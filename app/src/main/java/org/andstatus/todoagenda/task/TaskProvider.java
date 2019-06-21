@@ -10,12 +10,12 @@ public class TaskProvider {
         ArrayList<TaskEvent> events = new ArrayList<>();
 
         TaskEvent event = new TaskEvent();
-        event.setStartDate(DateTime.now());
+        event.setStartDate(DateTime.now().withTimeAtStartOfDay());
         event.setTitle("TODO for today");
         events.add(event);
 
         event = new TaskEvent();
-        event.setStartDate(DateTime.now().plusDays(5));
+        event.setStartDate(DateTime.now().plusDays(5).withTimeAtStartOfDay());
         event.setTitle("TODO in 5 days time");
         events.add(event);
 

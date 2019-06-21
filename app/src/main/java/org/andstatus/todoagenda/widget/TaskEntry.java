@@ -15,4 +15,9 @@ public class TaskEntry extends WidgetEntry {
     public String getTitle() {
         return event.getTitle();
     }
+
+    @Override
+    public int getPriority() {
+        return 20;
+    }
 }

@@ -5,7 +5,7 @@ import org.andstatus.todoagenda.DateUtil;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
-public class WidgetEntry implements Comparable<WidgetEntry> {
+public abstract class WidgetEntry implements Comparable<WidgetEntry> {
 
     private DateTime startDate;
 
@@ -20,6 +20,8 @@ public class WidgetEntry implements Comparable<WidgetEntry> {
     public DateTime getStartDay() {
         return getStartDate().withTimeAtStartOfDay();
     }
+
+    public abstract int getPriority();
 
     @Override
     public String toString() {
@@ -38,6 +40,6 @@ public class WidgetEntry implements Comparable<WidgetEntry> {
         } else if (getStartDate().isBefore(otherEvent.getStartDate())) {
             return -1;
         }
-        return 0;
+        return Integer.signum(getPriority() - otherEvent.getPriority());
     }
 }
