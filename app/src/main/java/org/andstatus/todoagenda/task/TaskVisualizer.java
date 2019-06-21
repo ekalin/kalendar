@@ -53,7 +53,7 @@ public class TaskVisualizer implements IEventVisualizer<TaskEntry> {
 
     @Override
     public List<TaskEntry> getEventEntries() {
-        return createEntryList(taskProvider.getEvents());
+        return createEntryList(taskProvider.getEvents(context, widgetId));
     }
 
     private List<TaskEntry> createEntryList(List<TaskEvent> events) {
