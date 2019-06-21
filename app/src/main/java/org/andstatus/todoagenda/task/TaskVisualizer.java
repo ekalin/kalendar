@@ -29,16 +29,17 @@ public class TaskVisualizer implements IEventVisualizer<TaskEntry> {
     @Override
     public RemoteViews getRemoteView(WidgetEntry eventEntry) {
         TaskEntry entry = (TaskEntry) eventEntry;
-        RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.event_entry);
+        RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.task_entry);
         setTitle(entry, rv);
         return rv;
     }
 
     private void setTitle(TaskEntry entry, RemoteViews rv) {
-        rv.setTextViewText(R.id.event_entry_title, entry.getTitle());
-        setTextSize(getSettings(), rv, R.id.event_entry_title, R.dimen.event_entry_title);
-        setTextColorFromAttr(getSettings().getEntryThemeContext(), rv, R.id.event_entry_title, R.attr.eventEntryTitle);
-        setMultiline(rv, R.id.event_entry_title, getSettings().isTitleMultiline());
+        rv.setTextViewText(R.id.task_entry_title, entry.getTitle());
+        setTextSize(getSettings(), rv, R.id.task_entry_icon, R.dimen.event_entry_title);
+        setTextSize(getSettings(), rv, R.id.task_entry_title, R.dimen.event_entry_title);
+        setTextColorFromAttr(getSettings().getEntryThemeContext(), rv, R.id.task_entry_title, R.attr.eventEntryTitle);
+        setMultiline(rv, R.id.task_entry_title, getSettings().isTitleMultiline());
     }
 
     public InstanceSettings getSettings() {
