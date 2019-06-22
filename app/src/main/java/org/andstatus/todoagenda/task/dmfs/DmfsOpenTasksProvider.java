@@ -44,7 +44,10 @@ public class DmfsOpenTasksProvider extends EventProvider {
         List<TaskEvent> tasks = new ArrayList<>();
         try {
             while (cursor.moveToNext()) {
-                tasks.add(createTask(cursor));
+                TaskEvent task = createTask(cursor);
+                if (!mKeywordsFilter.matched(task.getTitle())) {
+                    tasks.add(task);
+                }
             }
         } finally {
             cursor.close();
