@@ -135,6 +135,14 @@
   <string name="pref_hide_based_on_keywords_title">Ocultar baseado em palavras-chave no título</string>
   <string name="show_only_closest_instance_of_recurring_event">Mostrar apenas a instância mais próxima de um evento recorrente</string>
 
+  <!-- Preference header: Tasks -->
+  <string name="task_prefs">Tarefas</string>
+  <string name="task_prefs_desc">Configurar a exibição de tarefas</string>
+  <string name="task_source_pref_title">Origem das tarefas</string>
+  <string name="task_source_pref_desc">Selecione de onde obter eventos de tarefa</string>
+  <string name="task_source_none">Não exibir tarefas</string>
+  <string name="task_source_opentasks">OpenTasks (por dmfs GmbH)</string>
+
   <!-- Preference header: Feedback -->
   <string name="feedback_prefs">Feedback</string>
   <string name="feedback_prefs_desc">Entre em contato conosco</string>

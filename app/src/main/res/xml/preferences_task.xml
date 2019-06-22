@@ -1,0 +1,9 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:defaultValue="NONE"
+        android:entries="@array/pref_task_source_entries"
+        android:entryValues="@array/pref_task_source_values"
+        android:key="taskSource"
+        android:title="@string/task_source_pref_title"
+        android:summary="@string/task_source_pref_desc" />
+</PreferenceScreen>

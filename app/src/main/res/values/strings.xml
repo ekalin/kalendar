@@ -137,6 +137,14 @@
     <string name="pref_hide_based_on_keywords_title">Hide based on keywords in a title</string>
     <string name="show_only_closest_instance_of_recurring_event">Show only the closest instance of a recurring event</string>
 
+    <!-- Preference header: Tasks -->
+    <string name="task_prefs">Tasks</string>
+    <string name="task_prefs_desc">Configure display of tasks/TODOs</string>
+    <string name="task_source_pref_title">Task events source</string>
+    <string name="task_source_pref_desc">Select the source from which to get task events</string>
+    <string name="task_source_none">Don\'t display tasks</string>
+    <string name="task_source_opentasks">OpenTasks (by dmfs GmbH)</string>
+
     <!-- Preference header: Feedback -->
     <string name="feedback_prefs">Feedback</string>
     <string name="feedback_prefs_desc">Get in touch with us</string>
