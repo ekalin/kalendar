@@ -5,20 +5,22 @@ import android.database.Cursor;
 
 import org.andstatus.todoagenda.DateUtil;
 import org.andstatus.todoagenda.EventProvider;
+import org.andstatus.todoagenda.task.ITaskProvider;
 import org.andstatus.todoagenda.task.TaskEvent;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DmfsOpenTasksProvider extends EventProvider {
+public class DmfsOpenTasksProvider extends EventProvider implements ITaskProvider {
     private DateTime now;
 
     public DmfsOpenTasksProvider(Context context, int widgetId) {
         super(context, widgetId);
     }
 
-    public List<TaskEvent> getEvents() {
+    @Override
+    public List<TaskEvent> getTasks() {
         initialiseParameters();
         // Move endOfTime to end of day to include all tasks in the last day of range
         mEndOfTimeRange = mEndOfTimeRange.millisOfDay().withMaximumValue();
