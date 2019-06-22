@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DmfsOpenTasksProvider extends EventProvider {
+    private DateTime now;
+
     public DmfsOpenTasksProvider(Context context, int widgetId) {
         super(context, widgetId);
     }
@@ -20,6 +22,8 @@ public class DmfsOpenTasksProvider extends EventProvider {
         initialiseParameters();
         // Move endOfTime to end of day to include all tasks in the last day of range
         mEndOfTimeRange = mEndOfTimeRange.millisOfDay().withMaximumValue();
+        now = DateUtil.now(zone);
+
         return queryTasks();
     }
 
@@ -69,10 +73,15 @@ public class DmfsOpenTasksProvider extends EventProvider {
 
         int dueDateIdx = cursor.getColumnIndex(DmfsOpenTasksContract.COLUMN_DUE_DATE);
         if (cursor.isNull(dueDateIdx)) {
-            task.setStartDate(DateUtil.now(zone).withTimeAtStartOfDay());
+            task.setStartDate(now.withTimeAtStartOfDay());
         } else {
             long dueMillis = cursor.getLong(dueDateIdx);
-            task.setStartDate(new DateTime(dueMillis, zone).withTimeAtStartOfDay());
+            DateTime dueDate = new DateTime(dueMillis, zone);
+            if (dueDate.isBefore(now)) {
+                dueDate = now;
+            }
+
+            task.setStartDate(dueDate.withTimeAtStartOfDay());
         }
 
         return task;
