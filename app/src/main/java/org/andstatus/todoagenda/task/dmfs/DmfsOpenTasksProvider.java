@@ -1,7 +1,11 @@
 package org.andstatus.todoagenda.task.dmfs;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 import org.andstatus.todoagenda.DateUtil;
 import org.andstatus.todoagenda.EventProvider;
@@ -13,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DmfsOpenTasksProvider extends EventProvider implements ITaskProvider {
+
     private DateTime now;
 
     public DmfsOpenTasksProvider(Context context, int widgetId) {
@@ -21,6 +26,10 @@ public class DmfsOpenTasksProvider extends EventProvider implements ITaskProvide
 
     @Override
     public List<TaskEvent> getTasks() {
+        if (!hasPermission()) {
+            return new ArrayList<>();
+        }
+
         initialiseParameters();
         // Move endOfTime to end of day to include all tasks in the last day of range
         mEndOfTimeRange = mEndOfTimeRange.millisOfDay().withMaximumValue();
@@ -90,5 +99,15 @@ public class DmfsOpenTasksProvider extends EventProvider implements ITaskProvide
         }
 
         return task;
+    }
+
+    @Override
+    public boolean hasPermission() {
+        return ContextCompat.checkSelfPermission(context, DmfsOpenTasksContract.PERMISSION) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    @Override
+    public void requestPermission(Activity activity) {
+        ActivityCompat.requestPermissions(activity, new String[]{DmfsOpenTasksContract.PERMISSION}, 1);
     }
 }

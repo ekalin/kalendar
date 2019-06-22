@@ -10,4 +10,6 @@ public class DmfsOpenTasksContract {
     public static final String COLUMN_DUE_DATE = "due";
     public static final String COLUMN_STATUS = "status";
     public static final int STATUS_COMPLETED = 2;
+
+    public static final String PERMISSION = "org.dmfs.permission.READ_TASKS";
 }

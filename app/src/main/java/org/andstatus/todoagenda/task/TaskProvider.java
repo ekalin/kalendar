@@ -1,13 +1,11 @@
 package org.andstatus.todoagenda.task;
 
+import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 
 import org.andstatus.todoagenda.EventProvider;
 import org.andstatus.todoagenda.task.dmfs.DmfsOpenTasksProvider;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class TaskProvider extends EventProvider {
@@ -20,20 +18,26 @@ public class TaskProvider extends EventProvider {
     }
 
     public List<TaskEvent> getEvents() {
-        String taskSource = getSettings().getTaskSource();
-        ITaskProvider provider = getProvider(taskSource);
-        if (provider != null) {
-            return provider.getTasks();
-        } else {
-            return new ArrayList<>();
-        }
+        ITaskProvider provider = getProvider();
+        return provider.getTasks();
     }
 
-    private ITaskProvider getProvider(String taskSource) {
+    public boolean hasPermission() {
+        ITaskProvider provider = getProvider();
+        return provider.hasPermission();
+    }
+
+    public void requestPermission(Activity activity) {
+        ITaskProvider provider = getProvider();
+        provider.requestPermission(activity);
+    }
+
+    private ITaskProvider getProvider() {
+        String taskSource = getSettings().getTaskSource();
         if (PROVIDER_DMFS.equals(taskSource)) {
             return new DmfsOpenTasksProvider(context, widgetId);
         }
 
-        return null;
+        return new EmptyTaskProvider();
     }
 }

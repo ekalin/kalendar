@@ -277,7 +277,7 @@ public class InstanceSettings {
                 PREF_TEXT_SIZE_SCALE_DEFAULT);
         settings.dayHeaderAlignment = ApplicationPreferences.getString(context, PREF_DAY_HEADER_ALIGNMENT,
                 PREF_DAY_HEADER_ALIGNMENT_DEFAULT);
-        settings.taskSource = ApplicationPreferences.getString(context, PREF_TASK_SOURCE, PREF_DATE_FORMAT_DEFAULT);
+        settings.taskSource = ApplicationPreferences.getTaskSource(context);
         return settings;
     }
 
