@@ -31,6 +31,7 @@ public class TaskVisualizer implements IEventVisualizer<TaskEntry> {
         TaskEntry entry = (TaskEntry) eventEntry;
         RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.task_entry);
         setTitle(entry, rv);
+        rv.setOnClickFillInIntent(R.id.task_entry, entry.getEvent().createOpenCalendarEventIntent());
         return rv;
     }
 

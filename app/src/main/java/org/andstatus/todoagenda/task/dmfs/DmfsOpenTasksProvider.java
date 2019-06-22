@@ -70,7 +70,7 @@ public class DmfsOpenTasksProvider extends EventProvider {
     }
 
     private TaskEvent createTask(Cursor cursor) {
-        TaskEvent task = new TaskEvent();
+        TaskEvent task = new DmfsOpenTasksEvent();
         task.setId(cursor.getLong(cursor.getColumnIndex(DmfsOpenTasksContract.COLUMN_ID)));
         task.setTitle(cursor.getString(cursor.getColumnIndex(DmfsOpenTasksContract.COLUMN_TITLE)));
 

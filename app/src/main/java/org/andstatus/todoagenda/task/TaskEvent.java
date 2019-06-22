@@ -1,8 +1,9 @@
 package org.andstatus.todoagenda.task;
 
+import android.content.Intent;
 import org.joda.time.DateTime;
 
-public class TaskEvent {
+public abstract class TaskEvent {
     private long id;
     private String title;
     private DateTime startDate;
@@ -30,4 +31,6 @@ public class TaskEvent {
     public void setStartDate(DateTime startDate) {
         this.startDate = startDate;
     }
+
+    public abstract Intent createOpenCalendarEventIntent();
 }
