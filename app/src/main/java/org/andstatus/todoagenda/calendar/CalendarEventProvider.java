@@ -31,10 +31,6 @@ public class CalendarEventProvider extends EventProvider {
     public static final String EVENT_SORT_ORDER = "startDay ASC, allDay DESC, begin ASC ";
     private static final String EVENT_SELECTION = Instances.SELF_ATTENDEE_STATUS + "!="
             + Attendees.ATTENDEE_STATUS_DECLINED;
-    private static final String CLOSING_BRACKET = " )";
-    private static final String OR = " OR ";
-    private static final String EQUALS = " = ";
-    private static final String AND_BRACKET = " AND (";
 
     public CalendarEventProvider(Context context, int widgetId) {
         super(context, widgetId);

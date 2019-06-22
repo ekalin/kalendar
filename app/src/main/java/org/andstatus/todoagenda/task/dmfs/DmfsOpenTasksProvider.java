@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DmfsOpenTasksProvider extends EventProvider {
-    private static final String AND = " AND ";
-
     public DmfsOpenTasksProvider(Context context, int widgetId) {
         super(context, widgetId);
     }
 
     public List<TaskEvent> getEvents() {
         initialiseParameters();
+        // Move endOfTime to end of day to include all tasks in the last day of range
+        mEndOfTimeRange = mEndOfTimeRange.millisOfDay().withMaximumValue();
         return queryTasks();
     }
 
@@ -29,15 +29,10 @@ public class DmfsOpenTasksProvider extends EventProvider {
                 DmfsOpenTasksContract.COLUMN_TITLE,
                 DmfsOpenTasksContract.COLUMN_DUE_DATE
         };
-
-        StringBuilder whereBuilder = new StringBuilder();
-        whereBuilder.append(DmfsOpenTasksContract.COLUMN_STATUS).append("!=").append(DmfsOpenTasksContract.STATUS_COMPLETED);
-        String where = whereBuilder.toString();
-        String[] whereArgs = {};
+        String where = getWhereClause();
 
         Cursor cursor = context.getContentResolver().query(DmfsOpenTasksContract.PROVIDER_URI, projection,
-                where, whereArgs,
-                null);
+                where, null, null);
         if (cursor == null) {
             return new ArrayList<>();
         }
@@ -52,6 +47,19 @@ public class DmfsOpenTasksProvider extends EventProvider {
         }
 
         return tasks;
+    }
+
+    private String getWhereClause() {
+        StringBuilder whereBuilder = new StringBuilder();
+        whereBuilder.append(DmfsOpenTasksContract.COLUMN_STATUS).append(NOT_EQUALS).append(DmfsOpenTasksContract.STATUS_COMPLETED);
+
+        whereBuilder.append(AND_BRACKET)
+                .append(DmfsOpenTasksContract.COLUMN_DUE_DATE).append("<=").append(mEndOfTimeRange.getMillis())
+                .append(OR)
+                .append(DmfsOpenTasksContract.COLUMN_DUE_DATE).append(IS_NULL)
+                .append(CLOSING_BRACKET);
+
+        return whereBuilder.toString();
     }
 
     private TaskEvent createTask(Cursor cursor) {
