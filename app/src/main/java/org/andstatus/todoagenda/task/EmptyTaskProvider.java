@@ -1,11 +1,16 @@
 package org.andstatus.todoagenda.task;
 
 import android.app.Activity;
+import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmptyTaskProvider implements ITaskProvider {
+public class EmptyTaskProvider extends AbstractTaskProvider {
+
+    public EmptyTaskProvider(Context context, int widgetId) {
+        super(context, widgetId);
+    }
 
     @Override
     public List<TaskEvent> getTasks() {

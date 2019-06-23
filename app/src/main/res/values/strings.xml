@@ -144,6 +144,7 @@
     <string name="task_source_pref_desc">Select the source from which to get task events</string>
     <string name="task_source_none">Don\'t display tasks</string>
     <string name="task_source_opentasks">OpenTasks (by dmfs GmbH)</string>
+    <string name="task_source_samsung">Samsung Calendar</string>
     <string name="grant_task_permission_title">Grant permission to fetch tasks</string>
     <string name="grant_task_permission_desc">You need to grant permission for tasks to be displayed</string>
 

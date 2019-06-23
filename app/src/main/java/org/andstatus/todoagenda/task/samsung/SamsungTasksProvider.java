@@ -1,44 +1,38 @@
-package org.andstatus.todoagenda.task.dmfs;
+package org.andstatus.todoagenda.task.samsung;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import org.andstatus.todoagenda.task.AbstractTaskProvider;
 import org.andstatus.todoagenda.task.TaskEvent;
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DmfsOpenTasksProvider extends AbstractTaskProvider {
+public class SamsungTasksProvider extends AbstractTaskProvider {
 
-    public DmfsOpenTasksProvider(Context context, int widgetId) {
+    public SamsungTasksProvider(Context context, int widgetId) {
         super(context, widgetId);
     }
 
     @Override
     public List<TaskEvent> getTasks() {
-        if (!hasPermission()) {
-            return new ArrayList<>();
-        }
-
         initialiseParameters();
-
         return queryTasks();
     }
 
     private List<TaskEvent> queryTasks() {
         String[] projection = {
-                DmfsOpenTasksContract.COLUMN_ID,
-                DmfsOpenTasksContract.COLUMN_TITLE,
-                DmfsOpenTasksContract.COLUMN_DUE_DATE
+                SamsungTasksContract.COLUMN_ID,
+                SamsungTasksContract.COLUMN_TITLE,
+                SamsungTasksContract.COLUMN_DUE_DATE
         };
         String where = getWhereClause();
 
-        Cursor cursor = context.getContentResolver().query(DmfsOpenTasksContract.PROVIDER_URI, projection,
+        Cursor cursor = context.getContentResolver().query(SamsungTasksContract.PROVIDER_URI, projection,
                 where, null, null);
         if (cursor == null) {
             return new ArrayList<>();
@@ -61,23 +55,24 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
 
     private String getWhereClause() {
         StringBuilder whereBuilder = new StringBuilder();
-        whereBuilder.append(DmfsOpenTasksContract.COLUMN_STATUS).append(NOT_EQUALS).append(DmfsOpenTasksContract.STATUS_COMPLETED);
+        whereBuilder.append(SamsungTasksContract.COLUMN_COMPLETE).append(EQUALS).append("0");
+        whereBuilder.append(AND).append(SamsungTasksContract.COLUMN_DELETED).append(EQUALS).append("0");
 
         whereBuilder.append(AND_BRACKET)
-                .append(DmfsOpenTasksContract.COLUMN_DUE_DATE).append(LTE).append(mEndOfTimeRange.getMillis())
+                .append(SamsungTasksContract.COLUMN_DUE_DATE).append(LTE).append(mEndOfTimeRange.getMillis())
                 .append(OR)
-                .append(DmfsOpenTasksContract.COLUMN_DUE_DATE).append(IS_NULL)
+                .append(SamsungTasksContract.COLUMN_DUE_DATE).append(IS_NULL)
                 .append(CLOSING_BRACKET);
 
         return whereBuilder.toString();
     }
 
     private TaskEvent createTask(Cursor cursor) {
-        TaskEvent task = new DmfsOpenTasksEvent();
-        task.setId(cursor.getLong(cursor.getColumnIndex(DmfsOpenTasksContract.COLUMN_ID)));
-        task.setTitle(cursor.getString(cursor.getColumnIndex(DmfsOpenTasksContract.COLUMN_TITLE)));
+        TaskEvent task = new SamsungTaskEvent();
+        task.setId(cursor.getLong(cursor.getColumnIndex(SamsungTasksContract.COLUMN_ID)));
+        task.setTitle(cursor.getString(cursor.getColumnIndex(SamsungTasksContract.COLUMN_TITLE)));
 
-        int dueDateIdx = cursor.getColumnIndex(DmfsOpenTasksContract.COLUMN_DUE_DATE);
+        int dueDateIdx = cursor.getColumnIndex(SamsungTasksContract.COLUMN_DUE_DATE);
         Long dueMillis = null;
         if (!cursor.isNull(dueDateIdx)) {
             dueMillis = cursor.getLong(dueDateIdx);
@@ -89,11 +84,11 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
 
     @Override
     public boolean hasPermission() {
-        return ContextCompat.checkSelfPermission(context, DmfsOpenTasksContract.PERMISSION) == PackageManager.PERMISSION_GRANTED;
+        return true;
     }
 
     @Override
     public void requestPermission(Activity activity) {
-        ActivityCompat.requestPermissions(activity, new String[]{DmfsOpenTasksContract.PERMISSION}, 1);
+        // Requires just android.permission.READ_CALENDAR, which is expected to be granted already
     }
 }
