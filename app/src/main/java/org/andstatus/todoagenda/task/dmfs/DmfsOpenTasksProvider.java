@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
+import org.andstatus.todoagenda.calendar.CalendarQueryResult;
+import org.andstatus.todoagenda.calendar.CalendarQueryResultsStorage;
 import org.andstatus.todoagenda.task.AbstractTaskProvider;
 import org.andstatus.todoagenda.task.TaskEvent;
 
@@ -31,6 +34,7 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
     }
 
     private List<TaskEvent> queryTasks() {
+        Uri uri = DmfsOpenTasksContract.PROVIDER_URI;
         String[] projection = {
                 DmfsOpenTasksContract.COLUMN_ID,
                 DmfsOpenTasksContract.COLUMN_TITLE,
@@ -38,8 +42,9 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
         };
         String where = getWhereClause();
 
-        Cursor cursor = context.getContentResolver().query(DmfsOpenTasksContract.PROVIDER_URI, projection,
-                where, null, null);
+        CalendarQueryResult result = new CalendarQueryResult(getSettings(), uri, projection, where, null, null);
+
+        Cursor cursor = context.getContentResolver().query(uri, projection, where, null, null);
         if (cursor == null) {
             return new ArrayList<>();
         }
@@ -47,6 +52,10 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
         List<TaskEvent> tasks = new ArrayList<>();
         try {
             while (cursor.moveToNext()) {
+                if (CalendarQueryResultsStorage.getNeedToStoreResults()) {
+                    result.addRow(cursor);
+                }
+
                 TaskEvent task = createTask(cursor);
                 if (!mKeywordsFilter.matched(task.getTitle())) {
                     tasks.add(task);
@@ -55,6 +64,8 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
         } finally {
             cursor.close();
         }
+
+        CalendarQueryResultsStorage.storeTask(result);
 
         return tasks;
     }

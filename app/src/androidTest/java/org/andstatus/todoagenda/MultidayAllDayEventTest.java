@@ -8,7 +8,6 @@ import org.andstatus.todoagenda.calendar.MockCalendarContentProvider;
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
 import org.andstatus.todoagenda.widget.DayHeader;
 import org.andstatus.todoagenda.widget.WidgetEntry;
-
 import org.joda.time.DateTime;
 import org.json.JSONException;
 
@@ -41,7 +40,7 @@ public class MultidayAllDayEventTest extends InstrumentationTestCase {
         final String method = "testInsidePeriod";
         CalendarQueryResultsStorage inputs = provider.loadResults(this.getInstrumentation().getContext(),
                 org.andstatus.todoagenda.tests.R.raw.multi_day);
-        provider.addResults(inputs.getResults());
+        provider.addResults(inputs.getCalendarResults());
 
         int dateRange = 30;
         provider.startEditing();

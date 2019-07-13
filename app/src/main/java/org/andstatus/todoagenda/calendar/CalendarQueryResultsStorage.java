@@ -12,7 +12,6 @@ import org.andstatus.todoagenda.DateUtil;
 import org.andstatus.todoagenda.EventRemoteViewsFactory;
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
-
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.json.JSONArray;
@@ -30,7 +29,8 @@ public class CalendarQueryResultsStorage {
     private static final String TAG = CalendarQueryResultsStorage.class.getSimpleName();
     private static final String KEY_RESULTS_VERSION = "resultsVersion";
     private static final int RESULTS_VERSION = 2;
-    private static final String KEY_RESULTS = "results";
+    private static final String KEY_CALENDAR_RESULTS = "results";
+    private static final String KEY_TASK_RESULTS = "taskResults";
     private static final String KEY_APP_VERSION_NAME = "versionName";
     private static final String KEY_APP_VERSION_CODE = "versionCode";
     private static final String KEY_APP_INFO = "applicationInfo";
@@ -46,12 +46,22 @@ public class CalendarQueryResultsStorage {
 
     private static volatile CalendarQueryResultsStorage theStorage = null;
 
-    private final List<CalendarQueryResult> results = new CopyOnWriteArrayList<>();
+    private final List<CalendarQueryResult> calendarResults = new CopyOnWriteArrayList<>();
+    private final List<CalendarQueryResult> taskResults = new CopyOnWriteArrayList<>();
 
-    public static boolean store(CalendarQueryResult result) {
+    public static boolean storeCalendar(CalendarQueryResult result) {
         CalendarQueryResultsStorage storage = theStorage;
         if (storage != null) {
-            storage.results.add(result);
+            storage.calendarResults.add(result);
+            return (storage == theStorage);
+        }
+        return false;
+    }
+
+    public static boolean storeTask(CalendarQueryResult result) {
+        CalendarQueryResultsStorage storage = theStorage;
+        if (storage != null) {
+            storage.taskResults.add(result);
             return (storage == theStorage);
         }
         return false;
@@ -97,8 +107,12 @@ public class CalendarQueryResultsStorage {
         return theStorage;
     }
 
-    public List<CalendarQueryResult> getResults() {
-        return results;
+    public List<CalendarQueryResult> getCalendarResults() {
+        return calendarResults;
+    }
+
+    public List<CalendarQueryResult> getTaskResults() {
+        return taskResults;
     }
 
     private String getResultsAsString(Context context, int widgetId) {
@@ -111,36 +125,48 @@ public class CalendarQueryResultsStorage {
 
     public JSONObject toJson(Context context, int widgetId) throws JSONException {
         JSONObject json = new JSONObject();
-        List<CalendarQueryResult> results = this.results;
         json.put(KEY_RESULTS_VERSION, RESULTS_VERSION);
         json.put(KEY_DEVICE_INFO, getDeviceInfo());
         json.put(KEY_APP_INFO, getAppInfo(context));
         json.put(KEY_SETTINGS, InstanceSettings.fromId(context, widgetId).toJson());
-        if (results != null) {
-            JSONArray jsonArray = new JSONArray();
-            for (CalendarQueryResult result : results) {
-                if (result.getWidgetId() == widgetId) {
-                    jsonArray.put(result.toJson());
-                }
-            }
-            json.put(KEY_RESULTS, jsonArray);
-        }
+        json.put(KEY_CALENDAR_RESULTS, getResultsArray(widgetId, this.calendarResults));
+        json.put(KEY_TASK_RESULTS, getResultsArray(widgetId, this.taskResults));
         return json;
+    }
+
+    private JSONArray getResultsArray(int widgetId, List<CalendarQueryResult> results) throws JSONException {
+        JSONArray jsonArray = new JSONArray();
+        for (CalendarQueryResult result : results) {
+            if (result.getWidgetId() == widgetId) {
+                jsonArray.put(result.toJson());
+            }
+        }
+        return jsonArray;
     }
 
     public static CalendarQueryResultsStorage fromJson(Context context, JSONObject json) throws JSONException {
         InstanceSettings settings = InstanceSettings.fromJson(context, json.getJSONObject(KEY_SETTINGS));
         InstanceSettings.getInstances(context).put(settings.getWidgetId(), settings);
         CalendarQueryResultsStorage results = new CalendarQueryResultsStorage();
-        JSONArray jsonResults = json.getJSONArray(KEY_RESULTS);
-        for (int ind = 0; ind < jsonResults.length(); ind++) {
-            results.results.add(CalendarQueryResult.fromJson(jsonResults.getJSONObject(ind), settings.getWidgetId()));
-        }
-        if (!results.results.isEmpty()) {
-            DateTime now = results.results.get(0).getExecutedAt().toDateTime(DateTimeZone.getDefault());
+        readResults(json, KEY_CALENDAR_RESULTS, settings.getWidgetId(), results.calendarResults);
+        readResults(json, KEY_TASK_RESULTS, settings.getWidgetId(), results.taskResults);
+
+        if (!results.calendarResults.isEmpty()) {
+            DateTime now = results.calendarResults.get(0).getExecutedAt().toDateTime(DateTimeZone.getDefault());
             DateUtil.setNow(now);
         }
         return results;
+    }
+
+    private static void readResults(JSONObject json, String key, int widgetId, List<CalendarQueryResult> results) throws JSONException {
+        if (!json.has(key)) {
+            return;
+        }
+
+        JSONArray jsonResults = json.getJSONArray(key);
+        for (int ind = 0; ind < jsonResults.length(); ind++) {
+            results.add(CalendarQueryResult.fromJson(jsonResults.getJSONObject(ind), widgetId));
+        }
     }
 
     private static JSONObject getAppInfo(Context context) throws JSONException {
@@ -175,11 +201,18 @@ public class CalendarQueryResultsStorage {
 
         CalendarQueryResultsStorage results = (CalendarQueryResultsStorage) o;
 
-        if (this.results.size() != results.results.size()) {
+        if (!compareResults(this.calendarResults, results.calendarResults)) return false;
+        if (!compareResults(this.taskResults, results.taskResults)) return false;
+
+        return true;
+    }
+
+    private boolean compareResults(List<CalendarQueryResult> r1, List<CalendarQueryResult> r2) {
+        if (r1.size() != r2.size()) {
             return false;
         }
-        for (int ind = 0; ind < this.results.size(); ind++) {
-            if (!this.results.get(ind).equals(results.results.get(ind))) {
+        for (int ind = 0; ind < r1.size(); ind++) {
+            if (!r1.get(ind).equals(r2.get(ind))) {
                 return false;
             }
         }
@@ -189,8 +222,11 @@ public class CalendarQueryResultsStorage {
     @Override
     public int hashCode() {
         int result = 0;
-        for (int ind = 0; ind < results.size(); ind++) {
-            result = 31 * result + results.get(ind).hashCode();
+        for (int ind = 0; ind < calendarResults.size(); ind++) {
+            result = 31 * result + calendarResults.get(ind).hashCode();
+        }
+        for (int ind = 0; ind < taskResults.size(); ind++) {
+            result = 31 * result + taskResults.get(ind).hashCode();
         }
         return result;
     }
@@ -198,7 +234,8 @@ public class CalendarQueryResultsStorage {
     @Override
     public String toString() {
         return "CalendarQueryResultsStorage{" +
-                "results=" + results +
+                "results=" + calendarResults +
+                ",taksResults=" + taskResults +
                 '}';
     }
 }

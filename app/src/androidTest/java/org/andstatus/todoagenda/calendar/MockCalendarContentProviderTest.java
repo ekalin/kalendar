@@ -6,7 +6,6 @@ import android.provider.CalendarContract;
 import android.test.InstrumentationTestCase;
 
 import org.andstatus.todoagenda.DateUtil;
-
 import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,13 +46,13 @@ public class MockCalendarContentProviderTest extends InstrumentationTestCase {
         assertEquals(1, provider.getQueriesCount());
         assertEquals(input1, result1);
         assertEquals(result1, input1);
-        assertEquals(input1, CalendarQueryResultsStorage.getStorage().getResults().get(0));
+        assertEquals(input1, CalendarQueryResultsStorage.getStorage().getCalendarResults().get(0));
 
         CalendarQueryResult result2 = queryList(input2.getUri(), input2.getSelection());
         assertEquals(2, provider.getQueriesCount());
         assertEquals(input2, result2);
         assertEquals(result2, input2);
-        assertEquals(input2, CalendarQueryResultsStorage.getStorage().getResults().get(1));
+        assertEquals(input2, CalendarQueryResultsStorage.getStorage().getCalendarResults().get(1));
 
         assertNotSame(result1, result2);
 
@@ -105,7 +104,7 @@ public class MockCalendarContentProviderTest extends InstrumentationTestCase {
             }
         }
         result.dropNullColumns();
-        CalendarQueryResultsStorage.store(result);
+        CalendarQueryResultsStorage.storeCalendar(result);
         return result;
     }
 

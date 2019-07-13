@@ -13,7 +13,6 @@ import android.util.SparseArray;
 import org.andstatus.todoagenda.DateUtil;
 import org.andstatus.todoagenda.EventProvider;
 import org.andstatus.todoagenda.util.PermissionsUtil;
-
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -21,10 +20,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import static android.graphics.Color.argb;
-import static android.graphics.Color.blue;
-import static android.graphics.Color.green;
-import static android.graphics.Color.red;
+import static android.graphics.Color.*;
 
 public class CalendarEventProvider extends EventProvider {
 
@@ -152,7 +148,7 @@ public class CalendarEventProvider extends EventProvider {
                 cursor.close();
             }
         }
-        CalendarQueryResultsStorage.store(result);
+        CalendarQueryResultsStorage.storeCalendar(result);
         return eventList;
     }
 
