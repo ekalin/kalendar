@@ -11,13 +11,18 @@ import org.andstatus.todoagenda.EventAppWidgetProvider;
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.task.TaskProvider;
 
+import java.util.Collections;
+
 public class TaskPreferencesFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+
+    private static final String PREF_ACTIVE_TASK_LISTS_BUTTON = "activeTaskListsButton";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences_task);
         setGrantPermissionVisibility(false);
+        setTaskListState();
     }
 
     @Override
@@ -41,6 +46,8 @@ public class TaskPreferencesFragment extends PreferenceFragment implements Share
             case ApplicationPreferences.PREF_TASK_SOURCE:
                 showTaskSource();
                 setGrantPermissionVisibility(true);
+                setTaskListState();
+                clearTasksLists();
                 break;
         }
     }
@@ -63,6 +70,15 @@ public class TaskPreferencesFragment extends PreferenceFragment implements Share
                 getActivity().recreate();
             }
         }
+    }
+
+    private void setTaskListState() {
+        Preference taskListButton = findPreference(PREF_ACTIVE_TASK_LISTS_BUTTON);
+        taskListButton.setEnabled(!ApplicationPreferences.getTaskSource(getActivity()).equals(TaskProvider.PROVIDER_NONE));
+    }
+
+    private void clearTasksLists() {
+        ApplicationPreferences.setActiveTaskLists(getActivity(), Collections.<String>emptySet());
     }
 
     @Override

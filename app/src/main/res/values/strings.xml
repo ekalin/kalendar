@@ -147,6 +147,8 @@
     <string name="task_source_samsung">Samsung Calendar</string>
     <string name="grant_task_permission_title">Grant permission to fetch tasks</string>
     <string name="grant_task_permission_desc">You need to grant permission for tasks to be displayed</string>
+    <string name="task_lists_pref_title">Task lists</string>
+    <string name="task_lists_pref_summary">Select the task lists to display</string>
 
     <!-- Preference header: Feedback -->
     <string name="feedback_prefs">Feedback</string>

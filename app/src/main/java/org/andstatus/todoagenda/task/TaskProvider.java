@@ -4,14 +4,17 @@ import android.app.Activity;
 import android.content.Context;
 
 import org.andstatus.todoagenda.EventProvider;
+import org.andstatus.todoagenda.prefs.EventSource;
 import org.andstatus.todoagenda.task.dmfs.DmfsOpenTasksProvider;
 import org.andstatus.todoagenda.task.samsung.SamsungTasksProvider;
 
+import java.util.Collection;
 import java.util.List;
 
 public class TaskProvider extends EventProvider {
 
-    private static final String PROVIDER_NONE = "NONE";
+    public static final String PROVIDER_NONE = "NONE";
+
     private static final String PROVIDER_DMFS = "DMFS_OPEN_TASKS";
     private static final String PROVIDER_SAMSUNG = "SAMSUNG";
 
@@ -24,6 +27,11 @@ public class TaskProvider extends EventProvider {
         return provider.getTasks();
     }
 
+    public Collection<EventSource> getTaskLists(String taskSource) {
+        AbstractTaskProvider provider = getProvider(taskSource);
+        return provider.getTaskLists();
+    }
+
     public boolean hasPermission() {
         AbstractTaskProvider provider = getProvider();
         return provider.hasPermission();
@@ -33,9 +41,15 @@ public class TaskProvider extends EventProvider {
         AbstractTaskProvider provider = getProvider();
         provider.requestPermission(activity);
     }
+    // This is called from the settings activity, when the task source that the user
+    // selected has not been saved to settings yet
 
     private AbstractTaskProvider getProvider() {
         String taskSource = getSettings().getTaskSource();
+        return getProvider(taskSource);
+    }
+
+    private AbstractTaskProvider getProvider(String taskSource) {
         if (PROVIDER_DMFS.equals(taskSource)) {
             return new DmfsOpenTasksProvider(context, widgetId);
         }

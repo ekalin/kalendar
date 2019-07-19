@@ -5,8 +5,10 @@ import android.content.Context;
 
 import org.andstatus.todoagenda.DateUtil;
 import org.andstatus.todoagenda.EventProvider;
+import org.andstatus.todoagenda.prefs.EventSource;
 import org.joda.time.DateTime;
 
+import java.util.Collection;
 import java.util.List;
 
 public abstract class AbstractTaskProvider extends EventProvider {
@@ -28,6 +30,12 @@ public abstract class AbstractTaskProvider extends EventProvider {
 
     public abstract List<TaskEvent> getTasks();
 
+    public abstract Collection<EventSource> getTaskLists();
+
+    public abstract boolean hasPermission();
+
+    public abstract void requestPermission(Activity activity);
+
     protected DateTime getTaskDate(Long dueMillis, Long startMillis) {
         DateTime dueDate;
         if (dueMillis != null) {
@@ -46,8 +54,4 @@ public abstract class AbstractTaskProvider extends EventProvider {
 
         return dueDate.withTimeAtStartOfDay();
     }
-
-    public abstract boolean hasPermission();
-
-    public abstract void requestPermission(Activity activity);
 }
