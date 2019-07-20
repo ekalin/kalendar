@@ -44,6 +44,7 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
                 DmfsOpenTasksContract.Tasks.COLUMN_TITLE,
                 DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE,
                 DmfsOpenTasksContract.Tasks.COLUMN_START_DATE,
+                DmfsOpenTasksContract.Tasks.COLUMN_COLOR,
         };
         String where = getWhereClause();
 
@@ -123,6 +124,8 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
             startMillis = cursor.getLong(startDateIdx);
         }
         task.setTaskDate(getTaskDate(dueMillis, startMillis));
+
+        task.setColor(getAsOpaque(cursor.getInt(cursor.getColumnIndex(DmfsOpenTasksContract.Tasks.COLUMN_COLOR))));
 
         return task;
     }

@@ -20,8 +20,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import static android.graphics.Color.*;
-
 public class CalendarEventProvider extends EventProvider {
 
     public static final String EVENT_SORT_ORDER = "startDay ASC, allDay DESC, begin ASC ";
@@ -222,9 +220,5 @@ public class CalendarEventProvider extends EventProvider {
             }
             return cursor.getInt(cursor.getColumnIndex(Instances.CALENDAR_COLOR));
         }
-    }
-
-    private int getAsOpaque(int color) {
-        return argb(255, red(color), green(color), blue(color));
     }
 }
