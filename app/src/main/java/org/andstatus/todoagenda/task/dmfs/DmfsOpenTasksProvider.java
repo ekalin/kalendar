@@ -50,7 +50,12 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
 
         CalendarQueryResult result = new CalendarQueryResult(getSettings(), uri, projection, where, null, null);
 
-        Cursor cursor = context.getContentResolver().query(uri, projection, where, null, null);
+        Cursor cursor;
+        try {
+            cursor = context.getContentResolver().query(uri, projection, where, null, null);
+        } catch (IllegalArgumentException e) {
+            cursor = null;
+        }
         if (cursor == null) {
             return new ArrayList<>();
         }
@@ -140,7 +145,12 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
                 DmfsOpenTasksContract.TaskLists.COLUMN_COLOR,
                 DmfsOpenTasksContract.TaskLists.COLUMN_ACCOUNT_NAME,
         };
-        Cursor cursor = context.getContentResolver().query(DmfsOpenTasksContract.TaskLists.PROVIDER_URI, projection, null, null, null);
+        Cursor cursor;
+        try {
+            cursor = context.getContentResolver().query(DmfsOpenTasksContract.TaskLists.PROVIDER_URI, projection, null, null, null);
+        } catch (IllegalArgumentException e) {
+            cursor = null;
+        }
         if (cursor == null) {
             return eventSources;
         }
