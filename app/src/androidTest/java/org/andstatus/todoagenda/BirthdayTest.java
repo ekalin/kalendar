@@ -6,7 +6,6 @@ import org.andstatus.todoagenda.calendar.CalendarQueryResultsStorage;
 import org.andstatus.todoagenda.calendar.MockCalendarContentProvider;
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
 import org.andstatus.todoagenda.widget.CalendarEntry;
-
 import org.joda.time.DateTime;
 import org.json.JSONException;
 
@@ -103,7 +102,7 @@ public class BirthdayTest extends InstrumentationTestCase {
     }
 
     private void playAtOneTime(CalendarQueryResultsStorage inputs, DateTime now, int numberOfEntriesExpected) {
-        provider.addResults(inputs.getResults());
+        provider.addResults(inputs.getCalendarResults());
         DateUtil.setNow(now);
         factory.onDataSetChanged();
         factory.logWidgetEntries(TAG);

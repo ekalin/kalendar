@@ -11,44 +11,25 @@ import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
 import org.andstatus.todoagenda.DateUtil;
-import org.andstatus.todoagenda.prefs.InstanceSettings;
+import org.andstatus.todoagenda.EventProvider;
 import org.andstatus.todoagenda.util.PermissionsUtil;
-
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import static android.graphics.Color.argb;
-import static android.graphics.Color.blue;
-import static android.graphics.Color.green;
-import static android.graphics.Color.red;
+import static android.graphics.Color.*;
 
-public class CalendarEventProvider {
+public class CalendarEventProvider extends EventProvider {
 
     public static final String EVENT_SORT_ORDER = "startDay ASC, allDay DESC, begin ASC ";
     private static final String EVENT_SELECTION = Instances.SELF_ATTENDEE_STATUS + "!="
             + Attendees.ATTENDEE_STATUS_DECLINED;
-    private static final String CLOSING_BRACKET = " )";
-    private static final String OR = " OR ";
-    private static final String EQUALS = " = ";
-    private static final String AND_BRACKET = " AND (";
-
-    private final Context context;
-    private final int widgetId;
-
-    // Below are parameters, which may change in settings
-    private DateTimeZone zone;
-    private KeywordsFilter mKeywordsFilter;
-    private DateTime mStartOfTimeRange;
-    private DateTime mEndOfTimeRange;
 
     public CalendarEventProvider(Context context, int widgetId) {
-        this.context = context;
-        this.widgetId = widgetId;
+        super(context, widgetId);
     }
 
     public List<CalendarEvent> getEvents() {
@@ -95,31 +76,12 @@ public class CalendarEventProvider {
         eventList.removeAll(toDelete);
     }
 
-    private void initialiseParameters() {
-        zone = getSettings().getTimeZone();
-        mKeywordsFilter = new KeywordsFilter(getSettings().getHideBasedOnKeywords());
-        mStartOfTimeRange = getSettings().getEventsEnded().endedAt(DateUtil.now(zone));
-        mEndOfTimeRange = getEndOfTimeRange(DateUtil.now(zone));
-    }
-
     public DateTime getEndOfTimeRange() {
         return mEndOfTimeRange;
     }
 
     public DateTime getStartOfTimeRange() {
         return mStartOfTimeRange;
-    }
-
-    private DateTime getEndOfTimeRange(DateTime now) {
-        int dateRange = getSettings().getEventRange();
-        return dateRange > 0
-                ? now.plusDays(dateRange)
-                : now.withTimeAtStartOfDay().plusDays(1);
-    }
-
-    @NonNull
-    private InstanceSettings getSettings() {
-        return InstanceSettings.fromId(context, widgetId);
     }
 
     private List<CalendarEvent> getTimeFilteredEventList() {
@@ -186,7 +148,7 @@ public class CalendarEventProvider {
                 cursor.close();
             }
         }
-        CalendarQueryResultsStorage.store(result);
+        CalendarQueryResultsStorage.storeCalendar(result);
         return eventList;
     }
 

@@ -1,6 +1,7 @@
 package org.andstatus.todoagenda;
 
 import android.annotation.TargetApi;
+import android.app.Fragment;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.preference.PreferenceActivity;
 import android.support.annotation.NonNull;
 
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
+import org.andstatus.todoagenda.prefs.TaskPreferencesFragment;
 import org.andstatus.todoagenda.util.PermissionsUtil;
 
 import java.util.List;
@@ -17,7 +19,9 @@ import java.util.List;
 public class WidgetConfigurationActivity extends PreferenceActivity {
 
     private static final String PREFERENCES_PACKAGE_NAME = "org.andstatus.todoagenda.prefs";
+
     private int widgetId = 0;
+    private Fragment currentFragment;
 
     @NonNull
     public static Intent intentToStartMe(Context context, int widgetId) {
@@ -87,5 +91,19 @@ public class WidgetConfigurationActivity extends PreferenceActivity {
             return true;
         }
         return super.isValidFragment(fragmentName);
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        super.onAttachFragment(fragment);
+        this.currentFragment = fragment;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (currentFragment instanceof TaskPreferencesFragment) {
+            ((TaskPreferencesFragment) currentFragment).gotPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 }
