@@ -145,6 +145,8 @@
   <string name="task_source_samsung">Calendário Samsung</string>
   <string name="grant_task_permission_title">Conceder permissão para ler tarefas</string>
   <string name="grant_task_permission_desc">É necessário conceder permissão para que as tarefas possam ser exibidas</string>
+  <string name="task_lists_pref_title">Listas de tarefas</string>
+  <string name="task_lists_pref_summary">Selecione as listas de tarefas a exibir</string>
 
   <!-- Preference header: Feedback -->
   <string name="feedback_prefs">Feedback</string>
