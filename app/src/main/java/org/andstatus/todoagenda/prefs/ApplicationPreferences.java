@@ -46,7 +46,7 @@ public class ApplicationPreferences {
     static final String PREF_HEADER_THEME = "headerTheme";
     static final String PREF_HEADER_THEME_DEFAULT = Theme.DARK.name();
     static final String PREF_DAY_HEADER_ALIGNMENT = "dayHeaderAlignment";
-    static final String PREF_DAY_HEADER_ALIGNMENT_DEFAULT = Alignment.RIGHT.name();
+    static final String PREF_DAY_HEADER_ALIGNMENT_DEFAULT = Alignment.LEFT.name();
     static final String PREF_SHOW_PAST_EVENTS_WITH_DEFAULT_COLOR = "showPastEventsWithDefaultColor";
     static final String PREF_PAST_EVENTS_BACKGROUND_COLOR = "pastEventsBackgroundColor";
     static final int PREF_PAST_EVENTS_BACKGROUND_COLOR_DEFAULT = 0x4affff2b;
