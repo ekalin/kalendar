@@ -40,7 +40,7 @@ public class DateUtil {
         if (forDayHeader) {
             DateTime timeAtStartOfToday = DateTime.now().withTimeAtStartOfDay();
             if (dateTime.withTimeAtStartOfDay().isEqual(timeAtStartOfToday)) {
-                return createDateString(settings, dateTime, settings.getContext().getString(R.string.today));
+                return settings.getContext().getString(R.string.today);
             } else if (dateTime.withTimeAtStartOfDay().isEqual(timeAtStartOfToday.plusDays(1))) {
                 return createDateString(settings, dateTime, settings.getContext().getString(R.string.tomorrow));
             }
