@@ -8,7 +8,6 @@ import org.andstatus.todoagenda.CalendarIntentUtil;
 import org.andstatus.todoagenda.task.TaskEvent;
 
 public class SamsungTaskEvent extends TaskEvent {
-
     @Override
     public Intent createOpenCalendarEventIntent() {
         Intent intent = CalendarIntentUtil.createCalendarIntent();
@@ -19,5 +18,10 @@ public class SamsungTaskEvent extends TaskEvent {
         intent.putExtra(SamsungTasksContract.INTENT_EXTRA_DETAIL_MODE, true);
         intent.putExtra(SamsungTasksContract.INTENT_EXTRA_LAUNCH_FROM_WIDGET, true);
         return intent;
+    }
+
+    @Override
+    public String toString() {
+        return "SamsungTaskEvent{" + super.toString() + '}';
     }
 }

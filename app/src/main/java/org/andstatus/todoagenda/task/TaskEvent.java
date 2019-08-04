@@ -43,4 +43,34 @@ public abstract class TaskEvent {
     }
 
     public abstract Intent createOpenCalendarEventIntent();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TaskEvent taskEvent = (TaskEvent) o;
+        return id == taskEvent.id &&
+                color == taskEvent.color &&
+                title.equals(taskEvent.title) &&
+                taskDate.equals(taskEvent.taskDate);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Long.valueOf(id).hashCode();
+        result += 31 * title.hashCode();
+        result += 31 * taskDate.hashCode();
+        result += 31 * color;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TaskEvent{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", taskDate=" + taskDate +
+                ", color=" + color +
+                '}';
+    }
 }
