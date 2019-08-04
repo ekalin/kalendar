@@ -13,4 +13,9 @@ public class DmfsOpenTasksEvent extends TaskEvent {
         intent.setData(ContentUris.withAppendedId(DmfsOpenTasksContract.Tasks.PROVIDER_URI, getId()));
         return intent;
     }
+
+    @Override
+    public String toString() {
+        return "DmfsOpenTasksEvent{" + super.toString() + '}';
+    }
 }
