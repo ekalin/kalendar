@@ -35,7 +35,11 @@ public class PermissionsUtil {
     }
 
     public static boolean arePermissionsGranted(Context context) {
-        return isTestMode() || ContextCompat.checkSelfPermission(context, PERMISSION) == PackageManager.PERMISSION_GRANTED;
+        return isPermissionGranted(context, PERMISSION);
+    }
+
+    public static boolean isPermissionGranted(Context context, String permission) {
+        return isTestMode() || ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED;
     }
 
     /**
