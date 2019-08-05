@@ -3,10 +3,10 @@ package org.andstatus.todoagenda.task.dmfs;
 import android.net.Uri;
 
 public class DmfsOpenTasksContract {
+    public static final String AUTHORITY = "org.dmfs.tasks";
 
     public static class Tasks {
-
-        public static final Uri PROVIDER_URI = Uri.parse("content://org.dmfs.tasks/tasks");
+        public static final Uri PROVIDER_URI = Uri.parse("content://" + AUTHORITY + "/tasks");
 
         public static final String COLUMN_ID = "_id";
         public static final String COLUMN_TITLE = "title";
@@ -20,8 +20,7 @@ public class DmfsOpenTasksContract {
     }
 
     public static class TaskLists {
-
-        public static final Uri PROVIDER_URI = Uri.parse("content://org.dmfs.tasks/tasklists");
+        public static final Uri PROVIDER_URI = Uri.parse("content://" + AUTHORITY + "/tasklists");
 
         public static final String COLUMN_ID = "_id";
         public static final String COLUMN_NAME = "list_name";

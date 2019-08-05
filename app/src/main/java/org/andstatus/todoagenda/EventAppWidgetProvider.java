@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.RemoteViews;
 
 import org.andstatus.todoagenda.prefs.InstanceSettings;
+import org.andstatus.todoagenda.task.dmfs.DmfsOpenTasksContract;
 import org.andstatus.todoagenda.util.PermissionsUtil;
 import org.joda.time.DateTime;
 
@@ -197,6 +198,7 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         providerChanged.addAction("android.intent.action.PROVIDER_CHANGED");
         providerChanged.addDataScheme("content");
         providerChanged.addDataAuthority("com.android.calendar", null);
+        providerChanged.addDataAuthority(DmfsOpenTasksContract.AUTHORITY, null);
         context.registerReceiver(receiver, providerChanged);
 
         IntentFilter userPresent = new IntentFilter();
