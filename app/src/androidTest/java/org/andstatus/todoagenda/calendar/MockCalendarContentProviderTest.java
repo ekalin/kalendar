@@ -28,31 +28,31 @@ public class MockCalendarContentProviderTest extends InstrumentationTestCase {
     protected void setUp() throws Exception {
         super.setUp();
         provider = MockCalendarContentProvider.getContentProvider(this);
-        CalendarQueryResultsStorage.setNeedToStoreResults(true);
+        QueryResultsStorage.setNeedToStoreResults(true);
     }
 
     @Override
     protected void tearDown() throws Exception {
-        CalendarQueryResultsStorage.setNeedToStoreResults(false);
+        QueryResultsStorage.setNeedToStoreResults(false);
         provider.tearDown();
         super.tearDown();
     }
 
     public void testTwoEventsToday() {
-        CalendarQueryResult input1 = addOneResult("");
-        CalendarQueryResult input2 = addOneResult("SOMETHING=1");
+        QueryResult input1 = addOneResult("");
+        QueryResult input2 = addOneResult("SOMETHING=1");
 
-        CalendarQueryResult result1 = queryList(input1.getUri(), input1.getSelection());
+        QueryResult result1 = queryList(input1.getUri(), input1.getSelection());
         assertEquals(1, provider.getQueriesCount());
         assertEquals(input1, result1);
         assertEquals(result1, input1);
-        assertEquals(input1, CalendarQueryResultsStorage.getStorage().getCalendarResults().get(0));
+        assertEquals(input1, QueryResultsStorage.getStorage().getCalendarResults().get(0));
 
-        CalendarQueryResult result2 = queryList(input2.getUri(), input2.getSelection());
+        QueryResult result2 = queryList(input2.getUri(), input2.getSelection());
         assertEquals(2, provider.getQueriesCount());
         assertEquals(input2, result2);
         assertEquals(result2, input2);
-        assertEquals(input2, CalendarQueryResultsStorage.getStorage().getCalendarResults().get(1));
+        assertEquals(input2, QueryResultsStorage.getStorage().getCalendarResults().get(1));
 
         assertNotSame(result1, result2);
 
@@ -61,13 +61,13 @@ public class MockCalendarContentProviderTest extends InstrumentationTestCase {
         assertNotSame(result1, input1);
     }
 
-    private CalendarQueryResult addOneResult(String selection) {
-        CalendarQueryResult input = new CalendarQueryResult(provider.getSettings(),
+    private QueryResult addOneResult(String selection) {
+        QueryResult input = new QueryResult(provider.getSettings(),
                 CalendarContract.Instances.CONTENT_URI, projection, selection, null, sortOrder);
         DateTime today = DateUtil.now(provider.getSettings().getTimeZone()).withTimeAtStartOfDay();
-        input.addRow(new CalendarQueryRow().setEventId(++eventId)
+        input.addRow(new QueryRow().setEventId(++eventId)
                 .setTitle("First Event today").setBegin(today.plusHours(8).getMillis()));
-        input.addRow(new CalendarQueryRow()
+        input.addRow(new QueryRow()
                 .setEventId(++eventId)
                 .setTitle("Event with all known attributes")
                 .setBegin(today.plusHours(12).getMillis())
@@ -84,8 +84,8 @@ public class MockCalendarContentProviderTest extends InstrumentationTestCase {
         return input;
     }
 
-    private CalendarQueryResult queryList(Uri uri, String selection) {
-        CalendarQueryResult result = new CalendarQueryResult(provider.getSettings(),
+    private QueryResult queryList(Uri uri, String selection) {
+        QueryResult result = new QueryResult(provider.getSettings(),
                 uri, projection, selection, null, sortOrder);
         Cursor cursor = null;
         try {
@@ -93,7 +93,7 @@ public class MockCalendarContentProviderTest extends InstrumentationTestCase {
                     selection, null, sortOrder);
             if (cursor != null && cursor.moveToFirst()) {
                 do {
-                    if (CalendarQueryResultsStorage.getNeedToStoreResults()) {
+                    if (QueryResultsStorage.getNeedToStoreResults()) {
                         result.addRow(cursor);
                     }
                 } while (cursor.moveToNext());
@@ -104,16 +104,16 @@ public class MockCalendarContentProviderTest extends InstrumentationTestCase {
             }
         }
         result.dropNullColumns();
-        CalendarQueryResultsStorage.storeCalendar(result);
+        QueryResultsStorage.storeCalendar(result);
         return result;
     }
 
     public void testJsonToAndFrom() throws IOException, JSONException {
-        CalendarQueryResultsStorage inputs1 = provider.loadResults(getInstrumentation().getContext(),
+        QueryResultsStorage inputs1 = provider.loadResults(getInstrumentation().getContext(),
                 org.andstatus.todoagenda.tests.R.raw.birthday);
         JSONObject jsonOutput = inputs1.toJson(provider.getContext(), provider.getWidgetId());
-        CalendarQueryResultsStorage inputs2 =
-                CalendarQueryResultsStorage.fromJson(provider.getContext(), jsonOutput);
+        QueryResultsStorage inputs2 =
+                QueryResultsStorage.fromJson(provider.getContext(), jsonOutput);
         assertEquals(inputs1, inputs2);
     }
 }

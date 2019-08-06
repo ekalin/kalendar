@@ -2,12 +2,11 @@ package org.andstatus.todoagenda;
 
 import android.test.InstrumentationTestCase;
 
-import org.andstatus.todoagenda.calendar.CalendarQueryRow;
 import org.andstatus.todoagenda.calendar.MockCalendarContentProvider;
+import org.andstatus.todoagenda.calendar.QueryRow;
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
 import org.andstatus.todoagenda.widget.CalendarEntry;
 import org.andstatus.todoagenda.widget.WidgetEntry;
-
 import org.joda.time.DateTime;
 
 import java.util.concurrent.TimeUnit;
@@ -69,7 +68,7 @@ public class RecurringEventsTest extends InstrumentationTestCase {
         eventId++;
         for (int ind = 0; ind < 15; ind++) {
             millis += TimeUnit.DAYS.toMillis(1);
-            provider.addRow(new CalendarQueryRow().setEventId(eventId).setTitle("Work each day")
+            provider.addRow(new QueryRow().setEventId(eventId).setTitle("Work each day")
                     .setBegin(millis).setEnd(millis + TimeUnit.HOURS.toMillis(9)));
         }
         factory.onDataSetChanged();

@@ -24,9 +24,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * @author yvolk@yurivolkov.com
  */
-public class CalendarQueryResultsStorage {
-
-    private static final String TAG = CalendarQueryResultsStorage.class.getSimpleName();
+public class QueryResultsStorage {
+    private static final String TAG = QueryResultsStorage.class.getSimpleName();
     private static final String KEY_RESULTS_VERSION = "resultsVersion";
     private static final int RESULTS_VERSION = 2;
     private static final String KEY_CALENDAR_RESULTS = "results";
@@ -44,13 +43,13 @@ public class CalendarQueryResultsStorage {
     private static final String KEY_ANDROID_BRAND = "buildBrand";
     private static final String KEY_ANDROID_MODEL = "buildModel";
 
-    private static volatile CalendarQueryResultsStorage theStorage = null;
+    private static volatile QueryResultsStorage theStorage = null;
 
-    private final List<CalendarQueryResult> calendarResults = new CopyOnWriteArrayList<>();
-    private final List<CalendarQueryResult> taskResults = new CopyOnWriteArrayList<>();
+    private final List<QueryResult> calendarResults = new CopyOnWriteArrayList<>();
+    private final List<QueryResult> taskResults = new CopyOnWriteArrayList<>();
 
-    public static boolean storeCalendar(CalendarQueryResult result) {
-        CalendarQueryResultsStorage storage = theStorage;
+    public static boolean storeCalendar(QueryResult result) {
+        QueryResultsStorage storage = theStorage;
         if (storage != null) {
             storage.calendarResults.add(result);
             return (storage == theStorage);
@@ -58,8 +57,8 @@ public class CalendarQueryResultsStorage {
         return false;
     }
 
-    public static boolean storeTask(CalendarQueryResult result) {
-        CalendarQueryResultsStorage storage = theStorage;
+    public static boolean storeTask(QueryResult result) {
+        QueryResultsStorage storage = theStorage;
         if (storage != null) {
             storage.taskResults.add(result);
             return (storage == theStorage);
@@ -97,21 +96,21 @@ public class CalendarQueryResultsStorage {
 
     public static void setNeedToStoreResults(boolean needToStoreResults) {
         if (needToStoreResults) {
-            theStorage = new CalendarQueryResultsStorage();
+            theStorage = new QueryResultsStorage();
         } else {
             theStorage = null;
         }
     }
 
-    public static CalendarQueryResultsStorage getStorage() {
+    public static QueryResultsStorage getStorage() {
         return theStorage;
     }
 
-    public List<CalendarQueryResult> getCalendarResults() {
+    public List<QueryResult> getCalendarResults() {
         return calendarResults;
     }
 
-    public List<CalendarQueryResult> getTaskResults() {
+    public List<QueryResult> getTaskResults() {
         return taskResults;
     }
 
@@ -134,9 +133,9 @@ public class CalendarQueryResultsStorage {
         return json;
     }
 
-    private JSONArray getResultsArray(int widgetId, List<CalendarQueryResult> results) throws JSONException {
+    private JSONArray getResultsArray(int widgetId, List<QueryResult> results) throws JSONException {
         JSONArray jsonArray = new JSONArray();
-        for (CalendarQueryResult result : results) {
+        for (QueryResult result : results) {
             if (result.getWidgetId() == widgetId) {
                 jsonArray.put(result.toJson());
             }
@@ -144,10 +143,10 @@ public class CalendarQueryResultsStorage {
         return jsonArray;
     }
 
-    public static CalendarQueryResultsStorage fromJson(Context context, JSONObject json) throws JSONException {
+    public static QueryResultsStorage fromJson(Context context, JSONObject json) throws JSONException {
         InstanceSettings settings = InstanceSettings.fromJson(context, json.getJSONObject(KEY_SETTINGS));
         InstanceSettings.getInstances(context).put(settings.getWidgetId(), settings);
-        CalendarQueryResultsStorage results = new CalendarQueryResultsStorage();
+        QueryResultsStorage results = new QueryResultsStorage();
         readResults(json, KEY_CALENDAR_RESULTS, settings.getWidgetId(), results.calendarResults);
         readResults(json, KEY_TASK_RESULTS, settings.getWidgetId(), results.taskResults);
 
@@ -158,14 +157,14 @@ public class CalendarQueryResultsStorage {
         return results;
     }
 
-    private static void readResults(JSONObject json, String key, int widgetId, List<CalendarQueryResult> results) throws JSONException {
+    private static void readResults(JSONObject json, String key, int widgetId, List<QueryResult> results) throws JSONException {
         if (!json.has(key)) {
             return;
         }
 
         JSONArray jsonResults = json.getJSONArray(key);
         for (int ind = 0; ind < jsonResults.length(); ind++) {
-            results.add(CalendarQueryResult.fromJson(jsonResults.getJSONObject(ind), widgetId));
+            results.add(QueryResult.fromJson(jsonResults.getJSONObject(ind), widgetId));
         }
     }
 
@@ -199,7 +198,7 @@ public class CalendarQueryResultsStorage {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CalendarQueryResultsStorage results = (CalendarQueryResultsStorage) o;
+        QueryResultsStorage results = (QueryResultsStorage) o;
 
         if (!compareResults(this.calendarResults, results.calendarResults)) return false;
         if (!compareResults(this.taskResults, results.taskResults)) return false;
@@ -207,7 +206,7 @@ public class CalendarQueryResultsStorage {
         return true;
     }
 
-    private boolean compareResults(List<CalendarQueryResult> r1, List<CalendarQueryResult> r2) {
+    private boolean compareResults(List<QueryResult> r1, List<QueryResult> r2) {
         if (r1.size() != r2.size()) {
             return false;
         }

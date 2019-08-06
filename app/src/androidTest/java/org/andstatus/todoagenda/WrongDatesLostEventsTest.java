@@ -3,8 +3,8 @@ package org.andstatus.todoagenda;
 import android.test.InstrumentationTestCase;
 import android.util.Log;
 
-import org.andstatus.todoagenda.calendar.CalendarQueryResultsStorage;
 import org.andstatus.todoagenda.calendar.MockCalendarContentProvider;
+import org.andstatus.todoagenda.calendar.QueryResultsStorage;
 import org.andstatus.todoagenda.widget.CalendarEntry;
 import org.json.JSONException;
 
@@ -38,7 +38,7 @@ public class WrongDatesLostEventsTest extends InstrumentationTestCase {
      */
     public void testIssue205() throws IOException, JSONException {
         final String method = "testIssue205";
-        CalendarQueryResultsStorage inputs = provider.loadResults(this.getInstrumentation().getContext(),
+        QueryResultsStorage inputs = provider.loadResults(this.getInstrumentation().getContext(),
                 org.andstatus.todoagenda.tests.R.raw.wrong_dates_lost_events);
         provider.addResults(inputs.getCalendarResults());
         Log.d(method, "Results executed at " + inputs.getCalendarResults().get(0).getExecutedAt());

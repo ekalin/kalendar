@@ -7,8 +7,8 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 import org.andstatus.todoagenda.R;
-import org.andstatus.todoagenda.calendar.CalendarQueryResult;
-import org.andstatus.todoagenda.calendar.CalendarQueryResultsStorage;
+import org.andstatus.todoagenda.calendar.QueryResult;
+import org.andstatus.todoagenda.calendar.QueryResultsStorage;
 import org.andstatus.todoagenda.prefs.EventSource;
 import org.andstatus.todoagenda.task.AbstractTaskProvider;
 import org.andstatus.todoagenda.task.TaskEvent;
@@ -41,7 +41,7 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
         };
         String where = getWhereClause();
 
-        CalendarQueryResult result = new CalendarQueryResult(getSettings(), uri, projection, where, null, null);
+        QueryResult result = new QueryResult(getSettings(), uri, projection, where, null, null);
 
         Cursor cursor;
         try {
@@ -56,7 +56,7 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
         List<TaskEvent> tasks = new ArrayList<>();
         try {
             while (cursor.moveToNext()) {
-                if (CalendarQueryResultsStorage.getNeedToStoreResults()) {
+                if (QueryResultsStorage.getNeedToStoreResults()) {
                     result.addRow(cursor);
                 }
 
@@ -69,7 +69,7 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
             cursor.close();
         }
 
-        CalendarQueryResultsStorage.storeTask(result);
+        QueryResultsStorage.storeTask(result);
 
         return tasks;
     }

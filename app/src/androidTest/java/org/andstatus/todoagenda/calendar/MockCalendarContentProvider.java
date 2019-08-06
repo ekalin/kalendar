@@ -29,7 +29,7 @@ import java.util.List;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
-import static org.andstatus.todoagenda.calendar.CalendarQueryResultsStorage.KEY_SETTINGS;
+import static org.andstatus.todoagenda.calendar.QueryResultsStorage.KEY_SETTINGS;
 import static org.andstatus.todoagenda.prefs.ApplicationPreferences.PREF_WIDGET_ID;
 
 /**
@@ -40,7 +40,7 @@ public class MockCalendarContentProvider extends MockContentProvider {
     private static final int WIDGET_ID_MIN = 434892;
     private static final String[] ZONE_IDS = {"America/Los_Angeles", "Europe/Moscow", "Asia/Kuala_Lumpur", "UTC"};
     private int queriesCount = 0;
-    private final List<CalendarQueryResult> results = new ArrayList<>();
+    private final List<QueryResult> results = new ArrayList<>();
     private final JSONArray storedSettings;
     private final DateTimeZone storedZone;
 
@@ -115,8 +115,8 @@ public class MockCalendarContentProvider extends MockContentProvider {
         }
     }
 
-    public void addResults(List<CalendarQueryResult> results) {
-        for (CalendarQueryResult result : results) {
+    public void addResults(List<QueryResult> results) {
+        for (QueryResult result : results) {
             addResult(result);
         }
         if (!results.isEmpty()) {
@@ -128,12 +128,12 @@ public class MockCalendarContentProvider extends MockContentProvider {
         }
     }
 
-    public void addResult(CalendarQueryResult result) {
+    public void addResult(QueryResult result) {
         results.add(result);
     }
 
     public void addRow(CalendarEvent event) {
-        addRow(new CalendarQueryRow()
+        addRow(new QueryRow()
                 .setEventId(event.getEventId())
                 .setTitle(event.getTitle())
                 .setBegin(event.getStartMillis())
@@ -146,11 +146,11 @@ public class MockCalendarContentProvider extends MockContentProvider {
         );
     }
 
-    public void addRow(CalendarQueryRow calendarQueryRow) {
+    public void addRow(QueryRow queryRow) {
         if (results.isEmpty()) {
-            addResult(new CalendarQueryResult(getSettings().getWidgetId(), DateUtil.now(getSettings().getTimeZone())));
+            addResult(new QueryResult(getSettings().getWidgetId(), DateUtil.now(getSettings().getTimeZone())));
         }
-        results.get(0).addRow(calendarQueryRow);
+        results.get(0).addRow(queryRow);
     }
 
     @NonNull
@@ -184,10 +184,10 @@ public class MockCalendarContentProvider extends MockContentProvider {
         ApplicationPreferences.save(getContext(), getWidgetId());
     }
 
-    public CalendarQueryResultsStorage loadResults(Context context, @RawRes int jsonResId)
+    public QueryResultsStorage loadResults(Context context, @RawRes int jsonResId)
             throws IOException, JSONException {
         JSONObject json = new JSONObject(RawResourceUtils.getString(context, jsonResId));
         json.getJSONObject(KEY_SETTINGS).put(PREF_WIDGET_ID, widgetId);
-        return CalendarQueryResultsStorage.fromJson(getContext(), json);
+        return QueryResultsStorage.fromJson(getContext(), json);
     }
 }
