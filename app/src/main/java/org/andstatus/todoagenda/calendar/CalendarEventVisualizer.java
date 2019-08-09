@@ -12,11 +12,9 @@ import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.widget.CalendarEntry;
 import org.andstatus.todoagenda.widget.EventEntryLayout;
 import org.andstatus.todoagenda.widget.WidgetEntry;
-
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.andstatus.todoagenda.RemoteViewsUtil.setAlpha;
@@ -92,9 +90,7 @@ public class CalendarEventVisualizer implements IEventVisualizer<CalendarEntry> 
     }
 
     public List<CalendarEntry> getEventEntries() {
-        List<CalendarEntry> entries = createEntryList(calendarContentProvider.getEvents());
-        Collections.sort(entries);
-        return entries;
+        return createEntryList(calendarContentProvider.getEvents());
     }
 
     private List<CalendarEntry> createEntryList(List<CalendarEvent> eventList) {

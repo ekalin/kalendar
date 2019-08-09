@@ -194,7 +194,7 @@ public class ApplicationPreferences {
                 .getBoolean(PREF_SHOW_DAY_HEADERS, true);
     }
 
-    private static void setShowDayHeaders(Context context, boolean value) {
+    public static void setShowDayHeaders(Context context, boolean value) {
         setBoolean(context, PREF_SHOW_DAY_HEADERS, value);
     }
 
