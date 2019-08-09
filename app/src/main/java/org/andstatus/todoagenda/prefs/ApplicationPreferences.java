@@ -185,7 +185,7 @@ public class ApplicationPreferences {
                 .getBoolean(PREF_SHOW_DAYS_WITHOUT_EVENTS, false);
     }
 
-    private static void setShowDaysWithoutEvents(Context context, boolean value) {
+    public static void setShowDaysWithoutEvents(Context context, boolean value) {
         setBoolean(context, PREF_SHOW_DAYS_WITHOUT_EVENTS, value);
     }
 

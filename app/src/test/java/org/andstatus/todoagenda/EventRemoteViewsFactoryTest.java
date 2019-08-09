@@ -12,9 +12,13 @@ import org.andstatus.todoagenda.widget.TaskEntry;
 import org.andstatus.todoagenda.widget.WidgetEntry;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
+import org.mockito.quality.Strictness;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -32,7 +36,14 @@ import static org.mockito.Mockito.doReturn;
 
 @RunWith(RobolectricTestRunner.class)
 public class EventRemoteViewsFactoryTest {
+    @Rule
+    public MockitoRule mockitoRule = MockitoJUnit.rule().strictness(Strictness.STRICT_STUBS);
+
+    @Mock
+    private IEventVisualizer eventProvider;
+
     private Context context = ApplicationProvider.getApplicationContext();
+    private DateTime today = DateTime.now();
 
     @Test
     public void getEventEntries_returnsEventsSorted() {
@@ -40,8 +51,7 @@ public class EventRemoteViewsFactoryTest {
         ApplicationPreferences.setShowDayHeaders(context, false);
         ApplicationPreferences.save(context, 1);
 
-        IEventVisualizer<?> eventProvider = Mockito.mock(IEventVisualizer.class);
-        doReturn(createEventList()).when(eventProvider).getEventEntries();
+        doReturn(createEventListForSortTest()).when(eventProvider).getEventEntries();
 
         EventRemoteViewsFactory factory = createFactory(eventProvider);
         factory.onDataSetChanged();
@@ -50,7 +60,7 @@ public class EventRemoteViewsFactoryTest {
         assertEventOrder(widgetEntries);
     }
 
-    private List<WidgetEntry> createEventList() {
+    private List<WidgetEntry> createEventListForSortTest() {
         DayHeader dayHeader = new DayHeader(new DateTime(2019, 8, 8, 0, 0));
         TaskEntry task1 = createTaskEntry(new DateTime(2019, 8, 8, 0, 0), "task1");
         CalendarEntry calendar1 = createCalendarEntry(new DateTime(2019, 8, 8, 0, 0), "calendar1");
@@ -82,6 +92,71 @@ public class EventRemoteViewsFactoryTest {
         assertThat(entry, is(instanceOf(CalendarEntry.class)));
         calendarEntry = (CalendarEntry) entry;
         assertThat(calendarEntry.getTitle(), equalTo("calendar3"));
+    }
+
+    @Test
+    public void getEventEntries_addsDayHeaders() {
+        ApplicationPreferences.startEditing(context, 1);
+        ApplicationPreferences.setShowDayHeaders(context, true);
+        ApplicationPreferences.setShowDaysWithoutEvents(context, false);
+        ApplicationPreferences.save(context, 1);
+
+        doReturn(createEventListForDayHeaderTest()).when(eventProvider).getEventEntries();
+
+        EventRemoteViewsFactory factory = createFactory(eventProvider);
+        factory.onDataSetChanged();
+
+        List<WidgetEntry> widgetEntries = factory.getWidgetEntries();
+        assertDayHeaders(widgetEntries);
+    }
+
+    private void assertDayHeaders(List<WidgetEntry> widgetEntries) {
+        assertThat(widgetEntries, hasSize(4));
+
+        WidgetEntry entry = widgetEntries.get(0);
+        assertThat(entry, is(instanceOf(DayHeader.class)));
+        assertThat(entry.getStartDay(), equalTo(today.withTimeAtStartOfDay()));
+
+        entry = widgetEntries.get(2);
+        assertThat(entry, is(instanceOf(DayHeader.class)));
+        assertThat(entry.getStartDay(), equalTo(today.plusDays(2).withTimeAtStartOfDay()));
+    }
+
+    @Test
+    public void getEventEntries_addsDayHeadersForDaysWithoutEvents() {
+        ApplicationPreferences.startEditing(context, 1);
+        ApplicationPreferences.setShowDayHeaders(context, true);
+        ApplicationPreferences.setShowDaysWithoutEvents(context, true);
+        ApplicationPreferences.save(context, 1);
+
+        doReturn(createEventListForDayHeaderTest()).when(eventProvider).getEventEntries();
+
+        EventRemoteViewsFactory factory = createFactory(eventProvider);
+        factory.onDataSetChanged();
+
+        List<WidgetEntry> widgetEntries = factory.getWidgetEntries();
+        assertDayHeadersForDaysWithoutEvents(widgetEntries);
+    }
+
+    private void assertDayHeadersForDaysWithoutEvents(List<WidgetEntry> widgetEntries) {
+        assertThat(widgetEntries, hasSize(5));
+
+        WidgetEntry entry = widgetEntries.get(0);
+        assertThat(entry, is(instanceOf(DayHeader.class)));
+        assertThat(entry.getStartDay(), equalTo(today.withTimeAtStartOfDay()));
+
+        entry = widgetEntries.get(2);
+        assertThat(entry, is(instanceOf(DayHeader.class)));
+        assertThat(entry.getStartDay(), equalTo(today.plusDays(1).withTimeAtStartOfDay()));
+        entry = widgetEntries.get(3);
+        assertThat(entry, is(instanceOf(DayHeader.class)));
+        assertThat(entry.getStartDay(), equalTo(today.plusDays(2).withTimeAtStartOfDay()));
+    }
+
+    private List<CalendarEntry> createEventListForDayHeaderTest() {
+        CalendarEntry calendar1 = createCalendarEntry(today, "calendar1");
+        CalendarEntry calendar2 = createCalendarEntry(today.plusDays(2), "calendar2");
+        return Arrays.asList(calendar1, calendar2);
     }
 
     private EventRemoteViewsFactory createFactory(IEventVisualizer<?> eventProvider) {
