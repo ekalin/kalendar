@@ -7,6 +7,7 @@ import android.provider.CalendarContract;
 import android.util.Log;
 
 import org.andstatus.todoagenda.BuildConfig;
+import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.CalendarIntentUtil;
 import org.andstatus.todoagenda.util.DateUtil;
@@ -229,7 +230,7 @@ public class CalendarEvent {
     }
 
     public InstanceSettings getSettings() {
-        return InstanceSettings.fromId(context, widgetId);
+        return AllSettings.instanceFromId(context, widgetId);
     }
 
     public Intent createOpenCalendarEventIntent() {

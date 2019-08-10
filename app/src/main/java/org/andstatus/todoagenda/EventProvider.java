@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import org.andstatus.todoagenda.calendar.KeywordsFilter;
+import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
@@ -56,7 +57,7 @@ public abstract class EventProvider {
 
     @NonNull
     protected InstanceSettings getSettings() {
-        return InstanceSettings.fromId(context, widgetId);
+        return AllSettings.instanceFromId(context, widgetId);
     }
 
     protected int getAsOpaque(int color) {

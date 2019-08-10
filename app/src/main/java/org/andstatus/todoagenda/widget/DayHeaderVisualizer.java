@@ -7,6 +7,7 @@ import android.widget.RemoteViews;
 
 import org.andstatus.todoagenda.Alignment;
 import org.andstatus.todoagenda.R;
+import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.DateUtil;
 
@@ -68,6 +69,6 @@ public class DayHeaderVisualizer implements WidgetEntryVisualizer<DayHeader> {
     }
 
     private InstanceSettings getSettings() {
-        return InstanceSettings.fromId(context, widgetId);
+        return AllSettings.instanceFromId(context, widgetId);
     }
 }

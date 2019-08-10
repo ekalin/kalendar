@@ -10,6 +10,7 @@ import android.util.Log;
 
 import org.andstatus.todoagenda.EventRemoteViewsFactory;
 import org.andstatus.todoagenda.R;
+import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
@@ -127,7 +128,7 @@ public class QueryResultsStorage {
         json.put(KEY_RESULTS_VERSION, RESULTS_VERSION);
         json.put(KEY_DEVICE_INFO, getDeviceInfo());
         json.put(KEY_APP_INFO, getAppInfo(context));
-        json.put(KEY_SETTINGS, InstanceSettings.fromId(context, widgetId).toJson());
+        json.put(KEY_SETTINGS, AllSettings.instanceFromId(context, widgetId).toJson());
         json.put(KEY_CALENDAR_RESULTS, getResultsArray(widgetId, this.calendarResults));
         json.put(KEY_TASK_RESULTS, getResultsArray(widgetId, this.taskResults));
         return json;
@@ -145,7 +146,7 @@ public class QueryResultsStorage {
 
     static QueryResultsStorage fromTestData(Context context, JSONObject json) throws JSONException {
         InstanceSettings settings = InstanceSettings.fromJson(context, json.getJSONObject(KEY_SETTINGS));
-        InstanceSettings.getInstances(context).put(settings.getWidgetId(), settings);
+        AllSettings.getInstances(context).put(settings.getWidgetId(), settings);
         QueryResultsStorage results = new QueryResultsStorage();
         readResults(json, KEY_CALENDAR_RESULTS, settings.getWidgetId(), results.calendarResults);
         readResults(json, KEY_TASK_RESULTS, settings.getWidgetId(), results.taskResults);

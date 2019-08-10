@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.ContextThemeWrapper;
 
 import org.andstatus.todoagenda.EndedSomeTimeAgo;
-import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.widget.EventEntryLayout;
 import org.joda.time.DateTimeZone;
@@ -18,12 +17,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
-import java.util.concurrent.ConcurrentHashMap;
 
-import static org.andstatus.todoagenda.EventAppWidgetProvider.getWidgetIds;
 import static org.andstatus.todoagenda.Theme.themeNameToResId;
 import static org.andstatus.todoagenda.prefs.ApplicationPreferences.PREF_ABBREVIATE_DATES;
 import static org.andstatus.todoagenda.prefs.ApplicationPreferences.PREF_ABBREVIATE_DATES_DEFAULT;
@@ -68,24 +64,20 @@ import static org.andstatus.todoagenda.prefs.ApplicationPreferences.PREF_TEXT_SI
 import static org.andstatus.todoagenda.prefs.ApplicationPreferences.PREF_TEXT_SIZE_SCALE_DEFAULT;
 import static org.andstatus.todoagenda.prefs.ApplicationPreferences.PREF_WIDGET_ID;
 import static org.andstatus.todoagenda.prefs.ApplicationPreferences.PREF_WIDGET_INSTANCE_NAME;
-import static org.andstatus.todoagenda.prefs.SettingsStorage.loadJson;
 import static org.andstatus.todoagenda.prefs.SettingsStorage.saveJson;
 
 /**
+ * Loaded settings of one Widget
+ *
  * @author yvolk@yurivolkov.com
  */
 public class InstanceSettings {
-
-    private static volatile boolean instancesLoaded = false;
-    private static final Map<Integer, InstanceSettings> instances = new ConcurrentHashMap<>();
-
     private final Context context;
     private volatile ContextThemeWrapper entryThemeContext = null;
     private volatile ContextThemeWrapper headerThemeContext = null;
 
-    private final int widgetId;
+    final int widgetId;
     private final String widgetInstanceName;
-    private boolean justCreated = true;
     private Set<String> activeCalendars = Collections.emptySet();
     private int eventRange = Integer.valueOf(PREF_EVENT_RANGE_DEFAULT);
     private EndedSomeTimeAgo eventsEnded = EndedSomeTimeAgo.NONE;
@@ -114,74 +106,12 @@ public class InstanceSettings {
     private String taskSource = PREF_TASK_SOURCE_DEFAULT;
     private Set<String> activeTaskLists = Collections.emptySet();
 
-    @NonNull
-    public static InstanceSettings fromId(Context context, Integer widgetId) {
-        ensureLoadedFromFiles(context);
-        InstanceSettings settings = instances.get(widgetId);
-        return settings == null ? newInstance(context, widgetId) : settings;
-    }
-
-    @NonNull
-    private static InstanceSettings newInstance(Context context, Integer widgetId) {
-        synchronized (instances) {
-            InstanceSettings settings = instances.get(widgetId);
-            if (settings == null) {
-                if (widgetId != 0 &&
-                        (ApplicationPreferences.getWidgetId(context) == widgetId || instances.isEmpty())) {
-                    settings = fromApplicationPreferences(context, widgetId);
-                } else {
-                    settings = new InstanceSettings(context, widgetId, "");
-                }
-                instances.put(widgetId, settings);
-            }
-            return settings;
-        }
-    }
-
-    public static void ensureLoadedFromFiles(Context context) {
-        if (instancesLoaded) {
-            return;
-        }
-        synchronized (instances) {
-            if (!instancesLoaded) {
-                for (int widgetId : getWidgetIds(context)) {
-                    InstanceSettings settings;
-                    try {
-                        settings = fromJson(context, loadJson(context, getStorageKey(widgetId)));
-                        instances.put(widgetId, settings);
-                    } catch (Exception e) { // Starting from API21 android.system.ErrnoException may be thrown
-                        Log.e("loadInstances", "widgetId:" + widgetId, e);
-                        newInstance(context, widgetId);
-                    }
-                }
-                instancesLoaded = true;
-            }
-        }
-    }
-
-    public static void loadFromTestData(Context context, JSONArray jsonArray) throws JSONException {
-        synchronized (instances) {
-            instances.clear();
-            for (int index = 0; index < jsonArray.length(); index++) {
-                JSONObject json = jsonArray.optJSONObject(index);
-                if (json != null) {
-                    InstanceSettings settings = fromJson(context, json);
-                    if (settings.getWidgetId() != 0) {
-                        instances.put(settings.widgetId, settings);
-                    }
-                }
-            }
-            instancesLoaded = true;
-        }
-    }
-
     public static InstanceSettings fromJson(Context context, JSONObject json) throws JSONException {
         InstanceSettings settings = new InstanceSettings(context, json.optInt(PREF_WIDGET_ID),
                 json.optString(PREF_WIDGET_INSTANCE_NAME));
         if (settings.widgetId == 0) {
             return settings;
         }
-        settings.justCreated = false;
         if (json.has(PREF_ACTIVE_CALENDARS)) {
             settings.activeCalendars = jsonArray2StringSet(json.getJSONArray(PREF_ACTIVE_CALENDARS));
         }
@@ -278,23 +208,10 @@ public class InstanceSettings {
         return set;
     }
 
-    public static void save(Context context, Integer widgetId) {
-        if (widgetId == 0) {
-            return;
-        }
-        InstanceSettings settings = fromApplicationPreferences(context, widgetId);
-        InstanceSettings settingStored = fromId(context, widgetId);
-        if (!settings.equals(settingStored)) {
-            settings.save();
-            instances.put(widgetId, settings);
-        }
-    }
-
-    private static InstanceSettings fromApplicationPreferences(Context context, int widgetId) {
+    static InstanceSettings fromApplicationPreferences(Context context, int widgetId) {
         InstanceSettings settings = new InstanceSettings(context, widgetId,
                 ApplicationPreferences.getString(context, PREF_WIDGET_INSTANCE_NAME,
                         ApplicationPreferences.getString(context, PREF_WIDGET_INSTANCE_NAME, "")));
-        settings.justCreated = false;
         settings.activeCalendars = ApplicationPreferences.getActiveCalendars(context);
         settings.eventRange = ApplicationPreferences.getEventRange(context);
         settings.eventsEnded = ApplicationPreferences.getEventsEnded(context);
@@ -329,56 +246,18 @@ public class InstanceSettings {
         return settings;
     }
 
-    public static JSONArray toJson(Context context) {
-        ensureLoadedFromFiles(context);
-        return new JSONArray(instances.values());
-    }
-
     @NonNull
     private static String getStorageKey(int widgetId) {
         return "instanceSettings" + widgetId;
     }
 
-    public static void delete(Context context, int widgetId) {
-        ensureLoadedFromFiles(context);
-        synchronized (instances) {
-            instances.remove(widgetId);
-            SettingsStorage.delete(context, getStorageKey(widgetId));
-            if (ApplicationPreferences.getWidgetId(context) == widgetId) {
-                ApplicationPreferences.setWidgetId(context, 0);
-            }
-        }
-    }
-
-    private InstanceSettings(Context context, int widgetId, String widgetInstanceName) {
+    InstanceSettings(Context context, int widgetId, String uniqueInstanceName) {
         this.context = context;
         this.widgetId = widgetId;
-        this.widgetInstanceName = uniqueInstanceName(widgetInstanceName);
+        this.widgetInstanceName = uniqueInstanceName;
     }
 
-    private String uniqueInstanceName(String widgetInstanceName) {
-        int index = instances.size();
-        String name = TextUtils.isEmpty(widgetInstanceName) ? defaultInstanceName(++index) : widgetInstanceName;
-        while (existsInstanceName(name)) {
-            name = defaultInstanceName(++index);
-        }
-        return name;
-    }
-
-    private String defaultInstanceName(int index) {
-        return context.getText(R.string.app_name) + " " + index;
-    }
-
-    private boolean existsInstanceName(String name) {
-        for (InstanceSettings settings : instances.values()) {
-            if (settings.getWidgetId() != widgetId && settings.getWidgetInstanceName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void save() {
+    void save() {
         try {
             saveJson(context, getStorageKey(widgetId), toJson());
         } catch (IOException e) {
@@ -434,10 +313,6 @@ public class InstanceSettings {
 
     public String getWidgetInstanceName() {
         return widgetInstanceName;
-    }
-
-    public boolean isJustCreated() {
-        return justCreated;
     }
 
     public Set<String> getActiveCalendars() {
@@ -587,10 +462,5 @@ public class InstanceSettings {
 
     public Set<String> getActiveTaskLists() {
         return activeTaskLists;
-    }
-
-    public static Map<Integer, InstanceSettings> getInstances(Context context) {
-        ensureLoadedFromFiles(context);
-        return instances;
     }
 }
