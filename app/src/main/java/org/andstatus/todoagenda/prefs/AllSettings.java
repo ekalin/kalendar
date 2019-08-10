@@ -42,7 +42,7 @@ public class AllSettings {
                     }
                     settings = InstanceSettings.fromApplicationPreferences(context, widgetId);
                 } else {
-                    settings = new InstanceSettings(context, widgetId, uniqueInstanceName(context, widgetId));
+                    settings = new InstanceSettings(context, widgetId, "");
                 }
                 instances.put(widgetId, settings);
             }
@@ -120,7 +120,13 @@ public class AllSettings {
         }
     }
 
-    private static String uniqueInstanceName(Context context, int widgetId) {
+    public static String uniqueInstanceName(Context context, int widgetId, String proposedInstanceName) {
+         if (proposedInstanceName != null &&
+             proposedInstanceName.trim().length() > 0 &&
+             !existsInstanceName(widgetId, proposedInstanceName)) {
+                return proposedInstanceName;
+         }
+
         int index = instances.size();
         String name;
         do {

@@ -251,10 +251,10 @@ public class InstanceSettings {
         return "instanceSettings" + widgetId;
     }
 
-    InstanceSettings(Context context, int widgetId, String uniqueInstanceName) {
+    InstanceSettings(Context context, int widgetId, String proposedInstanceName) {
         this.context = context;
         this.widgetId = widgetId;
-        this.widgetInstanceName = uniqueInstanceName;
+        this.widgetInstanceName = AllSettings.uniqueInstanceName(context, widgetId, proposedInstanceName);
     }
 
     void save() {
