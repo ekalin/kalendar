@@ -4,8 +4,8 @@ import android.content.ContentUris;
 import android.content.Intent;
 import android.provider.CalendarContract;
 
-import org.andstatus.todoagenda.CalendarIntentUtil;
 import org.andstatus.todoagenda.task.TaskEvent;
+import org.andstatus.todoagenda.util.CalendarIntentUtil;
 
 public class SamsungTaskEvent extends TaskEvent {
     @Override

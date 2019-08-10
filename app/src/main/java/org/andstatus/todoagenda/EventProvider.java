@@ -5,10 +5,14 @@ import android.support.annotation.NonNull;
 
 import org.andstatus.todoagenda.calendar.KeywordsFilter;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
+import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
-import static android.graphics.Color.*;
+import static android.graphics.Color.argb;
+import static android.graphics.Color.blue;
+import static android.graphics.Color.green;
+import static android.graphics.Color.red;
 
 public abstract class EventProvider {
 

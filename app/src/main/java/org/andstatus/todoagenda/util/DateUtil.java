@@ -1,4 +1,4 @@
-package org.andstatus.todoagenda;
+package org.andstatus.todoagenda.util;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
 
+import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -14,7 +15,6 @@ import java.util.Formatter;
 import java.util.Locale;
 
 public class DateUtil {
-
     private static final String COMMA_SPACE = ", ";
     private static volatile DateTime mNow = null;
     private static volatile DateTime mNowSetAt = DateTime.now();

@@ -9,6 +9,7 @@ import android.widget.RemoteViewsService.RemoteViewsFactory;
 import org.andstatus.todoagenda.calendar.CalendarEventVisualizer;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.task.TaskVisualizer;
+import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.widget.DayHeader;
 import org.andstatus.todoagenda.widget.DayHeaderVisualizer;
 import org.andstatus.todoagenda.widget.WidgetEntry;
@@ -19,8 +20,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.andstatus.todoagenda.CalendarIntentUtil.createOpenCalendarEventPendingIntent;
 import static org.andstatus.todoagenda.Theme.themeNameToResId;
+import static org.andstatus.todoagenda.util.CalendarIntentUtil.createOpenCalendarEventPendingIntent;
 
 public class EventRemoteViewsFactory implements RemoteViewsFactory {
     private final Context context;

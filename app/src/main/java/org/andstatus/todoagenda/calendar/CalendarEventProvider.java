@@ -10,8 +10,8 @@ import android.provider.CalendarContract.Instances;
 import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
-import org.andstatus.todoagenda.DateUtil;
 import org.andstatus.todoagenda.EventProvider;
+import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.util.PermissionsUtil;
 import org.joda.time.DateTime;
 

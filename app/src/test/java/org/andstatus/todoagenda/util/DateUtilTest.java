@@ -1,4 +1,4 @@
-package org.andstatus.todoagenda;
+package org.andstatus.todoagenda.util;
 
 import android.content.Context;
 import android.text.format.DateUtils;

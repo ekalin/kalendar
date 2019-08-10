@@ -7,10 +7,9 @@ import android.provider.CalendarContract;
 import android.util.Log;
 
 import org.andstatus.todoagenda.BuildConfig;
-import org.andstatus.todoagenda.CalendarIntentUtil;
-import org.andstatus.todoagenda.DateUtil;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
-
+import org.andstatus.todoagenda.util.CalendarIntentUtil;
+import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;

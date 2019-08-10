@@ -1,4 +1,4 @@
-package org.andstatus.todoagenda;
+package org.andstatus.todoagenda.util;
 
 import android.app.PendingIntent;
 import android.content.ContentUris;
@@ -8,12 +8,10 @@ import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
 
 import org.andstatus.todoagenda.prefs.InstanceSettings;
-import org.andstatus.todoagenda.util.PermissionsUtil;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
 public class CalendarIntentUtil {
-
     private static final String KEY_DETAIL_VIEW = "DETAIL_VIEW";
     private static final String TIME = "time";
 
@@ -29,11 +27,11 @@ public class CalendarIntentUtil {
         return intent;
     }
 
-    static PendingIntent createOpenCalendarEventPendingIntent(InstanceSettings settings) {
+    public static PendingIntent createOpenCalendarEventPendingIntent(InstanceSettings settings) {
         return PermissionsUtil.getPermittedPendingIntent(settings, createCalendarIntent());
     }
 
-    static PendingIntent createOpenCalendarPendingIntent(InstanceSettings settings) {
+    public static PendingIntent createOpenCalendarPendingIntent(InstanceSettings settings) {
         return PermissionsUtil.getPermittedPendingIntent(settings,
                 createOpenCalendarAtDayIntent(new DateTime(settings.getTimeZone())));
     }

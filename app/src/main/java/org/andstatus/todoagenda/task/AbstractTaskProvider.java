@@ -3,9 +3,9 @@ package org.andstatus.todoagenda.task;
 import android.app.Activity;
 import android.content.Context;
 
-import org.andstatus.todoagenda.DateUtil;
 import org.andstatus.todoagenda.EventProvider;
 import org.andstatus.todoagenda.prefs.EventSource;
+import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 
 import java.util.Collection;

@@ -6,20 +6,20 @@ import android.graphics.Color;
 import android.widget.RemoteViews;
 
 import org.andstatus.todoagenda.Alignment;
-import org.andstatus.todoagenda.DateUtil;
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
+import org.andstatus.todoagenda.util.DateUtil;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-import static org.andstatus.todoagenda.CalendarIntentUtil.createOpenCalendarAtDayIntent;
-import static org.andstatus.todoagenda.RemoteViewsUtil.setBackgroundColor;
-import static org.andstatus.todoagenda.RemoteViewsUtil.setBackgroundColorFromAttr;
-import static org.andstatus.todoagenda.RemoteViewsUtil.setPadding;
-import static org.andstatus.todoagenda.RemoteViewsUtil.setTextColorFromAttr;
-import static org.andstatus.todoagenda.RemoteViewsUtil.setTextSize;
+import static org.andstatus.todoagenda.util.CalendarIntentUtil.createOpenCalendarAtDayIntent;
+import static org.andstatus.todoagenda.util.RemoteViewsUtil.setBackgroundColor;
+import static org.andstatus.todoagenda.util.RemoteViewsUtil.setBackgroundColorFromAttr;
+import static org.andstatus.todoagenda.util.RemoteViewsUtil.setPadding;
+import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextColorFromAttr;
+import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextSize;
 
 public class DayHeaderVisualizer implements WidgetEntryVisualizer<DayHeader> {
     private final Context context;

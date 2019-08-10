@@ -1,7 +1,6 @@
 package org.andstatus.todoagenda.widget;
 
-import org.andstatus.todoagenda.DateUtil;
-
+import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 

@@ -1,4 +1,4 @@
-package org.andstatus.todoagenda;
+package org.andstatus.todoagenda.util;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -12,7 +12,6 @@ import org.andstatus.todoagenda.prefs.InstanceSettings;
 import static java.lang.Float.parseFloat;
 
 public class RemoteViewsUtil {
-
     private static final String METHOD_SET_TEXT_SIZE = "setTextSize";
     private static final String METHOD_SET_BACKGROUND_COLOR = "setBackgroundColor";
     private static final String METHOD_SET_SINGLE_LINE = "setSingleLine";
@@ -99,7 +98,7 @@ public class RemoteViewsUtil {
         setImage(rv, viewId, outValue.resourceId);
     }
 
-    public static void setImage(RemoteViews rv, int viewId, int resId) {
+    private static void setImage(RemoteViews rv, int viewId, int resId) {
         rv.setImageViewResource(viewId, resId);
     }
 }

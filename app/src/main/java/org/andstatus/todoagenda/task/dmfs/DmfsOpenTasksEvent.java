@@ -3,8 +3,8 @@ package org.andstatus.todoagenda.task.dmfs;
 import android.content.ContentUris;
 import android.content.Intent;
 
-import org.andstatus.todoagenda.CalendarIntentUtil;
 import org.andstatus.todoagenda.task.TaskEvent;
+import org.andstatus.todoagenda.util.CalendarIntentUtil;
 
 public class DmfsOpenTasksEvent extends TaskEvent {
     @Override
