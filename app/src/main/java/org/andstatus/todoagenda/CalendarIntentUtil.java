@@ -9,7 +9,6 @@ import android.provider.CalendarContract.Events;
 
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.PermissionsUtil;
-
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
@@ -18,7 +17,7 @@ public class CalendarIntentUtil {
     private static final String KEY_DETAIL_VIEW = "DETAIL_VIEW";
     private static final String TIME = "time";
 
-    static Intent createOpenCalendarAtDayIntent(DateTime goToTime) {
+    public static Intent createOpenCalendarAtDayIntent(DateTime goToTime) {
         Intent intent = createCalendarIntent();
         Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
         builder.appendPath(TIME);

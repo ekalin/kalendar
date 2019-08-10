@@ -10,6 +10,7 @@ import org.andstatus.todoagenda.widget.CalendarEntry;
 import org.andstatus.todoagenda.widget.DayHeader;
 import org.andstatus.todoagenda.widget.TaskEntry;
 import org.andstatus.todoagenda.widget.WidgetEntry;
+import org.andstatus.todoagenda.widget.WidgetEntryVisualizer;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Rule;
@@ -40,7 +41,7 @@ public class EventRemoteViewsFactoryTest {
     public MockitoRule mockitoRule = MockitoJUnit.rule().strictness(Strictness.STRICT_STUBS);
 
     @Mock
-    private IEventVisualizer eventProvider;
+    private WidgetEntryVisualizer eventProvider;
 
     private Context context = ApplicationProvider.getApplicationContext();
     private DateTime today = DateTime.now();
@@ -159,10 +160,10 @@ public class EventRemoteViewsFactoryTest {
         return Arrays.asList(calendar1, calendar2);
     }
 
-    private EventRemoteViewsFactory createFactory(IEventVisualizer<?> eventProvider) {
+    private EventRemoteViewsFactory createFactory(WidgetEntryVisualizer<?> eventProvider) {
         EventRemoteViewsFactory factory = new EventRemoteViewsFactory(context, 1);
         // Make it a unit test
-        List<IEventVisualizer<?>> eventProviders = ReflectionHelpers.getField(factory, "eventProviders");
+        List<WidgetEntryVisualizer<?>> eventProviders = ReflectionHelpers.getField(factory, "eventProviders");
         eventProviders.clear();
         eventProviders.add(eventProvider);
 

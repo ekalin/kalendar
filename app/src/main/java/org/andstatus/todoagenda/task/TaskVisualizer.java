@@ -5,19 +5,21 @@ import android.view.View;
 import android.widget.RemoteViews;
 
 import org.andstatus.todoagenda.DateUtil;
-import org.andstatus.todoagenda.IEventVisualizer;
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.widget.EventEntryLayout;
 import org.andstatus.todoagenda.widget.TaskEntry;
 import org.andstatus.todoagenda.widget.WidgetEntry;
+import org.andstatus.todoagenda.widget.WidgetEntryVisualizer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.andstatus.todoagenda.RemoteViewsUtil.*;
+import static org.andstatus.todoagenda.RemoteViewsUtil.setMultiline;
+import static org.andstatus.todoagenda.RemoteViewsUtil.setTextColorFromAttr;
+import static org.andstatus.todoagenda.RemoteViewsUtil.setTextSize;
 
-public class TaskVisualizer implements IEventVisualizer<TaskEntry> {
+public class TaskVisualizer implements WidgetEntryVisualizer<TaskEntry> {
     private final Context context;
     private final int widgetId;
     private final TaskProvider taskProvider;

@@ -6,12 +6,12 @@ import android.view.View;
 import android.widget.RemoteViews;
 
 import org.andstatus.todoagenda.DateUtil;
-import org.andstatus.todoagenda.IEventVisualizer;
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.widget.CalendarEntry;
 import org.andstatus.todoagenda.widget.EventEntryLayout;
 import org.andstatus.todoagenda.widget.WidgetEntry;
+import org.andstatus.todoagenda.widget.WidgetEntryVisualizer;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import static org.andstatus.todoagenda.RemoteViewsUtil.setBackgroundColor;
 import static org.andstatus.todoagenda.RemoteViewsUtil.setImageFromAttr;
 import static org.andstatus.todoagenda.Theme.themeNameToResId;
 
-public class CalendarEventVisualizer implements IEventVisualizer<CalendarEntry> {
+public class CalendarEventVisualizer implements WidgetEntryVisualizer<CalendarEntry> {
 
     private final Context context;
     private final int widgetId;

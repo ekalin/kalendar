@@ -1,13 +1,10 @@
-package org.andstatus.todoagenda;
+package org.andstatus.todoagenda.widget;
 
 import android.widget.RemoteViews;
 
-import org.andstatus.todoagenda.widget.WidgetEntry;
-
 import java.util.List;
 
-public interface IEventVisualizer<T extends WidgetEntry> {
-
+public interface WidgetEntryVisualizer<T extends WidgetEntry> {
     RemoteViews getRemoteView(WidgetEntry eventEntry);
 
     int getViewTypeCount();
@@ -15,5 +12,4 @@ public interface IEventVisualizer<T extends WidgetEntry> {
     List<T> getEventEntries();
 
     Class<? extends T> getSupportedEventEntryType();
-
 }
