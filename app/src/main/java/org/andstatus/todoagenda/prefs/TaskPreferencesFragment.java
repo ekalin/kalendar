@@ -36,8 +36,6 @@ public class TaskPreferencesFragment extends PreferenceFragment implements Share
     public void onPause() {
         super.onPause();
         getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
-        EventAppWidgetProvider.updateEventList(getActivity());
-        EventAppWidgetProvider.updateAllWidgets(getActivity());
     }
 
     @Override

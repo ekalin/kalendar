@@ -258,6 +258,11 @@ public class InstanceSettings {
     }
 
     void save() {
+        if (widgetId == 0) {
+            logMe(InstanceSettings.class, "Skipped save", widgetId);
+            return;
+        }
+        logMe(InstanceSettings.class, "save", widgetId);
         try {
             saveJson(context, getStorageKey(widgetId), toJson());
         } catch (IOException e) {
@@ -462,5 +467,9 @@ public class InstanceSettings {
 
     public Set<String> getActiveTaskLists() {
         return activeTaskLists;
+    }
+
+    public void logMe(Class tag, String message, int widgetId) {
+        Log.v(tag.getSimpleName(), message + ", widgetId:" + widgetId + "\n" + toJson());
     }
 }

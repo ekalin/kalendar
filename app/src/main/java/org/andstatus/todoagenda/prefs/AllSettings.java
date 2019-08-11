@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import org.andstatus.todoagenda.EventAppWidgetProvider;
 import org.andstatus.todoagenda.R;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,7 +14,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static org.andstatus.todoagenda.EventAppWidgetProvider.getWidgetIds;
-import static org.andstatus.todoagenda.prefs.SettingsStorage.loadJson;
+import static org.andstatus.todoagenda.prefs.SettingsStorage.loadJsonFromFile;
 
 /**
  * Singleton holder of settings for all widgets
@@ -25,7 +26,7 @@ public class AllSettings {
 
     @NonNull
     public static InstanceSettings instanceFromId(Context context, Integer widgetId) {
-        ensureLoadedFromFiles(context);
+        ensureLoadedFromFiles(context, false);
         InstanceSettings settings = instances.get(widgetId);
         return settings == null ? newInstance(context, widgetId) : settings;
     }
@@ -35,32 +36,37 @@ public class AllSettings {
         synchronized (instances) {
             InstanceSettings settings = instances.get(widgetId);
             if (settings == null) {
-                if (widgetId != 0 &&
-                        (ApplicationPreferences.getWidgetId(context) == widgetId || instances.isEmpty())) {
-                    if (ApplicationPreferences.getWidgetId(context) != widgetId) {
-                        ApplicationPreferences.setWidgetId(context, widgetId);
-                    }
+                if (widgetId != 0 && ApplicationPreferences.getWidgetId(context) == widgetId) {
                     settings = InstanceSettings.fromApplicationPreferences(context, widgetId);
                 } else {
                     settings = new InstanceSettings(context, widgetId, "");
                 }
-                instances.put(widgetId, settings);
+                if (widgetId != 0) {
+                    settings.save();
+                    settings.logMe(AllSettings.class, "newInstance put", widgetId);
+                    instances.put(widgetId, settings);
+                }
             }
             return settings;
         }
     }
 
-    public static void ensureLoadedFromFiles(Context context) {
-        if (instancesLoaded) {
+    public static void ensureLoadedFromFiles(Context context, boolean reInitialize) {
+        if (instancesLoaded && !reInitialize) {
             return;
         }
         synchronized (instances) {
-            if (!instancesLoaded) {
+            if (!instancesLoaded || reInitialize) {
                 for (int widgetId : getWidgetIds(context)) {
                     InstanceSettings settings;
                     try {
-                        settings = InstanceSettings.fromJson(context, loadJson(context, getStorageKey(widgetId)));
-                        instances.put(widgetId, settings);
+                        settings = InstanceSettings.fromJson(context, loadJsonFromFile(context, getStorageKey(widgetId)));
+                        if (settings.widgetId == 0) {
+                            newInstance(context, widgetId);
+                        } else {
+                            settings.logMe(AllSettings.class, "ensureLoadedFromFiles put", widgetId);
+                            instances.put(widgetId, settings);
+                        }
                     } catch (Exception e) { // Starting from API21 android.system.ErrnoException may be thrown
                         Log.e("loadInstances", "widgetId:" + widgetId, e);
                         newInstance(context, widgetId);
@@ -78,7 +84,10 @@ public class AllSettings {
                 JSONObject json = jsonArray.optJSONObject(index);
                 if (json != null) {
                     InstanceSettings settings = InstanceSettings.fromJson(context, json);
-                    if (settings.getWidgetId() != 0) {
+                    if (settings.widgetId == 0) {
+                        settings.logMe(AllSettings.class, "Skipped loadFromTestData", settings.widgetId);
+                    } else {
+                        settings.logMe(AllSettings.class, "loadFromTestData put", settings.widgetId);
                         instances.put(settings.widgetId, settings);
                     }
                 }
@@ -95,13 +104,9 @@ public class AllSettings {
         InstanceSettings settingStored = instanceFromId(context, widgetId);
         if (settings.widgetId == widgetId && !settings.equals(settingStored)) {
             settings.save();
+            settings.logMe(AllSettings.class, "saveFromApplicationPreferences put", widgetId);
             instances.put(widgetId, settings);
         }
-    }
-
-    public static JSONArray toJson(Context context) {
-        ensureLoadedFromFiles(context);
-        return new JSONArray(instances.values());
     }
 
     @NonNull
@@ -110,7 +115,7 @@ public class AllSettings {
     }
 
     public static void delete(Context context, int widgetId) {
-        ensureLoadedFromFiles(context);
+        ensureLoadedFromFiles(context, false);
         synchronized (instances) {
             instances.remove(widgetId);
             SettingsStorage.delete(context, getStorageKey(widgetId));
@@ -127,11 +132,11 @@ public class AllSettings {
                 return proposedInstanceName;
          }
 
-        int index = instances.size();
+        int index = instances.size() == 0 ? 1 : instances.size();
         String name;
         do {
-            index = index + 1;
             name = defaultInstanceName(context, index);
+            index = index + 1;
         } while (existsInstanceName(widgetId, name));
         return name;
     }
@@ -150,7 +155,7 @@ public class AllSettings {
     }
 
     public static Map<Integer, InstanceSettings> getInstances(Context context) {
-        ensureLoadedFromFiles(context);
+        ensureLoadedFromFiles(context, false);
         return instances;
     }
 }

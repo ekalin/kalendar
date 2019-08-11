@@ -54,7 +54,6 @@ abstract class AbstractEventSourcesPreferencesFragment extends PreferenceFragmen
         Set<String> selectedSources = getSelectedSources();
         if (!selectedSources.equals(initialActiveSources)) {
             storeSelectedSources(selectedSources);
-            EventAppWidgetProvider.updateEventList(getActivity());
         }
     }
 

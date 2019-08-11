@@ -54,8 +54,6 @@ public class EventFiltersPreferencesFragment extends PreferenceFragment implemen
     @Override
     public void onPause() {
         getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
-        EventAppWidgetProvider.updateEventList(getActivity());
-        EventAppWidgetProvider.updateAllWidgets(getActivity());
         super.onPause();
     }
 

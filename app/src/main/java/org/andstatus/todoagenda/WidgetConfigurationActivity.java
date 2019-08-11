@@ -35,6 +35,7 @@ public class WidgetConfigurationActivity extends PreferenceActivity {
     protected void onPause() {
         super.onPause();
         ApplicationPreferences.save(this, widgetId);
+        EventAppWidgetProvider.updateWidgetWithData(this, widgetId);
     }
 
     @Override
