@@ -1,4 +1,4 @@
-package org.andstatus.todoagenda;
+package org.andstatus.todoagenda.testutil;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -7,8 +7,11 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import org.andstatus.todoagenda.calendar.QueryResult;
+
 public class ContentProviderForTests extends ContentProvider {
     private Cursor cursor;
+    private QueryResult queryResult;
 
     @Override
     public boolean onCreate() {
@@ -19,11 +22,21 @@ public class ContentProviderForTests extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection,
                         @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        return cursor;
+        if (cursor != null) {
+            return cursor;
+        }
+        if (queryResult != null) {
+            return queryResult.query(projection);
+        }
+        return null;
     }
 
     public void setQueryResult(Cursor cursor) {
         this.cursor = cursor;
+    }
+
+    public void setQueryResult(QueryResult queryResult) {
+        this.queryResult = queryResult;
     }
 
     @Nullable

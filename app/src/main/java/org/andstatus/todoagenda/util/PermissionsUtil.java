@@ -54,7 +54,7 @@ public class PermissionsUtil {
             // Ignore
         }
         try {
-            Class.forName("org.andstatus.todoagenda.ContentProviderForTests");
+            Class.forName("org.andstatus.todoagenda.testutil.ContentProviderForTests");
             return true;
         } catch (ClassNotFoundException e) {
             // Ignore

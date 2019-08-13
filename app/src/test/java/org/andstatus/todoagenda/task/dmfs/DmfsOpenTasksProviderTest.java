@@ -3,9 +3,9 @@ package org.andstatus.todoagenda.task.dmfs;
 import android.app.Application;
 import android.database.MatrixCursor;
 
-import org.andstatus.todoagenda.ContentProviderForTests;
 import org.andstatus.todoagenda.prefs.EventSource;
 import org.andstatus.todoagenda.task.TaskEvent;
+import org.andstatus.todoagenda.testutil.ContentProviderForTests;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
