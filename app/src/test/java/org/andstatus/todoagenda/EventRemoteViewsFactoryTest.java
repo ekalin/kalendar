@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import org.andstatus.todoagenda.calendar.CalendarEvent;
+import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
 import org.andstatus.todoagenda.task.TaskEvent;
 import org.andstatus.todoagenda.widget.CalendarEntry;
@@ -13,6 +14,7 @@ import org.andstatus.todoagenda.widget.WidgetEntry;
 import org.andstatus.todoagenda.widget.WidgetEntryVisualizer;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,6 +43,11 @@ public class EventRemoteViewsFactoryTest {
 
     private Context context = ApplicationProvider.getApplicationContext();
     private DateTime today = DateTime.now();
+
+    @After
+    public void resetSettings() {
+        AllSettings.delete(context, 1);
+    }
 
     @Test
     public void getEventEntries_returnsEventsSorted() {
@@ -181,7 +188,7 @@ public class EventRemoteViewsFactoryTest {
     }
 
     private CalendarEntry createCalendarEntry(DateTime startDate, String title) {
-        CalendarEvent event = new CalendarEvent(context, 1, DateTimeZone.UTC, false);
+        CalendarEvent event = new CalendarEvent(context, 1, DateTimeZone.getDefault(), false);
         event.setStartDate(startDate);
         event.setTitle(title);
         return CalendarEntry.fromEvent(event);

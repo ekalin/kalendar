@@ -85,7 +85,7 @@ public class CalendarEventProvider extends EventProvider {
 
     private List<CalendarEvent> getTimeFilteredEventList() {
         Uri.Builder builder = Instances.CONTENT_URI.buildUpon();
-        ContentUris.appendId(builder, mStartOfTimeRange.getMillis());
+        ContentUris.appendId(builder, getStartOfTimeRangeForQuery(mStartOfTimeRange));
         ContentUris.appendId(builder, mEndOfTimeRange.getMillis());
         List<CalendarEvent> eventList = queryList(builder.build(), getCalendarSelection());
         // Above filters are not exactly correct for AllDay events: for them that filter
@@ -100,6 +100,15 @@ public class CalendarEventProvider extends EventProvider {
             }
         }
         return eventList;
+    }
+
+    private long getStartOfTimeRangeForQuery(DateTime startOfTimeRange) {
+        int offset = zone.getOffset(startOfTimeRange);
+        if (offset >= 0) {
+            return startOfTimeRange.getMillis();
+        } else {
+            return startOfTimeRange.getMillis() + offset;
+        }
     }
 
     private String getCalendarSelection() {

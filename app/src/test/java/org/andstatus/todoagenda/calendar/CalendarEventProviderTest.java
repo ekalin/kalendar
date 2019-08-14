@@ -1,14 +1,17 @@
 package org.andstatus.todoagenda.calendar;
 
 import android.content.Context;
+import android.net.Uri;
 import android.provider.CalendarContract;
 
 import com.google.common.truth.Correspondence;
 
 import org.andstatus.todoagenda.prefs.AllSettings;
+import org.andstatus.todoagenda.prefs.ApplicationPreferences;
 import org.andstatus.todoagenda.testutil.ContentProviderForTests;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +41,11 @@ public class CalendarEventProviderTest {
                 CalendarContract.Instances.CONTENT_URI.getAuthority());
         daysRange = AllSettings.instanceFromId(context, 1).getEventRange();
         calendarProvider = new CalendarEventProvider(context, 1);
+    }
+
+    @After
+    public void resetSettings() {
+        AllSettings.delete(context, 1);
     }
 
     @Test
@@ -83,5 +91,33 @@ public class CalendarEventProviderTest {
                 .setEventLocation(event.getLocation())
                 .setHasAlarm(event.isAlarmActive() ? 1 : 0)
                 .setRRule(event.isRecurring() ? "FREQ=WEEKLY;WKST=MO;BYDAY=MO,WE,FR" : null));
+    }
+
+    @Test
+    public void getEvents_shouldSubtractTZOffsetIfNegative() {
+        ApplicationPreferences.startEditing(context, 1);
+        ApplicationPreferences.setLockedTimeZoneId(context, "-03:00");
+        ApplicationPreferences.save(context, 1);
+
+        calendarProvider.getEvents();
+        DateTime startOfTimeRange = calendarProvider.getStartOfTimeRange();
+        Uri queryUri = contentProvider.getLastQueryUri();
+
+        long expectedStartInQuery = startOfTimeRange.minusHours(3).getMillis();
+        assertThat(queryUri.toString()).contains("when/" + expectedStartInQuery + '/');
+    }
+
+    @Test
+    public void getEvents_shouldNotAddTZOffsetIfPositive() {
+        ApplicationPreferences.startEditing(context, 1);
+        ApplicationPreferences.setLockedTimeZoneId(context, "+02:00");
+        ApplicationPreferences.save(context, 1);
+
+        calendarProvider.getEvents();
+        DateTime startOfTimeRange = calendarProvider.getStartOfTimeRange();
+        Uri queryUri = contentProvider.getLastQueryUri();
+
+        long expectedStartInQuery = startOfTimeRange.getMillis();
+        assertThat(queryUri.toString()).contains("when/" + expectedStartInQuery + '/');
     }
 }

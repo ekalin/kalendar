@@ -12,6 +12,7 @@ import org.andstatus.todoagenda.calendar.QueryResult;
 public class ContentProviderForTests extends ContentProvider {
     private Cursor cursor;
     private QueryResult queryResult;
+    private Uri lastQueryUri;
 
     @Override
     public boolean onCreate() {
@@ -22,6 +23,8 @@ public class ContentProviderForTests extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection,
                         @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+        lastQueryUri = uri;
+
         if (cursor != null) {
             return cursor;
         }
@@ -37,6 +40,10 @@ public class ContentProviderForTests extends ContentProvider {
 
     public void setQueryResult(QueryResult queryResult) {
         this.queryResult = queryResult;
+    }
+
+    public Uri getLastQueryUri() {
+        return lastQueryUri;
     }
 
     @Nullable
