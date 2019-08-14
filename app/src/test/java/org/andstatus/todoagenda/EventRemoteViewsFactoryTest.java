@@ -28,11 +28,7 @@ import java.util.List;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.instanceOf;
-import static org.junit.Assert.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(RobolectricTestRunner.class)
@@ -71,28 +67,28 @@ public class EventRemoteViewsFactoryTest {
     }
 
     private void assertEventOrder(List<WidgetEntry> widgetEntries) {
-        assertThat(widgetEntries, hasSize(5));
+        assertThat(widgetEntries).hasSize(5);
 
         WidgetEntry entry = widgetEntries.get(0);
-        assertThat(entry, is(instanceOf(DayHeader.class)));
+        assertThat(entry).isInstanceOf(DayHeader.class);
 
         entry = widgetEntries.get(1);
-        assertThat(entry, is(instanceOf(TaskEntry.class)));
+        assertThat(entry).isInstanceOf(TaskEntry.class);
 
         entry = widgetEntries.get(2);
-        assertThat(entry, is(instanceOf(CalendarEntry.class)));
+        assertThat(entry).isInstanceOf(CalendarEntry.class);
         CalendarEntry calendarEntry = (CalendarEntry) entry;
-        assertThat(calendarEntry.getTitle(), equalTo("calendar1"));
+        assertThat(calendarEntry.getTitle()).isEqualTo("calendar1");
 
         entry = widgetEntries.get(3);
-        assertThat(entry, is(instanceOf(CalendarEntry.class)));
+        assertThat(entry).isInstanceOf(CalendarEntry.class);
         calendarEntry = (CalendarEntry) entry;
-        assertThat(calendarEntry.getTitle(), equalTo("calendar2"));
+        assertThat(calendarEntry.getTitle()).isEqualTo("calendar2");
 
         entry = widgetEntries.get(4);
-        assertThat(entry, is(instanceOf(CalendarEntry.class)));
+        assertThat(entry).isInstanceOf(CalendarEntry.class);
         calendarEntry = (CalendarEntry) entry;
-        assertThat(calendarEntry.getTitle(), equalTo("calendar3"));
+        assertThat(calendarEntry.getTitle()).isEqualTo("calendar3");
     }
 
     @Test
@@ -112,15 +108,15 @@ public class EventRemoteViewsFactoryTest {
     }
 
     private void assertDayHeaders(List<WidgetEntry> widgetEntries) {
-        assertThat(widgetEntries, hasSize(4));
+        assertThat(widgetEntries).hasSize(4);
 
         WidgetEntry entry = widgetEntries.get(0);
-        assertThat(entry, is(instanceOf(DayHeader.class)));
-        assertThat(entry.getStartDay(), equalTo(today.withTimeAtStartOfDay()));
+        assertThat(entry).isInstanceOf(DayHeader.class);
+        assertThat(entry.getStartDay()).isEqualTo(today.withTimeAtStartOfDay());
 
         entry = widgetEntries.get(2);
-        assertThat(entry, is(instanceOf(DayHeader.class)));
-        assertThat(entry.getStartDay(), equalTo(today.plusDays(2).withTimeAtStartOfDay()));
+        assertThat(entry).isInstanceOf(DayHeader.class);
+        assertThat(entry.getStartDay()).isEqualTo(today.plusDays(2).withTimeAtStartOfDay());
     }
 
     @Test
@@ -140,18 +136,19 @@ public class EventRemoteViewsFactoryTest {
     }
 
     private void assertDayHeadersForDaysWithoutEvents(List<WidgetEntry> widgetEntries) {
-        assertThat(widgetEntries, hasSize(5));
+        assertThat(widgetEntries).hasSize(5);
 
         WidgetEntry entry = widgetEntries.get(0);
-        assertThat(entry, is(instanceOf(DayHeader.class)));
-        assertThat(entry.getStartDay(), equalTo(today.withTimeAtStartOfDay()));
+        assertThat(entry).isInstanceOf(DayHeader.class);
+        assertThat(entry.getStartDay()).isEqualTo(today.withTimeAtStartOfDay());
 
         entry = widgetEntries.get(2);
-        assertThat(entry, is(instanceOf(DayHeader.class)));
-        assertThat(entry.getStartDay(), equalTo(today.plusDays(1).withTimeAtStartOfDay()));
+        assertThat(entry).isInstanceOf(DayHeader.class);
+        assertThat(entry.getStartDay()).isEqualTo(today.plusDays(1).withTimeAtStartOfDay());
+
         entry = widgetEntries.get(3);
-        assertThat(entry, is(instanceOf(DayHeader.class)));
-        assertThat(entry.getStartDay(), equalTo(today.plusDays(2).withTimeAtStartOfDay()));
+        assertThat(entry).isInstanceOf(DayHeader.class);
+        assertThat(entry.getStartDay()).isEqualTo(today.plusDays(2).withTimeAtStartOfDay());
     }
 
     private List<CalendarEntry> createEventListForDayHeaderTest() {

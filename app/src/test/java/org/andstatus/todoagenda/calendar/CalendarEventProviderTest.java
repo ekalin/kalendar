@@ -3,6 +3,8 @@ package org.andstatus.todoagenda.calendar;
 import android.content.Context;
 import android.provider.CalendarContract;
 
+import com.google.common.truth.Correspondence;
+
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.testutil.ContentProviderForTests;
 import org.joda.time.DateTime;
@@ -13,16 +15,17 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.junit.Assert.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
 public class CalendarEventProviderTest {
+    private static final Correspondence<CalendarEvent, String> EVENT_TITLE
+            = Correspondence.transforming(CalendarEvent::getTitle, "has title of");
+
     private Context context;
     private ContentProviderForTests contentProvider;
     private int daysRange;
@@ -42,9 +45,8 @@ public class CalendarEventProviderTest {
         setupEvents();
 
         List<CalendarEvent> events = calendarProvider.getEvents();
-
-        List<String> titles = getTitles(events);
-        assertThat(titles, containsInAnyOrder("Overlaps start range", "Inside range", "Overlaps end range"));
+        assertThat(events).comparingElementsUsing(EVENT_TITLE)
+                .containsExactly("Overlaps start range", "Inside range", "Overlaps end range");
     }
 
     private void setupEvents() {
@@ -81,13 +83,5 @@ public class CalendarEventProviderTest {
                 .setEventLocation(event.getLocation())
                 .setHasAlarm(event.isAlarmActive() ? 1 : 0)
                 .setRRule(event.isRecurring() ? "FREQ=WEEKLY;WKST=MO;BYDAY=MO,WE,FR" : null));
-    }
-
-    private List<String> getTitles(List<CalendarEvent> events) {
-        List<String> titles = new ArrayList<>();
-        for (CalendarEvent event : events) {
-            titles.add(event.getTitle());
-        }
-        return titles;
     }
 }

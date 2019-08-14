@@ -7,14 +7,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 
 public class WidgetEntryTest {
     @Test
     public void getStartDay_returnsMidnightOfDay() {
         WidgetEntry entry = new WidgetEntryForTest(new DateTime(2019, 8, 7, 18, 8));
-        assertThat(entry.getStartDay(), equalTo(new DateTime(2019, 8, 7, 0, 0)));
+        assertThat(entry.getStartDay()).isEqualTo(new DateTime(2019, 8, 7, 0, 0));
     }
 
     @Test
@@ -22,7 +21,7 @@ public class WidgetEntryTest {
         DateTime eventDate = DateTime.now().withTimeAtStartOfDay().plusDays(4).plusHours(7);
         WidgetEntry entry = new WidgetEntryForTest(eventDate);
 
-        assertThat(entry.getDaysFromToday(), equalTo(4));
+        assertThat(entry.getDaysFromToday()).isEqualTo(4);
     }
 
     @Test
@@ -36,8 +35,8 @@ public class WidgetEntryTest {
 
         Collections.sort(events);
 
-        assertThat(events, equalTo(Arrays.asList(event_day7_8h_prio20, event_day7_12h_prio20, event_day8_15h_prio10,
-                event_day8_15h_prio20)));
+        assertThat(events).containsExactly(event_day7_8h_prio20, event_day7_12h_prio20, event_day8_15h_prio10,
+                event_day8_15h_prio20).inOrder();
     }
 
     private static class WidgetEntryForTest extends WidgetEntry {

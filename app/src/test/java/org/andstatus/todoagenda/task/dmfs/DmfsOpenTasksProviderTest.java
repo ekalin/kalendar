@@ -19,8 +19,7 @@ import java.util.List;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
 public class DmfsOpenTasksProviderTest {
@@ -40,7 +39,7 @@ public class DmfsOpenTasksProviderTest {
 
         List<TaskEvent> tasks = tasksProvider.getTasks();
 
-        assertThat(tasks, equalTo(expectedEvents()));
+        assertThat(tasks).isEqualTo(expectedEvents());
     }
 
     private void setupTasks() {
@@ -92,7 +91,7 @@ public class DmfsOpenTasksProviderTest {
 
         Collection<EventSource> taskLists = tasksProvider.getTaskLists();
 
-        assertThat(taskLists, equalTo(createTaskListsSources()));
+        assertThat(taskLists).isEqualTo(createTaskListsSources());
     }
 
     private void setupTaskLists() {

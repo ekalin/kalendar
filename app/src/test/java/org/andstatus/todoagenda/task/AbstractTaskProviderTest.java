@@ -10,8 +10,7 @@ import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 public class AbstractTaskProviderTest {
@@ -20,7 +19,7 @@ public class AbstractTaskProviderTest {
         AbstractTaskProvider taskProvider = createTaskProvider();
 
         DateTime taskDate = taskProvider.getTaskDate(null, null);
-        assertThat(taskDate, equalTo(DateTime.now().withTimeAtStartOfDay()));
+        assertThat(taskDate).isEqualTo(DateTime.now().withTimeAtStartOfDay());
     }
 
     @Test
@@ -29,7 +28,7 @@ public class AbstractTaskProviderTest {
 
         DateTime dueDate = DateTime.now().plusDays(3);
         DateTime taskDate = taskProvider.getTaskDate(dueDate.getMillis(), null);
-        assertThat(taskDate, equalTo(dueDate.withTimeAtStartOfDay()));
+        assertThat(taskDate).isEqualTo(dueDate.withTimeAtStartOfDay());
     }
 
     @Test
@@ -38,7 +37,7 @@ public class AbstractTaskProviderTest {
 
         DateTime startDate = DateTime.now().plusDays(5);
         DateTime taskDate = taskProvider.getTaskDate(null, startDate.getMillis());
-        assertThat(taskDate, equalTo(startDate.withTimeAtStartOfDay()));
+        assertThat(taskDate).isEqualTo(startDate.withTimeAtStartOfDay());
     }
 
     @Test
@@ -48,7 +47,7 @@ public class AbstractTaskProviderTest {
         DateTime startDate = DateTime.now().plusDays(5);
         DateTime dueDate = DateTime.now().plusDays(15);
         DateTime taskDate = taskProvider.getTaskDate(dueDate.getMillis(), startDate.getMillis());
-        assertThat(taskDate, equalTo(dueDate.withTimeAtStartOfDay()));
+        assertThat(taskDate).isEqualTo(dueDate.withTimeAtStartOfDay());
     }
 
     @Test
@@ -57,7 +56,7 @@ public class AbstractTaskProviderTest {
 
         DateTime dueDate = DateTime.now().minusDays(1);
         DateTime taskDate = taskProvider.getTaskDate(dueDate.getMillis(), null);
-        assertThat(taskDate, equalTo(DateTime.now().withTimeAtStartOfDay()));
+        assertThat(taskDate).isEqualTo(DateTime.now().withTimeAtStartOfDay());
     }
 
     private AbstractTaskProvider createTaskProvider() {

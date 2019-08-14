@@ -16,8 +16,7 @@ import org.mockito.quality.Strictness;
 
 import java.util.Formatter;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -50,7 +49,7 @@ public class DateUtilTest {
         int flags = DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_SHOW_DATE;
         String result = DateUtil.formatDateTime(settings, testDate, flags);
 
-        assertThat(result, equalTo("[DT]"));
+        assertThat(result).isEqualTo("[DT]");
         verify(DateUtilsMock.INSTANCE).formatDateTime(context, testDate.getMillis(), flags);
     }
 
@@ -67,7 +66,7 @@ public class DateUtilTest {
         int flags = DateUtils.FORMAT_ABBREV_ALL | DateUtils.FORMAT_SHOW_DATE;
         String result = DateUtil.formatDateTime(settings, testDate, flags);
 
-        assertThat(result, equalTo(returnedFormatter.toString()));
+        assertThat(result).isEqualTo(returnedFormatter.toString());
         verify(DateUtilsMock.INSTANCE).formatDateRange(eq(context), any(Formatter.class),
                 eq(testDate.getMillis()), eq(testDate.getMillis()), eq(flags), eq("TZ"));
     }
@@ -82,7 +81,7 @@ public class DateUtilTest {
         DateTime testDate = DateTime.now().plusHours(2);
         String dayHeaderTitle = DateUtil.createDayHeaderTitle(settings, testDate);
 
-        assertThat(dayHeaderTitle, equalTo("[DT]"));
+        assertThat(dayHeaderTitle).isEqualTo("[DT]");
         verify(DateUtilsMock.INSTANCE).formatDateTime(context, testDate.getMillis(),
                 DateUtils.FORMAT_ABBREV_ALL | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_WEEKDAY);
     }
@@ -96,7 +95,7 @@ public class DateUtilTest {
         DateTime testDate = DateTime.now().plusDays(5);
         String dayHeaderTitle = DateUtil.createDayHeaderTitle(settings, testDate);
 
-        assertThat(dayHeaderTitle, equalTo("[DT]"));
+        assertThat(dayHeaderTitle).isEqualTo("[DT]");
         verify(DateUtilsMock.INSTANCE).formatDateTime(context, testDate.getMillis(),
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_WEEKDAY);
     }
@@ -111,7 +110,7 @@ public class DateUtilTest {
         DateTime testDate = DateTime.now().plusDays(1).withTimeAtStartOfDay().plusHours(13);
         String dayHeaderTitle = DateUtil.createDayHeaderTitle(settings, testDate);
 
-        assertThat(dayHeaderTitle, equalTo("Tomorrow, [DT]"));
+        assertThat(dayHeaderTitle).isEqualTo("Tomorrow, [DT]");
         verify(DateUtilsMock.INSTANCE).formatDateTime(context, testDate.getMillis(), DateUtils.FORMAT_SHOW_DATE);
     }
 
@@ -124,6 +123,6 @@ public class DateUtilTest {
         DateTime testDate = DateTime.now().withTimeAtStartOfDay().plusHours(2);
         String dayHeaderTitle = DateUtil.createDayHeaderTitle(settings, testDate);
 
-        assertThat(dayHeaderTitle, equalTo("Today"));
+        assertThat(dayHeaderTitle).isEqualTo("Today");
     }
 }
