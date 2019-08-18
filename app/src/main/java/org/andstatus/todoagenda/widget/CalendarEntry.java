@@ -12,7 +12,6 @@ import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 
 public class CalendarEntry extends WidgetEntry {
-
     private static final String TWELVE = "12";
     private static final String AUTO = "auto";
     private static final String SPACE_ARROW = " →";
@@ -24,6 +23,10 @@ public class CalendarEntry extends WidgetEntry {
     private DateTime endDate;
     private boolean allDay;
     private CalendarEvent event;
+
+    private CalendarEntry() {
+        super(30);
+    }
 
     public static CalendarEntry fromEvent(CalendarEvent event) {
         CalendarEntry entry = new CalendarEntry();
@@ -158,11 +161,6 @@ public class CalendarEntry extends WidgetEntry {
 
     public InstanceSettings getSettings() {
         return event.getSettings();
-    }
-
-    @Override
-    public int getPriority() {
-        return 30;
     }
 
     @Override

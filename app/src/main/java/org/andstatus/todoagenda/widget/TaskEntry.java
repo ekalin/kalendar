@@ -5,6 +5,10 @@ import org.andstatus.todoagenda.task.TaskEvent;
 public class TaskEntry extends WidgetEntry {
     private TaskEvent event;
 
+    private TaskEntry() {
+        super(20);
+    }
+
     public static TaskEntry fromEvent(TaskEvent event) {
         TaskEntry entry = new TaskEntry();
         entry.event = event;
@@ -18,10 +22,5 @@ public class TaskEntry extends WidgetEntry {
 
     public TaskEvent getEvent() {
         return event;
-    }
-
-    @Override
-    public int getPriority() {
-        return 20;
     }
 }

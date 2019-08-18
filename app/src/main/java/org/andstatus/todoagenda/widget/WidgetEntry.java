@@ -4,9 +4,13 @@ import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
-public abstract class WidgetEntry implements Comparable<WidgetEntry> {
-
+public class WidgetEntry implements Comparable<WidgetEntry> {
     private DateTime startDate;
+    private int priority;
+
+    protected WidgetEntry(int priority) {
+        this.priority = priority;
+    }
 
     public DateTime getStartDate() {
         return startDate;
@@ -20,16 +24,14 @@ public abstract class WidgetEntry implements Comparable<WidgetEntry> {
         return getStartDate().withTimeAtStartOfDay();
     }
 
-    public abstract int getPriority();
+    public int getDaysFromToday() {
+        return Days.daysBetween(DateUtil.now(startDate.getZone()).withTimeAtStartOfDay(),
+                startDate.withTimeAtStartOfDay()).getDays();
+    }
 
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + " [startDate=" + startDate + "]";
-    }
-
-    public int getDaysFromToday() {
-        return Days.daysBetween(DateUtil.now(startDate.getZone()).withTimeAtStartOfDay(),
-                startDate.withTimeAtStartOfDay()).getDays();
     }
 
     @Override
@@ -39,6 +41,6 @@ public abstract class WidgetEntry implements Comparable<WidgetEntry> {
         } else if (getStartDate().isBefore(otherEvent.getStartDate())) {
             return -1;
         }
-        return Integer.signum(getPriority() - otherEvent.getPriority());
+        return Integer.signum(priority - otherEvent.priority);
     }
 }
