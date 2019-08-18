@@ -1,10 +1,8 @@
 package org.andstatus.todoagenda.task;
 
-import android.content.Intent;
-
 import org.joda.time.DateTime;
 
-public abstract class TaskEvent {
+public class TaskEvent {
     private long id;
     private String title;
     private DateTime taskDate;
@@ -41,8 +39,6 @@ public abstract class TaskEvent {
     public void setColor(int color) {
         this.color = color;
     }
-
-    public abstract Intent createOpenCalendarEventIntent();
 
     @Override
     public boolean equals(Object o) {

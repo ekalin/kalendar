@@ -1,7 +1,9 @@
 package org.andstatus.todoagenda.task.dmfs;
 
 import android.app.Activity;
+import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
@@ -12,6 +14,7 @@ import org.andstatus.todoagenda.calendar.QueryResultsStorage;
 import org.andstatus.todoagenda.prefs.EventSource;
 import org.andstatus.todoagenda.task.AbstractTaskProvider;
 import org.andstatus.todoagenda.task.TaskEvent;
+import org.andstatus.todoagenda.util.CalendarIntentUtil;
 import org.andstatus.todoagenda.util.PermissionsUtil;
 
 import java.util.ArrayList;
@@ -20,7 +23,6 @@ import java.util.List;
 import java.util.Set;
 
 public class DmfsOpenTasksProvider extends AbstractTaskProvider {
-
     public DmfsOpenTasksProvider(Context context, int widgetId) {
         super(context, widgetId);
     }
@@ -113,7 +115,7 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
     }
 
     private TaskEvent createTask(Cursor cursor) {
-        TaskEvent task = new DmfsOpenTasksEvent();
+        TaskEvent task = new TaskEvent();
         task.setId(cursor.getLong(cursor.getColumnIndex(DmfsOpenTasksContract.Tasks.COLUMN_ID)));
         task.setTitle(cursor.getString(cursor.getColumnIndex(DmfsOpenTasksContract.Tasks.COLUMN_TITLE)));
 
@@ -169,6 +171,13 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
         }
 
         return eventSources;
+    }
+
+    @Override
+    public Intent createViewIntent(TaskEvent event) {
+        Intent intent = CalendarIntentUtil.createCalendarIntent();
+        intent.setData(ContentUris.withAppendedId(DmfsOpenTasksContract.Tasks.PROVIDER_URI, event.getId()));
+        return intent;
     }
 
     @Override

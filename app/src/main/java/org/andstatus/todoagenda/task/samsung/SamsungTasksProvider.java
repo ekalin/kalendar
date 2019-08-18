@@ -1,9 +1,12 @@
 package org.andstatus.todoagenda.task.samsung;
 
 import android.app.Activity;
+import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.provider.CalendarContract;
 import android.text.TextUtils;
 
 import org.andstatus.todoagenda.R;
@@ -12,6 +15,7 @@ import org.andstatus.todoagenda.calendar.QueryResultsStorage;
 import org.andstatus.todoagenda.prefs.EventSource;
 import org.andstatus.todoagenda.task.AbstractTaskProvider;
 import org.andstatus.todoagenda.task.TaskEvent;
+import org.andstatus.todoagenda.util.CalendarIntentUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,7 +23,6 @@ import java.util.List;
 import java.util.Set;
 
 public class SamsungTasksProvider extends AbstractTaskProvider {
-
     public SamsungTasksProvider(Context context, int widgetId) {
         super(context, widgetId);
     }
@@ -98,7 +101,7 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
     }
 
     private TaskEvent createTask(Cursor cursor) {
-        TaskEvent task = new SamsungTaskEvent();
+        TaskEvent task = new TaskEvent();
         task.setId(cursor.getLong(cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_ID)));
         task.setTitle(cursor.getString(cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_TITLE)));
 
@@ -160,6 +163,18 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
             int arrayIdx = accountId % fixedColors.length;
             return fixedColors[arrayIdx];
         }
+    }
+
+    @Override
+    public Intent createViewIntent(TaskEvent event) {
+        Intent intent = CalendarIntentUtil.createCalendarIntent();
+        intent.setData(ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, event.getId()));
+        intent.putExtra(SamsungTasksContract.INTENT_EXTRA_TASK, true);
+        intent.putExtra(SamsungTasksContract.INTENT_EXTRA_SELECTED, event.getId());
+        intent.putExtra(SamsungTasksContract.INTENT_EXTRA_ACTION_VIEW_FOCUS, 0);
+        intent.putExtra(SamsungTasksContract.INTENT_EXTRA_DETAIL_MODE, true);
+        intent.putExtra(SamsungTasksContract.INTENT_EXTRA_LAUNCH_FROM_WIDGET, true);
+        return intent;
     }
 
     @Override

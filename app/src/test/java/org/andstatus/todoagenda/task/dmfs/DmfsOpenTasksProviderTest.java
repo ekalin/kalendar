@@ -77,7 +77,7 @@ public class DmfsOpenTasksProviderTest {
     }
 
     private TaskEvent createTaskEvent(long id, String title, DateTime taskDate, int color) {
-        TaskEvent event = new DmfsOpenTasksEvent();
+        TaskEvent event = new TaskEvent();
         event.setId(id);
         event.setTitle(title);
         event.setTaskDate(taskDate);

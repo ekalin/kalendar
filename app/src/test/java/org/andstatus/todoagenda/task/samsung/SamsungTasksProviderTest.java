@@ -77,7 +77,7 @@ public class SamsungTasksProviderTest {
     }
 
     private TaskEvent createTaskEvent(long id, String title, DateTime taskDate, int color) {
-        TaskEvent event = new SamsungTaskEvent();
+        TaskEvent event = new TaskEvent();
         event.setId(id);
         event.setTitle(title);
         event.setTaskDate(taskDate);

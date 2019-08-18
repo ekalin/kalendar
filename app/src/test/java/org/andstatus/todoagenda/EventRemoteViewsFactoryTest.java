@@ -1,7 +1,6 @@
 package org.andstatus.todoagenda;
 
 import android.content.Context;
-import android.content.Intent;
 
 import org.andstatus.todoagenda.calendar.CalendarEvent;
 import org.andstatus.todoagenda.prefs.AllSettings;
@@ -175,12 +174,7 @@ public class EventRemoteViewsFactoryTest {
     }
 
     private TaskEntry createTaskEntry(DateTime taskDate, String title) {
-        TaskEvent event = new TaskEvent() {
-            @Override
-            public Intent createOpenCalendarEventIntent() {
-                return null;
-            }
-        };
+        TaskEvent event = new TaskEvent();
         event.setTaskDate(taskDate);
         event.setTitle(title);
 

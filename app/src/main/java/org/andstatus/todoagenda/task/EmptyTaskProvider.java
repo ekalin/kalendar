@@ -2,6 +2,7 @@ package org.andstatus.todoagenda.task;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
 import org.andstatus.todoagenda.prefs.EventSource;
 
@@ -10,7 +11,6 @@ import java.util.Collection;
 import java.util.List;
 
 public class EmptyTaskProvider extends AbstractTaskProvider {
-
     public EmptyTaskProvider(Context context, int widgetId) {
         super(context, widgetId);
     }
@@ -23,6 +23,11 @@ public class EmptyTaskProvider extends AbstractTaskProvider {
     @Override
     public Collection<EventSource> getTaskLists() {
         return new ArrayList<>();
+    }
+
+    @Override
+    public Intent createViewIntent(TaskEvent event) {
+        return null;
     }
 
     @Override

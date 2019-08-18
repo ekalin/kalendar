@@ -2,6 +2,7 @@ package org.andstatus.todoagenda.task;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
 import org.andstatus.todoagenda.EventProvider;
 import org.andstatus.todoagenda.prefs.EventSource;
@@ -12,7 +13,6 @@ import java.util.Collection;
 import java.util.List;
 
 public class TaskProvider extends EventProvider {
-
     public static final String PROVIDER_NONE = "NONE";
 
     private static final String PROVIDER_DMFS = "DMFS_OPEN_TASKS";
@@ -41,9 +41,14 @@ public class TaskProvider extends EventProvider {
         AbstractTaskProvider provider = getProvider();
         provider.requestPermission(activity);
     }
+
+    public Intent createOpenCalendarEventIntent(TaskEvent event) {
+        AbstractTaskProvider provider = getProvider();
+        return provider.createViewIntent(event);
+    }
+
     // This is called from the settings activity, when the task source that the user
     // selected has not been saved to settings yet
-
     private AbstractTaskProvider getProvider() {
         String taskSource = getSettings().getTaskSource();
         return getProvider(taskSource);

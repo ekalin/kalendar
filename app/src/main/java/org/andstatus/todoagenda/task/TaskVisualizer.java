@@ -38,7 +38,7 @@ public class TaskVisualizer implements WidgetEntryVisualizer<TaskEntry> {
         setColor(entry, rv);
         setDaysToEvent(entry, rv);
         setTitle(entry, rv);
-        rv.setOnClickFillInIntent(R.id.task_entry, entry.getEvent().createOpenCalendarEventIntent());
+        rv.setOnClickFillInIntent(R.id.task_entry, taskProvider.createOpenCalendarEventIntent(entry.getEvent()));
         return rv;
     }
 

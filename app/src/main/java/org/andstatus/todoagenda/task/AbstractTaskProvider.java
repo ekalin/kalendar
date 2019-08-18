@@ -2,6 +2,7 @@ package org.andstatus.todoagenda.task;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
 import org.andstatus.todoagenda.EventProvider;
 import org.andstatus.todoagenda.prefs.EventSource;
@@ -12,7 +13,6 @@ import java.util.Collection;
 import java.util.List;
 
 public abstract class AbstractTaskProvider extends EventProvider {
-
     protected DateTime now;
 
     public AbstractTaskProvider(Context context, int widgetId) {
@@ -31,6 +31,8 @@ public abstract class AbstractTaskProvider extends EventProvider {
     public abstract List<TaskEvent> getTasks();
 
     public abstract Collection<EventSource> getTaskLists();
+
+    public abstract Intent createViewIntent(TaskEvent event);
 
     public abstract boolean hasPermission();
 
