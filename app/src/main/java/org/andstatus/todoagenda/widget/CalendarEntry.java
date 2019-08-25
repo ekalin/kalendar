@@ -45,7 +45,7 @@ public class CalendarEntry extends WidgetEntry {
     public String getTitle() {
         String title = event.getTitle();
         if (TextUtils.isEmpty(title)) {
-            title = getSettings().getEntryThemeContext().getResources().getString(R.string.no_title);
+            title = getSettings().getContext().getResources().getString(R.string.no_title);
         }
         return title;
     }
@@ -100,7 +100,7 @@ public class CalendarEntry extends WidgetEntry {
 
     public String getEventTimeString() {
         return hideEventTime() ? "" :
-                createTimeSpanString(getSettings().getEntryThemeContext());
+                createTimeSpanString(getSettings().getContext());
     }
 
     private boolean hideEventTime() {

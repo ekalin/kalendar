@@ -131,11 +131,7 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
             }
 
             InstanceSettings settings = AllSettings.instanceFromId(context, widgetId);
-
-            context.setTheme(themeNameToResId(settings.getEntryTheme()));
-
             RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_initial);
-
             configureWidgetHeader(settings, rv);
             configureWidgetEntriesList(settings, context, widgetId, rv);
 
