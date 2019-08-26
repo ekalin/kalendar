@@ -40,6 +40,7 @@ import static org.andstatus.todoagenda.util.RemoteViewsUtil.setAlpha;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setBackgroundColor;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setImageFromAttr;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextColorFromAttr;
+import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextSize;
 
 public class EventRemoteViewsFactory implements RemoteViewsFactory {
     private static final String TAG = EventRemoteViewsFactory.class.getSimpleName();
@@ -235,11 +236,13 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
     }
 
     private static void configureCurrentDate(InstanceSettings settings, RemoteViews rv) {
-        rv.setOnClickPendingIntent(R.id.calendar_current_date, createOpenCalendarPendingIntent(settings));
+        int viewId = R.id.calendar_current_date;
+        rv.setOnClickPendingIntent(viewId, createOpenCalendarPendingIntent(settings));
         String formattedDate = DateUtil.createDateString(settings,
                 DateUtil.now(settings.getTimeZone())).toUpperCase(Locale.getDefault());
-        rv.setTextViewText(R.id.calendar_current_date, formattedDate);
-        setTextColorFromAttr(settings.getHeaderThemeContext(), rv, R.id.calendar_current_date, R.attr.header);
+        rv.setTextViewText(viewId, formattedDate);
+        setTextSize(settings, rv, viewId, R.dimen.widget_header_title);
+        setTextColorFromAttr(settings.getHeaderThemeContext(), rv, viewId, R.attr.header);
     }
 
     private static void setActionIcons(InstanceSettings settings, RemoteViews rv) {

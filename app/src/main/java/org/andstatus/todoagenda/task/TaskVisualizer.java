@@ -59,16 +59,19 @@ public class TaskVisualizer implements WidgetEntryVisualizer<TaskEntry> {
                 rv.setViewVisibility(R.id.task_one_line_spacer, View.VISIBLE);
             } else {
                 int days = entry.getDaysFromToday();
-                int viewToShow = days < -1 || days > 1 ? R.id.task_one_line_days_right : R.id.task_one_line_days;
-                int viewToHide = viewToShow == R.id.task_one_line_days ? R.id.task_one_line_days_right : R.id.task_one_line_days;
+                boolean daysAsText = days >= -1 && days <= 1;
+                int viewToShow = daysAsText ? R.id.task_one_line_days : R.id.task_one_line_days_right;
+                int viewToHide = daysAsText ? R.id.task_one_line_days_right : R.id.task_one_line_days;
                 rv.setViewVisibility(viewToHide, View.GONE);
                 rv.setViewVisibility(viewToShow, View.VISIBLE);
-                setViewWidth(getSettings(), rv, viewToShow, R.dimen.days_to_event_width);
+                setViewWidth(getSettings(), rv, viewToShow, daysAsText
+                        ? R.dimen.days_to_event_width
+                        : R.dimen.days_to_event_right_width);
                 rv.setTextViewText(viewToShow, DateUtil.getDaysFromTodayString(getSettings().getContext(), days));
                 setTextSize(getSettings(), rv, viewToShow, R.dimen.event_entry_details);
                 setTextColorFromAttr(getSettings().getEntryThemeContext(), rv, viewToShow, R.attr.dayHeaderTitle);
             }
-            setViewWidth(getSettings(), rv, R.id.task_one_line_spacer, R.dimen.days_to_event_width);
+            setViewWidth(getSettings(), rv, R.id.task_one_line_spacer, R.dimen.event_time_width);
             rv.setViewVisibility(R.id.task_one_line_spacer, View.VISIBLE);
         }
     }
