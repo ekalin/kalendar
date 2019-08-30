@@ -9,11 +9,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.graphics.Color;
 import android.net.Uri;
 import android.util.Log;
-import android.view.View;
 import android.widget.RemoteViews;
+import androidx.annotation.IdRes;
 
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
@@ -26,18 +25,12 @@ import org.joda.time.DateTime;
 import java.util.List;
 import java.util.Locale;
 
-import androidx.annotation.IdRes;
-
-import static android.graphics.Color.alpha;
-import static android.graphics.Color.blue;
-import static android.graphics.Color.green;
-import static android.graphics.Color.red;
 import static org.andstatus.todoagenda.Theme.themeNameToResId;
 import static org.andstatus.todoagenda.util.CalendarIntentUtil.createOpenCalendarAtDayIntent;
 import static org.andstatus.todoagenda.util.CalendarIntentUtil.createOpenCalendarEventPendingIntent;
 import static org.andstatus.todoagenda.util.CalendarIntentUtil.createOpenCalendarPendingIntent;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setAlpha;
-import static org.andstatus.todoagenda.util.RemoteViewsUtil.setColorFilter;
+import static org.andstatus.todoagenda.util.RemoteViewsUtil.setBackgroundColor;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setImageFromAttr;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextColorFromAttr;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextSize;
@@ -69,27 +62,34 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         for (int widgetId : appWidgetIds) {
             InstanceSettings settings = AllSettings.instanceFromId(baseContext, widgetId);
             AlarmReceiver.scheduleAlarm(settings.getHeaderThemeContext());
+            addWidgetParts(settings, widgetId);
+
             RemoteViews rv = new RemoteViews(baseContext.getPackageName(), R.layout.widget);
-            configureBackground(settings, rv);
             configureWidgetHeader(settings, rv);
             configureList(settings, widgetId, rv);
+            configureNoEvents(settings, rv);
             appWidgetManager.updateAppWidget(widgetId, rv);
         }
     }
 
-    private void configureBackground(InstanceSettings settings, RemoteViews rv) {
+    private void addWidgetParts(InstanceSettings settings, int widgetId) {
+        RemoteViews rvParent = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget);
+        rvParent.removeAllViews(R.id.widget_parent);
         if (settings.getShowWidgetHeader()) {
-            rv.setViewVisibility(R.id.action_bar, View.VISIBLE);
-        } else {
-            rv.setViewVisibility(R.id.action_bar, View.GONE);
+            RemoteViews rv = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_header_one_line);
+            rvParent.addView(R.id.widget_parent, rv);
         }
-        int color = settings.getBackgroundColor();
-        int opaqueColor = Color.rgb(red(color), green(color), blue(color));
-        setColorFilter(rv, R.id.background_image, opaqueColor);
-        setAlpha(rv, R.id.background_image, alpha(color));
+        RemoteViews rv = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_body);
+        rvParent.addView(R.id.widget_parent, rv);
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(settings.getContext());
+        appWidgetManager.updateAppWidget(widgetId, rvParent);
     }
 
     private void configureWidgetHeader(InstanceSettings settings, RemoteViews rv) {
+        if (!settings.getShowWidgetHeader()) {
+            return;
+        }
+
         configureCurrentDate(settings, rv);
         setActionIcons(settings, rv);
         configureAddEvent(settings, rv);
@@ -164,22 +164,26 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         Intent intent = new Intent(settings.getContext(), EventWidgetService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
+        setBackgroundColor(rv, R.id.event_list, settings.getBackgroundColor());
         rv.setRemoteAdapter(R.id.event_list, intent);
+    }
 
+    private void configureNoEvents(InstanceSettings settings, RemoteViews rv) {
         boolean permissionsGranted = PermissionsUtil.arePermissionsGranted(settings.getContext());
-        @IdRes int emptyViewId = R.id.empty_event_list;
-        rv.setEmptyView(R.id.event_list, emptyViewId);
-        rv.setTextViewText(emptyViewId, settings.getContext().getText(
+        @IdRes int viewId = R.id.empty_event_list;
+        rv.setEmptyView(R.id.event_list, viewId);
+        rv.setTextViewText(viewId, settings.getContext().getText(
                 permissionsGranted ? R.string.no_upcoming_events : R.string.grant_permissions_verbose
         ));
-        rv.setOnClickPendingIntent(emptyViewId, getPermittedAddEventPendingIntent(settings));
+        rv.setOnClickPendingIntent(viewId, getPermittedAddEventPendingIntent(settings));
         if (permissionsGranted) {
             rv.setPendingIntentTemplate(R.id.event_list, createOpenCalendarEventPendingIntent(settings));
-            rv.setOnClickFillInIntent(emptyViewId,
+            rv.setOnClickFillInIntent(viewId,
                     createOpenCalendarAtDayIntent(new DateTime(settings.getTimeZone())));
         }
-        setTextSize(settings, rv, emptyViewId, R.dimen.event_entry_details);
-        setTextColorFromAttr(settings.getEntryThemeContext(), rv, emptyViewId, R.attr.eventEntryTitle);
+        setTextSize(settings, rv, viewId, R.dimen.event_entry_details);
+        setBackgroundColor(rv, viewId, settings.getBackgroundColor());
+        setTextColorFromAttr(settings.getEntryThemeContext(), rv, viewId, R.attr.eventEntryTitle);
     }
 
     public static void updateWidgetsWithData(Context context) {
