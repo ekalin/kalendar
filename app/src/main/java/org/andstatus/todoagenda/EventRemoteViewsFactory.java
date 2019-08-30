@@ -70,6 +70,7 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
         return AllSettings.instanceFromId(context, widgetId);
     }
 
+    @Override
     public void onDataSetChanged() {
         context.setTheme(themeNameToResId(getSettings().getEntryTheme()));
         if (getSettings().getShowDayHeaders())

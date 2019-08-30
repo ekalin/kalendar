@@ -26,6 +26,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -44,8 +45,13 @@ public class EventRemoteViewsFactoryTest {
     private DateTime today = DateTime.now();
 
     @After
-    public void resetSettings() {
+    public void reset() {
         AllSettings.delete(context, 1);
+
+        // We need to clear this because otherwise it remains from one test method to the other
+        AtomicReference<EnvironmentChangedReceiver> registeredReceiver = ReflectionHelpers.getStaticField(EnvironmentChangedReceiver.class,
+                "registeredReceiver");
+        registeredReceiver.set(null);
     }
 
     @Test

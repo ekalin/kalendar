@@ -5,9 +5,11 @@ import android.database.MatrixCursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
 import androidx.test.core.app.ApplicationProvider;
+import androidx.test.internal.util.ReflectionUtil;
 
 import com.google.common.truth.Correspondence;
 
+import org.andstatus.todoagenda.EnvironmentChangedReceiver;
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
 import org.andstatus.todoagenda.prefs.EventSource;
@@ -22,10 +24,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -49,8 +53,13 @@ public class CalendarEventProviderTest {
     }
 
     @After
-    public void resetSettings() {
+    public void reset() {
         AllSettings.delete(context, 1);
+
+        // We need to clear this because otherwise it remains from one test method to the other
+        AtomicReference<EnvironmentChangedReceiver> registeredReceiver = ReflectionHelpers.getStaticField(EnvironmentChangedReceiver.class,
+                "registeredReceiver");
+        registeredReceiver.set(null);
     }
 
     @Test

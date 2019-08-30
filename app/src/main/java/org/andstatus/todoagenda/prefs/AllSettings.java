@@ -2,7 +2,10 @@ package org.andstatus.todoagenda.prefs;
 
 import android.content.Context;
 import android.util.Log;
+import androidx.annotation.NonNull;
 
+import org.andstatus.todoagenda.EnvironmentChangedReceiver;
+import org.andstatus.todoagenda.EventAppWidgetProvider;
 import org.andstatus.todoagenda.R;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,8 +13,6 @@ import org.json.JSONObject;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import androidx.annotation.NonNull;
 
 import static org.andstatus.todoagenda.EventAppWidgetProvider.getWidgetIds;
 import static org.andstatus.todoagenda.prefs.SettingsStorage.loadJsonFromFile;
@@ -45,6 +46,8 @@ public class AllSettings {
                     settings.save();
                     settings.logMe(AllSettings.class, "newInstance put", widgetId);
                     instances.put(widgetId, settings);
+                    EnvironmentChangedReceiver.registerReceivers(instances);
+                    EventAppWidgetProvider.updateWidget(context, widgetId);
                 }
             }
             return settings;
@@ -73,6 +76,7 @@ public class AllSettings {
                     }
                 }
                 instancesLoaded = true;
+                EnvironmentChangedReceiver.registerReceivers(instances);
             }
         }
     }
@@ -93,6 +97,7 @@ public class AllSettings {
                 }
             }
             instancesLoaded = true;
+            EnvironmentChangedReceiver.registerReceivers(instances);
         }
     }
 

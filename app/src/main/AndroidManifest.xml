@@ -45,10 +45,12 @@
         </receiver>
         <receiver android:name="org.andstatus.todoagenda.EnvironmentChangedReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+                <action android:name="android.intent.action.ACTION_ALARM_CHANGED" />
                 <action android:name="android.intent.action.DATE_CHANGED"/>
-                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.DREAMING_STOPPED" />
                 <action android:name="android.intent.action.LOCALE_CHANGED"/>
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
                 <action android:name="android.intent.action.USER_PRESENT"/>
                 <action android:name="org.andstatus.todoagenda.action.REFRESH"/>
             </intent-filter>
@@ -57,14 +59,6 @@
                 <data android:scheme="content"/>
                 <data android:host="com.android.calendar"/>
                 <data android:host="org.dmfs.tasks" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name="org.andstatus.todoagenda.AlarmReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.EVENT_REMINDER" />
-                <action android:name="android.intent.action.TIME_SET"/>
             </intent-filter>
         </receiver>
 
