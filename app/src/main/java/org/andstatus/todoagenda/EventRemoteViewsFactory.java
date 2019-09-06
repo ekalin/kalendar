@@ -28,7 +28,7 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
     private final Context context;
     private final int widgetId;
     private volatile List<WidgetEntry> mWidgetEntries = new ArrayList<>();
-    private final List<WidgetEntryVisualizer<?>> eventProviders;
+    private volatile List<WidgetEntryVisualizer<?>> eventProviders;
 
     public EventRemoteViewsFactory(Context context, int widgetId) {
         this.context = context;
@@ -40,7 +40,7 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
     }
 
     public void onCreate() {
-        RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget);
+        RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_initial);
         rv.setPendingIntentTemplate(R.id.event_list, createOpenCalendarEventPendingIntent(getSettings()));
     }
 

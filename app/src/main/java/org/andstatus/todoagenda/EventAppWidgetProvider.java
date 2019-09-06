@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.RemoteViews;
 import androidx.annotation.IdRes;
 
@@ -57,16 +58,18 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
     }
 
     public static void recreateWidget(Context context, int widgetId) {
-        addWidgetViews(context, widgetId);
-        updateWidget(context, widgetId);
+        try {
+            addWidgetViews(context, widgetId);
+            updateWidget(context, widgetId);
+        } catch (Exception e) {
+            Log.w(AppWidgetProvider.class.getSimpleName(), "Exception on recreateWidget, widgetId:" + widgetId + ", context:" + context, e);
+        }
     }
 
     private static void addWidgetViews(Context context, int widgetId) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         InstanceSettings settings = AllSettings.instanceFromId(context, widgetId);
-        addWidgetParts(settings, widgetId);
-
-        RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget);
+        RemoteViews rv = buildWidgetRemoteViews(settings);
         configureWidgetHeader(settings, rv);
         configureList(settings, widgetId, rv);
         configureNoEvents(settings, rv);
@@ -75,19 +78,15 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         }
     }
 
-    private static void addWidgetParts(InstanceSettings settings, int widgetId) {
-        RemoteViews rvParent = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget);
-        rvParent.removeAllViews(R.id.widget_parent);
+    private static RemoteViews buildWidgetRemoteViews(InstanceSettings settings) {
+        RemoteViews rvParent = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_parent);
         if (settings.getShowWidgetHeader()) {
             RemoteViews rv = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_header_one_line);
             rvParent.addView(R.id.widget_parent, rv);
         }
         RemoteViews rv = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_body);
         rvParent.addView(R.id.widget_parent, rv);
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(settings.getContext());
-        if (appWidgetManager != null) {
-            appWidgetManager.updateAppWidget(widgetId, rvParent);
-        }
+        return rvParent;
     }
 
     private static void configureWidgetHeader(InstanceSettings settings, RemoteViews rv) {
@@ -190,8 +189,10 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         setTextColorFromAttr(settings.getEntryThemeContext(), rv, viewId, R.attr.eventEntryTitle);
     }
 
-    static void updateAllWidgets(Context context) {
-        updateWidgets(context, getWidgetIds(context));
+    static void recreateAllWidgets(Context context) {
+        for (int widgetId : getWidgetIds(context)) {
+            recreateWidget(context, widgetId);
+        }
     }
 
     public static int[] getWidgetIds(Context context) {
@@ -202,15 +203,9 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
     }
 
     private static void updateWidget(Context context, int widgetId) {
-        updateWidgets(context, new int[]{widgetId});
-    }
-
-    private static void updateWidgets(Context context, int[] widgetIds) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         if (appWidgetManager != null) {
-            for (int widgetId : widgetIds) {
-                appWidgetManager.notifyAppWidgetViewDataChanged(new int[]{widgetId}, R.id.event_list);
-            }
+            appWidgetManager.notifyAppWidgetViewDataChanged(new int[]{widgetId}, R.id.event_list);
         }
     }
 }

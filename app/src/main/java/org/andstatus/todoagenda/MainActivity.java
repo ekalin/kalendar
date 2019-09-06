@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         if (grantPermissionsButton != null) {
             grantPermissionsButton.setVisibility(permissionsGranted ? View.GONE : View.VISIBLE);
         }
-        EventAppWidgetProvider.updateAllWidgets(this);
+        EventAppWidgetProvider.recreateAllWidgets(this);
     }
 
     private void fillWidgetList() {

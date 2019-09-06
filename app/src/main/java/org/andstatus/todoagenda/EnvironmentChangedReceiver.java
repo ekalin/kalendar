@@ -43,6 +43,7 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
 
             IntentFilter filter = new IntentFilter();
             filter.addAction(Intent.ACTION_USER_PRESENT);
+            filter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 filter.addAction(Intent.ACTION_DREAMING_STOPPED);
             }
@@ -54,7 +55,7 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
             }
             scheduleNextAlarms(context, instances);
 
-            Log.i(EventAppWidgetProvider.class.getName(),
+            Log.i(EventAppWidgetProvider.class.getSimpleName(),
                     "Registered receivers from " + instanceSettings.getContext().getClass().getName());
         }
     }
@@ -84,8 +85,8 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
     @SuppressLint("UnsafeProtectedBroadcastReceiver")
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i(this.getClass().getName(), "Received intent: " + intent);
+        Log.i(this.getClass().getSimpleName(), "Received intent: " + intent);
         AllSettings.ensureLoadedFromFiles(context, false);
-        EventAppWidgetProvider.updateAllWidgets(context);
+        EventAppWidgetProvider.recreateAllWidgets(context);
     }
 }
