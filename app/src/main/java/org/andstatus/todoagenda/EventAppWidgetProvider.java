@@ -69,30 +69,22 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
     private static void addWidgetViews(Context context, int widgetId) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         InstanceSettings settings = AllSettings.instanceFromId(context, widgetId);
-        RemoteViews rv = buildWidgetRemoteViews(settings);
+        RemoteViews rv = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_parent);
+        rv.removeAllViews(R.id.widget_parent);
         configureWidgetHeader(settings, rv);
-        configureList(settings, widgetId, rv);
-        configureNoEvents(settings, rv);
+        configureWidgetBody(settings, rv);
         if (appWidgetManager != null) {
             appWidgetManager.updateAppWidget(widgetId, rv);
         }
-    }
-
-    private static RemoteViews buildWidgetRemoteViews(InstanceSettings settings) {
-        RemoteViews rvParent = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_parent);
-        if (settings.getShowWidgetHeader()) {
-            RemoteViews rv = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_header_one_line);
-            rvParent.addView(R.id.widget_parent, rv);
-        }
-        RemoteViews rv = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_body);
-        rvParent.addView(R.id.widget_parent, rv);
-        return rvParent;
     }
 
     private static void configureWidgetHeader(InstanceSettings settings, RemoteViews rv) {
         if (!settings.getShowWidgetHeader()) {
             return;
         }
+
+        RemoteViews rvChild = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_header_one_line);
+        rv.addView(R.id.widget_parent, rvChild);
 
         configureCurrentDate(settings, rv);
         setActionIcons(settings, rv);
@@ -163,9 +155,17 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         return list.size() > 0;
     }
 
-    private static void configureList(InstanceSettings settings, int widgetId, RemoteViews rv) {
+    private static void configureWidgetBody(InstanceSettings settings, RemoteViews rv) {
+        RemoteViews rvChild = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_body);
+        rv.addView(R.id.widget_parent, rvChild);
+
+        configureList(settings, rv);
+        configureNoEvents(settings, rv);
+    }
+
+    private static void configureList(InstanceSettings settings, RemoteViews rv) {
         Intent intent = new Intent(settings.getContext(), EventWidgetService.class);
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, settings.getWidgetId());
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
         setBackgroundColor(rv, R.id.event_list, settings.getBackgroundColor());
         rv.setRemoteAdapter(R.id.event_list, intent);
