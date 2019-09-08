@@ -35,9 +35,9 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
         this.context = context;
         this.widgetId = widgetId;
         eventProviders = new ArrayList<>();
-        eventProviders.add(new DayHeaderVisualizer(context, widgetId));
-        eventProviders.add(new CalendarEventVisualizer(context, widgetId));
-        eventProviders.add(new TaskVisualizer(context, widgetId));
+        eventProviders.add(new DayHeaderVisualizer(getSettings().getEntryThemeContext(), widgetId));
+        eventProviders.add(new CalendarEventVisualizer(getSettings().getEntryThemeContext(), widgetId));
+        eventProviders.add(new TaskVisualizer(getSettings().getEntryThemeContext(), widgetId));
     }
 
     public void onCreate() {
