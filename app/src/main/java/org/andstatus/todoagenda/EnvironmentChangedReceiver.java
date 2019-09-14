@@ -42,8 +42,6 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
             context.registerReceiver(receiver, providerChanged);
 
             IntentFilter filter = new IntentFilter();
-            filter.addAction(Intent.ACTION_USER_PRESENT);
-            filter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 filter.addAction(Intent.ACTION_DREAMING_STOPPED);
             }

@@ -43,6 +43,12 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
     public static final int REQUEST_CODE_MIDNIGHT_ALARM = REQUEST_CODE_ADD_EVENT + MAX_NUMBER_OF_WIDGETS;
 
     @Override
+    public void onReceive(Context context, Intent intent) {
+        AllSettings.ensureLoadedFromFiles(context, false);
+        super.onReceive(context, intent);
+    }
+
+    @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
         for (int widgetId : appWidgetIds) {
@@ -60,9 +66,9 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
     public static void recreateWidget(Context context, int widgetId) {
         try {
             addWidgetViews(context, widgetId);
-            updateWidget(context, widgetId);
         } catch (Exception e) {
-            Log.w(AppWidgetProvider.class.getSimpleName(), "Exception on recreateWidget, widgetId:" + widgetId + ", context:" + context, e);
+            Log.w(AppWidgetProvider.class.getSimpleName(), widgetId + " Exception on recreateWidget" +
+                    ", context:" + context, e);
         }
     }
 

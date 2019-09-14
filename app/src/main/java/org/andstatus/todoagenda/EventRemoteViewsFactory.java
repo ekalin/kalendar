@@ -22,7 +22,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.andstatus.todoagenda.Theme.themeNameToResId;
-import static org.andstatus.todoagenda.util.CalendarIntentUtil.createOpenCalendarEventPendingIntent;
 
 public class EventRemoteViewsFactory implements RemoteViewsFactory {
     private final Context context;
@@ -40,8 +39,7 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
     }
 
     public void onCreate() {
-        RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_initial);
-        rv.setPendingIntentTemplate(R.id.event_list, createOpenCalendarEventPendingIntent(getSettings()));
+        reload();
     }
 
     public void onDestroy() {
@@ -72,6 +70,10 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
 
     @Override
     public void onDataSetChanged() {
+        reload();
+    }
+
+    private void reload() {
         context.setTheme(themeNameToResId(getSettings().getEntryTheme()));
         if (getSettings().getShowDayHeaders())
             mWidgetEntries = addDayHeaders(getEventEntries());
