@@ -66,6 +66,7 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
     public static void recreateWidget(Context context, int widgetId) {
         try {
             addWidgetViews(context, widgetId);
+            updateWidget(context, widgetId);
         } catch (Exception e) {
             Log.w(AppWidgetProvider.class.getSimpleName(), widgetId + " Exception on recreateWidget" +
                     ", context:" + context, e);
@@ -75,8 +76,7 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
     private static void addWidgetViews(Context context, int widgetId) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         InstanceSettings settings = AllSettings.instanceFromId(context, widgetId);
-        RemoteViews rv = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_parent);
-        rv.removeAllViews(R.id.widget_parent);
+        RemoteViews rv = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_initial);
         configureWidgetHeader(settings, rv);
         configureWidgetBody(settings, rv);
         if (appWidgetManager != null) {
@@ -85,12 +85,13 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
     }
 
     private static void configureWidgetHeader(InstanceSettings settings, RemoteViews rv) {
+        rv.removeAllViews(R.id.header_parent);
         if (!settings.getShowWidgetHeader()) {
             return;
         }
 
-        RemoteViews rvChild = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_header_one_line);
-        rv.addView(R.id.widget_parent, rvChild);
+        RemoteViews headerView = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_header_one_line);
+        rv.addView(R.id.header_parent, headerView);
 
         configureCurrentDate(settings, rv);
         setActionIcons(settings, rv);
@@ -145,6 +146,7 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
     private static void configureRefresh(InstanceSettings settings, RemoteViews rv) {
         Intent intent = new Intent(settings.getContext(), EnvironmentChangedReceiver.class);
         intent.setAction(ACTION_REFRESH);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, settings.getWidgetId());
         PendingIntent pendingIntent = PermissionsUtil.getPermittedPendingBroadcastIntent(settings, intent);
         rv.setOnClickPendingIntent(R.id.refresh, pendingIntent);
     }
@@ -162,9 +164,6 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
     }
 
     private static void configureWidgetBody(InstanceSettings settings, RemoteViews rv) {
-        RemoteViews rvChild = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_body);
-        rv.addView(R.id.widget_parent, rvChild);
-
         configureList(settings, rv);
         configureNoEvents(settings, rv);
     }

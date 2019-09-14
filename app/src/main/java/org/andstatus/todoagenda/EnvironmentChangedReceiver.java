@@ -3,6 +3,7 @@ package org.andstatus.todoagenda;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -85,6 +86,14 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.i(this.getClass().getSimpleName(), "Received intent: " + intent);
         AllSettings.ensureLoadedFromFiles(context, false);
-        EventAppWidgetProvider.recreateAllWidgets(context);
+
+        int widgetId = intent == null
+                ? 0
+                : intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, 0);
+        if (widgetId == 0) {
+            EventAppWidgetProvider.recreateAllWidgets(context);
+        } else {
+            EventAppWidgetProvider.recreateWidget(context, widgetId);
+        }
     }
 }
