@@ -4,9 +4,11 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.provider.CalendarContract;
 import android.text.TextUtils;
+import android.util.Log;
 import androidx.fragment.app.Fragment;
 
 import org.andstatus.todoagenda.R;
@@ -49,6 +51,9 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
         Cursor cursor;
         try {
             cursor = context.getContentResolver().query(uri, projection, where, null, null);
+        } catch (SQLiteException e) {
+            Log.i(SamsungTasksProvider.class.getSimpleName(), "fetchAvailableSources: " + e.getMessage());
+            cursor = null;
         } catch (IllegalArgumentException e) {
             cursor = null;
         }
