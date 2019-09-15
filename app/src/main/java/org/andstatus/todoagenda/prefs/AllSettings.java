@@ -1,10 +1,8 @@
 package org.andstatus.todoagenda.prefs;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
-import org.andstatus.todoagenda.EventAppWidgetProvider;
 import org.andstatus.todoagenda.R;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,6 +10,8 @@ import org.json.JSONObject;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import androidx.annotation.NonNull;
 
 import static org.andstatus.todoagenda.EventAppWidgetProvider.getWidgetIds;
 import static org.andstatus.todoagenda.prefs.SettingsStorage.loadJsonFromFile;

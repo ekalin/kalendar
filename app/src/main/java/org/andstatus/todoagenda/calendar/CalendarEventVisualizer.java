@@ -1,7 +1,6 @@
 package org.andstatus.todoagenda.calendar;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -17,6 +16,8 @@ import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 import static org.andstatus.todoagenda.Theme.themeNameToResId;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setAlpha;

@@ -5,12 +5,13 @@ import android.content.Context;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.annotation.DimenRes;
 import android.util.Log;
 import android.util.TypedValue;
 import android.widget.RemoteViews;
 
 import org.andstatus.todoagenda.prefs.InstanceSettings;
+
+import androidx.annotation.DimenRes;
 
 import static java.lang.Float.parseFloat;
 
@@ -27,7 +28,8 @@ public class RemoteViewsUtil {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public static void setPadding(InstanceSettings settings, RemoteViews rv, int viewId,
-          @DimenRes int leftDimenId, @DimenRes int topDimenId, @DimenRes int rightDimenId, @DimenRes int bottomDimenId) {
+                                  @DimenRes int leftDimenId, @DimenRes int topDimenId, @DimenRes int rightDimenId,
+                                  @DimenRes int bottomDimenId) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             int leftPadding = Math.round(getScaledValueInPixel(settings, leftDimenId));
             int topPadding = Math.round(getScaledValueInPixel(settings, topDimenId));

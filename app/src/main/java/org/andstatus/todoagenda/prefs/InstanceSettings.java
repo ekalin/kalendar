@@ -1,7 +1,6 @@
 package org.andstatus.todoagenda.prefs;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
@@ -19,6 +18,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TimeZone;
+
+import androidx.annotation.NonNull;
 
 import static org.andstatus.todoagenda.Theme.themeNameToResId;
 import static org.andstatus.todoagenda.prefs.ApplicationPreferences.PREF_ABBREVIATE_DATES;

@@ -1,7 +1,6 @@
 package org.andstatus.todoagenda;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import org.andstatus.todoagenda.calendar.KeywordsFilter;
 import org.andstatus.todoagenda.prefs.AllSettings;
@@ -9,6 +8,8 @@ import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+
+import androidx.annotation.NonNull;
 
 import static android.graphics.Color.argb;
 import static android.graphics.Color.blue;

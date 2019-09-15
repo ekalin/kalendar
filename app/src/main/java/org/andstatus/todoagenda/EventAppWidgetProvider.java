@@ -11,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.net.Uri;
-import android.support.annotation.IdRes;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -26,6 +25,8 @@ import org.joda.time.DateTime;
 
 import java.util.List;
 import java.util.Locale;
+
+import androidx.annotation.IdRes;
 
 import static android.graphics.Color.alpha;
 import static android.graphics.Color.blue;

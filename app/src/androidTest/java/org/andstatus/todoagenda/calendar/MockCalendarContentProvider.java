@@ -5,8 +5,6 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.RawRes;
 import android.test.InstrumentationTestCase;
 import android.test.IsolatedContext;
 import android.test.mock.MockContentProvider;
@@ -14,7 +12,6 @@ import android.test.mock.MockContentResolver;
 import android.util.Log;
 
 import org.andstatus.todoagenda.EventAppWidgetProvider;
-import org.andstatus.todoagenda.calendar.CalendarEvent;
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
@@ -30,8 +27,9 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+import androidx.annotation.NonNull;
+import androidx.annotation.RawRes;
+
 import static org.andstatus.todoagenda.calendar.QueryResultsStorage.KEY_SETTINGS;
 import static org.andstatus.todoagenda.prefs.ApplicationPreferences.PREF_WIDGET_ID;
 

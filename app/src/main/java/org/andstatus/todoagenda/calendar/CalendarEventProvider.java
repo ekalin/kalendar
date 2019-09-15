@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.CalendarContract.Attendees;
 import android.provider.CalendarContract.Instances;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -20,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
 
 public class CalendarEventProvider extends EventProvider {
 

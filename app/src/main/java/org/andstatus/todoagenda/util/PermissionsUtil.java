@@ -5,11 +5,12 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 
 import org.andstatus.todoagenda.MainActivity;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 /**
  * @author yvolk@yurivolkov.com

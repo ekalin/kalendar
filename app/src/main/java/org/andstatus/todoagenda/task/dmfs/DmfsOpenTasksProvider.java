@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 
 import org.andstatus.todoagenda.calendar.QueryResult;
@@ -21,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+
+import androidx.core.app.ActivityCompat;
 
 public class DmfsOpenTasksProvider extends AbstractTaskProvider {
     public DmfsOpenTasksProvider(Context context, int widgetId) {
