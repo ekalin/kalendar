@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 dependencies {
-    implementation 'joda-time:joda-time:2.9.7'
+    implementation 'joda-time:joda-time:2.10.3'
     implementation 'com.larswerkman:HoloColorPicker:1.5'
     implementation 'com.android.support:appcompat-v7:27.1.1'
 
