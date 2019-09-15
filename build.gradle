@@ -18,6 +18,7 @@ buildscript {
         junitVersion = '4.12'
         holoColorPickerVersion = '1.5'
         mockitoVersion = '3.0.0'
+        preferenceVersion = '1.1.0'
         robolectricVersion = '4.3'
         testCoreVersion = '1.2.0'
         testRulesVersion = '1.1.1'

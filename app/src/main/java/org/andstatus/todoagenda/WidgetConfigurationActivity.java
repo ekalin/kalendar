@@ -1,28 +1,24 @@
 package org.andstatus.todoagenda;
 
-import android.annotation.TargetApi;
-import android.app.Fragment;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
-import org.andstatus.todoagenda.prefs.TaskPreferencesFragment;
+import org.andstatus.todoagenda.prefs.PreferencesFragment;
 import org.andstatus.todoagenda.util.PermissionsUtil;
 
-import java.util.List;
-
-import androidx.annotation.NonNull;
-
-public class WidgetConfigurationActivity extends PreferenceActivity {
-
-    private static final String PREFERENCES_PACKAGE_NAME = "org.andstatus.todoagenda.prefs";
+public class WidgetConfigurationActivity extends AppCompatActivity
+        implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+    private static final String TITLE_TAG = "org.andstatus.todoagenda.PREFS_TITLE";
 
     private int widgetId = 0;
-    private Fragment currentFragment;
 
     @NonNull
     public static Intent intentToStartMe(Context context, int widgetId) {
@@ -33,25 +29,30 @@ public class WidgetConfigurationActivity extends PreferenceActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        ApplicationPreferences.save(this, widgetId);
-        EventAppWidgetProvider.updateWidgetWithData(this, widgetId);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        restartIfNeeded();
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
-        prepareForNewIntent(getIntent());
+        if (prepareForNewIntent(getIntent())) {
+            return;
+        }
+
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.widget_configuration_actitivy);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.preferences, new PreferencesFragment()).commit();
+            setTitleToWidgetName();
+        } else {
+            setTitle(savedInstanceState.getCharSequence(TITLE_TAG));
+        }
+
+        getSupportFragmentManager().addOnBackStackChangedListener(() -> {
+            if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+                setTitleToWidgetName();
+            }
+        });
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void prepareForNewIntent(Intent newIntent) {
+    private boolean prepareForNewIntent(Intent newIntent) {
         int newWidgetId = newIntent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, 0);
         if (newWidgetId == 0) {
             newWidgetId = ApplicationPreferences.getWidgetId(this);
@@ -69,7 +70,49 @@ public class WidgetConfigurationActivity extends PreferenceActivity {
             widgetId = 0;
             startActivity(restartIntent);
             finish();
+            return true;
         }
+
+        return false;
+    }
+
+    private void setTitleToWidgetName() {
+        setTitle(ApplicationPreferences.getWidgetInstanceName(this));
+    }
+
+    @Override
+    public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
+        Bundle args = pref.getExtras();
+        Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(getClassLoader(),
+                pref.getFragment());
+        fragment.setArguments(args);
+        fragment.setTargetFragment(caller, 0);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.preferences, fragment)
+                .addToBackStack(null)
+                .commit();
+        setTitle(pref.getTitle());
+        return true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ApplicationPreferences.save(this, widgetId);
+        EventAppWidgetProvider.updateWidgetWithData(this, widgetId);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        restartIfNeeded();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putCharSequence(TITLE_TAG, getTitle());
     }
 
     private void restartIfNeeded() {
@@ -81,31 +124,12 @@ public class WidgetConfigurationActivity extends PreferenceActivity {
     }
 
     @Override
-    public void onBuildHeaders(List<Header> target) {
-        loadHeadersFromResource(R.xml.preferences_header, target);
-        setTitle(ApplicationPreferences.getWidgetInstanceName(this));
-    }
-
-    @Override
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    protected boolean isValidFragment(String fragmentName) {
-        if (fragmentName.startsWith(PREFERENCES_PACKAGE_NAME)) {
+    public boolean onSupportNavigateUp() {
+        if (getSupportFragmentManager().popBackStackImmediate()) {
             return true;
-        }
-        return super.isValidFragment(fragmentName);
-    }
-
-    @Override
-    public void onAttachFragment(Fragment fragment) {
-        super.onAttachFragment(fragment);
-        this.currentFragment = fragment;
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (currentFragment instanceof TaskPreferencesFragment) {
-            ((TaskPreferencesFragment) currentFragment).gotPermissionsResult(requestCode, permissions, grantResults);
+        } else {
+            finish();
+            return true;
         }
     }
 }

@@ -5,9 +5,9 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import org.andstatus.todoagenda.R;
 
-public class EventDetailsPreferencesFragment extends PreferenceFragmentCompat {
+public class PreferencesFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_event_details, rootKey);
+        setPreferencesFromResource(R.xml.preferences, rootKey);
     }
 }

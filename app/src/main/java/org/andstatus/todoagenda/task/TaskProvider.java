@@ -1,8 +1,8 @@
 package org.andstatus.todoagenda.task;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import androidx.fragment.app.Fragment;
 
 import org.andstatus.todoagenda.EventProvider;
 import org.andstatus.todoagenda.prefs.EventSource;
@@ -37,9 +37,9 @@ public class TaskProvider extends EventProvider {
         return provider.hasPermission();
     }
 
-    public void requestPermission(Activity activity) {
+    public void requestPermission(Fragment fragment) {
         AbstractTaskProvider provider = getProvider();
-        provider.requestPermission(activity);
+        provider.requestPermission(fragment);
     }
 
     public Intent createOpenCalendarEventIntent(TaskEvent event) {

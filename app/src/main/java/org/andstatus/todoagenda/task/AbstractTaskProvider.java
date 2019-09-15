@@ -1,8 +1,8 @@
 package org.andstatus.todoagenda.task;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import androidx.fragment.app.Fragment;
 
 import org.andstatus.todoagenda.EventProvider;
 import org.andstatus.todoagenda.prefs.EventSource;
@@ -36,7 +36,7 @@ public abstract class AbstractTaskProvider extends EventProvider {
 
     public abstract boolean hasPermission();
 
-    public abstract void requestPermission(Activity activity);
+    public abstract void requestPermission(Fragment fragment);
 
     protected DateTime getTaskDate(Long dueMillis, Long startMillis) {
         DateTime dueDate;

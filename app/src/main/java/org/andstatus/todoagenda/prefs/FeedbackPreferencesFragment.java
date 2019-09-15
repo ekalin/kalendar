@@ -1,17 +1,20 @@
 package org.andstatus.todoagenda.prefs;
 
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.calendar.QueryResultsStorage;
 
-public class FeedbackPreferencesFragment extends PreferenceFragment {
+public class FeedbackPreferencesFragment extends PreferenceFragmentCompat {
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.preferences_feedback, rootKey);
+    }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         switch (preference.getKey()) {
             case ApplicationPreferences.KEY_SHARE_EVENTS_FOR_DEBUGGING:
                 QueryResultsStorage.shareEventsForDebugging(getActivity(),
@@ -19,12 +22,6 @@ public class FeedbackPreferencesFragment extends PreferenceFragment {
             default:
                 break;
         }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences_feedback);
+        return super.onPreferenceTreeClick(preference);
     }
 }

@@ -1,22 +1,22 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
     <ListPreference
-        android:defaultValue="NONE"
-        android:entries="@array/pref_task_source_entries"
-        android:entryValues="@array/pref_task_source_values"
-        android:key="taskSource"
-        android:title="@string/task_source_pref_title"
-        android:summary="@string/task_source_pref_desc" />
+        app:key="taskSource"
+        app:title="@string/task_source_pref_title"
+        app:summary="@string/task_source_pref_desc"
+        app:defaultValue="NONE"
+        app:entries="@array/pref_task_source_entries"
+        app:entryValues="@array/pref_task_source_values" />
 
     <Preference
-        android:key="grantTaskPermission"
-        android:title="@string/grant_task_permission_title"
-        android:summary="@string/grant_task_permission_desc"
-        android:persistent="false" />
+        app:key="grantTaskPermission"
+        app:title="@string/grant_task_permission_title"
+        app:summary="@string/grant_task_permission_desc"
+        app:persistent="false" />
 
     <Preference
-        android:fragment="org.andstatus.todoagenda.prefs.TaskListsPreferencesFragment"
-        android:key="activeTaskListsButton"
-        android:persistent="false"
-        android:title="@string/task_lists_pref_title"
-        android:summary="@string/task_lists_pref_summary" />
+        app:key="activeTaskListsButton"
+        app:title="@string/task_lists_pref_title"
+        app:summary="@string/task_lists_pref_summary"
+        app:persistent="false"
+        app:fragment="org.andstatus.todoagenda.prefs.TaskListsPreferencesFragment" />
 </PreferenceScreen>

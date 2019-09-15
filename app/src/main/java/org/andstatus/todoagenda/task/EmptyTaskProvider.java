@@ -1,8 +1,8 @@
 package org.andstatus.todoagenda.task;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import androidx.fragment.app.Fragment;
 
 import org.andstatus.todoagenda.prefs.EventSource;
 
@@ -36,7 +36,7 @@ public class EmptyTaskProvider extends AbstractTaskProvider {
     }
 
     @Override
-    public void requestPermission(Activity activity) {
+    public void requestPermission(Fragment fragment) {
         // No action necessary
     }
 }

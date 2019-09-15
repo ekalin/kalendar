@@ -2,25 +2,23 @@ package org.andstatus.todoagenda.prefs;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
+import androidx.annotation.NonNull;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 
-import org.andstatus.todoagenda.EventAppWidgetProvider;
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.task.TaskProvider;
 
 import java.util.Collections;
 
-public class TaskPreferencesFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
-
+public class TaskPreferencesFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String PREF_ACTIVE_TASK_LISTS_BUTTON = "activeTaskListsButton";
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences_task);
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.preferences_task, rootKey);
         setGrantPermissionVisibility(false);
         setTaskListState();
     }
@@ -51,7 +49,7 @@ public class TaskPreferencesFragment extends PreferenceFragment implements Share
     }
 
     private void showTaskSource() {
-        ListPreference preference = (ListPreference) findPreference(ApplicationPreferences.PREF_TASK_SOURCE);
+        ListPreference preference = findPreference(ApplicationPreferences.PREF_TASK_SOURCE);
         preference.setSummary(preference.getEntry());
     }
 
@@ -80,22 +78,24 @@ public class TaskPreferencesFragment extends PreferenceFragment implements Share
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         switch (preference.getKey()) {
             case ApplicationPreferences.KEY_PREF_GRANT_TASK_PERMISSION:
                 requestTaskPermission();
                 return true;
         }
 
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
+        return super.onPreferenceTreeClick(preference);
     }
 
     private void requestTaskPermission() {
         TaskProvider taskProvider = new TaskProvider(getActivity(), ApplicationPreferences.getWidgetId(getActivity()));
-        taskProvider.requestPermission(getActivity());
+        taskProvider.requestPermission(this);
     }
 
-    public void gotPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         setGrantPermissionVisibility(false);
     }
 }

@@ -1,16 +1,15 @@
 package org.andstatus.todoagenda.prefs;
 
 import android.content.Context;
-import android.preference.CheckBoxPreference;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.TextView;
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * See http://stackoverflow.com/questions/9220039/android-preferencescreen-title-in-two-lines
  */
 public class MultilineCheckBoxPreference extends CheckBoxPreference {
-
     public MultilineCheckBoxPreference(Context context) {
         super(context);
     }
@@ -24,12 +23,11 @@ public class MultilineCheckBoxPreference extends CheckBoxPreference {
     }
 
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
-        TextView textView = (TextView) view.findViewById(android.R.id.title);
+    public void onBindViewHolder(PreferenceViewHolder viewHolder) {
+        super.onBindViewHolder(viewHolder);
+        TextView textView = (TextView) viewHolder.findViewById(android.R.id.title);
         if (textView != null) {
             textView.setSingleLine(false);
         }
     }
-
 }

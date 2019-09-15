@@ -2,20 +2,23 @@ package org.andstatus.todoagenda.prefs;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
-import android.preference.ListPreference;
-import android.preference.PreferenceFragment;
+import androidx.preference.EditTextPreference;
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceFragmentCompat;
 
-import org.andstatus.todoagenda.EventAppWidgetProvider;
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.calendar.KeywordsFilter;
 
-public class EventFiltersPreferencesFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class EventFiltersPreferencesFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.preferences_event_filters, rootKey);
+    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences_event_filters);
+    public void onPause() {
+        getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+        super.onPause();
     }
 
     @Override
@@ -27,38 +30,32 @@ public class EventFiltersPreferencesFragment extends PreferenceFragment implemen
 
     private void showStatus() {
         showEventsEnded();
-        showEvenRange();
+        showEventRange();
         showHideBasedOnKeywords();
     }
 
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        showStatus();
+    }
+
     private void showEventsEnded() {
-        ListPreference preference = (ListPreference) findPreference(ApplicationPreferences.PREF_EVENTS_ENDED);
+        ListPreference preference = findPreference(ApplicationPreferences.PREF_EVENTS_ENDED);
         preference.setSummary(preference.getEntry());
     }
 
-    private void showEvenRange() {
-        ListPreference preference = (ListPreference) findPreference(ApplicationPreferences.PREF_EVENT_RANGE);
+    private void showEventRange() {
+        ListPreference preference = findPreference(ApplicationPreferences.PREF_EVENT_RANGE);
         preference.setSummary(preference.getEntry());
     }
 
     private void showHideBasedOnKeywords() {
-        EditTextPreference preference = (EditTextPreference) findPreference(ApplicationPreferences.PREF_HIDE_BASED_ON_KEYWORDS);
+        EditTextPreference preference = findPreference(ApplicationPreferences.PREF_HIDE_BASED_ON_KEYWORDS);
         KeywordsFilter filter = new KeywordsFilter(preference.getText());
         if (filter.isEmpty()) {
             preference.setSummary(R.string.this_option_is_turned_off);
         } else {
             preference.setSummary(filter.toString());
         }
-    }
-
-    @Override
-    public void onPause() {
-        getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
-        super.onPause();
-    }
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        showStatus();
     }
 }

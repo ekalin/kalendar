@@ -1,6 +1,5 @@
 package org.andstatus.todoagenda.task.samsung;
 
-import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +7,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
 import android.text.TextUtils;
+import androidx.fragment.app.Fragment;
 
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.calendar.QueryResult;
@@ -183,7 +183,7 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
     }
 
     @Override
-    public void requestPermission(Activity activity) {
+    public void requestPermission(Fragment fragment) {
         // Requires just android.permission.READ_CALENDAR, which is expected to be granted already
     }
 }

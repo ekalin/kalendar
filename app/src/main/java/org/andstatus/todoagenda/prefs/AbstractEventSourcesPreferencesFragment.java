@@ -3,28 +3,24 @@ package org.andstatus.todoagenda.prefs;
 import android.graphics.LightingColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 
-import org.andstatus.todoagenda.EventAppWidgetProvider;
 import org.andstatus.todoagenda.R;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-abstract class AbstractEventSourcesPreferencesFragment extends PreferenceFragment {
-
+abstract class AbstractEventSourcesPreferencesFragment extends PreferenceFragmentCompat {
     private static final String SOURCE_ID = "sourceId";
 
     private Set<String> initialActiveSources;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences_calendars);
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         initialActiveSources = fetchInitialActiveSources();
         populatePreferenceScreen(initialActiveSources);
     }
@@ -32,6 +28,9 @@ abstract class AbstractEventSourcesPreferencesFragment extends PreferenceFragmen
     protected abstract Set<String> fetchInitialActiveSources();
 
     private void populatePreferenceScreen(Set<String> activeCalendars) {
+        PreferenceScreen preferenceScreen =
+                getPreferenceManager().createPreferenceScreen(getPreferenceManager().getContext());
+
         Collection<EventSource> availableSources = fetchAvailableSources();
         for (EventSource source : availableSources) {
             CheckBoxPreference checkboxPref = new CheckBoxPreference(getActivity());
@@ -42,8 +41,10 @@ abstract class AbstractEventSourcesPreferencesFragment extends PreferenceFragmen
             checkboxPref.getExtras().putInt(SOURCE_ID, sourceId);
             checkboxPref.setChecked(activeCalendars.isEmpty()
                     || activeCalendars.contains(String.valueOf(sourceId)));
-            getPreferenceScreen().addPreference(checkboxPref);
+            preferenceScreen.addPreference(checkboxPref);
         }
+
+        setPreferenceScreen(preferenceScreen);
     }
 
     protected abstract Collection<EventSource> fetchAvailableSources();

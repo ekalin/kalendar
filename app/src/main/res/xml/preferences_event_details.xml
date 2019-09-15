@@ -1,34 +1,35 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <CheckBoxPreference
-        android:key="showEndTime"
-        android:title="@string/event_details_show_end_time_title"
-        android:summary="@string/event_details_show_end_time_desc"
-        android:defaultValue="true" />
+        app:key="showEndTime"
+        app:title="@string/event_details_show_end_time_title"
+        app:summary="@string/event_details_show_end_time_desc"
+        app:defaultValue="true" />
 
     <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="showLocation"
-        android:summary="@string/event_details_show_location_desc"
-        android:title="@string/event_details_show_location_title" />
+        app:key="showLocation"
+        app:title="@string/event_details_show_location_title"
+        app:summary="@string/event_details_show_location_desc"
+        app:defaultValue="true" />
 
     <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="fillAllDay"
-        android:summary="@string/event_details_fill_all_day_events_desc"
-        android:title="@string/event_details_fill_all_day_events_title" />
+        app:key="fillAllDay"
+        app:title="@string/event_details_fill_all_day_events_title"
+        app:summary="@string/event_details_fill_all_day_events_desc"
+        app:defaultValue="true" />
 
-    <PreferenceCategory android:title="@string/event_details_indicators">
+    <PreferenceCategory app:title="@string/event_details_indicators">
         <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="indicateAlerts"
-            android:summary="@string/event_details_indicate_alert_desc"
-            android:title="@string/event_details_indicate_alert_title" />
+            app:key="indicateAlerts"
+            app:title="@string/event_details_indicate_alert_title"
+            app:summary="@string/event_details_indicate_alert_desc"
+            app:defaultValue="true" />
+
         <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="indicateRecurring"
-            android:summary="@string/event_details_indicate_recurring_desc"
-            android:title="@string/event_details_indicate_recurring_title" />
+            app:key="indicateRecurring"
+            app:title="@string/event_details_indicate_recurring_title"
+            app:summary="@string/event_details_indicate_recurring_desc"
+            app:defaultValue="false" />
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -1,12 +1,12 @@
 package org.andstatus.todoagenda.task.dmfs;
 
-import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.text.TextUtils;
+import androidx.fragment.app.Fragment;
 
 import org.andstatus.todoagenda.calendar.QueryResult;
 import org.andstatus.todoagenda.calendar.QueryResultsStorage;
@@ -20,8 +20,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-
-import androidx.core.app.ActivityCompat;
 
 public class DmfsOpenTasksProvider extends AbstractTaskProvider {
     public DmfsOpenTasksProvider(Context context, int widgetId) {
@@ -187,7 +185,7 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
     }
 
     @Override
-    public void requestPermission(Activity activity) {
-        ActivityCompat.requestPermissions(activity, new String[]{DmfsOpenTasksContract.PERMISSION}, 1);
+    public void requestPermission(Fragment fragment) {
+        fragment.requestPermissions(new String[]{DmfsOpenTasksContract.PERMISSION}, 1);
     }
 }

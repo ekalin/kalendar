@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference
+        app:title="@string/appearance_prefs"
+        app:summary="@string/appearance_prefs_desc"
+        app:fragment="org.andstatus.todoagenda.prefs.AppearancePreferencesFragment" />
+    <Preference
+        app:title="@string/event_details_prefs"
+        app:summary="@string/event_details_prefs_desc"
+        app:fragment="org.andstatus.todoagenda.prefs.EventDetailsPreferencesFragment" />
+    <Preference
+        app:title="@string/event_filters_prefs"
+        app:summary="@string/event_filters_prefs_desc"
+        app:fragment="org.andstatus.todoagenda.prefs.EventFiltersPreferencesFragment" />
+    <Preference
+        app:title="@string/calendars_prefs"
+        app:summary="@string/calendars_prefs_desc"
+        app:fragment="org.andstatus.todoagenda.prefs.CalendarPreferencesFragment" />
+    <Preference
+        app:title="@string/task_prefs"
+        app:summary="@string/task_prefs_desc"
+        app:fragment="org.andstatus.todoagenda.prefs.TaskPreferencesFragment" />
+    <Preference
+        app:title="@string/feedback_prefs"
+        app:summary="@string/feedback_prefs_desc"
+        app:fragment="org.andstatus.todoagenda.prefs.FeedbackPreferencesFragment" />
+
+</PreferenceScreen>

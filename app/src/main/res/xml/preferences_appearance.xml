@@ -1,117 +1,108 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <EditTextPreference
-        android:key="widgetInstanceName"
-        android:title="@string/widget_instance_name"
-        android:singleLine="true" />
+        app:key="widgetInstanceName"
+        app:title="@string/widget_instance_name" />
 
     <ListPreference
-        android:defaultValue="1.0"
-        android:entries="@array/pref_text_size_entries"
-        android:entryValues="@array/pref_text_size_values"
-        android:key="textSizeScale"
-        android:summary="@string/appearance_text_size_desc"
-        android:title="@string/appearance_text_size_title" />
+        app:key="textSizeScale"
+        app:title="@string/appearance_text_size_title"
+        app:summary="@string/appearance_text_size_desc"
+        app:defaultValue="1.0"
+        app:entries="@array/pref_text_size_entries"
+        app:entryValues="@array/pref_text_size_values" />
 
     <ListPreference
-        android:defaultValue="DEFAULT"
-        android:entries="@array/pref_event_entry_layout_entries"
-        android:entryValues="@array/pref_event_entry_layout_values"
-        android:key="eventEntryLayout"
-        android:summary="@string/default_multiline_layout"
-        android:title="@string/pref_event_entry_layout_title" />
+        app:key="eventEntryLayout"
+        app:title="@string/pref_event_entry_layout_title"
+        app:summary="@string/default_multiline_layout"
+        app:defaultValue="DEFAULT"
+        app:entries="@array/pref_event_entry_layout_entries"
+        app:entryValues="@array/pref_event_entry_layout_values" />
 
     <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="multiline_title"
-        android:summary="@string/appearance_multiline_title_desc"
-        android:title="@string/appearance_multiline_title_title">
-    </CheckBoxPreference>
+        app:key="multiline_title"
+        app:summary="@string/appearance_multiline_title_desc"
+        app:title="@string/appearance_multiline_title_title"
+        app:defaultValue="false" />
 
     <ListPreference
-        android:defaultValue="auto"
-        android:entries="@array/pref_date_format_entries"
-        android:entryValues="@array/pref_date_format_values"
-        android:key="dateFormat"
-        android:summary="@string/appearance_date_format_desc"
-        android:title="@string/appearance_date_format_title" />
+        app:key="dateFormat"
+        app:title="@string/appearance_date_format_title"
+        app:summary="@string/appearance_date_format_desc"
+        app:defaultValue="auto"
+        app:entries="@array/pref_date_format_entries"
+        app:entryValues="@array/pref_date_format_values" />
 
     <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="abbreviateDates"
-        android:summary="@string/appearance_abbreviate_dates_desc"
-        android:title="@string/appearance_abbreviate_dates_title">
-    </CheckBoxPreference>
+        app:key="abbreviateDates"
+        app:title="@string/appearance_abbreviate_dates_title"
+        app:summary="@string/appearance_abbreviate_dates_desc"
+        app:defaultValue="false" />
 
     <CheckBoxPreference
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:defaultValue="true"
-        android:key="showDayHeaders"
-        android:summary="@string/appearance_show_day_headers_desc"
-        android:title="@string/appearance_show_day_headers_title">
-    </CheckBoxPreference>
+        app:key="showDayHeaders"
+        app:title="@string/appearance_show_day_headers_title"
+        app:summary="@string/appearance_show_day_headers_desc"
+        app:defaultValue="true" />
 
     <ListPreference
-        android:defaultValue="RIGHT"
-        android:dependency="showDayHeaders"
-        android:entries="@array/pref_day_header_alignment_entries"
-        android:entryValues="@array/pref_day_header_alignment_values"
-        android:key="dayHeaderAlignment"
-        android:summary="@string/appearance_day_header_alignment_desc"
-        android:title="@string/appearance_day_header_alignment_title" />
+        app:key="dayHeaderAlignment"
+        app:title="@string/appearance_day_header_alignment_title"
+        app:summary="@string/appearance_day_header_alignment_desc"
+        app:defaultValue="RIGHT"
+        app:dependency="showDayHeaders"
+        app:entries="@array/pref_day_header_alignment_entries"
+        app:entryValues="@array/pref_day_header_alignment_values" />
 
     <CheckBoxPreference
-        android:defaultValue="false"
-        android:dependency="showDayHeaders"
-        android:key="showDaysWithoutEvents"
-        android:summary="@string/appearance_show_days_without_events_desc"
-        android:title="@string/appearance_show_days_without_events_title">
-    </CheckBoxPreference>
+        app:key="showDaysWithoutEvents"
+        app:title="@string/appearance_show_days_without_events_title"
+        app:summary="@string/appearance_show_days_without_events_desc"
+        app:defaultValue="false"
+        app:dependency="showDayHeaders" />
 
     <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="showHeader"
-        android:summary="@string/appearance_display_header_desc"
-        android:title="@string/appearance_display_header_title">
-    </CheckBoxPreference>
+        app:key="showHeader"
+        app:title="@string/appearance_display_header_title"
+        app:summary="@string/appearance_display_header_desc"
+        app:defaultValue="true" />
 
     <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="lockTimeZone"
-        android:persistent="false"
-        android:summary="@string/lock_time_zone_off_desc"
-        android:title="@string/lock_time_zone_title">
-    </CheckBoxPreference>
+        app:key="lockTimeZone"
+        app:title="@string/lock_time_zone_title"
+        app:summary="@string/lock_time_zone_off_desc"
+        app:defaultValue="false"
+        app:persistent="false" />
 
-    <PreferenceCategory android:title="@string/appearance_group_color_title">
+    <PreferenceCategory app:title="@string/appearance_group_color_title">
         <ListPreference
-            android:defaultValue="DARK"
-            android:entries="@array/pref_theme_entries"
-            android:entryValues="@array/pref_theme_values"
-            android:key="headerTheme"
-            android:summary="@string/appearance_header_theme_desc"
-            android:title="@string/appearance_header_theme_title" />
+            app:key="headerTheme"
+            app:title="@string/appearance_header_theme_title"
+            app:summary="@string/appearance_header_theme_desc"
+            app:defaultValue="DARK"
+            app:entries="@array/pref_theme_entries"
+            app:entryValues="@array/pref_theme_values" />
 
         <Preference
-            android:defaultValue="2147483648"
-            android:key="backgroundColor"
-            android:summary="@string/appearance_background_color_desc"
-            android:title="@string/appearance_background_color_title" />
+            app:key="backgroundColor"
+            app:title="@string/appearance_background_color_title"
+            app:summary="@string/appearance_background_color_desc"
+            app:defaultValue="2147483648" />
 
         <Preference
-            android:defaultValue="2147548928"
-            android:key="pastEventsBackgroundColor"
-            android:summary="@string/appearance_past_events_background_color_desc"
-            android:title="@string/appearance_past_events_background_color_title" />
-        
+            app:key="pastEventsBackgroundColor"
+            app:title="@string/appearance_past_events_background_color_title"
+            app:summary="@string/appearance_past_events_background_color_desc"
+            app:defaultValue="2147548928" />
+
         <ListPreference
-            android:defaultValue="BLACK"
-            android:entries="@array/pref_theme_entries"
-            android:entryValues="@array/pref_theme_values"
-            android:key="entryTheme"
-            android:summary="@string/appearance_entries_theme_desc"
-            android:title="@string/appearance_entries_theme_title" />
+            app:key="entryTheme"
+            app:title="@string/appearance_entries_theme_title"
+            app:summary="@string/appearance_entries_theme_desc"
+            app:defaultValue="BLACK"
+            app:entries="@array/pref_theme_entries"
+            app:entryValues="@array/pref_theme_values" />
     </PreferenceCategory>
 
 </PreferenceScreen>

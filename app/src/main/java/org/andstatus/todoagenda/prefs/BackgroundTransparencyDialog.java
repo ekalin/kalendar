@@ -2,30 +2,28 @@ package org.andstatus.todoagenda.prefs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 
 import com.larswerkman.holocolorpicker.ColorPicker;
-import com.larswerkman.holocolorpicker.OpacityBar;
-import com.larswerkman.holocolorpicker.SVBar;
+
 import org.andstatus.todoagenda.R;
 
 public class BackgroundTransparencyDialog extends DialogFragment {
-
     private ColorPicker picker;
     private String prefKey;
 
     @Override
+    @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         View layout = inflater.inflate(R.layout.background_color, null);
-        picker = (ColorPicker) layout.findViewById(R.id.background_color_picker);
-        picker.addSVBar((SVBar) layout.findViewById(R.id.background_color_svbar));
-        picker.addOpacityBar((OpacityBar) layout.findViewById(R.id.background_color_opacitybar));
+        picker = layout.findViewById(R.id.background_color_picker);
+        picker.addSVBar(layout.findViewById(R.id.background_color_svbar));
+        picker.addOpacityBar(layout.findViewById(R.id.background_color_opacitybar));
         prefKey = getTag().equals(ApplicationPreferences.PREF_PAST_EVENTS_BACKGROUND_COLOR)
                 ? ApplicationPreferences.PREF_PAST_EVENTS_BACKGROUND_COLOR
                 : ApplicationPreferences.PREF_BACKGROUND_COLOR;
@@ -45,13 +43,8 @@ public class BackgroundTransparencyDialog extends DialogFragment {
                 ? R.string.appearance_past_events_background_color_title
                 : R.string.appearance_background_color_title);
         builder.setView(layout);
-        builder.setPositiveButton(android.R.string.ok, new OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int which) {
-                ApplicationPreferences.setInt(getActivity(), prefKey, picker.getColor());
-            }
-        });
+        builder.setPositiveButton(android.R.string.ok,
+                (dialog, which) -> ApplicationPreferences.setInt(getActivity(), prefKey, picker.getColor()));
         return builder.create();
     }
-
 }

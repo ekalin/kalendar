@@ -66,6 +66,7 @@ dependencies {
     implementation "joda-time:joda-time:$jodaTimeVersion"
     implementation "com.larswerkman:HoloColorPicker:$holoColorPickerVersion"
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "androidx.preference:preference:$preferenceVersion"
 
     testImplementation "junit:junit:$junitVersion"
     testImplementation "com.google.truth:truth:$truthVersion"
