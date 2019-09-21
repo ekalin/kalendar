@@ -18,7 +18,6 @@ public class CalendarEntry extends WidgetEntry {
     private static final String ARROW_SPACE = "→ ";
     private static final String EMPTY_STRING = "";
     static final String SPACE_DASH_SPACE = " - ";
-    private static final String SPACE_PIPE_SPACE = "  |  ";
 
     private DateTime endDate;
     private boolean allDay;
@@ -94,18 +93,13 @@ public class CalendarEntry extends WidgetEntry {
     }
 
     public String getEventTimeString() {
-        return hideEventDetails() ? "" :
+        return hideEventTime() ? "" :
                 createTimeSpanString(getSettings().getEntryThemeContext());
     }
 
-    String getLocationString() {
-        return getLocation() == null || getLocation().isEmpty() || hideEventDetails() ||
-                !getSettings().getShowLocation() ? "" : SPACE_PIPE_SPACE + getLocation();
-    }
-
-    private boolean hideEventDetails() {
-        return spansOneFullDay() && !(isStartOfMultiDayEvent() || isEndOfMultiDayEvent()) ||
-                isAllDay() && getSettings().getFillAllDayEvents();
+    private boolean hideEventTime() {
+        return (spansOneFullDay() && !(isStartOfMultiDayEvent() || isEndOfMultiDayEvent()))
+                || (isAllDay() && getSettings().getFillAllDayEvents());
     }
 
     private String createTimeSpanString(Context context) {
@@ -157,6 +151,14 @@ public class CalendarEntry extends WidgetEntry {
         }
         return DateUtil.formatDateTime(getSettings(), time,
                 DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_24HOUR);
+    }
+
+    public String getLocationString() {
+        return hideLocation() ? "" : getLocation();
+    }
+
+    private boolean hideLocation() {
+        return getLocation() == null || getLocation().isEmpty() || !getSettings().getShowLocation();
     }
 
     public InstanceSettings getSettings() {

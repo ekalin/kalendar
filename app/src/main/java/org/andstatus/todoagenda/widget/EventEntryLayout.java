@@ -3,13 +3,12 @@ package org.andstatus.todoagenda.widget;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.RemoteViews;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.StringRes;
 
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.util.RemoteViewsUtil;
-
-import androidx.annotation.LayoutRes;
-import androidx.annotation.StringRes;
 
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setMultiline;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextColorFromAttr;
@@ -22,7 +21,7 @@ public enum EventEntryLayout {
     DEFAULT(R.layout.event_entry, "DEFAULT", R.string.default_multiline_layout) {
         @Override
         protected void setEventDetails(CalendarEntry entry, RemoteViews rv) {
-            String eventDetails = entry.getEventTimeString() + entry.getLocationString();
+            String eventDetails = getEventDetails(entry);
             if (TextUtils.isEmpty(eventDetails)) {
                 rv.setViewVisibility(R.id.event_entry_details, View.GONE);
             } else {
@@ -33,11 +32,25 @@ public enum EventEntryLayout {
                         R.attr.eventEntryDetails);
             }
         }
+
+        private String getEventDetails(CalendarEntry entry) {
+            String time = entry.getEventTimeString();
+            String location = entry.getLocationString();
+            String separator = TextUtils.isEmpty(time) || TextUtils.isEmpty(location) ? "" : SEPARATOR;
+            return time + separator + location;
+        }
     },
+
     ONE_LINE(R.layout.event_entry_one_line, "ONE_LINE", R.string.single_line_layout) {
         @Override
         protected String getTitleString(CalendarEntry event) {
-            return event.getTitle() + event.getLocationString();
+            String title = event.getTitle();
+            String locationString = event.getLocationString();
+            if (TextUtils.isEmpty(locationString)) {
+                return title;
+            } else {
+                return title + SEPARATOR + locationString;
+            }
         }
 
         @Override
@@ -62,6 +75,8 @@ public enum EventEntryLayout {
                     .SPACE_DASH_SPACE, " "));
         }
     };
+
+    private static final String SEPARATOR = "  |  ";
 
     @LayoutRes
     public final int layoutId;
@@ -115,5 +130,4 @@ public enum EventEntryLayout {
     protected void setEventDetails(CalendarEntry entry, RemoteViews rv) {
         // Empty
     }
-
 }
