@@ -55,9 +55,9 @@ public class CalendarEntryTest {
         final DateTime start = DateTime.now();
         final DateTime end = start.plusDays(1);
 
+        when(event.getStartDate()).thenReturn(start);
+        when(event.getEndDate()).thenReturn(end);
         CalendarEntry entry = CalendarEntry.fromEvent(event);
-        entry.setStartDate(start);
-        entry.setEndDate(end);
 
         assertThat(entry.getEventTimeString()).isEmpty();
     }
@@ -125,6 +125,18 @@ public class CalendarEntryTest {
         CalendarEntry entry = CalendarEntry.fromEvent(event);
 
         assertThat(entry.getEventTimeString()).isEqualTo("→ [EndDay]");
+    }
+
+    @Test
+    public void getEventTimeString_forLastDayOfMultiDayEvent_returnsEmpty() {
+        when(settings.getFillAllDayEvents()).thenReturn(false);
+
+        when(event.isAllDay()).thenReturn(true);
+        when(event.isPartOfMultiDayEvent()).thenReturn(true);
+        CalendarEntry entry = CalendarEntry.fromEvent(event);
+        entry.setEndDate(event.getEndDate().plusDays(1).withTimeAtStartOfDay());
+
+        assertThat(entry.getEventTimeString()).isEmpty();
     }
 
     @Test

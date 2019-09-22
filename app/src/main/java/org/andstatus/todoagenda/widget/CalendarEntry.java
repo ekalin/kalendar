@@ -84,8 +84,8 @@ public class CalendarEntry extends WidgetEntry {
         return isPartOfMultiDayEvent() && !getEvent().getEndDate().isAfter(getEndDate());
     }
 
-    public boolean spansOneFullDay() {
-        return getStartDate().plusDays(1).isEqual(getEndDate());
+    private boolean spansOneFullDay() {
+        return getStartDate().plusDays(1).isEqual(getEvent().getEndDate());
     }
 
     public CalendarEvent getEvent() {
@@ -105,7 +105,11 @@ public class CalendarEntry extends WidgetEntry {
     private String createTimeSpanString(Context context) {
         if (isAllDay() && !getSettings().getFillAllDayEvents()) {
             DateTime dateTime = getEvent().getEndDate().minusDays(1);
-            return ARROW_SPACE + DateUtil.createDateString(getSettings(), dateTime);
+            if (isEndOfMultiDayEvent()) {
+                return "";
+            } else {
+                return ARROW_SPACE + DateUtil.createDateString(getSettings(), dateTime);
+            }
         } else {
             return createTimeStringForCalendarEntry(context);
         }
