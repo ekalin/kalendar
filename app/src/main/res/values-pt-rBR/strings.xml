@@ -99,8 +99,8 @@
   <string name="event_details_show_end_time_desc">Mostrar o horário final do evento</string>
   <string name="event_details_show_location_title">Mostrar local</string>
   <string name="event_details_show_location_desc">Mostrar ou ocultar o local do evento</string>
-  <string name="event_details_fill_all_day_events_title">Estender eventos de múltiplos dias</string>
-  <string name="event_details_fill_all_day_events_desc">Mostrar uma entrada para cada dia de um evento de múltiplos dias</string>
+  <string name="event_details_fill_all_day_events_title">Estender eventos de dia inteiro</string>
+  <string name="event_details_fill_all_day_events_desc">Mostrar uma entrada para cada dia de um evento de múltiplos dias inteiros</string>
   <string name="event_details_indicators">Indicadores</string>
   <string name="event_details_indicate_alert_desc">Mostrar indicador de alertas</string>
   <string name="event_details_indicate_alert_title">Alertas</string>

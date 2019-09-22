@@ -3,6 +3,7 @@ package org.andstatus.todoagenda.calendar;
 import android.content.Context;
 import android.view.View;
 import android.widget.RemoteViews;
+import androidx.annotation.NonNull;
 
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.prefs.AllSettings;
@@ -16,8 +17,6 @@ import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
 
 import static org.andstatus.todoagenda.Theme.themeNameToResId;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setAlpha;
@@ -99,15 +98,14 @@ public class CalendarEventVisualizer implements WidgetEntryVisualizer<CalendarEn
         boolean fillAllDayEvents = getSettings().getFillAllDayEvents();
         List<CalendarEntry> entryList = new ArrayList<>();
         for (CalendarEvent event : eventList) {
-            CalendarEntry dayOneEntry = setupDayOneEntry(entryList, event);
-            if (fillAllDayEvents) {
-                createFollowingEntries(entryList, dayOneEntry);
-            }
+            CalendarEntry dayOneEntry = setupDayOneEntry(event);
+            entryList.add(dayOneEntry);
+            createFollowingEntries(entryList, event, dayOneEntry, fillAllDayEvents);
         }
         return entryList;
     }
 
-    private CalendarEntry setupDayOneEntry(List<CalendarEntry> entryList, CalendarEvent event) {
+    private CalendarEntry setupDayOneEntry(CalendarEvent event) {
         CalendarEntry dayOneEntry = CalendarEntry.fromEvent(event);
         DateTime firstDate = event.getStartDate();
         DateTime dayOfStartOfTimeRange = calendarContentProvider.getStartOfTimeRange()
@@ -128,19 +126,23 @@ public class CalendarEventVisualizer implements WidgetEntryVisualizer<CalendarEn
         if (event.getEndDate().isAfter(nextDay)) {
             dayOneEntry.setEndDate(nextDay);
         }
-        entryList.add(dayOneEntry);
         return dayOneEntry;
     }
 
-    private void createFollowingEntries(List<CalendarEntry> entryList, CalendarEntry dayOneEntry) {
-        DateTime endDate = dayOneEntry.getEvent().getEndDate();
+    private void createFollowingEntries(List<CalendarEntry> entryList, CalendarEvent event, CalendarEntry dayOneEntry,
+                                        boolean fillAllDayEvents) {
+        if (!fillAllDayEvents && event.isAllDay()) {
+            return;
+        }
+
+        DateTime endDate = event.getEndDate();
         if (endDate.isAfter(calendarContentProvider.getEndOfTimeRange())) {
             endDate = calendarContentProvider.getEndOfTimeRange();
         }
         DateTime thisDay = dayOneEntry.getStartDay().plusDays(1).withTimeAtStartOfDay();
         while (thisDay.isBefore(endDate)) {
             DateTime nextDay = thisDay.plusDays(1);
-            CalendarEntry nextEntry = CalendarEntry.fromEvent(dayOneEntry.getEvent());
+            CalendarEntry nextEntry = CalendarEntry.fromEvent(event);
             nextEntry.setStartDate(thisDay);
             if (endDate.isAfter(nextDay)) {
                 nextEntry.setEndDate(nextDay);
