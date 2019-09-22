@@ -9,32 +9,29 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
-import androidx.annotation.IdRes;
 
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.CalendarIntentUtil;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.util.PermissionsUtil;
-import org.joda.time.DateTime;
 
 import java.util.List;
 import java.util.Locale;
 
 import static org.andstatus.todoagenda.Theme.themeNameToResId;
-import static org.andstatus.todoagenda.util.CalendarIntentUtil.createOpenCalendarAtDayIntent;
 import static org.andstatus.todoagenda.util.CalendarIntentUtil.createOpenCalendarEventPendingIntent;
 import static org.andstatus.todoagenda.util.CalendarIntentUtil.createOpenCalendarPendingIntent;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setAlpha;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setBackgroundColor;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setImageFromAttr;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextColorFromAttr;
-import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextSize;
 
 public class EventAppWidgetProvider extends AppWidgetProvider {
-
+    private static final String TAG = EventAppWidgetProvider.class.getSimpleName();
     private static final String PACKAGE = "org.andstatus.todoagenda";
     public static final String ACTION_REFRESH = PACKAGE + ".action.REFRESH";
     private static final int MAX_NUMBER_OF_WIDGETS = 100;
@@ -45,7 +42,22 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         AllSettings.ensureLoadedFromFiles(context, false);
-        super.onReceive(context, intent);
+
+        String action = intent.getAction();
+        if (AppWidgetManager.ACTION_APPWIDGET_UPDATE.equals(action)) {
+            Bundle extras = intent.getExtras();
+            int[] widgetIds = extras == null
+                    ? null
+                    : extras.getIntArray(AppWidgetManager.EXTRA_APPWIDGET_IDS);
+            if (widgetIds == null || widgetIds.length == 0) {
+                widgetIds = getWidgetIds(context);
+            }
+            if (widgetIds != null && widgetIds.length > 0) {
+                onUpdate(context, AppWidgetManager.getInstance(context), widgetIds);
+            }
+        } else {
+            super.onReceive(context, intent);
+        }
     }
 
     @Override
@@ -59,32 +71,20 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int widgetId : appWidgetIds) {
-            recreateWidget(context, widgetId);
+            try {
+                RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_initial);
+                InstanceSettings settings = AllSettings.instanceFromId(context, widgetId);
+                configureWidgetEntriesList(settings, context, widgetId, rv);
+                appWidgetManager.updateAppWidget(widgetId, rv);
+
+                notifyWidgetDataChanged(context, widgetId);
+            } catch (Exception e) {
+                Log.w(TAG, widgetId + " Exception in onUpdate, context:" + context, e);
+            }
         }
     }
 
-    public static void recreateWidget(Context context, int widgetId) {
-        try {
-            addWidgetViews(context, widgetId);
-            updateWidget(context, widgetId);
-        } catch (Exception e) {
-            Log.w(AppWidgetProvider.class.getSimpleName(), widgetId + " Exception on recreateWidget" +
-                    ", context:" + context, e);
-        }
-    }
-
-    private static void addWidgetViews(Context context, int widgetId) {
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        InstanceSettings settings = AllSettings.instanceFromId(context, widgetId);
-        RemoteViews rv = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_initial);
-        configureWidgetHeader(settings, rv);
-        configureWidgetBody(settings, rv);
-        if (appWidgetManager != null) {
-            appWidgetManager.updateAppWidget(widgetId, rv);
-        }
-    }
-
-    private static void configureWidgetHeader(InstanceSettings settings, RemoteViews rv) {
+    public static void configureWidgetHeader(InstanceSettings settings, RemoteViews rv) {
         rv.removeAllViews(R.id.header_parent);
         if (!settings.getShowWidgetHeader()) {
             return;
@@ -126,7 +126,7 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         rv.setOnClickPendingIntent(R.id.add_event, getPermittedAddEventPendingIntent(settings));
     }
 
-    private static PendingIntent getPermittedAddEventPendingIntent(InstanceSettings settings) {
+    public static PendingIntent getPermittedAddEventPendingIntent(InstanceSettings settings) {
         Context context = settings.getContext();
         Intent intent = PermissionsUtil.getPermittedActivityIntent(context,
                 CalendarIntentUtil.createNewEventIntent(settings.getTimeZone()));
@@ -163,40 +163,16 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         return list.size() > 0;
     }
 
-    private static void configureWidgetBody(InstanceSettings settings, RemoteViews rv) {
-        configureList(settings, rv);
-        configureNoEvents(settings, rv);
-    }
-
-    private static void configureList(InstanceSettings settings, RemoteViews rv) {
-        Intent intent = new Intent(settings.getContext(), EventWidgetService.class);
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, settings.getWidgetId());
+    public static void configureWidgetEntriesList(InstanceSettings settings, Context context, int widgetId,
+                                                  RemoteViews rv) {
+        Intent intent = new Intent(context, EventWidgetService.class);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
         setBackgroundColor(rv, R.id.event_list, settings.getBackgroundColor());
         rv.setRemoteAdapter(R.id.event_list, intent);
-    }
-
-    private static void configureNoEvents(InstanceSettings settings, RemoteViews rv) {
-        boolean permissionsGranted = PermissionsUtil.arePermissionsGranted(settings.getContext());
-        @IdRes int viewId = R.id.empty_event_list;
-        rv.setEmptyView(R.id.event_list, viewId);
-        rv.setTextViewText(viewId, settings.getContext().getText(
-                permissionsGranted ? R.string.no_upcoming_events : R.string.grant_permissions_verbose
-        ));
-        rv.setOnClickPendingIntent(viewId, getPermittedAddEventPendingIntent(settings));
+        boolean permissionsGranted = PermissionsUtil.arePermissionsGranted(context);
         if (permissionsGranted) {
             rv.setPendingIntentTemplate(R.id.event_list, createOpenCalendarEventPendingIntent(settings));
-            rv.setOnClickFillInIntent(viewId,
-                    createOpenCalendarAtDayIntent(new DateTime(settings.getTimeZone())));
-        }
-        setTextSize(settings, rv, viewId, R.dimen.event_entry_details);
-        setBackgroundColor(rv, viewId, settings.getBackgroundColor());
-        setTextColorFromAttr(settings.getEntryThemeContext(), rv, viewId, R.attr.eventEntryTitle);
-    }
-
-    static void recreateAllWidgets(Context context) {
-        for (int widgetId : getWidgetIds(context)) {
-            recreateWidget(context, widgetId);
         }
     }
 
@@ -204,13 +180,15 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         return appWidgetManager == null
                 ? new int[]{}
-                : appWidgetManager.getAppWidgetIds(new ComponentName(context, AppWidgetProvider.class));
+                : appWidgetManager.getAppWidgetIds(new ComponentName(context, EventAppWidgetProvider.class));
     }
 
-    private static void updateWidget(Context context, int widgetId) {
+    private static void notifyWidgetDataChanged(Context context, int widgetId) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         if (appWidgetManager != null) {
             appWidgetManager.notifyAppWidgetViewDataChanged(new int[]{widgetId}, R.id.event_list);
+        } else {
+            Log.d(TAG, widgetId + " notifyWidgetDataChanged, appWidgetManager is null, context:" + context);
         }
     }
 }

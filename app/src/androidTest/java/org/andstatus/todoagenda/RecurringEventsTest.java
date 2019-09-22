@@ -6,7 +6,9 @@ import org.andstatus.todoagenda.calendar.MockCalendarContentProvider;
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
 import org.andstatus.todoagenda.provider.QueryRow;
 import org.andstatus.todoagenda.util.DateUtil;
+import org.andstatus.todoagenda.util.TestHelpers;
 import org.andstatus.todoagenda.widget.CalendarEntry;
+import org.andstatus.todoagenda.widget.LastEntry;
 import org.andstatus.todoagenda.widget.WidgetEntry;
 import org.joda.time.DateTime;
 
@@ -28,7 +30,7 @@ public class RecurringEventsTest extends InstrumentationTestCase {
         super.setUp();
         provider = MockCalendarContentProvider.getContentProvider(this);
         factory = new EventRemoteViewsFactory(provider.getContext(), provider.getWidgetId());
-        assertTrue(factory.getWidgetEntries().isEmpty());
+        assertTrue(factory.getWidgetEntries().get(0) instanceof LastEntry);
         eventId = 0;
     }
 
@@ -63,6 +65,7 @@ public class RecurringEventsTest extends InstrumentationTestCase {
     }
 
     void generateEventInstances() {
+        TestHelpers.forceReload(factory);
         provider.clear();
         DateTime date = DateUtil.now(provider.getSettings().getTimeZone()).withTimeAtStartOfDay();
         long millis = date.getMillis() + TimeUnit.HOURS.toMillis(10);

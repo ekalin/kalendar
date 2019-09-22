@@ -500,6 +500,16 @@ public class InstanceSettings {
         return activeTaskLists;
     }
 
+    public boolean noPastEvents() {
+        return !getShowPastEventsWithDefaultColor()
+                && getEventsEnded() == EndedSomeTimeAgo.NONE
+                && noTaskSources();
+    }
+
+    private boolean noTaskSources() {
+        return getTaskSource().equals(TaskProvider.PROVIDER_NONE);
+    }
+
     public void logMe(Class tag, String message, int widgetId) {
         Log.v(tag.getSimpleName(), message + ", widgetId:" + widgetId + "\n" + toJson());
     }

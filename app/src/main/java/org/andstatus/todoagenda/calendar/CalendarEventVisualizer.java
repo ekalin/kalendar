@@ -34,7 +34,7 @@ public class CalendarEventVisualizer implements WidgetEntryVisualizer<CalendarEn
         calendarContentProvider = new CalendarEventProvider(context, widgetId);
     }
 
-    public RemoteViews getRemoteView(WidgetEntry eventEntry) {
+    public RemoteViews getRemoteViews(WidgetEntry eventEntry) {
         CalendarEntry entry = (CalendarEntry) eventEntry;
         EventEntryLayout eventEntryLayout = getSettings().getEventEntryLayout();
         RemoteViews rv = new RemoteViews(context.getPackageName(), eventEntryLayout.layoutId);

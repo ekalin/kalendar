@@ -27,7 +27,6 @@ public class MultidayEventTest extends InstrumentationTestCase {
         super.setUp();
         provider = MockCalendarContentProvider.getContentProvider(this);
         factory = new EventRemoteViewsFactory(provider.getContext(), provider.getWidgetId());
-        assertTrue(factory.getWidgetEntries().isEmpty());
     }
 
     @Override

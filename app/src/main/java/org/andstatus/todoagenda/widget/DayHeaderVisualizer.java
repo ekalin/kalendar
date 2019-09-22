@@ -32,7 +32,7 @@ public class DayHeaderVisualizer implements WidgetEntryVisualizer<DayHeader> {
     }
 
     @Override
-    public RemoteViews getRemoteView(WidgetEntry eventEntry) {
+    public RemoteViews getRemoteViews(WidgetEntry eventEntry) {
         DayHeader dayHeader = (DayHeader) eventEntry;
 
         String alignment = getSettings().getDayHeaderAlignment();

@@ -5,7 +5,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import org.andstatus.todoagenda.EnvironmentChangedReceiver;
-import org.andstatus.todoagenda.EventAppWidgetProvider;
 import org.andstatus.todoagenda.R;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,7 +46,7 @@ public class AllSettings {
                     settings.logMe(AllSettings.class, "newInstance put", widgetId);
                     instances.put(widgetId, settings);
                     EnvironmentChangedReceiver.registerReceivers(instances);
-                    EventAppWidgetProvider.recreateWidget(context, widgetId);
+                    EnvironmentChangedReceiver.updateWidget(context, widgetId);
                 }
             }
             return settings;

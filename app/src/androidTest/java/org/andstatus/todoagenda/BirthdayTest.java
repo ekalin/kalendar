@@ -6,6 +6,7 @@ import org.andstatus.todoagenda.calendar.MockCalendarContentProvider;
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
 import org.andstatus.todoagenda.provider.QueryResultsStorage;
 import org.andstatus.todoagenda.util.DateUtil;
+import org.andstatus.todoagenda.util.TestHelpers;
 import org.andstatus.todoagenda.widget.CalendarEntry;
 import org.joda.time.DateTime;
 import org.json.JSONException;
@@ -102,13 +103,14 @@ public class BirthdayTest extends InstrumentationTestCase {
                 provider.getSettings().getTimeZone());
     }
 
-    private void playAtOneTime(QueryResultsStorage inputs, DateTime now, int numberOfEntriesExpected) {
+    private void playAtOneTime(QueryResultsStorage inputs, DateTime now, int entriesWithoutLastExpected) {
         provider.addResults(inputs.getCalendarResults());
         DateUtil.setNow(now);
+        TestHelpers.forceReload(factory);
         factory.onDataSetChanged();
         factory.logWidgetEntries(TAG);
-        assertEquals(numberOfEntriesExpected, factory.getWidgetEntries().size());
-        if (numberOfEntriesExpected > 0) {
+        assertEquals(entriesWithoutLastExpected + 1, factory.getWidgetEntries().size());
+        if (entriesWithoutLastExpected > 0) {
             CalendarEntry birthday = (CalendarEntry) factory.getWidgetEntries().get(1);
             assertEquals(9, birthday.getStartDate().dayOfMonth().get());
             assertEquals(0, birthday.getStartDate().hourOfDay().get());

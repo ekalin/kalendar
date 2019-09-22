@@ -100,7 +100,7 @@ public class WidgetConfigurationActivity extends AppCompatActivity
     protected void onPause() {
         super.onPause();
         ApplicationPreferences.save(this, widgetId);
-        EventAppWidgetProvider.recreateWidget(this, widgetId);
+        EnvironmentChangedReceiver.updateWidget(this, widgetId);
     }
 
     @Override

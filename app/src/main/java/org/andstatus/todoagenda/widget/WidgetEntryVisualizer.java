@@ -5,7 +5,7 @@ import android.widget.RemoteViews;
 import java.util.List;
 
 public interface WidgetEntryVisualizer<T extends WidgetEntry> {
-    RemoteViews getRemoteView(WidgetEntry eventEntry);
+    RemoteViews getRemoteViews(WidgetEntry eventEntry);
 
     int getViewTypeCount();
 

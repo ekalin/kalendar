@@ -5,7 +5,9 @@ import android.test.InstrumentationTestCase;
 import org.andstatus.todoagenda.calendar.CalendarEvent;
 import org.andstatus.todoagenda.calendar.MockCalendarContentProvider;
 import org.andstatus.todoagenda.util.DateUtil;
+import org.andstatus.todoagenda.util.TestHelpers;
 import org.andstatus.todoagenda.widget.CalendarEntry;
+import org.andstatus.todoagenda.widget.LastEntry;
 import org.andstatus.todoagenda.widget.WidgetEntry;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -26,7 +28,7 @@ public class SingleEventTest extends InstrumentationTestCase {
         super.setUp();
         provider = MockCalendarContentProvider.getContentProvider(this);
         factory = new EventRemoteViewsFactory(provider.getContext(), provider.getWidgetId());
-        assertTrue(factory.getWidgetEntries().isEmpty());
+        assertTrue(factory.getWidgetEntries().get(0) instanceof LastEntry);
     }
 
     @Override
@@ -75,6 +77,7 @@ public class SingleEventTest extends InstrumentationTestCase {
 
 
     public void testAlldayEventMillis() {
+        TestHelpers.forceReload(factory);
         DateTime today = DateUtil.now(DateTimeZone.UTC).withTimeAtStartOfDay();
         CalendarEvent event = new CalendarEvent(provider.getContext(), provider.getWidgetId(),
                 provider.getSettings().getTimeZone(), true);
@@ -86,12 +89,13 @@ public class SingleEventTest extends InstrumentationTestCase {
     }
 
     private void assertOneEvent(CalendarEvent event, boolean equal) {
+        TestHelpers.forceReload(factory);
         provider.clear();
         provider.addRow(event);
         factory.onDataSetChanged();
         factory.logWidgetEntries(TAG);
         assertEquals(1, provider.getQueriesCount());
-        assertEquals(factory.getWidgetEntries().toString(), 2, factory.getWidgetEntries().size());
+        assertEquals(factory.getWidgetEntries().toString(), 3, factory.getWidgetEntries().size());
         WidgetEntry entry = factory.getWidgetEntries().get(1);
         assertTrue(entry instanceof CalendarEntry);
         CalendarEvent eventOut = ((CalendarEntry) entry).getEvent();

@@ -22,7 +22,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static org.andstatus.todoagenda.EventAppWidgetProvider.getWidgetIds;
+
 public class EnvironmentChangedReceiver extends BroadcastReceiver {
+    private static final String TAG = EnvironmentChangedReceiver.class.getSimpleName();
     private static final AtomicReference<EnvironmentChangedReceiver> registeredReceiver = new AtomicReference<>();
 
     public static void registerReceivers(Map<Integer, InstanceSettings> instances) {
@@ -54,8 +57,7 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
             }
             scheduleNextAlarms(context, instances);
 
-            Log.i(EventAppWidgetProvider.class.getSimpleName(),
-                    "Registered receivers from " + instanceSettings.getContext().getClass().getName());
+            Log.i(TAG, "Registered receivers from " + instanceSettings.getContext().getClass().getName());
         }
     }
 
@@ -91,9 +93,26 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
                 ? 0
                 : intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, 0);
         if (widgetId == 0) {
-            EventAppWidgetProvider.recreateAllWidgets(context);
+            updateAllWidgets(context);
         } else {
-            EventAppWidgetProvider.recreateWidget(context, widgetId);
+            updateWidget(context, widgetId);
         }
+    }
+
+    public static void updateWidget(Context context, int widgetId) {
+        Intent intent = new Intent(context, EventAppWidgetProvider.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[]{widgetId});
+        Log.d(TAG, "updateWidget:" + widgetId + ", context:" + context);
+        context.sendBroadcast(intent);
+    }
+
+    public static void updateAllWidgets(Context context) {
+        Intent intent = new Intent(context, EventAppWidgetProvider.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        int[] widgetIds = getWidgetIds(context);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds);
+        Log.d(TAG, "updateAllWidgets:" + widgetIds + ", context:" + context);
+        context.sendBroadcast(intent);
     }
 }
