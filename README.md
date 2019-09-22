@@ -60,6 +60,17 @@ We are also looking for new and improved translations over at http://crowdin.net
 
 ## Changelog
 
+### [v2.3.0]
+* [Don't show time for All day events](https://github.com/plusonelabs/calendar-widget/issues/236).
+* Show end date for multi-day all day events when "Fill all day events" is disabled.
+* Show end time for events spanning more than one day (but not all day events) when "Fill all day events" is disabled.
+* [Display location independently of time](https://github.com/plusonelabs/calendar-widget/issues/221), 
+  including showing location for All day events.
+* Separate "ToDo Agenda Loading..." layout added to see the widget, when it is not initialized yet (i.e. after device reboot).
+
+### [v2.2.0]
+* Fixes all-day events disappearing before the end of the day.
+
 ### [v2.1](https://github.com/plusonelabs/calendar-widget/issues/308) Tasks support
 * Tasks support added. Two Task apps are supported: [OpenTasks (by dmfs GmbH)](https://github.com/dmfs/opentasks)
   and Tasks of Samsung Calendar. 
