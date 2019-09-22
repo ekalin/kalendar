@@ -20,6 +20,7 @@
   <string name="select_a_widget_to_configure">Selecione um widget para configurar</string>
   <string name="close">Fechar</string>
   <string name="go_to_home_screen">Ir para a tela inicial</string>
+  <string name="loading_with_dots">Carregando…</string>
 
   <!-- Descriptions for app markets -->
   <string name="app_description_80_chars_max">Widget com lista dos próximos compromissos de calendários selecionados</string>
@@ -126,7 +127,7 @@
   <string name="event_range_one_year">Um ano</string>
   <string name="show_past_events_with_default_color_title">Mostrar todos os eventos passados na cor padrão</string>
   <string name="this_option_is_turned_off">(desativado)</string>
-  <string name="pref_events_ended_title">Mostrar eventos terminados recentemente</string>
+    <string name="pref_events_ended_title">Mostrar eventos passados</string>
   <string name="ended_one_hour_ago">Terminado há uma hora</string>
   <string name="ended_two_hours_ago">Terminado há duas horas</string>
   <string name="ended_four_hours_ago">Terminado há quatro horas</string>
