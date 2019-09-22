@@ -70,7 +70,7 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
         for (DateTime alarmTime : alarmTimes) {
             Intent intent = new Intent(context, EnvironmentChangedReceiver.class);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
-                    EventAppWidgetProvider.REQUEST_CODE_MIDNIGHT_ALARM + counter,
+                    EventRemoteViewsFactory.REQUEST_CODE_MIDNIGHT_ALARM + counter,
                     intent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
             AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);

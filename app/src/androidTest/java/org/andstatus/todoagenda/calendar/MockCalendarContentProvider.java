@@ -13,7 +13,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.RawRes;
 
-import org.andstatus.todoagenda.EventAppWidgetProvider;
+import org.andstatus.todoagenda.EventRemoteViewsFactory;
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
@@ -162,7 +162,7 @@ public class MockCalendarContentProvider extends MockContentProvider {
     }
 
     public void refreshWidget() {
-        Intent intent = new Intent(EventAppWidgetProvider.ACTION_REFRESH);
+        Intent intent = new Intent(EventRemoteViewsFactory.ACTION_REFRESH);
         getContext().sendBroadcast(intent);
     }
 

@@ -13,7 +13,7 @@ import org.joda.time.DateTime;
 import java.util.Collections;
 import java.util.List;
 
-import static org.andstatus.todoagenda.EventAppWidgetProvider.getPermittedAddEventPendingIntent;
+import static org.andstatus.todoagenda.EventRemoteViewsFactory.getPermittedAddEventPendingIntent;
 import static org.andstatus.todoagenda.util.CalendarIntentUtil.createOpenCalendarAtDayIntent;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextColorFromAttr;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextSize;
