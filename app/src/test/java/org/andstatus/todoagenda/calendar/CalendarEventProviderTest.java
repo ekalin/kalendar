@@ -1,6 +1,7 @@
 package org.andstatus.todoagenda.calendar;
 
 import android.content.Context;
+import android.database.MatrixCursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
 import androidx.test.core.app.ApplicationProvider;
@@ -9,6 +10,7 @@ import com.google.common.truth.Correspondence;
 
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
+import org.andstatus.todoagenda.prefs.EventSource;
 import org.andstatus.todoagenda.provider.QueryResult;
 import org.andstatus.todoagenda.provider.QueryRow;
 import org.andstatus.todoagenda.testutil.ContentProviderForTests;
@@ -21,6 +23,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -121,4 +125,37 @@ public class CalendarEventProviderTest {
         long expectedStartInQuery = startOfTimeRange.getMillis();
         assertThat(queryUri.toString()).contains("when/" + expectedStartInQuery + '/');
     }
+
+    @Test
+    public void getCalendars_returnsEventSources() {
+        setupCalendars();
+
+        List<EventSource> calendars = calendarProvider.getCalendars();
+
+        assertThat(calendars).isEqualTo(createEventSources());
+    }
+
+    private void setupCalendars() {
+        MatrixCursor matrixCursor = new MatrixCursor(new String[]{
+                CalendarContract.Calendars._ID,
+                CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,
+                CalendarContract.Calendars.CALENDAR_COLOR,
+                CalendarContract.Calendars.ACCOUNT_NAME});
+        for (EventSource source : createEventSources()) {
+            matrixCursor.newRow()
+                    .add(CalendarContract.Calendars._ID, source.getId())
+                    .add(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME, source.getTitle())
+                    .add(CalendarContract.Calendars.CALENDAR_COLOR, source.getColor())
+                    .add(CalendarContract.Calendars.ACCOUNT_NAME, source.getSummary());
+        }
+        contentProvider.setQueryResult(matrixCursor);
+    }
+
+    private Collection<EventSource> createEventSources() {
+        List<EventSource> sources = new ArrayList<>();
+        sources.add(new EventSource(2, "My Calendar", "Local account", 0xff000011));
+        sources.add(new EventSource(4, "Work Items", "remote@account.org", 0xff000022));
+        return sources;
+    }
+
 }

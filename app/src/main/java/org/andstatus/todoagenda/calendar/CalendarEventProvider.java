@@ -1,5 +1,6 @@
 package org.andstatus.todoagenda.calendar;
 
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -8,11 +9,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Attendees;
+import android.provider.CalendarContract.Calendars;
 import android.provider.CalendarContract.Instances;
 import android.util.Log;
 import android.util.SparseArray;
 import androidx.annotation.NonNull;
 
+import org.andstatus.todoagenda.prefs.EventSource;
 import org.andstatus.todoagenda.provider.EventProvider;
 import org.andstatus.todoagenda.provider.QueryResult;
 import org.andstatus.todoagenda.provider.QueryResultsStorage;
@@ -30,6 +33,10 @@ public class CalendarEventProvider extends EventProvider {
     public static final String EVENT_SORT_ORDER = "startDay ASC, allDay DESC, begin ASC ";
     private static final String EVENT_SELECTION = Instances.SELF_ATTENDEE_STATUS + "!="
             + Attendees.ATTENDEE_STATUS_DECLINED;
+    private static final String[] CALENDARS_PROJECTION = new String[]{Calendars._ID,
+            Calendars.CALENDAR_DISPLAY_NAME, Calendars.CALENDAR_COLOR,
+            Calendars.ACCOUNT_NAME};
+
 
     public CalendarEventProvider(Context context, int widgetId) {
         super(context, widgetId);
@@ -236,6 +243,29 @@ public class CalendarEventProvider extends EventProvider {
             }
             return cursor.getInt(cursor.getColumnIndex(Instances.CALENDAR_COLOR));
         }
+    }
+
+    public List<EventSource> getCalendars() {
+        List<EventSource> eventSources = new ArrayList<>();
+
+        Cursor cursor = createCalendarsCursor();
+        if (cursor == null) {
+            return eventSources;
+        }
+
+        for (int i = 0; i < cursor.getCount(); i++) {
+            cursor.moveToPosition(i);
+            EventSource source = new EventSource(cursor.getInt(0), cursor.getString(1),
+                    cursor.getString(3), cursor.getInt(2));
+            eventSources.add(source);
+        }
+        return eventSources;
+    }
+
+    private Cursor createCalendarsCursor() {
+        Uri.Builder builder = Calendars.CONTENT_URI.buildUpon();
+        ContentResolver contentResolver = context.getContentResolver();
+        return contentResolver.query(builder.build(), CALENDARS_PROJECTION, null, null, null);
     }
 
     public Intent createOpenCalendarEventIntent(CalendarEvent event) {
