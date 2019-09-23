@@ -108,17 +108,17 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
     }
 
     private void reload() {
+        InstanceSettings settings = getSettings();
         long prevReloadMillis = Math.abs(System.currentTimeMillis() - prevReloadFinishedAt);
         if (prevReloadMillis < MIN_MILLIS_BETWEEN_RELOADS) {
             logEvent("reload, skip as done " + prevReloadMillis + " ms ago");
-            return;
+        } else {
+            this.widgetEntries = getWidgetEntries(settings);
+            logEvent("reload, visualizers:" + eventProviders.size() + ", entries:" + this.widgetEntries.size());
+            prevReloadFinishedAt = System.currentTimeMillis();
         }
 
         context.setTheme(themeNameToResId(getSettings().getEntryTheme()));
-
-        InstanceSettings settings = getSettings();
-        this.widgetEntries = getWidgetEntries(settings);
-        logEvent("reload, visualizers:" + eventProviders.size() + ", entries:" + this.widgetEntries.size());
 
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         if (appWidgetManager != null) {
@@ -132,8 +132,6 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
             Log.d(EventRemoteViewsFactory.class.getSimpleName(), widgetId + " reload, appWidgetManager is null" +
                     ", context:" + context);
         }
-
-        prevReloadFinishedAt = System.currentTimeMillis();
     }
 
     private List<WidgetEntry> getWidgetEntries(InstanceSettings settings) {
