@@ -7,10 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.RemoteViews;
 
 import org.andstatus.todoagenda.prefs.AllSettings;
-import org.andstatus.todoagenda.prefs.InstanceSettings;
 
 public class EventAppWidgetProvider extends AppWidgetProvider {
     private static final String TAG = EventAppWidgetProvider.class.getSimpleName();
@@ -47,16 +45,8 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int widgetId : appWidgetIds) {
-            try {
-                RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_initial);
-                InstanceSettings settings = AllSettings.instanceFromId(context, widgetId);
-                EventRemoteViewsFactory.configureWidgetEntriesList(settings, context, widgetId, rv);
-                appWidgetManager.updateAppWidget(widgetId, rv);
-
-                notifyWidgetDataChanged(context, widgetId);
-            } catch (Exception e) {
-                Log.w(TAG, widgetId + " Exception in onUpdate, context:" + context, e);
-            }
+            EventRemoteViewsFactory.updateWidget(context, widgetId, null);
+            notifyWidgetDataChanged(context, widgetId);
         }
     }
 

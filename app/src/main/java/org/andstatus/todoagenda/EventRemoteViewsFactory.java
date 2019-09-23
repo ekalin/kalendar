@@ -11,6 +11,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService.RemoteViewsFactory;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.andstatus.todoagenda.calendar.CalendarEventVisualizer;
 import org.andstatus.todoagenda.prefs.AllSettings;
@@ -41,6 +42,8 @@ import static org.andstatus.todoagenda.util.RemoteViewsUtil.setImageFromAttr;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextColorFromAttr;
 
 public class EventRemoteViewsFactory implements RemoteViewsFactory {
+    private static final String TAG = EventRemoteViewsFactory.class.getSimpleName();
+
     private static final int MIN_MILLIS_BETWEEN_RELOADS = 500;
     private static final String PACKAGE = "org.andstatus.todoagenda";
     public static final String ACTION_REFRESH = PACKAGE + ".action.REFRESH";
@@ -108,29 +111,37 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
     }
 
     private void reload() {
-        InstanceSettings settings = getSettings();
         long prevReloadMillis = Math.abs(System.currentTimeMillis() - prevReloadFinishedAt);
         if (prevReloadMillis < MIN_MILLIS_BETWEEN_RELOADS) {
             logEvent("reload, skip as done " + prevReloadMillis + " ms ago");
         } else {
-            this.widgetEntries = getWidgetEntries(settings);
+            this.widgetEntries = getWidgetEntries(getSettings());
             logEvent("reload, visualizers:" + eventProviders.size() + ", entries:" + this.widgetEntries.size());
             prevReloadFinishedAt = System.currentTimeMillis();
         }
+        updateWidget(context, widgetId, this);
+    }
 
-        context.setTheme(themeNameToResId(getSettings().getEntryTheme()));
+    static void updateWidget(Context context, int widgetId, @Nullable RemoteViewsFactory factory) {
+        try {
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            if (appWidgetManager == null) {
+                Log.d(TAG, widgetId + " updateWidget, appWidgetManager is null, context:" + context);
+                return;
+            }
 
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        if (appWidgetManager != null) {
+            InstanceSettings settings = AllSettings.instanceFromId(context, widgetId);
+
+            context.setTheme(themeNameToResId(settings.getEntryTheme()));
+
             RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_initial);
 
             configureWidgetHeader(settings, rv);
             configureWidgetEntriesList(settings, context, widgetId, rv);
 
             appWidgetManager.updateAppWidget(widgetId, rv);
-        } else {
-            Log.d(EventRemoteViewsFactory.class.getSimpleName(), widgetId + " reload, appWidgetManager is null" +
-                    ", context:" + context);
+        } catch (Exception e) {
+            Log.w(TAG, widgetId + " Exception in updateWidget, context:" + context, e);
         }
     }
 
@@ -176,7 +187,8 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
         return widgetEntries;
     }
 
-    private void addEmptyDayHeadersBetweenTwoDays(List<WidgetEntry> entries, DateTime fromDayExclusive, DateTime toDayExclusive) {
+    private void addEmptyDayHeadersBetweenTwoDays(List<WidgetEntry> entries, DateTime fromDayExclusive,
+                                                  DateTime toDayExclusive) {
         DateTime emptyDay = fromDayExclusive.plusDays(1);
         DateTime today = DateUtil.now(getSettings().getTimeZone()).withTimeAtStartOfDay();
         if (emptyDay.isBefore(today)) {
