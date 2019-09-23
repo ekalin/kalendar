@@ -5,6 +5,9 @@ import android.net.Uri;
 import android.provider.CalendarContract;
 import android.test.InstrumentationTestCase;
 
+import org.andstatus.todoagenda.provider.QueryResult;
+import org.andstatus.todoagenda.provider.QueryResultsStorage;
+import org.andstatus.todoagenda.provider.QueryRow;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 import org.json.JSONException;

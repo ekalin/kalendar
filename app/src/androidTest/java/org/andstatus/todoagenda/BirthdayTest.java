@@ -3,8 +3,8 @@ package org.andstatus.todoagenda;
 import android.test.InstrumentationTestCase;
 
 import org.andstatus.todoagenda.calendar.MockCalendarContentProvider;
-import org.andstatus.todoagenda.calendar.QueryResultsStorage;
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
+import org.andstatus.todoagenda.provider.QueryResultsStorage;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.widget.CalendarEntry;
 import org.joda.time.DateTime;

@@ -1,15 +1,13 @@
-package org.andstatus.todoagenda;
+package org.andstatus.todoagenda.provider;
 
 import android.content.Context;
+import androidx.annotation.NonNull;
 
-import org.andstatus.todoagenda.calendar.KeywordsFilter;
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-
-import androidx.annotation.NonNull;
 
 import static android.graphics.Color.argb;
 import static android.graphics.Color.blue;
@@ -17,7 +15,6 @@ import static android.graphics.Color.green;
 import static android.graphics.Color.red;
 
 public abstract class EventProvider {
-
     protected static final String AND_BRACKET = " AND (";
     protected static final String OPEN_BRACKET = "( ";
     protected static final String CLOSING_BRACKET = " )";

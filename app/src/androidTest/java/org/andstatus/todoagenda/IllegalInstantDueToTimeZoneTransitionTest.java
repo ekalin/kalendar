@@ -4,7 +4,7 @@ import android.test.InstrumentationTestCase;
 import android.util.Log;
 
 import org.andstatus.todoagenda.calendar.MockCalendarContentProvider;
-import org.andstatus.todoagenda.calendar.QueryRow;
+import org.andstatus.todoagenda.provider.QueryRow;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;

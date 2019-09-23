@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.andstatus.todoagenda.calendar.QueryResult;
+import org.andstatus.todoagenda.provider.QueryResult;
 
 public class ContentProviderForTests extends ContentProvider {
     private Cursor cursor;

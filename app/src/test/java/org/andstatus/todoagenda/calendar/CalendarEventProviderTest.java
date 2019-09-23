@@ -3,11 +3,14 @@ package org.andstatus.todoagenda.calendar;
 import android.content.Context;
 import android.net.Uri;
 import android.provider.CalendarContract;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.google.common.truth.Correspondence;
 
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
+import org.andstatus.todoagenda.provider.QueryResult;
+import org.andstatus.todoagenda.provider.QueryRow;
 import org.andstatus.todoagenda.testutil.ContentProviderForTests;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -19,8 +22,6 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
 import java.util.List;
-
-import androidx.test.core.app.ApplicationProvider;
 
 import static com.google.common.truth.Truth.assertThat;
 

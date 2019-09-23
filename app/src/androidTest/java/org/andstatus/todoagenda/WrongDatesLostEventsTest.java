@@ -4,7 +4,7 @@ import android.test.InstrumentationTestCase;
 import android.util.Log;
 
 import org.andstatus.todoagenda.calendar.MockCalendarContentProvider;
-import org.andstatus.todoagenda.calendar.QueryResultsStorage;
+import org.andstatus.todoagenda.provider.QueryResultsStorage;
 import org.andstatus.todoagenda.widget.CalendarEntry;
 import org.json.JSONException;
 

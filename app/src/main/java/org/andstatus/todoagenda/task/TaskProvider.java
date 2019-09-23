@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import androidx.fragment.app.Fragment;
 
-import org.andstatus.todoagenda.EventProvider;
 import org.andstatus.todoagenda.prefs.EventSource;
+import org.andstatus.todoagenda.provider.EventProvider;
 import org.andstatus.todoagenda.task.dmfs.DmfsOpenTasksProvider;
 import org.andstatus.todoagenda.task.samsung.SamsungTasksProvider;
 

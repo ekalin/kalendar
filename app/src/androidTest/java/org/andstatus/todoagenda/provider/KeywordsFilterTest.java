@@ -1,4 +1,4 @@
-package org.andstatus.todoagenda.calendar;
+package org.andstatus.todoagenda.provider;
 
 import android.test.InstrumentationTestCase;
 

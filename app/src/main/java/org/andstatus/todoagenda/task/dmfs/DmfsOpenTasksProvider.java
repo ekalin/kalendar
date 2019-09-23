@@ -8,9 +8,9 @@ import android.net.Uri;
 import android.text.TextUtils;
 import androidx.fragment.app.Fragment;
 
-import org.andstatus.todoagenda.calendar.QueryResult;
-import org.andstatus.todoagenda.calendar.QueryResultsStorage;
 import org.andstatus.todoagenda.prefs.EventSource;
+import org.andstatus.todoagenda.provider.QueryResult;
+import org.andstatus.todoagenda.provider.QueryResultsStorage;
 import org.andstatus.todoagenda.task.AbstractTaskProvider;
 import org.andstatus.todoagenda.task.TaskEvent;
 import org.andstatus.todoagenda.util.CalendarIntentUtil;

@@ -9,8 +9,11 @@ import android.provider.CalendarContract.Attendees;
 import android.provider.CalendarContract.Instances;
 import android.util.Log;
 import android.util.SparseArray;
+import androidx.annotation.NonNull;
 
-import org.andstatus.todoagenda.EventProvider;
+import org.andstatus.todoagenda.provider.EventProvider;
+import org.andstatus.todoagenda.provider.QueryResult;
+import org.andstatus.todoagenda.provider.QueryResultsStorage;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.util.PermissionsUtil;
 import org.joda.time.DateTime;
@@ -19,8 +22,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
 
 public class CalendarEventProvider extends EventProvider {
 

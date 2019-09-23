@@ -10,11 +10,16 @@ import android.test.IsolatedContext;
 import android.test.mock.MockContentProvider;
 import android.test.mock.MockContentResolver;
 import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.annotation.RawRes;
 
 import org.andstatus.todoagenda.EventAppWidgetProvider;
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
+import org.andstatus.todoagenda.provider.QueryResult;
+import org.andstatus.todoagenda.provider.QueryResultsStorage;
+import org.andstatus.todoagenda.provider.QueryRow;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.util.RawResourceUtils;
 import org.joda.time.DateTimeZone;
@@ -27,11 +32,8 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RawRes;
-
-import static org.andstatus.todoagenda.calendar.QueryResultsStorage.KEY_SETTINGS;
 import static org.andstatus.todoagenda.prefs.ApplicationPreferences.PREF_WIDGET_ID;
+import static org.andstatus.todoagenda.provider.QueryResultsStorage.KEY_SETTINGS;
 
 /**
  * @author yvolk@yurivolkov.com

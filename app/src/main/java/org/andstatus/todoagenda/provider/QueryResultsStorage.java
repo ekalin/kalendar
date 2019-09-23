@@ -1,4 +1,4 @@
-package org.andstatus.todoagenda.calendar;
+package org.andstatus.todoagenda.provider;
 
 import android.content.Context;
 import android.content.Intent;
@@ -144,7 +144,7 @@ public class QueryResultsStorage {
         return jsonArray;
     }
 
-    static QueryResultsStorage fromTestData(Context context, JSONObject json) throws JSONException {
+    public static QueryResultsStorage fromTestData(Context context, JSONObject json) throws JSONException {
         InstanceSettings settings = InstanceSettings.fromJson(context, json.getJSONObject(KEY_SETTINGS));
         AllSettings.getInstances(context).put(settings.getWidgetId(), settings);
         QueryResultsStorage results = new QueryResultsStorage();

@@ -5,7 +5,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import org.andstatus.todoagenda.R;
-import org.andstatus.todoagenda.calendar.QueryResultsStorage;
+import org.andstatus.todoagenda.provider.QueryResultsStorage;
 
 public class FeedbackPreferencesFragment extends PreferenceFragmentCompat {
     @Override
