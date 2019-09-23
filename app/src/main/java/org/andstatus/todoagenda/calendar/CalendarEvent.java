@@ -1,22 +1,17 @@
 package org.andstatus.todoagenda.calendar;
 
-import android.content.ContentUris;
 import android.content.Context;
-import android.content.Intent;
-import android.provider.CalendarContract;
 import android.util.Log;
 
 import org.andstatus.todoagenda.BuildConfig;
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
-import org.andstatus.todoagenda.util.CalendarIntentUtil;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;
 
 public class CalendarEvent {
-
     private final Context context;
     private final int widgetId;
     private final DateTimeZone zone;
@@ -231,13 +226,5 @@ public class CalendarEvent {
 
     public InstanceSettings getSettings() {
         return AllSettings.instanceFromId(context, widgetId);
-    }
-
-    public Intent createOpenCalendarEventIntent() {
-        Intent intent = CalendarIntentUtil.createCalendarIntent();
-        intent.setData(ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventId));
-        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, getStartMillis());
-        intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, getEndMillis());
-        return intent;
     }
 }

@@ -24,7 +24,6 @@ import static org.andstatus.todoagenda.util.RemoteViewsUtil.setBackgroundColor;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setImageFromAttr;
 
 public class CalendarEventVisualizer implements WidgetEntryVisualizer<CalendarEntry> {
-
     private final Context context;
     private final int widgetId;
     private final CalendarEventProvider calendarContentProvider;
@@ -39,7 +38,8 @@ public class CalendarEventVisualizer implements WidgetEntryVisualizer<CalendarEn
         CalendarEntry entry = (CalendarEntry) eventEntry;
         EventEntryLayout eventEntryLayout = getSettings().getEventEntryLayout();
         RemoteViews rv = new RemoteViews(context.getPackageName(), eventEntryLayout.layoutId);
-        rv.setOnClickFillInIntent(R.id.event_entry, entry.getEvent().createOpenCalendarEventIntent());
+        rv.setOnClickFillInIntent(R.id.event_entry,
+                calendarContentProvider.createOpenCalendarEventIntent(entry.getEvent()));
         eventEntryLayout.visualizeEvent(entry, rv);
         setAlarmActive(entry, rv);
         setRecurring(entry, rv);
@@ -157,5 +157,4 @@ public class CalendarEventVisualizer implements WidgetEntryVisualizer<CalendarEn
     public Class<? extends CalendarEntry> getSupportedEventEntryType() {
         return CalendarEntry.class;
     }
-
 }

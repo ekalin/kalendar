@@ -2,9 +2,11 @@ package org.andstatus.todoagenda.calendar;
 
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.CalendarContract;
 import android.provider.CalendarContract.Attendees;
 import android.provider.CalendarContract.Instances;
 import android.util.Log;
@@ -14,6 +16,7 @@ import androidx.annotation.NonNull;
 import org.andstatus.todoagenda.provider.EventProvider;
 import org.andstatus.todoagenda.provider.QueryResult;
 import org.andstatus.todoagenda.provider.QueryResultsStorage;
+import org.andstatus.todoagenda.util.CalendarIntentUtil;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.util.PermissionsUtil;
 import org.joda.time.DateTime;
@@ -24,7 +27,6 @@ import java.util.List;
 import java.util.Set;
 
 public class CalendarEventProvider extends EventProvider {
-
     public static final String EVENT_SORT_ORDER = "startDay ASC, allDay DESC, begin ASC ";
     private static final String EVENT_SELECTION = Instances.SELF_ATTENDEE_STATUS + "!="
             + Attendees.ATTENDEE_STATUS_DECLINED;
@@ -234,5 +236,13 @@ public class CalendarEventProvider extends EventProvider {
             }
             return cursor.getInt(cursor.getColumnIndex(Instances.CALENDAR_COLOR));
         }
+    }
+
+    public Intent createOpenCalendarEventIntent(CalendarEvent event) {
+        Intent intent = CalendarIntentUtil.createCalendarIntent();
+        intent.setData(ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, event.getEventId()));
+        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, event.getStartMillis());
+        intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, event.getEndMillis());
+        return intent;
     }
 }
