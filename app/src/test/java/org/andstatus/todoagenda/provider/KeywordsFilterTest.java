@@ -1,12 +1,11 @@
 package org.andstatus.todoagenda.provider;
 
-import android.test.InstrumentationTestCase;
+import org.junit.Test;
 
-/**
- * @author yvolk@yurivolkov.com
- */
-public class KeywordsFilterTest extends InstrumentationTestCase {
+import static com.google.common.truth.Truth.assertWithMessage;
 
+public class KeywordsFilterTest {
+    @Test
     public void testPhrases() {
         String query = "\"do it\"";
         final String keywordDN = "do it";
@@ -34,17 +33,17 @@ public class KeywordsFilterTest extends InstrumentationTestCase {
     private void assertOneQueryToKeywords(String query, String... keywords) {
         int size = keywords.length;
         KeywordsFilter filter1 = new KeywordsFilter(query);
-        assertEquals(filter1.toString(), size, filter1.keywords.size());
+        assertWithMessage(filter1.toString()).that(filter1.keywords).hasSize(size);
         for (int ind = 0; ind < size; ind++) {
-            assertEquals(filter1.toString(), keywords[ind], filter1.keywords.get(ind));
+            assertWithMessage(filter1.toString()).that(filter1.keywords.get(ind)).isEqualTo(keywords[ind]);
         }
     }
 
     private void assertMatch(String query, String body) {
-        assertTrue("no keywords from '" + query + "' match: '" + body + "'", new KeywordsFilter(query).matched(body));
+        assertWithMessage("no keywords from '" + query + "' match: '" + body + "'").that(new KeywordsFilter(query).matched(body)).isTrue();
     }
 
     private void assertNotMatch(String query, String body) {
-        assertFalse("Some keyword from '" + query + "' match: '" + body + "'", new KeywordsFilter(query).matched(body));
+        assertWithMessage("Some keyword from '" + query + "' match: '" + body + "'").that(new KeywordsFilter(query).matched(body)).isFalse();
     }
 }
