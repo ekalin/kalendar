@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService.RemoteViewsFactory;
+import androidx.annotation.NonNull;
 
 import org.andstatus.todoagenda.calendar.CalendarEventVisualizer;
 import org.andstatus.todoagenda.prefs.AllSettings;
@@ -19,8 +20,6 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.NonNull;
 
 import static org.andstatus.todoagenda.Theme.themeNameToResId;
 import static org.andstatus.todoagenda.util.CalendarIntentUtil.createOpenCalendarEventPendingIntent;
@@ -136,7 +135,7 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
     }
 
     public int getViewTypeCount() {
-        int result = 3; // we have 3 because of the "left", "right" and "center" day headers
+        int result = 0;
         for (WidgetEntryVisualizer<?> eventProvider : eventProviders) {
             result += eventProvider.getViewTypeCount();
         }
