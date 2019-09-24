@@ -6,17 +6,14 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.RemoteViews;
 import androidx.annotation.IdRes;
 
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
-import org.andstatus.todoagenda.task.dmfs.DmfsOpenTasksContract;
 import org.andstatus.todoagenda.util.CalendarIntentUtil;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.util.PermissionsUtil;
@@ -39,7 +36,6 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
 
     private static final String PACKAGE = EventAppWidgetProvider.class.getPackage().getName();
     public static final String ACTION_REFRESH = PACKAGE + ".action.REFRESH";
-    private static volatile boolean receiversRegistered = false;
 
     public static int[] getWidgetIds(Context context) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -58,7 +54,7 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context baseContext, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        registerReceivers(baseContext);
+        EnvironmentChangedReceiver.registerReceivers(baseContext);
         for (int widgetId : appWidgetIds) {
             InstanceSettings settings = AllSettings.instanceFromId(baseContext, widgetId);
             AlarmReceiver.scheduleAlarm(settings.getHeaderThemeContext());
@@ -192,7 +188,6 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
     }
 
     public static void updateEventList(Context context) {
-        registerReceivers(context);
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         if (appWidgetManager != null) {
             appWidgetManager.notifyAppWidgetViewDataChanged(getWidgetIds(context), R.id.event_list);
@@ -217,26 +212,5 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         if (appWidgetManager != null) {
             appWidgetManager.notifyAppWidgetViewDataChanged(idAsArray, R.id.event_list);
         }
-    }
-
-    private static void registerReceivers(Context contextIn) {
-        if (receiversRegistered) return;
-
-        Context context = contextIn.getApplicationContext();
-        EnvironmentChangedReceiver receiver = new EnvironmentChangedReceiver();
-
-        IntentFilter providerChanged = new IntentFilter();
-        providerChanged.addAction("android.intent.action.PROVIDER_CHANGED");
-        providerChanged.addDataScheme("content");
-        providerChanged.addDataAuthority("com.android.calendar", null);
-        providerChanged.addDataAuthority(DmfsOpenTasksContract.AUTHORITY, null);
-        context.registerReceiver(receiver, providerChanged);
-
-        IntentFilter userPresent = new IntentFilter();
-        userPresent.addAction("android.intent.action.USER_PRESENT");
-        context.registerReceiver(receiver, userPresent);
-
-        Log.i(EventAppWidgetProvider.class.getName(), "Registered receivers from " + contextIn.getClass().getName());
-        receiversRegistered = true;
     }
 }

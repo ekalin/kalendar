@@ -3,11 +3,47 @@ package org.andstatus.todoagenda;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.util.Log;
 
 import org.andstatus.todoagenda.prefs.AllSettings;
+import org.andstatus.todoagenda.task.dmfs.DmfsOpenTasksContract;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 public class EnvironmentChangedReceiver extends BroadcastReceiver {
+    private static final AtomicReference<EnvironmentChangedReceiver> registeredReceiver = new AtomicReference<>();
+
+    public static void registerReceivers(Context contextIn) {
+        Context context = contextIn.getApplicationContext();
+        synchronized (registeredReceiver) {
+            EnvironmentChangedReceiver receiver = new EnvironmentChangedReceiver();
+
+            IntentFilter providerChanged = new IntentFilter();
+            providerChanged.addAction(Intent.ACTION_PROVIDER_CHANGED);
+            providerChanged.addDataScheme("content");
+            providerChanged.addDataAuthority("com.android.calendar", null);
+            providerChanged.addDataAuthority(DmfsOpenTasksContract.AUTHORITY, null);
+            context.registerReceiver(receiver, providerChanged);
+
+            IntentFilter userPresent = new IntentFilter();
+            userPresent.addAction("android.intent.action.USER_PRESENT");
+            context.registerReceiver(receiver, userPresent);
+
+            EnvironmentChangedReceiver oldReceiver = registeredReceiver.getAndSet(receiver);
+            if (oldReceiver != null) {
+                oldReceiver.unRegister(context);
+            }
+
+            Log.i(EventAppWidgetProvider.class.getName(),
+                    "Registered receivers from " + contextIn.getClass().getName());
+        }
+    }
+
+    private void unRegister(Context context) {
+        context.unregisterReceiver(this);
+    }
+
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i(this.getClass().getName(), "Received intent: " + intent);
