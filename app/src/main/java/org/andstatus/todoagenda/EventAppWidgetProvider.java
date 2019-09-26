@@ -34,8 +34,10 @@ import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextSize;
 
 public class EventAppWidgetProvider extends AppWidgetProvider {
 
-    private static final String PACKAGE = EventAppWidgetProvider.class.getPackage().getName();
+    private static final String PACKAGE = "org.andstatus.todoagenda";
     public static final String ACTION_REFRESH = PACKAGE + ".action.REFRESH";
+    private static final int REQUEST_CODE_EMPTY = 1;
+    private static final int REQUEST_CODE_ADD_EVENT = 3;
 
     public static int[] getWidgetIds(Context context) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -89,7 +91,7 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         configureCurrentDate(settings, rv);
         setActionIcons(settings, rv);
         configureAddEvent(settings, rv);
-        configureRefresh(settings.getContext(), rv);
+        configureRefresh(settings, rv);
         configureOverflowMenu(settings, rv);
     }
 
@@ -121,38 +123,37 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
 
     private PendingIntent getPermittedAddEventPendingIntent(InstanceSettings settings) {
         Context context = settings.getContext();
-        Intent intent = PermissionsUtil.getPermittedIntent(context,
+        Intent intent = PermissionsUtil.getPermittedActivityIntent(context,
                 CalendarIntentUtil.createNewEventIntent(settings.getTimeZone()));
         return isIntentAvailable(context, intent) ?
-                PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT) :
+                PendingIntent.getActivity(context, REQUEST_CODE_ADD_EVENT, intent, PendingIntent.FLAG_UPDATE_CURRENT) :
                 getEmptyPendingIntent(context);
     }
 
     private static PendingIntent getEmptyPendingIntent(Context context) {
         return PendingIntent.getActivity(
                 context.getApplicationContext(),
-                0,
+                REQUEST_CODE_EMPTY,
                 new Intent(),
                 PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
-    private void configureRefresh(Context context, RemoteViews rv) {
-        Intent intent = new Intent(context, EnvironmentChangedReceiver.class);
+    private void configureRefresh(InstanceSettings settings, RemoteViews rv) {
+        Intent intent = new Intent(settings.getContext(), EnvironmentChangedReceiver.class);
         intent.setAction(ACTION_REFRESH);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        PendingIntent pendingIntent = PermissionsUtil.getPermittedPendingBroadcastIntent(settings, intent);
         rv.setOnClickPendingIntent(R.id.refresh, pendingIntent);
     }
 
     private void configureOverflowMenu(InstanceSettings settings, RemoteViews rv) {
         Intent intent = MainActivity.intentToConfigure(settings.getContext(), settings.getWidgetId());
-        PendingIntent menuPendingIntent = PermissionsUtil.getPermittedPendingIntent(settings, intent);
-        rv.setOnClickPendingIntent(R.id.overflow_menu, menuPendingIntent);
+        PendingIntent pendingIntent = PermissionsUtil.getPermittedPendingActivityIntent(settings, intent);
+        rv.setOnClickPendingIntent(R.id.overflow_menu, pendingIntent);
     }
 
     private static boolean isIntentAvailable(Context context, Intent intent) {
         PackageManager packageManager = context.getPackageManager();
-        List<ResolveInfo> list = packageManager.queryIntentActivities(intent,
-                PackageManager.MATCH_DEFAULT_ONLY);
+        List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
         return list.size() > 0;
     }
 
