@@ -52,12 +52,16 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int widgetId : appWidgetIds) {
-            addWidgetViews(context, widgetId);
-            updateWidget(context, widgetId);
+            recreateWidget(context, widgetId);
         }
     }
 
-    private void addWidgetViews(Context context, int widgetId) {
+    public static void recreateWidget(Context context, int widgetId) {
+        addWidgetViews(context, widgetId);
+        updateWidget(context, widgetId);
+    }
+
+    private static void addWidgetViews(Context context, int widgetId) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         InstanceSettings settings = AllSettings.instanceFromId(context, widgetId);
         addWidgetParts(settings, widgetId);
@@ -66,10 +70,12 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         configureWidgetHeader(settings, rv);
         configureList(settings, widgetId, rv);
         configureNoEvents(settings, rv);
-        appWidgetManager.updateAppWidget(widgetId, rv);
+        if (appWidgetManager != null) {
+            appWidgetManager.updateAppWidget(widgetId, rv);
+        }
     }
 
-    private void addWidgetParts(InstanceSettings settings, int widgetId) {
+    private static void addWidgetParts(InstanceSettings settings, int widgetId) {
         RemoteViews rvParent = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget);
         rvParent.removeAllViews(R.id.widget_parent);
         if (settings.getShowWidgetHeader()) {
@@ -79,10 +85,12 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         RemoteViews rv = new RemoteViews(settings.getContext().getPackageName(), R.layout.widget_body);
         rvParent.addView(R.id.widget_parent, rv);
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(settings.getContext());
-        appWidgetManager.updateAppWidget(widgetId, rvParent);
+        if (appWidgetManager != null) {
+            appWidgetManager.updateAppWidget(widgetId, rvParent);
+        }
     }
 
-    private void configureWidgetHeader(InstanceSettings settings, RemoteViews rv) {
+    private static void configureWidgetHeader(InstanceSettings settings, RemoteViews rv) {
         if (!settings.getShowWidgetHeader()) {
             return;
         }
@@ -94,7 +102,7 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         configureOverflowMenu(settings, rv);
     }
 
-    private void configureCurrentDate(InstanceSettings settings, RemoteViews rv) {
+    private static void configureCurrentDate(InstanceSettings settings, RemoteViews rv) {
         rv.setOnClickPendingIntent(R.id.calendar_current_date, createOpenCalendarPendingIntent(settings));
         String formattedDate = DateUtil.createDateString(settings,
                 DateUtil.now(settings.getTimeZone())).toUpperCase(Locale.getDefault());
@@ -102,7 +110,7 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         setTextColorFromAttr(settings.getHeaderThemeContext(), rv, R.id.calendar_current_date, R.attr.header);
     }
 
-    private void setActionIcons(InstanceSettings settings, RemoteViews rv) {
+    private static void setActionIcons(InstanceSettings settings, RemoteViews rv) {
         setImageFromAttr(settings.getHeaderThemeContext(), rv, R.id.add_event, R.attr.header_action_add_event);
         setImageFromAttr(settings.getHeaderThemeContext(), rv, R.id.refresh, R.attr.header_action_refresh);
         setImageFromAttr(settings.getHeaderThemeContext(), rv, R.id.overflow_menu, R.attr.header_action_overflow);
@@ -116,11 +124,11 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         setAlpha(rv, R.id.overflow_menu, alpha);
     }
 
-    private void configureAddEvent(InstanceSettings settings, RemoteViews rv) {
+    private static void configureAddEvent(InstanceSettings settings, RemoteViews rv) {
         rv.setOnClickPendingIntent(R.id.add_event, getPermittedAddEventPendingIntent(settings));
     }
 
-    private PendingIntent getPermittedAddEventPendingIntent(InstanceSettings settings) {
+    private static PendingIntent getPermittedAddEventPendingIntent(InstanceSettings settings) {
         Context context = settings.getContext();
         Intent intent = PermissionsUtil.getPermittedActivityIntent(context,
                 CalendarIntentUtil.createNewEventIntent(settings.getTimeZone()));
@@ -137,14 +145,14 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
                 PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
-    private void configureRefresh(InstanceSettings settings, RemoteViews rv) {
+    private static void configureRefresh(InstanceSettings settings, RemoteViews rv) {
         Intent intent = new Intent(settings.getContext(), EnvironmentChangedReceiver.class);
         intent.setAction(ACTION_REFRESH);
         PendingIntent pendingIntent = PermissionsUtil.getPermittedPendingBroadcastIntent(settings, intent);
         rv.setOnClickPendingIntent(R.id.refresh, pendingIntent);
     }
 
-    private void configureOverflowMenu(InstanceSettings settings, RemoteViews rv) {
+    private static void configureOverflowMenu(InstanceSettings settings, RemoteViews rv) {
         Intent intent = MainActivity.intentToConfigure(settings.getContext(), settings.getWidgetId());
         PendingIntent pendingIntent = PermissionsUtil.getPermittedPendingActivityIntent(settings, intent);
         rv.setOnClickPendingIntent(R.id.overflow_menu, pendingIntent);
@@ -156,7 +164,7 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         return list.size() > 0;
     }
 
-    private void configureList(InstanceSettings settings, int widgetId, RemoteViews rv) {
+    private static void configureList(InstanceSettings settings, int widgetId, RemoteViews rv) {
         Intent intent = new Intent(settings.getContext(), EventWidgetService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
@@ -164,7 +172,7 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         rv.setRemoteAdapter(R.id.event_list, intent);
     }
 
-    private void configureNoEvents(InstanceSettings settings, RemoteViews rv) {
+    private static void configureNoEvents(InstanceSettings settings, RemoteViews rv) {
         boolean permissionsGranted = PermissionsUtil.arePermissionsGranted(settings.getContext());
         @IdRes int viewId = R.id.empty_event_list;
         rv.setEmptyView(R.id.event_list, viewId);
@@ -193,7 +201,7 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
                 : appWidgetManager.getAppWidgetIds(new ComponentName(context, AppWidgetProvider.class));
     }
 
-    public static void updateWidget(Context context, int widgetId) {
+    private static void updateWidget(Context context, int widgetId) {
         updateWidgets(context, new int[]{widgetId});
     }
 

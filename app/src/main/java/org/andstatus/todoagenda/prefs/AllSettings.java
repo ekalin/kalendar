@@ -47,7 +47,7 @@ public class AllSettings {
                     settings.logMe(AllSettings.class, "newInstance put", widgetId);
                     instances.put(widgetId, settings);
                     EnvironmentChangedReceiver.registerReceivers(instances);
-                    EventAppWidgetProvider.updateWidget(context, widgetId);
+                    EventAppWidgetProvider.recreateWidget(context, widgetId);
                 }
             }
             return settings;

@@ -155,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         checkPermissions();
         updateScreen();
-        EventAppWidgetProvider.updateAllWidgets(this);
     }
 
     public void onHomeButtonClick(View view) {
