@@ -30,7 +30,7 @@ public class WidgetConfigurationActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (prepareForNewIntent(getIntent())) {
+        if (!openThisActivity(getIntent())) {
             return;
         }
 
@@ -52,7 +52,7 @@ public class WidgetConfigurationActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private boolean prepareForNewIntent(Intent newIntent) {
+    private boolean openThisActivity(Intent newIntent) {
         int newWidgetId = newIntent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, 0);
         if (newWidgetId == 0) {
             newWidgetId = ApplicationPreferences.getWidgetId(this);
@@ -64,16 +64,16 @@ public class WidgetConfigurationActivity extends AppCompatActivity
             restartIntent = MainActivity.intentToConfigure(this, newWidgetId);
         } else if (widgetId == 0) {
             widgetId = newWidgetId;
-            ApplicationPreferences.startEditing(this, widgetId);
+            ApplicationPreferences.fromInstanceSettings(this, widgetId);
         }
         if (restartIntent != null) {
             widgetId = 0;
             startActivity(restartIntent);
             finish();
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     private void setTitleToWidgetName() {

@@ -38,10 +38,10 @@ public class AppearancePreferencesFragment extends PreferenceFragmentCompat
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         switch (key) {
-            case ApplicationPreferences.PREF_EVENT_ENTRY_LAYOUT:
+            case InstanceSettings.PREF_EVENT_ENTRY_LAYOUT:
                 showEventEntryLayout();
                 break;
-            case ApplicationPreferences.PREF_WIDGET_INSTANCE_NAME:
+            case InstanceSettings.PREF_WIDGET_INSTANCE_NAME:
                 getActivity().finish();
                 startActivity(MainActivity.intentToConfigure(getActivity(), ApplicationPreferences
                         .getWidgetId(getActivity())));
@@ -52,21 +52,21 @@ public class AppearancePreferencesFragment extends PreferenceFragmentCompat
     }
 
     private void showEventEntryLayout() {
-        Preference preference = findPreference(ApplicationPreferences.PREF_EVENT_ENTRY_LAYOUT);
+        Preference preference = findPreference(InstanceSettings.PREF_EVENT_ENTRY_LAYOUT);
         if (preference != null) {
             preference.setSummary(ApplicationPreferences.getEventEntryLayout(getActivity()).summaryResId);
         }
     }
 
     private void showWidgetInstanceName() {
-        Preference preference = findPreference(ApplicationPreferences.PREF_WIDGET_INSTANCE_NAME);
+        Preference preference = findPreference(InstanceSettings.PREF_WIDGET_INSTANCE_NAME);
         if (preference != null) {
             preference.setSummary(ApplicationPreferences.getWidgetInstanceName(getActivity()));
         }
     }
 
     private void showLockTimeZone(boolean setAlso) {
-        CheckBoxPreference preference = findPreference(ApplicationPreferences.PREF_LOCK_TIME_ZONE);
+        CheckBoxPreference preference = findPreference(InstanceSettings.PREF_LOCK_TIME_ZONE);
         if (preference != null) {
             boolean isChecked = setAlso ? ApplicationPreferences.isTimeZoneLocked(getActivity()) : preference.isChecked();
             if (setAlso && preference.isChecked() != isChecked) {
@@ -84,15 +84,15 @@ public class AppearancePreferencesFragment extends PreferenceFragmentCompat
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         switch (preference.getKey()) {
-            case ApplicationPreferences.PREF_BACKGROUND_COLOR:
+            case InstanceSettings.PREF_BACKGROUND_COLOR:
                 new BackgroundTransparencyDialog().show(getFragmentManager(),
-                        ApplicationPreferences.PREF_BACKGROUND_COLOR);
+                        InstanceSettings.PREF_BACKGROUND_COLOR);
                 break;
-            case ApplicationPreferences.PREF_PAST_EVENTS_BACKGROUND_COLOR:
+            case InstanceSettings.PREF_PAST_EVENTS_BACKGROUND_COLOR:
                 new BackgroundTransparencyDialog().show(getFragmentManager(),
-                        ApplicationPreferences.PREF_PAST_EVENTS_BACKGROUND_COLOR);
+                        InstanceSettings.PREF_PAST_EVENTS_BACKGROUND_COLOR);
                 break;
-            case ApplicationPreferences.PREF_LOCK_TIME_ZONE:
+            case InstanceSettings.PREF_LOCK_TIME_ZONE:
                 if (preference instanceof CheckBoxPreference) {
                     CheckBoxPreference checkPref = (CheckBoxPreference) preference;
                     ApplicationPreferences.setLockedTimeZoneId(getActivity(),

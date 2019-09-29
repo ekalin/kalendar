@@ -111,7 +111,7 @@ public class CalendarEventProviderTest {
 
     @Test
     public void getEvents_shouldSubtractTZOffsetIfNegative() {
-        ApplicationPreferences.startEditing(context, 1);
+        ApplicationPreferences.fromInstanceSettings(context, 1);
         ApplicationPreferences.setLockedTimeZoneId(context, "-03:00");
         ApplicationPreferences.save(context, 1);
 
@@ -125,7 +125,7 @@ public class CalendarEventProviderTest {
 
     @Test
     public void getEvents_shouldNotAddTZOffsetIfPositive() {
-        ApplicationPreferences.startEditing(context, 1);
+        ApplicationPreferences.fromInstanceSettings(context, 1);
         ApplicationPreferences.setLockedTimeZoneId(context, "+02:00");
         ApplicationPreferences.save(context, 1);
 

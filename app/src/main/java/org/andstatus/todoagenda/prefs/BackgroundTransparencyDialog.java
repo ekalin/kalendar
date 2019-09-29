@@ -24,13 +24,13 @@ public class BackgroundTransparencyDialog extends DialogFragment {
         picker = layout.findViewById(R.id.background_color_picker);
         picker.addSVBar(layout.findViewById(R.id.background_color_svbar));
         picker.addOpacityBar(layout.findViewById(R.id.background_color_opacitybar));
-        prefKey = getTag().equals(ApplicationPreferences.PREF_PAST_EVENTS_BACKGROUND_COLOR)
-                ? ApplicationPreferences.PREF_PAST_EVENTS_BACKGROUND_COLOR
-                : ApplicationPreferences.PREF_BACKGROUND_COLOR;
+        prefKey = getTag().equals(InstanceSettings.PREF_PAST_EVENTS_BACKGROUND_COLOR)
+                ? InstanceSettings.PREF_PAST_EVENTS_BACKGROUND_COLOR
+                : InstanceSettings.PREF_BACKGROUND_COLOR;
         int color = ApplicationPreferences.getInt(getActivity(), prefKey,
-                getTag().equals(ApplicationPreferences.PREF_PAST_EVENTS_BACKGROUND_COLOR)
-                        ? ApplicationPreferences.PREF_PAST_EVENTS_BACKGROUND_COLOR_DEFAULT
-                        : ApplicationPreferences.PREF_BACKGROUND_COLOR_DEFAULT);
+                getTag().equals(InstanceSettings.PREF_PAST_EVENTS_BACKGROUND_COLOR)
+                        ? InstanceSettings.PREF_PAST_EVENTS_BACKGROUND_COLOR_DEFAULT
+                        : InstanceSettings.PREF_BACKGROUND_COLOR_DEFAULT);
         // android.util.Log.v("Color", "key:" + prefKey + "; color:0x" + Integer.toString(color, 16));
         picker.setColor(color);
         picker.setOldCenterColor(color);
@@ -39,7 +39,7 @@ public class BackgroundTransparencyDialog extends DialogFragment {
 
     private Dialog createDialog(View layout) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(getTag().equals(ApplicationPreferences.PREF_PAST_EVENTS_BACKGROUND_COLOR)
+        builder.setTitle(getTag().equals(InstanceSettings.PREF_PAST_EVENTS_BACKGROUND_COLOR)
                 ? R.string.appearance_past_events_background_color_title
                 : R.string.appearance_background_color_title);
         builder.setView(layout);

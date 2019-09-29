@@ -16,7 +16,7 @@ public class FeedbackPreferencesFragment extends PreferenceFragmentCompat {
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         switch (preference.getKey()) {
-            case ApplicationPreferences.KEY_SHARE_EVENTS_FOR_DEBUGGING:
+            case InstanceSettings.KEY_SHARE_EVENTS_FOR_DEBUGGING:
                 QueryResultsStorage.shareEventsForDebugging(getActivity(),
                         ApplicationPreferences.getWidgetId(getActivity()));
             default:

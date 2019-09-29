@@ -40,17 +40,17 @@ public class EventFiltersPreferencesFragment extends PreferenceFragmentCompat im
     }
 
     private void showEventsEnded() {
-        ListPreference preference = findPreference(ApplicationPreferences.PREF_EVENTS_ENDED);
+        ListPreference preference = findPreference(InstanceSettings.PREF_EVENTS_ENDED);
         preference.setSummary(preference.getEntry());
     }
 
     private void showEventRange() {
-        ListPreference preference = findPreference(ApplicationPreferences.PREF_EVENT_RANGE);
+        ListPreference preference = findPreference(InstanceSettings.PREF_EVENT_RANGE);
         preference.setSummary(preference.getEntry());
     }
 
     private void showHideBasedOnKeywords() {
-        EditTextPreference preference = findPreference(ApplicationPreferences.PREF_HIDE_BASED_ON_KEYWORDS);
+        EditTextPreference preference = findPreference(InstanceSettings.PREF_HIDE_BASED_ON_KEYWORDS);
         KeywordsFilter filter = new KeywordsFilter(preference.getText());
         if (filter.isEmpty()) {
             preference.setSummary(R.string.this_option_is_turned_off);

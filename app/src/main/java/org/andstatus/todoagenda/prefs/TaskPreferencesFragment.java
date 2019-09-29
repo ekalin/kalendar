@@ -39,7 +39,7 @@ public class TaskPreferencesFragment extends PreferenceFragmentCompat implements
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         switch (key) {
-            case ApplicationPreferences.PREF_TASK_SOURCE:
+            case InstanceSettings.PREF_TASK_SOURCE:
                 showTaskSource();
                 setGrantPermissionVisibility(true);
                 setTaskListState();
@@ -49,7 +49,7 @@ public class TaskPreferencesFragment extends PreferenceFragmentCompat implements
     }
 
     private void showTaskSource() {
-        ListPreference preference = findPreference(ApplicationPreferences.PREF_TASK_SOURCE);
+        ListPreference preference = findPreference(InstanceSettings.PREF_TASK_SOURCE);
         preference.setSummary(preference.getEntry());
     }
 
@@ -80,7 +80,7 @@ public class TaskPreferencesFragment extends PreferenceFragmentCompat implements
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         switch (preference.getKey()) {
-            case ApplicationPreferences.KEY_PREF_GRANT_TASK_PERMISSION:
+            case InstanceSettings.KEY_PREF_GRANT_TASK_PERMISSION:
                 requestTaskPermission();
                 return true;
         }

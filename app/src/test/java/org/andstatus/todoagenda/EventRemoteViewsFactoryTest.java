@@ -58,7 +58,7 @@ public class EventRemoteViewsFactoryTest {
 
     @Test
     public void getEventEntries_returnsEventsSorted() {
-        ApplicationPreferences.startEditing(context, 1);
+        ApplicationPreferences.fromInstanceSettings(context, 1);
         ApplicationPreferences.setShowDayHeaders(context, false);
         ApplicationPreferences.save(context, 1);
 
@@ -107,7 +107,7 @@ public class EventRemoteViewsFactoryTest {
 
     @Test
     public void getEventEntries_addsDayHeaders() {
-        ApplicationPreferences.startEditing(context, 1);
+        ApplicationPreferences.fromInstanceSettings(context, 1);
         ApplicationPreferences.setShowDayHeaders(context, true);
         ApplicationPreferences.setShowDaysWithoutEvents(context, false);
         ApplicationPreferences.save(context, 1);
@@ -135,7 +135,7 @@ public class EventRemoteViewsFactoryTest {
 
     @Test
     public void getEventEntries_addsDayHeadersForDaysWithoutEvents() {
-        ApplicationPreferences.startEditing(context, 1);
+        ApplicationPreferences.fromInstanceSettings(context, 1);
         ApplicationPreferences.setShowDayHeaders(context, true);
         ApplicationPreferences.setShowDaysWithoutEvents(context, true);
         ApplicationPreferences.save(context, 1);
