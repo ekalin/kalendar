@@ -22,6 +22,7 @@ import static org.andstatus.todoagenda.Theme.themeNameToResId;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setAlpha;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setBackgroundColor;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setImageFromAttr;
+import static org.andstatus.todoagenda.util.RemoteViewsUtil.setViewHeight;
 
 public class CalendarEventVisualizer implements WidgetEntryVisualizer<CalendarEntry> {
     private final Context context;
@@ -60,6 +61,9 @@ public class CalendarEventVisualizer implements WidgetEntryVisualizer<CalendarEn
     private void setIndicator(RemoteViews rv, boolean showIndication, int viewId, int imageAttrId) {
         if (showIndication) {
             rv.setViewVisibility(viewId, View.VISIBLE);
+            if (!getSettings().getTextSizeScale().equals("1.0")) {
+                setViewHeight(getSettings(), rv, R.id.event_entry_indicator_layout, R.dimen.event_indicator_size);
+            }
             setImageFromAttr(context, rv, viewId, imageAttrId);
             int themeId = themeNameToResId(getSettings().getEntryTheme());
             int alpha = 255;
