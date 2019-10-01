@@ -66,7 +66,11 @@ We are also looking for new and improved translations over at http://crowdin.net
 * Show end time for events spanning more than one day (but not all day events) when "Fill all day events" is disabled.
 * [Display location independently of time](https://github.com/plusonelabs/calendar-widget/issues/221), 
   including showing location for All day events.
-* Separate "ToDo Agenda Loading..." layout added to see the widget, when it is not initialized yet (i.e. after device reboot).
+* [Text size scaling improved](https://github.com/plusonelabs/calendar-widget/issues/301) - Now size of text in all parts
+  of the widget changes, when you change "Text size" option.
+* Hopefully fixed intermittent "No events" display instead of actual list of events. 
+  Separate "[ToDo Agenda Not Initialized yet...](https://github.com/plusonelabs/calendar-widget/issues/318)" layout added 
+  to see the widget, when it is not initialized yet (e.g. after device reboot).
 
 ### [v2.2.0]
 * Fixes all-day events disappearing before the end of the day.

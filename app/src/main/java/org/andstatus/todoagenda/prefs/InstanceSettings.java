@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 
 import org.andstatus.todoagenda.Alignment;
 import org.andstatus.todoagenda.EndedSomeTimeAgo;
+import org.andstatus.todoagenda.TextSizeScale;
 import org.andstatus.todoagenda.Theme;
 import org.andstatus.todoagenda.task.TaskProvider;
 import org.andstatus.todoagenda.util.DateUtil;
@@ -42,9 +43,8 @@ public class InstanceSettings {
     static final String PREF_WIDGET_INSTANCE_NAME = "widgetInstanceName";
     private final String widgetInstanceName;
     static final String PREF_TEXT_SIZE_SCALE = "textSizeScale";
-    static final String PREF_TEXT_SIZE_SCALE_DEFAULT = "1.0";
+    private TextSizeScale textSizeScale = TextSizeScale.MEDIUM;
     static final String PREF_EVENT_ENTRY_LAYOUT = "eventEntryLayout";
-    private String textSizeScale = PREF_TEXT_SIZE_SCALE_DEFAULT;
     private EventEntryLayout eventEntryLayout = EventEntryLayout.DEFAULT;
     static final String PREF_MULTILINE_TITLE = "multiline_title";
     static final boolean PREF_MULTILINE_TITLE_DEFAULT = false;
@@ -137,7 +137,7 @@ public class InstanceSettings {
         }
 
         if (json.has(PREF_TEXT_SIZE_SCALE)) {
-            settings.textSizeScale = json.getString(PREF_TEXT_SIZE_SCALE);
+            settings.textSizeScale = TextSizeScale.fromPreferenceValue(json.getString(PREF_TEXT_SIZE_SCALE));
         }
         if (json.has(PREF_EVENT_ENTRY_LAYOUT)) {
             settings.eventEntryLayout = EventEntryLayout.fromValue(json.getString(PREF_EVENT_ENTRY_LAYOUT));
@@ -244,8 +244,9 @@ public class InstanceSettings {
                     ApplicationPreferences.getString(context, PREF_WIDGET_INSTANCE_NAME,
                             ApplicationPreferences.getString(context, PREF_WIDGET_INSTANCE_NAME, "")));
 
-            settings.textSizeScale = ApplicationPreferences.getString(context, PREF_TEXT_SIZE_SCALE,
-                    PREF_TEXT_SIZE_SCALE_DEFAULT);
+            settings.textSizeScale = TextSizeScale.fromPreferenceValue(ApplicationPreferences.getString(context,
+                    PREF_TEXT_SIZE_SCALE,
+                    ""));
             settings.eventEntryLayout = ApplicationPreferences.getEventEntryLayout(context);
             settings.titleMultiline = ApplicationPreferences.isTitleMultiline(context);
             settings.dateFormat = ApplicationPreferences.getDateFormat(context);
@@ -365,7 +366,7 @@ public class InstanceSettings {
         return widgetInstanceName;
     }
 
-    public String getTextSizeScale() {
+    public TextSizeScale getTextSizeScale() {
         return textSizeScale;
     }
 

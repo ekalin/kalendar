@@ -12,8 +12,6 @@ import androidx.annotation.DimenRes;
 
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 
-import static java.lang.Float.parseFloat;
-
 public class RemoteViewsUtil {
     private static final String METHOD_SET_TEXT_SIZE = "setTextSize";
     private static final String METHOD_SET_BACKGROUND_COLOR = "setBackgroundColor";
@@ -75,15 +73,13 @@ public class RemoteViewsUtil {
 
     private static int getScaledValueInPixels(InstanceSettings settings, int dimenId) {
         float resValue = getDimension(settings.getContext(), dimenId);
-        float prefTextScale = parseFloat(settings.getTextSizeScale());
-        return  Math.round(resValue * prefTextScale);
+        return Math.round(resValue * settings.getTextSizeScale().scaleValue);
     }
 
     private static float getScaledValueInScaledPixels(InstanceSettings settings, int dimenId) {
         float resValue = getDimension(settings.getContext(), dimenId);
         float density = settings.getContext().getResources().getDisplayMetrics().density;
-        float prefTextScale = parseFloat(settings.getTextSizeScale());
-        return resValue * prefTextScale / density;
+        return resValue * settings.getTextSizeScale().scaleValue / density;
     }
 
     private static int getColorValue(Context context, int attrId) {
@@ -108,7 +104,8 @@ public class RemoteViewsUtil {
         try {
             return context.getResources().getDimension(dimensionResourceId);
         } catch (NotFoundException e) {
-            Log.w(RemoteViewsUtil.class.getSimpleName(), "getDimension failed for dimension resource Id:" + dimensionResourceId);
+            Log.w(RemoteViewsUtil.class.getSimpleName(),
+                    "getDimension failed for dimension resource Id:" + dimensionResourceId);
             return 0f;
         }
     }

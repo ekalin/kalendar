@@ -60,7 +60,7 @@ public class ApplicationPreferences {
             setWidgetId(context, widgetId == 0 ? settings.getWidgetId() : widgetId);
 
             setString(context, PREF_WIDGET_INSTANCE_NAME, settings.getWidgetInstanceName());
-            setString(context, PREF_TEXT_SIZE_SCALE, settings.getTextSizeScale());
+            setString(context, PREF_TEXT_SIZE_SCALE, settings.getTextSizeScale().preferenceValue);
             setString(context, PREF_EVENT_ENTRY_LAYOUT, settings.getEventEntryLayout().value);
             setBoolean(context, PREF_MULTILINE_TITLE, settings.isTitleMultiline());
             setString(context, PREF_DATE_FORMAT, settings.getDateFormat());
