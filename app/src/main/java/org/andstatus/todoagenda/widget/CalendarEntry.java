@@ -27,10 +27,16 @@ public class CalendarEntry extends WidgetEntry {
         super(30);
     }
 
-    public static CalendarEntry fromEvent(CalendarEvent event) {
+    public static CalendarEntry fromEvent(CalendarEvent event, DateTime entryDate) {
         CalendarEntry entry = new CalendarEntry();
-        entry.setStartDate(event.getStartDate());
-        entry.endDate = event.getEndDate();
+        entry.setStartDate(entryDate);
+        DateTime defaultEndDate = DateUtil.startOfNextDay(entryDate);
+        if (event.getEndDate().isBefore(defaultEndDate)) {
+            entry.setEndDate(event.getEndDate());
+        } else {
+            entry.setEndDate(defaultEndDate);
+        }
+
         entry.allDay = event.isAllDay();
         entry.event = event;
         return entry;
@@ -173,8 +179,10 @@ public class CalendarEntry extends WidgetEntry {
     public String toString() {
         return "CalendarEntry ["
                 + "startDate=" + getStartDate()
-                + (endDate != null ? ", endDate=" + getEndDate() : "")
+                + ", endDate=" + getEndDate()
                 + ", allDay=" + allDay
+                + ", time=" + getEventTimeString()
+                + ", location=" + getLocationString()
                 + ", event=" + event
                 + "]";
     }

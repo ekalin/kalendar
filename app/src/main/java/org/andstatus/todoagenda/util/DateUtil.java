@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
+import androidx.annotation.NonNull;
 
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
@@ -12,8 +13,6 @@ import org.joda.time.DateTimeZone;
 
 import java.util.Formatter;
 import java.util.Locale;
-
-import androidx.annotation.NonNull;
 
 public class DateUtil {
     private static final String COMMA_SPACE = ", ";
@@ -79,6 +78,10 @@ public class DateUtil {
             default:
                 return Integer.toString(daysFromToday);
         }
+    }
+
+    public static DateTime startOfNextDay(DateTime date) {
+        return date.plusDays(1).withTimeAtStartOfDay();
     }
 
     public static void setNow(DateTime now) {

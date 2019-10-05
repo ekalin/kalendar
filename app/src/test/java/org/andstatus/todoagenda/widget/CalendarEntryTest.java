@@ -57,7 +57,7 @@ public class CalendarEntryTest {
 
         when(event.getStartDate()).thenReturn(start);
         when(event.getEndDate()).thenReturn(end);
-        CalendarEntry entry = CalendarEntry.fromEvent(event);
+        CalendarEntry entry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(entry.getEventTimeString()).isEmpty();
     }
@@ -68,7 +68,7 @@ public class CalendarEntryTest {
 
         when(event.isAllDay()).thenReturn(true);
 
-        CalendarEntry entry = CalendarEntry.fromEvent(event);
+        CalendarEntry entry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(entry.getEventTimeString()).isEmpty();
     }
@@ -77,7 +77,7 @@ public class CalendarEntryTest {
     public void getEventTimeString_forRegularEvent_withoutEndTime_returnsStartTime() {
         when(settings.getShowEndTime()).thenReturn(false);
 
-        CalendarEntry entry = CalendarEntry.fromEvent(event);
+        CalendarEntry entry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(entry.getEventTimeString()).isEqualTo("[Start]");
     }
@@ -86,7 +86,7 @@ public class CalendarEntryTest {
     public void getEventTimeString_forRegularEvent_withEndTime_returnsTimes() {
         when(settings.getShowEndTime()).thenReturn(true);
 
-        CalendarEntry entry = CalendarEntry.fromEvent(event);
+        CalendarEntry entry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(entry.getEventTimeString()).isEqualTo("[Start] - [End]");
     }
@@ -96,7 +96,7 @@ public class CalendarEntryTest {
         when(settings.getShowEndTime()).thenReturn(true);
 
         when(event.isPartOfMultiDayEvent()).thenReturn(true);
-        CalendarEntry entry = CalendarEntry.fromEvent(event);
+        CalendarEntry entry = CalendarEntry.fromEvent(event, event.getStartDate());
         entry.setEndDate(entry.getEndDate().withTimeAtStartOfDay());
 
         assertThat(entry.getEventTimeString()).isEqualTo("[Start] →");
@@ -107,7 +107,7 @@ public class CalendarEntryTest {
         when(settings.getShowEndTime()).thenReturn(true);
 
         when(event.isPartOfMultiDayEvent()).thenReturn(true);
-        CalendarEntry entry = CalendarEntry.fromEvent(event);
+        CalendarEntry entry = CalendarEntry.fromEvent(event, event.getStartDate());
         entry.setStartDate(entry.getStartDate().withTimeAtStartOfDay().plusDays(1));
 
         assertThat(entry.getEventTimeString()).isEqualTo("→ [End]");
@@ -122,7 +122,7 @@ public class CalendarEntryTest {
         when(settings.getFillAllDayEvents()).thenReturn(false);
 
         when(event.isAllDay()).thenReturn(true);
-        CalendarEntry entry = CalendarEntry.fromEvent(event);
+        CalendarEntry entry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(entry.getEventTimeString()).isEqualTo("→ [EndDay]");
     }
@@ -133,7 +133,7 @@ public class CalendarEntryTest {
 
         when(event.isAllDay()).thenReturn(true);
         when(event.isPartOfMultiDayEvent()).thenReturn(true);
-        CalendarEntry entry = CalendarEntry.fromEvent(event);
+        CalendarEntry entry = CalendarEntry.fromEvent(event, event.getStartDate());
         entry.setEndDate(event.getEndDate().plusDays(1).withTimeAtStartOfDay());
 
         assertThat(entry.getEventTimeString()).isEmpty();
@@ -143,7 +143,7 @@ public class CalendarEntryTest {
     public void getLocationString_withNullLocation_returnsEmpty() {
         when(event.getLocation()).thenReturn(null);
 
-        CalendarEntry entry = CalendarEntry.fromEvent(event);
+        CalendarEntry entry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(entry.getLocationString()).isEmpty();
     }
@@ -151,7 +151,7 @@ public class CalendarEntryTest {
     @Test
     public void getLocationString_withEmptyLocation_returnsEmpty() {
         when(event.getLocation()).thenReturn("");
-        CalendarEntry entry = CalendarEntry.fromEvent(event);
+        CalendarEntry entry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(entry.getLocationString()).isEmpty();
     }
@@ -161,7 +161,7 @@ public class CalendarEntryTest {
         when(settings.getShowLocation()).thenReturn(false);
 
         when(event.getLocation()).thenReturn("15 Something St");
-        CalendarEntry entry = CalendarEntry.fromEvent(event);
+        CalendarEntry entry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(entry.getLocationString()).isEmpty();
     }
@@ -173,7 +173,7 @@ public class CalendarEntryTest {
         when(settings.getShowLocation()).thenReturn(true);
 
         when(event.getLocation()).thenReturn(location);
-        CalendarEntry entry = CalendarEntry.fromEvent(event);
+        CalendarEntry entry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(entry.getLocationString()).isEqualTo(location);
     }

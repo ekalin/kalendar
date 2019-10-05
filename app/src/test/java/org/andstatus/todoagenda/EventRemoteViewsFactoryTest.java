@@ -197,7 +197,7 @@ public class EventRemoteViewsFactoryTest {
         CalendarEvent event = new CalendarEvent(context, 1, DateTimeZone.getDefault(), false);
         event.setStartDate(startDate);
         event.setTitle(title);
-        return CalendarEntry.fromEvent(event);
+        return CalendarEntry.fromEvent(event, startDate);
     }
 
     private void removeLastEntry(List<WidgetEntry> widgetEntries) {
