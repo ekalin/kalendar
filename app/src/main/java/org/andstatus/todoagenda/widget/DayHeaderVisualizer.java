@@ -35,28 +35,35 @@ public class DayHeaderVisualizer implements WidgetEntryVisualizer<DayHeader> {
     public RemoteViews getRemoteViews(WidgetEntry eventEntry) {
         DayHeader dayHeader = (DayHeader) eventEntry;
 
-        String alignment = getSettings().getDayHeaderAlignment();
-        RemoteViews rv = new RemoteViews(context.getPackageName(), Alignment.valueOf(alignment).getLayoutId());
-        String dateString = DateUtil.createDayHeaderTitle(getSettings(), dayHeader.getStartDate())
-                .toUpperCase(Locale.getDefault());
-        rv.setTextViewText(R.id.day_header_title, dateString);
-        setTextSize(getSettings(), rv, R.id.day_header_title, R.dimen.day_header_title);
-        setTextColorFromAttr(context, rv, R.id.day_header_title, R.attr.dayHeaderTitle);
+        Alignment alignment = Alignment.valueOf(getSettings().getDayHeaderAlignment());
+        RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.day_header_separator_below);
+        rv.setInt(R.id.day_header_title_wrapper, "setGravity", alignment.gravity);
+
         setBackgroundColor(rv, R.id.day_header,
                 dayHeader.getStartDay().plusDays(1).isBefore(DateUtil.now(getSettings().getTimeZone())) ?
                         getSettings().getPastEventsBackgroundColor() : Color.TRANSPARENT);
-        setBackgroundColorFromAttr(context, rv, R.id.day_header_separator, R.attr.dayHeaderSeparator);
-        setPadding(getSettings(), rv, R.id.day_header_title,
-                R.dimen.day_header_padding_left, R.dimen.day_header_padding_top,
-                R.dimen.day_header_padding_right, R.dimen.day_header_padding_bottom);
+        setDayHeaderTitle(dayHeader, rv);
+
         Intent intent = createOpenCalendarAtDayIntent(dayHeader.getStartDate());
         rv.setOnClickFillInIntent(R.id.day_header, intent);
         return rv;
     }
 
+    private void setDayHeaderTitle(DayHeader dayHeader, RemoteViews rv) {
+        String dateString = DateUtil.createDayHeaderTitle(getSettings(), dayHeader.getStartDate())
+                .toUpperCase(Locale.getDefault());
+        rv.setTextViewText(R.id.day_header_title, dateString);
+        setTextSize(getSettings(), rv, R.id.day_header_title, R.dimen.day_header_title);
+        setTextColorFromAttr(context, rv, R.id.day_header_title, R.attr.dayHeaderTitle);
+        setBackgroundColorFromAttr(context, rv, R.id.day_header_separator, R.attr.dayHeaderSeparator);
+        setPadding(getSettings(), rv, R.id.day_header_title,
+                R.dimen.day_header_padding_left, R.dimen.day_header_padding_top,
+                R.dimen.day_header_padding_right, R.dimen.day_header_padding_bottom);
+    }
+
     @Override
     public int getViewTypeCount() {
-        return 3; // we have 3 because of the "left", "right" and "center" day headers
+        return 1;
     }
 
     @Override
