@@ -103,14 +103,16 @@ public class BirthdayTest extends InstrumentationTestCase {
                 provider.getSettings().getTimeZone());
     }
 
-    private void playAtOneTime(QueryResultsStorage inputs, DateTime now, int entriesWithoutLastExpected) {
+    private void playAtOneTime(QueryResultsStorage inputs, DateTime now, int numberOfEntriesExpected) {
         provider.addResults(inputs.getCalendarResults());
         DateUtil.setNow(now);
         TestHelpers.forceReload(factory);
         factory.onDataSetChanged();
         factory.logWidgetEntries(TAG);
-        assertEquals(entriesWithoutLastExpected + 1, factory.getWidgetEntries().size());
-        if (entriesWithoutLastExpected > 0) {
+        TestHelpers.removeLastEntry(factory.getWidgetEntries());
+
+        assertEquals(numberOfEntriesExpected, factory.getWidgetEntries().size());
+        if (numberOfEntriesExpected > 0) {
             CalendarEntry birthday = (CalendarEntry) factory.getWidgetEntries().get(1);
             assertEquals(9, birthday.getStartDate().dayOfMonth().get());
             assertEquals(0, birthday.getStartDate().hourOfDay().get());

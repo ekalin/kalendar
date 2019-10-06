@@ -95,7 +95,7 @@ public class SingleEventTest extends InstrumentationTestCase {
         factory.onDataSetChanged();
         factory.logWidgetEntries(TAG);
         assertEquals(1, provider.getQueriesCount());
-        assertEquals(factory.getWidgetEntries().toString(), 3, factory.getWidgetEntries().size());
+        assertEquals(factory.getWidgetEntries().toString(), 2, factory.getWidgetEntries().size());
         WidgetEntry entry = factory.getWidgetEntries().get(1);
         assertTrue(entry instanceof CalendarEntry);
         CalendarEvent eventOut = ((CalendarEntry) entry).getEvent();

@@ -19,14 +19,13 @@ public class LastEntry extends WidgetEntry {
                         ? LastEntryType.EMPTY
                         : LastEntryType.NO_PERMISSIONS,
                 DateUtil.now(settings.getTimeZone()))
-                : new LastEntry(LastEntryType.LAST, widgetEntries.get(widgetEntries.size() - 1).getStartDate());
+                : null;
     }
 
     public enum LastEntryType {
         NOT_LOADED(R.layout.item_not_loaded),
         NO_PERMISSIONS(R.layout.item_no_permissions),
-        EMPTY(R.layout.item_empty_list),
-        LAST(R.layout.item_last);
+        EMPTY(R.layout.item_empty_list);
 
         final int layoutId;
 

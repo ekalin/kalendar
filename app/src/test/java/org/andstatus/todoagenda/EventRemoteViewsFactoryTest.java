@@ -10,7 +10,6 @@ import org.andstatus.todoagenda.task.TaskEvent;
 import org.andstatus.todoagenda.testutil.ShadowDummyAppWidgetManager;
 import org.andstatus.todoagenda.widget.CalendarEntry;
 import org.andstatus.todoagenda.widget.DayHeader;
-import org.andstatus.todoagenda.widget.LastEntry;
 import org.andstatus.todoagenda.widget.TaskEntry;
 import org.andstatus.todoagenda.widget.WidgetEntry;
 import org.andstatus.todoagenda.widget.WidgetEntryVisualizer;
@@ -69,7 +68,6 @@ public class EventRemoteViewsFactoryTest {
         factory.onDataSetChanged();
 
         List<WidgetEntry> widgetEntries = factory.getWidgetEntries();
-        removeLastEntry(widgetEntries);
         assertEventOrder(widgetEntries);
     }
 
@@ -120,7 +118,6 @@ public class EventRemoteViewsFactoryTest {
         factory.onDataSetChanged();
 
         List<WidgetEntry> widgetEntries = factory.getWidgetEntries();
-        removeLastEntry(widgetEntries);
         assertDayHeaders(widgetEntries);
     }
 
@@ -149,7 +146,6 @@ public class EventRemoteViewsFactoryTest {
         factory.onDataSetChanged();
 
         List<WidgetEntry> widgetEntries = factory.getWidgetEntries();
-        removeLastEntry(widgetEntries);
         assertDayHeadersForDaysWithoutEvents(widgetEntries);
     }
 
@@ -198,12 +194,5 @@ public class EventRemoteViewsFactoryTest {
         event.setStartDate(startDate);
         event.setTitle(title);
         return CalendarEntry.fromEvent(event, startDate);
-    }
-
-    private void removeLastEntry(List<WidgetEntry> widgetEntries) {
-        int last = widgetEntries.size() - 1;
-        if (widgetEntries.get(last) instanceof LastEntry) {
-            widgetEntries.remove(last);
-        }
     }
 }
