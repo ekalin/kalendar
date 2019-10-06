@@ -93,7 +93,7 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
             WidgetEntry entry = widgetEntries.get(position);
             for (WidgetEntryVisualizer<?> eventProvider : eventProviders) {
                 if (entry.getClass().isAssignableFrom(eventProvider.getSupportedEventEntryType())) {
-                    return eventProvider.getRemoteViews(entry);
+                    return eventProvider.getRemoteViews(entry, position);
                 }
             }
         }

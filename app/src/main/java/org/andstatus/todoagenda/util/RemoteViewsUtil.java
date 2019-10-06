@@ -9,6 +9,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.widget.RemoteViews;
 import androidx.annotation.DimenRes;
+import androidx.annotation.IdRes;
 
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 
@@ -26,7 +27,7 @@ public class RemoteViewsUtil {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public static void setPadding(InstanceSettings settings, RemoteViews rv, int viewId,
+    public static void setPadding(InstanceSettings settings, RemoteViews rv, @IdRes int viewId,
                                   @DimenRes int leftDimenId, @DimenRes int topDimenId, @DimenRes int rightDimenId,
                                   @DimenRes int bottomDimenId) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {

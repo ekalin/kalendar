@@ -36,7 +36,8 @@ public class CalendarEventVisualizer implements WidgetEntryVisualizer<CalendarEn
         calendarContentProvider = new CalendarEventProvider(context, widgetId);
     }
 
-    public RemoteViews getRemoteViews(WidgetEntry eventEntry) {
+    @Override
+    public RemoteViews getRemoteViews(WidgetEntry eventEntry, int position) {
         CalendarEntry entry = (CalendarEntry) eventEntry;
         EventEntryLayout eventEntryLayout = getSettings().getEventEntryLayout();
         RemoteViews rv = new RemoteViews(context.getPackageName(), eventEntryLayout.layoutId);
@@ -96,10 +97,12 @@ public class CalendarEventVisualizer implements WidgetEntryVisualizer<CalendarEn
         return AllSettings.instanceFromId(context, widgetId);
     }
 
+    @Override
     public int getViewTypeCount() {
         return 1;
     }
 
+    @Override
     public List<CalendarEntry> getEventEntries() {
         return createEntryList(calendarContentProvider.getEvents());
     }
@@ -151,6 +154,7 @@ public class CalendarEventVisualizer implements WidgetEntryVisualizer<CalendarEn
         }
     }
 
+    @Override
     public Class<? extends CalendarEntry> getSupportedEventEntryType() {
         return CalendarEntry.class;
     }

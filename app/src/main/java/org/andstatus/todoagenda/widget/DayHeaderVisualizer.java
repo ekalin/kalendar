@@ -32,7 +32,7 @@ public class DayHeaderVisualizer implements WidgetEntryVisualizer<DayHeader> {
     }
 
     @Override
-    public RemoteViews getRemoteViews(WidgetEntry eventEntry) {
+    public RemoteViews getRemoteViews(WidgetEntry eventEntry, int position) {
         DayHeader dayHeader = (DayHeader) eventEntry;
 
         Alignment alignment = Alignment.valueOf(getSettings().getDayHeaderAlignment());
@@ -42,22 +42,24 @@ public class DayHeaderVisualizer implements WidgetEntryVisualizer<DayHeader> {
         setBackgroundColor(rv, R.id.day_header,
                 dayHeader.getStartDay().plusDays(1).isBefore(DateUtil.now(getSettings().getTimeZone())) ?
                         getSettings().getPastEventsBackgroundColor() : Color.TRANSPARENT);
-        setDayHeaderTitle(dayHeader, rv);
+        setDayHeaderTitle(dayHeader, position, rv);
 
         Intent intent = createOpenCalendarAtDayIntent(dayHeader.getStartDate());
         rv.setOnClickFillInIntent(R.id.day_header, intent);
         return rv;
     }
 
-    private void setDayHeaderTitle(DayHeader dayHeader, RemoteViews rv) {
+    private void setDayHeaderTitle(DayHeader dayHeader, int position, RemoteViews rv) {
         String dateString = DateUtil.createDayHeaderTitle(getSettings(), dayHeader.getStartDate())
                 .toUpperCase(Locale.getDefault());
         rv.setTextViewText(R.id.day_header_title, dateString);
         setTextSize(getSettings(), rv, R.id.day_header_title, R.dimen.day_header_title);
         setTextColorFromAttr(context, rv, R.id.day_header_title, R.attr.dayHeaderTitle);
         setBackgroundColorFromAttr(context, rv, R.id.day_header_separator, R.attr.dayHeaderSeparator);
+
+        int paddingTop = position == 0 ? R.dimen.day_header_padding_top_first : R.dimen.day_header_padding_top;
         setPadding(getSettings(), rv, R.id.day_header_title,
-                R.dimen.day_header_padding_left, R.dimen.day_header_padding_top,
+                R.dimen.day_header_padding_left, paddingTop,
                 R.dimen.day_header_padding_right, R.dimen.day_header_padding_bottom);
     }
 

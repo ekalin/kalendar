@@ -33,7 +33,7 @@ public class TaskVisualizer implements WidgetEntryVisualizer<TaskEntry> {
     }
 
     @Override
-    public RemoteViews getRemoteViews(WidgetEntry eventEntry) {
+    public RemoteViews getRemoteViews(WidgetEntry eventEntry, int position) {
         TaskEntry entry = (TaskEntry) eventEntry;
         RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.task_entry);
         setColor(entry, rv);

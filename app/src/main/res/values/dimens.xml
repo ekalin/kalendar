@@ -14,6 +14,7 @@
     <dimen name="entry_bottom_padding">2dp</dimen>
     <dimen name="day_header_padding_left">0dp</dimen>
     <dimen name="day_header_padding_top">12dp</dimen>
+    <dimen name="day_header_padding_top_first">4dp</dimen>
     <dimen name="day_header_padding_right">0dp</dimen>
     <dimen name="day_header_padding_bottom">2dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->

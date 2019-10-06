@@ -31,7 +31,7 @@ public class LastEntryVisualizer implements WidgetEntryVisualizer<LastEntry> {
     }
 
     @Override
-    public RemoteViews getRemoteViews(WidgetEntry eventEntry) {
+    public RemoteViews getRemoteViews(WidgetEntry eventEntry, int position) {
         if (!(eventEntry instanceof LastEntry)) {
             return null;
         }
