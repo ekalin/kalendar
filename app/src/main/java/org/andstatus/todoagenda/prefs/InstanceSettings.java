@@ -316,7 +316,7 @@ public class InstanceSettings {
         try {
             json.put(PREF_WIDGET_ID, widgetId);
             json.put(PREF_WIDGET_INSTANCE_NAME, widgetInstanceName);
-            json.put(PREF_TEXT_SIZE_SCALE, textSizeScale);
+            json.put(PREF_TEXT_SIZE_SCALE, textSizeScale.preferenceValue);
             json.put(PREF_EVENT_ENTRY_LAYOUT, eventEntryLayout.value);
             json.put(PREF_MULTILINE_TITLE, titleMultiline);
             json.put(PREF_DATE_FORMAT, dateFormat);
