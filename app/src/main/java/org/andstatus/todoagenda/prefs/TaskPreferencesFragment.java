@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceScreen;
 
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.task.TaskProvider;
@@ -19,7 +18,7 @@ public class TaskPreferencesFragment extends PreferenceFragmentCompat implements
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences_task, rootKey);
-        setGrantPermissionVisibility(false);
+        setGrantPermissionVisibility();
         setTaskListState();
     }
 
@@ -41,7 +40,7 @@ public class TaskPreferencesFragment extends PreferenceFragmentCompat implements
         switch (key) {
             case InstanceSettings.PREF_TASK_SOURCE:
                 showTaskSource();
-                setGrantPermissionVisibility(true);
+                setGrantPermissionVisibility();
                 setTaskListState();
                 clearTasksLists();
                 break;
@@ -53,19 +52,10 @@ public class TaskPreferencesFragment extends PreferenceFragmentCompat implements
         preference.setSummary(preference.getEntry());
     }
 
-    private void setGrantPermissionVisibility(boolean forceDisplay) {
+    private void setGrantPermissionVisibility() {
         TaskProvider taskProvider = new TaskProvider(getActivity(), ApplicationPreferences.getWidgetId(getActivity()));
-        if (taskProvider.hasPermission()) {
-            Preference preference = findPreference("grantTaskPermission");
-            if (preference != null) {
-                PreferenceScreen screen = getPreferenceScreen();
-                screen.removePreference(preference);
-            }
-        } else {
-            if (forceDisplay) {
-                getActivity().recreate();
-            }
-        }
+        Preference preference = findPreference("grantTaskPermission");
+        preference.setVisible(!taskProvider.hasPermissionForSource(ApplicationPreferences.getTaskSource(getActivity())));
     }
 
     private void setTaskListState() {
@@ -90,12 +80,12 @@ public class TaskPreferencesFragment extends PreferenceFragmentCompat implements
 
     private void requestTaskPermission() {
         TaskProvider taskProvider = new TaskProvider(getActivity(), ApplicationPreferences.getWidgetId(getActivity()));
-        taskProvider.requestPermission(this);
+        taskProvider.requestPermission(this, ApplicationPreferences.getTaskSource(getActivity()));
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-        setGrantPermissionVisibility(false);
+        setGrantPermissionVisibility();
     }
 }

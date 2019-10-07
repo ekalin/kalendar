@@ -32,13 +32,13 @@ public class TaskProvider extends EventProvider {
         return provider.getTaskLists();
     }
 
-    public boolean hasPermission() {
-        AbstractTaskProvider provider = getProvider();
+    public boolean hasPermissionForSource(String taskSource) {
+        AbstractTaskProvider provider = getProvider(taskSource);
         return provider.hasPermission();
     }
 
-    public void requestPermission(Fragment fragment) {
-        AbstractTaskProvider provider = getProvider();
+    public void requestPermission(Fragment fragment, String taskSource) {
+        AbstractTaskProvider provider = getProvider(taskSource);
         provider.requestPermission(fragment);
     }
 
@@ -47,13 +47,13 @@ public class TaskProvider extends EventProvider {
         return provider.createViewIntent(event);
     }
 
-    // This is called from the settings activity, when the task source that the user
-    // selected has not been saved to settings yet
     private AbstractTaskProvider getProvider() {
         String taskSource = getSettings().getTaskSource();
         return getProvider(taskSource);
     }
 
+    // This is called from the settings activity, when the task source that the user
+    // selected has not been saved to settings yet
     private AbstractTaskProvider getProvider(String taskSource) {
         if (PROVIDER_DMFS.equals(taskSource)) {
             return new DmfsOpenTasksProvider(context, widgetId);
