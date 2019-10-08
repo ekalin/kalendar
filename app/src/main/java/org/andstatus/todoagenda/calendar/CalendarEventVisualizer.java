@@ -71,7 +71,7 @@ public class CalendarEventVisualizer implements WidgetEntryVisualizer<CalendarEn
     private void setIndicator(RemoteViews rv, boolean showIndication, int viewId, int imageAttrId) {
         if (showIndication) {
             rv.setViewVisibility(viewId, View.VISIBLE);
-            setImageFromAttr(context, rv, viewId, imageAttrId);
+            setImageFromAttr(getSettings().getEntryThemeContext(), rv, viewId, imageAttrId);
             int themeId = themeNameToResId(getSettings().getEntryTheme());
             int alpha = 255;
             if (themeId == R.style.Theme_Calendar_Dark || themeId == R.style.Theme_Calendar_Light) {

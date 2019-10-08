@@ -54,8 +54,9 @@ public class DayHeaderVisualizer implements WidgetEntryVisualizer<DayHeader> {
                 .toUpperCase(Locale.getDefault());
         rv.setTextViewText(R.id.day_header_title, dateString);
         setTextSize(getSettings(), rv, R.id.day_header_title, R.dimen.day_header_title);
-        setTextColorFromAttr(context, rv, R.id.day_header_title, R.attr.dayHeaderTitle);
-        setBackgroundColorFromAttr(context, rv, R.id.day_header_separator, R.attr.dayHeaderSeparator);
+        setTextColorFromAttr(getSettings().getEntryThemeContext(), rv, R.id.day_header_title, R.attr.dayHeaderTitle);
+        setBackgroundColorFromAttr(getSettings().getEntryThemeContext(), rv, R.id.day_header_separator,
+                R.attr.dayHeaderSeparator);
 
         int paddingTop = position == 0 ? R.dimen.day_header_padding_top_first : R.dimen.day_header_padding_top;
         setPadding(getSettings(), rv, R.id.day_header_title,
