@@ -29,6 +29,7 @@ Want to contribute to the project? Start by translating the widget to another la
 
 ## Features
 
+* No advertising. Free and Open Source.
 * Displays all events from your calendars and task lists. Optionally shows past events.
 * Automatically updates when you add/delete/modify an event. Or you may update the list instantly.
 * Select only the calendars you want to see in the widget.
