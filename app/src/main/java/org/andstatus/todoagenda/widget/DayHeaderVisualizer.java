@@ -7,8 +7,6 @@ import android.widget.RemoteViews;
 
 import org.andstatus.todoagenda.Alignment;
 import org.andstatus.todoagenda.R;
-import org.andstatus.todoagenda.prefs.AllSettings;
-import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.DateUtil;
 
 import java.util.Collections;
@@ -22,13 +20,9 @@ import static org.andstatus.todoagenda.util.RemoteViewsUtil.setPadding;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextColorFromAttr;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextSize;
 
-public class DayHeaderVisualizer implements WidgetEntryVisualizer<DayHeader> {
-    private final Context context;
-    private final int widgetId;
-
+public class DayHeaderVisualizer extends WidgetEntryVisualizer<DayHeader> {
     public DayHeaderVisualizer(Context context, int widgetId) {
-        this.context = context;
-        this.widgetId = widgetId;
+        super(context, widgetId);
     }
 
     @Override
@@ -36,7 +30,7 @@ public class DayHeaderVisualizer implements WidgetEntryVisualizer<DayHeader> {
         DayHeader dayHeader = (DayHeader) eventEntry;
 
         Alignment alignment = Alignment.valueOf(getSettings().getDayHeaderAlignment());
-        RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.day_header_separator_below);
+        RemoteViews rv = new RemoteViews(getContext().getPackageName(), R.layout.day_header_separator_below);
         rv.setInt(R.id.day_header_title_wrapper, "setGravity", alignment.gravity);
 
         setBackgroundColor(rv, R.id.day_header,
@@ -77,9 +71,5 @@ public class DayHeaderVisualizer implements WidgetEntryVisualizer<DayHeader> {
     @Override
     public Class<? extends DayHeader> getSupportedEventEntryType() {
         return DayHeader.class;
-    }
-
-    private InstanceSettings getSettings() {
-        return AllSettings.instanceFromId(context, widgetId);
     }
 }

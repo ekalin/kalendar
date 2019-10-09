@@ -3,13 +3,10 @@ package org.andstatus.todoagenda.calendar;
 import android.content.Context;
 import android.view.View;
 import android.widget.RemoteViews;
-import androidx.annotation.NonNull;
 
 import org.andstatus.todoagenda.AlarmIndicatorScaled;
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.RecurringIndicatorScaled;
-import org.andstatus.todoagenda.prefs.AllSettings;
-import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.widget.CalendarEntry;
 import org.andstatus.todoagenda.widget.EventEntryLayout;
@@ -25,14 +22,11 @@ import static org.andstatus.todoagenda.util.RemoteViewsUtil.setAlpha;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setBackgroundColor;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setImageFromAttr;
 
-public class CalendarEventVisualizer implements WidgetEntryVisualizer<CalendarEntry> {
-    private final Context context;
-    private final int widgetId;
+public class CalendarEventVisualizer extends WidgetEntryVisualizer<CalendarEntry> {
     private final CalendarEventProvider calendarContentProvider;
 
     public CalendarEventVisualizer(Context context, int widgetId) {
-        this.context = context;
-        this.widgetId = widgetId;
+        super(context, widgetId);
         calendarContentProvider = new CalendarEventProvider(context, widgetId);
     }
 
@@ -40,7 +34,7 @@ public class CalendarEventVisualizer implements WidgetEntryVisualizer<CalendarEn
     public RemoteViews getRemoteViews(WidgetEntry eventEntry, int position) {
         CalendarEntry entry = (CalendarEntry) eventEntry;
         EventEntryLayout eventEntryLayout = getSettings().getEventEntryLayout();
-        RemoteViews rv = new RemoteViews(context.getPackageName(), eventEntryLayout.layoutId);
+        RemoteViews rv = new RemoteViews(getContext().getPackageName(), eventEntryLayout.layoutId);
         rv.setOnClickFillInIntent(R.id.event_entry,
                 calendarContentProvider.createOpenCalendarEventIntent(entry.getEvent()));
         eventEntryLayout.visualizeEvent(entry, rv);
@@ -90,11 +84,6 @@ public class CalendarEventVisualizer implements WidgetEntryVisualizer<CalendarEn
         } else {
             setBackgroundColor(rv, R.id.event_entry, 0);
         }
-    }
-
-    @NonNull
-    private InstanceSettings getSettings() {
-        return AllSettings.instanceFromId(context, widgetId);
     }
 
     @Override

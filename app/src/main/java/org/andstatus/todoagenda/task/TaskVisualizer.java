@@ -5,8 +5,6 @@ import android.view.View;
 import android.widget.RemoteViews;
 
 import org.andstatus.todoagenda.R;
-import org.andstatus.todoagenda.prefs.AllSettings;
-import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.widget.EventEntryLayout;
 import org.andstatus.todoagenda.widget.TaskEntry;
@@ -21,21 +19,18 @@ import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextColorFromAttr
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextSize;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setViewWidth;
 
-public class TaskVisualizer implements WidgetEntryVisualizer<TaskEntry> {
-    private final Context context;
-    private final int widgetId;
+public class TaskVisualizer extends WidgetEntryVisualizer<TaskEntry> {
     private final TaskProvider taskProvider;
 
     public TaskVisualizer(Context context, int widgetId) {
-        this.context = context;
-        this.widgetId = widgetId;
+        super(context, widgetId);
         this.taskProvider = new TaskProvider(context, widgetId);
     }
 
     @Override
     public RemoteViews getRemoteViews(WidgetEntry eventEntry, int position) {
         TaskEntry entry = (TaskEntry) eventEntry;
-        RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.task_entry);
+        RemoteViews rv = new RemoteViews(getContext().getPackageName(), R.layout.task_entry);
         setColor(entry, rv);
         setDaysToEvent(entry, rv);
         setTitle(entry, rv);
@@ -83,10 +78,6 @@ public class TaskVisualizer implements WidgetEntryVisualizer<TaskEntry> {
         setTextSize(getSettings(), rv, viewId, R.dimen.event_entry_title);
         setTextColorFromAttr(getSettings().getEntryThemeContext(), rv, viewId, R.attr.eventEntryTitle);
         setMultiline(rv, viewId, getSettings().isTitleMultiline());
-    }
-
-    public InstanceSettings getSettings() {
-        return AllSettings.instanceFromId(context, widgetId);
     }
 
     @Override
