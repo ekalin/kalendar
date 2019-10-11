@@ -1,11 +1,13 @@
 package org.andstatus.todoagenda.task;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 public class TaskEvent {
     private long id;
     private String title;
     private DateTime taskDate;
+    private DateTimeZone zone;
     private int color;
 
     public long getId() {
@@ -30,6 +32,14 @@ public class TaskEvent {
 
     public void setTaskDate(DateTime taskDate) {
         this.taskDate = taskDate;
+    }
+
+    public DateTimeZone getZone() {
+        return zone;
+    }
+
+    public void setZone(DateTimeZone zone) {
+        this.zone = zone;
     }
 
     public int getColor() {

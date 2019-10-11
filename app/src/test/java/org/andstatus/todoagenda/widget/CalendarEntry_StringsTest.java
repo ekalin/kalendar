@@ -19,7 +19,7 @@ import org.mockito.quality.Strictness;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
-public class CalendarEntryTest {
+public class CalendarEntry_StringsTest {
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule().strictness(Strictness.STRICT_STUBS);
 

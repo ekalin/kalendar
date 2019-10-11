@@ -135,6 +135,10 @@ public class CalendarEvent {
         return utcDate.getMillis();
     }
 
+    public DateTimeZone getZone() {
+        return zone;
+    }
+
     public int getColor() {
         return color;
     }

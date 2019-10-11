@@ -27,6 +27,7 @@ import org.andstatus.todoagenda.widget.LastEntryVisualizer;
 import org.andstatus.todoagenda.widget.WidgetEntry;
 import org.andstatus.todoagenda.widget.WidgetEntryVisualizer;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -161,15 +162,16 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
     private List<WidgetEntry> addDayHeaders(List<WidgetEntry> listIn) {
         List<WidgetEntry> listOut = new ArrayList<>();
         if (!listIn.isEmpty()) {
+            DateTimeZone zone = getSettings().getTimeZone();
             boolean showDaysWithoutEvents = getSettings().getShowDaysWithoutEvents();
-            DayHeader curDayBucket = new DayHeader(new DateTime(0, getSettings().getTimeZone()));
+            DayHeader curDayBucket = new DayHeader(new DateTime(0, zone), zone);
             for (WidgetEntry entry : listIn) {
                 DateTime nextStartOfDay = entry.getStartDay();
                 if (!nextStartOfDay.isEqual(curDayBucket.getStartDay())) {
                     if (showDaysWithoutEvents) {
-                        addEmptyDayHeadersBetweenTwoDays(listOut, curDayBucket.getStartDay(), nextStartOfDay);
+                        addEmptyDayHeadersBetweenTwoDays(listOut, curDayBucket.getStartDay(), nextStartOfDay, zone);
                     }
-                    curDayBucket = new DayHeader(nextStartOfDay);
+                    curDayBucket = new DayHeader(nextStartOfDay, zone);
                     listOut.add(curDayBucket);
                 }
                 listOut.add(entry);
@@ -190,14 +192,14 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
     }
 
     private void addEmptyDayHeadersBetweenTwoDays(List<WidgetEntry> entries, DateTime fromDayExclusive,
-                                                  DateTime toDayExclusive) {
+                                                  DateTime toDayExclusive, DateTimeZone zone) {
         DateTime emptyDay = fromDayExclusive.plusDays(1);
         DateTime today = DateUtil.now(getSettings().getTimeZone()).withTimeAtStartOfDay();
         if (emptyDay.isBefore(today)) {
             emptyDay = today;
         }
         while (emptyDay.isBefore(toDayExclusive)) {
-            entries.add(new DayHeader(emptyDay));
+            entries.add(new DayHeader(emptyDay, zone));
             emptyDay = emptyDay.plusDays(1);
         }
     }
