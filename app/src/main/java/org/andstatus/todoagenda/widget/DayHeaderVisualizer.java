@@ -48,7 +48,8 @@ public class DayHeaderVisualizer extends WidgetEntryVisualizer<DayHeader> {
                 .toUpperCase(Locale.getDefault());
         rv.setTextViewText(R.id.day_header_title, dateString);
         setTextSize(getSettings(), rv, R.id.day_header_title, R.dimen.day_header_title);
-        setTextColorFromAttr(getSettings().getEntryThemeContext(), rv, R.id.day_header_title, R.attr.dayHeaderTitle);
+        setTextColorFromAttr(getSettings().getEntryThemeContext(), rv, R.id.day_header_title,
+                dayHeader.isCurrent() ? R.attr.eventEntryCurrentTitle : R.attr.dayHeaderTitle);
         setBackgroundColorFromAttr(getSettings().getEntryThemeContext(), rv, R.id.day_header_separator,
                 R.attr.dayHeaderSeparator);
 

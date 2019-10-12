@@ -32,7 +32,7 @@ public enum EventEntryLayout {
                 rv.setTextViewText(viewId, eventDetails);
                 setTextSize(entry.getSettings(), rv, viewId, R.dimen.event_entry_details);
                 setTextColorFromAttr(entry.getSettings().getEntryThemeContext(), rv, viewId,
-                        R.attr.dayHeaderTitle);
+                        entry.isCurrent() ? R.attr.eventEntryCurrentTitle : R.attr.dayHeaderTitle);
             }
         }
 
@@ -74,7 +74,8 @@ public enum EventEntryLayout {
                         ? R.dimen.days_to_event_width
                         : R.dimen.days_to_event_right_width);
                 setTextSize(settings, rv, viewToShow, R.dimen.event_entry_details);
-                setTextColorFromAttr(settings.getEntryThemeContext(), rv, viewToShow, R.attr.dayHeaderTitle);
+                setTextColorFromAttr(settings.getEntryThemeContext(), rv, viewToShow,
+                        entry.isCurrent() ? R.attr.eventEntryCurrentTitle : R.attr.dayHeaderTitle);
             }
         }
 
@@ -87,7 +88,8 @@ public enum EventEntryLayout {
             InstanceSettings settings = entry.getSettings();
             setViewWidth(settings, rv, viewId, R.dimen.event_time_width);
             setTextSize(settings, rv, viewId, R.dimen.event_entry_details);
-            setTextColorFromAttr(settings.getEntryThemeContext(), rv, viewId, R.attr.dayHeaderTitle);
+            setTextColorFromAttr(settings.getEntryThemeContext(), rv, viewId,
+                    entry.isCurrent() ? R.attr.eventEntryCurrentTitle : R.attr.dayHeaderTitle);
         }
     };
 
@@ -127,7 +129,8 @@ public enum EventEntryLayout {
         int viewId = R.id.event_entry_title;
         rv.setTextViewText(viewId, getTitleString(event));
         setTextSize(event.getSettings(), rv, viewId, R.dimen.event_entry_title);
-        setTextColorFromAttr(event.getSettings().getEntryThemeContext(), rv, viewId, R.attr.eventEntryTitle);
+        setTextColorFromAttr(event.getSettings().getEntryThemeContext(), rv, viewId,
+                event.isCurrent() ? R.attr.eventEntryCurrentTitle : R.attr.eventEntryTitle);
         setMultiline(rv, viewId, event.getSettings().isTitleMultiline());
     }
 
