@@ -23,6 +23,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.andstatus.todoagenda.EventAppWidgetProvider.getWidgetIds;
+import static org.andstatus.todoagenda.EventRemoteViewsFactory.ACTION_REFRESH;
 
 public class EnvironmentChangedReceiver extends BroadcastReceiver {
     private static final String TAG = EnvironmentChangedReceiver.class.getSimpleName();
@@ -81,6 +82,21 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
 
     private void unRegister(Context context) {
         context.unregisterReceiver(this);
+    }
+
+    public static void scheduleNextUpdate(InstanceSettings settings, DateTime nextUpdate) {
+        Log.i(TAG, "Setting next update for id " + settings.getWidgetId() + " for " + nextUpdate);
+
+        Intent intent = new Intent(settings.getContext(), EnvironmentChangedReceiver.class);
+        intent.setAction(ACTION_REFRESH);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, settings.getWidgetId());
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(settings.getContext(),
+                EventRemoteViewsFactory.REQUEST_CODE_MIDNIGHT_ALARM + settings.getWidgetId(),
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager am = settings.getContext().getSystemService(AlarmManager.class);
+        am.set(AlarmManager.RTC, nextUpdate.getMillis(), pendingIntent);
     }
 
     @SuppressLint("UnsafeProtectedBroadcastReceiver")

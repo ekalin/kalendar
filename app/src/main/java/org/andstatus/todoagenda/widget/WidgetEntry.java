@@ -29,9 +29,8 @@ public class WidgetEntry implements Comparable<WidgetEntry> {
                 startDate.withTimeAtStartOfDay()).getDays();
     }
 
-    @Override
-    public String toString() {
-        return this.getClass().getSimpleName() + " [startDate=" + startDate + "]";
+    public DateTime getNextUpdateTime() {
+        return null;
     }
 
     @Override
@@ -42,5 +41,10 @@ public class WidgetEntry implements Comparable<WidgetEntry> {
             return -1;
         }
         return Integer.signum(priority - otherEvent.priority);
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + " [startDate=" + startDate + "]";
     }
 }

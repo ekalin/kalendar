@@ -58,6 +58,18 @@ public class CalendarEntry extends WidgetEntry {
         this.endDate = endDate;
     }
 
+    @Override
+    public DateTime getNextUpdateTime() {
+        DateTime now = DateUtil.now(event.getZone());
+        if (getStartDate().isAfter(now)) {
+            return getStartDate();
+        } else if (getEndDate().isAfter(now)) {
+            return getEndDate();
+        } else {
+            return null;
+        }
+    }
+
     public int getColor() {
         return event.getColor();
     }
