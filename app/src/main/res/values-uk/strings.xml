@@ -71,10 +71,10 @@
     <string name="appearance_header_theme_desc">Відображати шапку віджета в темному або світлому відтінку</string>
     <string name="appearance_entries_theme_title">Відтінок події</string>
     <string name="appearance_entries_theme_desc">Відображати текст події в темному або світлому відтінку</string>
-    <string name="appearance_theme_black">Білий</string>
-    <string name="appearance_theme_dark">Світлий</string>
-    <string name="appearance_theme_light">Темний</string>
-    <string name="appearance_theme_white">Чорний</string>
+    <string name="appearance_theme_black">Чорний</string>
+    <string name="appearance_theme_dark">Темний</string>
+    <string name="appearance_theme_light">Світлий</string>
+    <string name="appearance_theme_white">Білий</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Деталі події</string>
     <string name="event_details_prefs_desc">Налаштувати подробиці, що відображатимуться для події</string>

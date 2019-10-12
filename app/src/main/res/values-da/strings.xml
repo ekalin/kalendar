@@ -48,10 +48,10 @@
     <string name="appearance_header_theme_desc">Vis widgetens header i mørk eller lys skygge</string>
     <string name="appearance_entries_theme_title">Aftale skygge</string>
     <string name="appearance_entries_theme_desc">Vis aftale tekst i mørk eller lys skygge</string>
-    <string name="appearance_theme_black">Hvid</string>
-    <string name="appearance_theme_dark">Lys</string>
-    <string name="appearance_theme_light">Mørk</string>
-    <string name="appearance_theme_white">Sort</string>
+    <string name="appearance_theme_black">Sort</string>
+    <string name="appearance_theme_dark">Mørk</string>
+    <string name="appearance_theme_light">Lys</string>
+    <string name="appearance_theme_white">Hvid</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Aftale detaljer</string>
     <string name="event_details_prefs_desc">Konfigurer hvilke detaljer der vises for en aftale</string>

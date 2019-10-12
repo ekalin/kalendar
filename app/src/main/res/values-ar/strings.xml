@@ -54,10 +54,10 @@
     <string name="appearance_header_theme_desc">إظهار عنوان التطبيق بظل داكن أو فاتح</string>
     <string name="appearance_entries_theme_title">تظليل الحدث</string>
     <string name="appearance_entries_theme_desc">إظهار نص الحدث بظل داكن أو فاتح</string>
-    <string name="appearance_theme_black">ابيض</string>
-    <string name="appearance_theme_dark">فاتح</string>
-    <string name="appearance_theme_light">داكن</string>
-    <string name="appearance_theme_white">اسود</string>
+    <string name="appearance_theme_black">اسود</string>
+    <string name="appearance_theme_dark">داكن</string>
+    <string name="appearance_theme_light">فاتح</string>
+    <string name="appearance_theme_white">ابيض</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">تفاصيل الحدث</string>
     <string name="event_details_prefs_desc">اختيار التفاصيل المرغوب اظهارها للحدث</string>

@@ -66,10 +66,10 @@
     <string name="appearance_header_theme_desc">הצג את כותרת היישומון בגוון כהה או בהיר</string>
     <string name="appearance_entries_theme_title">גוון האירוע</string>
     <string name="appearance_entries_theme_desc">הצג טקסט של אירוע בגוון כהה או בהיר</string>
-    <string name="appearance_theme_black">לבן</string>
-    <string name="appearance_theme_dark">בהיר</string>
-    <string name="appearance_theme_light">כהה</string>
-    <string name="appearance_theme_white">שחור</string>
+    <string name="appearance_theme_black">שחור</string>
+    <string name="appearance_theme_dark">כהה</string>
+    <string name="appearance_theme_light">בהיר</string>
+    <string name="appearance_theme_white">לבן</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">פרטי אירוע</string>
     <string name="event_details_prefs_desc">הגדר אילו פריטים להציג לאירוע</string>

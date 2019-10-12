@@ -67,10 +67,10 @@
     <string name="appearance_header_theme_desc">Mostrar o cabeçalho do widget com sombra clara ou escura</string>
     <string name="appearance_entries_theme_title">Sombra do evento</string>
     <string name="appearance_entries_theme_desc">Mostrar o texto do evento com sombra clara ou escura</string>
-    <string name="appearance_theme_black">Branco</string>
-    <string name="appearance_theme_dark">Claro</string>
-    <string name="appearance_theme_light">Escuro</string>
-    <string name="appearance_theme_white">Preto</string>
+    <string name="appearance_theme_black">Preto</string>
+    <string name="appearance_theme_dark">Escuro</string>
+    <string name="appearance_theme_light">Claro</string>
+    <string name="appearance_theme_white">Branco</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Detalhes do evento</string>
     <string name="event_details_prefs_desc">Configurar quais os detalhes a mostrar do evento</string>

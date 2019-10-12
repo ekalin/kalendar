@@ -85,10 +85,10 @@
     <string name="appearance_header_theme_desc">Afficher l\'en-tête du gadget avec une ombre claire ou foncée</string>
     <string name="appearance_entries_theme_title">Ombrage des événements</string>
     <string name="appearance_entries_theme_desc">Afficher un événement avec une ombre claire ou foncée</string>
-    <string name="appearance_theme_black">Blanc</string>
-    <string name="appearance_theme_dark">Clair</string>
-    <string name="appearance_theme_light">Sombre</string>
-    <string name="appearance_theme_white">Noir</string>
+    <string name="appearance_theme_black">Noir</string>
+    <string name="appearance_theme_dark">Sombre</string>
+    <string name="appearance_theme_light">Clair</string>
+    <string name="appearance_theme_white">Blanc</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Détails de l\'événement</string>
     <string name="event_details_prefs_desc">Configurez quelles informations voir pour un événement</string>

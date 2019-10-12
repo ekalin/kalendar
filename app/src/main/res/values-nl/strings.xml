@@ -82,10 +82,10 @@
     <string name="appearance_header_theme_desc">De kop van de widget in donkere of lichte tint weergeven</string>
     <string name="appearance_entries_theme_title">Gebeurtenis kleur</string>
     <string name="appearance_entries_theme_desc">Gebeurtenis tekst in donkere of lichte tint weergeven</string>
-    <string name="appearance_theme_black">Wit</string>
-    <string name="appearance_theme_dark">Licht</string>
-    <string name="appearance_theme_light">Donker</string>
-    <string name="appearance_theme_white">Zwart</string>
+    <string name="appearance_theme_black">Zwart</string>
+    <string name="appearance_theme_dark">Donker</string>
+    <string name="appearance_theme_light">Licht</string>
+    <string name="appearance_theme_white">Wit</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Details afspraken</string>
     <string name="event_details_prefs_desc">Instellen welke details weergegeven moeten worden voor een gebeurtenis</string>

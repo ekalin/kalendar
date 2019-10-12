@@ -90,10 +90,10 @@
     <string name="appearance_header_theme_desc">Mostra la sombra de la capçalera en oscur o clar</string>
     <string name="appearance_entries_theme_title">Ombrejat d\'esdeveniment</string>
     <string name="appearance_entries_theme_desc">Mostra el text de l\'esdeveniment amb l\'ombra clara o fosca</string>
-    <string name="appearance_theme_black">Blanc</string>
-    <string name="appearance_theme_dark">Clar</string>
-    <string name="appearance_theme_light">Fosc</string>
-    <string name="appearance_theme_white">Negre</string>
+    <string name="appearance_theme_black">Negre</string>
+    <string name="appearance_theme_dark">Fosc</string>
+    <string name="appearance_theme_light">Clar</string>
+    <string name="appearance_theme_white">Blanc</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Detalls de l\'esdeveniment</string>
     <string name="event_details_prefs_desc">Configurar el que detalla per mostrar per a un esdeveniment</string>

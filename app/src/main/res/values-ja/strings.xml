@@ -89,10 +89,10 @@
     <string name="appearance_header_theme_desc">暗いまたは明るい陰で、ウィジェットのヘッダーを表示します</string>
     <string name="appearance_entries_theme_title">イベント シェーディング</string>
     <string name="appearance_entries_theme_desc">暗いまたは明るい陰で、イベントのテキストを表示します</string>
-    <string name="appearance_theme_black">ホワイト</string>
-    <string name="appearance_theme_dark">明るい</string>
-    <string name="appearance_theme_light">暗い</string>
-    <string name="appearance_theme_white">ブラック</string>
+    <string name="appearance_theme_black">ブラック</string>
+    <string name="appearance_theme_dark">暗い</string>
+    <string name="appearance_theme_light">明るい</string>
+    <string name="appearance_theme_white">ホワイト</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">イベントの詳細</string>
     <string name="event_details_prefs_desc">表示するイベントの詳細を設定します</string>

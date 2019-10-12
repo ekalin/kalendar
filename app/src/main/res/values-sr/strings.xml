@@ -46,10 +46,10 @@
     <string name="appearance_background_color_title">Боја позадине</string>
     <string name="appearance_background_color_desc">Подесите боју позадине</string>
     <string name="appearance_entries_theme_title">Сенчење догађаја</string>
-    <string name="appearance_theme_black">Бела</string>
-    <string name="appearance_theme_dark">Светла</string>
-    <string name="appearance_theme_light">Тамна</string>
-    <string name="appearance_theme_white">Црна</string>
+    <string name="appearance_theme_black">Црна</string>
+    <string name="appearance_theme_dark">Тамна</string>
+    <string name="appearance_theme_light">Светла</string>
+    <string name="appearance_theme_white">Бела</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Детаљи догађаја</string>
     <string name="event_details_show_end_time_title">Време завршетка</string>

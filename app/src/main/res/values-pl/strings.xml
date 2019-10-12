@@ -89,10 +89,10 @@
     <string name="appearance_header_theme_desc">Wyświetlaj nagłówek widżetu w ciemnym lub jasnym odcieniu</string>
     <string name="appearance_entries_theme_title">Cieniowanie wydarzenia</string>
     <string name="appearance_entries_theme_desc">Wyświetlaj tekst wydarzenia w ciemnym lub jasnym odcieniu</string>
-    <string name="appearance_theme_black">Biały</string>
-    <string name="appearance_theme_dark">Jasny</string>
-    <string name="appearance_theme_light">Ciemny</string>
-    <string name="appearance_theme_white">Czarny</string>
+    <string name="appearance_theme_black">Czarny</string>
+    <string name="appearance_theme_dark">Ciemny</string>
+    <string name="appearance_theme_light">Jasny</string>
+    <string name="appearance_theme_white">Biały</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Szczegóły wydarzeń</string>
     <string name="event_details_prefs_desc">Skonfiguruj, jakie szczegóły wydarzenia pokazać</string>

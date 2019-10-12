@@ -65,10 +65,10 @@
     <string name="appearance_header_theme_desc">Visa applikationens rubrik med ljus eller mörk skugga</string>
     <string name="appearance_entries_theme_title">Händelsens skuggning</string>
     <string name="appearance_entries_theme_desc">Visa händelsens text med ljus eller mörk skugga</string>
-    <string name="appearance_theme_black">Vitt</string>
-    <string name="appearance_theme_dark">Ljust</string>
-    <string name="appearance_theme_light">Mörkt</string>
-    <string name="appearance_theme_white">Svart</string>
+    <string name="appearance_theme_black">Svart</string>
+    <string name="appearance_theme_dark">Mörkt</string>
+    <string name="appearance_theme_light">Ljust</string>
+    <string name="appearance_theme_white">Vitt</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Händelsedetaljer</string>
     <string name="event_details_prefs_desc">Konfigurera vilket innehåll som skall visas för en händelse</string>

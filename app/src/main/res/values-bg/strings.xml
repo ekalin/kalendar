@@ -48,10 +48,10 @@
     <string name="appearance_header_theme_desc">Показва в светъл или тъмен нюанс заглавната част</string>
     <string name="appearance_entries_theme_title">Нюанс на събитието</string>
     <string name="appearance_entries_theme_desc">Показва в светъл или тъмен нюанс събитието</string>
-    <string name="appearance_theme_black">Бял</string>
-    <string name="appearance_theme_dark">Светъл</string>
-    <string name="appearance_theme_light">Тъмен</string>
-    <string name="appearance_theme_white">Черен</string>
+    <string name="appearance_theme_black">Черен</string>
+    <string name="appearance_theme_dark">Тъмен</string>
+    <string name="appearance_theme_light">Светъл</string>
+    <string name="appearance_theme_white">Бял</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Подробности за събитието</string>
     <string name="event_details_prefs_desc">Настройки за показване на събитията</string>

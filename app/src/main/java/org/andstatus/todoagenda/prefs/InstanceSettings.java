@@ -70,7 +70,7 @@ public class InstanceSettings {
 
     // Appearance - colors
     static final String PREF_HEADER_THEME = "headerTheme";
-    static final String PREF_HEADER_THEME_DEFAULT = Theme.DARK.name();
+    static final String PREF_HEADER_THEME_DEFAULT = Theme.WHITE.name();
     private String headerTheme = PREF_HEADER_THEME_DEFAULT;
     static final String PREF_BACKGROUND_COLOR = "backgroundColor";
     @ColorInt static final int PREF_BACKGROUND_COLOR_DEFAULT = 0x80000000;
@@ -79,7 +79,7 @@ public class InstanceSettings {
     @ColorInt static final int PREF_PAST_EVENTS_BACKGROUND_COLOR_DEFAULT = 0x4affff2b;
     private int pastEventsBackgroundColor = PREF_PAST_EVENTS_BACKGROUND_COLOR_DEFAULT;
     static final String PREF_ENTRY_THEME = "entryTheme";
-    public static final String PREF_ENTRY_THEME_DEFAULT = Theme.BLACK.name();
+    public static final String PREF_ENTRY_THEME_DEFAULT = Theme.WHITE.name();
     private String entryTheme = PREF_ENTRY_THEME_DEFAULT;
 
     private volatile ContextThemeWrapper entryThemeContext = null;

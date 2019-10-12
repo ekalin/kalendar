@@ -65,10 +65,10 @@
     <string name="appearance_header_theme_desc">Nastavenie farebnej témy pre záhlavie widgetu</string>
     <string name="appearance_entries_theme_title">Téma udalosti</string>
     <string name="appearance_entries_theme_desc">Nastavenie farebnej témy pre text udalosti</string>
-    <string name="appearance_theme_black">Biela</string>
-    <string name="appearance_theme_dark">Svetlá</string>
-    <string name="appearance_theme_light">Tmavá</string>
-    <string name="appearance_theme_white">Čierna</string>
+    <string name="appearance_theme_black">Čierna</string>
+    <string name="appearance_theme_dark">Tmavá</string>
+    <string name="appearance_theme_light">Svetlá</string>
+    <string name="appearance_theme_white">Biela</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Detaily udalosti</string>
     <string name="event_details_prefs_desc">Nastavenie detailov, ktoré sa zobrazia pri každej udalosti</string>

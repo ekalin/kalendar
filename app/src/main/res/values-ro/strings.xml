@@ -46,10 +46,10 @@
     <string name="appearance_header_theme_desc">Afisare antet widget cu umbra sau luminos</string>
     <string name="appearance_entries_theme_title">Umbrire eveniment</string>
     <string name="appearance_entries_theme_desc">Afisare text eveniment cu umbra sau intunecat</string>
-    <string name="appearance_theme_black">Alb</string>
-    <string name="appearance_theme_dark">Luminos</string>
-    <string name="appearance_theme_light">Intunecat</string>
-    <string name="appearance_theme_white">Negru</string>
+    <string name="appearance_theme_black">Negru</string>
+    <string name="appearance_theme_dark">Intunecat</string>
+    <string name="appearance_theme_light">Luminos</string>
+    <string name="appearance_theme_white">Alb</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs_desc">Configurarea detalii pentru un eveniment</string>
     <string name="event_details_show_end_time_title">Sfarsit timp</string>

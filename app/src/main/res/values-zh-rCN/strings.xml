@@ -61,10 +61,10 @@
     <string name="appearance_header_theme_desc">小部件顶栏深色或浅色阴影</string>
     <string name="appearance_entries_theme_title">日程阴影</string>
     <string name="appearance_entries_theme_desc">深色或浅色阴影下显示日程内容</string>
-    <string name="appearance_theme_black">白色</string>
-    <string name="appearance_theme_dark">浅色</string>
-    <string name="appearance_theme_light">深色</string>
-    <string name="appearance_theme_white">黑色</string>
+    <string name="appearance_theme_black">黑色</string>
+    <string name="appearance_theme_dark">深色</string>
+    <string name="appearance_theme_light">浅色</string>
+    <string name="appearance_theme_white">白色</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">日程细节</string>
     <string name="event_details_prefs_desc">配置日程显示详情</string>

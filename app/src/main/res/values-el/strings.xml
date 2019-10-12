@@ -65,10 +65,10 @@
     <string name="appearance_header_theme_desc">Εμφάνιση της κεφαλίδας του γραφικού με σκούρα ή ανοιχτή σκίαση</string>
     <string name="appearance_entries_theme_title">Σκίαση γεγονότων</string>
     <string name="appearance_entries_theme_desc">Εμφάνιση κειμένου γεγονότος με σκούρα ή ανοιχτή σκίαση</string>
-    <string name="appearance_theme_black">Άσπρο</string>
-    <string name="appearance_theme_dark">Ανοιχτό</string>
-    <string name="appearance_theme_light">Σκούρο</string>
-    <string name="appearance_theme_white">Μαύρο</string>
+    <string name="appearance_theme_black">Μαύρο</string>
+    <string name="appearance_theme_dark">Σκούρο</string>
+    <string name="appearance_theme_light">Ανοιχτό</string>
+    <string name="appearance_theme_white">Άσπρο</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Λεπτομέρειες εκδήλωσης</string>
     <string name="event_details_prefs_desc">Ρυθμίστες ποιες λεπτομέρειες θα εμφανίζονται για ένα γεγονός</string>

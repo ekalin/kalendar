@@ -65,10 +65,10 @@
     <string name="appearance_header_theme_desc">Mostra l\'intestazione del widget con una ombreggiatura chiara o scura</string>
     <string name="appearance_entries_theme_title">Ombreggiatura evento</string>
     <string name="appearance_entries_theme_desc">Mostra il testo dell\'evento con una ombreggiatura chiara o scura</string>
-    <string name="appearance_theme_black">Bianco</string>
-    <string name="appearance_theme_dark">Luce</string>
-    <string name="appearance_theme_light">Scuro</string>
-    <string name="appearance_theme_white">Nero</string>
+    <string name="appearance_theme_black">Nero</string>
+    <string name="appearance_theme_dark">Scuro</string>
+    <string name="appearance_theme_light">Luce</string>
+    <string name="appearance_theme_white">Bianco</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Dettagli dell\'evento</string>
     <string name="event_details_prefs_desc">Selezionare quali dettagli mostrare per gli eventi</string>

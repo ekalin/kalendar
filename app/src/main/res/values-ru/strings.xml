@@ -89,10 +89,10 @@
     <string name="appearance_header_theme_desc">Светлый или тёмный цвет текста заголовка</string>
     <string name="appearance_entries_theme_title">Цвет текста событий</string>
     <string name="appearance_entries_theme_desc">Светлый или тёмный цвет текста событий</string>
-    <string name="appearance_theme_black">Белый</string>
-    <string name="appearance_theme_dark">Светлый</string>
-    <string name="appearance_theme_light">Тёмный</string>
-    <string name="appearance_theme_white">Чёрный</string>
+    <string name="appearance_theme_black">Чёрный</string>
+    <string name="appearance_theme_dark">Тёмный</string>
+    <string name="appearance_theme_light">Светлый</string>
+    <string name="appearance_theme_white">Белый</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Подробности о событии</string>
     <string name="event_details_prefs_desc">Укажите, какую информацию о событиях показывать</string>

@@ -57,10 +57,10 @@
     <string name="appearance_header_theme_desc">نمایش سرصفحه ویدجت در سایه تیره یا روشن</string>
     <string name="appearance_entries_theme_title">رویداد سایه دار</string>
     <string name="appearance_entries_theme_desc">نمایش متن رویداد در سایه تیره یا روشن</string>
-    <string name="appearance_theme_black">سفید</string>
-    <string name="appearance_theme_dark">روشن</string>
-    <string name="appearance_theme_light">تیره</string>
-    <string name="appearance_theme_white">مشکی</string>
+    <string name="appearance_theme_black">مشکی</string>
+    <string name="appearance_theme_dark">تیره</string>
+    <string name="appearance_theme_light">روشن</string>
+    <string name="appearance_theme_white">سفید</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">جزئیات رویداد</string>
     <string name="event_details_prefs_desc">تنظیم نمایش جزئیات رویداد</string>

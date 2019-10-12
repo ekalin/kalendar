@@ -47,10 +47,10 @@
     <string name="appearance_header_theme_desc">在深色或淺色的陰影下顯示小工具的標題</string>
     <string name="appearance_entries_theme_title">活動的陰影</string>
     <string name="appearance_entries_theme_desc">以深色或淺色的陰影顯示活動的文字</string>
-    <string name="appearance_theme_black">白色</string>
-    <string name="appearance_theme_dark">淺色</string>
-    <string name="appearance_theme_light">深色</string>
-    <string name="appearance_theme_white">黑色</string>
+    <string name="appearance_theme_black">黑色</string>
+    <string name="appearance_theme_dark">深色</string>
+    <string name="appearance_theme_light">淺色</string>
+    <string name="appearance_theme_white">白色</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">活動詳細資訊</string>
     <string name="event_details_prefs_desc">設置活動需要顯示的細節</string>

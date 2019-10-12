@@ -83,10 +83,10 @@
     <string name="appearance_header_theme_desc">Tampilkan margin atas widget dalam bayang gelap atau terang</string>
     <string name="appearance_entries_theme_title">Acara Bayangan</string>
     <string name="appearance_entries_theme_desc">Tampilkan teks acara dalam bayangan gelap atau terang</string>
-    <string name="appearance_theme_black">Putih</string>
-    <string name="appearance_theme_dark">Terang</string>
-    <string name="appearance_theme_light">Gelap</string>
-    <string name="appearance_theme_white">Hitam</string>
+    <string name="appearance_theme_black">Hitam</string>
+    <string name="appearance_theme_dark">Gelap</string>
+    <string name="appearance_theme_light">Terang</string>
+    <string name="appearance_theme_white">Putih</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Detail acara</string>
     <string name="event_details_prefs_desc">Konfigurasi yang detail untuk tampilan sebuah acara</string>
