@@ -14,12 +14,8 @@ import android.util.Log;
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.task.dmfs.DmfsOpenTasksContract;
-import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.andstatus.todoagenda.EventAppWidgetProvider.getWidgetIds;
@@ -29,12 +25,7 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
     private static final String TAG = EnvironmentChangedReceiver.class.getSimpleName();
     private static final AtomicReference<EnvironmentChangedReceiver> registeredReceiver = new AtomicReference<>();
 
-    public static void registerReceivers(Map<Integer, InstanceSettings> instances) {
-        if (instances.isEmpty()) {
-            return;
-        }
-
-        InstanceSettings instanceSettings = instances.values().iterator().next();
+    public static void registerReceivers(InstanceSettings instanceSettings) {
         Context context = instanceSettings.getContext().getApplicationContext();
         synchronized (registeredReceiver) {
             EnvironmentChangedReceiver receiver = new EnvironmentChangedReceiver();
@@ -56,27 +47,8 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
             if (oldReceiver != null) {
                 oldReceiver.unRegister(context);
             }
-            scheduleNextAlarms(context, instances);
 
             Log.i(TAG, "Registered receivers from " + instanceSettings.getContext().getClass().getName());
-        }
-    }
-
-    private static void scheduleNextAlarms(Context context, Map<Integer, InstanceSettings> instances) {
-        Set<DateTime> alarmTimes = new HashSet<>();
-        for (InstanceSettings settings : instances.values()) {
-            alarmTimes.add(DateUtil.now(settings.getTimeZone()).withTimeAtStartOfDay().plusDays(1));
-        }
-        int counter = 0;
-        for (DateTime alarmTime : alarmTimes) {
-            Intent intent = new Intent(context, EnvironmentChangedReceiver.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
-                    EventRemoteViewsFactory.REQUEST_CODE_MIDNIGHT_ALARM + counter,
-                    intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-            AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            am.set(AlarmManager.RTC, alarmTime.getMillis(), pendingIntent);
-            counter++;
         }
     }
 
@@ -95,7 +67,7 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
-        AlarmManager am = settings.getContext().getSystemService(AlarmManager.class);
+        AlarmManager am = settings.getContext().getApplicationContext().getSystemService(AlarmManager.class);
         am.set(AlarmManager.RTC, nextUpdate.getMillis(), pendingIntent);
     }
 
