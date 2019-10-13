@@ -8,7 +8,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import android.util.Log;
 
 import org.andstatus.todoagenda.prefs.AllSettings;
@@ -38,9 +37,8 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
             context.registerReceiver(receiver, providerChanged);
 
             IntentFilter filter = new IntentFilter();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                filter.addAction(Intent.ACTION_DREAMING_STOPPED);
-            }
+            filter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
+            filter.addAction(Intent.ACTION_DREAMING_STOPPED);
             context.registerReceiver(receiver, filter);
 
             EnvironmentChangedReceiver oldReceiver = registeredReceiver.getAndSet(receiver);

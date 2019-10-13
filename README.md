@@ -42,7 +42,7 @@ and selected calendars.
 * Indicators for alerts and recurring events.
 * Lock time zone when travelling to different time zones.
 * Turn off Day headers and see dates in the "Days from today" column.
-* Android 4+ supported. Supports Android tablets.
+* Android 4.4+ supported. Supports Android tablets.
 
 Note on Tasks support: As there is no unified way to access tasks created in different applications, 
 each application needs its own implementation. Currently supported:

@@ -7,7 +7,7 @@ buildscript {
     ext {
         compileSdkVersion = 28 as int
         buildToolsVersion = '28.0.3'
-        minSdkVersion = 15 as int
+        minSdkVersion = 19 as int
         targetSdkVersion = 28 as int
 
         annotationVersion = '1.0.1'

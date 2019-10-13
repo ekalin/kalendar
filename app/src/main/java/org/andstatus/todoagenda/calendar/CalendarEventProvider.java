@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Attendees;
 import android.provider.CalendarContract.Calendars;
@@ -183,13 +182,8 @@ public class CalendarEventProvider extends EventProvider {
         columnNames.add(Instances.EVENT_LOCATION);
         columnNames.add(Instances.HAS_ALARM);
         columnNames.add(Instances.RRULE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            columnNames.add(Instances.DISPLAY_COLOR);
-        } else {
-            columnNames.add(Instances.CALENDAR_COLOR);
-            columnNames.add(Instances.EVENT_COLOR);
-        }
-        return columnNames.toArray(new String[columnNames.size()]);
+        columnNames.add(Instances.DISPLAY_COLOR);
+        return columnNames.toArray(new String[0]);
     }
 
     private List<CalendarEvent> getPastEventsWithColorList() {
@@ -206,15 +200,9 @@ public class CalendarEventProvider extends EventProvider {
     private String getPastEventsWithColorSelection() {
         StringBuilder stringBuilder = new StringBuilder(getCalendarSelection());
         stringBuilder.append(AND_BRACKET);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            stringBuilder.append(Instances.DISPLAY_COLOR);
-            stringBuilder.append(EQUALS);
-            stringBuilder.append(Instances.CALENDAR_COLOR);
-        } else {
-            stringBuilder.append(Instances.EVENT_COLOR);
-            stringBuilder.append(EQUALS);
-            stringBuilder.append("0");
-        }
+        stringBuilder.append(Instances.DISPLAY_COLOR);
+        stringBuilder.append(EQUALS);
+        stringBuilder.append(Instances.CALENDAR_COLOR);
         stringBuilder.append(CLOSING_BRACKET);
         return stringBuilder.toString();
     }
@@ -234,15 +222,7 @@ public class CalendarEventProvider extends EventProvider {
     }
 
     private int getEventColor(Cursor cursor) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            return cursor.getInt(cursor.getColumnIndex(Instances.DISPLAY_COLOR));
-        } else {
-            int eventColor = cursor.getInt(cursor.getColumnIndex(Instances.EVENT_COLOR));
-            if (eventColor > 0) {
-                return eventColor;
-            }
-            return cursor.getInt(cursor.getColumnIndex(Instances.CALENDAR_COLOR));
-        }
+        return cursor.getInt(cursor.getColumnIndex(Instances.DISPLAY_COLOR));
     }
 
     public List<EventSource> getCalendars() {
