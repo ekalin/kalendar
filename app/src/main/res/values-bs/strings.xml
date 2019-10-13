@@ -21,8 +21,6 @@
     <string name="calendars_prefs">Kalendari</string>
     <string name="calendars_prefs_desc">Odaberi kalendare za prikaz</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Izgled</string>
-    <string name="appearance_prefs_desc">Prilagodi izgled widgeta</string>
     <string name="appearance_text_size_title">Veličina teksta</string>
     <string name="appearance_text_size_desc">Prilagodi veličinu teksta</string>
     <string name="appearance_text_size_very_small">Vrlo mala</string>

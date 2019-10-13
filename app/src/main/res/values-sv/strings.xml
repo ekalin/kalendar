@@ -21,8 +21,6 @@
     <string name="calendars_prefs">Kalendrar</string>
     <string name="calendars_prefs_desc">Välj kalendrar som skall visas</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Utseende</string>
-    <string name="appearance_prefs_desc">Anpassa applikationens utseende</string>
     <string name="appearance_text_size_title">Textstorlek</string>
     <string name="appearance_text_size_desc">Justera textstorleken</string>
     <string name="appearance_text_size_very_small">Mycket liten</string>

@@ -19,7 +19,6 @@
     <!-- Preference header: Calendars and Task Lists -->
     <string name="calendars_prefs">Календари</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Изглед</string>
     <string name="appearance_text_size_title">Величина текста</string>
     <string name="appearance_text_size_desc">Подешавање величине текста</string>
     <string name="appearance_text_size_very_small">Врло мали</string>

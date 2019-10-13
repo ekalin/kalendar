@@ -14,8 +14,6 @@
     <string name="calendars_prefs">行事曆</string>
     <string name="calendars_prefs_desc">選擇要顯示的行事曆</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">外觀</string>
-    <string name="appearance_prefs_desc">調整小工具的外觀</string>
     <string name="appearance_text_size_title">字體大小</string>
     <string name="appearance_text_size_desc">調整字體大小</string>
     <string name="appearance_text_size_very_small">極小</string>

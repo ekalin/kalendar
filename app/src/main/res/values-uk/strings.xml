@@ -27,8 +27,6 @@
     <string name="calendars_prefs_desc">Виберіть календарі для відображення</string>
     <string name="task_source_samsung">Календар Samsung</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Вигляд</string>
-    <string name="appearance_prefs_desc">Налаштувати вигляд віджета</string>
     <string name="appearance_text_size_title">Розмір тексту</string>
     <string name="appearance_text_size_desc">Налаштувати розмір тексту</string>
     <string name="appearance_text_size_very_small">Дуже малий</string>

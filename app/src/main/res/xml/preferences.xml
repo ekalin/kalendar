@@ -2,9 +2,13 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Preference
-        app:title="@string/appearance_prefs"
-        app:summary="@string/appearance_prefs_desc"
-        app:fragment="org.andstatus.todoagenda.prefs.AppearancePreferencesFragment" />
+        app:title="@string/layout_prefs_title"
+        app:summary="@string/layout_prefs_desc"
+        app:fragment="org.andstatus.todoagenda.prefs.LayoutPreferencesFragment" />
+    <Preference
+        app:title="@string/appearance_group_color_title"
+        app:summary="@string/colors_prefs_desc"
+        app:fragment="org.andstatus.todoagenda.prefs.ColorsPreferencesFragment" />
     <Preference
         app:title="@string/event_details_prefs"
         app:summary="@string/event_details_prefs_desc"

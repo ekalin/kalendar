@@ -45,8 +45,6 @@
     <string name="task_source_opentasks">OpenTasks (от dmfs GmbH)</string>
     <string name="task_source_samsung">Календарь Samsung</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Отображение</string>
-    <string name="appearance_prefs_desc">Изменить отображение виджета</string>
     <string name="appearance_text_size_title">Размер текста</string>
     <string name="appearance_text_size_desc">Изменить размер текста</string>
     <string name="appearance_text_size_very_small">Очень маленький</string>
@@ -65,6 +63,8 @@
     <string name="appearance_abbreviate_dates_title">Сокращать представление дат</string>
     <string name="appearance_abbreviate_dates_desc">Использовать трёхбуквенный формат дат в Заголовке виджета, Заголовках дней и т.п.</string>
     <!-- Preference header: Layout -->
+    <string name="layout_prefs_title">Макет / раскладка</string>
+    <string name="layout_prefs_desc">Разместить, показать и скрыть элементы виджета</string>
     <string name="pref_event_entry_layout_title">Макет представления события</string>
     <string name="default_multiline_layout">Время под заголовком</string>
     <string name="single_line_layout">Всё - в один ряд</string>
@@ -81,6 +81,7 @@
     <string name="appearance_show_day_headers_desc">Показать заголовки дней</string>
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Цвета</string>
+    <string name="colors_prefs_desc">Цвет и прозрачность текста и фона</string>
     <string name="appearance_background_color_title">Цвет фона</string>
     <string name="appearance_background_color_desc">Изменить цвет и прозрачность фона</string>
     <string name="appearance_past_events_background_color_title">Цвет фона для прошедших событий</string>

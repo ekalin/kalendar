@@ -45,8 +45,6 @@
     <string name="task_source_opentasks">OpenTasks (by dmfs GmbH)</string>
     <string name="task_source_samsung">Kalendarz Samsung</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Wygląd</string>
-    <string name="appearance_prefs_desc">Dostosuj wygląd widżetu</string>
     <string name="appearance_text_size_title">Rozmiar tekstu</string>
     <string name="appearance_text_size_desc">Dostosuj rozmiar tekstu</string>
     <string name="appearance_text_size_very_small">Bardzo mały</string>
@@ -65,6 +63,8 @@
     <string name="appearance_abbreviate_dates_title">Krótkie daty</string>
     <string name="appearance_abbreviate_dates_desc">Użyj 3-literowego formaty daty w widżecie i nagłówkach dnia.</string>
     <!-- Preference header: Layout -->
+    <string name="layout_prefs_title">Układ</string>
+    <string name="layout_prefs_desc">Pokaż lub ukryj elementy nagłówka</string>
     <string name="pref_event_entry_layout_title">Układ wydarzenia</string>
     <string name="default_multiline_layout">Czas poniżej nazwy</string>
     <string name="single_line_layout">Wszystko w jedenym wierszu</string>
@@ -81,6 +81,7 @@
     <string name="appearance_show_day_headers_desc">Wyświetlaj nagłówki dla każdego dnia</string>
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Kolory</string>
+    <string name="colors_prefs_desc">Kolory i przezroczystości tekstów i tła</string>
     <string name="appearance_background_color_title">Kolor tła</string>
     <string name="appearance_background_color_desc">Dostosuj kolor tła</string>
     <string name="appearance_past_events_background_color_title">Kolor tła przeszłych wydarzeń</string>

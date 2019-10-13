@@ -21,8 +21,6 @@
     <string name="calendars_prefs">Kalendrid</string>
     <string name="calendars_prefs_desc">Vali näidatavad kalendrid</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Välimus</string>
-    <string name="appearance_prefs_desc">Muuda vidina kujundust</string>
     <string name="appearance_text_size_title">Teksti suurus</string>
     <string name="appearance_text_size_desc">Muuda teksti suurust</string>
     <string name="appearance_text_size_very_small">Väga väike</string>

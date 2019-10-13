@@ -24,8 +24,6 @@
     <string name="calendars_prefs">캘린더</string>
     <string name="calendars_prefs_desc">표시할 캘린더 선택</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">모양 설정</string>
-    <string name="appearance_prefs_desc">위젯 환경을 설정</string>
     <string name="appearance_text_size_title">글자 크기</string>
     <string name="appearance_text_size_desc">글자 크기 변경</string>
     <string name="appearance_text_size_very_small">매우 작게</string>

@@ -46,8 +46,6 @@
     <string name="task_source_opentasks">OpenTasks (by dmfs GmbH)</string>
     <string name="task_source_samsung">Samsung Calendar</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Apariència</string>
-    <string name="appearance_prefs_desc">Ajustar l\'apariència del widget</string>
     <string name="appearance_text_size_title">Mida del text</string>
     <string name="appearance_text_size_desc">Ajustar la mida del text</string>
     <string name="appearance_text_size_very_small">Molt petita</string>
@@ -66,6 +64,8 @@
     <string name="appearance_abbreviate_dates_title">Abreuja les dates</string>
     <string name="appearance_abbreviate_dates_desc">Utilitza el format de tres lletres per dates a les capçaleres diàries del Ginya etc.</string>
     <!-- Preference header: Layout -->
+    <string name="layout_prefs_title">Disposició</string>
+    <string name="layout_prefs_desc">Col·loca, mostra o oculta elements del giny</string>
     <string name="pref_event_entry_layout_title">Disposició d\'entrada d\'esdeveniment</string>
     <string name="default_multiline_layout">Hora a sota del títol</string>
     <string name="single_line_layout">Tot a la mateixa fila</string>
@@ -82,6 +82,7 @@
     <string name="appearance_show_day_headers_desc">Mostra l\'encapçalament de tots els dies</string>
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Colors</string>
+    <string name="colors_prefs_desc">Colors i opacitat dels textos i fons</string>
     <string name="appearance_background_color_title">Color de fons</string>
     <string name="appearance_background_color_desc">Ajusteu el color del fons</string>
     <string name="appearance_past_events_background_color_title">Color de fons dels esdeveniments passats</string>

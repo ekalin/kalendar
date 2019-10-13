@@ -39,8 +39,6 @@
     <string name="calendars_prefs">Kalender</string>
     <string name="calendars_prefs_desc">Pilih kalender yang ditampilkan</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Tampilan</string>
-    <string name="appearance_prefs_desc">Atur tampilan widget</string>
     <string name="appearance_text_size_title">Ukuran teks</string>
     <string name="appearance_text_size_desc">Atur ukuran teks</string>
     <string name="appearance_text_size_very_small">Sangat kecil</string>

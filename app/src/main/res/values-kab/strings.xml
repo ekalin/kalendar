@@ -30,8 +30,6 @@
     <string name="calendars_prefs">Iwitayen</string>
     <string name="calendars_prefs_desc">Fren iwitayen ara d-sekneḍ</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Timeẓri</string>
-    <string name="appearance_prefs_desc">Seggem timeẓri n usfaylurar</string>
     <string name="appearance_text_size_title">Teɣzi n uḍris</string>
     <string name="appearance_text_size_desc">Seggem teɣzi n uḍris</string>
     <string name="appearance_text_size_very_small">Wezzil aṭas</string>

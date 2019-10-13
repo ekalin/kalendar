@@ -38,8 +38,6 @@
     <string name="calendars_prefs">Agenda\'s</string>
     <string name="calendars_prefs_desc">Selecteer de weer te geven agenda\'s</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Uiterlijk</string>
-    <string name="appearance_prefs_desc">Het uiterlijk van de widget aanpassen</string>
     <string name="appearance_text_size_title">Tekstgrootte</string>
     <string name="appearance_text_size_desc">De tekstgrootte wijzigen</string>
     <string name="appearance_text_size_very_small">Zeer klein</string>

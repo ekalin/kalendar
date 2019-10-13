@@ -23,8 +23,6 @@
     <string name="calendars_prefs">تقویم ها</string>
     <string name="calendars_prefs_desc">تقویم را برای نمایش انتخاب کنید</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">ظاهر</string>
-    <string name="appearance_prefs_desc">تنظیم ظاهر ویجت</string>
     <string name="appearance_text_size_title">اندازه متن</string>
     <string name="appearance_text_size_desc">تنظیم اندازه متن</string>
     <string name="appearance_text_size_very_small">بسیار کوچک</string>

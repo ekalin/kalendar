@@ -14,8 +14,6 @@
     <string name="calendars_prefs">Calendare</string>
     <string name="calendars_prefs_desc">Selectati calendarele pentru a afisare</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Aparitie</string>
-    <string name="appearance_prefs_desc">Ajustare aspect de widget</string>
     <string name="appearance_text_size_title">Dimensiune text</string>
     <string name="appearance_text_size_desc">Ajustare dimensiune text</string>
     <string name="appearance_text_size_very_small">Foarte mic</string>

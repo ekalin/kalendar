@@ -45,9 +45,9 @@
   <string name="calendars_prefs">Calendários</string>
   <string name="calendars_prefs_desc">Selecione os calendários a exibir</string>
 
-  <!-- Preference header: Appearance -->
-  <string name="appearance_prefs">Aparência</string>
-  <string name="appearance_prefs_desc">Ajustar a aparência do widget</string>
+  <!-- Preference header: Layout -->
+  <string name="layout_prefs_title">Layout</string>
+  <string name="layout_prefs_desc">Posição, visibilidade e configuração dos elementos do widget</string>
   <string name="appearance_text_size_title">Tamanho do texto</string>
   <string name="appearance_text_size_desc">Ajustar o tamanho do texto</string>
   <string name="appearance_text_size_very_small">Muito pequeno</string>
@@ -74,7 +74,10 @@
   <string name="lock_time_zone_off_desc">Desbloqueado, fuso atual: %s</string>
   <string name="lock_time_zone_on_desc">Bloqueado em %s</string>
   <string name="lock_time_zone_title">Bloquear fuso horário</string>
+
+  <!-- Preference header: Colors -->
   <string name="appearance_group_color_title">Cores</string>
+  <string name="colors_prefs_desc">Cores e opacidade dos textos e fundos</string>
   <string name="appearance_background_color_title">Cor de fundo</string>
   <string name="appearance_background_color_desc">Ajustar a cor de fundo</string>
   <string name="appearance_past_events_background_color_title">Cor de fundo de eventos passados</string>

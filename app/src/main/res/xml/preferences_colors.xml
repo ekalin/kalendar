@@ -1,0 +1,31 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ListPreference
+        app:key="headerTheme"
+        app:title="@string/appearance_header_theme_title"
+        app:summary="@string/appearance_header_theme_desc"
+        app:defaultValue="DARK"
+        app:entries="@array/pref_theme_entries"
+        app:entryValues="@array/pref_theme_values" />
+
+    <Preference
+        app:key="backgroundColor"
+        app:title="@string/appearance_background_color_title"
+        app:summary="@string/appearance_background_color_desc"
+        app:defaultValue="2147483648" />
+
+    <Preference
+        app:key="pastEventsBackgroundColor"
+        app:title="@string/appearance_past_events_background_color_title"
+        app:summary="@string/appearance_past_events_background_color_desc"
+        app:defaultValue="2147548928" />
+
+    <ListPreference
+        app:key="entryTheme"
+        app:title="@string/appearance_entries_theme_title"
+        app:summary="@string/appearance_entries_theme_desc"
+        app:defaultValue="BLACK"
+        app:entries="@array/pref_theme_entries"
+        app:entryValues="@array/pref_theme_values" />
+
+</PreferenceScreen>

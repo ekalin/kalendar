@@ -18,8 +18,6 @@
     <string name="calendars_prefs">التقويمات</string>
     <string name="calendars_prefs_desc">تحديد التقويمات للعرض</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">المظهر</string>
-    <string name="appearance_prefs_desc">ضبط مظهر التطبيق</string>
     <string name="appearance_text_size_title">حجم الخط</string>
     <string name="appearance_text_size_desc">ضبط حجم النص</string>
     <string name="appearance_text_size_very_small">صغير حدا</string>

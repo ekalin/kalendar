@@ -21,8 +21,6 @@
     <string name="calendars_prefs">Kalendáře</string>
     <string name="calendars_prefs_desc">Vyberte kalendaře k zobrazení</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Vzhled</string>
-    <string name="appearance_prefs_desc">Nastavení vzhledu widgetu</string>
     <string name="appearance_text_size_title">Velikost textu</string>
     <string name="appearance_text_size_desc">Nastavit velikost textu</string>
     <string name="appearance_text_size_very_small">Velmi malá</string>

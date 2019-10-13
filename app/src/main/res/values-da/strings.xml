@@ -14,8 +14,6 @@
     <string name="calendars_prefs">Kalendere</string>
     <string name="calendars_prefs_desc">Vælg kalendere som skal vises</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Udseende</string>
-    <string name="appearance_prefs_desc">Juster widgetens udseende</string>
     <string name="appearance_text_size_title">Tekst størrelse</string>
     <string name="appearance_text_size_desc">Juster tekst-størrelsen</string>
     <string name="appearance_text_size_very_small">Meget lille</string>

@@ -21,8 +21,6 @@
     <string name="calendars_prefs">日历</string>
     <string name="calendars_prefs_desc">选择要显示的日历</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">外观</string>
-    <string name="appearance_prefs_desc">调整小部件的外观</string>
     <string name="appearance_text_size_title">字体大小</string>
     <string name="appearance_text_size_desc">调整字体大小</string>
     <string name="appearance_text_size_very_small">很小</string>

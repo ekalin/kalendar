@@ -41,8 +41,6 @@
     <string name="calendars_prefs">Lịch</string>
     <string name="calendars_prefs_desc">Chọn lịch để hiển thị</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Giao diện</string>
-    <string name="appearance_prefs_desc">Điều chỉnh giao diện widget</string>
     <string name="appearance_text_size_title">Cỡ chữ</string>
     <string name="appearance_text_size_desc">Điều chỉnh cỡ chữ</string>
     <string name="appearance_text_size_very_small">Rất nhỏ</string>

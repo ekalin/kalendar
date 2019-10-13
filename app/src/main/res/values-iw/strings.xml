@@ -22,8 +22,6 @@
     <string name="calendars_prefs">לוחות שנה</string>
     <string name="calendars_prefs_desc">בחר את לוחות השנה להצגה</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">מראה</string>
-    <string name="appearance_prefs_desc">התאם את המראה של היישומון</string>
     <string name="appearance_text_size_title">גודל טקסט</string>
     <string name="appearance_text_size_desc">התאם את גודל הטקסט</string>
     <string name="appearance_text_size_very_small">קטן מאוד</string>

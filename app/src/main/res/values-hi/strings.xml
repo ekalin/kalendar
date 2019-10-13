@@ -21,8 +21,6 @@
     <string name="calendars_prefs">कैलेंडर</string>
     <string name="calendars_prefs_desc">प्रदर्शित करने के लिए कैलेंडर का चयन करें</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">रूप</string>
-    <string name="appearance_prefs_desc">विजेट का स्वरूप ठीक करें</string>
     <string name="appearance_text_size_title">पाठ का आकार</string>
     <string name="appearance_text_size_desc">टेक्स्ट का आकार ठीक करें</string>
     <string name="appearance_text_size_very_small">बहुत छोटा</string>

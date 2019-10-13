@@ -68,7 +68,7 @@ public class InstanceSettings {
     static final String PREF_LOCKED_TIME_ZONE_ID = "lockedTimeZoneId";
     private String lockedTimeZoneId = "";
 
-    // Appearance - colors
+    // Colors
     static final String PREF_HEADER_THEME = "headerTheme";
     static final String PREF_HEADER_THEME_DEFAULT = Theme.WHITE.name();
     private String headerTheme = PREF_HEADER_THEME_DEFAULT;

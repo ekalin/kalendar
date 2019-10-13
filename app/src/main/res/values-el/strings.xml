@@ -21,8 +21,6 @@
     <string name="calendars_prefs">Ημερολόγια</string>
     <string name="calendars_prefs_desc">Επιλέξτε ημερολόγια προς εμφάνιση</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Εμφάνιση</string>
-    <string name="appearance_prefs_desc">Προσαρμογή εμφάνισης γραφικού</string>
     <string name="appearance_text_size_title">Μέγεθος κειμένου</string>
     <string name="appearance_text_size_desc">Προσαρμογή μεγέθους κειμένου</string>
     <string name="appearance_text_size_very_small">Πολύ μικρό</string>

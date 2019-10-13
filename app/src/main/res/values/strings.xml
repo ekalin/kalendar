@@ -47,9 +47,9 @@
     <string name="calendars_prefs">Calendars</string>
     <string name="calendars_prefs_desc">Select the calendars to display</string>
 
-    <!-- Preference header: Appearance -->
-    <string name="appearance_prefs">Appearance</string>
-    <string name="appearance_prefs_desc">Adjust the appearance of the widget</string>
+    <!-- Preference header: Layout -->
+    <string name="layout_prefs_title">Layout</string>
+    <string name="layout_prefs_desc">Place, show and hide widget elements</string>
     <string name="appearance_text_size_title">Text size</string>
     <string name="appearance_text_size_desc">Adjust the text size</string>
     <string name="appearance_text_size_very_small">Very small</string>
@@ -76,7 +76,10 @@
     <string name="lock_time_zone_off_desc">Unlocked, current zone: %s</string>
     <string name="lock_time_zone_on_desc">Locked at %s</string>
     <string name="lock_time_zone_title">Lock time zone</string>
+
+    <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Colors</string>
+    <string name="colors_prefs_desc">Colors and opacity of texts and backgrounds</string>
     <string name="appearance_background_color_title">Background color</string>
     <string name="appearance_background_color_desc">Adjust the color of the background</string>
     <string name="appearance_past_events_background_color_title">Past events background color</string>

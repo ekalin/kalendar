@@ -26,8 +26,6 @@
     <string name="calendars_prefs">Təqvimlər</string>
     <string name="calendars_prefs_desc">Göstəriləcək təqvimləri seçin</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Görünüş</string>
-    <string name="appearance_prefs_desc">Vidget görünüşünü nizamla</string>
     <string name="appearance_text_size_title">Mətn ölçüsü</string>
     <string name="appearance_text_size_desc">Mətn ölçüsünü nizamla</string>
     <string name="appearance_text_size_very_small">Çox kiçik</string>

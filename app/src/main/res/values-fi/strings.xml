@@ -21,8 +21,6 @@
     <string name="calendars_prefs">Kalenterit</string>
     <string name="calendars_prefs_desc">Valitse näytettävät kalenterit</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Ulkoasu</string>
-    <string name="appearance_prefs_desc">Muuta widgetin ulkoasua</string>
     <string name="appearance_text_size_title">Tekstin koko</string>
     <string name="appearance_text_size_desc">Muuta tekstin kokoa</string>
     <string name="appearance_text_size_very_small">Hyvin pieni</string>

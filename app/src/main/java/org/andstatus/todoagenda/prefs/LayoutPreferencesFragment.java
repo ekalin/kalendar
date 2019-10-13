@@ -13,7 +13,7 @@ import org.joda.time.DateTimeZone;
 
 import java.util.TimeZone;
 
-public class AppearancePreferencesFragment extends PreferenceFragmentCompat
+public class LayoutPreferencesFragment extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -29,32 +29,25 @@ public class AppearancePreferencesFragment extends PreferenceFragmentCompat
     @Override
     public void onResume() {
         super.onResume();
-        showLockTimeZone(true);
-        showEventEntryLayout();
         showWidgetInstanceName();
+        showEventEntryLayout();
+        showLockTimeZone(true);
         getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         switch (key) {
-            case InstanceSettings.PREF_EVENT_ENTRY_LAYOUT:
-                showEventEntryLayout();
-                break;
             case InstanceSettings.PREF_WIDGET_INSTANCE_NAME:
                 getActivity().finish();
                 startActivity(MainActivity.intentToConfigure(getActivity(), ApplicationPreferences
                         .getWidgetId(getActivity())));
                 break;
+            case InstanceSettings.PREF_EVENT_ENTRY_LAYOUT:
+                showEventEntryLayout();
+                break;
             default:
                 break;
-        }
-    }
-
-    private void showEventEntryLayout() {
-        Preference preference = findPreference(InstanceSettings.PREF_EVENT_ENTRY_LAYOUT);
-        if (preference != null) {
-            preference.setSummary(ApplicationPreferences.getEventEntryLayout(getActivity()).summaryResId);
         }
     }
 
@@ -63,6 +56,13 @@ public class AppearancePreferencesFragment extends PreferenceFragmentCompat
         if (preference != null) {
             preference.setSummary(ApplicationPreferences.getWidgetInstanceName(getActivity()) +
                     " (id:" + ApplicationPreferences.getWidgetId(getActivity()) + ")");
+        }
+    }
+
+    private void showEventEntryLayout() {
+        Preference preference = findPreference(InstanceSettings.PREF_EVENT_ENTRY_LAYOUT);
+        if (preference != null) {
+            preference.setSummary(ApplicationPreferences.getEventEntryLayout(getActivity()).summaryResId);
         }
     }
 
@@ -85,14 +85,6 @@ public class AppearancePreferencesFragment extends PreferenceFragmentCompat
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         switch (preference.getKey()) {
-            case InstanceSettings.PREF_BACKGROUND_COLOR:
-                new BackgroundTransparencyDialog().show(getFragmentManager(),
-                        InstanceSettings.PREF_BACKGROUND_COLOR);
-                break;
-            case InstanceSettings.PREF_PAST_EVENTS_BACKGROUND_COLOR:
-                new BackgroundTransparencyDialog().show(getFragmentManager(),
-                        InstanceSettings.PREF_PAST_EVENTS_BACKGROUND_COLOR);
-                break;
             case InstanceSettings.PREF_LOCK_TIME_ZONE:
                 if (preference instanceof CheckBoxPreference) {
                     CheckBoxPreference checkPref = (CheckBoxPreference) preference;

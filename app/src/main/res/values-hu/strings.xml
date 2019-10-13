@@ -21,8 +21,6 @@
     <string name="calendars_prefs">Naptárak</string>
     <string name="calendars_prefs_desc">Válassza ki a naptárakat</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Megjelenés</string>
-    <string name="appearance_prefs_desc">A modul megjelenésének beállítása</string>
     <string name="appearance_text_size_title">Szövegméret</string>
     <string name="appearance_text_size_desc">Szövegméret beállítása</string>
     <string name="appearance_text_size_very_small">Nagyon kicsi</string>

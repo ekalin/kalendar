@@ -23,8 +23,6 @@
     <string name="calendars_prefs">Calendários</string>
     <string name="calendars_prefs_desc">Escolher os calendários a mostrar</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Aparência</string>
-    <string name="appearance_prefs_desc">Ajustar a aparência do widget</string>
     <string name="appearance_text_size_title">Tamanho do texto</string>
     <string name="appearance_text_size_desc">Ajustar o tamanho do texto</string>
     <string name="appearance_text_size_very_small">Muito pequeno</string>

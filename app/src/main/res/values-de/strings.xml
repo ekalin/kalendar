@@ -46,8 +46,6 @@
     <string name="task_source_opentasks">OpenTasks (von dmfs GmbH)</string>
     <string name="task_source_samsung">Samsung Calendar</string>
     <!-- Preference header: Other -->
-    <string name="appearance_prefs">Aussehen</string>
-    <string name="appearance_prefs_desc">Passen Sie das Aussehen des Widgets an</string>
     <string name="appearance_text_size_title">Textgröße</string>
     <string name="appearance_text_size_desc">Textgröße anpassen</string>
     <string name="appearance_text_size_very_small">Sehr klein</string>
@@ -66,6 +64,8 @@
     <string name="appearance_abbreviate_dates_title">Daten Abkürzen</string>
     <string name="appearance_abbreviate_dates_desc">Verwende 3-Buchstaben Format für Daten und Tagesüberschriften.</string>
     <!-- Preference header: Layout -->
+    <string name="layout_prefs_title">Ansicht</string>
+    <string name="layout_prefs_desc">Widget-Elemente platzieren, anzeigen und verbergen</string>
     <string name="pref_event_entry_layout_title">Ereignis Anordnung</string>
     <string name="default_multiline_layout">Zeit unterhalb von Title</string>
     <string name="single_line_layout">Alles in einer Zeile</string>
@@ -82,6 +82,7 @@
     <string name="appearance_show_day_headers_desc">Zeige Tagesüberschriften in Widget an</string>
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Farben</string>
+    <string name="colors_prefs_desc">Farbe und Deckkraft von Texten und Hintergründen</string>
     <string name="appearance_background_color_title">Hintergrundfarbe</string>
     <string name="appearance_background_color_desc">Passe die Farbe des Hintergrundes an</string>
     <string name="appearance_past_events_background_color_title">Hintergrundfarbe für vergangene Ereignisse</string>
