@@ -11,7 +11,6 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService.RemoteViewsFactory;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import org.andstatus.todoagenda.calendar.CalendarEventVisualizer;
 import org.andstatus.todoagenda.prefs.AllSettings;
@@ -126,7 +125,7 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
             prevReloadFinishedAt = System.currentTimeMillis();
             scheduleNextUpdate();
         }
-        updateWidget(context, widgetId, this);
+        updateWidget(context, widgetId);
     }
 
     private void scheduleNextUpdate() {
@@ -141,7 +140,7 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
         EnvironmentChangedReceiver.scheduleNextUpdate(getSettings(), nextUpdate);
     }
 
-    static void updateWidget(Context context, int widgetId, @Nullable RemoteViewsFactory factory) {
+    static void updateWidget(Context context, int widgetId) {
         try {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             if (appWidgetManager == null) {
