@@ -16,9 +16,7 @@ public class RemoteViewsUtil {
     private static final String METHOD_SET_BACKGROUND_COLOR = "setBackgroundColor";
     private static final String METHOD_SET_SINGLE_LINE = "setSingleLine";
     private static final String METHOD_SET_ALPHA = "setAlpha";
-    private static final String METHOD_SET_COLOR_FILTER = "setColorFilter";
     private static final String METHOD_SET_WIDTH = "setWidth";
-    private static final String METHOD_SET_HEIGHT = "setHeight";
 
     private RemoteViewsUtil() {
         // prohibit instantiation
@@ -38,16 +36,8 @@ public class RemoteViewsUtil {
         rv.setInt(viewId, METHOD_SET_ALPHA, alpha);
     }
 
-    public static void setColorFilter(RemoteViews rv, int viewId, int color) {
-        rv.setInt(viewId, METHOD_SET_COLOR_FILTER, color);
-    }
-
     public static void setViewWidth(InstanceSettings settings, RemoteViews rv, int viewId, int dimenId) {
         rv.setInt(viewId, METHOD_SET_WIDTH, getScaledValueInPixels(settings, dimenId));
-    }
-
-    public static void setViewHeight(InstanceSettings settings, RemoteViews rv, int viewId, int dimenId) {
-        rv.setInt(viewId, METHOD_SET_HEIGHT, getScaledValueInPixels(settings, dimenId));
     }
 
     public static void setTextSize(InstanceSettings settings, RemoteViews rv, int viewId, int dimenId) {
