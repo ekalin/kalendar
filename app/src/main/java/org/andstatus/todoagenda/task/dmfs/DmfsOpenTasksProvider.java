@@ -129,6 +129,7 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
             startMillis = cursor.getLong(startDateIdx);
         }
         task.setTaskDate(getTaskDate(dueMillis, startMillis));
+        task.setZone(zone);
 
         task.setColor(getAsOpaque(cursor.getInt(cursor.getColumnIndex(DmfsOpenTasksContract.Tasks.COLUMN_COLOR))));
 

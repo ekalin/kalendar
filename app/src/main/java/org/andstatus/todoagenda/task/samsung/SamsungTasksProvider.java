@@ -116,6 +116,7 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
             dueMillis = cursor.getLong(dueDateIdx);
         }
         task.setTaskDate(getTaskDate(dueMillis, null));
+        task.setZone(zone);
 
         task.setColor(getColor(cursor, cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_COLOR),
                 cursor.getInt(cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_LIST_ID))));

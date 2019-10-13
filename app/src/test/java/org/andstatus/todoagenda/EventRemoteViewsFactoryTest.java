@@ -72,7 +72,7 @@ public class EventRemoteViewsFactoryTest {
     }
 
     private List<WidgetEntry> createEventListForSortTest() {
-        DayHeader dayHeader = new DayHeader(new DateTime(2019, 8, 8, 0, 0));
+        DayHeader dayHeader = new DayHeader(new DateTime(2019, 8, 8, 0, 0), DateTimeZone.getDefault());
         TaskEntry task1 = createTaskEntry(new DateTime(2019, 8, 8, 0, 0), "task1");
         CalendarEntry calendar1 = createCalendarEntry(new DateTime(2019, 8, 8, 0, 0), "calendar1");
         CalendarEntry calendar2 = createCalendarEntry(new DateTime(2019, 8, 8, 15, 30), "calendar2");

@@ -27,6 +27,7 @@ import org.andstatus.todoagenda.widget.LastEntryVisualizer;
 import org.andstatus.todoagenda.widget.WidgetEntry;
 import org.andstatus.todoagenda.widget.WidgetEntryVisualizer;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -75,18 +76,22 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
         Log.d(this.getClass().getSimpleName(), widgetId + " " + message);
     }
 
+    @Override
     public void onCreate() {
         reload();
     }
 
+    @Override
     public void onDestroy() {
         // Empty
     }
 
+    @Override
     public int getCount() {
         return widgetEntries.size();
     }
 
+    @Override
     public RemoteViews getViewAt(int position) {
         List<WidgetEntry> widgetEntries = this.widgetEntries;
         if (position < widgetEntries.size()) {
@@ -119,8 +124,21 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
             this.widgetEntries = getWidgetEntries(getSettings());
             logEvent("reload, visualizers:" + eventProviders.size() + ", entries:" + this.widgetEntries.size());
             prevReloadFinishedAt = System.currentTimeMillis();
+            scheduleNextUpdate();
         }
         updateWidget(context, widgetId, this);
+    }
+
+    private void scheduleNextUpdate() {
+        DateTime nextUpdate = DateUtil.startOfNextDay(DateUtil.now(getSettings().getTimeZone()));
+        for (WidgetEntry entry : widgetEntries) {
+            DateTime eventUpdateTime = entry.getNextUpdateTime();
+            if (eventUpdateTime != null && eventUpdateTime.isBefore(nextUpdate)) {
+                nextUpdate = eventUpdateTime;
+            }
+        }
+
+        EnvironmentChangedReceiver.scheduleNextUpdate(getSettings(), nextUpdate);
     }
 
     static void updateWidget(Context context, int widgetId, @Nullable RemoteViewsFactory factory) {
@@ -161,15 +179,16 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
     private List<WidgetEntry> addDayHeaders(List<WidgetEntry> listIn) {
         List<WidgetEntry> listOut = new ArrayList<>();
         if (!listIn.isEmpty()) {
+            DateTimeZone zone = getSettings().getTimeZone();
             boolean showDaysWithoutEvents = getSettings().getShowDaysWithoutEvents();
-            DayHeader curDayBucket = new DayHeader(new DateTime(0, getSettings().getTimeZone()));
+            DayHeader curDayBucket = new DayHeader(new DateTime(0, zone), zone);
             for (WidgetEntry entry : listIn) {
                 DateTime nextStartOfDay = entry.getStartDay();
                 if (!nextStartOfDay.isEqual(curDayBucket.getStartDay())) {
                     if (showDaysWithoutEvents) {
-                        addEmptyDayHeadersBetweenTwoDays(listOut, curDayBucket.getStartDay(), nextStartOfDay);
+                        addEmptyDayHeadersBetweenTwoDays(listOut, curDayBucket.getStartDay(), nextStartOfDay, zone);
                     }
-                    curDayBucket = new DayHeader(nextStartOfDay);
+                    curDayBucket = new DayHeader(nextStartOfDay, zone);
                     listOut.add(curDayBucket);
                 }
                 listOut.add(entry);
@@ -190,22 +209,24 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
     }
 
     private void addEmptyDayHeadersBetweenTwoDays(List<WidgetEntry> entries, DateTime fromDayExclusive,
-                                                  DateTime toDayExclusive) {
+                                                  DateTime toDayExclusive, DateTimeZone zone) {
         DateTime emptyDay = fromDayExclusive.plusDays(1);
         DateTime today = DateUtil.now(getSettings().getTimeZone()).withTimeAtStartOfDay();
         if (emptyDay.isBefore(today)) {
             emptyDay = today;
         }
         while (emptyDay.isBefore(toDayExclusive)) {
-            entries.add(new DayHeader(emptyDay));
+            entries.add(new DayHeader(emptyDay, zone));
             emptyDay = emptyDay.plusDays(1);
         }
     }
 
+    @Override
     public RemoteViews getLoadingView() {
         return null;
     }
 
+    @Override
     public int getViewTypeCount() {
         int result = 0;
         for (WidgetEntryVisualizer<?> eventProvider : eventProviders) {
@@ -215,10 +236,12 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
         return result;
     }
 
+    @Override
     public long getItemId(int position) {
         return position;
     }
 
+    @Override
     public boolean hasStableIds() {
         return true;
     }
@@ -282,8 +305,8 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
         rv.setOnClickPendingIntent(R.id.overflow_menu, pendingIntent);
     }
 
-    static void configureWidgetEntriesList(InstanceSettings settings, Context context, int widgetId,
-                                           RemoteViews rv) {
+    private static void configureWidgetEntriesList(InstanceSettings settings, Context context, int widgetId,
+                                                   RemoteViews rv) {
         Intent intent = new Intent(context, EventWidgetService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));

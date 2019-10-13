@@ -45,7 +45,7 @@ public class AllSettings {
                     settings.save();
                     settings.logMe(AllSettings.class, "newInstance put", widgetId);
                     instances.put(widgetId, settings);
-                    EnvironmentChangedReceiver.registerReceivers(instances);
+                    EnvironmentChangedReceiver.registerReceivers(settings);
                     EnvironmentChangedReceiver.updateWidget(context, widgetId);
                 }
             }
@@ -76,7 +76,9 @@ public class AllSettings {
                     }
                 }
                 instancesLoaded = true;
-                EnvironmentChangedReceiver.registerReceivers(instances);
+                if (!instances.isEmpty()) {
+                    EnvironmentChangedReceiver.registerReceivers(instances.values().iterator().next());
+                }
             }
         }
     }
@@ -97,7 +99,7 @@ public class AllSettings {
                 }
             }
             instancesLoaded = true;
-            EnvironmentChangedReceiver.registerReceivers(instances);
+            EnvironmentChangedReceiver.registerReceivers(instances.values().iterator().next());
         }
     }
 

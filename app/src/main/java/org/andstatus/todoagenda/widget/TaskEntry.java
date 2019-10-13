@@ -1,6 +1,7 @@
 package org.andstatus.todoagenda.widget;
 
 import org.andstatus.todoagenda.task.TaskEvent;
+import org.andstatus.todoagenda.util.DateUtil;
 
 public class TaskEntry extends WidgetEntry {
     private TaskEvent event;
@@ -22,5 +23,9 @@ public class TaskEntry extends WidgetEntry {
 
     public TaskEvent getEvent() {
         return event;
+    }
+
+    public boolean isCurrent() {
+        return getStartDate().withTimeAtStartOfDay().equals(DateUtil.now(event.getZone()).withTimeAtStartOfDay());
     }
 }
