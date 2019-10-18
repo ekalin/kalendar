@@ -20,7 +20,17 @@
     </Preference>
     <Preference
         app:key="shareEventsForDebugging"
-        app:title="@string/share_events_for_debugging_title"
+        app:title="@string/share_events_settings_for_debugging_title"
         app:summary="@string/share_events_for_debugging_desc"
+        app:persistent="false" />
+    <Preference
+        app:key="backupSettings"
+        app:title="@string/backup_settings_title"
+        app:summary="@string/backup_settings_desc"
+        app:persistent="false" />
+    <Preference
+        app:key="restoreSettings"
+        app:title="@string/restore_settings_title"
+        app:summary="@string/restore_settings_desc"
         app:persistent="false" />
 </PreferenceScreen>

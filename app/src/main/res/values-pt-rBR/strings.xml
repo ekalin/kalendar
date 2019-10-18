@@ -155,13 +155,22 @@
   <string name="task_lists_pref_summary">Selecione as listas de tarefas a exibir</string>
 
   <!-- Preference header: Feedback -->
-  <string name="feedback_prefs">Feedback</string>
-  <string name="feedback_prefs_desc">Entre em contato conosco</string>
+  <string name="feedback_backup_prefs">Feedback e backup</string>
+  <string name="feedback_backup_prefs_desc">Entre em contato conosco, fazer backup e restaurar configurações</string>
   <string name="feedback_github_desc">Sua opinião sobre o projeto</string>
   <string name="feedback_github_title">Visite a página do widget no GitHub</string>
   <string name="feedback_play_store_desc">Avalie e comente na Google Play Store</string>
   <string name="feedback_play_store_title">Visite-nos na Google Play Store</string>
   <string name="refresh_desc">Atualizar</string>
-  <string name="share_events_for_debugging_desc">Criar um relatório para ajudar os desenvolvedores a solucionar problemas</string>
-  <string name="share_events_for_debugging_title">Compartilhar eventos para depuração</string>
+  <string name="share_events_for_debugging_desc">Criar um relatório para ajudar os desenvolvedores a solucionar problemas.
+  Antes de compartilhar filtre os eventos para proteger sua privacidae, mas ainda demonstrando o problema</string>
+  <string name="share_events_settings_for_debugging_title">Compartilhar eventos e configurações para depuração</string>
+  <string name="backup_settings_title">Backup das configurações</string>
+  <string name="backup_settings_desc">Exportar as configurações deste widget para um arquivo</string>
+  <string name="restore_settings_title">Restaurar configurações de um backup</string>
+  <string name="restore_settings_desc">Importar configurações salvas. Configurações de cada widget devem ser importadas separadamente</string>
+  <string name="backup_settings_successful">Backup das configurações feito</string>
+  <string name="backup_settings_error">Erro ao escrever configurações para %1$s\n%2$s</string>
+  <string name="restore_settings_unsuccessful">Não foi possível restaurar as configurações</string>
+  <string name="restore_settings_successful">Configurações restauradas</string>
 </resources>

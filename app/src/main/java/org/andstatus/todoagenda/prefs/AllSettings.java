@@ -1,11 +1,14 @@
 package org.andstatus.todoagenda.prefs;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import androidx.annotation.NonNull;
 
 import org.andstatus.todoagenda.EnvironmentChangedReceiver;
 import org.andstatus.todoagenda.R;
+import org.andstatus.todoagenda.provider.WidgetData;
+import org.andstatus.todoagenda.util.Optional;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,15 +63,15 @@ public class AllSettings {
         synchronized (instances) {
             if (!instancesLoaded || reInitialize) {
                 for (int widgetId : getWidgetIds(context)) {
-                    InstanceSettings settings;
                     try {
-                        settings = InstanceSettings.fromJson(context, loadJsonFromFile(context,
+                        Optional<InstanceSettings> opSettings = InstanceSettings.fromJson(context, loadJsonFromFile(context,
                                 getStorageKey(widgetId)));
-                        if (settings.widgetId == 0) {
-                            newInstance(context, widgetId);
-                        } else {
+                        if (opSettings.isPresent()) {
+                            InstanceSettings settings = opSettings.get();
                             settings.logMe(AllSettings.class, "ensureLoadedFromFiles put", widgetId);
                             instances.put(widgetId, settings);
+                        } else {
+                            newInstance(context, widgetId);
                         }
                     } catch (Exception e) { // Starting from API21 android.system.ErrnoException may be thrown
                         Log.e("loadInstances", "widgetId:" + widgetId, e);
@@ -83,20 +86,14 @@ public class AllSettings {
         }
     }
 
-    public static void loadFromTestData(Context context, JSONArray jsonArray) throws JSONException {
+    public static void loadFromTestData(Context context, InstanceSettings settings) {
         synchronized (instances) {
             instances.clear();
-            for (int index = 0; index < jsonArray.length(); index++) {
-                JSONObject json = jsonArray.optJSONObject(index);
-                if (json != null) {
-                    InstanceSettings settings = InstanceSettings.fromJson(context, json);
-                    if (settings.widgetId == 0) {
-                        settings.logMe(AllSettings.class, "Skipped loadFromTestData", settings.widgetId);
-                    } else {
-                        settings.logMe(AllSettings.class, "loadFromTestData put", settings.widgetId);
-                        instances.put(settings.widgetId, settings);
-                    }
-                }
+            if (settings.widgetId == 0) {
+                settings.logMe(AllSettings.class, "Skipped loadFromTestData", settings.widgetId);
+            } else {
+                settings.logMe(AllSettings.class, "loadFromTestData put", settings.widgetId);
+                instances.put(settings.widgetId, settings);
             }
             instancesLoaded = true;
             EnvironmentChangedReceiver.registerReceivers(instances.values().iterator().next());
@@ -168,5 +165,20 @@ public class AllSettings {
     public static Map<Integer, InstanceSettings> getInstances(Context context) {
         ensureLoadedFromFiles(context, false);
         return instances;
+    }
+
+    public static boolean restoreWidgetSettings(Context context, JSONObject json, int targetWidgetId) {
+        Optional<InstanceSettings> opSettings = WidgetData.fromJson(json)
+                .flatMap(data -> data.getSettingsForWidget(context, targetWidgetId));
+        if (opSettings.isPresent()) {
+            InstanceSettings settings = opSettings.get();
+            settings.save();
+            settings.logMe(AllSettings.class, "restoreWidgetSettings put", settings.widgetId);
+            instances.put(settings.widgetId, settings);
+            return true;
+        } else {
+            Log.v(AllSettings.class.getSimpleName(), "Skipped restoreWidgetSettings, widgetId = " + targetWidgetId);
+            return false;
+        }
     }
 }

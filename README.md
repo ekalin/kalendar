@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/andstatus/todoagenda.svg?branch=master)](https://travis-ci.org/andstatus/todoagenda)
 
 Todo Agenda is a home screen widget for your Android device. 
-It displays a list of upcoming calendar events and tasks
+Each widget has its own settings and displays configured list of calendar events and tasks
 so that you can easily have a glimpse at your appointments.
 
 <table style="border-collapse:collapse; margin:0; padding:0">
@@ -23,8 +23,10 @@ so that you can easily have a glimpse at your appointments.
 </tr>
 </table>
 
-Want to contribute to the project? Start by translating the widget to another language. Visit the 
-[project at crowdin.net](http://crowdin.net/project/plusonelabs-calendar-widget) and be part of the next release. :)
+Want to contribute to the project? Start by translating the widget to another language or update existing translation
+at [Translation project at Crowdin](http://crowdin.net/project/plusonelabs-calendar-widget) 
+and be a part of the next release. :)
+
 ![Calendar Widget Screenshots](assets/screenshots/widget-device.png)
 
 ## Features
@@ -65,6 +67,9 @@ We are also looking for new and improved translations over at http://crowdin.net
 * Ongoing events are highlighted in a different color.
 * [Text size scaling improved](https://github.com/plusonelabs/calendar-widget/issues/301) - Now size of text in all parts
   of the widget changes, when you change "Text size" option.
+* [Backup and Restore widget settings](https://github.com/plusonelabs/calendar-widget/issues/330). 
+  Convenient for cloning settings to another widget. 
+  Good for moving widget settings to another device, but requires calendars selection adjustment.  
 * Hopefully fixed intermittent "No events" display instead of actual list of events. 
   Separate "[ToDo Agenda Not Initialized yet...](https://github.com/plusonelabs/calendar-widget/issues/318)" layout added 
   to see the widget, when it is not initialized yet (e.g. after device reboot).

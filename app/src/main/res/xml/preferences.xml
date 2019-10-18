@@ -26,8 +26,8 @@
         app:summary="@string/task_prefs_desc"
         app:fragment="org.andstatus.todoagenda.prefs.TaskPreferencesFragment" />
     <Preference
-        app:title="@string/feedback_prefs"
-        app:summary="@string/feedback_prefs_desc"
+        app:title="@string/feedback_backup_prefs"
+        app:summary="@string/feedback_backup_prefs_desc"
         app:fragment="org.andstatus.todoagenda.prefs.FeedbackPreferencesFragment" />
 
 </PreferenceScreen>
