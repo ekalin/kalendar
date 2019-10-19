@@ -18,17 +18,19 @@ import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.prefs.PreferencesFragment;
+import org.andstatus.todoagenda.prefs.SettingsStorage;
 import org.andstatus.todoagenda.provider.WidgetData;
 import org.andstatus.todoagenda.util.Optional;
 import org.andstatus.todoagenda.util.PermissionsUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.Reader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 
 public class WidgetConfigurationActivity extends AppCompatActivity
@@ -184,8 +186,9 @@ public class WidgetConfigurationActivity extends AppCompatActivity
 
         InstanceSettings settings = AllSettings.instanceFromId(this, widgetId);
         String jsonSettings = WidgetData.fromSettingsForBackup(settings).toJsonString();
-        try (OutputStream out = this.getContentResolver().openOutputStream(uri, "w")) {
-            out.write(jsonSettings.getBytes());
+        try (OutputStream out = this.getContentResolver().openOutputStream(uri, "w");
+             Writer writer = new BufferedWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8))) {
+            writer.write(jsonSettings);
             Toast.makeText(this, getText(R.string.backup_settings_successful), Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             String msg = getString(R.string.backup_settings_error, uri, e.getMessage());
@@ -220,16 +223,8 @@ public class WidgetConfigurationActivity extends AppCompatActivity
     }
 
     private Optional<JSONObject> readJson(Uri uri) {
-        final int BUFFER_LENGTH = 10000;
-        char[] buffer = new char[BUFFER_LENGTH];
-        try (InputStream in = getContentResolver().openInputStream(uri);
-             Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
-            StringBuilder builder = new StringBuilder();
-            int count;
-            while ((count = reader.read(buffer)) != -1) {
-                builder.append(buffer, 0, count);
-            }
-            return Optional.of(new JSONObject(builder.toString()));
+        try (InputStream in = getContentResolver().openInputStream(uri)) {
+            return Optional.of(new JSONObject(SettingsStorage.getContents(in)));
         } catch (IOException | JSONException e) {
             String msg = getString(R.string.restore_settings_error, uri, e.getMessage());
             Log.e(this.getClass().getSimpleName(), msg, e);
