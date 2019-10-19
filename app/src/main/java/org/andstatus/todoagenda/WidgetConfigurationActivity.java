@@ -183,7 +183,7 @@ public class WidgetConfigurationActivity extends AppCompatActivity
         }
 
         InstanceSettings settings = AllSettings.instanceFromId(this, widgetId);
-        String jsonSettings = WidgetData.fromSettings(settings).toJsonString();
+        String jsonSettings = WidgetData.fromSettingsForBackup(settings).toJsonString();
         try (OutputStream out = this.getContentResolver().openOutputStream(uri, "w")) {
             out.write(jsonSettings.getBytes());
             Toast.makeText(this, getText(R.string.backup_settings_successful), Toast.LENGTH_LONG).show();

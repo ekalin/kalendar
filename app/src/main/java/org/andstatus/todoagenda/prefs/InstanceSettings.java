@@ -1,7 +1,6 @@
 package org.andstatus.todoagenda.prefs;
 
 import android.content.Context;
-import android.graphics.Path;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
@@ -315,13 +314,21 @@ public class InstanceSettings {
         }
         logMe(InstanceSettings.class, "save", widgetId);
         try {
-            saveJson(context, getStorageKey(widgetId), toJson());
+            saveJson(context, getStorageKey(widgetId), toJsonComplete());
         } catch (IOException e) {
             Log.e("save", toString(), e);
         }
     }
 
-    public JSONObject toJson() {
+    public JSONObject toJsonForBackup() {
+        return toJson(false);
+    }
+
+    public JSONObject toJsonComplete() {
+        return toJson(true);
+    }
+
+    private JSONObject toJson(boolean complete) {
         JSONObject json = new JSONObject();
         try {
             json.put(PREF_WIDGET_ID, widgetId);
@@ -354,10 +361,14 @@ public class InstanceSettings {
             json.put(PREF_HIDE_BASED_ON_KEYWORDS, hideBasedOnKeywords);
             json.put(PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT, showOnlyClosestInstanceOfRecurringEvent);
 
-            json.put(PREF_ACTIVE_CALENDARS, new JSONArray(activeCalendars));
+            if (complete) {
+                json.put(PREF_ACTIVE_CALENDARS, new JSONArray(activeCalendars));
+            }
 
             json.put(PREF_TASK_SOURCE, taskSource);
-            json.put(PREF_ACTIVE_TASK_LISTS, new JSONArray(activeTaskLists));
+            if (complete) {
+                json.put(PREF_ACTIVE_TASK_LISTS, new JSONArray(activeTaskLists));
+            }
         } catch (JSONException e) {
             throw new RuntimeException("Saving settings to JSON", e);
         }
@@ -522,7 +533,7 @@ public class InstanceSettings {
     }
 
     public void logMe(Class tag, String message, int widgetId) {
-        Log.v(tag.getSimpleName(), message + ", widgetId:" + widgetId + "\n" + toJson());
+        Log.v(tag.getSimpleName(), message + ", widgetId:" + widgetId + "\n" + toJsonComplete());
     }
 
     @Override
@@ -531,11 +542,11 @@ public class InstanceSettings {
         if (o == null || getClass() != o.getClass()) return false;
 
         InstanceSettings settings = (InstanceSettings) o;
-        return toJson().toString().equals(settings.toJson().toString());
+        return toJsonComplete().toString().equals(settings.toJsonComplete().toString());
     }
 
     @Override
     public int hashCode() {
-        return toJson().toString().hashCode();
+        return toJsonComplete().toString().hashCode();
     }
 }

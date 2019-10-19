@@ -3,7 +3,6 @@ package org.andstatus.todoagenda.provider;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Path;
 import android.os.Build;
 import android.util.Log;
 
@@ -12,9 +11,6 @@ import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.Optional;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class WidgetData {
     private static final String TAG = WidgetData.class.getSimpleName();
@@ -43,16 +39,20 @@ public class WidgetData {
         if (context == null || widgetId == 0) {
             return Optional.empty();
         } else {
-            return Optional.of(fromSettings(AllSettings.instanceFromId(context, widgetId)));
+            return Optional.of(fromSettings(AllSettings.instanceFromId(context, widgetId), false));
         }
     }
 
-    public static WidgetData fromSettings(InstanceSettings settings) {
+    public static WidgetData fromSettingsForBackup(InstanceSettings settings) {
+        return fromSettings(settings, true);
+    }
+
+    private static WidgetData fromSettings(InstanceSettings settings, boolean forBackup) {
         JSONObject json = new JSONObject();
         try {
             json.put(KEY_DEVICE_INFO, getDeviceInfo());
             json.put(KEY_APP_INFO, getAppInfo(settings.getContext()));
-            json.put(KEY_SETTINGS, settings.toJson());
+            json.put(KEY_SETTINGS, forBackup ? settings.toJsonForBackup() : settings.toJsonComplete());
         } catch (JSONException e) {
             Log.w(TAG,"fromSettings failed; " + settings, e);
         }
