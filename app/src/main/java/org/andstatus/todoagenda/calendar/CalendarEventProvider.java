@@ -233,10 +233,14 @@ public class CalendarEventProvider extends EventProvider {
             return eventSources;
         }
 
+        int idIdx = cursor.getColumnIndex(CalendarContract.Calendars._ID);
+        int nameIdx = cursor.getColumnIndex(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME);
+        int summaryIdx = cursor.getColumnIndex(CalendarContract.Calendars.ACCOUNT_NAME);
+        int colorIdx = cursor.getColumnIndex(CalendarContract.Calendars.CALENDAR_COLOR);
         for (int i = 0; i < cursor.getCount(); i++) {
             cursor.moveToPosition(i);
-            EventSource source = new EventSource(cursor.getInt(0), cursor.getString(1),
-                    cursor.getString(3), cursor.getInt(2));
+            EventSource source = new EventSource(cursor.getInt(idIdx), cursor.getString(nameIdx),
+                    cursor.getString(summaryIdx), cursor.getInt(colorIdx));
             eventSources.add(source);
         }
         return eventSources;
