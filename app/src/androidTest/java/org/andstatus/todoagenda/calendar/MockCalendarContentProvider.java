@@ -33,7 +33,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_WIDGET_ID;
-import static org.andstatus.todoagenda.provider.QueryResultsStorage.KEY_SETTINGS;
+import static org.andstatus.todoagenda.provider.WidgetData.KEY_SETTINGS;
 
 /**
  * @author yvolk@yurivolkov.com
@@ -78,10 +78,7 @@ public class MockCalendarContentProvider extends MockContentProvider {
         Log.i(getClass().getSimpleName(), "Default Time zone set to " + zone);
 
         InstanceSettings settings = AllSettings.instanceFromId(context, widgetId.incrementAndGet());
-        JSONObject json = settings.toJson();
-        JSONArray allSettingsJsonArray = new JSONArray();
-        allSettingsJsonArray.put(json);
-        AllSettings.loadFromTestData(context, allSettingsJsonArray);
+        AllSettings.loadFromTestData(context, settings);
     }
 
     public void tearDown() {

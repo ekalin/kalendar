@@ -157,14 +157,24 @@
     <string name="task_lists_pref_summary">Select the task lists to display</string>
 
     <!-- Preference header: Feedback -->
-    <string name="feedback_prefs">Feedback</string>
-    <string name="feedback_prefs_desc">Get in touch with us</string>
+    <string name="feedback_backup_prefs">Feedback and Backup</string>
+    <string name="feedback_backup_prefs_desc">Get in touch with us, backup and restore settings</string>
     <string name="feedback_github_desc">Provide feedback on the project page</string>
     <string name="feedback_github_title">Visit widget on Github</string>
     <string name="feedback_play_store_desc">Rate and comment on Google Play Store</string>
     <string name="feedback_play_store_title">Visit widget on Google Play Store</string>
     <string name="refresh_desc">Refresh</string>
-    <string name="share_events_for_debugging_desc">Create a report to help developers troubleshoot problems</string>
-    <string name="share_events_for_debugging_title">Share events for debugging</string>
+    <string name="share_events_for_debugging_desc">Create a report to help developers troubleshoot problems.
+        Before sharing please filter events to protect your privacy but still demonstrate a problem</string>
+    <string name="share_events_settings_for_debugging_title">Share events and settings for debugging</string>
+    <string name="backup_settings_title">Backup settings</string>
+    <string name="backup_settings_desc">Export this widget\'s settings to a file</string>
+    <string name="restore_settings_title">Restore settings from a backup</string>
+    <string name="restore_settings_desc">Import saved settings. Settings of each ToDo Agenda widget should be imported separately</string>
+    <string name="backup_settings_successful">Settings backed up</string>
+    <string name="backup_settings_error">Error while writing settings to %1$s\n%2$s</string>
+    <string name="restore_settings_successful">Settings restored</string>
+    <string name="restore_settings_unsuccessful">Could not restore settings</string>
+    <string name="restore_settings_error">Error while reading settings from %1$s\n%2$s</string>
 
 </resources>

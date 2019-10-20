@@ -1,10 +1,8 @@
 package org.andstatus.todoagenda.util;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Color;
-import android.os.Build;
 import android.util.Log;
 import android.util.TypedValue;
 import android.widget.RemoteViews;
@@ -18,41 +16,28 @@ public class RemoteViewsUtil {
     private static final String METHOD_SET_BACKGROUND_COLOR = "setBackgroundColor";
     private static final String METHOD_SET_SINGLE_LINE = "setSingleLine";
     private static final String METHOD_SET_ALPHA = "setAlpha";
-    private static final String METHOD_SET_COLOR_FILTER = "setColorFilter";
     private static final String METHOD_SET_WIDTH = "setWidth";
-    private static final String METHOD_SET_HEIGHT = "setHeight";
 
     private RemoteViewsUtil() {
         // prohibit instantiation
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public static void setPadding(InstanceSettings settings, RemoteViews rv, @IdRes int viewId,
                                   @DimenRes int leftDimenId, @DimenRes int topDimenId, @DimenRes int rightDimenId,
                                   @DimenRes int bottomDimenId) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            int leftPadding = getScaledValueInPixels(settings, leftDimenId);
-            int topPadding = getScaledValueInPixels(settings, topDimenId);
-            int rightPadding = getScaledValueInPixels(settings, rightDimenId);
-            int bottomPadding = getScaledValueInPixels(settings, bottomDimenId);
-            rv.setViewPadding(viewId, leftPadding, topPadding, rightPadding, bottomPadding);
-        }
+        int leftPadding = getScaledValueInPixels(settings, leftDimenId);
+        int topPadding = getScaledValueInPixels(settings, topDimenId);
+        int rightPadding = getScaledValueInPixels(settings, rightDimenId);
+        int bottomPadding = getScaledValueInPixels(settings, bottomDimenId);
+        rv.setViewPadding(viewId, leftPadding, topPadding, rightPadding, bottomPadding);
     }
 
     public static void setAlpha(RemoteViews rv, int viewId, int alpha) {
         rv.setInt(viewId, METHOD_SET_ALPHA, alpha);
     }
 
-    public static void setColorFilter(RemoteViews rv, int viewId, int color) {
-        rv.setInt(viewId, METHOD_SET_COLOR_FILTER, color);
-    }
-
     public static void setViewWidth(InstanceSettings settings, RemoteViews rv, int viewId, int dimenId) {
         rv.setInt(viewId, METHOD_SET_WIDTH, getScaledValueInPixels(settings, dimenId));
-    }
-
-    public static void setViewHeight(InstanceSettings settings, RemoteViews rv, int viewId, int dimenId) {
-        rv.setInt(viewId, METHOD_SET_HEIGHT, getScaledValueInPixels(settings, dimenId));
     }
 
     public static void setTextSize(InstanceSettings settings, RemoteViews rv, int viewId, int dimenId) {

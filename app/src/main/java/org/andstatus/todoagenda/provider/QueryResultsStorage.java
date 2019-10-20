@@ -2,9 +2,6 @@ package org.andstatus.todoagenda.provider;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -13,6 +10,7 @@ import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.DateUtil;
+import org.andstatus.todoagenda.util.Optional;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.json.JSONArray;
@@ -27,27 +25,17 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class QueryResultsStorage {
     private static final String TAG = QueryResultsStorage.class.getSimpleName();
+
     private static final String KEY_RESULTS_VERSION = "resultsVersion";
     private static final int RESULTS_VERSION = 2;
     private static final String KEY_CALENDAR_RESULTS = "results";
     private static final String KEY_TASK_RESULTS = "taskResults";
-    private static final String KEY_APP_VERSION_NAME = "versionName";
-    private static final String KEY_APP_VERSION_CODE = "versionCode";
-    private static final String KEY_APP_INFO = "applicationInfo";
-    public static final String KEY_SETTINGS = "settings";
-
-    private static final String KEY_DEVICE_INFO = "deviceInfo";
-    private static final String KEY_ANDROID_VERSION_CODE = "versionCode";
-    private static final String KEY_ANDROID_VERSION_RELEASE = "versionRelease";
-    private static final String KEY_ANDROID_VERSION_CODENAME = "versionCodename";
-    private static final String KEY_ANDROID_MANUFACTURE = "buildManufacturer";
-    private static final String KEY_ANDROID_BRAND = "buildBrand";
-    private static final String KEY_ANDROID_MODEL = "buildModel";
 
     private static volatile QueryResultsStorage theStorage = null;
 
     private final List<QueryResult> calendarResults = new CopyOnWriteArrayList<>();
     private final List<QueryResult> taskResults = new CopyOnWriteArrayList<>();
+
 
     public static boolean storeCalendar(QueryResult result) {
         QueryResultsStorage storage = theStorage;
@@ -74,16 +62,17 @@ public class QueryResultsStorage {
             setNeedToStoreResults(true);
             EventRemoteViewsFactory factory = new EventRemoteViewsFactory(context, widgetId);
             factory.onDataSetChanged();
-            String results = theStorage.getResultsAsString(context, widgetId);
+            String results = theStorage.toJsonString(context, widgetId);
             if (TextUtils.isEmpty(results)) {
                 Log.i(TAG, method + "; Nothing to share");
             } else {
+                String fileName = "Todo_Agenda-" + widgetId + ".json";
                 Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_SUBJECT, TAG);
+                intent.setType("application/json");
+                intent.putExtra(Intent.EXTRA_SUBJECT, fileName);
                 intent.putExtra(Intent.EXTRA_TEXT, results);
                 context.startActivity(
-                        Intent.createChooser(intent, context.getText(R.string.share_events_for_debugging_title)));
+                        Intent.createChooser(intent, context.getText(R.string.share_events_settings_for_debugging_title)));
                 Log.i(TAG, method + "; Shared " + results);
             }
         } finally {
@@ -115,7 +104,7 @@ public class QueryResultsStorage {
         return taskResults;
     }
 
-    private String getResultsAsString(Context context, int widgetId) {
+    private String toJsonString(Context context, int widgetId) {
         try {
             return toJson(context, widgetId).toString(2);
         } catch (JSONException e) {
@@ -124,11 +113,8 @@ public class QueryResultsStorage {
     }
 
     public JSONObject toJson(Context context, int widgetId) throws JSONException {
-        JSONObject json = new JSONObject();
+        JSONObject json = WidgetData.fromWidgetId(context, widgetId).map(WidgetData::toJson).orElse(new JSONObject());
         json.put(KEY_RESULTS_VERSION, RESULTS_VERSION);
-        json.put(KEY_DEVICE_INFO, getDeviceInfo());
-        json.put(KEY_APP_INFO, getAppInfo(context));
-        json.put(KEY_SETTINGS, AllSettings.instanceFromId(context, widgetId).toJson());
         json.put(KEY_CALENDAR_RESULTS, getResultsArray(widgetId, this.calendarResults));
         json.put(KEY_TASK_RESULTS, getResultsArray(widgetId, this.taskResults));
         return json;
@@ -145,7 +131,12 @@ public class QueryResultsStorage {
     }
 
     public static QueryResultsStorage fromTestData(Context context, JSONObject json) throws JSONException {
-        InstanceSettings settings = InstanceSettings.fromJson(context, json.getJSONObject(KEY_SETTINGS));
+        Optional<InstanceSettings> opSettings =  WidgetData.fromJson(json).flatMap(data -> data.getSettings(context));
+        if (!opSettings.isPresent()) {
+            throw new IllegalStateException("fromTestData without settings");
+        }
+        InstanceSettings settings = opSettings.get();
+
         AllSettings.getInstances(context).put(settings.getWidgetId(), settings);
         QueryResultsStorage results = new QueryResultsStorage();
         readResults(json, KEY_CALENDAR_RESULTS, settings.getWidgetId(), results.calendarResults);
@@ -167,31 +158,6 @@ public class QueryResultsStorage {
         for (int ind = 0; ind < jsonResults.length(); ind++) {
             results.add(QueryResult.fromJson(jsonResults.getJSONObject(ind), widgetId));
         }
-    }
-
-    private static JSONObject getAppInfo(Context context) throws JSONException {
-        JSONObject json = new JSONObject();
-        try {
-            PackageManager pm = context.getPackageManager();
-            PackageInfo pi = pm.getPackageInfo(context.getApplicationContext().getPackageName(), 0);
-            json.put(KEY_APP_VERSION_NAME, pi.versionName);
-            json.put(KEY_APP_VERSION_CODE, pi.versionCode);
-        } catch (PackageManager.NameNotFoundException e) {
-            json.put(KEY_APP_VERSION_NAME, "Unable to obtain package information " + e);
-            json.put(KEY_APP_VERSION_CODE, -1);
-        }
-        return json;
-    }
-
-    private static JSONObject getDeviceInfo() throws JSONException {
-        JSONObject json = new JSONObject();
-        json.put(KEY_ANDROID_VERSION_CODE, Build.VERSION.SDK_INT);
-        json.put(KEY_ANDROID_VERSION_RELEASE, Build.VERSION.RELEASE);
-        json.put(KEY_ANDROID_VERSION_CODENAME, Build.VERSION.CODENAME);
-        json.put(KEY_ANDROID_MANUFACTURE, Build.MANUFACTURER);
-        json.put(KEY_ANDROID_BRAND, Build.BRAND);
-        json.put(KEY_ANDROID_MODEL, Build.MODEL);
-        return json;
     }
 
     @Override

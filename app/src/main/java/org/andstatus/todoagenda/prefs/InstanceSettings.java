@@ -13,6 +13,7 @@ import org.andstatus.todoagenda.TextSizeScale;
 import org.andstatus.todoagenda.Theme;
 import org.andstatus.todoagenda.task.TaskProvider;
 import org.andstatus.todoagenda.util.DateUtil;
+import org.andstatus.todoagenda.util.Optional;
 import org.andstatus.todoagenda.widget.EventEntryLayout;
 import org.joda.time.DateTimeZone;
 import org.json.JSONArray;
@@ -126,105 +127,113 @@ public class InstanceSettings {
     static final String PREF_ACTIVE_TASK_LISTS = "activeTaskLists";
     private Set<String> activeTaskLists = Collections.emptySet();
 
-    // Feedback
-    static final String KEY_SHARE_EVENTS_FOR_DEBUGGING = "shareEventsForDebugging";
-
-    public static InstanceSettings fromJson(Context context, JSONObject json) throws JSONException {
-        InstanceSettings settings = new InstanceSettings(context, json.optInt(PREF_WIDGET_ID),
-                json.optString(PREF_WIDGET_INSTANCE_NAME));
-        if (settings.widgetId == 0) {
-            return settings;
+    public static Optional<InstanceSettings> fromJson(Context context, JSONObject json) {
+        int widgetId = json.optInt(PREF_WIDGET_ID);
+        if (widgetId == 0) {
+            return Optional.empty();
         }
 
-        if (json.has(PREF_TEXT_SIZE_SCALE)) {
-            settings.textSizeScale = TextSizeScale.fromPreferenceValue(json.getString(PREF_TEXT_SIZE_SCALE));
-        }
-        if (json.has(PREF_EVENT_ENTRY_LAYOUT)) {
-            settings.eventEntryLayout = EventEntryLayout.fromValue(json.getString(PREF_EVENT_ENTRY_LAYOUT));
-        }
-        if (json.has(PREF_MULTILINE_TITLE)) {
-            settings.titleMultiline = json.getBoolean(PREF_MULTILINE_TITLE);
-        }
-        if (json.has(PREF_DATE_FORMAT)) {
-            settings.dateFormat = json.getString(PREF_DATE_FORMAT);
-        }
-        if (json.has(PREF_ABBREVIATE_DATES)) {
-            settings.abbreviateDates = json.getBoolean(PREF_ABBREVIATE_DATES);
-        }
-        if (json.has(PREF_SHOW_DAY_HEADERS)) {
-            settings.showDayHeaders = json.getBoolean(PREF_SHOW_DAY_HEADERS);
-        }
-        if (json.has(PREF_DAY_HEADER_ALIGNMENT)) {
-            settings.dayHeaderAlignment = json.getString(PREF_DAY_HEADER_ALIGNMENT);
-        }
-        if (json.has(PREF_SHOW_DAYS_WITHOUT_EVENTS)) {
-            settings.showDaysWithoutEvents = json.getBoolean(PREF_SHOW_DAYS_WITHOUT_EVENTS);
-        }
-        if (json.has(PREF_SHOW_WIDGET_HEADER)) {
-            settings.showWidgetHeader = json.getBoolean(PREF_SHOW_WIDGET_HEADER);
-        }
-        if (json.has(PREF_LOCKED_TIME_ZONE_ID)) {
-            settings.setLockedTimeZoneId(json.getString(PREF_LOCKED_TIME_ZONE_ID));
-        }
+        return Optional.of(fromJsonForWidget(context, widgetId, json));
+    }
 
-        if (json.has(PREF_HEADER_THEME)) {
-            settings.headerTheme = json.getString(PREF_HEADER_THEME);
-        }
-        if (json.has(PREF_BACKGROUND_COLOR)) {
-            settings.backgroundColor = json.getInt(PREF_BACKGROUND_COLOR);
-        }
-        if (json.has(PREF_PAST_EVENTS_BACKGROUND_COLOR)) {
-            settings.pastEventsBackgroundColor = json.getInt(PREF_PAST_EVENTS_BACKGROUND_COLOR);
-        }
-        if (json.has(PREF_ENTRY_THEME)) {
-            settings.entryTheme = json.getString(PREF_ENTRY_THEME);
-        }
-
-        if (json.has(PREF_SHOW_END_TIME)) {
-            settings.showEndTime = json.getBoolean(PREF_SHOW_END_TIME);
-        }
-        if (json.has(PREF_SHOW_LOCATION)) {
-            settings.showLocation = json.getBoolean(PREF_SHOW_LOCATION);
-        }
-        if (json.has(PREF_FILL_ALL_DAY)) {
-            settings.fillAllDayEvents = json.getBoolean(PREF_FILL_ALL_DAY);
-        }
-        if (json.has(PREF_INDICATE_ALERTS)) {
-            settings.indicateAlerts = json.getBoolean(PREF_INDICATE_ALERTS);
-        }
-        if (json.has(PREF_INDICATE_RECURRING)) {
-            settings.indicateRecurring = json.getBoolean(PREF_INDICATE_RECURRING);
-        }
-
-        if (json.has(PREF_EVENTS_ENDED)) {
-            settings.eventsEnded = EndedSomeTimeAgo.fromValue(json.getString(PREF_EVENTS_ENDED));
-        }
-        if (json.has(PREF_SHOW_PAST_EVENTS_WITH_DEFAULT_COLOR)) {
-            settings.showPastEventsWithDefaultColor = json.getBoolean(PREF_SHOW_PAST_EVENTS_WITH_DEFAULT_COLOR);
-        }
-        if (json.has(PREF_EVENT_RANGE)) {
-            settings.eventRange = json.getInt(PREF_EVENT_RANGE);
-        }
-        if (json.has(PREF_HIDE_BASED_ON_KEYWORDS)) {
-            settings.hideBasedOnKeywords = json.getString(PREF_HIDE_BASED_ON_KEYWORDS);
-        }
-        if (json.has(PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT)) {
-            settings.showOnlyClosestInstanceOfRecurringEvent = json.getBoolean(
-                    PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT);
-        }
-
-        if (json.has(PREF_ACTIVE_CALENDARS)) {
-            settings.activeCalendars = jsonArray2StringSet(json.getJSONArray(PREF_ACTIVE_CALENDARS));
-        }
-
-        if (json.has(PREF_TASK_SOURCE)) {
-            settings.taskSource = json.getString(PREF_TASK_SOURCE);
-        }
-        if (json.has(PREF_ACTIVE_TASK_LISTS)) {
-            settings.activeTaskLists = jsonArray2StringSet(json.getJSONArray(PREF_ACTIVE_TASK_LISTS));
-        }
-
+    public static InstanceSettings fromJsonForWidget(Context context, int targetWidgetId, JSONObject json) {
+        InstanceSettings settings = new InstanceSettings(context, targetWidgetId, json.optString(PREF_WIDGET_INSTANCE_NAME));
+        settings.setFromJson(json);
         return settings;
+    }
+
+    private void setFromJson(JSONObject json) {
+        try {
+            if (json.has(PREF_TEXT_SIZE_SCALE)) {
+                textSizeScale = TextSizeScale.fromPreferenceValue(json.getString(PREF_TEXT_SIZE_SCALE));
+            }
+            if (json.has(PREF_EVENT_ENTRY_LAYOUT)) {
+                eventEntryLayout = EventEntryLayout.fromValue(json.getString(PREF_EVENT_ENTRY_LAYOUT));
+            }
+            if (json.has(PREF_MULTILINE_TITLE)) {
+                titleMultiline = json.getBoolean(PREF_MULTILINE_TITLE);
+            }
+            if (json.has(PREF_DATE_FORMAT)) {
+                dateFormat = json.getString(PREF_DATE_FORMAT);
+            }
+            if (json.has(PREF_ABBREVIATE_DATES)) {
+                abbreviateDates = json.getBoolean(PREF_ABBREVIATE_DATES);
+            }
+            if (json.has(PREF_SHOW_DAY_HEADERS)) {
+                showDayHeaders = json.getBoolean(PREF_SHOW_DAY_HEADERS);
+            }
+            if (json.has(PREF_DAY_HEADER_ALIGNMENT)) {
+                dayHeaderAlignment = json.getString(PREF_DAY_HEADER_ALIGNMENT);
+            }
+            if (json.has(PREF_SHOW_DAYS_WITHOUT_EVENTS)) {
+                showDaysWithoutEvents = json.getBoolean(PREF_SHOW_DAYS_WITHOUT_EVENTS);
+            }
+            if (json.has(PREF_SHOW_WIDGET_HEADER)) {
+                showWidgetHeader = json.getBoolean(PREF_SHOW_WIDGET_HEADER);
+            }
+            if (json.has(PREF_LOCKED_TIME_ZONE_ID)) {
+                setLockedTimeZoneId(json.getString(PREF_LOCKED_TIME_ZONE_ID));
+            }
+
+            if (json.has(PREF_HEADER_THEME)) {
+                headerTheme = json.getString(PREF_HEADER_THEME);
+            }
+            if (json.has(PREF_BACKGROUND_COLOR)) {
+                backgroundColor = json.getInt(PREF_BACKGROUND_COLOR);
+            }
+            if (json.has(PREF_PAST_EVENTS_BACKGROUND_COLOR)) {
+                pastEventsBackgroundColor = json.getInt(PREF_PAST_EVENTS_BACKGROUND_COLOR);
+            }
+            if (json.has(PREF_ENTRY_THEME)) {
+                entryTheme = json.getString(PREF_ENTRY_THEME);
+            }
+
+            if (json.has(PREF_SHOW_END_TIME)) {
+                showEndTime = json.getBoolean(PREF_SHOW_END_TIME);
+            }
+            if (json.has(PREF_SHOW_LOCATION)) {
+                showLocation = json.getBoolean(PREF_SHOW_LOCATION);
+            }
+            if (json.has(PREF_FILL_ALL_DAY)) {
+                fillAllDayEvents = json.getBoolean(PREF_FILL_ALL_DAY);
+            }
+            if (json.has(PREF_INDICATE_ALERTS)) {
+                indicateAlerts = json.getBoolean(PREF_INDICATE_ALERTS);
+            }
+            if (json.has(PREF_INDICATE_RECURRING)) {
+                indicateRecurring = json.getBoolean(PREF_INDICATE_RECURRING);
+            }
+
+            if (json.has(PREF_EVENTS_ENDED)) {
+                eventsEnded = EndedSomeTimeAgo.fromValue(json.getString(PREF_EVENTS_ENDED));
+            }
+            if (json.has(PREF_SHOW_PAST_EVENTS_WITH_DEFAULT_COLOR)) {
+                showPastEventsWithDefaultColor = json.getBoolean(PREF_SHOW_PAST_EVENTS_WITH_DEFAULT_COLOR);
+            }
+            if (json.has(PREF_EVENT_RANGE)) {
+                eventRange = json.getInt(PREF_EVENT_RANGE);
+            }
+            if (json.has(PREF_HIDE_BASED_ON_KEYWORDS)) {
+                hideBasedOnKeywords = json.getString(PREF_HIDE_BASED_ON_KEYWORDS);
+            }
+            if (json.has(PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT)) {
+                showOnlyClosestInstanceOfRecurringEvent = json.getBoolean(
+                        PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT);
+            }
+
+            if (json.has(PREF_ACTIVE_CALENDARS)) {
+                activeCalendars = jsonArray2StringSet(json.getJSONArray(PREF_ACTIVE_CALENDARS));
+            }
+
+            if (json.has(PREF_TASK_SOURCE)) {
+                taskSource = json.getString(PREF_TASK_SOURCE);
+            }
+            if (json.has(PREF_ACTIVE_TASK_LISTS)) {
+                activeTaskLists = jsonArray2StringSet(json.getJSONArray(PREF_ACTIVE_TASK_LISTS));
+            }
+        } catch (JSONException e) {
+            Log.w(InstanceSettings.class.getSimpleName(), "setFromJson failed, widgetId:" + widgetId + "\n" + json);
+        }
     }
 
     private static Set<String> jsonArray2StringSet(JSONArray jsonArray) {
@@ -305,13 +314,21 @@ public class InstanceSettings {
         }
         logMe(InstanceSettings.class, "save", widgetId);
         try {
-            saveJson(context, getStorageKey(widgetId), toJson());
+            saveJson(context, getStorageKey(widgetId), toJsonComplete());
         } catch (IOException e) {
             Log.e("save", toString(), e);
         }
     }
 
-    public JSONObject toJson() {
+    public JSONObject toJsonForBackup() {
+        return toJson(false);
+    }
+
+    public JSONObject toJsonComplete() {
+        return toJson(true);
+    }
+
+    private JSONObject toJson(boolean complete) {
         JSONObject json = new JSONObject();
         try {
             json.put(PREF_WIDGET_ID, widgetId);
@@ -344,10 +361,14 @@ public class InstanceSettings {
             json.put(PREF_HIDE_BASED_ON_KEYWORDS, hideBasedOnKeywords);
             json.put(PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT, showOnlyClosestInstanceOfRecurringEvent);
 
-            json.put(PREF_ACTIVE_CALENDARS, new JSONArray(activeCalendars));
+            if (complete) {
+                json.put(PREF_ACTIVE_CALENDARS, new JSONArray(activeCalendars));
+            }
 
             json.put(PREF_TASK_SOURCE, taskSource);
-            json.put(PREF_ACTIVE_TASK_LISTS, new JSONArray(activeTaskLists));
+            if (complete) {
+                json.put(PREF_ACTIVE_TASK_LISTS, new JSONArray(activeTaskLists));
+            }
         } catch (JSONException e) {
             throw new RuntimeException("Saving settings to JSON", e);
         }
@@ -512,7 +533,7 @@ public class InstanceSettings {
     }
 
     public void logMe(Class tag, String message, int widgetId) {
-        Log.v(tag.getSimpleName(), message + ", widgetId:" + widgetId + "\n" + toJson());
+        Log.v(tag.getSimpleName(), message + ", widgetId:" + widgetId + "\n" + toJsonComplete());
     }
 
     @Override
@@ -521,11 +542,11 @@ public class InstanceSettings {
         if (o == null || getClass() != o.getClass()) return false;
 
         InstanceSettings settings = (InstanceSettings) o;
-        return toJson().toString().equals(settings.toJson().toString());
+        return toJsonComplete().toString().equals(settings.toJsonComplete().toString());
     }
 
     @Override
     public int hashCode() {
-        return toJson().toString().hashCode();
+        return toJsonComplete().toString().hashCode();
     }
 }

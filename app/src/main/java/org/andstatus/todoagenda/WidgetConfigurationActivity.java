@@ -3,22 +3,45 @@ package org.andstatus.todoagenda;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
+import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.prefs.PreferencesFragment;
+import org.andstatus.todoagenda.prefs.SettingsStorage;
+import org.andstatus.todoagenda.provider.WidgetData;
+import org.andstatus.todoagenda.util.Optional;
 import org.andstatus.todoagenda.util.PermissionsUtil;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 
 public class WidgetConfigurationActivity extends AppCompatActivity
         implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
     private static final String TITLE_TAG = "org.andstatus.todoagenda.PREFS_TITLE";
 
+    public static final int REQUEST_ID_RESTORE_SETTINGS = 1;
+    public static final int REQUEST_ID_BACKUP_SETTINGS = 2;
+
     private int widgetId = 0;
+    private boolean saveOnPause = true;
 
     @NonNull
     public static Intent intentToStartMe(Context context, int widgetId) {
@@ -99,8 +122,10 @@ public class WidgetConfigurationActivity extends AppCompatActivity
     @Override
     protected void onPause() {
         super.onPause();
-        ApplicationPreferences.save(this, widgetId);
-        EnvironmentChangedReceiver.updateWidget(this, widgetId);
+        if (saveOnPause) {
+            ApplicationPreferences.save(this, widgetId);
+            EnvironmentChangedReceiver.updateWidget(this, widgetId);
+        }
     }
 
     @Override
@@ -130,6 +155,81 @@ public class WidgetConfigurationActivity extends AppCompatActivity
         } else {
             finish();
             return true;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_ID_BACKUP_SETTINGS:
+                if (resultCode == RESULT_OK && data != null) {
+                    backupSettings(data.getData());
+                }
+                break;
+
+            case REQUEST_ID_RESTORE_SETTINGS:
+                if (resultCode == RESULT_OK && data != null) {
+                    restoreSettings(data.getData());
+                }
+                break;
+
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
+        }
+    }
+
+    private void backupSettings(Uri uri) {
+        if (uri == null) {
+            return;
+        }
+
+        InstanceSettings settings = AllSettings.instanceFromId(this, widgetId);
+        String jsonSettings = WidgetData.fromSettingsForBackup(settings).toJsonString();
+        try (OutputStream out = this.getContentResolver().openOutputStream(uri, "w");
+             Writer writer = new BufferedWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8))) {
+            writer.write(jsonSettings);
+            Toast.makeText(this, getText(R.string.backup_settings_successful), Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            String msg = getString(R.string.backup_settings_error, uri, e.getMessage());
+            Log.e(this.getClass().getSimpleName(), msg, e);
+            Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void restoreSettings(Uri uri) {
+        if (uri == null) {
+            return;
+        }
+
+        Optional<JSONObject> jsonObject = readJson(uri);
+        if (!jsonObject.isPresent()) {
+            // A toast with the error has already been shown, so exit early
+            return;
+        }
+
+        final WidgetConfigurationActivity context = WidgetConfigurationActivity.this;
+        if (AllSettings.restoreWidgetSettings(context, jsonObject.get(), widgetId)) {
+            saveOnPause = false;
+            int duration = 3000;
+            Toast.makeText(context, context.getText(R.string.restore_settings_successful), Toast.LENGTH_LONG).show();
+            new Handler().postDelayed(() -> {
+                startActivity(intentToStartMe(context, widgetId));
+                context.finish();
+            }, duration);
+        } else {
+            Toast.makeText(context, context.getText(R.string.restore_settings_unsuccessful), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private Optional<JSONObject> readJson(Uri uri) {
+        try (InputStream in = getContentResolver().openInputStream(uri)) {
+            return Optional.of(new JSONObject(SettingsStorage.getContents(in)));
+        } catch (IOException | JSONException e) {
+            String msg = getString(R.string.restore_settings_error, uri, e.getMessage());
+            Log.e(this.getClass().getSimpleName(), msg, e);
+            Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+            return Optional.empty();
         }
     }
 }
