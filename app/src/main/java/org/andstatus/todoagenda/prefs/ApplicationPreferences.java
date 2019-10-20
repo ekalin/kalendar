@@ -211,8 +211,8 @@ public class ApplicationPreferences {
     }
 
     public static int getEventRange(Context context) {
-        return Integer.valueOf(PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(PREF_EVENT_RANGE, PREF_EVENT_RANGE_DEFAULT));
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return parseIntSafe(prefs.getString(PREF_EVENT_RANGE, PREF_EVENT_RANGE_DEFAULT));
     }
 
     public static void setEventRange(Context context, int value) {
@@ -303,5 +303,13 @@ public class ApplicationPreferences {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(key, value);
         editor.apply();
+    }
+
+    private static int parseIntSafe(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 }
