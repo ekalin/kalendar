@@ -32,11 +32,11 @@ and be a part of the next release. :)
 ## Features
 
 * No advertising. Free and Open Source.
-* Displays all events from your calendars and task lists. Optionally shows past events.
+* Displays events from your calendars and task lists for the selected period. Optionally shows past events.
 * Automatically updates when you add/delete/modify an event. Or you may update the list instantly.
-* Select only the calendars you want to see in the widget.
-* Create several widgets, if you need. Each widget will have its own settings, including filters 
-and selected calendars.
+* Select only the calendars and task lists that you want to see in the widget.
+* Create several widgets, if you need. Each widget has its own settings, including layouts, filters 
+and selected calendars and task lists.
 * Customize colors of the widget background and texts.
 * Scroll through the list of upcoming events.
 * Customize the text size of the widget.
@@ -44,6 +44,7 @@ and selected calendars.
 * Indicators for alerts and recurring events.
 * Lock time zone when travelling to different time zones.
 * Turn off Day headers and see dates in the "Days from today" column.
+* Backup and restore settings, cloning widgets on the same or different devices.
 * Android 4.4+ supported. Supports Android tablets.
 
 Note on Tasks support: As there is no unified way to access tasks created in different applications, 
@@ -68,8 +69,8 @@ We are also looking for new and improved translations over at http://crowdin.net
 * [Text size scaling improved](https://github.com/plusonelabs/calendar-widget/issues/301) - Now size of text in all parts
   of the widget changes, when you change "Text size" option.
 * [Backup and Restore widget settings](https://github.com/plusonelabs/calendar-widget/issues/330). 
-  Convenient for cloning settings to another widget. 
-  Good for moving widget settings to another device, but requires calendars selection adjustment.  
+  Convenient for cloning settings to another widget on the same device. 
+  Good for moving widget settings to another device, but may require calendars selection adjustment in this case.  
 * Hopefully fixed intermittent "No events" display instead of actual list of events. 
   Separate "[ToDo Agenda Not Initialized yet...](https://github.com/plusonelabs/calendar-widget/issues/318)" layout added 
   to see the widget, when it is not initialized yet (e.g. after device reboot).
