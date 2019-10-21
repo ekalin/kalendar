@@ -36,23 +36,16 @@ public class QueryResultsStorage {
     private final List<QueryResult> calendarResults = new CopyOnWriteArrayList<>();
     private final List<QueryResult> taskResults = new CopyOnWriteArrayList<>();
 
-
-    public static boolean storeCalendar(QueryResult result) {
-        QueryResultsStorage storage = theStorage;
-        if (storage != null) {
-            storage.calendarResults.add(result);
-            return (storage == theStorage);
+    public static void storeCalendar(QueryResult result) {
+        if (theStorage != null) {
+            theStorage.calendarResults.add(result);
         }
-        return false;
     }
 
-    public static boolean storeTask(QueryResult result) {
-        QueryResultsStorage storage = theStorage;
-        if (storage != null) {
-            storage.taskResults.add(result);
-            return (storage == theStorage);
+    public static void storeTask(QueryResult result) {
+        if (theStorage != null) {
+            theStorage.taskResults.add(result);
         }
-        return false;
     }
 
     public static void shareEventsForDebugging(Context context, int widgetId) {
