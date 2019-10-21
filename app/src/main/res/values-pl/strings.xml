@@ -135,14 +135,18 @@
     <string name="ended_yesterday">Zakończyły się wczoraj</string>
     <string name="pref_hide_based_on_keywords_title">Ukryj gdy zawiera określone słowa kluczowe w tytule</string>
     <string name="show_only_closest_instance_of_recurring_event">Wyświetlaj tylko najbliższe wystąpienia powtarzającego się wydarzenia</string>
-    <!-- Preference header: Feedback -->
-    <string name="feedback_prefs">Opinia</string>
-    <string name="feedback_prefs_desc">Skontaktuj się z nami</string>
+    <!-- Preference header: Feedback and Backup -->
+    <string name="feedback_backup_prefs">Opinia i kopia zapasowa</string>
+    <string name="feedback_backup_prefs_desc">Skontaktuj się z nami, kopia zapasowa i przywracanie ustawień</string>
     <string name="feedback_github_desc">Wyraź swoją opinię na stronie projektu</string>
     <string name="feedback_github_title">Odwiedź widżet na stronie Github</string>
     <string name="feedback_play_store_desc">Oceń i skomentuj w sklepie Google Play</string>
     <string name="feedback_play_store_title">Odwiedź widżet w Sklep Google Play</string>
     <string name="refresh_desc">Odśwież</string>
-    <string name="share_events_for_debugging_desc">Utworzy raport, aby pomóc programistom w rozwiązaniu problemu</string>
-    <string name="share_events_for_debugging_title">Udostępnij wydarzenia do debugowania</string>
+    <string name="share_events_settings_for_debugging_title">Udostępniaj wydarzenia i ustawienia do sprawdzania błędów</string>
+    <string name="share_events_for_debugging_desc">Stwórz raport aby pomóc programistom rozpoznać problem. Przed udostępnieniem raportu ukryj wszystkie twoje prywatne dane, ale postaraj się zrobić to tak aby raport nadal przedstawiał problem</string>
+    <string name="backup_settings_title">Ustawienia kopii zapasowej</string>
+    <string name="backup_settings_desc">To samo co \"Udostępnij wydarzenia do sprawdzania błędów\", ale nie zawiera danych wydarzeń</string>
+    <string name="restore_settings_title">Przywróć ustawienia z kopii zapasowej</string>
+    <string name="restore_settings_desc">Ustawienia z każdego widgetu powinny być przywracanie pojedynczo</string>
 </resources>

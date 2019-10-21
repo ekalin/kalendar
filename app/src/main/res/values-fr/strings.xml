@@ -7,6 +7,8 @@
     <string name="yesterday">Hier</string>
     <string name="today">Aujourd’hui</string>
     <string name="tomorrow">Demain</string>
+    <string name="not_initialized_yet">Pas encore initialisé...</string>
+    <string name="no_events_to_show">Aucun événement à afficher</string>
     <string name="no_upcoming_events">Aucun événement à venir</string>
     <string name="open_prefs_desc">Ouvrir les paramètres du widget calendrier</string>
     <string name="add_event_desc">Ajouter un nouvel événement</string>
@@ -20,6 +22,7 @@
     <string name="select_a_widget_to_configure">Sélectionner un widget à configurer</string>
     <string name="close">Fermer</string>
     <string name="go_to_home_screen">Aller à l\'écran d\'accueil</string>
+    <string name="loading_with_dots">Chargement en cours...</string>
     <!-- Descriptions for app markets -->
     <string name="app_description_80_chars_max">Widgets affichant les listes des événements à venir (et anciens&#8230;) des calendriers sélectionnés</string>
     <string name="app_description_4000_chars_max_part01">Todo Agenda est un widget d\'écran d\'accueil pour votre appareil Android. Il affiche une liste des prochains événements du calendrier
@@ -40,6 +43,8 @@
     <!-- Preference header: Calendars and Task Lists -->
     <string name="calendars_prefs">Calendriers</string>
     <string name="calendars_prefs_desc">Choisir les calendriers à afficher</string>
+    <string name="task_source_opentasks">OpenTasks (par dmfs GmbH)</string>
+    <string name="task_source_samsung">Calendrier Samsung</string>
     <!-- Preference header: Other -->
     <string name="appearance_text_size_title">Taille de police</string>
     <string name="appearance_text_size_desc">Ajuster la taille de police</string>
@@ -59,6 +64,8 @@
     <string name="appearance_abbreviate_dates_title">Dates abrégées</string>
     <string name="appearance_abbreviate_dates_desc">Utiliser un format de 3 lettres pour les dates du Widget, les en-têtes des Jours, etc.</string>
     <!-- Preference header: Layout -->
+    <string name="layout_prefs_desc">Positionnez,, affichez et masquez les éléments du widget</string>
+    <string name="layout_prefs_title">Disposition</string>
     <string name="pref_event_entry_layout_title">Disposition des événements</string>
     <string name="default_multiline_layout">Heure en-dessous du titre</string>
     <string name="single_line_layout">Tout sur la même ligne</string>

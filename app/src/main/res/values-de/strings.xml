@@ -8,7 +8,7 @@
     <string name="today">Heute</string>
     <string name="tomorrow">Morgen</string>
     <string name="not_initialized_yet">Noch nicht initialisiert...</string>
-    <string name="no_events_to_show">Keine Ereignisse vorhanden</string>
+    <string name="no_events_to_show">Keine Termine vorhanden</string>
     <string name="no_upcoming_events">Keine anstehenden Termine</string>
     <string name="open_prefs_desc">Öffne die Einstellungen des Kalender-Widget</string>
     <string name="add_event_desc">Neuen Kalendereintrag erstellen</string>
@@ -16,9 +16,11 @@
     <string name="indicator_recurring">Hinweis ob das Ereignis wiederkehrend ist</string>
     <string name="no_title">(Kein Titel)</string>
     <string name="grant_permissions">Berechtigung erteilen</string>
-    <string name="grant_permissions_verbose">Das Widget erfordert die Berechtigung deinen Kalender zu lesen. \nKlicke hier um die Berechtigung zu erteilen.</string>
-    <string name="permissions_justification">Willkommen bei Todo Agenda, dem einfachen Zugriff auf deinen Kalender.\n\nUm das Widget zu nutzen musst du Zugriff auf deinen Kalender gewähren.</string>
-    <string name="no_widgets_found">Füge Todo Agenda dem Startbildschirm des Gerätes hinzu.</string>
+    <string name="grant_permissions_verbose">Das Widget erfordert die Berechtigung deinen Kalender zu lesen.\n
+        Klicke hier, um die Berechtigung zu erteilen.</string>
+    <string name="permissions_justification">Willkommen bei Todo Agenda, dem einfachen Zugriff auf deine Kalender und Aufgaben.\n\n
+        Um das Widget bestmöglich zu nutzen, musst du Zugriff auf deine Kalender und Aufgaben gewähren.</string>
+    <string name="no_widgets_found">Füge zuerst das \"Todo Agenda\"-Widget dem Startbildschirm des Gerätes hinzu.</string>
     <string name="select_a_widget_to_configure">Wähle ein Widget zur Konfiguration aus</string>
     <string name="close">Schließen</string>
     <string name="go_to_home_screen">Zum Startbildschirm</string>
@@ -42,7 +44,7 @@
     <string name="app_description_4000_chars_max_part14">Android 4 bis 7 unterstützt. Unterstützt Android Tablets.</string>
     <!-- Preference header: Calendars and Task Lists -->
     <string name="calendars_prefs">Kalender</string>
-    <string name="calendars_prefs_desc">Wählen Sie die anzuzeigenden Kalender</string>
+    <string name="calendars_prefs_desc">Die anzuzeigenden Kalender wählen</string>
     <string name="task_source_opentasks">OpenTasks (von dmfs GmbH)</string>
     <string name="task_source_samsung">Samsung Calendar</string>
     <!-- Preference header: Other -->
@@ -136,14 +138,19 @@
     <string name="ended_yesterday">Gestern geendet</string>
     <string name="pref_hide_based_on_keywords_title">Ausblenden basierend auf Schlüsselwörtern in Titel</string>
     <string name="show_only_closest_instance_of_recurring_event">Zeigen nur den nächsten Eintrag eines wiederholenden Ereignisses</string>
-    <!-- Preference header: Feedback -->
-    <string name="feedback_prefs">Feedback</string>
-    <string name="feedback_prefs_desc">Kontakt mit uns aufnehmen</string>
+    <!-- Preference header: Feedback and Backup -->
+    <string name="feedback_backup_prefs">Feedback und Sicherung</string>
+    <string name="feedback_backup_prefs_desc">Mit uns in Kontakt treten, Einstellungen sichern und wiederherstellen</string>
     <string name="feedback_github_desc">Feedback auf der Projektseite hinterlassen</string>
     <string name="feedback_github_title">Widget auf Github</string>
     <string name="feedback_play_store_desc">Bewerten und kommentieren im Google Play-Shop</string>
     <string name="feedback_play_store_title">Widget im Google Play-Store</string>
     <string name="refresh_desc">Aktualisieren</string>
-    <string name="share_events_for_debugging_desc">Erstelle Bericht um dem Entwicklerteam bei Problembehebungen zu helfen</string>
-    <string name="share_events_for_debugging_title">Versende Bericht zur Problembehebung</string>
+    <string name="share_events_for_debugging_desc">Erstelle einen Bericht, um Entwicklern beim Beheben von Problemen zu helfen.
+        Bevor du ihn teilst, filtere bitte die Termine, sodass deine Privatsphäre geschützt ist, aber das Problem noch dargestellt wird</string>
+    <string name="share_events_settings_for_debugging_title">Termine und Einstellungen zum Debuggen teilen</string>
+    <string name="backup_settings_title">Einstellungen sichern</string>
+    <string name="backup_settings_desc">Das gleiche wie \"Termine für Debugging teilen\", aber enthält nicht Termine</string>
+    <string name="restore_settings_title">Einstellungen aus einer Sicherung wiederherstellen</string>
+    <string name="restore_settings_desc">Einstellungen jedes Todo-Agenda-Widgets sollten getrennt wiederhergestellt werden</string>
 </resources>

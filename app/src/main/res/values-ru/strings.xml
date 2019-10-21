@@ -135,14 +135,18 @@
     <string name="ended_yesterday">Завершились вчера</string>
     <string name="pref_hide_based_on_keywords_title">Скрыть при начичии ключевых слов в названии</string>
     <string name="show_only_closest_instance_of_recurring_event">Показать только ближайший экземпляр повторяющегося события</string>
-    <!-- Preference header: Feedback -->
-    <string name="feedback_prefs">Обратная связь</string>
-    <string name="feedback_prefs_desc">Свяжитесь с нами</string>
+    <!-- Preference header: Feedback and Backup -->
+    <string name="feedback_backup_prefs">Обратная связь и Резервное копирование</string>
+    <string name="feedback_backup_prefs_desc">Свяжитесь с нами, Резервное копирование и восстановление настроек</string>
     <string name="feedback_github_desc">Оставить отзыв на сайте проекта</string>
     <string name="feedback_github_title">Виджет на Github</string>
     <string name="feedback_play_store_desc">Рейтинг и комментарии на Google Play Store</string>
     <string name="feedback_play_store_title">Виджет на Google Play Store</string>
     <string name="refresh_desc">Обновить</string>
-    <string name="share_events_for_debugging_desc">Создать отчёт, который поможет разработчикам устранить проблемы</string>
-    <string name="share_events_for_debugging_title">Поделиться событиями виджета для отладки разработчиками</string>
+    <string name="share_events_for_debugging_desc">Создайте отчёт, который поможет разработчикам устранить проблемы. А перед этим, пожалуйста, отфильтруйте события так, чтобы защитить вашу приватность, но чтобы проблема всё ещё была видна</string>
+    <string name="share_events_settings_for_debugging_title">Поделиться событиями и настройками для отладки</string>
+    <string name="backup_settings_title">Создать резервную копию настроек</string>
+    <string name="backup_settings_desc">То же самое, что \"Поделиться событиями и настройками для отладки\", только без событий</string>
+    <string name="restore_settings_title">Восстановить настройки из резервной копии</string>
+    <string name="restore_settings_desc">Настройки каждого виджета ToDo Agenda должны быть восстановлены отдельно</string>
 </resources>
