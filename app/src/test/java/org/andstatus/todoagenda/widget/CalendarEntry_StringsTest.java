@@ -6,7 +6,9 @@ import android.text.format.DateUtilsMock;
 
 import org.andstatus.todoagenda.calendar.CalendarEvent;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
+import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,8 +34,11 @@ public class CalendarEntry_StringsTest {
 
     @Before
     public void setup() {
-        final DateTime startTime = DateTime.now().plusHours(1);
-        final DateTime endTime = DateTime.now().plusHours(2);
+        DateTime now = new DateTime(2019, 8, 10, 12, 0);
+        DateUtil.setNow(now);
+
+        final DateTime startTime = now.plusHours(1);
+        final DateTime endTime = now.plusHours(2);
 
         Mockito.lenient().when(event.getStartDate()).thenReturn(startTime);
         Mockito.lenient().when(event.getEndDate()).thenReturn(endTime);
@@ -176,5 +181,10 @@ public class CalendarEntry_StringsTest {
         CalendarEntry entry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(entry.getLocationString()).isEqualTo(location);
+    }
+
+    @After
+    public void unsetDate() {
+        DateUtil.setNow(null);
     }
 }

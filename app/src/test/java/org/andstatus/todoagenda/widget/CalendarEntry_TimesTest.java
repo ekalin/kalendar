@@ -6,6 +6,8 @@ import org.andstatus.todoagenda.calendar.CalendarEvent;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -15,7 +17,13 @@ public class CalendarEntry_TimesTest {
     private final Context context = Mockito.mock(Context.class);
     private final int widgetId = 1;
     private final DateTimeZone zone = DateTimeZone.getDefault();
-    private final DateTime now = DateUtil.now(zone);
+    private DateTime now;
+
+    @Before
+    public void setupDateTime() {
+        now = new DateTime(2019, 8, 10, 12, 0);
+        DateUtil.setNow(now);
+    }
 
     @Test
     public void isCurrent_forCurrentEvent_returnsTrue() {
@@ -89,5 +97,10 @@ public class CalendarEntry_TimesTest {
         CalendarEntry calendarEntry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(calendarEntry.getNextUpdateTime()).isNull();
+    }
+
+    @After
+    public void unsetDate() {
+        DateUtil.setNow(null);
     }
 }
