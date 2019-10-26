@@ -121,7 +121,6 @@
     <string name="event_range_three_months">Tres mesos</string>
     <string name="event_range_six_months">Sis mesos</string>
     <string name="event_range_one_year">Un any</string>
-    <string name="show_past_events_with_default_color_title">Mostra tots els esdeveniments passats que tenen el color predeterminat</string>
     <string name="this_option_is_turned_off">(desactivat)</string>
     <string name="pref_events_ended_title">Mostra els esdeveniments que han finalitzat recentment</string>
     <string name="ended_one_hour_ago">Finalitzats fa una hora</string>

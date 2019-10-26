@@ -93,7 +93,6 @@
     <string name="event_range_three_months">Kolm kuud</string>
     <string name="event_range_six_months">Kuus kuud</string>
     <string name="event_range_one_year">Üks aasta</string>
-    <string name="show_past_events_with_default_color_title">Näita kõik möödunud sündmused vaikevärviga</string>
     <string name="this_option_is_turned_off">(pole kasutusel)</string>
     <string name="pref_events_ended_title">Näita äsja möödunud sündmused</string>
     <string name="ended_one_hour_ago">Lõppenud tund aega tagasi</string>

@@ -76,7 +76,6 @@
     <string name="event_range_three_months">Три месеца</string>
     <string name="event_range_six_months">Шест месеца</string>
     <string name="event_range_one_year">Една година</string>
-    <string name="show_past_events_with_default_color_title">Покажи всички минали събития с цвят по подразбиране</string>
     <string name="this_option_is_turned_off">(изключено)</string>
     <string name="pref_events_ended_title">Покажи събития, които са приключили скоро</string>
     <string name="ended_one_hour_ago">Завършили преди един час</string>

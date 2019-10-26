@@ -98,7 +98,6 @@
     <string name="event_range_three_months">Üç ay</string>
     <string name="event_range_six_months">Altı ay</string>
     <string name="event_range_one_year">Bir il</string>
-    <string name="show_past_events_with_default_color_title">İlkin rəngə sahib olan bütün keçmiş tədbirləri göstər</string>
     <string name="this_option_is_turned_off">(sıradan çıxarıldı)</string>
     <string name="pref_events_ended_title">Təzəlikcə bitmiş tədbirləri göstər</string>
     <string name="ended_one_hour_ago">Bir saat əvvəl bitdi</string>

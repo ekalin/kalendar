@@ -40,7 +40,6 @@ import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_SHOW_END_TIME
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_SHOW_LOCATION;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_SHOW_LOCATION_DEFAULT;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT;
-import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_SHOW_PAST_EVENTS_WITH_DEFAULT_COLOR;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_SHOW_WIDGET_HEADER;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_TASK_SOURCE;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_TASK_SOURCE_DEFAULT;
@@ -81,7 +80,6 @@ public class ApplicationPreferences {
             setBoolean(context, PREF_INDICATE_RECURRING, settings.getIndicateRecurring());
 
             setEventsEnded(context, settings.getEventsEnded());
-            setShowPastEventsWithDefaultColor(context, settings.getShowPastEventsWithDefaultColor());
             setEventRange(context, settings.getEventRange());
             setHideBasedOnKeywords(context, settings.getHideBasedOnKeywords());
             setShowOnlyClosestInstanceOfRecurringEvent(context, settings.getShowOnlyClosestInstanceOfRecurringEvent());
@@ -192,15 +190,6 @@ public class ApplicationPreferences {
 
     public static void setEventsEnded(Context context, EndedSomeTimeAgo value) {
         setString(context, PREF_EVENTS_ENDED, value.save());
-    }
-
-    public static boolean getShowPastEventsWithDefaultColor(Context context) {
-        return PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean(PREF_SHOW_PAST_EVENTS_WITH_DEFAULT_COLOR, false);
-    }
-
-    public static void setShowPastEventsWithDefaultColor(Context context, boolean value) {
-        setBoolean(context, PREF_SHOW_PAST_EVENTS_WITH_DEFAULT_COLOR, value);
     }
 
     public static int getEventRange(Context context) {

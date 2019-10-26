@@ -105,7 +105,6 @@
     <string name="event_range_three_months">三个月</string>
     <string name="event_range_six_months">六个月</string>
     <string name="event_range_one_year">一年</string>
-    <string name="show_past_events_with_default_color_title">默认颜色显示已过期日程</string>
     <string name="this_option_is_turned_off">关闭</string>
     <string name="pref_events_ended_title">显示最近结束的日程</string>
     <string name="ended_one_hour_ago">已结束一小时</string>

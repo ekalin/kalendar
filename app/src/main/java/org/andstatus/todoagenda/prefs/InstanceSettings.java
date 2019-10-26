@@ -101,8 +101,6 @@ public class InstanceSettings {
     // Event filters
     static final String PREF_EVENTS_ENDED = "eventsEnded";
     private EndedSomeTimeAgo eventsEnded = EndedSomeTimeAgo.NONE;
-    static final String PREF_SHOW_PAST_EVENTS_WITH_DEFAULT_COLOR = "showPastEventsWithDefaultColor";
-    private boolean showPastEventsWithDefaultColor = false;
     static final String PREF_EVENT_RANGE = "eventRange";
     static final String PREF_EVENT_RANGE_DEFAULT = "30";
     private int eventRange = Integer.parseInt(PREF_EVENT_RANGE_DEFAULT);
@@ -201,9 +199,6 @@ public class InstanceSettings {
             if (json.has(PREF_EVENTS_ENDED)) {
                 eventsEnded = EndedSomeTimeAgo.fromValue(json.getString(PREF_EVENTS_ENDED));
             }
-            if (json.has(PREF_SHOW_PAST_EVENTS_WITH_DEFAULT_COLOR)) {
-                showPastEventsWithDefaultColor = json.getBoolean(PREF_SHOW_PAST_EVENTS_WITH_DEFAULT_COLOR);
-            }
             if (json.has(PREF_EVENT_RANGE)) {
                 eventRange = json.getInt(PREF_EVENT_RANGE);
             }
@@ -274,7 +269,6 @@ public class InstanceSettings {
             settings.indicateRecurring = ApplicationPreferences.getBoolean(context, PREF_INDICATE_RECURRING, false);
 
             settings.eventsEnded = ApplicationPreferences.getEventsEnded(context);
-            settings.showPastEventsWithDefaultColor = ApplicationPreferences.getShowPastEventsWithDefaultColor(context);
             settings.eventRange = ApplicationPreferences.getEventRange(context);
             settings.hideBasedOnKeywords = ApplicationPreferences.getHideBasedOnKeywords(context);
             settings.showOnlyClosestInstanceOfRecurringEvent = ApplicationPreferences
@@ -348,7 +342,6 @@ public class InstanceSettings {
             json.put(PREF_INDICATE_RECURRING, indicateRecurring);
 
             json.put(PREF_EVENTS_ENDED, eventsEnded.save());
-            json.put(PREF_SHOW_PAST_EVENTS_WITH_DEFAULT_COLOR, showPastEventsWithDefaultColor);
             json.put(PREF_EVENT_RANGE, eventRange);
             json.put(PREF_HIDE_BASED_ON_KEYWORDS, hideBasedOnKeywords);
             json.put(PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT, showOnlyClosestInstanceOfRecurringEvent);
@@ -482,10 +475,6 @@ public class InstanceSettings {
         return eventsEnded;
     }
 
-    public boolean getShowPastEventsWithDefaultColor() {
-        return showPastEventsWithDefaultColor;
-    }
-
     public int getEventRange() {
         return eventRange;
     }
@@ -511,9 +500,7 @@ public class InstanceSettings {
     }
 
     public boolean noPastEvents() {
-        return !getShowPastEventsWithDefaultColor()
-                && getEventsEnded() == EndedSomeTimeAgo.NONE
-                && noTaskSources();
+        return getEventsEnded() == EndedSomeTimeAgo.NONE && noTaskSources();
     }
 
     private boolean noTaskSources() {

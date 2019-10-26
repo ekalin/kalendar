@@ -7,11 +7,6 @@
             app:defaultValue="NONE"
             app:entries="@array/pref_events_ended_entries"
             app:entryValues="@array/pref_events_ended_values" />
-
-        <org.andstatus.todoagenda.prefs.MultilineCheckBoxPreference
-            app:key="showPastEventsWithDefaultColor"
-            app:title="@string/show_past_events_with_default_color_title"
-            app:defaultValue="false" />
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/current_and_future_events">

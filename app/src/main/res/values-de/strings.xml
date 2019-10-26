@@ -123,7 +123,6 @@
     <string name="event_range_three_months">Drei Monate</string>
     <string name="event_range_six_months">Sechs Monate</string>
     <string name="event_range_one_year">Ein Jahr</string>
-    <string name="show_past_events_with_default_color_title">Zeige alle vergangenen Termine mit Standardfarbe</string>
     <string name="this_option_is_turned_off">(deaktiviert)</string>
     <string name="pref_events_ended_title">Zeige Termine die vor kurzem geendet sind</string>
     <string name="ended_one_hour_ago">Vor einer Stunden geendet</string>

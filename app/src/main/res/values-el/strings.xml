@@ -93,7 +93,6 @@
     <string name="event_range_three_months">Τρεις μήνες</string>
     <string name="event_range_six_months">Έξι μήνες</string>
     <string name="event_range_one_year">Ένα έτος</string>
-    <string name="show_past_events_with_default_color_title">Εμφάνιση όλων των περασμένων εκδηλώσεων που έχουν το προεπιλεγμένο χρώμα</string>
     <string name="this_option_is_turned_off">(Ανενεργό)</string>
     <string name="pref_events_ended_title">Εμφάνιση των συμβάντων που έληξαν πρόσφατα</string>
     <string name="ended_one_hour_ago">Έληξαν πριν μία ώρα</string>

@@ -93,7 +93,6 @@
     <string name="event_range_three_months">3 mesiace</string>
     <string name="event_range_six_months">6 mesiacov</string>
     <string name="event_range_one_year">1 rok</string>
-    <string name="show_past_events_with_default_color_title">Zobraziť všetky skončené udalosti so základnou farbou</string>
     <string name="this_option_is_turned_off">(vypnuté)</string>
     <string name="pref_events_ended_title">Zobraziť nedávno skončené udalosti</string>
     <string name="ended_one_hour_ago">Pred 1 hodinou</string>

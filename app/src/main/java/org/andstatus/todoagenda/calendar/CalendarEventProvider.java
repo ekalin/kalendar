@@ -47,22 +47,10 @@ public class CalendarEventProvider extends EventProvider {
             return new ArrayList<>();
         }
         List<CalendarEvent> eventList = getTimeFilteredEventList();
-        if (getSettings().getShowPastEventsWithDefaultColor()) {
-            addPastEventsWithDefaultColor(eventList);
-        }
         if (getSettings().getShowOnlyClosestInstanceOfRecurringEvent()) {
             filterShowOnlyClosestInstanceOfRecurringEvent(eventList);
         }
         return eventList;
-    }
-
-    private void addPastEventsWithDefaultColor(List<CalendarEvent> eventList) {
-        for (CalendarEvent event : getPastEventsWithColorList()) {
-            if (eventList.contains(event)) {
-                eventList.remove(event);
-            }
-            eventList.add(event);
-        }
     }
 
     private void filterShowOnlyClosestInstanceOfRecurringEvent(@NonNull List<CalendarEvent> eventList) {
@@ -184,27 +172,6 @@ public class CalendarEventProvider extends EventProvider {
         columnNames.add(Instances.RRULE);
         columnNames.add(Instances.DISPLAY_COLOR);
         return columnNames.toArray(new String[0]);
-    }
-
-    private List<CalendarEvent> getPastEventsWithColorList() {
-        Uri.Builder builder = Instances.CONTENT_URI.buildUpon();
-        ContentUris.appendId(builder, 0);
-        ContentUris.appendId(builder, DateUtil.now(zone).getMillis());
-        List<CalendarEvent> eventList = queryList(builder.build(), getPastEventsWithColorSelection());
-        for (CalendarEvent event : eventList) {
-            event.setDefaultCalendarColor();
-        }
-        return eventList;
-    }
-
-    private String getPastEventsWithColorSelection() {
-        StringBuilder stringBuilder = new StringBuilder(getCalendarSelection());
-        stringBuilder.append(AND_BRACKET);
-        stringBuilder.append(Instances.DISPLAY_COLOR);
-        stringBuilder.append(EQUALS);
-        stringBuilder.append(Instances.CALENDAR_COLOR);
-        stringBuilder.append(CLOSING_BRACKET);
-        return stringBuilder.toString();
     }
 
     private CalendarEvent createCalendarEvent(Cursor cursor) {

@@ -111,7 +111,6 @@
     <string name="event_range_three_months">Tiga bulan</string>
     <string name="event_range_six_months">Enam bulan</string>
     <string name="event_range_one_year">Satu tahun</string>
-    <string name="show_past_events_with_default_color_title">Tampilkan semua acara yang lalu dengan warna standar</string>
     <string name="this_option_is_turned_off">(nonaktifkan)</string>
     <string name="pref_events_ended_title">Tampilkan acara yang baru saja selesai</string>
     <string name="ended_one_hour_ago">Selesai sejam yang lalu</string>

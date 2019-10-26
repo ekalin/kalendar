@@ -22,7 +22,6 @@ public class CalendarEvent {
     private DateTime startDate;
     private DateTime endDate;
     private int color;
-    private boolean mHasDefaultCalendarColor;
     private String location;
     private boolean alarmActive;
     private boolean recurring;
@@ -147,14 +146,6 @@ public class CalendarEvent {
         this.color = color;
     }
 
-    public boolean hasDefaultCalendarColor() {
-        return mHasDefaultCalendarColor;
-    }
-
-    public void setDefaultCalendarColor() {
-        mHasDefaultCalendarColor = true;
-    }
-
     public boolean isAllDay() {
         return allDay;
     }
@@ -190,7 +181,6 @@ public class CalendarEvent {
                 + ", startDate=" + getStartDate()
                 + (endDate != null ? ", endDate=" + endDate : "")
                 + ", color=" + color
-                + (mHasDefaultCalendarColor ? " is default" : "")
                 + ", allDay=" + allDay
                 + ", alarmActive=" + alarmActive
                 + ", recurring=" + recurring

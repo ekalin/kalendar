@@ -102,7 +102,6 @@
     <string name="event_range_three_months">Kraḍ n wagguren</string>
     <string name="event_range_six_months">Sḍis n wagguren</string>
     <string name="event_range_one_year">Yiwen n useggas</string>
-    <string name="show_past_events_with_default_color_title">Sken akk tidyanin izrin yesɛan initen imezwar</string>
     <string name="this_option_is_turned_off">(insa)</string>
     <string name="pref_events_ended_title">Sken tidyanin aken kan ara yefaken</string>
     <string name="ended_one_hour_ago">Ifuk yiwen n usrag aya</string>

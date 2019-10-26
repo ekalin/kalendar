@@ -42,7 +42,6 @@ public class BirthdayTest extends InstrumentationTestCase {
 
         provider.startEditing();
         ApplicationPreferences.setEventsEnded(provider.getContext(), EndedSomeTimeAgo.NONE);
-        ApplicationPreferences.setShowPastEventsWithDefaultColor(provider.getContext(), false);
         ApplicationPreferences.setEventRange(provider.getContext(), 30);
         provider.saveSettings();
 
@@ -82,10 +81,6 @@ public class BirthdayTest extends InstrumentationTestCase {
         playAtOneTime(inputs, dateTime(2015, 9, 10, 17, 0), 2);
         playAtOneTime(inputs, dateTime(2015, 9, 10, 23, 30), 2);
         playAtOneTime(inputs, dateTime(2015, 9, 11, 0, 0), 0);
-        playAtOneTime(inputs, dateTime(2015, 9, 11, 0, 30), 0);
-
-        ApplicationPreferences.setShowPastEventsWithDefaultColor(provider.getContext(), true);
-        provider.saveSettings();
         playAtOneTime(inputs, dateTime(2015, 9, 11, 0, 30), 0);
 
         // TODO: This doesn't work yet. We need to inject a MockCalendarContentProvider deeper,

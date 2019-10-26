@@ -76,7 +76,6 @@
     <string name="event_range_three_months">三個月</string>
     <string name="event_range_six_months">六個月</string>
     <string name="event_range_one_year">一年</string>
-    <string name="show_past_events_with_default_color_title">顯示所有有預設顏色的過去活動</string>
     <string name="this_option_is_turned_off">(禁用)</string>
     <string name="pref_events_ended_title">顯示近期完結的活動</string>
     <string name="ended_one_hour_ago">一小時前完結</string>

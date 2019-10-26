@@ -76,7 +76,6 @@
     <string name="event_range_three_months">Tre måneder</string>
     <string name="event_range_six_months">Seks måneder</string>
     <string name="event_range_one_year">Et år</string>
-    <string name="show_past_events_with_default_color_title">Vis alle tidligere aftaler med standardfarve</string>
     <string name="this_option_is_turned_off">(Slået fra)</string>
     <string name="pref_events_ended_title">Vis aftaler, der sluttede for nylig</string>
     <string name="ended_one_hour_ago">Sluttede for en time siden</string>

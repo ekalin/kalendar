@@ -111,8 +111,7 @@ public class CalendarEventVisualizer extends WidgetEntryVisualizer<CalendarEntry
         DateTime firstDate = event.getStartDate();
         DateTime dayOfStartOfTimeRange = calendarContentProvider.getStartOfTimeRange()
                 .withTimeAtStartOfDay();
-        if (!event.hasDefaultCalendarColor()
-                && firstDate.isBefore(calendarContentProvider.getStartOfTimeRange())
+        if (firstDate.isBefore(calendarContentProvider.getStartOfTimeRange())
                 && event.getEndDate().isAfter(calendarContentProvider.getStartOfTimeRange())) {
             if (event.isAllDay() || firstDate.isBefore(dayOfStartOfTimeRange)) {
                 firstDate = dayOfStartOfTimeRange;

@@ -67,7 +67,6 @@
     "showDaysWithoutEvents": false,
     "hideBasedOnKeywords": "",
     "eventRange": 30,
-    "showPastEventsWithDefaultColor": false,
     "fillAllDay": true,
     "eventsEnded": "NONE"
   },

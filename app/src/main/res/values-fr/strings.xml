@@ -120,7 +120,6 @@
     <string name="event_range_three_months">Trois mois</string>
     <string name="event_range_six_months">Six mois</string>
     <string name="event_range_one_year">Un an</string>
-    <string name="show_past_events_with_default_color_title">Montrer tout événement passé ayant la couleur par défaut</string>
     <string name="this_option_is_turned_off">(désactivé)</string>
     <string name="pref_events_ended_title">Montrer les événements récemment terminés</string>
     <string name="ended_one_hour_ago">Terminé il y a une heure</string>
