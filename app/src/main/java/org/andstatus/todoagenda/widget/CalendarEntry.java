@@ -1,8 +1,6 @@
 package org.andstatus.todoagenda.widget;
 
-import android.content.Context;
 import android.text.TextUtils;
-import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 
 import org.andstatus.todoagenda.R;
@@ -111,8 +109,7 @@ public class CalendarEntry extends WidgetEntry {
     }
 
     public String getEventTimeString() {
-        return hideEventTime() ? "" :
-                createTimeSpanString(getSettings().getContext());
+        return hideEventTime() ? "" : createTimeSpanString();
     }
 
     private boolean hideEventTime() {
@@ -120,7 +117,7 @@ public class CalendarEntry extends WidgetEntry {
                 || (isAllDay() && getSettings().getFillAllDayEvents());
     }
 
-    private String createTimeSpanString(Context context) {
+    private String createTimeSpanString() {
         if (isAllDay() && !getSettings().getFillAllDayEvents()) {
             DateTime dateTime = getEvent().getEndDate().minusDays(1);
             if (isEndOfMultiDayEvent()) {
@@ -129,11 +126,11 @@ public class CalendarEntry extends WidgetEntry {
                 return ARROW_SPACE + DateUtil.createDateString(getSettings(), dateTime);
             }
         } else {
-            return createTimeStringForCalendarEntry(context);
+            return createTimeStringForCalendarEntry();
         }
     }
 
-    private String createTimeStringForCalendarEntry(Context context) {
+    private String createTimeStringForCalendarEntry() {
         String startStr;
         String endStr;
         String separator = SPACE_DASH_SPACE;
@@ -142,7 +139,7 @@ public class CalendarEntry extends WidgetEntry {
             startStr = ARROW_SPACE;
             separator = EMPTY_STRING;
         } else {
-            startStr = createTimeString(context, getStartDate());
+            startStr = createTimeString(getStartDate());
         }
         if (getSettings().getShowEndTime()) {
             if (isPartOfMultiDayEvent() && DateUtil.isMidnight(getEndDate())
@@ -150,7 +147,7 @@ public class CalendarEntry extends WidgetEntry {
                 endStr = SPACE_ARROW;
                 separator = EMPTY_STRING;
             } else {
-                endStr = createTimeString(context, getEndDate());
+                endStr = createTimeString(getEndDate());
             }
         } else {
             separator = EMPTY_STRING;
@@ -164,15 +161,8 @@ public class CalendarEntry extends WidgetEntry {
         return startStr + separator + endStr;
     }
 
-    private String createTimeString(Context context, DateTime time) {
-        String dateFormat = getSettings().getDateFormat();
-        if (!DateFormat.is24HourFormat(context) && dateFormat.equals(AUTO)
-                || dateFormat.equals(TWELVE)) {
-            return DateUtil.formatDateTime(getSettings(), time,
-                    DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_12HOUR);
-        }
-        return DateUtil.formatDateTime(getSettings(), time,
-                DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_24HOUR);
+    private String createTimeString(DateTime time) {
+        return DateUtil.formatDateTime(getSettings(), time, DateUtils.FORMAT_SHOW_TIME);
     }
 
     public String getLocationString() {

@@ -13,7 +13,6 @@ public class DateUtils {
     public static final int FORMAT_SHOW_TIME = 0x00001;
     public static final int FORMAT_SHOW_WEEKDAY = 0x00002;
     public static final int FORMAT_SHOW_DATE = 0x00010;
-    public static final int FORMAT_24HOUR = 0x00080;
     public static final int FORMAT_ABBREV_ALL = 0x80000;
 
     public static String formatDateTime(Context context, long millis, int flags) {

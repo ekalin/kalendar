@@ -26,14 +26,6 @@
         app:title="@string/appearance_multiline_title_title"
         app:defaultValue="false" />
 
-    <ListPreference
-        app:key="dateFormat"
-        app:title="@string/appearance_date_format_title"
-        app:summary="@string/appearance_date_format_desc"
-        app:defaultValue="auto"
-        app:entries="@array/pref_date_format_entries"
-        app:entryValues="@array/pref_date_format_values" />
-
     <CheckBoxPreference
         app:key="abbreviateDates"
         app:title="@string/appearance_abbreviate_dates_title"

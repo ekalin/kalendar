@@ -28,11 +28,6 @@
     <string name="appearance_text_size_medium">Keskikokoinen</string>
     <string name="appearance_text_size_large">Suuri</string>
     <string name="appearance_text_size_very_large">Erittäin suuri</string>
-    <string name="appearance_date_format_desc">Käytetäänkö 12h vai 24h muotoa?</string>
-    <string name="appearance_date_format_title">Päiväyksen muoto</string>
-    <string name="appearance_date_format_auto">Automaattinen</string>
-    <string name="appearance_date_format_24">17.00</string>
-    <string name="appearance_date_format_12">5.00 ip</string>
     <string name="lock_time_zone_off_desc">Ei lukittu, nykyinen aikavyöhyke: %s</string>
     <string name="lock_time_zone_on_desc">Lukittu: %s</string>
     <string name="lock_time_zone_title">Lukitse aikavyöhyke</string>

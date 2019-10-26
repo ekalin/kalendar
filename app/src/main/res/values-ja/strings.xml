@@ -52,11 +52,6 @@
     <string name="appearance_text_size_medium">中</string>
     <string name="appearance_text_size_large">大</string>
     <string name="appearance_text_size_very_large">特大</string>
-    <string name="appearance_date_format_desc">午前/午後もしくは 24 時間形式で時刻を表示します。</string>
-    <string name="appearance_date_format_title">時刻の形式</string>
-    <string name="appearance_date_format_auto">自動</string>
-    <string name="appearance_date_format_24">17:00</string>
-    <string name="appearance_date_format_12">5:00PM</string>
     <string name="lock_time_zone_off_desc">ロック解除されました。現在のゾーン: %s</string>
     <string name="lock_time_zone_on_desc">%s でロックされています</string>
     <string name="lock_time_zone_title">タイム ゾーンをロック</string>

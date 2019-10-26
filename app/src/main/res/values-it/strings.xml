@@ -33,11 +33,6 @@
     <string name="appearance_text_size_medium">Medio</string>
     <string name="appearance_text_size_large">Grande</string>
     <string name="appearance_text_size_very_large">Molto grande</string>
-    <string name="appearance_date_format_desc">Visualizza il tempo in formato am/pm o 24 ore</string>
-    <string name="appearance_date_format_title">Formato ora</string>
-    <string name="appearance_date_format_auto">Automatico</string>
-    <string name="appearance_date_format_24">17:00</string>
-    <string name="appearance_date_format_12">5:00 pm</string>
     <string name="lock_time_zone_off_desc">Sbloccato, fuso corrente: %s</string>
     <string name="lock_time_zone_on_desc">Bloccato a %s</string>
     <string name="lock_time_zone_title">Blocca fuso orario</string>

@@ -52,11 +52,6 @@ Randevularınıza kolayca göz atmanız için yaklaşan takvim etkinliklerinin b
     <string name="appearance_text_size_medium">Orta</string>
     <string name="appearance_text_size_large">Büyük</string>
     <string name="appearance_text_size_very_large">Çok büyük</string>
-    <string name="appearance_date_format_desc">Zamanı öö/ös veya 24 saatlik formatta göster</string>
-    <string name="appearance_date_format_title">Tarih formatı</string>
-    <string name="appearance_date_format_auto">Otomatik</string>
-    <string name="appearance_date_format_24">17:00</string>
-    <string name="appearance_date_format_12">17:00 ös</string>
     <string name="lock_time_zone_off_desc">Kilit açıldı, geçerli bölge:%s</string>
     <string name="lock_time_zone_on_desc">%s\'de kitlendi</string>
     <string name="lock_time_zone_title">Saat dilimini kilitle</string>

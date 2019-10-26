@@ -28,11 +28,6 @@
     <string name="appearance_text_size_medium">Μεσαίο</string>
     <string name="appearance_text_size_large">Μεγάλο</string>
     <string name="appearance_text_size_very_large">Πολύ μεγάλο</string>
-    <string name="appearance_date_format_desc">Εμφάνιση ώρας σε μορφή π.μ./μ.μ. ή 24ωρη</string>
-    <string name="appearance_date_format_title">Μορφή ημερομηνίας</string>
-    <string name="appearance_date_format_auto">Αυτόματο</string>
-    <string name="appearance_date_format_24">17:00</string>
-    <string name="appearance_date_format_12">5:00 μ.μ</string>
     <string name="lock_time_zone_off_desc">Ξεκλειδωμένο, τρέχουσα ζώνη: %s</string>
     <string name="lock_time_zone_on_desc">Κλειδωμένο στο %s</string>
     <string name="lock_time_zone_title">Κλείδωμα ζώνης ώρας</string>

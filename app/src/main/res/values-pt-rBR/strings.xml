@@ -60,11 +60,6 @@
   <string name="single_line_layout">Tudo em uma linha</string>
   <string name="appearance_multiline_title_title">Título em múltiplas linhas</string>
   <string name="appearance_multiline_title_desc">Distribuir título por múltiplas linhas</string>
-  <string name="appearance_date_format_desc">Mostrar a hora no formato am/pm ou 24 horas</string>
-  <string name="appearance_date_format_title">Formato da data</string>
-  <string name="appearance_date_format_auto">Automático</string>
-  <string name="appearance_date_format_24">17:00</string>
-  <string name="appearance_date_format_12">5:00 pm</string>
   <string name="appearance_show_days_without_events_title">Exibir dias sem eventos</string>
   <string name="appearance_show_days_without_events_desc">Exibir cabeçalho para dias sem eventos</string>
   <string name="appearance_show_day_headers_title">Mostrar dias</string>

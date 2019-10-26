@@ -45,13 +45,12 @@ public class CalendarEntry_StringsTest {
         Mockito.lenient().when(event.getSettings()).thenReturn(settings);
 
         Mockito.lenient().when(settings.getContext()).thenReturn(context);
-        Mockito.lenient().when(settings.getDateFormat()).thenReturn("auto");
 
         Mockito.lenient().when(DateUtilsMock.INSTANCE.formatDateTime(context,
-                startTime.getMillis(), DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_24HOUR))
+                startTime.getMillis(), DateUtils.FORMAT_SHOW_TIME))
                 .thenReturn("[Start]");
         Mockito.lenient().when(DateUtilsMock.INSTANCE.formatDateTime(context,
-                endTime.getMillis(), DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_24HOUR))
+                endTime.getMillis(), DateUtils.FORMAT_SHOW_TIME))
                 .thenReturn("[End]");
     }
 

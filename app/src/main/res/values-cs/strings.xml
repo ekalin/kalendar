@@ -28,11 +28,6 @@
     <string name="appearance_text_size_medium">Střední</string>
     <string name="appearance_text_size_large">Velká</string>
     <string name="appearance_text_size_very_large">Velmi velká</string>
-    <string name="appearance_date_format_desc">Zobrazit čas ve formátu am/pm nebo 24 hodin</string>
-    <string name="appearance_date_format_title">Formát data</string>
-    <string name="appearance_date_format_auto">Automatický</string>
-    <string name="appearance_date_format_24">17:00</string>
-    <string name="appearance_date_format_12">5:00 pm</string>
     <string name="lock_time_zone_off_desc">Odemčené, aktuální zóna: %s</string>
     <string name="lock_time_zone_on_desc">Uzamčeno na %s</string>
     <string name="lock_time_zone_title">Zamknout časové pásmo</string>

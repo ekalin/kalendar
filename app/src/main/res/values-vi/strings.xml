@@ -48,11 +48,6 @@
     <string name="appearance_text_size_medium">Vừa</string>
     <string name="appearance_text_size_large">Lớn</string>
     <string name="appearance_text_size_very_large">Rất lớn</string>
-    <string name="appearance_date_format_desc">Hiển thị thời gian ở định dạng am/pm hoặc 24 giờ</string>
-    <string name="appearance_date_format_title">Định dạng ngày tháng</string>
-    <string name="appearance_date_format_auto">Tự động</string>
-    <string name="appearance_date_format_24">17:00</string>
-    <string name="appearance_date_format_12">5:00 pm</string>
     <string name="lock_time_zone_off_desc">Khu vực mở khóa, hiện tại: %s</string>
     <string name="lock_time_zone_on_desc">Bị khóa tại %s</string>
     <string name="lock_time_zone_title">Múi giờ khóa</string>

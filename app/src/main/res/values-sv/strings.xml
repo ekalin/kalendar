@@ -28,11 +28,6 @@
     <string name="appearance_text_size_medium">Medium</string>
     <string name="appearance_text_size_large">Stor</string>
     <string name="appearance_text_size_very_large">Mycket stor</string>
-    <string name="appearance_date_format_desc">Visa tid i 24 timmars eller fm/em-format</string>
-    <string name="appearance_date_format_title">Datumformat</string>
-    <string name="appearance_date_format_auto">Automatiskt</string>
-    <string name="appearance_date_format_24">17:00</string>
-    <string name="appearance_date_format_12">5:00 pm</string>
     <string name="lock_time_zone_off_desc">Upplåst, nuvarande zonen: %s</string>
     <string name="lock_time_zone_on_desc">Låst i %s</string>
     <string name="lock_time_zone_title">Lås tidszon</string>

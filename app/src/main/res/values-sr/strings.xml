@@ -26,10 +26,6 @@
     <string name="appearance_text_size_medium">Средњи</string>
     <string name="appearance_text_size_large">Велики</string>
     <string name="appearance_text_size_very_large">Веома велики</string>
-    <string name="appearance_date_format_title">Формат датума</string>
-    <string name="appearance_date_format_auto">Аутоматско</string>
-    <string name="appearance_date_format_24">17:00</string>
-    <string name="appearance_date_format_12">17:00 х</string>
     <string name="lock_time_zone_on_desc">Закључан у %s</string>
     <string name="lock_time_zone_title">Закључај временску зону</string>
     <!-- Preference header: Layout -->

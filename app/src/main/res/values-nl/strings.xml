@@ -45,11 +45,6 @@
     <string name="appearance_text_size_medium">Gemiddeld</string>
     <string name="appearance_text_size_large">Groot</string>
     <string name="appearance_text_size_very_large">Erg Groot</string>
-    <string name="appearance_date_format_desc">Toon tijd in am/pm of in 24-uurs formaat</string>
-    <string name="appearance_date_format_title">Tijdnotatie</string>
-    <string name="appearance_date_format_auto">Automatisch</string>
-    <string name="appearance_date_format_24">17:00</string>
-    <string name="appearance_date_format_12">5:00 pm</string>
     <string name="lock_time_zone_off_desc">Ontgrendeld, de huidige tijdzone: %s</string>
     <string name="lock_time_zone_on_desc">Vergrendeld op %s</string>
     <string name="lock_time_zone_title">Zet de tijdzone vast</string>

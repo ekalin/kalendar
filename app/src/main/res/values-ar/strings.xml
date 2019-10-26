@@ -35,11 +35,6 @@
     <string name="appearance_text_size_medium">متوسط</string>
     <string name="appearance_text_size_large">كبير</string>
     <string name="appearance_text_size_very_large">كبير جدا</string>
-    <string name="appearance_date_format_desc">اظهار الوقت بصيغة صباحا/مساءا او بصيغة 24 ساعة</string>
-    <string name="appearance_date_format_title">صيغة التاريخ</string>
-    <string name="appearance_date_format_auto">تلقائي</string>
-    <string name="appearance_date_format_24">17:00</string>
-    <string name="appearance_date_format_12">05:00 م</string>
     <!-- Preference header: Layout -->
     <string name="layout_prefs_title">التصميم</string>
     <string name="pref_event_entry_layout_title">مخطط شكل الحدث</string>

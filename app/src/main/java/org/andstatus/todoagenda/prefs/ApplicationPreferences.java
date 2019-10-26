@@ -16,8 +16,6 @@ import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_ABBREVIATE_DA
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_ACTIVE_CALENDARS;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_ACTIVE_TASK_LISTS;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_BACKGROUND_COLOR;
-import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_DATE_FORMAT;
-import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_DATE_FORMAT_DEFAULT;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_DAY_HEADER_ALIGNMENT;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_ENTRY_THEME;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_EVENTS_ENDED;
@@ -45,6 +43,7 @@ import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_SHOW_ONLY_CLO
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_SHOW_PAST_EVENTS_WITH_DEFAULT_COLOR;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_SHOW_WIDGET_HEADER;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_TASK_SOURCE;
+import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_TASK_SOURCE_DEFAULT;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_TEXT_SIZE_SCALE;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_WIDGET_ID;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_WIDGET_INSTANCE_NAME;
@@ -63,7 +62,6 @@ public class ApplicationPreferences {
             setString(context, PREF_TEXT_SIZE_SCALE, settings.getTextSizeScale().preferenceValue);
             setString(context, PREF_EVENT_ENTRY_LAYOUT, settings.getEventEntryLayout().value);
             setBoolean(context, PREF_MULTILINE_TITLE, settings.isTitleMultiline());
-            setString(context, PREF_DATE_FORMAT, settings.getDateFormat());
             setAbbreviateDates(context, settings.getAbbreviateDates());
             setShowDayHeaders(context, settings.getShowDayHeaders());
             setString(context, PREF_DAY_HEADER_ALIGNMENT, settings.getDayHeaderAlignment());
@@ -121,11 +119,6 @@ public class ApplicationPreferences {
     public static boolean isTitleMultiline(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(PREF_MULTILINE_TITLE, PREF_MULTILINE_TITLE_DEFAULT);
-    }
-
-    public static String getDateFormat(Context context) {
-        return PreferenceManager.getDefaultSharedPreferences(context).getString(
-                PREF_DATE_FORMAT, PREF_DATE_FORMAT_DEFAULT);
     }
 
     public static boolean getAbbreviateDates(Context context) {
@@ -253,7 +246,7 @@ public class ApplicationPreferences {
     }
 
     public static String getTaskSource(Context context) {
-        return getString(context, PREF_TASK_SOURCE, PREF_DATE_FORMAT_DEFAULT);
+        return getString(context, PREF_TASK_SOURCE, PREF_TASK_SOURCE_DEFAULT);
     }
 
     public static Set<String> getActiveTaskLists(Context context) {

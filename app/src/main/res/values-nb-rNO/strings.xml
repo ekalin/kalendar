@@ -26,10 +26,6 @@
     <string name="appearance_text_size_medium">Middels</string>
     <string name="appearance_text_size_large">Stor</string>
     <string name="appearance_text_size_very_large">Ekstra stor</string>
-    <string name="appearance_date_format_title">Datoformat</string>
-    <string name="appearance_date_format_auto">Automatisk</string>
-    <string name="appearance_date_format_24">17:00</string>
-    <string name="appearance_date_format_12">5:00 pm</string>
     <!-- Preference header: Layout -->
     <string name="single_line_layout">Alt på én rad</string>
     <string name="appearance_day_header_alignment_desc">Velg posisjonen til dag-linjen</string>

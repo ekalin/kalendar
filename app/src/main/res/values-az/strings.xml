@@ -33,11 +33,6 @@
     <string name="appearance_text_size_medium">Orta</string>
     <string name="appearance_text_size_large">Böyük</string>
     <string name="appearance_text_size_very_large">Çox böyük</string>
-    <string name="appearance_date_format_desc">Vaxtı gə/gs və ya 24 saat formatında göstər</string>
-    <string name="appearance_date_format_title">Tarix formatı</string>
-    <string name="appearance_date_format_auto">Avtomatik</string>
-    <string name="appearance_date_format_24">17:00</string>
-    <string name="appearance_date_format_12">5:00 gs</string>
     <string name="lock_time_zone_off_desc">Kilid açıldı, hazırki bölgə: %s</string>
     <string name="lock_time_zone_on_desc">%s-də kilidləndi</string>
     <string name="lock_time_zone_title">Saat qurşağını kilidlə</string>

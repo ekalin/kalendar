@@ -28,11 +28,6 @@
     <string name="appearance_text_size_medium">Közepes</string>
     <string name="appearance_text_size_large">Nagy</string>
     <string name="appearance_text_size_very_large">Nagyon nagy</string>
-    <string name="appearance_date_format_desc">Idő mutatása 12 vagy 24 órás formátumban</string>
-    <string name="appearance_date_format_title">Idő formátum</string>
-    <string name="appearance_date_format_auto">Alapértelmezett</string>
-    <string name="appearance_date_format_24">17:00</string>
-    <string name="appearance_date_format_12">5:00</string>
     <string name="lock_time_zone_off_desc">Feloldva, a jelenlegi időzóna: %s</string>
     <string name="lock_time_zone_on_desc">Zárolva %on</string>
     <string name="lock_time_zone_title">Időzóna rögzítése</string>

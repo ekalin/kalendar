@@ -28,11 +28,6 @@
     <string name="appearance_text_size_medium">Srednja</string>
     <string name="appearance_text_size_large">Velika</string>
     <string name="appearance_text_size_very_large">Vrlo velika</string>
-    <string name="appearance_date_format_desc">Prikaži vrijeme u formatu am/pm ili 24 sata</string>
-    <string name="appearance_date_format_title">Oblik datuma</string>
-    <string name="appearance_date_format_auto">Automatski</string>
-    <string name="appearance_date_format_24">17:00</string>
-    <string name="appearance_date_format_12">5:00 pm</string>
     <string name="lock_time_zone_off_desc">Otključano, trenutna zona: %s</string>
     <string name="lock_time_zone_on_desc">Zaključano na %s</string>
     <string name="lock_time_zone_title">Zaključaj vremensku zonu</string>

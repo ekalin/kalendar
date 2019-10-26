@@ -52,11 +52,6 @@
     <string name="appearance_text_size_medium">Średni</string>
     <string name="appearance_text_size_large">Duży</string>
     <string name="appearance_text_size_very_large">Bardzo duży</string>
-    <string name="appearance_date_format_desc">Wyświetlaj czas w formacie am/pm lub 24-godzinnym</string>
-    <string name="appearance_date_format_title">Format godziny</string>
-    <string name="appearance_date_format_auto">Automatyczny</string>
-    <string name="appearance_date_format_24">17:00</string>
-    <string name="appearance_date_format_12">5:00 pm</string>
     <string name="lock_time_zone_off_desc">Odblokowana. Aktualna strefa: %s</string>
     <string name="lock_time_zone_on_desc">Zablokowana na %s</string>
     <string name="lock_time_zone_title">Blokada strefy czasowej</string>

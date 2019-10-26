@@ -50,9 +50,6 @@ public class InstanceSettings {
     static final String PREF_MULTILINE_TITLE = "multiline_title";
     static final boolean PREF_MULTILINE_TITLE_DEFAULT = false;
     private boolean titleMultiline = PREF_MULTILINE_TITLE_DEFAULT;
-    static final String PREF_DATE_FORMAT = "dateFormat";
-    static final String PREF_DATE_FORMAT_DEFAULT = "auto";
-    private String dateFormat = PREF_DATE_FORMAT_DEFAULT;
     static final String PREF_ABBREVIATE_DATES = "abbreviateDates";
     static final boolean PREF_ABBREVIATE_DATES_DEFAULT = false;
     private boolean abbreviateDates = PREF_ABBREVIATE_DATES_DEFAULT;
@@ -152,9 +149,6 @@ public class InstanceSettings {
             }
             if (json.has(PREF_MULTILINE_TITLE)) {
                 titleMultiline = json.getBoolean(PREF_MULTILINE_TITLE);
-            }
-            if (json.has(PREF_DATE_FORMAT)) {
-                dateFormat = json.getString(PREF_DATE_FORMAT);
             }
             if (json.has(PREF_ABBREVIATE_DATES)) {
                 abbreviateDates = json.getBoolean(PREF_ABBREVIATE_DATES);
@@ -258,7 +252,6 @@ public class InstanceSettings {
                     ""));
             settings.eventEntryLayout = ApplicationPreferences.getEventEntryLayout(context);
             settings.titleMultiline = ApplicationPreferences.isTitleMultiline(context);
-            settings.dateFormat = ApplicationPreferences.getDateFormat(context);
             settings.abbreviateDates = ApplicationPreferences.getAbbreviateDates(context);
             settings.showDayHeaders = ApplicationPreferences.getShowDayHeaders(context);
             settings.dayHeaderAlignment = ApplicationPreferences.getString(context, PREF_DAY_HEADER_ALIGNMENT,
@@ -336,7 +329,6 @@ public class InstanceSettings {
             json.put(PREF_TEXT_SIZE_SCALE, textSizeScale.preferenceValue);
             json.put(PREF_EVENT_ENTRY_LAYOUT, eventEntryLayout.value);
             json.put(PREF_MULTILINE_TITLE, titleMultiline);
-            json.put(PREF_DATE_FORMAT, dateFormat);
             json.put(PREF_ABBREVIATE_DATES, abbreviateDates);
             json.put(PREF_SHOW_DAY_HEADERS, showDayHeaders);
             json.put(PREF_DAY_HEADER_ALIGNMENT, dayHeaderAlignment);
@@ -397,10 +389,6 @@ public class InstanceSettings {
 
     public boolean isTitleMultiline() {
         return titleMultiline;
-    }
-
-    public String getDateFormat() {
-        return dateFormat;
     }
 
     public boolean getAbbreviateDates() {
