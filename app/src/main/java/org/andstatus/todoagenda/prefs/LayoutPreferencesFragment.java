@@ -17,7 +17,7 @@ public class LayoutPreferencesFragment extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_appearance, rootKey);
+        setPreferencesFromResource(R.xml.preferences_layout, rootKey);
     }
 
     @Override
