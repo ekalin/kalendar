@@ -1,20 +1,30 @@
 package org.andstatus.todoagenda.prefs;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.core.util.Consumer;
 import androidx.fragment.app.DialogFragment;
 
 import com.larswerkman.holocolorpicker.ColorPicker;
 
 import org.andstatus.todoagenda.R;
 
+@SuppressLint("ValidFragment")
 public class BackgroundTransparencyDialog extends DialogFragment {
     private ColorPicker picker;
-    private String prefKey;
+    @ColorInt private int initialColor;
+    private Consumer<Integer> setter;
+
+    public BackgroundTransparencyDialog(@ColorInt int initialColor, Consumer<Integer> setter) {
+        this.initialColor = initialColor;
+        this.setter = setter;
+    }
 
     @Override
     @NonNull
@@ -24,16 +34,8 @@ public class BackgroundTransparencyDialog extends DialogFragment {
         picker = layout.findViewById(R.id.background_color_picker);
         picker.addSVBar(layout.findViewById(R.id.background_color_svbar));
         picker.addOpacityBar(layout.findViewById(R.id.background_color_opacitybar));
-        prefKey = getTag().equals(InstanceSettings.PREF_PAST_EVENTS_BACKGROUND_COLOR)
-                ? InstanceSettings.PREF_PAST_EVENTS_BACKGROUND_COLOR
-                : InstanceSettings.PREF_BACKGROUND_COLOR;
-        int color = ApplicationPreferences.getInt(getActivity(), prefKey,
-                getTag().equals(InstanceSettings.PREF_PAST_EVENTS_BACKGROUND_COLOR)
-                        ? InstanceSettings.PREF_PAST_EVENTS_BACKGROUND_COLOR_DEFAULT
-                        : InstanceSettings.PREF_BACKGROUND_COLOR_DEFAULT);
-        // android.util.Log.v("Color", "key:" + prefKey + "; color:0x" + Integer.toString(color, 16));
-        picker.setColor(color);
-        picker.setOldCenterColor(color);
+        picker.setColor(initialColor);
+        picker.setOldCenterColor(initialColor);
         return createDialog(layout);
     }
 
@@ -44,7 +46,7 @@ public class BackgroundTransparencyDialog extends DialogFragment {
                 : R.string.appearance_background_color_title);
         builder.setView(layout);
         builder.setPositiveButton(android.R.string.ok,
-                (dialog, which) -> ApplicationPreferences.setInt(getActivity(), prefKey, picker.getColor()));
+                (dialog, which) -> setter.accept(picker.getColor()));
         return builder.create();
     }
 }

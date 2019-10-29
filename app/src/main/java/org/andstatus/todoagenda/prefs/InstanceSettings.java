@@ -1,6 +1,7 @@
 package org.andstatus.todoagenda.prefs;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
@@ -20,14 +21,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TimeZone;
 
 import static org.andstatus.todoagenda.Theme.themeNameToResId;
-import static org.andstatus.todoagenda.prefs.SettingsStorage.saveJson;
 
 /**
  * Loaded settings of one Widget
@@ -39,6 +38,7 @@ public class InstanceSettings {
 
     public static final String PREF_WIDGET_ID = "widgetId";
     final int widgetId;
+    final SharedPreferences sharedPreferences;
 
     // Appearance
     static final String PREF_WIDGET_INSTANCE_NAME = "widgetInstanceName";
@@ -68,7 +68,7 @@ public class InstanceSettings {
 
     // Colors
     static final String PREF_HEADER_THEME = "headerTheme";
-    static final String PREF_HEADER_THEME_DEFAULT = Theme.WHITE.name();
+    static final String PREF_HEADER_THEME_DEFAULT = Theme.LIGHT.name();
     private String headerTheme = PREF_HEADER_THEME_DEFAULT;
     static final String PREF_BACKGROUND_COLOR = "backgroundColor";
     @ColorInt static final int PREF_BACKGROUND_COLOR_DEFAULT = 0x80000000;
@@ -102,8 +102,8 @@ public class InstanceSettings {
     static final String PREF_EVENTS_ENDED = "eventsEnded";
     private EndedSomeTimeAgo eventsEnded = EndedSomeTimeAgo.NONE;
     static final String PREF_EVENT_RANGE = "eventRange";
-    static final String PREF_EVENT_RANGE_DEFAULT = "30";
-    private int eventRange = Integer.parseInt(PREF_EVENT_RANGE_DEFAULT);
+    static final int PREF_EVENT_RANGE_DEFAULT = 30;
+    private int eventRange = PREF_EVENT_RANGE_DEFAULT;
     static final String PREF_HIDE_BASED_ON_KEYWORDS = "hideBasedOnKeywords";
     private String hideBasedOnKeywords = "";
     static final String PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT =
@@ -143,7 +143,7 @@ public class InstanceSettings {
                 textSizeScale = TextSizeScale.fromPreferenceValue(json.getString(PREF_TEXT_SIZE_SCALE));
             }
             if (json.has(PREF_EVENT_ENTRY_LAYOUT)) {
-                eventEntryLayout = EventEntryLayout.fromValue(json.getString(PREF_EVENT_ENTRY_LAYOUT));
+                eventEntryLayout = EventEntryLayout.fromPreferenceValue(json.getString(PREF_EVENT_ENTRY_LAYOUT));
             }
             if (json.has(PREF_MULTILINE_TITLE)) {
                 titleMultiline = json.getBoolean(PREF_MULTILINE_TITLE);
@@ -197,7 +197,7 @@ public class InstanceSettings {
             }
 
             if (json.has(PREF_EVENTS_ENDED)) {
-                eventsEnded = EndedSomeTimeAgo.fromValue(json.getString(PREF_EVENTS_ENDED));
+                eventsEnded = EndedSomeTimeAgo.fromPreferenceValue(json.getString(PREF_EVENTS_ENDED));
             }
             if (json.has(PREF_EVENT_RANGE)) {
                 eventRange = json.getInt(PREF_EVENT_RANGE);
@@ -237,50 +237,10 @@ public class InstanceSettings {
     }
 
     static InstanceSettings fromApplicationPreferences(Context context, int widgetId) {
-        synchronized (ApplicationPreferences.class) {
             InstanceSettings settings = new InstanceSettings(context, widgetId,
                     ApplicationPreferences.getString(context, PREF_WIDGET_INSTANCE_NAME,
                             ApplicationPreferences.getString(context, PREF_WIDGET_INSTANCE_NAME, "")));
-
-            settings.textSizeScale = TextSizeScale.fromPreferenceValue(ApplicationPreferences.getString(context,
-                    PREF_TEXT_SIZE_SCALE,
-                    ""));
-            settings.eventEntryLayout = ApplicationPreferences.getEventEntryLayout(context);
-            settings.titleMultiline = ApplicationPreferences.isTitleMultiline(context);
-            settings.abbreviateDates = ApplicationPreferences.getAbbreviateDates(context);
-            settings.showDayHeaders = ApplicationPreferences.getShowDayHeaders(context);
-            settings.dayHeaderAlignment = ApplicationPreferences.getString(context, PREF_DAY_HEADER_ALIGNMENT,
-                    PREF_DAY_HEADER_ALIGNMENT_DEFAULT);
-            settings.showDaysWithoutEvents = ApplicationPreferences.getShowDaysWithoutEvents(context);
-            settings.showWidgetHeader = ApplicationPreferences.getBoolean(context, PREF_SHOW_WIDGET_HEADER, true);
-            settings.setLockedTimeZoneId(ApplicationPreferences.getLockedTimeZoneId(context));
-
-            settings.headerTheme = ApplicationPreferences.getString(context, PREF_HEADER_THEME,
-                    PREF_HEADER_THEME_DEFAULT);
-            settings.backgroundColor = ApplicationPreferences.getInt(context, PREF_BACKGROUND_COLOR,
-                    PREF_BACKGROUND_COLOR_DEFAULT);
-            settings.pastEventsBackgroundColor = ApplicationPreferences.getPastEventsBackgroundColor(context);
-            settings.entryTheme = ApplicationPreferences.getString(context, PREF_ENTRY_THEME, PREF_ENTRY_THEME_DEFAULT);
-
-            settings.showEndTime = ApplicationPreferences.getShowEndTime(context);
-            settings.showLocation = ApplicationPreferences.getShowLocation(context);
-            settings.fillAllDayEvents = ApplicationPreferences.getFillAllDayEvents(context);
-            settings.indicateAlerts = ApplicationPreferences.getBoolean(context, PREF_INDICATE_ALERTS, true);
-            settings.indicateRecurring = ApplicationPreferences.getBoolean(context, PREF_INDICATE_RECURRING, false);
-
-            settings.eventsEnded = ApplicationPreferences.getEventsEnded(context);
-            settings.eventRange = ApplicationPreferences.getEventRange(context);
-            settings.hideBasedOnKeywords = ApplicationPreferences.getHideBasedOnKeywords(context);
-            settings.showOnlyClosestInstanceOfRecurringEvent = ApplicationPreferences
-                    .getShowOnlyClosestInstanceOfRecurringEvent(context);
-
-            settings.activeCalendars = ApplicationPreferences.getActiveCalendars(context);
-
-            settings.taskSource = ApplicationPreferences.getTaskSource(context);
-            settings.activeTaskLists = ApplicationPreferences.getActiveTaskLists(context);
-
             return settings;
-        }
     }
 
     @NonNull
@@ -292,19 +252,15 @@ public class InstanceSettings {
         this.context = context;
         this.widgetId = widgetId;
         this.widgetInstanceName = AllSettings.uniqueInstanceName(context, widgetId, proposedInstanceName);
+        this.sharedPreferences = context.getSharedPreferences(nameForWidget(widgetId), Context.MODE_PRIVATE);
+    }
+
+    public static String nameForWidget(int widgetId) {
+        return "widget" + widgetId;
     }
 
     void save() {
-        if (widgetId == 0) {
-            logMe(InstanceSettings.class, "Skipped save", widgetId);
-            return;
-        }
-        logMe(InstanceSettings.class, "save", widgetId);
-        try {
-            saveJson(context, getStorageKey(widgetId), toJsonComplete());
-        } catch (IOException e) {
-            Log.e("save", toString(), e);
-        }
+        // noop
     }
 
     public JSONObject toJsonForBackup() {
@@ -369,134 +325,155 @@ public class InstanceSettings {
     }
 
     public String getWidgetInstanceName() {
-        return widgetInstanceName;
+        return sharedPreferences.getString(PREF_WIDGET_INSTANCE_NAME, "");
     }
 
     public TextSizeScale getTextSizeScale() {
-        return textSizeScale;
+        return TextSizeScale.fromPreferenceValue(sharedPreferences.getString(PREF_TEXT_SIZE_SCALE, ""));
     }
 
     public EventEntryLayout getEventEntryLayout() {
-        return eventEntryLayout;
+        return EventEntryLayout.fromPreferenceValue(sharedPreferences.getString(PREF_EVENT_ENTRY_LAYOUT, ""));
     }
 
     public boolean isTitleMultiline() {
-        return titleMultiline;
+        return sharedPreferences.getBoolean(PREF_MULTILINE_TITLE, PREF_MULTILINE_TITLE_DEFAULT);
     }
 
     public boolean getAbbreviateDates() {
-        return abbreviateDates;
+        return sharedPreferences.getBoolean(PREF_ABBREVIATE_DATES, PREF_ABBREVIATE_DATES_DEFAULT);
     }
 
     public boolean getShowDayHeaders() {
-        return showDayHeaders;
+        return sharedPreferences.getBoolean(PREF_SHOW_DAY_HEADERS, true);
     }
 
     public String getDayHeaderAlignment() {
-        return dayHeaderAlignment;
+        return sharedPreferences.getString(PREF_DAY_HEADER_ALIGNMENT, PREF_DAY_HEADER_ALIGNMENT_DEFAULT);
     }
 
     public boolean getShowDaysWithoutEvents() {
-        return showDaysWithoutEvents;
+        return sharedPreferences.getBoolean(PREF_SHOW_DAYS_WITHOUT_EVENTS, false);
     }
 
     public boolean getShowWidgetHeader() {
-        return showWidgetHeader;
+        return sharedPreferences.getBoolean(PREF_SHOW_WIDGET_HEADER, true);
     }
 
     public String getLockedTimeZoneId() {
-        return lockedTimeZoneId;
+        return sharedPreferences.getString(PREF_LOCKED_TIME_ZONE_ID, "");
     }
 
     public boolean isTimeZoneLocked() {
-        return !TextUtils.isEmpty(lockedTimeZoneId);
+        return !TextUtils.isEmpty(getLockedTimeZoneId());
     }
 
-    private void setLockedTimeZoneId(String lockedTimeZoneId) {
-        this.lockedTimeZoneId = DateUtil.validatedTimeZoneId(lockedTimeZoneId);
+    public void setLockedTimeZoneId(String lockedTimeZoneId) {
+        sharedPreferences.edit().putString(PREF_LOCKED_TIME_ZONE_ID, lockedTimeZoneId).apply();
     }
 
     public DateTimeZone getTimeZone() {
         return DateTimeZone.forID(DateUtil.validatedTimeZoneId(
-                isTimeZoneLocked() ? lockedTimeZoneId : TimeZone.getDefault().getID()));
+                isTimeZoneLocked() ? getLockedTimeZoneId() : TimeZone.getDefault().getID()));
     }
 
     public String getHeaderTheme() {
-        return headerTheme;
+        return sharedPreferences.getString(PREF_HEADER_THEME, PREF_HEADER_THEME_DEFAULT);
     }
 
     public ContextThemeWrapper getHeaderThemeContext() {
         if (headerThemeContext == null) {
-            headerThemeContext = new ContextThemeWrapper(context, themeNameToResId(headerTheme));
+            headerThemeContext = new ContextThemeWrapper(context, themeNameToResId(getHeaderTheme()));
         }
         return headerThemeContext;
     }
 
     public int getBackgroundColor() {
-        return backgroundColor;
+        return sharedPreferences.getInt(PREF_BACKGROUND_COLOR, PREF_BACKGROUND_COLOR_DEFAULT);
+    }
+
+    public void setBackgroundColor(@ColorInt int color) {
+        sharedPreferences.edit().putInt(PREF_BACKGROUND_COLOR, color).apply();
     }
 
     public int getPastEventsBackgroundColor() {
-        return pastEventsBackgroundColor;
+        return sharedPreferences.getInt(PREF_PAST_EVENTS_BACKGROUND_COLOR, PREF_PAST_EVENTS_BACKGROUND_COLOR_DEFAULT);
+    }
+
+    public void setPastEventsBackgroundColor(@ColorInt int color) {
+        sharedPreferences.edit().putInt(PREF_PAST_EVENTS_BACKGROUND_COLOR, color).apply();
     }
 
     public String getEntryTheme() {
-        return entryTheme;
+        return sharedPreferences.getString(PREF_ENTRY_THEME, PREF_ENTRY_THEME_DEFAULT);
     }
 
     public ContextThemeWrapper getEntryThemeContext() {
         if (entryThemeContext == null) {
-            entryThemeContext = new ContextThemeWrapper(context, themeNameToResId(entryTheme));
+            entryThemeContext = new ContextThemeWrapper(context, themeNameToResId(getEntryTheme()));
         }
         return entryThemeContext;
     }
 
     public boolean getShowEndTime() {
-        return showEndTime;
+        return sharedPreferences.getBoolean(PREF_SHOW_END_TIME, PREF_SHOW_END_TIME_DEFAULT);
     }
 
     public boolean getShowLocation() {
-        return showLocation;
+        return sharedPreferences.getBoolean(PREF_SHOW_LOCATION, PREF_SHOW_LOCATION_DEFAULT);
     }
 
     public boolean getFillAllDayEvents() {
-        return fillAllDayEvents;
+        return sharedPreferences.getBoolean(PREF_FILL_ALL_DAY, PREF_FILL_ALL_DAY_DEFAULT);
     }
 
     public boolean getIndicateAlerts() {
-        return indicateAlerts;
+        return sharedPreferences.getBoolean(PREF_INDICATE_ALERTS, true);
     }
 
     public boolean getIndicateRecurring() {
-        return indicateRecurring;
+        return sharedPreferences.getBoolean(PREF_INDICATE_RECURRING, false);
     }
 
     public EndedSomeTimeAgo getEventsEnded() {
-        return eventsEnded;
+        return EndedSomeTimeAgo.fromPreferenceValue(sharedPreferences.getString(PREF_EVENTS_ENDED, ""));
     }
 
     public int getEventRange() {
-        return eventRange;
+        try {
+            return Integer.parseInt(sharedPreferences.getString(PREF_EVENT_RANGE,
+                    String.valueOf(PREF_EVENT_RANGE_DEFAULT)));
+        } catch (NumberFormatException e) {
+            return PREF_EVENT_RANGE_DEFAULT;
+        }
     }
 
     public String getHideBasedOnKeywords() {
-        return hideBasedOnKeywords;
+        return sharedPreferences.getString(PREF_HIDE_BASED_ON_KEYWORDS, "");
     }
 
     public boolean getShowOnlyClosestInstanceOfRecurringEvent() {
-        return showOnlyClosestInstanceOfRecurringEvent;
+        return sharedPreferences.getBoolean(PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT, false);
     }
 
     public Set<String> getActiveCalendars() {
-        return activeCalendars;
+        return sharedPreferences.getStringSet(PREF_ACTIVE_CALENDARS, Collections.emptySet());
+    }
+
+    public void setActiveCalendars(Set<String> calendars) {
+        sharedPreferences.edit().putStringSet(PREF_ACTIVE_CALENDARS, calendars).apply();
     }
 
     public String getTaskSource() {
-        return taskSource;
+        return sharedPreferences.getString(PREF_TASK_SOURCE, PREF_TASK_SOURCE_DEFAULT);
     }
 
     public Set<String> getActiveTaskLists() {
-        return activeTaskLists;
+        return sharedPreferences.getStringSet(PREF_ACTIVE_TASK_LISTS, Collections.emptySet());
+    }
+
+    public void setActiveTaskLists(Set<String> taskLists) {
+        sharedPreferences.edit().putStringSet(PREF_ACTIVE_TASK_LISTS, taskLists).apply();
     }
 
     public boolean noPastEvents() {

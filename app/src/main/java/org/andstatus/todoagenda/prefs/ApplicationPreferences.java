@@ -15,19 +15,13 @@ import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_ABBREVIATE_DA
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_ABBREVIATE_DATES_DEFAULT;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_ACTIVE_CALENDARS;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_ACTIVE_TASK_LISTS;
-import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_BACKGROUND_COLOR;
-import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_DAY_HEADER_ALIGNMENT;
-import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_ENTRY_THEME;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_EVENTS_ENDED;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_EVENT_ENTRY_LAYOUT;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_EVENT_RANGE;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_EVENT_RANGE_DEFAULT;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_FILL_ALL_DAY;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_FILL_ALL_DAY_DEFAULT;
-import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_HEADER_THEME;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_HIDE_BASED_ON_KEYWORDS;
-import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_INDICATE_ALERTS;
-import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_INDICATE_RECURRING;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_LOCKED_TIME_ZONE_ID;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_MULTILINE_TITLE;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_MULTILINE_TITLE_DEFAULT;
@@ -40,10 +34,8 @@ import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_SHOW_END_TIME
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_SHOW_LOCATION;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_SHOW_LOCATION_DEFAULT;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT;
-import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_SHOW_WIDGET_HEADER;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_TASK_SOURCE;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_TASK_SOURCE_DEFAULT;
-import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_TEXT_SIZE_SCALE;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_WIDGET_ID;
 import static org.andstatus.todoagenda.prefs.InstanceSettings.PREF_WIDGET_INSTANCE_NAME;
 
@@ -53,52 +45,11 @@ public class ApplicationPreferences {
     }
 
     public static void fromInstanceSettings(Context context, Integer widgetId) {
-        synchronized (ApplicationPreferences.class) {
-            InstanceSettings settings = AllSettings.instanceFromId(context, widgetId);
-            setWidgetId(context, widgetId == 0 ? settings.getWidgetId() : widgetId);
-
-            setString(context, PREF_WIDGET_INSTANCE_NAME, settings.getWidgetInstanceName());
-            setString(context, PREF_TEXT_SIZE_SCALE, settings.getTextSizeScale().preferenceValue);
-            setString(context, PREF_EVENT_ENTRY_LAYOUT, settings.getEventEntryLayout().value);
-            setBoolean(context, PREF_MULTILINE_TITLE, settings.isTitleMultiline());
-            setAbbreviateDates(context, settings.getAbbreviateDates());
-            setShowDayHeaders(context, settings.getShowDayHeaders());
-            setString(context, PREF_DAY_HEADER_ALIGNMENT, settings.getDayHeaderAlignment());
-            setShowDaysWithoutEvents(context, settings.getShowDaysWithoutEvents());
-            setBoolean(context, PREF_SHOW_WIDGET_HEADER, settings.getShowWidgetHeader());
-            setLockedTimeZoneId(context, settings.getLockedTimeZoneId());
-
-            setString(context, PREF_HEADER_THEME, settings.getHeaderTheme());
-            setInt(context, PREF_BACKGROUND_COLOR, settings.getBackgroundColor());
-            setInt(context, PREF_PAST_EVENTS_BACKGROUND_COLOR, settings.getPastEventsBackgroundColor());
-            setString(context, PREF_ENTRY_THEME, settings.getEntryTheme());
-
-            setBoolean(context, PREF_SHOW_END_TIME, settings.getShowEndTime());
-            setBoolean(context, PREF_SHOW_LOCATION, settings.getShowLocation());
-            setFillAllDayEvents(context, settings.getFillAllDayEvents());
-            setBoolean(context, PREF_INDICATE_ALERTS, settings.getIndicateAlerts());
-            setBoolean(context, PREF_INDICATE_RECURRING, settings.getIndicateRecurring());
-
-            setEventsEnded(context, settings.getEventsEnded());
-            setEventRange(context, settings.getEventRange());
-            setHideBasedOnKeywords(context, settings.getHideBasedOnKeywords());
-            setShowOnlyClosestInstanceOfRecurringEvent(context, settings.getShowOnlyClosestInstanceOfRecurringEvent());
-
-            setActiveCalendars(context, settings.getActiveCalendars());
-
-            setString(context, PREF_TASK_SOURCE, settings.getTaskSource());
-            setActiveTaskLists(context, settings.getActiveTaskLists());
-        }
+        // noop
     }
 
     public static void save(Context context, int wigdetId) {
-        if (wigdetId != 0 && wigdetId == getWidgetId(context)) {
-            AllSettings.saveFromApplicationPreferences(context, wigdetId);
-        }
-    }
-
-    public static int getWidgetId(Context context) {
-        return PreferenceManager.getDefaultSharedPreferences(context).getInt(PREF_WIDGET_ID, 0);
+        // noop
     }
 
     public static void setWidgetId(Context context, int value) {
@@ -110,7 +61,7 @@ public class ApplicationPreferences {
     }
 
     public static EventEntryLayout getEventEntryLayout(Context context) {
-        return EventEntryLayout.fromValue(PreferenceManager.getDefaultSharedPreferences(context).getString(
+        return EventEntryLayout.fromPreferenceValue(PreferenceManager.getDefaultSharedPreferences(context).getString(
                 PREF_EVENT_ENTRY_LAYOUT, ""));
     }
 
@@ -184,7 +135,7 @@ public class ApplicationPreferences {
     }
 
     public static EndedSomeTimeAgo getEventsEnded(Context context) {
-        return EndedSomeTimeAgo.fromValue(PreferenceManager.getDefaultSharedPreferences(context).getString(
+        return EndedSomeTimeAgo.fromPreferenceValue(PreferenceManager.getDefaultSharedPreferences(context).getString(
                 PREF_EVENTS_ENDED, ""));
     }
 
@@ -194,7 +145,7 @@ public class ApplicationPreferences {
 
     public static int getEventRange(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return parseIntSafe(prefs.getString(PREF_EVENT_RANGE, PREF_EVENT_RANGE_DEFAULT));
+        return parseIntSafe(prefs.getString(PREF_EVENT_RANGE, String.valueOf(PREF_EVENT_RANGE_DEFAULT)));
     }
 
     public static void setEventRange(Context context, int value) {

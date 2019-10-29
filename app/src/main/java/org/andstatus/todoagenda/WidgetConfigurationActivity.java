@@ -17,6 +17,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.ApplicationPreferences;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
+import org.andstatus.todoagenda.prefs.KalendarPreferenceFragment;
 import org.andstatus.todoagenda.prefs.PreferencesFragment;
 import org.andstatus.todoagenda.prefs.SettingsStorage;
 import org.andstatus.todoagenda.provider.WidgetData;
@@ -41,6 +42,7 @@ public class WidgetConfigurationActivity extends AppCompatActivity
     public static final int REQUEST_ID_BACKUP_SETTINGS = 2;
 
     private int widgetId = 0;
+    private String prefsName;
     private boolean saveOnPause = true;
 
     @NonNull
@@ -59,8 +61,15 @@ public class WidgetConfigurationActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.widget_configuration_actitivy);
+
+        prefsName = InstanceSettings.nameForWidget(widgetId);
+
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.preferences, new PreferencesFragment()).commit();
+            PreferencesFragment fragment = new PreferencesFragment();
+            Bundle args = new Bundle();
+            setFragmentArguments(args);
+            fragment.setArguments(args);
+            getSupportFragmentManager().beginTransaction().replace(R.id.preferences, fragment).commit();
             setTitleToWidgetName();
         } else {
             setTitle(savedInstanceState.getCharSequence(TITLE_TAG));
@@ -75,11 +84,13 @@ public class WidgetConfigurationActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    private void setFragmentArguments(Bundle args) {
+        args.putString(KalendarPreferenceFragment.PREFS_NAME_KEY, prefsName);
+        args.putInt(KalendarPreferenceFragment.WIDGET_ID_KEY, widgetId);
+    }
+
     private boolean openThisActivity(Intent newIntent) {
         int newWidgetId = newIntent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, 0);
-        if (newWidgetId == 0) {
-            newWidgetId = ApplicationPreferences.getWidgetId(this);
-        }
         Intent restartIntent = null;
         if (newWidgetId == 0 || !PermissionsUtil.arePermissionsGranted(this)) {
             restartIntent = MainActivity.intentToStartMe(this);
@@ -100,12 +111,14 @@ public class WidgetConfigurationActivity extends AppCompatActivity
     }
 
     private void setTitleToWidgetName() {
-        setTitle(ApplicationPreferences.getWidgetInstanceName(this));
+        InstanceSettings instanceSettings = AllSettings.instanceFromId(this, widgetId);
+        setTitle(instanceSettings.getWidgetInstanceName());
     }
 
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
         Bundle args = pref.getExtras();
+        setFragmentArguments(args);
         Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(getClassLoader(),
                 pref.getFragment());
         fragment.setArguments(args);
@@ -141,7 +154,9 @@ public class WidgetConfigurationActivity extends AppCompatActivity
     }
 
     private void restartIfNeeded() {
-        if (widgetId != ApplicationPreferences.getWidgetId(this) || !PermissionsUtil.arePermissionsGranted(this)) {
+        // FIXME: Review
+        // if (widgetId != ApplicationPreferences.getWidgetId(this) || !PermissionsUtil.arePermissionsGranted(this)) {
+        if (!PermissionsUtil.arePermissionsGranted(this)) {
             widgetId = 0;
             startActivity(MainActivity.intentToStartMe(this));
             finish();

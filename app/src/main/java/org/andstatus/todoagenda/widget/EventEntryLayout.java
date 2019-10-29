@@ -107,7 +107,7 @@ public enum EventEntryLayout {
         this.summaryResId = summaryResId;
     }
 
-    public static EventEntryLayout fromValue(String value) {
+    public static EventEntryLayout fromPreferenceValue(String value) {
         EventEntryLayout layout = DEFAULT;
         for (EventEntryLayout item : EventEntryLayout.values()) {
             if (item.value.equals(value)) {

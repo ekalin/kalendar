@@ -32,7 +32,7 @@ public enum EndedSomeTimeAgo {
         return now.minusHours(hoursAgo);
     }
 
-    public static EndedSomeTimeAgo fromValue(String valueIn) {
+    public static EndedSomeTimeAgo fromPreferenceValue(String valueIn) {
         EndedSomeTimeAgo ended = NONE;
         for (EndedSomeTimeAgo item : EndedSomeTimeAgo.values()) {
             if (item.value.equals(valueIn)) {

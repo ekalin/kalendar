@@ -5,18 +5,18 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.task.TaskProvider;
 
 import java.util.Collections;
 
-public class TaskPreferencesFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class TaskPreferencesFragment extends KalendarPreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String PREF_ACTIVE_TASK_LISTS_BUTTON = "activeTaskListsButton";
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
         setPreferencesFromResource(R.xml.preferences_task, rootKey);
         setGrantPermissionVisibility();
         setTaskListState();
@@ -53,18 +53,18 @@ public class TaskPreferencesFragment extends PreferenceFragmentCompat implements
     }
 
     private void setGrantPermissionVisibility() {
-        TaskProvider taskProvider = new TaskProvider(getActivity(), ApplicationPreferences.getWidgetId(getActivity()));
+        TaskProvider taskProvider = new TaskProvider(getActivity(), instanceSettings.getWidgetId());
         Preference preference = findPreference("grantTaskPermission");
-        preference.setVisible(!taskProvider.hasPermissionForSource(ApplicationPreferences.getTaskSource(getActivity())));
+        preference.setVisible(!taskProvider.hasPermissionForSource(instanceSettings.getTaskSource()));
     }
 
     private void setTaskListState() {
         Preference taskListButton = findPreference(PREF_ACTIVE_TASK_LISTS_BUTTON);
-        taskListButton.setEnabled(!ApplicationPreferences.getTaskSource(getActivity()).equals(TaskProvider.PROVIDER_NONE));
+        taskListButton.setEnabled(!instanceSettings.getTaskSource().equals(TaskProvider.PROVIDER_NONE));
     }
 
     private void clearTasksLists() {
-        ApplicationPreferences.setActiveTaskLists(getActivity(), Collections.<String>emptySet());
+        instanceSettings.setActiveTaskLists(Collections.emptySet());
     }
 
     @Override
@@ -79,8 +79,8 @@ public class TaskPreferencesFragment extends PreferenceFragmentCompat implements
     }
 
     private void requestTaskPermission() {
-        TaskProvider taskProvider = new TaskProvider(getActivity(), ApplicationPreferences.getWidgetId(getActivity()));
-        taskProvider.requestPermission(this, ApplicationPreferences.getTaskSource(getActivity()));
+        TaskProvider taskProvider = new TaskProvider(getActivity(), instanceSettings.getWidgetId());
+        taskProvider.requestPermission(this, instanceSettings.getTaskSource());
     }
 
     @Override

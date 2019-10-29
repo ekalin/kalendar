@@ -11,7 +11,7 @@ import java.util.Set;
 public class CalendarPreferencesFragment extends AbstractEventSourcesPreferencesFragment {
     @Override
     protected Set<String> fetchInitialActiveSources() {
-        return ApplicationPreferences.getActiveCalendars(getActivity());
+        return instanceSettings.getActiveCalendars();
     }
 
     @Override
@@ -23,6 +23,6 @@ public class CalendarPreferencesFragment extends AbstractEventSourcesPreferences
 
     @Override
     protected void storeSelectedSources(Set<String> selectedSources) {
-        ApplicationPreferences.setActiveCalendars(getActivity(), selectedSources);
+        instanceSettings.setActiveCalendars(selectedSources);
     }
 }

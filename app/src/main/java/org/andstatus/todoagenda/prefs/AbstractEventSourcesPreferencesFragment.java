@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import org.andstatus.todoagenda.R;
@@ -14,13 +13,14 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-abstract class AbstractEventSourcesPreferencesFragment extends PreferenceFragmentCompat {
+abstract class AbstractEventSourcesPreferencesFragment extends KalendarPreferenceFragment {
     private static final String SOURCE_ID = "sourceId";
 
     private Set<String> initialActiveSources;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
         initialActiveSources = fetchInitialActiveSources();
         populatePreferenceScreen(initialActiveSources);
     }

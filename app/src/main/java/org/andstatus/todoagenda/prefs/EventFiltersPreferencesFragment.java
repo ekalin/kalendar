@@ -4,14 +4,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.provider.KeywordsFilter;
 
-public class EventFiltersPreferencesFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class EventFiltersPreferencesFragment extends KalendarPreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
         setPreferencesFromResource(R.xml.preferences_event_filters, rootKey);
     }
 

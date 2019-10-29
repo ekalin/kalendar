@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import org.andstatus.todoagenda.MainActivity;
 import org.andstatus.todoagenda.R;
@@ -13,10 +12,11 @@ import org.joda.time.DateTimeZone;
 
 import java.util.TimeZone;
 
-public class LayoutPreferencesFragment extends PreferenceFragmentCompat
+public class LayoutPreferencesFragment extends KalendarPreferenceFragment
         implements SharedPreferences.OnSharedPreferenceChangeListener {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
         setPreferencesFromResource(R.xml.preferences_layout, rootKey);
     }
 
@@ -30,7 +30,6 @@ public class LayoutPreferencesFragment extends PreferenceFragmentCompat
     public void onResume() {
         super.onResume();
         showWidgetInstanceName();
-        showEventEntryLayout();
         showLockTimeZone(true);
         getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
     }
@@ -40,11 +39,8 @@ public class LayoutPreferencesFragment extends PreferenceFragmentCompat
         switch (key) {
             case InstanceSettings.PREF_WIDGET_INSTANCE_NAME:
                 getActivity().finish();
-                startActivity(MainActivity.intentToConfigure(getActivity(), ApplicationPreferences
-                        .getWidgetId(getActivity())));
-                break;
-            case InstanceSettings.PREF_EVENT_ENTRY_LAYOUT:
-                showEventEntryLayout();
+                startActivity(MainActivity.intentToConfigure(getActivity(), instanceSettings
+                        .getWidgetId()));
                 break;
             default:
                 break;
@@ -54,27 +50,20 @@ public class LayoutPreferencesFragment extends PreferenceFragmentCompat
     private void showWidgetInstanceName() {
         Preference preference = findPreference(InstanceSettings.PREF_WIDGET_INSTANCE_NAME);
         if (preference != null) {
-            preference.setSummary(ApplicationPreferences.getWidgetInstanceName(getActivity()) +
-                    " (id:" + ApplicationPreferences.getWidgetId(getActivity()) + ")");
-        }
-    }
-
-    private void showEventEntryLayout() {
-        Preference preference = findPreference(InstanceSettings.PREF_EVENT_ENTRY_LAYOUT);
-        if (preference != null) {
-            preference.setSummary(ApplicationPreferences.getEventEntryLayout(getActivity()).summaryResId);
+            preference.setSummary(instanceSettings.getWidgetInstanceName() +
+                    " (id:" + instanceSettings.getWidgetId() + ")");
         }
     }
 
     private void showLockTimeZone(boolean setAlso) {
         CheckBoxPreference preference = findPreference(InstanceSettings.PREF_LOCK_TIME_ZONE);
         if (preference != null) {
-            boolean isChecked = setAlso ? ApplicationPreferences.isTimeZoneLocked(getActivity()) : preference.isChecked();
+            boolean isChecked = setAlso ? instanceSettings.isTimeZoneLocked() : preference.isChecked();
             if (setAlso && preference.isChecked() != isChecked) {
                 preference.setChecked(isChecked);
             }
             DateTimeZone timeZone = DateTimeZone.forID(DateUtil.validatedTimeZoneId(isChecked ?
-                    ApplicationPreferences.getLockedTimeZoneId(getActivity()) : TimeZone.getDefault().getID()));
+                    instanceSettings.getLockedTimeZoneId() : TimeZone.getDefault().getID()));
             preference.setSummary(String.format(
                     getText(isChecked ? R.string.lock_time_zone_on_desc : R.string.lock_time_zone_off_desc).toString(),
                     timeZone.getName(DateUtil.now(timeZone).getMillis()))
@@ -88,8 +77,7 @@ public class LayoutPreferencesFragment extends PreferenceFragmentCompat
             case InstanceSettings.PREF_LOCK_TIME_ZONE:
                 if (preference instanceof CheckBoxPreference) {
                     CheckBoxPreference checkPref = (CheckBoxPreference) preference;
-                    ApplicationPreferences.setLockedTimeZoneId(getActivity(),
-                            checkPref.isChecked() ? TimeZone.getDefault().getID() : "");
+                    instanceSettings.setLockedTimeZoneId(checkPref.isChecked() ? TimeZone.getDefault().getID() : "");
                     showLockTimeZone(false);
                 }
                 break;
