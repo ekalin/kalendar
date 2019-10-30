@@ -131,7 +131,7 @@ public enum EventEntryLayout {
         setTextSize(event.getSettings(), rv, viewId, R.dimen.event_entry_title);
         setTextColorFromAttr(event.getSettings().getEntryThemeContext(), rv, viewId,
                 event.isCurrent() ? R.attr.eventEntryCurrentTitle : R.attr.eventEntryTitle);
-        setMultiline(rv, viewId, event.getSettings().isTitleMultiline());
+        setMultiline(rv, viewId, event.getSettings().getTitleMultiline());
     }
 
     protected String getTitleString(CalendarEntry event) {

@@ -22,7 +22,7 @@
         app:useSimpleSummaryProvider="true" />
 
     <CheckBoxPreference
-        app:key="multiline_title"
+        app:key="multilineTitle"
         app:summary="@string/appearance_multiline_title_desc"
         app:title="@string/appearance_multiline_title_title"
         app:defaultValue="false" />
