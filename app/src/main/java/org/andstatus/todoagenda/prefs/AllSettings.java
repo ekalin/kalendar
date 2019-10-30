@@ -55,7 +55,7 @@ public class AllSettings {
     }
 
     public static void delete(Context context, int widgetId) {
-        // FIXME: Add delete support
+        instanceFromId(context, widgetId).delete();
     }
 
     public static String uniqueInstanceName(Context context, int widgetId, String proposedInstanceName) {

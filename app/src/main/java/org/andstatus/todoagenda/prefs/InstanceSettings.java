@@ -2,6 +2,7 @@ package org.andstatus.todoagenda.prefs;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
@@ -21,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -482,6 +484,20 @@ public class InstanceSettings {
 
     private boolean noTaskSources() {
         return getTaskSource().equals(TaskProvider.PROVIDER_NONE);
+    }
+
+    public void delete() {
+        if (!sharedPreferences.edit().clear().commit()) {
+            Log.w(getClass().getSimpleName(), "Could not commit prefs change before deletion");
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            context.deleteSharedPreferences(nameForWidget(widgetId));
+        } else {
+            File sharedPrefsDir = new File(context.getFilesDir().getParentFile(), "shared_prefs");
+            File sharedPrefFile = new File(sharedPrefsDir, nameForWidget(widgetId) + ".xml");
+            sharedPrefFile.delete();
+        }
     }
 
     public void logMe(Class tag, String message, int widgetId) {
