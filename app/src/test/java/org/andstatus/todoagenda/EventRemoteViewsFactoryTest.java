@@ -5,7 +5,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import org.andstatus.todoagenda.calendar.CalendarEvent;
 import org.andstatus.todoagenda.prefs.AllSettings;
-import org.andstatus.todoagenda.prefs.ApplicationPreferences;
+import org.andstatus.todoagenda.prefs.InstanceSettingsTestHelper;
 import org.andstatus.todoagenda.task.TaskEvent;
 import org.andstatus.todoagenda.testutil.ShadowDummyAppWidgetManager;
 import org.andstatus.todoagenda.widget.CalendarEntry;
@@ -58,9 +58,7 @@ public class EventRemoteViewsFactoryTest {
 
     @Test
     public void getEventEntries_returnsEventsSorted() {
-        ApplicationPreferences.fromInstanceSettings(context, 1);
-        ApplicationPreferences.setShowDayHeaders(context, false);
-        ApplicationPreferences.save(context, 1);
+        new InstanceSettingsTestHelper(context, 1).setShowDayHeaders(false);
 
         doReturn(createEventListForSortTest()).when(eventProvider).getEventEntries();
 
@@ -107,10 +105,9 @@ public class EventRemoteViewsFactoryTest {
 
     @Test
     public void getEventEntries_addsDayHeaders() {
-        ApplicationPreferences.fromInstanceSettings(context, 1);
-        ApplicationPreferences.setShowDayHeaders(context, true);
-        ApplicationPreferences.setShowDaysWithoutEvents(context, false);
-        ApplicationPreferences.save(context, 1);
+        InstanceSettingsTestHelper settingsHelper = new InstanceSettingsTestHelper(context, 1);
+        settingsHelper.setShowDayHeaders(true);
+        settingsHelper.setShowDaysWithoutEvents(false);
 
         doReturn(createEventListForDayHeaderTest()).when(eventProvider).getEventEntries();
 
@@ -135,10 +132,9 @@ public class EventRemoteViewsFactoryTest {
 
     @Test
     public void getEventEntries_addsDayHeadersForDaysWithoutEvents() {
-        ApplicationPreferences.fromInstanceSettings(context, 1);
-        ApplicationPreferences.setShowDayHeaders(context, true);
-        ApplicationPreferences.setShowDaysWithoutEvents(context, true);
-        ApplicationPreferences.save(context, 1);
+        InstanceSettingsTestHelper settingsHelper = new InstanceSettingsTestHelper(context, 1);
+        settingsHelper.setShowDayHeaders(true);
+        settingsHelper.setShowDaysWithoutEvents(true);
 
         doReturn(createEventListForDayHeaderTest()).when(eventProvider).getEventEntries();
 
