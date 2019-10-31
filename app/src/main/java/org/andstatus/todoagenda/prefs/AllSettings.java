@@ -10,8 +10,11 @@ import org.andstatus.todoagenda.provider.WidgetData;
 import org.andstatus.todoagenda.util.Optional;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static org.andstatus.todoagenda.EventAppWidgetProvider.getWidgetIds;
 
 /**
  * Singleton holder of settings for all widgets
@@ -91,8 +94,12 @@ public class AllSettings {
         return false;
     }
 
-    public static Map<Integer, InstanceSettings> getInstances(Context context) {
-        ensureLoadedFromFiles(context, false);
+    public static Map<Integer, String> getInstances(Context context) {
+        Map<Integer, String> instances = new HashMap<>();
+        for (int widgetId : getWidgetIds(context)) {
+            InstanceSettings settings = instanceFromId(context, widgetId);
+            instances.put(widgetId, settings.getWidgetInstanceName());
+        }
         return instances;
     }
 

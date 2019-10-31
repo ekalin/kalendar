@@ -7,7 +7,6 @@ import android.util.Log;
 
 import org.andstatus.todoagenda.EventRemoteViewsFactory;
 import org.andstatus.todoagenda.R;
-import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.util.Optional;
@@ -130,7 +129,8 @@ public class QueryResultsStorage {
         }
         InstanceSettings settings = opSettings.get();
 
-        AllSettings.getInstances(context).put(settings.getWidgetId(), settings);
+        // FIXME
+        // AllSettings.getInstances(context).put(settings.getWidgetId(), settings);
         QueryResultsStorage results = new QueryResultsStorage();
         readResults(json, KEY_CALENDAR_RESULTS, settings.getWidgetId(), results.calendarResults);
         readResults(json, KEY_TASK_RESULTS, settings.getWidgetId(), results.taskResults);

@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import org.andstatus.todoagenda.prefs.AllSettings;
-import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.PermissionsUtil;
 
 import java.util.ArrayList;
@@ -29,7 +28,6 @@ import java.util.Map;
  * @author yvolk@yurivolkov.com
  */
 public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
-
     protected static final String KEY_VISIBLE_NAME = "visible_name";
     protected static final String KEY_ID = "id";
 
@@ -121,10 +119,10 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
     private void fillWidgetList() {
         final List<Map<String, String>> data = new ArrayList<>();
-        for (InstanceSettings settings : AllSettings.getInstances(this).values()) {
+        for (Map.Entry<Integer, String> instance : AllSettings.getInstances(this).entrySet()) {
             Map<String, String> map = new HashMap<>();
-            map.put(KEY_VISIBLE_NAME, settings.getWidgetInstanceName());
-            map.put(KEY_ID, Integer.toString(settings.getWidgetId()));
+            map.put(KEY_VISIBLE_NAME, instance.getValue());
+            map.put(KEY_ID, Integer.toString(instance.getKey()));
             data.add(map);
         }
 
