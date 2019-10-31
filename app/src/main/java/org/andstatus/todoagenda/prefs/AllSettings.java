@@ -26,7 +26,14 @@ public class AllSettings {
 
     @NonNull
     public static InstanceSettings instanceFromId(Context context, Integer widgetId) {
-        return new InstanceSettings(context, widgetId, "");
+        InstanceSettings settings = new InstanceSettings(context, widgetId);
+        settings.setWidgetInstanceNameIfNew(uniqueInstanceName(context, widgetId));
+        return settings;
+    }
+
+    @NonNull
+    private static InstanceSettings existingInstanceFromId(Context context, Integer widgetId) {
+        return new InstanceSettings(context, widgetId);
     }
 
     public static void ensureLoadedFromFiles(Context context, boolean reInitialize) {
@@ -58,17 +65,14 @@ public class AllSettings {
     }
 
     public static void delete(Context context, int widgetId) {
-        instanceFromId(context, widgetId).delete();
+        existingInstanceFromId(context, widgetId).delete();
     }
 
-    public static String uniqueInstanceName(Context context, int widgetId, String proposedInstanceName) {
-        if (proposedInstanceName != null && proposedInstanceName.trim().length() > 0
-                && !existsInstanceName(widgetId, proposedInstanceName)) {
-            return proposedInstanceName;
-        }
+    public static String uniqueInstanceName(Context context, int widgetId) {
+        Map<Integer, String> instances = getInstances(context);
 
         String nameByWidgetId = defaultInstanceName(context, widgetId);
-        if (!existsInstanceName(widgetId, nameByWidgetId)) {
+        if (!existsInstanceName(widgetId, nameByWidgetId, instances)) {
             return nameByWidgetId;
         }
 
@@ -77,7 +81,7 @@ public class AllSettings {
         do {
             name = defaultInstanceName(context, index);
             index = index + 1;
-        } while (existsInstanceName(widgetId, name));
+        } while (existsInstanceName(widgetId, name, instances));
         return name;
     }
 
@@ -85,9 +89,9 @@ public class AllSettings {
         return context.getText(R.string.app_name) + " " + index;
     }
 
-    private static boolean existsInstanceName(int widgetId, String name) {
-        for (InstanceSettings settings : instances.values()) {
-            if (settings.getWidgetId() != widgetId && settings.getWidgetInstanceName().equals(name)) {
+    private static boolean existsInstanceName(int widgetId, String name, Map<Integer, String> instances) {
+        for (Map.Entry<Integer, String> instance : instances.entrySet()) {
+            if (instance.getKey() != widgetId && instance.getValue().equals(name)) {
                 return true;
             }
         }
@@ -97,7 +101,7 @@ public class AllSettings {
     public static Map<Integer, String> getInstances(Context context) {
         Map<Integer, String> instances = new HashMap<>();
         for (int widgetId : getWidgetIds(context)) {
-            InstanceSettings settings = instanceFromId(context, widgetId);
+            InstanceSettings settings = existingInstanceFromId(context, widgetId);
             instances.put(widgetId, settings.getWidgetInstanceName());
         }
         return instances;

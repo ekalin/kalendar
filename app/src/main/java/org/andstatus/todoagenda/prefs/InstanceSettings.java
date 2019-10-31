@@ -40,7 +40,6 @@ public class InstanceSettings {
 
     // Appearance
     static final String PREF_WIDGET_INSTANCE_NAME = "widgetInstanceName";
-    private final String widgetInstanceName;
     static final String PREF_TEXT_SIZE_SCALE = "textSizeScale";
     static final String PREF_EVENT_ENTRY_LAYOUT = "eventEntryLayout";
     static final String PREF_MULTILINE_TITLE = "multilineTitle";
@@ -110,7 +109,7 @@ public class InstanceSettings {
     }
 
     public static InstanceSettings fromJsonForWidget(Context context, int targetWidgetId, JSONObject json) {
-        InstanceSettings settings = new InstanceSettings(context, targetWidgetId, json.optString(PREF_WIDGET_INSTANCE_NAME));
+        InstanceSettings settings = new InstanceSettings(context, targetWidgetId);
         settings.setFromJson(json);
         return settings;
     }
@@ -118,6 +117,7 @@ public class InstanceSettings {
     private void setFromJson(JSONObject json) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         try {
+            setStringFromJson(editor, json, PREF_WIDGET_INSTANCE_NAME);
             setStringFromJson(editor, json, PREF_TEXT_SIZE_SCALE);
             setStringFromJson(editor, json, PREF_EVENT_ENTRY_LAYOUT);
             setBooleanFromJson(editor, json, PREF_MULTILINE_TITLE);
@@ -192,22 +192,14 @@ public class InstanceSettings {
         return set;
     }
 
-    static InstanceSettings fromApplicationPreferences(Context context, int widgetId) {
-            InstanceSettings settings = new InstanceSettings(context, widgetId,
-                    ApplicationPreferences.getString(context, PREF_WIDGET_INSTANCE_NAME,
-                            ApplicationPreferences.getString(context, PREF_WIDGET_INSTANCE_NAME, "")));
-            return settings;
-    }
-
     @NonNull
     private static String getStorageKey(int widgetId) {
         return "instanceSettings" + widgetId;
     }
 
-    InstanceSettings(Context context, int widgetId, String proposedInstanceName) {
+    InstanceSettings(Context context, int widgetId) {
         this.context = context;
         this.widgetId = widgetId;
-        this.widgetInstanceName = AllSettings.uniqueInstanceName(context, widgetId, proposedInstanceName);
         this.sharedPreferences = context.getSharedPreferences(nameForWidget(widgetId), Context.MODE_PRIVATE);
     }
 
@@ -282,6 +274,12 @@ public class InstanceSettings {
 
     public String getWidgetInstanceName() {
         return sharedPreferences.getString(PREF_WIDGET_INSTANCE_NAME, "");
+    }
+
+    public void setWidgetInstanceNameIfNew(String name) {
+        if (!sharedPreferences.contains(PREF_WIDGET_INSTANCE_NAME)) {
+            sharedPreferences.edit().putString(PREF_WIDGET_INSTANCE_NAME, name).apply();
+        }
     }
 
     public TextSizeScale getTextSizeScale() {
