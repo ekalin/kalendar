@@ -15,7 +15,6 @@ import androidx.annotation.RawRes;
 
 import org.andstatus.todoagenda.EventRemoteViewsFactory;
 import org.andstatus.todoagenda.prefs.AllSettings;
-import org.andstatus.todoagenda.prefs.ApplicationPreferences;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.provider.QueryResult;
 import org.andstatus.todoagenda.provider.QueryResultsStorage;
@@ -23,7 +22,6 @@ import org.andstatus.todoagenda.provider.QueryRow;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.util.RawResourceUtils;
 import org.joda.time.DateTimeZone;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -82,13 +80,11 @@ public class MockCalendarContentProvider extends MockContentProvider {
     }
 
     public void tearDown() {
-        for(int id = WIDGET_ID_MIN; id <= getWidgetId(); id++) {
+        for (int id = WIDGET_ID_MIN; id <= getWidgetId(); id++) {
             AllSettings.delete(targetContext, id);
         }
-        ApplicationPreferences.setWidgetId(targetContext, WIDGET_ID_MIN);
         DateUtil.setNow(null);
         DateTimeZone.setDefault(storedZone);
-        AllSettings.ensureLoadedFromFiles(targetContext, true);
     }
 
     @Override
@@ -113,9 +109,7 @@ public class MockCalendarContentProvider extends MockContentProvider {
         if (!results.isEmpty()) {
             Context context = getSettings().getContext();
             int widgetId = getSettings().getWidgetId();
-            ApplicationPreferences.fromInstanceSettings(context, widgetId);
-            ApplicationPreferences.setLockedTimeZoneId(context, results.get(0).getExecutedAt().getZone().getID());
-            ApplicationPreferences.save(context, widgetId);
+            AllSettings.instanceFromId(context, widgetId).setLockedTimeZoneId(results.get(0).getExecutedAt().getZone().getID());
         }
     }
 
@@ -165,14 +159,6 @@ public class MockCalendarContentProvider extends MockContentProvider {
 
     public int getWidgetId() {
         return widgetId.get();
-    }
-
-    public void startEditing() {
-        ApplicationPreferences.fromInstanceSettings(getContext(), getWidgetId());
-    }
-
-    public void saveSettings() {
-        ApplicationPreferences.save(getContext(), getWidgetId());
     }
 
     public QueryResultsStorage loadResults(Context context, @RawRes int jsonResId)

@@ -4,7 +4,7 @@ import android.test.InstrumentationTestCase;
 import android.util.Log;
 
 import org.andstatus.todoagenda.calendar.MockCalendarContentProvider;
-import org.andstatus.todoagenda.prefs.ApplicationPreferences;
+import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.provider.QueryResultsStorage;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.widget.DayHeader;
@@ -43,17 +43,14 @@ public class MultidayAllDayEventTest extends InstrumentationTestCase {
                 org.andstatus.todoagenda.tests.R.raw.multi_day);
         provider.addResults(inputs.getCalendarResults());
 
-        int dateRange = 30;
-        provider.startEditing();
-        ApplicationPreferences.setEventRange(provider.getContext(), dateRange);
-        provider.saveSettings();
         DateTime now = new DateTime(2015, 8, 30, 0, 0, 1, 0, provider.getSettings().getTimeZone());
         DateUtil.setNow(now);
         factory.onDataSetChanged();
         factory.logWidgetEntries(method);
 
         DateTime today = now.withTimeAtStartOfDay();
-        DateTime endOfRangeTime = today.plusDays(dateRange);
+        DateTime endOfRangeTime = today.plusDays(AllSettings.instanceFromId(provider.getContext(),
+                provider.getWidgetId()).getEventRange());
         int dayOfEventEntryPrev = 0;
         int dayOfHeaderPrev = 0;
         for (int ind = 0; ind < factory.getWidgetEntries().size(); ind++) {
