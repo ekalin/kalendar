@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
     boolean permissionsGranted = false;
     ListView listView = null;
+    Map<Integer, String> instances;
 
     @NonNull
     public static Intent intentToConfigure(Context context, int widgetId) {
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         setContentView(R.layout.activity_main);
         listView = findViewById(android.R.id.list);
         checkPermissions();
+        instances = AllSettings.getInstances(this);
         if (openThisActivity()) {
             updateScreen();
         }
@@ -72,8 +74,8 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         int widgetIdToConfigure = 0;
         if (permissionsGranted) {
             widgetIdToConfigure = getIntent().getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, 0);
-            if (widgetIdToConfigure == 0 && AllSettings.getInstances(this).size() == 1) {
-                widgetIdToConfigure = AllSettings.getInstances(this).keySet().iterator().next();
+            if (widgetIdToConfigure == 0 && instances.size() == 1) {
+                widgetIdToConfigure = instances.keySet().iterator().next();
             }
             if (widgetIdToConfigure != 0) {
                 startActivity(WidgetConfigurationActivity.intentToStartMe(this, widgetIdToConfigure));
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     private void updateScreen() {
         int messageResourceId = R.string.permissions_justification;
         if (permissionsGranted) {
-            if (AllSettings.getInstances(this).isEmpty()) {
+            if (instances.isEmpty()) {
                 messageResourceId = R.string.no_widgets_found;
             } else {
                 messageResourceId = R.string.select_a_widget_to_configure;
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
             message.setText(messageResourceId);
         }
 
-        if (!AllSettings.getInstances(this).isEmpty() && permissionsGranted) {
+        if (!instances.isEmpty() && permissionsGranted) {
             fillWidgetList();
             listView.setVisibility(View.VISIBLE);
         } else {
@@ -107,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         Button goToHomeScreenButton = findViewById(R.id.go_to_home_screen_button);
         if (goToHomeScreenButton != null) {
             goToHomeScreenButton.setVisibility(permissionsGranted &&
-                    AllSettings.getInstances(this).isEmpty() ? View.VISIBLE : View.GONE);
+                    instances.isEmpty() ? View.VISIBLE : View.GONE);
         }
 
         Button grantPermissionsButton = findViewById(R.id.grant_permissions);
@@ -119,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
     private void fillWidgetList() {
         final List<Map<String, String>> data = new ArrayList<>();
-        for (Map.Entry<Integer, String> instance : AllSettings.getInstances(this).entrySet()) {
+        for (Map.Entry<Integer, String> instance : instances.entrySet()) {
             Map<String, String> map = new HashMap<>();
             map.put(KEY_VISIBLE_NAME, instance.getValue());
             map.put(KEY_ID, Integer.toString(instance.getKey()));
