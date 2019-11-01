@@ -21,14 +21,14 @@ import static org.andstatus.todoagenda.EventAppWidgetProvider.getWidgetIds;
  */
 public class AllSettings {
     @NonNull
-    public static InstanceSettings instanceFromId(Context context, Integer widgetId) {
+    public static InstanceSettings instanceFromId(Context context, int widgetId) {
         InstanceSettings settings = new InstanceSettings(context, widgetId);
         settings.setWidgetInstanceNameIfNew(uniqueInstanceName(context, widgetId));
         return settings;
     }
 
     @NonNull
-    private static InstanceSettings existingInstanceFromId(Context context, Integer widgetId) {
+    private static InstanceSettings existingInstanceFromId(Context context, int widgetId) {
         return new InstanceSettings(context, widgetId);
     }
 
@@ -80,7 +80,7 @@ public class AllSettings {
                 .flatMap(data -> data.getSettingsForWidget(context, targetWidgetId));
         if (opSettings.isPresent()) {
             InstanceSettings settings = opSettings.get();
-            settings.logMe(AllSettings.class, "restoreWidgetSettings put", settings.widgetId);
+            settings.logMe(AllSettings.class, "restoreWidgetSettings put", settings.getWidgetId());
             return true;
         } else {
             Log.v(AllSettings.class.getSimpleName(), "Skipped restoreWidgetSettings, widgetId = " + targetWidgetId);

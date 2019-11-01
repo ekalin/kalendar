@@ -18,7 +18,6 @@ import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.prefs.KalendarPreferenceFragment;
 import org.andstatus.todoagenda.prefs.PreferencesFragment;
-import org.andstatus.todoagenda.prefs.SettingsStorage;
 import org.andstatus.todoagenda.provider.WidgetData;
 import org.andstatus.todoagenda.util.Optional;
 import org.andstatus.todoagenda.util.PermissionsUtil;
@@ -28,6 +27,7 @@ import org.json.JSONObject;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -36,6 +36,7 @@ import java.nio.charset.StandardCharsets;
 public class WidgetConfigurationActivity extends AppCompatActivity
         implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
     private static final String TITLE_TAG = "org.andstatus.todoagenda.PREFS_TITLE";
+    private static final int BUFFER_LENGTH = 4 * 1024;
 
     public static final int REQUEST_ID_RESTORE_SETTINGS = 1;
     public static final int REQUEST_ID_BACKUP_SETTINGS = 2;
@@ -234,12 +235,27 @@ public class WidgetConfigurationActivity extends AppCompatActivity
 
     private Optional<JSONObject> readJson(Uri uri) {
         try (InputStream in = getContentResolver().openInputStream(uri)) {
-            return Optional.of(new JSONObject(SettingsStorage.getContents(in)));
+            return Optional.of(new JSONObject(getContents(in)));
         } catch (IOException | JSONException e) {
             String msg = getString(R.string.restore_settings_error, uri, e.getMessage());
             Log.e(this.getClass().getSimpleName(), msg, e);
             Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
             return Optional.empty();
         }
+    }
+
+    private String getContents(InputStream is) throws IOException {
+        char[] buffer = new char[BUFFER_LENGTH];
+        StringBuilder bout = new StringBuilder();
+        if (is != null) {
+            try (InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8)) {
+                int count;
+                while ((count = reader.read(buffer)) != -1) {
+                    bout.append(buffer, 0, count);
+                }
+            }
+        }
+
+        return bout.toString();
     }
 }

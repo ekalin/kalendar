@@ -14,6 +14,8 @@ import java.util.TimeZone;
 
 public class LayoutPreferencesFragment extends KalendarPreferenceFragment
         implements SharedPreferences.OnSharedPreferenceChangeListener {
+    private static final String PREF_LOCK_TIME_ZONE = "lockTimeZone";
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
@@ -56,7 +58,7 @@ public class LayoutPreferencesFragment extends KalendarPreferenceFragment
     }
 
     private void showLockTimeZone(boolean setAlso) {
-        CheckBoxPreference preference = findPreference(InstanceSettings.PREF_LOCK_TIME_ZONE);
+        CheckBoxPreference preference = findPreference(PREF_LOCK_TIME_ZONE);
         if (preference != null) {
             boolean isChecked = setAlso ? instanceSettings.isTimeZoneLocked() : preference.isChecked();
             if (setAlso && preference.isChecked() != isChecked) {
@@ -74,7 +76,7 @@ public class LayoutPreferencesFragment extends KalendarPreferenceFragment
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         switch (preference.getKey()) {
-            case InstanceSettings.PREF_LOCK_TIME_ZONE:
+            case PREF_LOCK_TIME_ZONE:
                 if (preference instanceof CheckBoxPreference) {
                     CheckBoxPreference checkPref = (CheckBoxPreference) preference;
                     instanceSettings.setLockedTimeZoneId(checkPref.isChecked() ? TimeZone.getDefault().getID() : "");

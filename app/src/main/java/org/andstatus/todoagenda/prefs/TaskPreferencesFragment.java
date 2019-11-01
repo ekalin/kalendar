@@ -13,6 +13,7 @@ import java.util.Collections;
 
 public class TaskPreferencesFragment extends KalendarPreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String PREF_ACTIVE_TASK_LISTS_BUTTON = "activeTaskListsButton";
+    private static final String KEY_PREF_GRANT_TASK_PERMISSION = "grantTaskPermission";
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -54,7 +55,7 @@ public class TaskPreferencesFragment extends KalendarPreferenceFragment implemen
 
     private void setGrantPermissionVisibility() {
         TaskProvider taskProvider = new TaskProvider(getActivity(), instanceSettings.getWidgetId());
-        Preference preference = findPreference("grantTaskPermission");
+        Preference preference = findPreference(KEY_PREF_GRANT_TASK_PERMISSION);
         preference.setVisible(!taskProvider.hasPermissionForSource(instanceSettings.getTaskSource()));
     }
 
@@ -70,7 +71,7 @@ public class TaskPreferencesFragment extends KalendarPreferenceFragment implemen
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         switch (preference.getKey()) {
-            case InstanceSettings.KEY_PREF_GRANT_TASK_PERMISSION:
+            case KEY_PREF_GRANT_TASK_PERMISSION:
                 requestTaskPermission();
                 return true;
         }

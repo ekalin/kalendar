@@ -50,7 +50,6 @@ public class InstanceSettings {
     static final String PREF_DAY_HEADER_ALIGNMENT_DEFAULT = Alignment.LEFT.name();
     static final String PREF_SHOW_DAYS_WITHOUT_EVENTS = "showDaysWithoutEvents";
     static final String PREF_SHOW_WIDGET_HEADER = "showHeader";
-    static final String PREF_LOCK_TIME_ZONE = "lockTimeZone";
     static final String PREF_LOCKED_TIME_ZONE_ID = "lockedTimeZoneId";
 
     // Colors
@@ -63,8 +62,8 @@ public class InstanceSettings {
     static final String PREF_ENTRY_THEME = "entryTheme";
     public static final String PREF_ENTRY_THEME_DEFAULT = Theme.WHITE.name();
 
-    private volatile ContextThemeWrapper entryThemeContext = null;
     private volatile ContextThemeWrapper headerThemeContext = null;
+    private volatile ContextThemeWrapper entryThemeContext = null;
 
     // Event details
     static final String PREF_SHOW_END_TIME = "showEndTime";
@@ -90,12 +89,11 @@ public class InstanceSettings {
     // Tasks
     static final String PREF_TASK_SOURCE = "taskSource";
     static final String PREF_TASK_SOURCE_DEFAULT = TaskProvider.PROVIDER_NONE;
-    static final String KEY_PREF_GRANT_TASK_PERMISSION = "grantTaskPermission";
     static final String PREF_ACTIVE_TASK_LISTS = "activeTaskLists";
 
+
     private final Context context;
-    // FIXME: Make private
-    final int widgetId;
+    private final int widgetId;
     private final SharedPreferences sharedPreferences;
 
     public static Optional<InstanceSettings> fromJson(Context context, JSONObject json) {
