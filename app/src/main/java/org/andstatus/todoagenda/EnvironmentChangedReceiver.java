@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
 
-import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.task.dmfs.DmfsOpenTasksContract;
 import org.joda.time.DateTime;
@@ -73,7 +72,6 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i(this.getClass().getSimpleName(), "Received intent: " + intent);
-        AllSettings.ensureLoadedFromFiles(context, false);
 
         int widgetId = intent == null
                 ? 0

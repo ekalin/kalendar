@@ -15,7 +15,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import org.andstatus.todoagenda.prefs.AllSettings;
-import org.andstatus.todoagenda.prefs.ApplicationPreferences;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.prefs.KalendarPreferenceFragment;
 import org.andstatus.todoagenda.prefs.PreferencesFragment;
@@ -98,7 +97,6 @@ public class WidgetConfigurationActivity extends AppCompatActivity
             restartIntent = MainActivity.intentToConfigure(this, newWidgetId);
         } else if (widgetId == 0) {
             widgetId = newWidgetId;
-            ApplicationPreferences.fromInstanceSettings(this, widgetId);
         }
         if (restartIntent != null) {
             widgetId = 0;
@@ -136,7 +134,6 @@ public class WidgetConfigurationActivity extends AppCompatActivity
     protected void onPause() {
         super.onPause();
         if (saveOnPause) {
-            ApplicationPreferences.save(this, widgetId);
             EnvironmentChangedReceiver.updateWidget(this, widgetId);
         }
     }
@@ -154,8 +151,6 @@ public class WidgetConfigurationActivity extends AppCompatActivity
     }
 
     private void restartIfNeeded() {
-        // FIXME: Review
-        // if (widgetId != ApplicationPreferences.getWidgetId(this) || !PermissionsUtil.arePermissionsGranted(this)) {
         if (!PermissionsUtil.arePermissionsGranted(this)) {
             widgetId = 0;
             startActivity(MainActivity.intentToStartMe(this));

@@ -13,6 +13,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.RawRes;
 
+import org.andstatus.todoagenda.EnvironmentChangedReceiver;
 import org.andstatus.todoagenda.EventRemoteViewsFactory;
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
@@ -70,13 +71,13 @@ public class MockCalendarContentProvider extends MockContentProvider {
                 context).getBaseContext() : context;
     }
 
-    private void setPreferences(Context context) throws JSONException {
-        DateTimeZone zone = DateTimeZone.forID(ZONE_IDS[(int)(System.currentTimeMillis() % ZONE_IDS.length)]);
+    private void setPreferences(Context context) {
+        DateTimeZone zone = DateTimeZone.forID(ZONE_IDS[(int) (System.currentTimeMillis() % ZONE_IDS.length)]);
         DateTimeZone.setDefault(zone);
         Log.i(getClass().getSimpleName(), "Default Time zone set to " + zone);
 
         InstanceSettings settings = AllSettings.instanceFromId(context, widgetId.incrementAndGet());
-        AllSettings.loadFromTestData(context, settings);
+        EnvironmentChangedReceiver.registerReceivers(settings);
     }
 
     public void tearDown() {

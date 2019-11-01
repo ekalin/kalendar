@@ -149,7 +149,6 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        AllSettings.ensureLoadedFromFiles(this, true);
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         checkPermissions();
         updateScreen();

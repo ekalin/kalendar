@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
 
 import org.andstatus.todoagenda.Alignment;
 import org.andstatus.todoagenda.EndedSomeTimeAgo;
@@ -192,11 +191,6 @@ public class InstanceSettings {
         return set;
     }
 
-    @NonNull
-    private static String getStorageKey(int widgetId) {
-        return "instanceSettings" + widgetId;
-    }
-
     InstanceSettings(Context context, int widgetId) {
         this.context = context;
         this.widgetId = widgetId;
@@ -205,10 +199,6 @@ public class InstanceSettings {
 
     public static String nameForWidget(int widgetId) {
         return "widget" + widgetId;
-    }
-
-    void save() {
-        // noop
     }
 
     public JSONObject toJsonForBackup() {

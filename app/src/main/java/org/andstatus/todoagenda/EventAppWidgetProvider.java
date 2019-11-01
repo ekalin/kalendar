@@ -15,8 +15,6 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        AllSettings.ensureLoadedFromFiles(context, false);
-
         String action = intent.getAction();
         if (AppWidgetManager.ACTION_APPWIDGET_UPDATE.equals(action)) {
             Bundle extras = intent.getExtras();

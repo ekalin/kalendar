@@ -28,12 +28,10 @@ public class FeedbackPreferencesFragment extends KalendarPreferenceFragment {
 
         switch (preference.getKey()) {
             case KEY_SHARE_EVENTS_FOR_DEBUGGING:
-                ApplicationPreferences.save(getActivity(), widgetId);
                 QueryResultsStorage.shareEventsForDebugging(getActivity(), widgetId);
                 break;
 
             case KEY_BACKUP_SETTINGS:
-                ApplicationPreferences.save(getActivity(), widgetId);
                 backupSettings(widgetId);
                 break;
 

@@ -4,14 +4,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.widget.RemoteViewsService;
 
-import org.andstatus.todoagenda.prefs.AllSettings;
-
 public class EventWidgetService extends RemoteViewsService {
-    @Override
-    public void onCreate() {
-        AllSettings.ensureLoadedFromFiles(this, true);
-    }
-
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
         int widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, 0);
