@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -43,7 +42,6 @@ public class WidgetConfigurationActivity extends AppCompatActivity
 
     private int widgetId = 0;
     private String prefsName;
-    private boolean saveOnPause = true;
 
     @NonNull
     public static Intent intentToStartMe(Context context, int widgetId) {
@@ -134,9 +132,7 @@ public class WidgetConfigurationActivity extends AppCompatActivity
     @Override
     protected void onPause() {
         super.onPause();
-        if (saveOnPause) {
-            EnvironmentChangedReceiver.updateWidget(this, widgetId);
-        }
+        EnvironmentChangedReceiver.updateWidget(this, widgetId);
     }
 
     @Override
@@ -221,13 +217,7 @@ public class WidgetConfigurationActivity extends AppCompatActivity
 
         final WidgetConfigurationActivity context = WidgetConfigurationActivity.this;
         if (AllSettings.restoreWidgetSettings(context, jsonObject.get(), widgetId)) {
-            saveOnPause = false;
-            int duration = 3000;
             Toast.makeText(context, context.getText(R.string.restore_settings_successful), Toast.LENGTH_LONG).show();
-            new Handler().postDelayed(() -> {
-                startActivity(intentToStartMe(context, widgetId));
-                context.finish();
-            }, duration);
         } else {
             Toast.makeText(context, context.getText(R.string.restore_settings_unsuccessful), Toast.LENGTH_LONG).show();
         }

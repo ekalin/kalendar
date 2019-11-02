@@ -102,10 +102,10 @@ public class InstanceSettings {
             return Optional.empty();
         }
 
-        return Optional.of(fromJsonForWidget(context, widgetId, json));
+        return Optional.of(fromJson(context, widgetId, json));
     }
 
-    public static InstanceSettings fromJsonForWidget(Context context, int targetWidgetId, JSONObject json) {
+    static InstanceSettings fromJson(Context context, int targetWidgetId, JSONObject json) {
         InstanceSettings settings = new InstanceSettings(context, targetWidgetId);
         settings.setFromJson(json);
         return settings;
@@ -264,7 +264,7 @@ public class InstanceSettings {
         return sharedPreferences.getString(PREF_WIDGET_INSTANCE_NAME, "");
     }
 
-    public void setWidgetInstanceNameIfNew(String name) {
+    void setWidgetInstanceNameIfNew(String name) {
         if (!sharedPreferences.contains(PREF_WIDGET_INSTANCE_NAME)) {
             sharedPreferences.edit().putString(PREF_WIDGET_INSTANCE_NAME, name).apply();
         }
@@ -426,7 +426,7 @@ public class InstanceSettings {
         return getTaskSource().equals(TaskProvider.PROVIDER_NONE);
     }
 
-    public void delete() {
+    void delete() {
         if (!sharedPreferences.edit().clear().commit()) {
             Log.w(getClass().getSimpleName(), "Could not commit prefs change before deletion");
         }
@@ -438,10 +438,6 @@ public class InstanceSettings {
             File sharedPrefFile = new File(sharedPrefsDir, nameForWidget(widgetId) + ".xml");
             sharedPrefFile.delete();
         }
-    }
-
-    public void logMe(Class tag, String message, int widgetId) {
-        Log.v(tag.getSimpleName(), message + ", widgetId:" + widgetId + "\n" + toJsonComplete());
     }
 
     @Override

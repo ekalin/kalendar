@@ -1,7 +1,6 @@
 package org.andstatus.todoagenda.prefs;
 
 import android.content.Context;
-import android.util.Log;
 import androidx.annotation.NonNull;
 
 import org.andstatus.todoagenda.R;
@@ -77,14 +76,9 @@ public class AllSettings {
 
     public static boolean restoreWidgetSettings(Context context, JSONObject json, int targetWidgetId) {
         Optional<InstanceSettings> opSettings = WidgetData.fromJson(json)
-                .flatMap(data -> data.getSettingsForWidget(context, targetWidgetId));
-        if (opSettings.isPresent()) {
-            InstanceSettings settings = opSettings.get();
-            settings.logMe(AllSettings.class, "restoreWidgetSettings put", settings.getWidgetId());
-            return true;
-        } else {
-            Log.v(AllSettings.class.getSimpleName(), "Skipped restoreWidgetSettings, widgetId = " + targetWidgetId);
-            return false;
-        }
+                .flatMap(WidgetData::getSettingsFromJson)
+                .map(jsonSettings -> InstanceSettings.fromJson(context, targetWidgetId, jsonSettings));
+
+        return opSettings.isPresent();
     }
 }
