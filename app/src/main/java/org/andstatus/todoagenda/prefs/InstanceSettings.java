@@ -39,16 +39,21 @@ public class InstanceSettings {
     // Appearance
     static final String PREF_WIDGET_INSTANCE_NAME = "widgetInstanceName";
     static final String PREF_TEXT_SIZE_SCALE = "textSizeScale";
+    static final String PREF_TEXT_SIZE_SCALE_DEFAULT = "";
     static final String PREF_EVENT_ENTRY_LAYOUT = "eventEntryLayout";
+    static final String PREF_EVENT_ENTRY_LAYOUT_DEFAULT = "";
     static final String PREF_MULTILINE_TITLE = "multilineTitle";
     static final boolean PREF_MULTILINE_TITLE_DEFAULT = false;
     static final String PREF_ABBREVIATE_DATES = "abbreviateDates";
     static final boolean PREF_ABBREVIATE_DATES_DEFAULT = false;
     static final String PREF_SHOW_DAY_HEADERS = "showDayHeaders";
+    static final boolean PREF_SHOW_DAY_HEADERS_DEFAULT = true;
     static final String PREF_DAY_HEADER_ALIGNMENT = "dayHeaderAlignment";
     static final String PREF_DAY_HEADER_ALIGNMENT_DEFAULT = Alignment.LEFT.name();
     static final String PREF_SHOW_DAYS_WITHOUT_EVENTS = "showDaysWithoutEvents";
+    static final boolean PREF_SHOW_DAYS_WITHOUT_EVENTS_DEFAULT = false;
     static final String PREF_SHOW_WIDGET_HEADER = "showHeader";
+    static final boolean PREF_SHOW_WIDGET_HEADER_DEFAULT = true;
     static final String PREF_LOCKED_TIME_ZONE_ID = "lockedTimeZoneId";
 
     // Colors
@@ -72,15 +77,18 @@ public class InstanceSettings {
     static final String PREF_FILL_ALL_DAY = "fillAllDay";
     static final boolean PREF_FILL_ALL_DAY_DEFAULT = true;
     static final String PREF_INDICATE_ALERTS = "indicateAlerts";
+    static final boolean PREF_INDICATE_ALERTS_DEFAULT = true;
     static final String PREF_INDICATE_RECURRING = "indicateRecurring";
+    static final boolean PREF_INDICATE_RECURRING_DEFAULT = false;
 
     // Event filters
     static final String PREF_EVENTS_ENDED = "eventsEnded";
+    static final String PREF_EVENTS_ENDED_DEFAULT = "eventsEnded";
     static final String PREF_EVENT_RANGE = "eventRange";
     static final int PREF_EVENT_RANGE_DEFAULT = 30;
     static final String PREF_HIDE_BASED_ON_KEYWORDS = "hideBasedOnKeywords";
-    static final String PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT =
-            "showOnlyClosestInstanceOfRecurringEvent";
+    static final String PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT = "showOnlyClosestInstanceOfRecurringEvent";
+    static final boolean PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT_DEFAULT = false;
 
     // Calendars
     static final String PREF_ACTIVE_CALENDARS = "activeCalendars";
@@ -89,7 +97,6 @@ public class InstanceSettings {
     static final String PREF_TASK_SOURCE = "taskSource";
     static final String PREF_TASK_SOURCE_DEFAULT = TaskProvider.PROVIDER_NONE;
     static final String PREF_ACTIVE_TASK_LISTS = "activeTaskLists";
-
 
     private final Context context;
     private final int widgetId;
@@ -261,11 +268,13 @@ public class InstanceSettings {
     }
 
     public TextSizeScale getTextSizeScale() {
-        return TextSizeScale.fromPreferenceValue(sharedPreferences.getString(PREF_TEXT_SIZE_SCALE, ""));
+        return TextSizeScale.fromPreferenceValue(sharedPreferences.getString(PREF_TEXT_SIZE_SCALE,
+                PREF_TEXT_SIZE_SCALE_DEFAULT));
     }
 
     public EventEntryLayout getEventEntryLayout() {
-        return EventEntryLayout.fromPreferenceValue(sharedPreferences.getString(PREF_EVENT_ENTRY_LAYOUT, ""));
+        return EventEntryLayout.fromPreferenceValue(sharedPreferences.getString(PREF_EVENT_ENTRY_LAYOUT,
+                PREF_EVENT_ENTRY_LAYOUT_DEFAULT));
     }
 
     public boolean getTitleMultiline() {
@@ -277,7 +286,7 @@ public class InstanceSettings {
     }
 
     public boolean getShowDayHeaders() {
-        return sharedPreferences.getBoolean(PREF_SHOW_DAY_HEADERS, true);
+        return sharedPreferences.getBoolean(PREF_SHOW_DAY_HEADERS, PREF_SHOW_DAY_HEADERS_DEFAULT);
     }
 
     public String getDayHeaderAlignment() {
@@ -285,11 +294,11 @@ public class InstanceSettings {
     }
 
     public boolean getShowDaysWithoutEvents() {
-        return sharedPreferences.getBoolean(PREF_SHOW_DAYS_WITHOUT_EVENTS, false);
+        return sharedPreferences.getBoolean(PREF_SHOW_DAYS_WITHOUT_EVENTS, PREF_SHOW_DAYS_WITHOUT_EVENTS_DEFAULT);
     }
 
     public boolean getShowWidgetHeader() {
-        return sharedPreferences.getBoolean(PREF_SHOW_WIDGET_HEADER, true);
+        return sharedPreferences.getBoolean(PREF_SHOW_WIDGET_HEADER, PREF_SHOW_WIDGET_HEADER_DEFAULT);
     }
 
     public String getLockedTimeZoneId() {
@@ -360,15 +369,16 @@ public class InstanceSettings {
     }
 
     public boolean getIndicateAlerts() {
-        return sharedPreferences.getBoolean(PREF_INDICATE_ALERTS, true);
+        return sharedPreferences.getBoolean(PREF_INDICATE_ALERTS, PREF_INDICATE_ALERTS_DEFAULT);
     }
 
     public boolean getIndicateRecurring() {
-        return sharedPreferences.getBoolean(PREF_INDICATE_RECURRING, false);
+        return sharedPreferences.getBoolean(PREF_INDICATE_RECURRING, PREF_INDICATE_RECURRING_DEFAULT);
     }
 
     public EndedSomeTimeAgo getEventsEnded() {
-        return EndedSomeTimeAgo.fromPreferenceValue(sharedPreferences.getString(PREF_EVENTS_ENDED, ""));
+        return EndedSomeTimeAgo.fromPreferenceValue(sharedPreferences.getString(PREF_EVENTS_ENDED,
+                PREF_EVENTS_ENDED_DEFAULT));
     }
 
     public int getEventRange() {
@@ -385,7 +395,8 @@ public class InstanceSettings {
     }
 
     public boolean getShowOnlyClosestInstanceOfRecurringEvent() {
-        return sharedPreferences.getBoolean(PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT, false);
+        return sharedPreferences.getBoolean(PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT,
+                PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT_DEFAULT);
     }
 
     public Set<String> getActiveCalendars() {
