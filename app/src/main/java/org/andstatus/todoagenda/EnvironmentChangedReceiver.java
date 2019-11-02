@@ -21,11 +21,16 @@ import static org.andstatus.todoagenda.EventRemoteViewsFactory.ACTION_REFRESH;
 
 public class EnvironmentChangedReceiver extends BroadcastReceiver {
     private static final String TAG = EnvironmentChangedReceiver.class.getSimpleName();
+    private static boolean receiverRegistered = false;
     private static final AtomicReference<EnvironmentChangedReceiver> registeredReceiver = new AtomicReference<>();
 
-    public static void registerReceivers(InstanceSettings instanceSettings) {
-        Context context = instanceSettings.getContext().getApplicationContext();
+    public static void registerReceivers(Context context) {
+        context = context.getApplicationContext();
         synchronized (registeredReceiver) {
+            if (receiverRegistered) {
+                return;
+            }
+
             EnvironmentChangedReceiver receiver = new EnvironmentChangedReceiver();
 
             IntentFilter providerChanged = new IntentFilter();
@@ -45,7 +50,8 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
                 oldReceiver.unRegister(context);
             }
 
-            Log.i(TAG, "Registered receivers from " + instanceSettings.getContext().getClass().getName());
+            receiverRegistered = true;
+            Log.i(TAG, "Registered receivers from " + context.getClass().getName());
         }
     }
 
