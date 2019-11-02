@@ -14,7 +14,6 @@ import org.andstatus.todoagenda.TextSizeScale;
 import org.andstatus.todoagenda.Theme;
 import org.andstatus.todoagenda.task.TaskProvider;
 import org.andstatus.todoagenda.util.DateUtil;
-import org.andstatus.todoagenda.util.Optional;
 import org.andstatus.todoagenda.widget.EventEntryLayout;
 import org.joda.time.DateTimeZone;
 import org.json.JSONArray;
@@ -96,16 +95,7 @@ public class InstanceSettings {
     private final int widgetId;
     private final SharedPreferences sharedPreferences;
 
-    public static Optional<InstanceSettings> fromJson(Context context, JSONObject json) {
-        int widgetId = json.optInt(PREF_WIDGET_ID);
-        if (widgetId == 0) {
-            return Optional.empty();
-        }
-
-        return Optional.of(fromJson(context, widgetId, json));
-    }
-
-    static InstanceSettings fromJson(Context context, int targetWidgetId, JSONObject json) {
+    public static InstanceSettings fromJson(Context context, int targetWidgetId, JSONObject json) {
         InstanceSettings settings = new InstanceSettings(context, targetWidgetId);
         settings.setFromJson(json);
         return settings;

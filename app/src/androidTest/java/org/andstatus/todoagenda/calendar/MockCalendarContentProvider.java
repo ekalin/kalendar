@@ -21,6 +21,7 @@ import org.andstatus.todoagenda.provider.QueryResult;
 import org.andstatus.todoagenda.provider.QueryResultsStorage;
 import org.andstatus.todoagenda.provider.QueryRow;
 import org.andstatus.todoagenda.util.DateUtil;
+import org.andstatus.todoagenda.util.QueryResultsStorageLoader;
 import org.andstatus.todoagenda.util.RawResourceUtils;
 import org.joda.time.DateTimeZone;
 import org.json.JSONException;
@@ -166,6 +167,6 @@ public class MockCalendarContentProvider extends MockContentProvider {
             throws IOException, JSONException {
         JSONObject json = new JSONObject(RawResourceUtils.getString(context, jsonResId));
         json.getJSONObject(KEY_SETTINGS).put(PREF_WIDGET_ID, widgetId);
-        return QueryResultsStorage.fromTestData(getContext(), json);
+        return QueryResultsStorageLoader.fromTestData(getContext(), json);
     }
 }

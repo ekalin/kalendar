@@ -7,11 +7,6 @@ import android.util.Log;
 
 import org.andstatus.todoagenda.EventRemoteViewsFactory;
 import org.andstatus.todoagenda.R;
-import org.andstatus.todoagenda.prefs.InstanceSettings;
-import org.andstatus.todoagenda.util.DateUtil;
-import org.andstatus.todoagenda.util.Optional;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -120,35 +115,6 @@ public class QueryResultsStorage {
             }
         }
         return jsonArray;
-    }
-
-    public static QueryResultsStorage fromTestData(Context context, JSONObject json) throws JSONException {
-        Optional<InstanceSettings> opSettings =  WidgetData.fromJson(json).flatMap(data -> data.getSettings(context));
-        if (!opSettings.isPresent()) {
-            throw new IllegalStateException("fromTestData without settings");
-        }
-        InstanceSettings settings = opSettings.get();
-
-        QueryResultsStorage results = new QueryResultsStorage();
-        readResults(json, KEY_CALENDAR_RESULTS, settings.getWidgetId(), results.calendarResults);
-        readResults(json, KEY_TASK_RESULTS, settings.getWidgetId(), results.taskResults);
-
-        if (!results.calendarResults.isEmpty()) {
-            DateTime now = results.calendarResults.get(0).getExecutedAt().toDateTime(DateTimeZone.getDefault());
-            DateUtil.setNow(now);
-        }
-        return results;
-    }
-
-    private static void readResults(JSONObject json, String key, int widgetId, List<QueryResult> results) throws JSONException {
-        if (!json.has(key)) {
-            return;
-        }
-
-        JSONArray jsonResults = json.getJSONArray(key);
-        for (int ind = 0; ind < jsonResults.length(); ind++) {
-            results.add(QueryResult.fromJson(jsonResults.getJSONObject(ind), widgetId));
-        }
     }
 
     @Override
