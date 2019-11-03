@@ -70,7 +70,8 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
-        AlarmManager am = settings.getContext().getApplicationContext().getSystemService(AlarmManager.class);
+        AlarmManager am =
+                (AlarmManager) settings.getContext().getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         am.set(AlarmManager.RTC, nextUpdate.getMillis(), pendingIntent);
     }
 
