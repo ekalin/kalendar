@@ -3,7 +3,6 @@ package org.andstatus.todoagenda.prefs;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 import org.andstatus.todoagenda.R;
@@ -26,7 +25,6 @@ public class TaskPreferencesFragment extends KalendarPreferenceFragment implemen
     @Override
     public void onResume() {
         super.onResume();
-        showTaskSource();
         getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
     }
 
@@ -40,17 +38,11 @@ public class TaskPreferencesFragment extends KalendarPreferenceFragment implemen
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         switch (key) {
             case InstanceSettings.PREF_TASK_SOURCE:
-                showTaskSource();
                 setGrantPermissionVisibility();
                 setTaskListState();
                 clearTasksLists();
                 break;
         }
-    }
-
-    private void showTaskSource() {
-        ListPreference preference = findPreference(InstanceSettings.PREF_TASK_SOURCE);
-        preference.setSummary(preference.getEntry());
     }
 
     private void setGrantPermissionVisibility() {
