@@ -141,7 +141,5 @@
          問題を共有する前に、問題が分かるレベルでイベントをフィルタリングしてプライバシーを保護してください</string>
     <string name="share_events_settings_for_debugging_title">デバッグ用のイベントと設定を共有する</string>
     <string name="backup_settings_title">設定のバックアップ</string>
-    <string name="backup_settings_desc">「デバッグ用にイベントを共有する」と同じですが、イベントは含まれません</string>
     <string name="restore_settings_title">バックアップから設定を復元</string>
-    <string name="restore_settings_desc">それぞれのToDoアジェンダウィジェットの設定は個別に復元する必要があります</string>
 </resources>

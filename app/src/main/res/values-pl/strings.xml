@@ -140,7 +140,5 @@
     <string name="share_events_settings_for_debugging_title">Udostępniaj wydarzenia i ustawienia do sprawdzania błędów</string>
     <string name="share_events_for_debugging_desc">Stwórz raport aby pomóc programistom rozpoznać problem. Przed udostępnieniem raportu ukryj wszystkie twoje prywatne dane, ale postaraj się zrobić to tak aby raport nadal przedstawiał problem</string>
     <string name="backup_settings_title">Ustawienia kopii zapasowej</string>
-    <string name="backup_settings_desc">To samo co \"Udostępnij wydarzenia do sprawdzania błędów\", ale nie zawiera danych wydarzeń</string>
     <string name="restore_settings_title">Przywróć ustawienia z kopii zapasowej</string>
-    <string name="restore_settings_desc">Ustawienia z każdego widgetu powinny być przywracanie pojedynczo</string>
 </resources>

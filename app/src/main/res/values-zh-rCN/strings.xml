@@ -124,7 +124,5 @@
     <string name="share_events_for_debugging_desc">创建报告以帮助开发者解决问题。分享之前，请过滤事件以保护您的隐私但仍然显示问题</string>
     <string name="share_events_settings_for_debugging_title">共享事件和设置用于调试</string>
     <string name="backup_settings_title">备份设置</string>
-    <string name="backup_settings_desc">与“共享事件进行调试”相同，但不包含事件</string>
     <string name="restore_settings_title">从备份中恢复设置</string>
-    <string name="restore_settings_desc">每个ToDo议程小部件的设置都应该单独恢复</string>
 </resources>

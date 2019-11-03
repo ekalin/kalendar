@@ -144,7 +144,5 @@
         Bevor du ihn teilst, filtere bitte die Termine, sodass deine Privatsphäre geschützt ist, aber das Problem noch dargestellt wird</string>
     <string name="share_events_settings_for_debugging_title">Termine und Einstellungen zum Debuggen teilen</string>
     <string name="backup_settings_title">Einstellungen sichern</string>
-    <string name="backup_settings_desc">Das gleiche wie \"Termine für Debugging teilen\", aber enthält nicht Termine</string>
     <string name="restore_settings_title">Einstellungen aus einer Sicherung wiederherstellen</string>
-    <string name="restore_settings_desc">Einstellungen jedes Todo-Agenda-Widgets sollten getrennt wiederhergestellt werden</string>
 </resources>
