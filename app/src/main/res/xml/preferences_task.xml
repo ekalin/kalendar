@@ -2,10 +2,10 @@
     <ListPreference
         app:key="taskSource"
         app:title="@string/task_source_pref_title"
-        app:summary="@string/task_source_pref_desc"
         app:defaultValue="NONE"
         app:entries="@array/pref_task_source_entries"
-        app:entryValues="@array/pref_task_source_values" />
+        app:entryValues="@array/pref_task_source_values"
+        app:useSimpleSummaryProvider="true" />
 
     <Preference
         app:key="grantTaskPermission"

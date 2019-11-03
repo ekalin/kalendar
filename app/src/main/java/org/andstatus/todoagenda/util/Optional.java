@@ -1,8 +1,7 @@
 package org.andstatus.todoagenda.util;
 
-import android.graphics.Path;
-
 import androidx.arch.core.util.Function;
+import androidx.core.util.Supplier;
 
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -51,6 +50,14 @@ public class Optional<T> {
             return this.value;
         } else {
             return elseValue;
+        }
+    }
+
+    public <X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSupplier) throws X {
+        if (isPresent()) {
+            return this.value;
+        } else {
+            throw exceptionSupplier.get();
         }
     }
 

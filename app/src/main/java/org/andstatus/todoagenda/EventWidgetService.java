@@ -2,14 +2,15 @@ package org.andstatus.todoagenda;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViewsService;
-
-import org.andstatus.todoagenda.prefs.AllSettings;
 
 public class EventWidgetService extends RemoteViewsService {
     @Override
     public void onCreate() {
-        AllSettings.ensureLoadedFromFiles(this, true);
+        super.onCreate();
+        Log.d(this.getClass().getSimpleName(), "onCreate");
+        EnvironmentChangedReceiver.registerReceivers(this);
     }
 
     @Override

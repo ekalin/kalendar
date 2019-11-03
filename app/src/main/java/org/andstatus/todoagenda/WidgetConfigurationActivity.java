@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -15,10 +14,9 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import org.andstatus.todoagenda.prefs.AllSettings;
-import org.andstatus.todoagenda.prefs.ApplicationPreferences;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
+import org.andstatus.todoagenda.prefs.KalendarPreferenceFragment;
 import org.andstatus.todoagenda.prefs.PreferencesFragment;
-import org.andstatus.todoagenda.prefs.SettingsStorage;
 import org.andstatus.todoagenda.provider.WidgetData;
 import org.andstatus.todoagenda.util.Optional;
 import org.andstatus.todoagenda.util.PermissionsUtil;
@@ -28,6 +26,7 @@ import org.json.JSONObject;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -36,12 +35,13 @@ import java.nio.charset.StandardCharsets;
 public class WidgetConfigurationActivity extends AppCompatActivity
         implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
     private static final String TITLE_TAG = "org.andstatus.todoagenda.PREFS_TITLE";
+    private static final int BUFFER_LENGTH = 4 * 1024;
 
     public static final int REQUEST_ID_RESTORE_SETTINGS = 1;
     public static final int REQUEST_ID_BACKUP_SETTINGS = 2;
 
     private int widgetId = 0;
-    private boolean saveOnPause = true;
+    private String prefsName;
 
     @NonNull
     public static Intent intentToStartMe(Context context, int widgetId) {
@@ -59,8 +59,15 @@ public class WidgetConfigurationActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.widget_configuration_actitivy);
+
+        prefsName = InstanceSettings.nameForWidget(widgetId);
+
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.preferences, new PreferencesFragment()).commit();
+            PreferencesFragment fragment = new PreferencesFragment();
+            Bundle args = new Bundle();
+            setFragmentArguments(args);
+            fragment.setArguments(args);
+            getSupportFragmentManager().beginTransaction().replace(R.id.preferences, fragment).commit();
             setTitleToWidgetName();
         } else {
             setTitle(savedInstanceState.getCharSequence(TITLE_TAG));
@@ -75,11 +82,13 @@ public class WidgetConfigurationActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    private void setFragmentArguments(Bundle args) {
+        args.putString(KalendarPreferenceFragment.PREFS_NAME_KEY, prefsName);
+        args.putInt(KalendarPreferenceFragment.WIDGET_ID_KEY, widgetId);
+    }
+
     private boolean openThisActivity(Intent newIntent) {
         int newWidgetId = newIntent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, 0);
-        if (newWidgetId == 0) {
-            newWidgetId = ApplicationPreferences.getWidgetId(this);
-        }
         Intent restartIntent = null;
         if (newWidgetId == 0 || !PermissionsUtil.arePermissionsGranted(this)) {
             restartIntent = MainActivity.intentToStartMe(this);
@@ -87,7 +96,6 @@ public class WidgetConfigurationActivity extends AppCompatActivity
             restartIntent = MainActivity.intentToConfigure(this, newWidgetId);
         } else if (widgetId == 0) {
             widgetId = newWidgetId;
-            ApplicationPreferences.fromInstanceSettings(this, widgetId);
         }
         if (restartIntent != null) {
             widgetId = 0;
@@ -100,12 +108,14 @@ public class WidgetConfigurationActivity extends AppCompatActivity
     }
 
     private void setTitleToWidgetName() {
-        setTitle(ApplicationPreferences.getWidgetInstanceName(this));
+        InstanceSettings instanceSettings = AllSettings.instanceFromId(this, widgetId);
+        setTitle(instanceSettings.getWidgetInstanceName());
     }
 
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
         Bundle args = pref.getExtras();
+        setFragmentArguments(args);
         Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(getClassLoader(),
                 pref.getFragment());
         fragment.setArguments(args);
@@ -122,10 +132,7 @@ public class WidgetConfigurationActivity extends AppCompatActivity
     @Override
     protected void onPause() {
         super.onPause();
-        if (saveOnPause) {
-            ApplicationPreferences.save(this, widgetId);
-            EnvironmentChangedReceiver.updateWidget(this, widgetId);
-        }
+        EnvironmentChangedReceiver.updateWidget(this, widgetId);
     }
 
     @Override
@@ -141,7 +148,7 @@ public class WidgetConfigurationActivity extends AppCompatActivity
     }
 
     private void restartIfNeeded() {
-        if (widgetId != ApplicationPreferences.getWidgetId(this) || !PermissionsUtil.arePermissionsGranted(this)) {
+        if (!PermissionsUtil.arePermissionsGranted(this)) {
             widgetId = 0;
             startActivity(MainActivity.intentToStartMe(this));
             finish();
@@ -210,13 +217,7 @@ public class WidgetConfigurationActivity extends AppCompatActivity
 
         final WidgetConfigurationActivity context = WidgetConfigurationActivity.this;
         if (AllSettings.restoreWidgetSettings(context, jsonObject.get(), widgetId)) {
-            saveOnPause = false;
-            int duration = 3000;
             Toast.makeText(context, context.getText(R.string.restore_settings_successful), Toast.LENGTH_LONG).show();
-            new Handler().postDelayed(() -> {
-                startActivity(intentToStartMe(context, widgetId));
-                context.finish();
-            }, duration);
         } else {
             Toast.makeText(context, context.getText(R.string.restore_settings_unsuccessful), Toast.LENGTH_LONG).show();
         }
@@ -224,12 +225,27 @@ public class WidgetConfigurationActivity extends AppCompatActivity
 
     private Optional<JSONObject> readJson(Uri uri) {
         try (InputStream in = getContentResolver().openInputStream(uri)) {
-            return Optional.of(new JSONObject(SettingsStorage.getContents(in)));
+            return Optional.of(new JSONObject(getContents(in)));
         } catch (IOException | JSONException e) {
             String msg = getString(R.string.restore_settings_error, uri, e.getMessage());
             Log.e(this.getClass().getSimpleName(), msg, e);
             Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
             return Optional.empty();
         }
+    }
+
+    private String getContents(InputStream is) throws IOException {
+        char[] buffer = new char[BUFFER_LENGTH];
+        StringBuilder bout = new StringBuilder();
+        if (is != null) {
+            try (InputStreamReader reader = new InputStreamReader(is, StandardCharsets.UTF_8)) {
+                int count;
+                while ((count = reader.read(buffer)) != -1) {
+                    bout.append(buffer, 0, count);
+                }
+            }
+        }
+
+        return bout.toString();
     }
 }

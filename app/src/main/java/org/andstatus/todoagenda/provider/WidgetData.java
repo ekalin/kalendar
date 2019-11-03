@@ -108,13 +108,8 @@ public class WidgetData {
         return jsonData;
     }
 
-    public Optional<InstanceSettings> getSettings(Context context) {
+    public Optional<JSONObject> getSettingsFromJson() {
         JSONObject jsonSettings = jsonData.optJSONObject(KEY_SETTINGS);
-        return Optional.ofNullable(jsonSettings).flatMap(s -> InstanceSettings.fromJson(context, s));
-    }
-
-    public Optional<InstanceSettings> getSettingsForWidget(Context context, int targetWidgetId) {
-        JSONObject jsonSettings = jsonData.optJSONObject(KEY_SETTINGS);
-        return Optional.ofNullable(jsonSettings).map(s -> InstanceSettings.fromJsonForWidget(context, targetWidgetId, s));
+        return Optional.ofNullable(jsonSettings);
     }
 }

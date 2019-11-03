@@ -3,7 +3,6 @@ package org.andstatus.todoagenda.prefs;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.provider.QueryResultsStorage;
@@ -12,28 +11,27 @@ import static android.content.Intent.ACTION_CREATE_DOCUMENT;
 import static org.andstatus.todoagenda.WidgetConfigurationActivity.REQUEST_ID_BACKUP_SETTINGS;
 import static org.andstatus.todoagenda.WidgetConfigurationActivity.REQUEST_ID_RESTORE_SETTINGS;
 
-public class FeedbackPreferencesFragment extends PreferenceFragmentCompat {
+public class FeedbackPreferencesFragment extends KalendarPreferenceFragment {
     private static final String KEY_SHARE_EVENTS_FOR_DEBUGGING = "shareEventsForDebugging";
     private static final String KEY_BACKUP_SETTINGS = "backupSettings";
     private static final String KEY_RESTORE_SETTINGS = "restoreSettings";
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
         setPreferencesFromResource(R.xml.preferences_feedback, rootKey);
     }
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        int widgetId = ApplicationPreferences.getWidgetId(getActivity());
+        int widgetId = instanceSettings.getWidgetId();
 
         switch (preference.getKey()) {
             case KEY_SHARE_EVENTS_FOR_DEBUGGING:
-                ApplicationPreferences.save(getActivity(), widgetId);
                 QueryResultsStorage.shareEventsForDebugging(getActivity(), widgetId);
                 break;
 
             case KEY_BACKUP_SETTINGS:
-                ApplicationPreferences.save(getActivity(), widgetId);
                 backupSettings(widgetId);
                 break;
 

@@ -107,7 +107,7 @@ public enum EventEntryLayout {
         this.summaryResId = summaryResId;
     }
 
-    public static EventEntryLayout fromValue(String value) {
+    public static EventEntryLayout fromPreferenceValue(String value) {
         EventEntryLayout layout = DEFAULT;
         for (EventEntryLayout item : EventEntryLayout.values()) {
             if (item.value.equals(value)) {
@@ -131,7 +131,7 @@ public enum EventEntryLayout {
         setTextSize(event.getSettings(), rv, viewId, R.dimen.event_entry_title);
         setTextColorFromAttr(event.getSettings().getEntryThemeContext(), rv, viewId,
                 event.isCurrent() ? R.attr.eventEntryCurrentTitle : R.attr.eventEntryTitle);
-        setMultiline(rv, viewId, event.getSettings().isTitleMultiline());
+        setMultiline(rv, viewId, event.getSettings().getTitleMultiline());
     }
 
     protected String getTitleString(CalendarEntry event) {

@@ -139,7 +139,6 @@
   <string name="task_prefs">Tarefas</string>
   <string name="task_prefs_desc">Configurar a exibição de tarefas</string>
   <string name="task_source_pref_title">Origem das tarefas</string>
-  <string name="task_source_pref_desc">Selecione de onde obter eventos de tarefa</string>
   <string name="task_source_none">Não exibir tarefas</string>
   <string name="task_source_opentasks">OpenTasks (por dmfs GmbH)</string>
   <string name="task_source_samsung">Calendário Samsung</string>

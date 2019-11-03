@@ -3,20 +3,20 @@
         <ListPreference
             app:key="eventsEnded"
             app:title="@string/pref_events_ended_title"
-            app:summary="@string/this_option_is_turned_off"
             app:defaultValue="NONE"
             app:entries="@array/pref_events_ended_entries"
-            app:entryValues="@array/pref_events_ended_values" />
+            app:entryValues="@array/pref_events_ended_values"
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/current_and_future_events">
         <ListPreference
             app:key="eventRange"
             app:title="@string/event_details_event_range_title"
-            app:summary="@string/event_range_one_month"
             app:defaultValue="30"
             app:entries="@array/pref_event_range_entries"
-            app:entryValues="@array/pref_event_range_values" />
+            app:entryValues="@array/pref_event_range_values"
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/all_events">

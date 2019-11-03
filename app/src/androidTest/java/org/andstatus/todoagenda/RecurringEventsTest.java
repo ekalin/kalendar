@@ -3,7 +3,7 @@ package org.andstatus.todoagenda;
 import android.test.InstrumentationTestCase;
 
 import org.andstatus.todoagenda.calendar.MockCalendarContentProvider;
-import org.andstatus.todoagenda.prefs.ApplicationPreferences;
+import org.andstatus.todoagenda.prefs.InstanceSettingsTestHelper;
 import org.andstatus.todoagenda.provider.QueryRow;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.util.TestHelpers;
@@ -47,9 +47,11 @@ public class RecurringEventsTest extends InstrumentationTestCase {
     public void testShowRecurringEvents() {
         generateEventInstances();
         assertEquals("Entries: " + factory.getWidgetEntries().size(), 15, countCalendarEntries());
-        provider.startEditing();
-        ApplicationPreferences.setShowOnlyClosestInstanceOfRecurringEvent(provider.getContext(), true);
-        provider.saveSettings();
+
+        InstanceSettingsTestHelper settingsHelper = new InstanceSettingsTestHelper(provider.getContext(),
+                provider.getWidgetId());
+        settingsHelper.setShowOnlyClosestInstanceOfRecurringEvent(true);
+
         generateEventInstances();
         assertEquals("Entries: " + factory.getWidgetEntries().size(), 1, countCalendarEntries());
     }

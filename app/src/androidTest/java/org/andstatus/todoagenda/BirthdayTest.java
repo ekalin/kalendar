@@ -3,7 +3,7 @@ package org.andstatus.todoagenda;
 import android.test.InstrumentationTestCase;
 
 import org.andstatus.todoagenda.calendar.MockCalendarContentProvider;
-import org.andstatus.todoagenda.prefs.ApplicationPreferences;
+import org.andstatus.todoagenda.prefs.InstanceSettingsTestHelper;
 import org.andstatus.todoagenda.provider.QueryResultsStorage;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.util.TestHelpers;
@@ -39,11 +39,11 @@ public class BirthdayTest extends InstrumentationTestCase {
     public void testBirthdayOneDayOnly() throws IOException, JSONException {
         QueryResultsStorage inputs = provider.loadResults(this.getInstrumentation().getContext(),
                 org.andstatus.todoagenda.tests.R.raw.birthday);
+        InstanceSettingsTestHelper settingsHelper = new InstanceSettingsTestHelper(provider.getContext(),
+                provider.getWidgetId());
 
-        provider.startEditing();
-        ApplicationPreferences.setEventsEnded(provider.getContext(), EndedSomeTimeAgo.NONE);
-        ApplicationPreferences.setEventRange(provider.getContext(), 30);
-        provider.saveSettings();
+        settingsHelper.setEventsEnded(EndedSomeTimeAgo.NONE);
+        settingsHelper.setEventRange(30);
 
         playAtOneTime(inputs, dateTime(2015, 8, 1, 17, 0), 0);
         playAtOneTime(inputs, dateTime(2015, 8, 9, 23, 59), 0);
@@ -59,23 +59,19 @@ public class BirthdayTest extends InstrumentationTestCase {
         playAtOneTime(inputs, dateTime(2015, 9, 10, 0, 30), 0);
         playAtOneTime(inputs, dateTime(2015, 9, 10, 11, 0), 0);
 
-        ApplicationPreferences.setEventsEnded(provider.getContext(), EndedSomeTimeAgo.ONE_HOUR);
-        provider.saveSettings();
+        settingsHelper.setEventsEnded(EndedSomeTimeAgo.ONE_HOUR);
         playAtOneTime(inputs, dateTime(2015, 9, 10, 0, 30), 2);
         playAtOneTime(inputs, dateTime(2015, 9, 10, 1, 30), 0);
 
-        ApplicationPreferences.setEventsEnded(provider.getContext(), EndedSomeTimeAgo.TODAY);
-        provider.saveSettings();
+        settingsHelper.setEventsEnded(EndedSomeTimeAgo.TODAY);
         playAtOneTime(inputs, dateTime(2015, 9, 10, 1, 30), 0);
 
-        ApplicationPreferences.setEventsEnded(provider.getContext(), EndedSomeTimeAgo.FOUR_HOURS);
-        provider.saveSettings();
+        settingsHelper.setEventsEnded(EndedSomeTimeAgo.FOUR_HOURS);
         playAtOneTime(inputs, dateTime(2015, 9, 10, 1, 30), 2);
         playAtOneTime(inputs, dateTime(2015, 9, 10, 3, 59), 2);
         playAtOneTime(inputs, dateTime(2015, 9, 10, 4, 0), 0);
 
-        ApplicationPreferences.setEventsEnded(provider.getContext(), EndedSomeTimeAgo.YESTERDAY);
-        provider.saveSettings();
+        settingsHelper.setEventsEnded(EndedSomeTimeAgo.YESTERDAY);
         playAtOneTime(inputs, dateTime(2015, 9, 10, 4, 0), 2);
         playAtOneTime(inputs, dateTime(2015, 9, 10, 11, 0), 2);
         playAtOneTime(inputs, dateTime(2015, 9, 10, 17, 0), 2);

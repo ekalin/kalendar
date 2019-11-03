@@ -10,7 +10,6 @@ import com.google.common.truth.Correspondence;
 
 import org.andstatus.todoagenda.EnvironmentChangedReceiver;
 import org.andstatus.todoagenda.prefs.AllSettings;
-import org.andstatus.todoagenda.prefs.ApplicationPreferences;
 import org.andstatus.todoagenda.prefs.EventSource;
 import org.andstatus.todoagenda.provider.QueryResult;
 import org.andstatus.todoagenda.provider.QueryRow;
@@ -111,23 +110,19 @@ public class CalendarEventProviderTest {
 
     @Test
     public void getEvents_shouldSubtractTZOffsetIfNegative() {
-        ApplicationPreferences.fromInstanceSettings(context, 1);
-        ApplicationPreferences.setLockedTimeZoneId(context, "-03:00");
-        ApplicationPreferences.save(context, 1);
+        AllSettings.instanceFromId(context, 1).setLockedTimeZoneId("-04:00");
 
         calendarProvider.getEvents();
         DateTime startOfTimeRange = calendarProvider.getStartOfTimeRange();
         Uri queryUri = contentProvider.getLastQueryUri();
 
-        long expectedStartInQuery = startOfTimeRange.minusHours(3).getMillis();
+        long expectedStartInQuery = startOfTimeRange.minusHours(4).getMillis();
         assertThat(queryUri.toString()).contains("when/" + expectedStartInQuery + '/');
     }
 
     @Test
     public void getEvents_shouldNotAddTZOffsetIfPositive() {
-        ApplicationPreferences.fromInstanceSettings(context, 1);
-        ApplicationPreferences.setLockedTimeZoneId(context, "+02:00");
-        ApplicationPreferences.save(context, 1);
+        AllSettings.instanceFromId(context, 1).setLockedTimeZoneId("+02:00");
 
         calendarProvider.getEvents();
         DateTime startOfTimeRange = calendarProvider.getStartOfTimeRange();

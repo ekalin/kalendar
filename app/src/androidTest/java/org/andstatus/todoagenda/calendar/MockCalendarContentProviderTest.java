@@ -9,6 +9,7 @@ import org.andstatus.todoagenda.provider.QueryResult;
 import org.andstatus.todoagenda.provider.QueryResultsStorage;
 import org.andstatus.todoagenda.provider.QueryRow;
 import org.andstatus.todoagenda.util.DateUtil;
+import org.andstatus.todoagenda.util.QueryResultsStorageLoader;
 import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -115,7 +116,7 @@ public class MockCalendarContentProviderTest extends InstrumentationTestCase {
         QueryResultsStorage inputs1 = provider.loadResults(getInstrumentation().getContext(),
                 org.andstatus.todoagenda.tests.R.raw.birthday);
         JSONObject jsonOutput = inputs1.toJson(provider.getContext(), provider.getWidgetId());
-        QueryResultsStorage inputs2 = QueryResultsStorage.fromTestData(provider.getContext(), jsonOutput);
+        QueryResultsStorage inputs2 = QueryResultsStorageLoader.fromTestData(provider.getContext(), jsonOutput);
         assertEquals(inputs1, inputs2);
     }
 }

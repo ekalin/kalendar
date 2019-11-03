@@ -4,7 +4,7 @@
         app:key="headerTheme"
         app:title="@string/appearance_header_theme_title"
         app:summary="@string/appearance_header_theme_desc"
-        app:defaultValue="DARK"
+        app:defaultValue="LIGHT"
         app:entries="@array/pref_theme_entries"
         app:entryValues="@array/pref_theme_values" />
 
@@ -24,7 +24,7 @@
         app:key="entryTheme"
         app:title="@string/appearance_entries_theme_title"
         app:summary="@string/appearance_entries_theme_desc"
-        app:defaultValue="BLACK"
+        app:defaultValue="WHITE"
         app:entries="@array/pref_theme_entries"
         app:entryValues="@array/pref_theme_values" />
 
