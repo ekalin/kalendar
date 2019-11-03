@@ -17,6 +17,9 @@
     <string name="no_title">(Nessun titolo)</string>
     <string name="grant_permissions">Dai permessi</string>
     <string name="grant_permissions_verbose">Il widget chiede il permesso di leggere i calendari.\nTocca per concederlo.</string>
+    <string name="permissions_justification">Benvenuto in Todo Agenda, facile accesso a calendario e attività.
+Per ottenere il massimo dal widget è necessario autorizzare l\'accesso ai calendari ed alle attività.</string>
+    <string name="no_widgets_found">Per prima cosa aggiungere il widget \"Todo Agenda\" alla pagina Home del tuo dispositivo.</string>
     <string name="select_a_widget_to_configure">Seleziona un widget da configurare</string>
     <string name="close">Chiudi</string>
     <string name="go_to_home_screen">Vai alla home</string>
@@ -25,6 +28,8 @@
     <!-- Preference header: Calendars and Task Lists -->
     <string name="calendars_prefs">Calendari</string>
     <string name="calendars_prefs_desc">Selezionare i calendari da mostrare</string>
+    <string name="task_source_opentasks">OpenTasks (di dmfs GmbH)</string>
+    <string name="task_source_samsung">Calendario Samsung</string>
     <!-- Preference header: Other -->
     <string name="appearance_text_size_title">Dimensione testo</string>
     <string name="appearance_text_size_desc">Imposta dimensione del testo</string>
@@ -39,6 +44,8 @@
     <string name="appearance_abbreviate_dates_title">Abbrevia date</string>
     <string name="appearance_abbreviate_dates_desc">Usa formato tre lettere per le date nel widget, nell\'intestazione giorno, ecc.</string>
     <!-- Preference header: Layout -->
+    <string name="layout_prefs_title">Aspetto</string>
+    <string name="layout_prefs_desc">Imposta, mostra o nascondi elementi</string>
     <string name="pref_event_entry_layout_title">Formato dell\'evento</string>
     <string name="default_multiline_layout">Ora sotto il titolo</string>
     <string name="single_line_layout">Tutto in una riga</string>
@@ -55,6 +62,7 @@
     <string name="appearance_show_day_headers_desc">Non visualizzare l\'intestazione del giorno</string>
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Colori</string>
+    <string name="colors_prefs_desc">Colore e trasparenza dei testi e dello sfondo</string>
     <string name="appearance_background_color_title">Sfondo trasparente</string>
     <string name="appearance_background_color_desc">Imposta la trasparenza dello sfondo</string>
     <string name="appearance_past_events_background_color_title">Colore di sfondo di eventi passati</string>
@@ -107,14 +115,16 @@
     <string name="ended_yesterday">Conclusi ieri</string>
     <string name="pref_hide_based_on_keywords_title">Nascondi in base alla parole chiave nel titolo</string>
     <string name="show_only_closest_instance_of_recurring_event">Visualizza solo l\'istanza piú vicina di un evento ricorrente</string>
-    <!-- Preference header: Feedback -->
-    <string name="feedback_prefs">Feedback</string>
-    <string name="feedback_prefs_desc">Entra in contatto con noi</string>
+    <!-- Preference header: Feedback and backup -->
+    <string name="feedback_backup_prefs">Feedback e salvataggio</string>
+    <string name="feedback_backup_prefs_desc">Entra in contatto con noi, impostazioni di salvataggio e ripristino</string>
     <string name="feedback_github_desc">Fornisci un feedback sulla pagina del progetto</string>
     <string name="feedback_github_title">Visita su Github</string>
     <string name="feedback_play_store_desc">Vota e commenta su Google Play Store</string>
     <string name="feedback_play_store_title">Visita su Google Play Store</string>
     <string name="refresh_desc">Aggiorna</string>
-    <string name="share_events_for_debugging_desc">Crea un report per aiutare gli sviluppatori a risolvere i problemi</string>
-    <string name="share_events_for_debugging_title">Condividi gli eventi per il debug</string>
+    <string name="share_events_for_debugging_desc">Crea un report per aiutare gli sviluppatori a individuare i problemi. Prima di condividere si consiglia di filtrare gli eventi per proteggere la propria privacy</string>
+    <string name="share_events_settings_for_debugging_title">Condividi eventi ed impostazioni per il debug</string>
+    <string name="backup_settings_title">Impostazioni di salvataggio</string>
+    <string name="restore_settings_title">Ripristino impostazioni da un salvataggio</string>
 </resources>
