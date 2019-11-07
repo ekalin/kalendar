@@ -18,4 +18,9 @@ public class InstanceSettingsTestHelper {
     public void setShowDaysWithoutEvents(boolean showDaysWithoutEvents) {
         sharedPreferences.edit().putBoolean(InstanceSettings.PREF_SHOW_DAYS_WITHOUT_EVENTS, showDaysWithoutEvents).apply();
     }
+
+    public void setShowOnlyClosestInstanceOfRecurringEvent(boolean show) {
+        sharedPreferences.edit().putBoolean(InstanceSettings.PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT,
+                show).apply();
+    }
 }

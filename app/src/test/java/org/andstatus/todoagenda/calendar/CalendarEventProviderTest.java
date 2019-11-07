@@ -11,6 +11,7 @@ import com.google.common.truth.Correspondence;
 import org.andstatus.todoagenda.EnvironmentChangedReceiver;
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.EventSource;
+import org.andstatus.todoagenda.prefs.InstanceSettingsTestHelper;
 import org.andstatus.todoagenda.provider.QueryResult;
 import org.andstatus.todoagenda.provider.QueryRow;
 import org.andstatus.todoagenda.testutil.ContentProviderForTests;
@@ -29,6 +30,7 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -65,14 +67,14 @@ public class CalendarEventProviderTest {
 
     @Test
     public void getEvents_shouldFilterEventsOutsideSearchRange() {
-        setupEvents();
+        setupEvents_forSearchRange();
 
         List<CalendarEvent> events = calendarProvider.getEvents();
         assertThat(events).comparingElementsUsing(EVENT_TITLE)
                 .containsExactly("Overlaps start range", "Inside range", "Overlaps end range");
     }
 
-    private void setupEvents() {
+    private void setupEvents_forSearchRange() {
         DateTime start = DateTime.now();
         DateTime end = start.plusDays(daysRange);
         DateTimeZone zone = start.getZone();
@@ -133,6 +135,39 @@ public class CalendarEventProviderTest {
     }
 
     @Test
+    public void getEvents_withoutShowOnlyClosest_returnsAllInstances() {
+        setupEvents_forRecurringInstances();
+
+        List<CalendarEvent> events = calendarProvider.getEvents();
+
+        assertThat(events).hasSize(15);
+    }
+
+    @Test
+    public void getEvents_withShowOnlyClosest_returnsOnlyFirstInstance() {
+        InstanceSettingsTestHelper settingsHelper = new InstanceSettingsTestHelper(context, 1);
+        settingsHelper.setShowOnlyClosestInstanceOfRecurringEvent(true);
+
+        setupEvents_forRecurringInstances();
+
+        List<CalendarEvent> events = calendarProvider.getEvents();
+        assertThat(events).hasSize(1);
+    }
+
+    private void setupEvents_forRecurringInstances() {
+        QueryResult queryResult = new QueryResult(1, DateTime.now());
+        DateTime date = DateTime.now().withTimeAtStartOfDay();
+        long millis = date.getMillis() + TimeUnit.HOURS.toMillis(10);
+        for (int ind = 0; ind < 15; ind++) {
+            millis += TimeUnit.DAYS.toMillis(1);
+            queryResult.addRow(new QueryRow().setEventId(3).setTitle("Work each day")
+                    .setBegin(millis).setEnd(millis + TimeUnit.HOURS.toMillis(9)));
+        }
+        contentProvider.setQueryResult(queryResult);
+    }
+
+
+    @Test
     public void getCalendars_returnsEventSources() {
         setupCalendars();
 
@@ -163,5 +198,4 @@ public class CalendarEventProviderTest {
         sources.add(new EventSource(4, "Work Items", "remote@account.org", 0xff000022));
         return sources;
     }
-
 }
