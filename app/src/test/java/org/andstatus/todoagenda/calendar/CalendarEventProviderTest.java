@@ -8,6 +8,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.google.common.truth.Correspondence;
 
+import org.andstatus.todoagenda.EndedSomeTimeAgo;
 import org.andstatus.todoagenda.EnvironmentChangedReceiver;
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.EventSource;
@@ -16,6 +17,7 @@ import org.andstatus.todoagenda.provider.QueryResult;
 import org.andstatus.todoagenda.provider.QueryRow;
 import org.andstatus.todoagenda.testutil.ContentProviderForTests;
 import org.andstatus.todoagenda.testutil.ShadowDummyAppWidgetManager;
+import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.After;
@@ -108,6 +110,19 @@ public class CalendarEventProviderTest {
                 .setEventLocation(event.getLocation())
                 .setHasAlarm(event.isAlarmActive() ? 1 : 0)
                 .setRRule(event.isRecurring() ? "FREQ=WEEKLY;WKST=MO;BYDAY=MO,WE,FR" : null));
+    }
+
+    @Test
+    public void getEvents_shouldConsiderEndedSomeTimeAgoSetting() {
+        DateTime now = new DateTime(2019, 11, 9, 15, 0, 0, DateTimeZone.getDefault());
+        DateUtil.setNow(now);
+        new InstanceSettingsTestHelper(context, 1).setEventsEnded(EndedSomeTimeAgo.FOUR_HOURS);
+
+        calendarProvider.getEvents();
+        // Since a few ms have elapsed since setNow() and setting of startOfTimeRange, we need a little fuzzyness
+        assertThat(calendarProvider.getStartOfTimeRange().getMillis() - now.minusHours(4).getMillis()).isAtMost(500);
+
+        DateUtil.setNow(null);
     }
 
     @Test

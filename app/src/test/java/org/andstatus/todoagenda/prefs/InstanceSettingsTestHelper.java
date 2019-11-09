@@ -3,6 +3,8 @@ package org.andstatus.todoagenda.prefs;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import org.andstatus.todoagenda.EndedSomeTimeAgo;
+
 public class InstanceSettingsTestHelper {
     private SharedPreferences sharedPreferences;
 
@@ -22,5 +24,9 @@ public class InstanceSettingsTestHelper {
     public void setShowOnlyClosestInstanceOfRecurringEvent(boolean show) {
         sharedPreferences.edit().putBoolean(InstanceSettings.PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT,
                 show).apply();
+    }
+
+    public void setEventsEnded(EndedSomeTimeAgo value) {
+        sharedPreferences.edit().putString(InstanceSettings.PREF_EVENTS_ENDED, value.save()).apply();
     }
 }
