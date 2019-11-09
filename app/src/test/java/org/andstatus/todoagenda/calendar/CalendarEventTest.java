@@ -2,6 +2,8 @@ package org.andstatus.todoagenda.calendar;
 
 import android.content.Context;
 
+import org.andstatus.todoagenda.util.DateUtil;
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -13,6 +15,15 @@ import java.util.Date;
 import static com.google.common.truth.Truth.assertThat;
 
 public class CalendarEventTest {
+    @Test
+    public void setStartMillis_forAllDayEvent_adjustsEndTimeToMidnight() {
+        DateTime midnight = DateUtil.now(DateTimeZone.UTC).withTimeAtStartOfDay();
+        CalendarEvent event = new CalendarEvent(Mockito.mock(Context.class), 1, DateTimeZone.forOffsetHours(1), true);
+        event.setStartMillis(midnight.getMillis());
+        assertThat(event.getStartMillis()).isEqualTo(midnight.getMillis());
+        assertThat(event.getEndMillis()).isEqualTo(midnight.plusDays(1).getMillis());
+    }
+
     /* See https://github.com/plusonelabs/calendar-widget/issues/186 */
     @Test
     public void setStartDate_shouldAvoidIllegalInstantException() {
