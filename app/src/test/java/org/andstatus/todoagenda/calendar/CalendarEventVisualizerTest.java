@@ -106,14 +106,22 @@ public class CalendarEventVisualizerTest {
         when(provider.getEvents()).thenReturn(Collections.singletonList(event));
         List<CalendarEntry> entries = visualizer.getEventEntries();
         assertThat(entries).hasSize(2);
-        CalendarEntry calendarEntry = entries.get(0);
 
-        assertWithMessage("Is active event").that(calendarEntry.getEvent().isActive()).isTrue();
-        assertWithMessage("Is part of multi day event").that(calendarEntry.isPartOfMultiDayEvent()).isTrue();
-        assertWithMessage("Is start of multi day event").that(calendarEntry.isStartOfMultiDayEvent()).isTrue();
-        assertWithMessage("Is end of multi day event").that(calendarEntry.isEndOfMultiDayEvent()).isFalse();
-        assertWithMessage("Start time shouldn't change for event ending tomorrow").that(calendarEntry.getStartDate()).isEqualTo(event.getStartDate());
-        assertWithMessage("End time for event ending tomorrow is next midnight").that(calendarEntry.getEndDate()).isEqualTo(now.plusDays(1).withTimeAtStartOfDay());
+        CalendarEntry todaysEvent = entries.get(0);
+        assertWithMessage("[Today] Is active event").that(todaysEvent.getEvent().isActive()).isTrue();
+        assertWithMessage("[Today] Is part of multi day event").that(todaysEvent.isPartOfMultiDayEvent()).isTrue();
+        assertWithMessage("[Today] Is start of multi day event").that(todaysEvent.isStartOfMultiDayEvent()).isTrue();
+        assertWithMessage("[Today] Is end of multi day event").that(todaysEvent.isEndOfMultiDayEvent()).isFalse();
+        assertWithMessage("[Today] Start time shouldn't change for event ending tomorrow").that(todaysEvent.getStartDate()).isEqualTo(event.getStartDate());
+        assertWithMessage("[Today] End time for event ending tomorrow is next midnight").that(todaysEvent.getEndDate()).isEqualTo(now.plusDays(1).withTimeAtStartOfDay());
+
+        CalendarEntry tomorrowsEvent = entries.get(1);
+        assertWithMessage("[Tomorrow] Is active event").that(tomorrowsEvent.getEvent().isActive()).isTrue();
+        assertWithMessage("[Tomorrow] Is part of multi day event").that(tomorrowsEvent.isPartOfMultiDayEvent()).isTrue();
+        assertWithMessage("[Tomorrow] Is start of multi day event").that(tomorrowsEvent.isStartOfMultiDayEvent()).isFalse();
+        assertWithMessage("[Tomorrow] Is end of multi day event").that(tomorrowsEvent.isEndOfMultiDayEvent()).isTrue();
+        assertWithMessage("[Tomorrow] Start time for event ending tomorrow is next midnight").that(tomorrowsEvent.getStartDate()).isEqualTo(now.plusDays(1).withTimeAtStartOfDay());
+        assertWithMessage("[Tomorrow] End time for event ending tomorrow is next midnight").that(tomorrowsEvent.getEndDate()).isEqualTo(event.getEndDate());
     }
 
     @After
