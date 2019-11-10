@@ -196,13 +196,6 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
         return listOut;
     }
 
-    public void logWidgetEntries(String tag) {
-        for (int ind = 0; ind < getWidgetEntries().size(); ind++) {
-            WidgetEntry widgetEntry = getWidgetEntries().get(ind);
-            Log.v(tag, String.format("%02d ", ind) + widgetEntry.toString());
-        }
-    }
-
     List<WidgetEntry> getWidgetEntries() {
         return widgetEntries;
     }

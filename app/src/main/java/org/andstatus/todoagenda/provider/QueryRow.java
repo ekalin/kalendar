@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -89,14 +88,6 @@ public class QueryRow {
                 }
                 return UNKNOWN;
             }
-        }
-
-        public static TypedValue fromJson(JSONObject json) {
-            CursorFieldType type = CursorFieldType.UNKNOWN;
-            if (json.has(KEY_TYPE)) {
-                type = CursorFieldType.fromColumnType(json.optInt(KEY_TYPE));
-            }
-            return new TypedValue(type, json.opt(KEY_VALUE));
         }
 
         public TypedValue(Cursor cursor, int columnIndex) {
@@ -229,33 +220,11 @@ public class QueryRow {
         return row;
     }
 
-    public static QueryRow fromJson(JSONObject json) throws JSONException {
-        QueryRow row = new QueryRow();
-        if (json != null) {
-            Iterator<String> it = json.keys();
-            while (it.hasNext()) {
-                String columnName = it.next();
-                row.mRow.put(columnName, TypedValue.fromJson(json.getJSONObject(columnName)));
-            }
-        }
-        return row;
-    }
-
     public JSONObject toJson() throws JSONException {
         JSONObject json = new JSONObject();
         for (Map.Entry<String, TypedValue> entry : mRow.entrySet()) {
             json.put(entry.getKey(), entry.getValue().toJson());
         }
         return json;
-    }
-
-    public void dropNullColumns() {
-        for (Iterator<Map.Entry<String, TypedValue>> it = mRow.entrySet().iterator(); it.hasNext(); ) {
-            Map.Entry<String, TypedValue> entry = it.next();
-            if (entry.getValue().type == TypedValue.CursorFieldType.NULL
-                    || entry.getValue().value == null) {
-                it.remove();
-            }
-        }
     }
 }

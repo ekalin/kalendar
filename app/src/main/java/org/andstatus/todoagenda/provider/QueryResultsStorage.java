@@ -79,18 +79,6 @@ public class QueryResultsStorage {
         }
     }
 
-    public static QueryResultsStorage getStorage() {
-        return theStorage;
-    }
-
-    public List<QueryResult> getCalendarResults() {
-        return calendarResults;
-    }
-
-    public List<QueryResult> getTaskResults() {
-        return taskResults;
-    }
-
     private String toJsonString(Context context, int widgetId) {
         try {
             return toJson(context, widgetId).toString(2);
@@ -99,7 +87,7 @@ public class QueryResultsStorage {
         }
     }
 
-    public JSONObject toJson(Context context, int widgetId) throws JSONException {
+    private JSONObject toJson(Context context, int widgetId) throws JSONException {
         JSONObject json = WidgetData.fromWidgetId(context, widgetId).map(WidgetData::toJson).orElse(new JSONObject());
         json.put(KEY_RESULTS_VERSION, RESULTS_VERSION);
         json.put(KEY_CALENDAR_RESULTS, getResultsArray(widgetId, this.calendarResults));

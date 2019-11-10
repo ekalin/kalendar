@@ -3,7 +3,6 @@ package org.andstatus.todoagenda.provider;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
-import android.text.TextUtils;
 
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.DateUtil;
@@ -59,45 +58,8 @@ public class QueryResult {
         this.executedAt = executedAt;
     }
 
-    public static QueryResult fromJson(JSONObject json, int widgetId) throws JSONException {
-        QueryResult result = new QueryResult(widgetId,
-                new DateTime(json.getLong(KEY_EXECUTED_AT), dateTimeZoneFromJson(json)));
-        result.uri = Uri.parse(json.getString(KEY_URI));
-        result.projection = jsonToArrayOfStings(json.getJSONArray(KEY_PROJECTION));
-        result.selection = json.getString(KEY_SELECTION);
-        result.selectionArgs = jsonToArrayOfStings(json.getJSONArray(KEY_SELECTION_ARGS));
-        result.sortOrder = json.getString(KEY_SORT_ORDER);
-
-        JSONArray jsonArray = json.getJSONArray(KEY_ROWS);
-        if (jsonArray != null) {
-            for (int ind = 0; ind < jsonArray.length(); ind++) {
-                result.addRow(QueryRow.fromJson(jsonArray.getJSONObject(ind)));
-            }
-        }
-        return result;
-    }
-
-    static DateTimeZone dateTimeZoneFromJson(JSONObject json) {
-        String zoneId = DateUtil.validatedTimeZoneId(json.optString(KEY_TIME_ZONE_ID));
-        return DateTimeZone.forID(TextUtils.isEmpty(zoneId) ? "UTC" : zoneId);
-    }
-
-    private static String[] jsonToArrayOfStings(JSONArray jsonArray) throws JSONException {
-        String[] array = new String[jsonArray != null ? jsonArray.length() : 0];
-        if (jsonArray != null) {
-            for (int ind = 0; ind < jsonArray.length(); ind++) {
-                array[ind] = jsonArray.getString(ind);
-            }
-        }
-        return array;
-    }
-
     public int getWidgetId() {
         return widgetId;
-    }
-
-    public DateTime getExecutedAt() {
-        return executedAt;
     }
 
     public Cursor query(String[] projection) {
@@ -120,14 +82,6 @@ public class QueryResult {
         return uri;
     }
 
-    public String getSelection() {
-        return selection;
-    }
-
-    public List<QueryRow> getRows() {
-        return rows;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -147,7 +101,6 @@ public class QueryResult {
             }
         }
         return true;
-
     }
 
     @Override
@@ -201,11 +154,5 @@ public class QueryResult {
             }
         }
         return jsonArray;
-    }
-
-    public void dropNullColumns() {
-        for (QueryRow row : rows) {
-            row.dropNullColumns();
-        }
     }
 }

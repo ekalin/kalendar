@@ -102,7 +102,7 @@ public class InstanceSettings {
     private final int widgetId;
     private final SharedPreferences sharedPreferences;
 
-    public static InstanceSettings fromJson(Context context, int targetWidgetId, JSONObject json) {
+    static InstanceSettings fromJson(Context context, int targetWidgetId, JSONObject json) {
         InstanceSettings settings = new InstanceSettings(context, targetWidgetId);
         settings.setFromJson(json);
         return settings;

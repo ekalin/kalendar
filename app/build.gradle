@@ -4,19 +4,12 @@ android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
 
-    useLibrary 'android.test.runner'
-
-    useLibrary 'android.test.base'
-    useLibrary 'android.test.mock'
-
     defaultConfig {
         versionCode getCommitCount()
         versionName '2.3.0' + "-" + versionCode
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
 
-        testApplicationId "org.andstatus.todoagenda.tests"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         project.ext.archivesBaseName = "TodoAgenda-$versionName".toString()
     }
 
@@ -73,10 +66,6 @@ dependencies {
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "androidx.test:core:$testCoreVersion"
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
-
-    androidTestImplementation "androidx.test:runner:$testRunnerVersion"
-    androidTestImplementation "androidx.test:rules:$testRulesVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
 }
 
 static getCommitCount() {
