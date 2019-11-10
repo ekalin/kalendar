@@ -7,10 +7,12 @@ import org.andstatus.todoagenda.EndedSomeTimeAgo;
 
 public class InstanceSettingsTestHelper {
     private SharedPreferences sharedPreferences;
+    private InstanceSettings instanceSettings;
 
     public InstanceSettingsTestHelper(Context context, int widgetId) {
         this.sharedPreferences = context.getSharedPreferences(InstanceSettings.nameForWidget(widgetId),
                 Context.MODE_PRIVATE);
+        this.instanceSettings = AllSettings.instanceFromId(context, widgetId);
     }
 
     public void setShowDayHeaders(boolean showDayHeaders) {
@@ -32,5 +34,13 @@ public class InstanceSettingsTestHelper {
 
     public void setEventRage(int range) {
         sharedPreferences.edit().putString(InstanceSettings.PREF_EVENT_RANGE, String.valueOf(range)).apply();
+    }
+
+    public void setTaskSource(String source) {
+        sharedPreferences.edit().putString(InstanceSettings.PREF_TASK_SOURCE, source).apply();
+    }
+
+    public void setLockedTimeZoneId(String zoneId) {
+        instanceSettings.setLockedTimeZoneId(zoneId);
     }
 }
