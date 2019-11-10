@@ -22,11 +22,15 @@ public class InstanceSettingsTestHelper {
     }
 
     public void setShowOnlyClosestInstanceOfRecurringEvent(boolean show) {
-        sharedPreferences.edit().putBoolean(InstanceSettings.PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT,
-                show).apply();
+        sharedPreferences.edit()
+                .putBoolean(InstanceSettings.PREF_SHOW_ONLY_CLOSEST_INSTANCE_OF_RECURRING_EVENT, show).apply();
     }
 
     public void setEventsEnded(EndedSomeTimeAgo value) {
         sharedPreferences.edit().putString(InstanceSettings.PREF_EVENTS_ENDED, value.save()).apply();
+    }
+
+    public void setEventRage(int range) {
+        sharedPreferences.edit().putString(InstanceSettings.PREF_EVENT_RANGE, String.valueOf(range)).apply();
     }
 }

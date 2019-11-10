@@ -36,6 +36,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowDummyAppWidgetManager.class})
@@ -119,10 +120,41 @@ public class CalendarEventProviderTest {
         new InstanceSettingsTestHelper(context, 1).setEventsEnded(EndedSomeTimeAgo.FOUR_HOURS);
 
         calendarProvider.getEvents();
-        // Since a few ms have elapsed since setNow() and setting of startOfTimeRange, we need a little fuzzyness
-        assertThat(calendarProvider.getStartOfTimeRange().getMillis() - now.minusHours(4).getMillis()).isAtMost(500);
+        assertDatesWithTolerance(calendarProvider.getStartOfTimeRange(), now.minusHours(4));
 
         DateUtil.setNow(null);
+    }
+
+    @Test
+    public void getEvents_shouldConsiderEventRangeSetting_forToday() {
+        DateTime now = new DateTime(2019, 11, 9, 15, 0, 0, DateTimeZone.getDefault());
+        DateUtil.setNow(now);
+        new InstanceSettingsTestHelper(context, 1).setEventRage(0);
+
+        calendarProvider.getEvents();
+        assertDatesWithTolerance(calendarProvider.getEndOfTimeRange(), now.withTimeAtStartOfDay().plusDays(1));
+
+        DateUtil.setNow(null);
+    }
+
+    @Test
+    public void getEvents_shouldConsiderEventRangeSetting_for14Days() {
+        DateTime now = new DateTime(2019, 11, 9, 15, 0, 0, DateTimeZone.getDefault());
+        DateUtil.setNow(now);
+        new InstanceSettingsTestHelper(context, 1).setEventRage(14);
+
+        calendarProvider.getEvents();
+        assertDatesWithTolerance(calendarProvider.getEndOfTimeRange(), now.plusDays(14));
+
+        DateUtil.setNow(null);
+    }
+
+    private void assertDatesWithTolerance(DateTime actual, DateTime expected) {
+        // Since a few ms have elapsed since setNow() and setting of startOfTimeRange/endOfTimeRange, we need a
+        // little fuzzyness
+        int toleranceMs = 500;
+        assertWithMessage("%s is not equal to %s (with tolerance %sms)", actual, expected, toleranceMs)
+                .that(actual.getMillis() - expected.getMillis()).isAtMost(toleranceMs);
     }
 
     @Test
