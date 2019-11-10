@@ -60,8 +60,8 @@ public class CalendarEventVisualizerTest {
     @Test
     public void valuesForTodaysCurrentEvent_areReturnedCorrectly() {
         CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
-        event.setStartDate(now.minusHours(1));
-        event.setEndDate(now.plusHours(2));
+        event.setStartMillis(now.minusHours(1).getMillis());
+        event.setEndMillis(now.plusHours(2).getMillis());
 
         when(provider.getEvents()).thenReturn(Collections.singletonList(event));
         List<CalendarEntry> entries = visualizer.getEventEntries();
@@ -80,8 +80,8 @@ public class CalendarEventVisualizerTest {
     @Test
     public void valuesForCurrentEventStartedYesterday_areReturnedCorrectly() {
         CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
-        event.setStartDate(now.minusDays(1).minusHours(1));
-        event.setEndDate(now.plusHours(2));
+        event.setStartMillis(now.minusDays(1).minusHours(1).getMillis());
+        event.setEndMillis(now.plusHours(2).getMillis());
 
         when(provider.getEvents()).thenReturn(Collections.singletonList(event));
         List<CalendarEntry> entries = visualizer.getEventEntries();
@@ -100,8 +100,8 @@ public class CalendarEventVisualizerTest {
     @Test
     public void valuesForCurrentEventEndingTomorrow_areReturnedCorrectly() {
         CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
-        event.setStartDate(now.minusHours(1));
-        event.setEndDate(now.plusDays(1).plusHours(2));
+        event.setStartMillis(now.minusHours(1).getMillis());
+        event.setEndMillis(now.plusDays(1).plusHours(2).getMillis());
 
         when(provider.getEvents()).thenReturn(Collections.singletonList(event));
         List<CalendarEntry> entries = visualizer.getEventEntries();

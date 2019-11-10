@@ -37,11 +37,6 @@ public class CalendarEvent {
         return startDate;
     }
 
-    public void setStartDate(DateTime startDate) {
-        this.startDate = allDay ? startDate.withTimeAtStartOfDay() : startDate;
-        fixEndDate();
-    }
-
     public void setStartMillis(long startMillis) {
         this.startDate = dateFromMillis(startMillis);
         fixEndDate();
@@ -108,11 +103,6 @@ public class CalendarEvent {
 
     public DateTime getEndDate() {
         return endDate;
-    }
-
-    public void setEndDate(DateTime endDate) {
-        this.endDate = allDay ? endDate.withTimeAtStartOfDay() : endDate;
-        fixEndDate();
     }
 
     public void setEndMillis(long endMillis) {

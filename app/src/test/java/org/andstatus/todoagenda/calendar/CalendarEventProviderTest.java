@@ -94,8 +94,8 @@ public class CalendarEventProviderTest {
 
     private CalendarEvent createEvent(DateTime start, DateTime endDate, String title, DateTimeZone zone) {
         CalendarEvent event = new CalendarEvent(context, 1, zone, false);
-        event.setStartDate(start);
-        event.setEndDate(endDate);
+        event.setStartMillis(start.getMillis());
+        event.setEndMillis(endDate.getMillis());
         event.setTitle(title);
         return event;
     }

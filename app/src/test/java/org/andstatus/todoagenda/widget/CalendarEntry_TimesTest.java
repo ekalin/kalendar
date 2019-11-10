@@ -28,8 +28,8 @@ public class CalendarEntry_TimesTest {
     @Test
     public void isCurrent_forCurrentEvent_returnsTrue() {
         CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
-        event.setStartDate(now.minusHours(1));
-        event.setEndDate(now.plusMinutes(10));
+        event.setStartMillis(now.minusHours(1).getMillis());
+        event.setEndMillis(now.plusMinutes(10).getMillis());
         CalendarEntry calendarEntry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(calendarEntry.isCurrent()).isTrue();
@@ -38,8 +38,8 @@ public class CalendarEntry_TimesTest {
     @Test
     public void isCurrent_forPastEvent_returnsFalse() {
         CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
-        event.setStartDate(now.minusHours(2));
-        event.setEndDate(now.minusHours(1));
+        event.setStartMillis(now.minusHours(2).getMillis());
+        event.setEndMillis(now.minusHours(1).getMillis());
         CalendarEntry calendarEntry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(calendarEntry.isCurrent()).isFalse();
@@ -48,8 +48,8 @@ public class CalendarEntry_TimesTest {
     @Test
     public void isCurrent_forFutureEvent_returnsFalse() {
         CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
-        event.setStartDate(now.plusSeconds(10));
-        event.setEndDate(now.plusMinutes(15));
+        event.setStartMillis(now.plusSeconds(10).getMillis());
+        event.setEndMillis(now.plusMinutes(15).getMillis());
         CalendarEntry calendarEntry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(calendarEntry.isCurrent()).isFalse();
@@ -58,8 +58,8 @@ public class CalendarEntry_TimesTest {
     @Test
     public void isCurrent_forAllDayEventToday_returnsTrue() {
         CalendarEvent event = new CalendarEvent(context, widgetId, zone, true);
-        event.setStartDate(now.withTimeAtStartOfDay());
-        event.setEndDate(DateUtil.startOfNextDay(now));
+        event.setStartMillis(now.withTimeAtStartOfDay().getMillis());
+        event.setEndMillis(DateUtil.startOfNextDay(now).getMillis());
         CalendarEntry calendarEntry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(calendarEntry.isCurrent()).isTrue();
@@ -70,8 +70,8 @@ public class CalendarEntry_TimesTest {
         final DateTime startDate = now.plusMinutes(30);
 
         CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
-        event.setStartDate(startDate);
-        event.setEndDate(now.plusMinutes(45));
+        event.setStartMillis(startDate.getMillis());
+        event.setEndMillis(now.plusMinutes(45).getMillis());
         CalendarEntry calendarEntry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(calendarEntry.getNextUpdateTime()).isEqualTo(startDate);
@@ -82,8 +82,8 @@ public class CalendarEntry_TimesTest {
         final DateTime endDate = now.plusHours(2);
 
         CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
-        event.setStartDate(now.minusHours(2));
-        event.setEndDate(endDate);
+        event.setStartMillis(now.minusHours(2).getMillis());
+        event.setEndMillis(endDate.getMillis());
         CalendarEntry calendarEntry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(calendarEntry.getNextUpdateTime()).isEqualTo(endDate);
@@ -92,8 +92,8 @@ public class CalendarEntry_TimesTest {
     @Test
     public void getNextUpdateTime_forPastEvent_returnsNull() {
         CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
-        event.setStartDate(now.minusHours(2));
-        event.setEndDate(now.minusMinutes(1));
+        event.setStartMillis(now.minusHours(2).getMillis());
+        event.setEndMillis(now.minusMinutes(1).getMillis());
         CalendarEntry calendarEntry = CalendarEntry.fromEvent(event, event.getStartDate());
 
         assertThat(calendarEntry.getNextUpdateTime()).isNull();
