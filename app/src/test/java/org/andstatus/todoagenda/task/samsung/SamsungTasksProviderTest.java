@@ -6,14 +6,12 @@ import androidx.test.core.app.ApplicationProvider;
 import org.andstatus.todoagenda.prefs.EventSource;
 import org.andstatus.todoagenda.task.TaskEvent;
 import org.andstatus.todoagenda.testutil.ContentProviderForTests;
-import org.andstatus.todoagenda.testutil.ShadowDummyAppWidgetManager;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,7 +20,6 @@ import java.util.List;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowDummyAppWidgetManager.class})
 public class SamsungTasksProviderTest {
     private ContentProviderForTests contentProvider;
     private SamsungTasksProvider tasksProvider;

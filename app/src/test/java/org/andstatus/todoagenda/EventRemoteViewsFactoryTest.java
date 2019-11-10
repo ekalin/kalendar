@@ -7,7 +7,6 @@ import org.andstatus.todoagenda.calendar.CalendarEvent;
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettingsTestHelper;
 import org.andstatus.todoagenda.task.TaskEvent;
-import org.andstatus.todoagenda.testutil.ShadowDummyAppWidgetManager;
 import org.andstatus.todoagenda.widget.CalendarEntry;
 import org.andstatus.todoagenda.widget.DayHeader;
 import org.andstatus.todoagenda.widget.TaskEntry;
@@ -24,7 +23,6 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.mockito.quality.Strictness;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Arrays;
@@ -35,7 +33,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowDummyAppWidgetManager.class})
 public class EventRemoteViewsFactoryTest {
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule().strictness(Strictness.STRICT_STUBS);

@@ -16,7 +16,6 @@ import org.andstatus.todoagenda.prefs.InstanceSettingsTestHelper;
 import org.andstatus.todoagenda.provider.QueryResult;
 import org.andstatus.todoagenda.provider.QueryRow;
 import org.andstatus.todoagenda.testutil.ContentProviderForTests;
-import org.andstatus.todoagenda.testutil.ShadowDummyAppWidgetManager;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -26,7 +25,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -39,7 +37,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowDummyAppWidgetManager.class})
 public class CalendarEventProviderTest {
     private static final Correspondence<CalendarEvent, String> EVENT_TITLE
             = Correspondence.transforming(CalendarEvent::getTitle, "has title of");
