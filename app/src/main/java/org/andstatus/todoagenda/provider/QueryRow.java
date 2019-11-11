@@ -1,7 +1,6 @@
 package org.andstatus.todoagenda.provider;
 
 import android.database.Cursor;
-import android.provider.CalendarContract;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,6 +14,66 @@ import java.util.Map;
  * @author yvolk@yurivolkov.com
  */
 public class QueryRow {
+    private final Map<String, TypedValue> mRow = new HashMap<>();
+
+    public static QueryRow fromCursor(Cursor cursor) {
+        QueryRow row = new QueryRow();
+        if (cursor != null && !cursor.isClosed()) {
+            for (int ind = 0; ind < cursor.getColumnCount(); ind++) {
+                row.mRow.put(cursor.getColumnName(ind), new TypedValue(cursor, ind));
+            }
+        }
+        return row;
+    }
+
+    public JSONObject toJson() throws JSONException {
+        JSONObject json = new JSONObject();
+        for (Map.Entry<String, TypedValue> entry : mRow.entrySet()) {
+            json.put(entry.getKey(), entry.getValue().toJson());
+        }
+        return json;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        QueryRow that = (QueryRow) o;
+        if (mRow.size() != that.mRow.size()) {
+            return false;
+        }
+        for (Map.Entry<String, TypedValue> entry : mRow.entrySet()) {
+            if (!that.mRow.containsKey(entry.getKey())) {
+                return false;
+            }
+            if (!entry.getValue().equals(that.mRow.get(entry.getKey()))) {
+                return false;
+            }
+        }
+        return mRow.equals(that.mRow);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 0;
+        for (Map.Entry<String, TypedValue> entry : mRow.entrySet()) {
+            result += 31 * entry.getValue().hashCode();
+        }
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        try {
+            return toJson().toString(2);
+        } catch (JSONException e) {
+            return this.getClass().getSimpleName() + "Error converting to Json "
+                    + e.getMessage() + "; " + mRow.toString();
+        }
+    }
+
     private static class TypedValue {
         private static final String KEY_TYPE = "type";
         private static final String KEY_VALUE = "value";
@@ -95,136 +154,11 @@ public class QueryRow {
             value = type.columnToObject(cursor, columnIndex);
         }
 
-        public TypedValue(Object object) {
-            this(CursorFieldType.UNKNOWN, object);
-        }
-
-        public TypedValue(CursorFieldType type, Object object) {
-            this.type = type;
-            value = object;
-        }
-
         public JSONObject toJson() throws JSONException {
             JSONObject json = new JSONObject();
             json.put(KEY_TYPE, type.code);
             json.put(KEY_VALUE, value);
             return json;
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        QueryRow that = (QueryRow) o;
-        if (mRow.size() != that.mRow.size()) {
-            return false;
-        }
-        for (Map.Entry<String, TypedValue> entry : mRow.entrySet()) {
-            if (!that.mRow.containsKey(entry.getKey())) {
-                return false;
-            }
-            if (!entry.getValue().equals(that.mRow.get(entry.getKey()))) {
-                return false;
-            }
-        }
-        return mRow.equals(that.mRow);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = 0;
-        for (Map.Entry<String, TypedValue> entry : mRow.entrySet()) {
-            result += 31 * entry.getValue().hashCode();
-        }
-        return result;
-    }
-
-    private final Map<String, TypedValue> mRow = new HashMap<>();
-
-    private QueryRow setColumn(String columnName, Object columnValue) {
-        mRow.put(columnName, new TypedValue(columnValue));
-        return this;
-    }
-
-    public QueryRow setEventId(Object obj) {
-        return setColumn(CalendarContract.Instances.EVENT_ID, obj);
-    }
-
-    public QueryRow setTitle(Object obj) {
-        return setColumn(CalendarContract.Instances.TITLE, obj);
-    }
-
-    public QueryRow setBegin(Object obj) {
-        return setColumn(CalendarContract.Instances.BEGIN, obj);
-    }
-
-    public QueryRow setEnd(Object obj) {
-        return setColumn(CalendarContract.Instances.END, obj);
-    }
-
-    public QueryRow setAllDay(Object obj) {
-        return setColumn(CalendarContract.Instances.ALL_DAY, obj);
-    }
-
-    public QueryRow setEventLocation(Object obj) {
-        return setColumn(CalendarContract.Instances.EVENT_LOCATION, obj);
-    }
-
-    public QueryRow setHasAlarm(Object obj) {
-        return setColumn(CalendarContract.Instances.HAS_ALARM, obj);
-    }
-
-    public QueryRow setRRule(Object obj) {
-        return setColumn(CalendarContract.Instances.RRULE, obj);
-    }
-
-    @Override
-    public String toString() {
-        try {
-            return toJson().toString(2);
-        } catch (JSONException e) {
-            return this.getClass().getSimpleName() + "Error converting to Json "
-                    + e.getMessage() + "; " + mRow.toString();
-        }
-    }
-
-    public QueryRow setDisplayColor(Object obj) {
-        return setColumn(CalendarContract.Instances.DISPLAY_COLOR, obj);
-    }
-
-    public Object[] getArray(String[] projection) {
-        Object[] values = new Object[projection.length];
-        for (int ind = 0; ind < projection.length; ind++) {
-            values[ind] = get(projection[ind]);
-        }
-        return values;
-    }
-
-    private Object get(String columnName) {
-        if (mRow.containsKey(columnName)) {
-            return mRow.get(columnName).value;
-        }
-        return null;
-    }
-
-    public static QueryRow fromCursor(Cursor cursor) {
-        QueryRow row = new QueryRow();
-        if (cursor != null && !cursor.isClosed()) {
-            for (int ind = 0; ind < cursor.getColumnCount(); ind++) {
-                row.mRow.put(cursor.getColumnName(ind), new TypedValue(cursor, ind));
-            }
-        }
-        return row;
-    }
-
-    public JSONObject toJson() throws JSONException {
-        JSONObject json = new JSONObject();
-        for (Map.Entry<String, TypedValue> entry : mRow.entrySet()) {
-            json.put(entry.getKey(), entry.getValue().toJson());
-        }
-        return json;
     }
 }

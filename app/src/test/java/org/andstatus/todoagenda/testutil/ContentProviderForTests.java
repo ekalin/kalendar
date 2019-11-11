@@ -7,11 +7,8 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.andstatus.todoagenda.provider.QueryResult;
-
 public class ContentProviderForTests extends ContentProvider {
     private Cursor cursor;
-    private QueryResult queryResult;
     private Uri lastQueryUri;
 
     @Override
@@ -24,22 +21,11 @@ public class ContentProviderForTests extends ContentProvider {
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection,
                         @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         lastQueryUri = uri;
-
-        if (cursor != null) {
-            return cursor;
-        }
-        if (queryResult != null) {
-            return queryResult.query(projection);
-        }
-        return null;
+        return cursor;
     }
 
     public void setQueryResult(Cursor cursor) {
         this.cursor = cursor;
-    }
-
-    public void setQueryResult(QueryResult queryResult) {
-        this.queryResult = queryResult;
     }
 
     public Uri getLastQueryUri() {

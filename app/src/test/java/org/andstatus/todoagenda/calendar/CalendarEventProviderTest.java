@@ -13,8 +13,6 @@ import org.andstatus.todoagenda.EnvironmentChangedReceiver;
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.EventSource;
 import org.andstatus.todoagenda.prefs.InstanceSettingsTestHelper;
-import org.andstatus.todoagenda.provider.QueryResult;
-import org.andstatus.todoagenda.provider.QueryRow;
 import org.andstatus.todoagenda.testutil.ContentProviderForTests;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
@@ -30,7 +28,6 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -77,37 +74,15 @@ public class CalendarEventProviderTest {
     private void setupEvents_forSearchRange() {
         DateTime start = DateTime.now();
         DateTime end = start.plusDays(daysRange);
-        DateTimeZone zone = start.getZone();
 
-        QueryResult queryResult = new QueryResult(1, DateTime.now());
-        addCalendarRow(queryResult, createEvent(start.minusHours(2), start.minusHours(1), "Before start", zone));
-        addCalendarRow(queryResult, createEvent(start.minusHours(1), start.plusHours(2), "Overlaps start range", zone));
-        addCalendarRow(queryResult, createEvent(start.plusHours(2), start.plusHours(3), "Inside range", zone));
-        addCalendarRow(queryResult, createEvent(end.minusHours(3), end.plusHours(1), "Overlaps end range", zone));
-        addCalendarRow(queryResult, createEvent(end.plusHours(2), end.plusHours(4), "After end", zone));
+        MatrixCursor cursor = createCalendarCursor();
+        addCalendarRow(cursor, start.minusHours(2), start.minusHours(1), "Before start");
+        addCalendarRow(cursor, start.minusHours(1), start.plusHours(2), "Overlaps start range");
+        addCalendarRow(cursor, start.plusHours(2), start.plusHours(3), "Inside range");
+        addCalendarRow(cursor, end.minusHours(3), end.plusHours(1), "Overlaps end range");
+        addCalendarRow(cursor, end.plusHours(2), end.plusHours(4), "After end");
 
-        contentProvider.setQueryResult(queryResult);
-    }
-
-    private CalendarEvent createEvent(DateTime start, DateTime endDate, String title, DateTimeZone zone) {
-        CalendarEvent event = new CalendarEvent(context, 1, zone, false);
-        event.setStartMillis(start.getMillis());
-        event.setEndMillis(endDate.getMillis());
-        event.setTitle(title);
-        return event;
-    }
-
-    private void addCalendarRow(QueryResult queryResult, CalendarEvent event) {
-        queryResult.addRow(new QueryRow()
-                .setEventId(event.getEventId())
-                .setTitle(event.getTitle())
-                .setBegin(event.getStartMillis())
-                .setEnd(event.getEndMillis())
-                .setDisplayColor(event.getColor())
-                .setAllDay(event.isAllDay() ? 1 : 0)
-                .setEventLocation(event.getLocation())
-                .setHasAlarm(event.isAlarmActive() ? 1 : 0)
-                .setRRule(event.isRecurring() ? "FREQ=WEEKLY;WKST=MO;BYDAY=MO,WE,FR" : null));
+        contentProvider.setQueryResult(cursor);
     }
 
     @Test
@@ -199,15 +174,41 @@ public class CalendarEventProviderTest {
     }
 
     private void setupEvents_forRecurringInstances() {
-        QueryResult queryResult = new QueryResult(1, DateTime.now());
-        DateTime date = DateTime.now().withTimeAtStartOfDay();
-        long millis = date.getMillis() + TimeUnit.HOURS.toMillis(10);
+        MatrixCursor cursor = createCalendarCursor();
+
+        DateTime date = DateTime.now().withTimeAtStartOfDay().plusHours(10);
         for (int ind = 0; ind < 15; ind++) {
-            millis += TimeUnit.DAYS.toMillis(1);
-            queryResult.addRow(new QueryRow().setEventId(3).setTitle("Work each day")
-                    .setBegin(millis).setEnd(millis + TimeUnit.HOURS.toMillis(9)));
+            date = date.plusDays(1);
+            addCalendarRow(cursor, date, date.plusHours(9), "Work each day");
         }
-        contentProvider.setQueryResult(queryResult);
+        contentProvider.setQueryResult(cursor);
+    }
+
+    private MatrixCursor createCalendarCursor() {
+        return new MatrixCursor(new String[]{
+                CalendarContract.Instances.EVENT_ID,
+                CalendarContract.Instances.TITLE,
+                CalendarContract.Instances.BEGIN,
+                CalendarContract.Instances.END,
+                CalendarContract.Instances.ALL_DAY,
+                CalendarContract.Instances.EVENT_LOCATION,
+                CalendarContract.Instances.HAS_ALARM,
+                CalendarContract.Instances.RRULE,
+                CalendarContract.Instances.DISPLAY_COLOR,
+        });
+    }
+
+    private void addCalendarRow(MatrixCursor cursor, DateTime start, DateTime end, String title) {
+        cursor.newRow()
+                .add(CalendarContract.Instances.EVENT_ID, 1)
+                .add(CalendarContract.Instances.TITLE, title)
+                .add(CalendarContract.Instances.BEGIN, start.getMillis())
+                .add(CalendarContract.Instances.END, end.getMillis())
+                .add(CalendarContract.Instances.ALL_DAY, 0)
+                .add(CalendarContract.Instances.EVENT_LOCATION, null)
+                .add(CalendarContract.Instances.HAS_ALARM, 0)
+                .add(CalendarContract.Instances.RRULE, null)
+                .add(CalendarContract.Instances.DISPLAY_COLOR, 0);
     }
 
 

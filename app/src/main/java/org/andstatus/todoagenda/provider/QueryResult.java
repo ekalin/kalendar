@@ -1,7 +1,6 @@
 package org.andstatus.todoagenda.provider;
 
 import android.database.Cursor;
-import android.database.MatrixCursor;
 import android.net.Uri;
 
 import org.andstatus.todoagenda.prefs.InstanceSettings;
@@ -45,7 +44,8 @@ public class QueryResult {
 
     public QueryResult(InstanceSettings settings, Uri uri, String[] projection, String selection,
                        String[] selectionArgs, String sortOrder) {
-        this(settings.getWidgetId(), DateUtil.now(settings.getTimeZone()));
+        this.widgetId = settings.getWidgetId();
+        this.executedAt = DateUtil.now(settings.getTimeZone());
         this.uri = uri;
         this.projection = projection;
         this.selection = selection;
@@ -53,28 +53,15 @@ public class QueryResult {
         this.sortOrder = sortOrder;
     }
 
-    public QueryResult(int widgetId, DateTime executedAt) {
-        this.widgetId = widgetId;
-        this.executedAt = executedAt;
-    }
-
     public int getWidgetId() {
         return widgetId;
-    }
-
-    public Cursor query(String[] projection) {
-        MatrixCursor cursor = new MatrixCursor(projection);
-        for (QueryRow row : rows) {
-            cursor.addRow(row.getArray(projection));
-        }
-        return cursor;
     }
 
     public void addRow(Cursor cursor) {
         addRow(QueryRow.fromCursor(cursor));
     }
 
-    public void addRow(QueryRow row) {
+    private void addRow(QueryRow row) {
         rows.add(row);
     }
 
