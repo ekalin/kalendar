@@ -8,17 +8,23 @@
         app:entries="@array/pref_theme_entries"
         app:entryValues="@array/pref_theme_values" />
 
-    <Preference
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         app:key="backgroundColor"
         app:title="@string/appearance_background_color_title"
         app:summary="@string/appearance_background_color_desc"
-        app:defaultValue="2147483648" />
+        app:cpv_dialogTitle="@string/appearance_background_color_title"
+        app:defaultValue="0x80000000"
+        app:cpv_showAlphaSlider="true"
+        app:cpv_colorShape="square" />
 
-    <Preference
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         app:key="pastEventsBackgroundColor"
         app:title="@string/appearance_past_events_background_color_title"
         app:summary="@string/appearance_past_events_background_color_desc"
-        app:defaultValue="2147548928" />
+        app:cpv_dialogTitle="@string/appearance_past_events_background_color_title"
+        app:defaultValue="0x4affff2b"
+        app:cpv_showAlphaSlider="true"
+        app:cpv_colorShape="square" />
 
     <ListPreference
         app:key="entryTheme"

@@ -333,16 +333,8 @@ public class InstanceSettings {
         return sharedPreferences.getInt(PREF_BACKGROUND_COLOR, PREF_BACKGROUND_COLOR_DEFAULT);
     }
 
-    public void setBackgroundColor(@ColorInt int color) {
-        sharedPreferences.edit().putInt(PREF_BACKGROUND_COLOR, color).apply();
-    }
-
     public int getPastEventsBackgroundColor() {
         return sharedPreferences.getInt(PREF_PAST_EVENTS_BACKGROUND_COLOR, PREF_PAST_EVENTS_BACKGROUND_COLOR_DEFAULT);
-    }
-
-    public void setPastEventsBackgroundColor(@ColorInt int color) {
-        sharedPreferences.edit().putInt(PREF_PAST_EVENTS_BACKGROUND_COLOR, color).apply();
     }
 
     public String getEntryTheme() {
