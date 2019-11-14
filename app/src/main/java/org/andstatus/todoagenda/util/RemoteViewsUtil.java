@@ -48,11 +48,6 @@ public class RemoteViewsUtil {
         rv.setTextColor(viewId, getColorValue(context, colorAttrId));
     }
 
-    public static void setBackgroundColorFromAttr(Context context, RemoteViews rv, int viewId,
-                                                  int colorAttrId) {
-        setBackgroundColor(rv, viewId, getColorValue(context, colorAttrId));
-    }
-
     public static void setBackgroundColor(RemoteViews rv, int viewId, int color) {
         rv.setInt(viewId, METHOD_SET_BACKGROUND_COLOR, color);
     }

@@ -59,6 +59,12 @@ public class InstanceSettings {
     // Colors
     static final String PREF_HEADER_THEME = "headerTheme";
     static final String PREF_HEADER_THEME_DEFAULT = Theme.LIGHT.name();
+    static final String PREF_EVENT_COLOR = "eventColor";
+    @ColorInt static final int PREF_EVENT_COLOR_DEFAULT = 0xffffffff;
+    static final String PREF_CURRENT_EVENT_COLOR = "currentEventColor";
+    @ColorInt static final int PREF_CURRENT_EVENT_COLOR_DEFAULT = 0xffffe900;
+    static final String PREF_DAY_HEADER_COLOR = "dayHeaderColor";
+    @ColorInt static final int PREF_DAY_HEADER_COLOR_DEFAULT = 0xffffffff;
     static final String PREF_BACKGROUND_COLOR = "backgroundColor";
     @ColorInt static final int PREF_BACKGROUND_COLOR_DEFAULT = 0x80000000;
     static final String PREF_PAST_EVENTS_BACKGROUND_COLOR = "pastEventsBackgroundColor";
@@ -123,6 +129,9 @@ public class InstanceSettings {
             setStringFromJson(editor, json, PREF_LOCKED_TIME_ZONE_ID);
 
             setStringFromJson(editor, json, PREF_HEADER_THEME);
+            setIntFromJson(editor, json, PREF_EVENT_COLOR);
+            setIntFromJson(editor, json, PREF_CURRENT_EVENT_COLOR);
+            setIntFromJson(editor, json, PREF_DAY_HEADER_COLOR);
             setIntFromJson(editor, json, PREF_BACKGROUND_COLOR);
             setIntFromJson(editor, json, PREF_PAST_EVENTS_BACKGROUND_COLOR);
             setStringFromJson(editor, json, PREF_ENTRY_THEME);
@@ -220,6 +229,9 @@ public class InstanceSettings {
             json.put(PREF_LOCKED_TIME_ZONE_ID, getLockedTimeZoneId());
 
             json.put(PREF_HEADER_THEME, getHeaderTheme());
+            json.put(PREF_EVENT_COLOR, getEventColor());
+            json.put(PREF_CURRENT_EVENT_COLOR, getCurrentEventColor());
+            json.put(PREF_DAY_HEADER_COLOR, getDayHeaderColor());
             json.put(PREF_BACKGROUND_COLOR, getBackgroundColor());
             json.put(PREF_PAST_EVENTS_BACKGROUND_COLOR, getPastEventsBackgroundColor());
             json.put(PREF_ENTRY_THEME, getEntryTheme());
@@ -327,6 +339,18 @@ public class InstanceSettings {
             headerThemeContext = new ContextThemeWrapper(context, themeNameToResId(getHeaderTheme()));
         }
         return headerThemeContext;
+    }
+
+    public int getEventColor() {
+        return sharedPreferences.getInt(PREF_EVENT_COLOR, PREF_EVENT_COLOR_DEFAULT);
+    }
+
+    public int getCurrentEventColor() {
+        return sharedPreferences.getInt(PREF_CURRENT_EVENT_COLOR, PREF_CURRENT_EVENT_COLOR_DEFAULT);
+    }
+
+    public int getDayHeaderColor() {
+        return sharedPreferences.getInt(PREF_DAY_HEADER_COLOR, PREF_DAY_HEADER_COLOR_DEFAULT);
     }
 
     public int getBackgroundColor() {

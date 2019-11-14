@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setMultiline;
-import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextColorFromAttr;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextSize;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setViewWidth;
 
@@ -64,8 +63,7 @@ public class TaskVisualizer extends WidgetEntryVisualizer<TaskEntry> {
                         : R.dimen.days_to_event_right_width);
                 rv.setTextViewText(viewToShow, DateUtil.getDaysFromTodayString(getSettings().getContext(), days));
                 setTextSize(getSettings(), rv, viewToShow, R.dimen.event_entry_details);
-                setTextColorFromAttr(getSettings().getEntryThemeContext(), rv, viewToShow,
-                        entry.isCurrent() ? R.attr.eventEntryCurrentTitle : R.attr.dayHeaderTitle);
+                setDayHeaderColor(rv, viewToShow, entry);
             }
             setViewWidth(getSettings(), rv, R.id.task_one_line_spacer, R.dimen.event_time_width);
             rv.setViewVisibility(R.id.task_one_line_spacer, View.VISIBLE);
@@ -77,8 +75,7 @@ public class TaskVisualizer extends WidgetEntryVisualizer<TaskEntry> {
         rv.setTextViewText(viewId, entry.getTitle());
         setTextSize(getSettings(), rv, R.id.task_entry_icon, R.dimen.event_entry_title);
         setTextSize(getSettings(), rv, viewId, R.dimen.event_entry_title);
-        setTextColorFromAttr(getSettings().getEntryThemeContext(), rv, viewId,
-                entry.isCurrent() ? R.attr.eventEntryCurrentTitle : R.attr.eventEntryTitle);
+        setEventTitleColor(rv, viewId, entry);
         setMultiline(rv, viewId, getSettings().getTitleMultiline());
     }
 

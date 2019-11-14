@@ -9,6 +9,33 @@
         app:entryValues="@array/pref_theme_values" />
 
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        app:key="eventColor"
+        app:title="@string/appearance_event_color_title"
+        app:summary="@string/appearance_event_color_desc"
+        app:cpv_dialogTitle="@string/appearance_event_color_title"
+        app:defaultValue="0xffffffff"
+        app:cpv_showAlphaSlider="true"
+        app:cpv_colorShape="square" />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        app:key="currentEventColor"
+        app:title="@string/appearance_current_event_color_title"
+        app:summary="@string/appearance_current_event_color_desc"
+        app:cpv_dialogTitle="@string/appearance_current_event_color_title"
+        app:defaultValue="0xffffe900"
+        app:cpv_showAlphaSlider="true"
+        app:cpv_colorShape="square" />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        app:key="dayHeaderColor"
+        app:title="@string/appearance_day_header_color_title"
+        app:summary="@string/appearance_day_header_color_desc"
+        app:cpv_dialogTitle="@string/appearance_day_header_color_title"
+        app:defaultValue="0xffffffff"
+        app:cpv_showAlphaSlider="true"
+        app:cpv_colorShape="square" />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         app:key="backgroundColor"
         app:title="@string/appearance_background_color_title"
         app:summary="@string/appearance_background_color_desc"

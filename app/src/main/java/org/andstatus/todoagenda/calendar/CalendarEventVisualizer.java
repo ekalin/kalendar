@@ -37,7 +37,7 @@ public class CalendarEventVisualizer extends WidgetEntryVisualizer<CalendarEntry
         RemoteViews rv = new RemoteViews(getContext().getPackageName(), eventEntryLayout.layoutId);
         rv.setOnClickFillInIntent(R.id.event_entry,
                 calendarContentProvider.createOpenCalendarEventIntent(entry.getEvent()));
-        eventEntryLayout.visualizeEvent(entry, rv);
+        eventEntryLayout.visualizeEvent(this, entry, rv);
         setAlarmActive(entry, rv);
         setRecurring(entry, rv);
         setColor(entry, rv);

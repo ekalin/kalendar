@@ -49,7 +49,7 @@
   <string name="layout_prefs_title">Layout</string>
   <string name="layout_prefs_desc">Posição, visibilidade e configuração dos elementos do widget</string>
   <string name="appearance_text_size_title">Tamanho do texto</string>
-  <string name="appearance_text_size_desc">Ajustar o tamanho do texto</string>
+  <string name="appearance_text_size_desc">Selecionar o tamanho do texto</string>
   <string name="appearance_text_size_very_small">Muito pequeno</string>
   <string name="appearance_text_size_small">Pequeno</string>
   <string name="appearance_text_size_medium">Médio</string>
@@ -73,11 +73,17 @@
   <!-- Preference header: Colors -->
   <string name="appearance_group_color_title">Cores</string>
   <string name="colors_prefs_desc">Cores e opacidade dos textos e fundos</string>
+  <string name="appearance_event_color_title">Cor dos eventos</string>
+  <string name="appearance_event_color_desc">Selecionar a cor do texto dos eventos</string>
+  <string name="appearance_current_event_color_title">Cor dos eventos atuais</string>
+  <string name="appearance_current_event_color_desc">Selecionar a cor do texto dos eventos acontecendo no momento</string>
+  <string name="appearance_day_header_color_title">Cor dos cabeçalhos dos dias</string>
+  <string name="appearance_day_header_color_desc">Selecionar a cor do texto dos cabeçalhos dos dias</string>
   <string name="appearance_background_color_title">Cor de fundo</string>
-  <string name="appearance_background_color_desc">Ajustar a cor de fundo</string>
+  <string name="appearance_background_color_desc">Selecionar a cor de fundo</string>
   <string name="appearance_past_events_background_color_title">Cor de fundo de eventos passados</string>
-  <string name="appearance_past_events_background_color_desc">Ajustar cor de fundo dos eventos passados</string>
-  <string name="appearance_day_header_alignment_desc">Ajustar posição do cabeçalho do dia</string>
+  <string name="appearance_past_events_background_color_desc">Selecionar cor de fundo dos eventos passados</string>
+  <string name="appearance_day_header_alignment_desc">Selecionar posição do cabeçalho do dia</string>
   <string name="appearance_day_header_alignment_title">Posição do dia</string>
   <string name="appearance_day_header_alignment_left">À esquerda</string>
   <string name="appearance_day_header_alignment_center">Centralizado</string>

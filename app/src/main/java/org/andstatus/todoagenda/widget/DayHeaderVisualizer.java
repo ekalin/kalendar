@@ -15,9 +15,7 @@ import java.util.Locale;
 
 import static org.andstatus.todoagenda.util.CalendarIntentUtil.createOpenCalendarAtDayIntent;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setBackgroundColor;
-import static org.andstatus.todoagenda.util.RemoteViewsUtil.setBackgroundColorFromAttr;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setPadding;
-import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextColorFromAttr;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextSize;
 
 public class DayHeaderVisualizer extends WidgetEntryVisualizer<DayHeader> {
@@ -48,10 +46,8 @@ public class DayHeaderVisualizer extends WidgetEntryVisualizer<DayHeader> {
                 .toUpperCase(Locale.getDefault());
         rv.setTextViewText(R.id.day_header_title, dateString);
         setTextSize(getSettings(), rv, R.id.day_header_title, R.dimen.day_header_title);
-        setTextColorFromAttr(getSettings().getEntryThemeContext(), rv, R.id.day_header_title,
-                dayHeader.isCurrent() ? R.attr.eventEntryCurrentTitle : R.attr.dayHeaderTitle);
-        setBackgroundColorFromAttr(getSettings().getEntryThemeContext(), rv, R.id.day_header_separator,
-                R.attr.dayHeaderSeparator);
+        setDayHeaderColor(rv, R.id.day_header_title, dayHeader);
+        setBackgroundColor(rv, R.id.day_header_separator, getSettings().getDayHeaderColor());
 
         int paddingTop = position == 0 ? R.dimen.day_header_padding_top_first : R.dimen.day_header_padding_top;
         setPadding(getSettings(), rv, R.id.day_header_title,

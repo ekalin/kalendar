@@ -173,6 +173,7 @@ public class CalendarEntry extends WidgetEntry {
         return getLocation() == null || getLocation().isEmpty() || !getSettings().getShowLocation();
     }
 
+    @Override
     public boolean isCurrent() {
         DateTime now = DateUtil.now(event.getZone());
         return getStartDate().isBefore(now) && getEndDate().isAfter(now);

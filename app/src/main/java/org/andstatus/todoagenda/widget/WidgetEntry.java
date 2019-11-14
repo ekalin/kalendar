@@ -29,6 +29,10 @@ public class WidgetEntry implements Comparable<WidgetEntry> {
                 startDate.withTimeAtStartOfDay()).getDays();
     }
 
+    public boolean isCurrent() {
+        return false;
+    }
+
     public DateTime getNextUpdateTime() {
         return null;
     }

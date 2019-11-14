@@ -13,7 +13,6 @@ import java.util.List;
 
 import static org.andstatus.todoagenda.EventRemoteViewsFactory.getPermittedAddEventPendingIntent;
 import static org.andstatus.todoagenda.util.CalendarIntentUtil.createOpenCalendarAtDayIntent;
-import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextColorFromAttr;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextSize;
 
 /**
@@ -50,7 +49,7 @@ public class LastEntryVisualizer extends WidgetEntryVisualizer<LastEntry> {
             rv.setTextViewText(viewId, getContext().getText(R.string.no_upcoming_events));
         }
         setTextSize(getSettings(), rv, viewId, R.dimen.event_entry_title);
-        setTextColorFromAttr(getSettings().getEntryThemeContext(), rv, viewId, R.attr.eventEntryTitle);
+        setEventTitleColor(rv, viewId, entry);
         return rv;
     }
 

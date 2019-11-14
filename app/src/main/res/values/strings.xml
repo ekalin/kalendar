@@ -75,6 +75,12 @@
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Colors</string>
     <string name="colors_prefs_desc">Colors and opacity of texts and backgrounds</string>
+    <string name="appearance_event_color_title">Event color</string>
+    <string name="appearance_event_color_desc">Adjust the text color of events</string>
+    <string name="appearance_current_event_color_title">Current event color</string>
+    <string name="appearance_current_event_color_desc">Adjust the text color of events currently happening</string>
+    <string name="appearance_day_header_color_title">Day header color</string>
+    <string name="appearance_day_header_color_desc">Adjust the text color of day headers</string>
     <string name="appearance_background_color_title">Background color</string>
     <string name="appearance_background_color_desc">Adjust the color of the background</string>
     <string name="appearance_past_events_background_color_title">Past events background color</string>
