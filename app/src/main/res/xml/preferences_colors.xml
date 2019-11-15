@@ -36,6 +36,15 @@
         app:cpv_colorShape="square" />
 
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        app:key="widgetHeaderColor"
+        app:title="@string/appearance_widget_header_color_title"
+        app:summary="@string/appearance_widget_header_color_desc"
+        app:cpv_dialogTitle="@string/appearance_widget_header_color_title"
+        app:defaultValue="0x9affffff"
+        app:cpv_showAlphaSlider="true"
+        app:cpv_colorShape="square" />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         app:key="backgroundColor"
         app:title="@string/appearance_background_color_title"
         app:summary="@string/appearance_background_color_desc"

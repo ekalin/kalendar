@@ -33,13 +33,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-import static org.andstatus.todoagenda.Theme.themeNameToResId;
 import static org.andstatus.todoagenda.util.CalendarIntentUtil.createOpenCalendarEventPendingIntent;
 import static org.andstatus.todoagenda.util.CalendarIntentUtil.createOpenCalendarPendingIntent;
-import static org.andstatus.todoagenda.util.RemoteViewsUtil.setAlpha;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setBackgroundColor;
-import static org.andstatus.todoagenda.util.RemoteViewsUtil.setImageFromAttr;
-import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextColorFromAttr;
+import static org.andstatus.todoagenda.util.RemoteViewsUtil.setDrawableColor;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setTextSize;
 
 public class EventRemoteViewsFactory implements RemoteViewsFactory {
@@ -262,21 +259,13 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
                 DateUtil.now(settings.getTimeZone())).toUpperCase(Locale.getDefault());
         rv.setTextViewText(viewId, formattedDate);
         setTextSize(settings, rv, viewId, R.dimen.widget_header_title);
-        setTextColorFromAttr(settings.getHeaderThemeContext(), rv, viewId, R.attr.header);
+        rv.setTextColor(viewId, settings.getWidgetHeaderColor());
     }
 
     private static void setActionIcons(InstanceSettings settings, RemoteViews rv) {
-        setImageFromAttr(settings.getHeaderThemeContext(), rv, R.id.add_event, R.attr.header_action_add_event);
-        setImageFromAttr(settings.getHeaderThemeContext(), rv, R.id.refresh, R.attr.header_action_refresh);
-        setImageFromAttr(settings.getHeaderThemeContext(), rv, R.id.overflow_menu, R.attr.header_action_overflow);
-        int themeId = themeNameToResId(settings.getHeaderTheme());
-        int alpha = 255;
-        if (themeId == R.style.Theme_Calendar_Dark || themeId == R.style.Theme_Calendar_Light) {
-            alpha = 154;
-        }
-        setAlpha(rv, R.id.add_event, alpha);
-        setAlpha(rv, R.id.refresh, alpha);
-        setAlpha(rv, R.id.overflow_menu, alpha);
+        setDrawableColor(rv, R.id.add_event, settings.getWidgetHeaderColor());
+        setDrawableColor(rv, R.id.refresh, settings.getWidgetHeaderColor());
+        setDrawableColor(rv, R.id.overflow_menu, settings.getWidgetHeaderColor());
     }
 
     private static void configureAddEvent(InstanceSettings settings, RemoteViews rv) {

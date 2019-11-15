@@ -81,6 +81,8 @@
     <string name="appearance_current_event_color_desc">Adjust the text color of events currently happening</string>
     <string name="appearance_day_header_color_title">Day header color</string>
     <string name="appearance_day_header_color_desc">Adjust the text color of day headers</string>
+    <string name="appearance_widget_header_color_title">Widget header color</string>
+    <string name="appearance_widget_header_color_desc">Adjust the text color of widget header</string>
     <string name="appearance_background_color_title">Background color</string>
     <string name="appearance_background_color_desc">Adjust the color of the background</string>
     <string name="appearance_past_events_background_color_title">Past events background color</string>

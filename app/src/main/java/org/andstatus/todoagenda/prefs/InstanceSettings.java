@@ -65,6 +65,8 @@ public class InstanceSettings {
     @ColorInt static final int PREF_CURRENT_EVENT_COLOR_DEFAULT = 0xffffe900;
     static final String PREF_DAY_HEADER_COLOR = "dayHeaderColor";
     @ColorInt static final int PREF_DAY_HEADER_COLOR_DEFAULT = 0xffffffff;
+    static final String PREF_WIDGET_HEADER_COLOR = "widgetHeaderColor";
+    @ColorInt static final int PREF_WIDGET_HEADER_COLOR_DEFAULT = 0x9affffff;
     static final String PREF_BACKGROUND_COLOR = "backgroundColor";
     @ColorInt static final int PREF_BACKGROUND_COLOR_DEFAULT = 0x80000000;
     static final String PREF_PAST_EVENTS_BACKGROUND_COLOR = "pastEventsBackgroundColor";
@@ -132,6 +134,7 @@ public class InstanceSettings {
             setIntFromJson(editor, json, PREF_EVENT_COLOR);
             setIntFromJson(editor, json, PREF_CURRENT_EVENT_COLOR);
             setIntFromJson(editor, json, PREF_DAY_HEADER_COLOR);
+            setIntFromJson(editor, json, PREF_WIDGET_HEADER_COLOR);
             setIntFromJson(editor, json, PREF_BACKGROUND_COLOR);
             setIntFromJson(editor, json, PREF_PAST_EVENTS_BACKGROUND_COLOR);
             setStringFromJson(editor, json, PREF_ENTRY_THEME);
@@ -232,6 +235,7 @@ public class InstanceSettings {
             json.put(PREF_EVENT_COLOR, getEventColor());
             json.put(PREF_CURRENT_EVENT_COLOR, getCurrentEventColor());
             json.put(PREF_DAY_HEADER_COLOR, getDayHeaderColor());
+            json.put(PREF_WIDGET_HEADER_COLOR, getWidgetHeaderColor());
             json.put(PREF_BACKGROUND_COLOR, getBackgroundColor());
             json.put(PREF_PAST_EVENTS_BACKGROUND_COLOR, getPastEventsBackgroundColor());
             json.put(PREF_ENTRY_THEME, getEntryTheme());
@@ -351,6 +355,10 @@ public class InstanceSettings {
 
     public int getDayHeaderColor() {
         return sharedPreferences.getInt(PREF_DAY_HEADER_COLOR, PREF_DAY_HEADER_COLOR_DEFAULT);
+    }
+
+    public int getWidgetHeaderColor() {
+        return sharedPreferences.getInt(PREF_WIDGET_HEADER_COLOR, PREF_WIDGET_HEADER_COLOR_DEFAULT);
     }
 
     public int getBackgroundColor() {

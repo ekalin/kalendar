@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:contentDescription="@string/add_event_desc"
-        android:src="@drawable/ic_action_add_event_light" />
+        android:src="@drawable/ic_action_add_event" />
 
     <ImageView
         android:id="@+id/refresh"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:contentDescription="@string/refresh_desc"
-        android:src="@drawable/ic_action_refresh_light" />
+        android:src="@drawable/ic_action_refresh" />
 
     <ImageView
         android:id="@+id/overflow_menu"
@@ -36,5 +36,5 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:contentDescription="@string/open_prefs_desc"
-        android:src="@drawable/ic_action_overflow_light" />
+        android:src="@drawable/ic_action_overflow" />
 </LinearLayout>

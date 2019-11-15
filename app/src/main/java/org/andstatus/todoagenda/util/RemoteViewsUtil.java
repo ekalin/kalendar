@@ -2,9 +2,7 @@ package org.andstatus.todoagenda.util;
 
 import android.content.Context;
 import android.content.res.Resources.NotFoundException;
-import android.graphics.Color;
 import android.util.Log;
-import android.util.TypedValue;
 import android.widget.RemoteViews;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DimenRes;
@@ -16,7 +14,6 @@ public class RemoteViewsUtil {
     private static final String METHOD_SET_TEXT_SIZE = "setTextSize";
     private static final String METHOD_SET_BACKGROUND_COLOR = "setBackgroundColor";
     private static final String METHOD_SET_SINGLE_LINE = "setSingleLine";
-    private static final String METHOD_SET_ALPHA = "setAlpha";
     private static final String METHOD_SET_WIDTH = "setWidth";
 
     private RemoteViewsUtil() {
@@ -33,20 +30,12 @@ public class RemoteViewsUtil {
         rv.setViewPadding(viewId, leftPadding, topPadding, rightPadding, bottomPadding);
     }
 
-    public static void setAlpha(RemoteViews rv, int viewId, int alpha) {
-        rv.setInt(viewId, METHOD_SET_ALPHA, alpha);
-    }
-
     public static void setViewWidth(InstanceSettings settings, RemoteViews rv, int viewId, int dimenId) {
         rv.setInt(viewId, METHOD_SET_WIDTH, getScaledValueInPixels(settings, dimenId));
     }
 
     public static void setTextSize(InstanceSettings settings, RemoteViews rv, int viewId, int dimenId) {
         rv.setFloat(viewId, METHOD_SET_TEXT_SIZE, getScaledValueInScaledPixels(settings, dimenId));
-    }
-
-    public static void setTextColorFromAttr(Context context, RemoteViews rv, int viewId, int colorAttrId) {
-        rv.setTextColor(viewId, getColorValue(context, colorAttrId));
     }
 
     public static void setBackgroundColor(RemoteViews rv, int viewId, int color) {
@@ -64,24 +53,6 @@ public class RemoteViewsUtil {
         return resValue * settings.getTextSizeScale().scaleValue / density;
     }
 
-    private static int getColorValue(Context context, int attrId) {
-        TypedValue outValue = new TypedValue();
-        if (context.getTheme().resolveAttribute(attrId, outValue, true)) {
-            int colorResourceId = outValue.resourceId;
-            try {
-                return context.getResources().getColor(colorResourceId);
-            } catch (Exception e) {
-                Log.w(RemoteViewsUtil.class.getSimpleName(), "context.getResources() failed to resolve color for" +
-                        " resource Id:" + colorResourceId +
-                        " derived from attribute Id:" + attrId, e);
-                return Color.GRAY;
-            }
-        }
-        Log.w(RemoteViewsUtil.class.getSimpleName(),
-                "getColorValue failed to resolve color for attribute Id:" + attrId);
-        return Color.GRAY;
-    }
-
     private static float getDimension(Context context, int dimensionResourceId) {
         try {
             return context.getResources().getDimension(dimensionResourceId);
@@ -96,22 +67,7 @@ public class RemoteViewsUtil {
         rv.setBoolean(viewId, METHOD_SET_SINGLE_LINE, !multiLine);
     }
 
-    public static void setImageFromAttr(Context context, RemoteViews rv, int viewId, int attrResId) {
-        TypedValue outValue = new TypedValue();
-        if (context.getTheme().resolveAttribute(attrResId, outValue, true)) {
-            setImage(rv, viewId, outValue.resourceId);
-        } else {
-            Log.w(RemoteViewsUtil.class.getSimpleName(),
-                    "setImageFromAttr: not found; attrResId:" + attrResId + ", resourceId:" + outValue.resourceId +
-                            ", out:" + outValue + ", context:" + context);
-        }
-    }
-
     public static void setDrawableColor(RemoteViews rv, int viewId, @ColorInt int color) {
         rv.setInt(viewId, "setColorFilter", color);
-    }
-
-    private static void setImage(RemoteViews rv, int viewId, int resId) {
-        rv.setImageViewResource(viewId, resId);
     }
 }
