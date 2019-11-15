@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.util.Log;
 import android.util.TypedValue;
 import android.widget.RemoteViews;
+import androidx.annotation.ColorInt;
 import androidx.annotation.DimenRes;
 import androidx.annotation.IdRes;
 
@@ -104,6 +105,10 @@ public class RemoteViewsUtil {
                     "setImageFromAttr: not found; attrResId:" + attrResId + ", resourceId:" + outValue.resourceId +
                             ", out:" + outValue + ", context:" + context);
         }
+    }
+
+    public static void setDrawableColor(RemoteViews rv, int viewId, @ColorInt int color) {
+        rv.setInt(viewId, "setColorFilter", color);
     }
 
     private static void setImage(RemoteViews rv, int viewId, int resId) {

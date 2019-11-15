@@ -10,7 +10,5 @@
     <attr name="eventEntryTitle" format="reference|color" />
     <attr name="eventEntryDetails" format="reference|color" />
     <attr name="eventEntryCurrentTitle" format="reference|color" />
-    <attr name="eventEntryAlarm" format="reference" />
-    <attr name="eventEntryRecurring" format="reference" />
 
 </resources>

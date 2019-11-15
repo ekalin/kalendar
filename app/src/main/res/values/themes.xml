@@ -17,8 +17,6 @@
         <item name="eventEntryTitle">@color/event_entry_title_black</item>
         <item name="eventEntryDetails">@color/event_entry_details_black</item>
         <item name="eventEntryCurrentTitle">@color/event_entry_current_title_black</item>
-        <item name="eventEntryAlarm">@drawable/ic_alarm_dark</item>
-        <item name="eventEntryRecurring">@drawable/ic_recurring_dark</item>
     </style>
 
     <style name="Theme.Calendar.Dark" parent="android:Theme.Holo">
@@ -31,8 +29,6 @@
         <item name="eventEntryTitle">@color/event_entry_title_dark</item>
         <item name="eventEntryDetails">@color/event_entry_details_dark</item>
         <item name="eventEntryCurrentTitle">@color/event_entry_current_title_dark</item>
-        <item name="eventEntryAlarm">@drawable/ic_alarm_dark</item>
-        <item name="eventEntryRecurring">@drawable/ic_recurring_dark</item>
     </style>
 
     <style name="Theme.Calendar.Light" parent="android:Theme.Holo.Light">
@@ -45,8 +41,6 @@
         <item name="eventEntryTitle">@color/event_entry_title_light</item>
         <item name="eventEntryDetails">@color/event_entry_details_light</item>
         <item name="eventEntryCurrentTitle">@color/event_entry_current_title_light</item>
-        <item name="eventEntryAlarm">@drawable/ic_alarm_light</item>
-        <item name="eventEntryRecurring">@drawable/ic_recurring_light</item>
     </style>
 
     <style name="Theme.Calendar.White" parent="android:Theme.Holo.Light">
@@ -59,8 +53,6 @@
         <item name="eventEntryTitle">@color/event_entry_title_white</item>
         <item name="eventEntryDetails">@color/event_entry_details_white</item>
         <item name="eventEntryCurrentTitle">@color/event_entry_current_title_white</item>
-        <item name="eventEntryAlarm">@drawable/ic_alarm_light</item>
-        <item name="eventEntryRecurring">@drawable/ic_recurring_light</item>
     </style>
 
 </resources>
