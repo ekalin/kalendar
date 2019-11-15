@@ -53,12 +53,6 @@
     <string name="appearance_background_color_desc">पृष्ठभूमि का रंग ठीक करें</string>
     <string name="appearance_past_events_background_color_title">पिछले घटनाक्रम का पृष्ठभूमि रंग</string>
     <string name="appearance_past_events_background_color_desc">अतीत की घटनाओं की पृष्ठभूमि रंग ठीक करें</string>
-    <string name="appearance_header_theme_title">विजेट शीर्ष छायांकन</string>
-    <string name="appearance_entries_theme_title">ईवेंट छायांकन</string>
-    <string name="appearance_theme_black">काला</string>
-    <string name="appearance_theme_dark">काला</string>
-    <string name="appearance_theme_light">हल्का</string>
-    <string name="appearance_theme_white">सफेद</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">घटना का ब्योरा</string>
     <string name="event_details_show_end_time_title">ख़त्म होने का समय</string>

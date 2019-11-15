@@ -1,13 +1,5 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ListPreference
-        app:key="headerTheme"
-        app:title="@string/appearance_header_theme_title"
-        app:summary="@string/appearance_header_theme_desc"
-        app:defaultValue="LIGHT"
-        app:entries="@array/pref_theme_entries"
-        app:entryValues="@array/pref_theme_values" />
-
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         app:key="eventColor"
         app:title="@string/appearance_event_color_title"
@@ -61,13 +53,5 @@
         app:defaultValue="0x4affff2b"
         app:cpv_showAlphaSlider="true"
         app:cpv_colorShape="square" />
-
-    <ListPreference
-        app:key="entryTheme"
-        app:title="@string/appearance_entries_theme_title"
-        app:summary="@string/appearance_entries_theme_desc"
-        app:defaultValue="WHITE"
-        app:entries="@array/pref_theme_entries"
-        app:entryValues="@array/pref_theme_values" />
 
 </PreferenceScreen>

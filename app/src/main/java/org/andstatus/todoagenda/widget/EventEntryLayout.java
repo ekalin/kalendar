@@ -68,7 +68,7 @@ public enum EventEntryLayout {
                 int viewToHide = daysAsText ? R.id.event_entry_days_right : R.id.event_entry_days;
                 rv.setViewVisibility(viewToHide, View.GONE);
                 rv.setViewVisibility(viewToShow, View.VISIBLE);
-                rv.setTextViewText(viewToShow, DateUtil.getDaysFromTodayString(entry.getSettings().getEntryThemeContext(), days));
+                rv.setTextViewText(viewToShow, DateUtil.getDaysFromTodayString(entry.getSettings().getContext(), days));
                 InstanceSettings settings = entry.getSettings();
                 setViewWidth(settings, rv, viewToShow, daysAsText
                         ? R.dimen.days_to_event_width

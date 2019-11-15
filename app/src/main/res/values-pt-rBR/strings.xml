@@ -90,14 +90,6 @@
   <string name="appearance_day_header_alignment_left">À esquerda</string>
   <string name="appearance_day_header_alignment_center">Centralizado</string>
   <string name="appearance_day_header_alignment_right">À direita</string>
-  <string name="appearance_header_theme_title">Cor do cabeçalho do widget</string>
-  <string name="appearance_header_theme_desc">Escolher cor para o texto do cabeçalho do widget</string>
-  <string name="appearance_entries_theme_title">Cor do evento</string>
-  <string name="appearance_entries_theme_desc">Escolher cor do texto do evento</string>
-  <string name="appearance_theme_black">Preto</string>
-  <string name="appearance_theme_dark">Escuro</string>
-  <string name="appearance_theme_light">Claro</string>
-  <string name="appearance_theme_white">Branco</string>
   <string name="appearance_abbreviate_dates_title">Abreviar datas</string>
   <string name="appearance_abbreviate_dates_desc">Usar abreviaturas para datas (seg, ter, etc) no widget</string>
 

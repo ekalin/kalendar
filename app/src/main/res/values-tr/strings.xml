@@ -81,14 +81,6 @@ Randevularınıza kolayca göz atmanız için yaklaşan takvim etkinliklerinin b
     <string name="appearance_background_color_desc">Arkaplan rengini ayarla</string>
     <string name="appearance_past_events_background_color_title">Geçmiş etkinlikler arkaplan rengi</string>
     <string name="appearance_past_events_background_color_desc">Geçmiş etkinliklerin arkaplan rengini ayarla</string>
-    <string name="appearance_header_theme_title">Widget başlık gölgesi</string>
-    <string name="appearance_header_theme_desc">Widget başlığını koyu veya açık gölgede göster</string>
-    <string name="appearance_entries_theme_title">Etkinlik gölgelendirme</string>
-    <string name="appearance_entries_theme_desc">Etkinlik metnini koyu veya açık gölgede göster</string>
-    <string name="appearance_theme_black">Siyah</string>
-    <string name="appearance_theme_dark">Koyu</string>
-    <string name="appearance_theme_light">Açık</string>
-    <string name="appearance_theme_white">Beyaz</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Etkinlik ayrıntıları</string>
     <string name="event_details_prefs_desc">Bir etkinlik için gösterilecek detayları yapılandır</string>

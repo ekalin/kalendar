@@ -5,13 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import androidx.annotation.ColorInt;
 
 import org.andstatus.todoagenda.Alignment;
 import org.andstatus.todoagenda.EndedSomeTimeAgo;
 import org.andstatus.todoagenda.TextSizeScale;
-import org.andstatus.todoagenda.Theme;
 import org.andstatus.todoagenda.task.TaskProvider;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.widget.EventEntryLayout;
@@ -25,8 +23,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TimeZone;
-
-import static org.andstatus.todoagenda.Theme.themeNameToResId;
 
 /**
  * Loaded settings of one Widget
@@ -57,8 +53,6 @@ public class InstanceSettings {
     static final String PREF_LOCKED_TIME_ZONE_ID = "lockedTimeZoneId";
 
     // Colors
-    static final String PREF_HEADER_THEME = "headerTheme";
-    static final String PREF_HEADER_THEME_DEFAULT = Theme.LIGHT.name();
     static final String PREF_EVENT_COLOR = "eventColor";
     @ColorInt static final int PREF_EVENT_COLOR_DEFAULT = 0xffffffff;
     static final String PREF_CURRENT_EVENT_COLOR = "currentEventColor";
@@ -71,11 +65,6 @@ public class InstanceSettings {
     @ColorInt static final int PREF_BACKGROUND_COLOR_DEFAULT = 0x80000000;
     static final String PREF_PAST_EVENTS_BACKGROUND_COLOR = "pastEventsBackgroundColor";
     @ColorInt static final int PREF_PAST_EVENTS_BACKGROUND_COLOR_DEFAULT = 0x4affff2b;
-    static final String PREF_ENTRY_THEME = "entryTheme";
-    public static final String PREF_ENTRY_THEME_DEFAULT = Theme.WHITE.name();
-
-    private volatile ContextThemeWrapper headerThemeContext = null;
-    private volatile ContextThemeWrapper entryThemeContext = null;
 
     // Event details
     static final String PREF_SHOW_END_TIME = "showEndTime";
@@ -130,14 +119,12 @@ public class InstanceSettings {
             setBooleanFromJson(editor, json, PREF_SHOW_WIDGET_HEADER);
             setStringFromJson(editor, json, PREF_LOCKED_TIME_ZONE_ID);
 
-            setStringFromJson(editor, json, PREF_HEADER_THEME);
             setIntFromJson(editor, json, PREF_EVENT_COLOR);
             setIntFromJson(editor, json, PREF_CURRENT_EVENT_COLOR);
             setIntFromJson(editor, json, PREF_DAY_HEADER_COLOR);
             setIntFromJson(editor, json, PREF_WIDGET_HEADER_COLOR);
             setIntFromJson(editor, json, PREF_BACKGROUND_COLOR);
             setIntFromJson(editor, json, PREF_PAST_EVENTS_BACKGROUND_COLOR);
-            setStringFromJson(editor, json, PREF_ENTRY_THEME);
 
             setBooleanFromJson(editor, json, PREF_SHOW_END_TIME);
             setBooleanFromJson(editor, json, PREF_SHOW_LOCATION);
@@ -231,14 +218,12 @@ public class InstanceSettings {
             json.put(PREF_SHOW_WIDGET_HEADER, getShowWidgetHeader());
             json.put(PREF_LOCKED_TIME_ZONE_ID, getLockedTimeZoneId());
 
-            json.put(PREF_HEADER_THEME, getHeaderTheme());
             json.put(PREF_EVENT_COLOR, getEventColor());
             json.put(PREF_CURRENT_EVENT_COLOR, getCurrentEventColor());
             json.put(PREF_DAY_HEADER_COLOR, getDayHeaderColor());
             json.put(PREF_WIDGET_HEADER_COLOR, getWidgetHeaderColor());
             json.put(PREF_BACKGROUND_COLOR, getBackgroundColor());
             json.put(PREF_PAST_EVENTS_BACKGROUND_COLOR, getPastEventsBackgroundColor());
-            json.put(PREF_ENTRY_THEME, getEntryTheme());
 
             json.put(PREF_SHOW_END_TIME, getShowEndTime());
             json.put(PREF_SHOW_LOCATION, getShowLocation());
@@ -334,17 +319,6 @@ public class InstanceSettings {
                 isTimeZoneLocked() ? getLockedTimeZoneId() : TimeZone.getDefault().getID()));
     }
 
-    public String getHeaderTheme() {
-        return sharedPreferences.getString(PREF_HEADER_THEME, PREF_HEADER_THEME_DEFAULT);
-    }
-
-    public ContextThemeWrapper getHeaderThemeContext() {
-        if (headerThemeContext == null) {
-            headerThemeContext = new ContextThemeWrapper(context, themeNameToResId(getHeaderTheme()));
-        }
-        return headerThemeContext;
-    }
-
     public int getEventColor() {
         return sharedPreferences.getInt(PREF_EVENT_COLOR, PREF_EVENT_COLOR_DEFAULT);
     }
@@ -367,17 +341,6 @@ public class InstanceSettings {
 
     public int getPastEventsBackgroundColor() {
         return sharedPreferences.getInt(PREF_PAST_EVENTS_BACKGROUND_COLOR, PREF_PAST_EVENTS_BACKGROUND_COLOR_DEFAULT);
-    }
-
-    public String getEntryTheme() {
-        return sharedPreferences.getString(PREF_ENTRY_THEME, PREF_ENTRY_THEME_DEFAULT);
-    }
-
-    public ContextThemeWrapper getEntryThemeContext() {
-        if (entryThemeContext == null) {
-            entryThemeContext = new ContextThemeWrapper(context, themeNameToResId(getEntryTheme()));
-        }
-        return entryThemeContext;
     }
 
     public boolean getShowEndTime() {

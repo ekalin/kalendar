@@ -25,18 +25,6 @@
         <item>CENTER</item>
         <item>RIGHT</item>
     </string-array>
-    <string-array name="pref_theme_entries">
-        <item>@string/appearance_theme_black</item>
-        <item>@string/appearance_theme_dark</item>
-        <item>@string/appearance_theme_light</item>
-        <item>@string/appearance_theme_white</item>
-    </string-array>
-    <string-array name="pref_theme_values" tools:ignore="MissingTranslation">
-        <item>BLACK</item>
-        <item>DARK</item>
-        <item>LIGHT</item>
-        <item>WHITE</item>
-    </string-array>
     <string-array name="pref_event_range_entries">
         <item>@string/event_range_today</item>
         <item>@string/event_range_one_day</item>

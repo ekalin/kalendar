@@ -92,14 +92,6 @@
     <string name="appearance_day_header_alignment_left">Left</string>
     <string name="appearance_day_header_alignment_center">Center</string>
     <string name="appearance_day_header_alignment_right">Right</string>
-    <string name="appearance_header_theme_title">Widget header text shading</string>
-    <string name="appearance_header_theme_desc">Show the header of the widget in dark or light shade</string>
-    <string name="appearance_entries_theme_title">Event shading</string>
-    <string name="appearance_entries_theme_desc">Show event text in dark or light shade</string>
-    <string name="appearance_theme_black">Black</string>
-    <string name="appearance_theme_dark">Dark</string>
-    <string name="appearance_theme_light">Light</string>
-    <string name="appearance_theme_white">White</string>
     <string name="appearance_abbreviate_dates_title">Abbreviate dates</string>
     <string name="appearance_abbreviate_dates_desc">Use three-letter format for dates in Widget and Day headers etc.</string>
 

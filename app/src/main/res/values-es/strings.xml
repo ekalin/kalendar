@@ -55,14 +55,6 @@
     <string name="appearance_background_color_desc">Ajustar el color de fondo</string>
     <string name="appearance_past_events_background_color_title">Color de fondo de eventos pasados</string>
     <string name="appearance_past_events_background_color_desc">Ajustar color de fondo de eventos pasados</string>
-    <string name="appearance_header_theme_title">Sombreado del encabezado del widget</string>
-    <string name="appearance_header_theme_desc">Mostrar el encabezado del widget en un tono oscuro o claro</string>
-    <string name="appearance_entries_theme_title">Sombreado de los eventos</string>
-    <string name="appearance_entries_theme_desc">Mostrar el texto del evento en tono oscuro o claro</string>
-    <string name="appearance_theme_black">Negro</string>
-    <string name="appearance_theme_dark">Oscuro</string>
-    <string name="appearance_theme_light">Claro</string>
-    <string name="appearance_theme_white">Blanco</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Detalles del evento</string>
     <string name="event_details_prefs_desc">Configurar los detalles a mostrar de un evento</string>

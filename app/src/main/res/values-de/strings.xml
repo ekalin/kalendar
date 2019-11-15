@@ -84,14 +84,6 @@
     <string name="appearance_background_color_desc">Passe die Farbe des Hintergrundes an</string>
     <string name="appearance_past_events_background_color_title">Hintergrundfarbe für vergangene Ereignisse</string>
     <string name="appearance_past_events_background_color_desc">Hintergrundfarbe von vergangenen Einträgen ändern</string>
-    <string name="appearance_header_theme_title">Schattierung der Kopfzeile</string>
-    <string name="appearance_header_theme_desc">Zeige die Kopfzeile des Widgets in heller oder dunkler Schattierung an</string>
-    <string name="appearance_entries_theme_title">Schattierung der Ereignisse</string>
-    <string name="appearance_entries_theme_desc">Zeige Ereignisse in heller oder dunkler Schattierung an</string>
-    <string name="appearance_theme_black">Schwarz</string>
-    <string name="appearance_theme_dark">Dunkel</string>
-    <string name="appearance_theme_light">Hell</string>
-    <string name="appearance_theme_white">Weiß</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Termindetails</string>
     <string name="event_details_prefs_desc">Details die zu einem Termin angezeigt werden</string>

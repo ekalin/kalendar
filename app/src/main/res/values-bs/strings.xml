@@ -53,14 +53,6 @@
     <string name="appearance_background_color_desc">Prilagodi boju pozadine</string>
     <string name="appearance_past_events_background_color_title">Boja pozadine za prošle događaje</string>
     <string name="appearance_past_events_background_color_desc">Prilagodi boju pozadine za prošle događaje</string>
-    <string name="appearance_header_theme_title">Nijansiranje zaglavlja widgeta</string>
-    <string name="appearance_header_theme_desc">Prikaži zaglavlje widgeta u tamnoj ili svijetloj nijansi</string>
-    <string name="appearance_entries_theme_title">Nijansiranje događaja</string>
-    <string name="appearance_entries_theme_desc">Prikaži tekst događaja u tamnoj ili svijetloj nijansi</string>
-    <string name="appearance_theme_black">Crno</string>
-    <string name="appearance_theme_dark">Tamno</string>
-    <string name="appearance_theme_light">Svijetlo</string>
-    <string name="appearance_theme_white">Bijelo</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Pojedinosti događaja</string>
     <string name="event_details_prefs_desc">Odaberi koje će pojedinosti događaja biti prikazane</string>

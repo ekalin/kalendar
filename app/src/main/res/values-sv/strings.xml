@@ -54,14 +54,6 @@
     <string name="appearance_background_color_desc">Justera bakgrundsfärg</string>
     <string name="appearance_past_events_background_color_title">Bakgrundsfärg för tidigare händelser</string>
     <string name="appearance_past_events_background_color_desc">Justera bakgrundsfärg för tidigare händelser</string>
-    <string name="appearance_header_theme_title">Applikationsrubrikens skuggning</string>
-    <string name="appearance_header_theme_desc">Visa applikationens rubrik med ljus eller mörk skugga</string>
-    <string name="appearance_entries_theme_title">Händelsens skuggning</string>
-    <string name="appearance_entries_theme_desc">Visa händelsens text med ljus eller mörk skugga</string>
-    <string name="appearance_theme_black">Svart</string>
-    <string name="appearance_theme_dark">Mörkt</string>
-    <string name="appearance_theme_light">Ljust</string>
-    <string name="appearance_theme_white">Vitt</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Händelsedetaljer</string>
     <string name="event_details_prefs_desc">Konfigurera vilket innehåll som skall visas för en händelse</string>

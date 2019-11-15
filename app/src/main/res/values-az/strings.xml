@@ -59,14 +59,6 @@
     <string name="appearance_background_color_desc">Arxafon rəngini nizamla</string>
     <string name="appearance_past_events_background_color_title">Keçmiş tədbirlərin arxafon rəngi</string>
     <string name="appearance_past_events_background_color_desc">Keçmiş tədbirlərin arxafon rəngini nizamla</string>
-    <string name="appearance_header_theme_title">Vidget başlığı kölgəsi</string>
-    <string name="appearance_header_theme_desc">Vidget başlığını tünd və ya açıq kölgədə göstər</string>
-    <string name="appearance_entries_theme_title">Tədbir kölgəsi</string>
-    <string name="appearance_entries_theme_desc">Tədbir mətnini tünd və ya açıq kölgədə göstər</string>
-    <string name="appearance_theme_black">Qara</string>
-    <string name="appearance_theme_dark">Tünd</string>
-    <string name="appearance_theme_light">Açıq</string>
-    <string name="appearance_theme_white">Ağ</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Tədbir təfsilatı</string>
     <string name="event_details_prefs_desc">Bir tədbir üçün göstəriləcək təfsilatları konfiqurasiya et</string>

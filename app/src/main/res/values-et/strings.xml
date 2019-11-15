@@ -54,14 +54,6 @@
     <string name="appearance_background_color_desc">Muuda tausta värvi</string>
     <string name="appearance_past_events_background_color_title">Möödunud sündmuste taustavärv</string>
     <string name="appearance_past_events_background_color_desc">Muuda möödunud sündmuste taustavärvi</string>
-    <string name="appearance_header_theme_title">Vidina päise teksti heledus</string>
-    <string name="appearance_header_theme_desc">Näita vidina päises tekst tumedana või heledana</string>
-    <string name="appearance_entries_theme_title">Sündmuse teksti heledus</string>
-    <string name="appearance_entries_theme_desc">Näita sündmuse tekst tumedana või heledana</string>
-    <string name="appearance_theme_black">Must</string>
-    <string name="appearance_theme_dark">Tume</string>
-    <string name="appearance_theme_light">Hele</string>
-    <string name="appearance_theme_white">Valge</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Sündmuse info</string>
     <string name="event_details_prefs_desc">Määra näidatav sündmuse info</string>

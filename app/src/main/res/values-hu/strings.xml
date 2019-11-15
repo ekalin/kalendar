@@ -52,14 +52,6 @@
     <string name="appearance_background_color_desc">A háttér átlátszóság beállítása</string>
     <string name="appearance_past_events_background_color_title">Múltbéi események háttérszíne</string>
     <string name="appearance_past_events_background_color_desc">Múltbéli események háttérszínének beállítása</string>
-    <string name="appearance_header_theme_title">Modul fejlécének árnyalata</string>
-    <string name="appearance_header_theme_desc">Modul fejlécének árnyalata sötét vagy világos legyen</string>
-    <string name="appearance_entries_theme_title">Esemény árnyalata</string>
-    <string name="appearance_entries_theme_desc">Esemény szövegének árnyalata sötét vagy világos legyen</string>
-    <string name="appearance_theme_black">Fekete</string>
-    <string name="appearance_theme_dark">Sötét</string>
-    <string name="appearance_theme_light">Világos</string>
-    <string name="appearance_theme_white">Fehér</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Esemény részletei</string>
     <string name="event_details_prefs_desc">Az esemény részleteinek beállítása</string>

@@ -1,38 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Black -->
-    <color name="header_current_date_black">#cc000000</color>
-    <color name="day_header_title_black">#000</color>
-    <color name="day_header_separator_black">#22000000</color>
-    <color name="event_entry_title_black">#000</color>
-    <color name="event_entry_details_black">#555</color>
-    <color name="event_entry_current_title_black">#886600</color>
-
-    <!-- Dark -->
-    <color name="header_current_date_dark">#99000000</color>
-    <color name="day_header_title_dark">#777</color>
-    <color name="day_header_separator_dark">#33000000</color>
-    <color name="event_entry_title_dark">#555</color>
-    <color name="event_entry_details_dark">#999</color>
-    <color name="event_entry_current_title_dark">#A79100</color>
-
-    <!-- Light -->
-    <color name="header_current_date_light">#9affffff</color>
-    <color name="day_header_title_light">#ccc</color>
-    <color name="day_header_separator_light">#55ffffff</color>
-    <color name="event_entry_title_light">#ccc</color>
-    <color name="event_entry_details_light">#999</color>
-    <color name="event_entry_current_title_light">#eed000</color>
-
-    <!-- White -->
-    <color name="header_current_date_white">#dcffffff</color>
-    <color name="day_header_title_white">#fff</color>
-    <color name="day_header_separator_white">#77ffffff</color>
-    <color name="event_entry_title_white">#fff</color>
-    <color name="event_entry_details_white">#bbb</color>
-    <color name="event_entry_current_title_white">#ffe900</color>
-
     <!-- Preferences -->
     <color name="colorPrimary">#455a63</color>
     <color name="colorPrimaryDark">#37474f</color>

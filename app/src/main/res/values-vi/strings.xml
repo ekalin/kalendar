@@ -74,14 +74,6 @@
     <string name="appearance_background_color_desc">Điều chỉnh màu nền</string>
     <string name="appearance_past_events_background_color_title">Màu nền những sự kiện đã qua</string>
     <string name="appearance_past_events_background_color_desc">Thay đổi màu nền những sự kiện đã qua</string>
-    <string name="appearance_header_theme_title">Đổ bóng tiêu đề widget</string>
-    <string name="appearance_header_theme_desc">Đổ bóng tối hoặc sáng cho tiêu đề widget</string>
-    <string name="appearance_entries_theme_title">Đổ bóng Sự kiện</string>
-    <string name="appearance_entries_theme_desc">Đổ bóng tối hoặc sáng cho Sự kiện</string>
-    <string name="appearance_theme_black">Đen</string>
-    <string name="appearance_theme_dark">Tối</string>
-    <string name="appearance_theme_light">Sáng</string>
-    <string name="appearance_theme_white">Trắng</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Chi tiết sự kiện</string>
     <string name="event_details_prefs_desc">Cài đặt hiển thị chi tiết cho Sự kiện</string>
