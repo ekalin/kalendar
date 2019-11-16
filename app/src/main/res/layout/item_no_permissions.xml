@@ -4,7 +4,7 @@
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:gravity="center"
-          android:padding="@dimen/calender_padding"
+          android:padding="@dimen/calendar_padding"
           android:text="@string/grant_permissions_verbose"
           android:minHeight="48dp"
           android:textAppearance="?android:attr/textAppearanceMedium">

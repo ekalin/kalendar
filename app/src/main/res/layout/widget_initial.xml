@@ -35,22 +35,22 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:background="#32000000"
-                    android:padding="@dimen/calender_padding"
+                    android:padding="@dimen/calendar_padding"
                     android:text="@string/widget_name"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginLeft="@dimen/calender_padding"
-                    android:layout_marginStart="@dimen/calender_padding" />
+                    android:layout_marginLeft="@dimen/calendar_padding"
+                    android:layout_marginStart="@dimen/calendar_padding" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/empty_event_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/calender_padding"
+                android:layout_marginTop="@dimen/calendar_padding"
                 android:background="#32000000"
                 android:gravity="center"
                 android:minHeight="48dp"
-                android:padding="@dimen/calender_padding"
+                android:padding="@dimen/calendar_padding"
                 android:text="@string/not_initialized_yet"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
