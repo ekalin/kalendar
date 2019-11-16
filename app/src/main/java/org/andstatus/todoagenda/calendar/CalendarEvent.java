@@ -1,10 +1,8 @@
 package org.andstatus.todoagenda.calendar;
 
-import android.content.Context;
 import android.util.Log;
 
 import org.andstatus.todoagenda.BuildConfig;
-import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
@@ -12,8 +10,7 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;
 
 public class CalendarEvent {
-    private final Context context;
-    private final int widgetId;
+    private final InstanceSettings settings;
     private final DateTimeZone zone;
     private final boolean allDay;
 
@@ -26,9 +23,8 @@ public class CalendarEvent {
     private boolean alarmActive;
     private boolean recurring;
 
-    public CalendarEvent(Context context, int widgetId, DateTimeZone zone, boolean allDay) {
-        this.context = context;
-        this.widgetId = widgetId;
+    public CalendarEvent(InstanceSettings settings, DateTimeZone zone, boolean allDay) {
+        this.settings = settings;
         this.zone = zone;
         this.allDay = allDay;
     }
@@ -209,6 +205,6 @@ public class CalendarEvent {
     }
 
     public InstanceSettings getSettings() {
-        return AllSettings.instanceFromId(context, widgetId);
+        return settings;
     }
 }

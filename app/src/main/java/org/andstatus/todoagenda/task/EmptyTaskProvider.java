@@ -5,14 +5,15 @@ import android.content.Intent;
 import androidx.fragment.app.Fragment;
 
 import org.andstatus.todoagenda.prefs.EventSource;
+import org.andstatus.todoagenda.prefs.InstanceSettings;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class EmptyTaskProvider extends AbstractTaskProvider {
-    public EmptyTaskProvider(Context context, int widgetId) {
-        super(context, widgetId);
+    public EmptyTaskProvider(Context context, int widgetId, InstanceSettings settings) {
+        super(context, widgetId, settings);
     }
 
     @Override

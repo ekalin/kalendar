@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import androidx.fragment.app.Fragment;
 
 import org.andstatus.todoagenda.prefs.EventSource;
+import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.provider.QueryResult;
 import org.andstatus.todoagenda.provider.QueryResultsStorage;
 import org.andstatus.todoagenda.task.AbstractTaskProvider;
@@ -22,8 +23,8 @@ import java.util.List;
 import java.util.Set;
 
 public class DmfsOpenTasksProvider extends AbstractTaskProvider {
-    public DmfsOpenTasksProvider(Context context, int widgetId) {
-        super(context, widgetId);
+    public DmfsOpenTasksProvider(Context context, int widgetId, InstanceSettings settings) {
+        super(context, widgetId, settings);
     }
 
     @Override

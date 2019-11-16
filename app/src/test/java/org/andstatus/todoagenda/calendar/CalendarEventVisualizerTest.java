@@ -3,6 +3,8 @@ package org.andstatus.todoagenda.calendar;
 import android.content.Context;
 import androidx.test.core.app.ApplicationProvider;
 
+import org.andstatus.todoagenda.prefs.AllSettings;
+import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.widget.CalendarEntry;
 import org.joda.time.DateTime;
@@ -32,6 +34,7 @@ public class CalendarEventVisualizerTest {
     private final DateTimeZone zone = DateTimeZone.getDefault();
 
     private Context context;
+    private InstanceSettings settings;
     private DateTime now;
 
     @Rule
@@ -48,6 +51,7 @@ public class CalendarEventVisualizerTest {
         DateUtil.setNow(now);
 
         context = ApplicationProvider.getApplicationContext();
+        settings = AllSettings.instanceFromId(context, 1);
 
         visualizer = new CalendarEventVisualizer(context, 1);
         ReflectionHelpers.setField(visualizer, "calendarContentProvider", provider);
@@ -59,7 +63,7 @@ public class CalendarEventVisualizerTest {
     /* https://github.com/plusonelabs/calendar-widget/issues/199 */
     @Test
     public void valuesForTodaysCurrentEvent_areReturnedCorrectly() {
-        CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
+        CalendarEvent event = new CalendarEvent(settings, zone, false);
         event.setStartMillis(now.minusHours(1).getMillis());
         event.setEndMillis(now.plusHours(2).getMillis());
 
@@ -79,7 +83,7 @@ public class CalendarEventVisualizerTest {
     /* https://github.com/plusonelabs/calendar-widget/issues/199 */
     @Test
     public void valuesForCurrentEventStartedYesterday_areReturnedCorrectly() {
-        CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
+        CalendarEvent event = new CalendarEvent(settings, zone, false);
         event.setStartMillis(now.minusDays(1).minusHours(1).getMillis());
         event.setEndMillis(now.plusHours(2).getMillis());
 
@@ -99,7 +103,7 @@ public class CalendarEventVisualizerTest {
     /* https://github.com/plusonelabs/calendar-widget/issues/199 */
     @Test
     public void valuesForCurrentEventEndingTomorrow_areReturnedCorrectly() {
-        CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
+        CalendarEvent event = new CalendarEvent(settings, zone, false);
         event.setStartMillis(now.minusHours(1).getMillis());
         event.setEndMillis(now.plusDays(1).plusHours(2).getMillis());
 

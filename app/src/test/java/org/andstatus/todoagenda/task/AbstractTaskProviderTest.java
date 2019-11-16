@@ -70,7 +70,7 @@ class TestTaskProvider extends EmptyTaskProvider {
     private InstanceSettings settings = Mockito.mock(InstanceSettings.class);
 
     TestTaskProvider(Context context, int widgetId) {
-        super(context, widgetId);
+        super(context, widgetId, null);
         when(settings.getTimeZone()).thenReturn(DateTimeZone.getDefault());
         when(settings.getEventsEnded()).thenReturn(EndedSomeTimeAgo.NONE);
     }

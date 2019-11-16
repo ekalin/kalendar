@@ -3,6 +3,7 @@ package org.andstatus.todoagenda.widget;
 import android.content.Context;
 
 import org.andstatus.todoagenda.calendar.CalendarEvent;
+import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -16,6 +17,7 @@ import static com.google.common.truth.Truth.assertThat;
 public class CalendarEntry_TimesTest {
     private final Context context = Mockito.mock(Context.class);
     private final int widgetId = 1;
+    private final InstanceSettings settings = Mockito.mock(InstanceSettings.class);
     private final DateTimeZone zone = DateTimeZone.getDefault();
     private DateTime now;
 
@@ -27,7 +29,7 @@ public class CalendarEntry_TimesTest {
 
     @Test
     public void isCurrent_forCurrentEvent_returnsTrue() {
-        CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
+        CalendarEvent event = new CalendarEvent(settings, zone, false);
         event.setStartMillis(now.minusHours(1).getMillis());
         event.setEndMillis(now.plusMinutes(10).getMillis());
         CalendarEntry calendarEntry = CalendarEntry.fromEvent(event, event.getStartDate());
@@ -37,7 +39,7 @@ public class CalendarEntry_TimesTest {
 
     @Test
     public void isCurrent_forPastEvent_returnsFalse() {
-        CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
+        CalendarEvent event = new CalendarEvent(settings, zone, false);
         event.setStartMillis(now.minusHours(2).getMillis());
         event.setEndMillis(now.minusHours(1).getMillis());
         CalendarEntry calendarEntry = CalendarEntry.fromEvent(event, event.getStartDate());
@@ -47,7 +49,7 @@ public class CalendarEntry_TimesTest {
 
     @Test
     public void isCurrent_forFutureEvent_returnsFalse() {
-        CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
+        CalendarEvent event = new CalendarEvent(settings, zone, false);
         event.setStartMillis(now.plusSeconds(10).getMillis());
         event.setEndMillis(now.plusMinutes(15).getMillis());
         CalendarEntry calendarEntry = CalendarEntry.fromEvent(event, event.getStartDate());
@@ -57,7 +59,7 @@ public class CalendarEntry_TimesTest {
 
     @Test
     public void isCurrent_forAllDayEventToday_returnsTrue() {
-        CalendarEvent event = new CalendarEvent(context, widgetId, zone, true);
+        CalendarEvent event = new CalendarEvent(settings, zone, true);
         event.setStartMillis(now.withTimeAtStartOfDay().getMillis());
         event.setEndMillis(DateUtil.startOfNextDay(now).getMillis());
         CalendarEntry calendarEntry = CalendarEntry.fromEvent(event, event.getStartDate());
@@ -69,7 +71,7 @@ public class CalendarEntry_TimesTest {
     public void getNextUpdateTime_forFutureEvent_returnsStartTime() {
         final DateTime startDate = now.plusMinutes(30);
 
-        CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
+        CalendarEvent event = new CalendarEvent(settings, zone, false);
         event.setStartMillis(startDate.getMillis());
         event.setEndMillis(now.plusMinutes(45).getMillis());
         CalendarEntry calendarEntry = CalendarEntry.fromEvent(event, event.getStartDate());
@@ -81,7 +83,7 @@ public class CalendarEntry_TimesTest {
     public void getNextUpdateTime_forCurrentEvent_returnsEndTime() {
         final DateTime endDate = now.plusHours(2);
 
-        CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
+        CalendarEvent event = new CalendarEvent(settings, zone, false);
         event.setStartMillis(now.minusHours(2).getMillis());
         event.setEndMillis(endDate.getMillis());
         CalendarEntry calendarEntry = CalendarEntry.fromEvent(event, event.getStartDate());
@@ -91,7 +93,7 @@ public class CalendarEntry_TimesTest {
 
     @Test
     public void getNextUpdateTime_forPastEvent_returnsNull() {
-        CalendarEvent event = new CalendarEvent(context, widgetId, zone, false);
+        CalendarEvent event = new CalendarEvent(settings, zone, false);
         event.setStartMillis(now.minusHours(2).getMillis());
         event.setEndMillis(now.minusMinutes(1).getMillis());
         CalendarEntry calendarEntry = CalendarEntry.fromEvent(event, event.getStartDate());

@@ -10,8 +10,6 @@ import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 
 public class CalendarEntry extends WidgetEntry {
-    private static final String TWELVE = "12";
-    private static final String AUTO = "auto";
     private static final String SPACE_ARROW = " →";
     private static final String ARROW_SPACE = "→ ";
     private static final String EMPTY_STRING = "";

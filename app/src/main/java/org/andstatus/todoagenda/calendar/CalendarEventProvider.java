@@ -15,6 +15,7 @@ import android.util.SparseArray;
 import androidx.annotation.NonNull;
 
 import org.andstatus.todoagenda.prefs.EventSource;
+import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.provider.EventProvider;
 import org.andstatus.todoagenda.provider.QueryResult;
 import org.andstatus.todoagenda.provider.QueryResultsStorage;
@@ -36,9 +37,8 @@ public class CalendarEventProvider extends EventProvider {
             Calendars.CALENDAR_DISPLAY_NAME, Calendars.CALENDAR_COLOR,
             Calendars.ACCOUNT_NAME};
 
-
-    public CalendarEventProvider(Context context, int widgetId) {
-        super(context, widgetId);
+    public CalendarEventProvider(Context context, int widgetId, InstanceSettings settings) {
+        super(context, widgetId, settings);
     }
 
     public List<CalendarEvent> getEvents() {
@@ -176,7 +176,7 @@ public class CalendarEventProvider extends EventProvider {
 
     private CalendarEvent createCalendarEvent(Cursor cursor) {
         boolean allDay = cursor.getInt(cursor.getColumnIndex(Instances.ALL_DAY)) > 0;
-        CalendarEvent event = new CalendarEvent(context, widgetId, zone, allDay);
+        CalendarEvent event = new CalendarEvent(settings, zone, allDay);
         event.setEventId(cursor.getInt(cursor.getColumnIndex(Instances.EVENT_ID)));
         event.setTitle(cursor.getString(cursor.getColumnIndex(Instances.TITLE)));
         event.setStartMillis(cursor.getLong(cursor.getColumnIndex(Instances.BEGIN)));

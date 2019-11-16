@@ -23,7 +23,7 @@ public class TaskVisualizer extends WidgetEntryVisualizer<TaskEntry> {
 
     public TaskVisualizer(Context context, int widgetId) {
         super(context, widgetId);
-        this.taskProvider = new TaskProvider(context, widgetId);
+        this.taskProvider = new TaskProvider(context, widgetId, getSettings());
     }
 
     @Override

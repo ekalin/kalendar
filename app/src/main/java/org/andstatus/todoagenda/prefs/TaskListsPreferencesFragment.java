@@ -20,7 +20,7 @@ public class TaskListsPreferencesFragment extends AbstractEventSourcesPreference
 
     @Override
     protected Collection<EventSource> fetchAvailableSources() {
-        return new TaskProvider(getActivity(), instanceSettings.getWidgetId()).getTaskLists(instanceSettings.getTaskSource());
+        return new TaskProvider(getActivity(), instanceSettings.getWidgetId(), instanceSettings).getTaskLists(instanceSettings.getTaskSource());
     }
 
     @Override

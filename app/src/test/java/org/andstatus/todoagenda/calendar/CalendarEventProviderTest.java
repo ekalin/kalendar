@@ -49,7 +49,7 @@ public class CalendarEventProviderTest {
         contentProvider = Robolectric.setupContentProvider(ContentProviderForTests.class,
                 CalendarContract.Instances.CONTENT_URI.getAuthority());
         daysRange = AllSettings.instanceFromId(context, 1).getEventRange();
-        calendarProvider = new CalendarEventProvider(context, 1);
+        calendarProvider = new CalendarEventProvider(context, 1, AllSettings.instanceFromId(context, 1));
     }
 
     @After

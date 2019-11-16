@@ -1,8 +1,10 @@
 package org.andstatus.todoagenda.task.samsung;
 
+import android.content.Context;
 import android.database.MatrixCursor;
 import androidx.test.core.app.ApplicationProvider;
 
+import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.EventSource;
 import org.andstatus.todoagenda.task.TaskEvent;
 import org.andstatus.todoagenda.testutil.ContentProviderForTests;
@@ -26,9 +28,10 @@ public class SamsungTasksProviderTest {
 
     @Before
     public void setup() {
+        Context context = ApplicationProvider.getApplicationContext();
         contentProvider = Robolectric.setupContentProvider(ContentProviderForTests.class,
                 SamsungTasksContract.TaskLists.PROVIDER_URI.getAuthority());
-        tasksProvider = new SamsungTasksProvider(ApplicationProvider.getApplicationContext(), 1);
+        tasksProvider = new SamsungTasksProvider(context, 1, AllSettings.instanceFromId(context, 1));
     }
 
     @Test

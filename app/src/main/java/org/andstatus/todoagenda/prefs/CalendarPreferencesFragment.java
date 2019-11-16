@@ -13,7 +13,7 @@ public class CalendarPreferencesFragment extends AbstractEventSourcesPreferences
 
     @Override
     protected Collection<EventSource> fetchAvailableSources() {
-        return new CalendarEventProvider(getActivity(), instanceSettings.getWidgetId()).getCalendars();
+        return new CalendarEventProvider(getActivity(), instanceSettings.getWidgetId(), instanceSettings).getCalendars();
     }
 
     @Override

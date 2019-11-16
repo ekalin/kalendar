@@ -183,7 +183,8 @@ public class EventRemoteViewsFactoryTest {
     }
 
     private CalendarEntry createCalendarEntry(DateTime startDate, String title) {
-        CalendarEvent event = new CalendarEvent(context, 1, DateTimeZone.getDefault(), false);
+        CalendarEvent event = new CalendarEvent(AllSettings.instanceFromId(context, 1), DateTimeZone.getDefault(),
+                false);
         event.setStartMillis(startDate.getMillis());
         event.setTitle(title);
         return CalendarEntry.fromEvent(event, startDate);

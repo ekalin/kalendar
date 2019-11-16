@@ -46,7 +46,7 @@ public class TaskPreferencesFragment extends KalendarPreferenceFragment implemen
     }
 
     private void setGrantPermissionVisibility() {
-        TaskProvider taskProvider = new TaskProvider(getActivity(), instanceSettings.getWidgetId());
+        TaskProvider taskProvider = new TaskProvider(getActivity(), instanceSettings.getWidgetId(), instanceSettings);
         Preference preference = findPreference(KEY_PREF_GRANT_TASK_PERMISSION);
         preference.setVisible(!taskProvider.hasPermissionForSource(instanceSettings.getTaskSource()));
     }
@@ -72,7 +72,7 @@ public class TaskPreferencesFragment extends KalendarPreferenceFragment implemen
     }
 
     private void requestTaskPermission() {
-        TaskProvider taskProvider = new TaskProvider(getActivity(), instanceSettings.getWidgetId());
+        TaskProvider taskProvider = new TaskProvider(getActivity(), instanceSettings.getWidgetId(), instanceSettings);
         taskProvider.requestPermission(this, instanceSettings.getTaskSource());
     }
 

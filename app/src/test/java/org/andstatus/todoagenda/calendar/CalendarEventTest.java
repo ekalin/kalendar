@@ -1,7 +1,6 @@
 package org.andstatus.todoagenda.calendar;
 
-import android.content.Context;
-
+import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -18,7 +17,8 @@ public class CalendarEventTest {
     @Test
     public void setStartMillis_forAllDayEvent_adjustsEndTimeToMidnight() {
         DateTime midnight = DateUtil.now(DateTimeZone.UTC).withTimeAtStartOfDay();
-        CalendarEvent event = new CalendarEvent(Mockito.mock(Context.class), 1, DateTimeZone.forOffsetHours(1), true);
+        CalendarEvent event = new CalendarEvent(Mockito.mock(InstanceSettings.class), DateTimeZone.forOffsetHours(1),
+                true);
         event.setStartMillis(midnight.getMillis());
         assertThat(event.getStartMillis()).isEqualTo(midnight.getMillis());
         assertThat(event.getEndMillis()).isEqualTo(midnight.plusDays(1).getMillis());
@@ -28,7 +28,7 @@ public class CalendarEventTest {
     @Test
     public void setStartDate_shouldAvoidIllegalInstantException() {
         DateTimeZone zone = DateTimeZone.forID("America/Sao_Paulo");
-        CalendarEvent event = new CalendarEvent(Mockito.mock(Context.class), 1, zone, true);
+        CalendarEvent event = new CalendarEvent(Mockito.mock(InstanceSettings.class), zone, true);
 
         long millis = toMillis("2018-11-04T00:00:00");
         event.setStartMillis(millis);

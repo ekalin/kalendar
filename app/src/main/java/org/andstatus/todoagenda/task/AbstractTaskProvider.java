@@ -5,6 +5,7 @@ import android.content.Intent;
 import androidx.fragment.app.Fragment;
 
 import org.andstatus.todoagenda.prefs.EventSource;
+import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.provider.EventProvider;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
@@ -15,8 +16,8 @@ import java.util.List;
 public abstract class AbstractTaskProvider extends EventProvider {
     protected DateTime now;
 
-    public AbstractTaskProvider(Context context, int widgetId) {
-        super(context, widgetId);
+    public AbstractTaskProvider(Context context, int widgetId, InstanceSettings settings) {
+        super(context, widgetId, settings);
     }
 
     @Override

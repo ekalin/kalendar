@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import org.andstatus.todoagenda.R;
 import org.andstatus.todoagenda.prefs.EventSource;
+import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.provider.QueryResult;
 import org.andstatus.todoagenda.provider.QueryResultsStorage;
 import org.andstatus.todoagenda.task.AbstractTaskProvider;
@@ -25,8 +26,8 @@ import java.util.List;
 import java.util.Set;
 
 public class SamsungTasksProvider extends AbstractTaskProvider {
-    public SamsungTasksProvider(Context context, int widgetId) {
-        super(context, widgetId);
+    public SamsungTasksProvider(Context context, int widgetId, InstanceSettings settings) {
+        super(context, widgetId, settings);
     }
 
     @Override

@@ -25,7 +25,7 @@ public class CalendarEventVisualizer extends WidgetEntryVisualizer<CalendarEntry
 
     public CalendarEventVisualizer(Context context, int widgetId) {
         super(context, widgetId);
-        calendarContentProvider = new CalendarEventProvider(context, widgetId);
+        calendarContentProvider = new CalendarEventProvider(context, widgetId, getSettings());
     }
 
     @Override

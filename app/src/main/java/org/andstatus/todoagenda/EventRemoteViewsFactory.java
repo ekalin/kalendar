@@ -52,6 +52,7 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
 
     private final Context context;
     private final int widgetId;
+    private final InstanceSettings settings;
     private volatile List<WidgetEntry> widgetEntries = new ArrayList<>();
     private volatile List<WidgetEntryVisualizer<?>> eventProviders;
     private volatile long prevReloadFinishedAt = 0;
@@ -59,6 +60,8 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
     public EventRemoteViewsFactory(Context context, int widgetId) {
         this.context = context;
         this.widgetId = widgetId;
+        this.settings = AllSettings.instanceFromId(context, widgetId);
+
         eventProviders = new ArrayList<>();
         eventProviders.add(new DayHeaderVisualizer(context, widgetId));
         eventProviders.add(new CalendarEventVisualizer(context, widgetId));
@@ -103,7 +106,7 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
 
     @NonNull
     private InstanceSettings getSettings() {
-        return AllSettings.instanceFromId(context, widgetId);
+        return settings;
     }
 
     @Override

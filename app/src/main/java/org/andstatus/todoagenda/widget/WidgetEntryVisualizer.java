@@ -10,11 +10,11 @@ import java.util.List;
 
 public abstract class WidgetEntryVisualizer<T extends WidgetEntry> {
     private final Context context;
-    private final int widgetId;
+    private final InstanceSettings settings;
 
     public WidgetEntryVisualizer(Context context, int widgetId) {
         this.context = context;
-        this.widgetId = widgetId;
+        this.settings = AllSettings.instanceFromId(context, widgetId);
     }
 
     protected Context getContext() {
@@ -22,7 +22,7 @@ public abstract class WidgetEntryVisualizer<T extends WidgetEntry> {
     }
 
     protected InstanceSettings getSettings() {
-        return AllSettings.instanceFromId(context, widgetId);
+        return settings;
     }
 
     public abstract RemoteViews getRemoteViews(WidgetEntry eventEntry, int position);

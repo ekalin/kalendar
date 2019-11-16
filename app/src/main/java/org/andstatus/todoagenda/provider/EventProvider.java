@@ -3,7 +3,6 @@ package org.andstatus.todoagenda.provider;
 import android.content.Context;
 import androidx.annotation.NonNull;
 
-import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettings;
 import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
@@ -27,6 +26,7 @@ public abstract class EventProvider {
 
     protected final Context context;
     protected final int widgetId;
+    protected final InstanceSettings settings;
 
     // Below are parameters, which may change in settings
     protected DateTimeZone zone;
@@ -34,9 +34,10 @@ public abstract class EventProvider {
     protected DateTime mStartOfTimeRange;
     protected DateTime mEndOfTimeRange;
 
-    public EventProvider(Context context, int widgetId) {
+    public EventProvider(Context context, int widgetId, InstanceSettings settings) {
         this.context = context;
         this.widgetId = widgetId;
+        this.settings = settings;
     }
 
     protected void initialiseParameters() {
@@ -55,7 +56,7 @@ public abstract class EventProvider {
 
     @NonNull
     protected InstanceSettings getSettings() {
-        return AllSettings.instanceFromId(context, widgetId);
+        return settings;
     }
 
     protected int getAsOpaque(int color) {
