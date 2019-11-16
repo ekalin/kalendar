@@ -4,32 +4,39 @@
         app:key="showEndTime"
         app:title="@string/event_details_show_end_time_title"
         app:summary="@string/event_details_show_end_time_desc"
-        app:defaultValue="true" />
+        app:defaultValue="true"
+        app:iconSpaceReserved="false" />
 
     <CheckBoxPreference
         app:key="showLocation"
         app:title="@string/event_details_show_location_title"
         app:summary="@string/event_details_show_location_desc"
-        app:defaultValue="true" />
+        app:defaultValue="true"
+        app:iconSpaceReserved="false" />
 
     <CheckBoxPreference
         app:key="fillAllDay"
         app:title="@string/event_details_fill_all_day_events_title"
         app:summary="@string/event_details_fill_all_day_events_desc"
-        app:defaultValue="true" />
+        app:defaultValue="true"
+        app:iconSpaceReserved="false" />
 
-    <PreferenceCategory app:title="@string/event_details_indicators">
+    <PreferenceCategory
+        app:title="@string/event_details_indicators"
+        app:iconSpaceReserved="false">
         <CheckBoxPreference
             app:key="indicateAlerts"
             app:title="@string/event_details_indicate_alert_title"
             app:summary="@string/event_details_indicate_alert_desc"
-            app:defaultValue="true" />
+            app:defaultValue="true"
+            app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
             app:key="indicateRecurring"
             app:title="@string/event_details_indicate_recurring_title"
             app:summary="@string/event_details_indicate_recurring_desc"
-            app:defaultValue="false" />
+            app:defaultValue="false"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
 </PreferenceScreen>

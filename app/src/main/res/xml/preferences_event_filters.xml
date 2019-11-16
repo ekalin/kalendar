@@ -1,33 +1,43 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
-    <PreferenceCategory app:title="@string/past_events">
+    <PreferenceCategory
+        app:title="@string/past_events"
+        app:iconSpaceReserved="false">
         <ListPreference
             app:key="eventsEnded"
             app:title="@string/pref_events_ended_title"
             app:defaultValue="NONE"
             app:entries="@array/pref_events_ended_entries"
             app:entryValues="@array/pref_events_ended_values"
-            app:useSimpleSummaryProvider="true" />
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/current_and_future_events">
+    <PreferenceCategory
+        app:title="@string/current_and_future_events"
+        app:iconSpaceReserved="false">
         <ListPreference
             app:key="eventRange"
             app:title="@string/event_details_event_range_title"
             app:defaultValue="30"
             app:entries="@array/pref_event_range_entries"
             app:entryValues="@array/pref_event_range_values"
-            app:useSimpleSummaryProvider="true" />
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/all_events">
+    <PreferenceCategory
+        app:title="@string/all_events"
+        app:iconSpaceReserved="false">
         <EditTextPreference
             app:key="hideBasedOnKeywords"
             app:title="@string/pref_hide_based_on_keywords_title"
-            app:summary="@string/this_option_is_turned_off" />
+            app:summary="@string/this_option_is_turned_off"
+            app:iconSpaceReserved="false" />
 
         <org.andstatus.todoagenda.prefs.MultilineCheckBoxPreference
             app:key="showOnlyClosestInstanceOfRecurringEvent"
             app:title="@string/show_only_closest_instance_of_recurring_event"
-            app:defaultValue="false" />
+            app:defaultValue="false"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

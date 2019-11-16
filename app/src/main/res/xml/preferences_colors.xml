@@ -7,7 +7,8 @@
         app:cpv_dialogTitle="@string/appearance_event_color_title"
         app:defaultValue="0xffffffff"
         app:cpv_showAlphaSlider="true"
-        app:cpv_colorShape="square" />
+        app:cpv_colorShape="square"
+        app:iconSpaceReserved="false" />
 
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         app:key="currentEventColor"
@@ -16,7 +17,8 @@
         app:cpv_dialogTitle="@string/appearance_current_event_color_title"
         app:defaultValue="0xffffe900"
         app:cpv_showAlphaSlider="true"
-        app:cpv_colorShape="square" />
+        app:cpv_colorShape="square"
+        app:iconSpaceReserved="false" />
 
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         app:key="dayHeaderColor"
@@ -25,7 +27,8 @@
         app:cpv_dialogTitle="@string/appearance_day_header_color_title"
         app:defaultValue="0xffffffff"
         app:cpv_showAlphaSlider="true"
-        app:cpv_colorShape="square" />
+        app:cpv_colorShape="square"
+        app:iconSpaceReserved="false" />
 
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         app:key="widgetHeaderColor"
@@ -34,7 +37,8 @@
         app:cpv_dialogTitle="@string/appearance_widget_header_color_title"
         app:defaultValue="0x9affffff"
         app:cpv_showAlphaSlider="true"
-        app:cpv_colorShape="square" />
+        app:cpv_colorShape="square"
+        app:iconSpaceReserved="false" />
 
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         app:key="backgroundColor"
@@ -43,7 +47,8 @@
         app:cpv_dialogTitle="@string/appearance_background_color_title"
         app:defaultValue="0x80000000"
         app:cpv_showAlphaSlider="true"
-        app:cpv_colorShape="square" />
+        app:cpv_colorShape="square"
+        app:iconSpaceReserved="false" />
 
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         app:key="pastEventsBackgroundColor"
@@ -52,6 +57,7 @@
         app:cpv_dialogTitle="@string/appearance_past_events_background_color_title"
         app:defaultValue="0x4affff2b"
         app:cpv_showAlphaSlider="true"
-        app:cpv_colorShape="square" />
+        app:cpv_colorShape="square"
+        app:iconSpaceReserved="false" />
 
 </PreferenceScreen>

@@ -2,7 +2,8 @@
 
     <EditTextPreference
         app:key="widgetInstanceName"
-        app:title="@string/widget_instance_name" />
+        app:title="@string/widget_instance_name"
+        app:iconSpaceReserved="false" />
 
     <ListPreference
         app:key="textSizeScale"
@@ -10,7 +11,8 @@
         app:summary="@string/appearance_text_size_desc"
         app:defaultValue="1.0"
         app:entries="@array/pref_text_size_entries"
-        app:entryValues="@array/pref_text_size_values" />
+        app:entryValues="@array/pref_text_size_values"
+        app:iconSpaceReserved="false" />
 
     <ListPreference
         app:key="eventEntryLayout"
@@ -19,25 +21,29 @@
         app:defaultValue="DEFAULT"
         app:entries="@array/pref_event_entry_layout_entries"
         app:entryValues="@array/pref_event_entry_layout_values"
-        app:useSimpleSummaryProvider="true" />
+        app:useSimpleSummaryProvider="true"
+        app:iconSpaceReserved="false" />
 
     <CheckBoxPreference
         app:key="multilineTitle"
         app:summary="@string/appearance_multiline_title_desc"
         app:title="@string/appearance_multiline_title_title"
-        app:defaultValue="false" />
+        app:defaultValue="false"
+        app:iconSpaceReserved="false" />
 
     <CheckBoxPreference
         app:key="abbreviateDates"
         app:title="@string/appearance_abbreviate_dates_title"
         app:summary="@string/appearance_abbreviate_dates_desc"
-        app:defaultValue="false" />
+        app:defaultValue="false"
+        app:iconSpaceReserved="false" />
 
     <CheckBoxPreference
         app:key="showDayHeaders"
         app:title="@string/appearance_show_day_headers_title"
         app:summary="@string/appearance_show_day_headers_desc"
-        app:defaultValue="true" />
+        app:defaultValue="true"
+        app:iconSpaceReserved="false" />
 
     <ListPreference
         app:key="dayHeaderAlignment"
@@ -46,26 +52,30 @@
         app:defaultValue="LEFT"
         app:dependency="showDayHeaders"
         app:entries="@array/pref_day_header_alignment_entries"
-        app:entryValues="@array/pref_day_header_alignment_values" />
+        app:entryValues="@array/pref_day_header_alignment_values"
+        app:iconSpaceReserved="false" />
 
     <CheckBoxPreference
         app:key="showDaysWithoutEvents"
         app:title="@string/appearance_show_days_without_events_title"
         app:summary="@string/appearance_show_days_without_events_desc"
         app:defaultValue="false"
-        app:dependency="showDayHeaders" />
+        app:dependency="showDayHeaders"
+        app:iconSpaceReserved="false" />
 
     <CheckBoxPreference
         app:key="showHeader"
         app:title="@string/appearance_display_header_title"
         app:summary="@string/appearance_display_header_desc"
-        app:defaultValue="true" />
+        app:defaultValue="true"
+        app:iconSpaceReserved="false" />
 
     <CheckBoxPreference
         app:key="lockTimeZone"
         app:title="@string/lock_time_zone_title"
         app:summary="@string/lock_time_zone_off_desc"
         app:defaultValue="false"
-        app:persistent="false" />
+        app:persistent="false"
+        app:iconSpaceReserved="false" />
 
 </PreferenceScreen>

@@ -4,7 +4,8 @@
         app:key="feedbackGithub"
         app:title="@string/feedback_github_title"
         app:summary="@string/feedback_github_desc"
-        app:persistent="false">
+        app:persistent="false"
+        app:iconSpaceReserved="false">
         <intent
             android:action="android.intent.action.VIEW"
             android:data="https://github.com/andstatus/todoagenda" />
@@ -13,7 +14,8 @@
         app:key="feedbackPlayStore"
         app:title="@string/feedback_play_store_title"
         app:summary="@string/feedback_play_store_desc"
-        app:persistent="false">
+        app:persistent="false"
+        app:iconSpaceReserved="false">
         <intent
             android:action="android.intent.action.VIEW"
             android:data="https://play.google.com/store/apps/details?id=org.andstatus.todoagenda" />
@@ -22,15 +24,18 @@
         app:key="shareEventsForDebugging"
         app:title="@string/share_events_settings_for_debugging_title"
         app:summary="@string/share_events_for_debugging_desc"
-        app:persistent="false" />
+        app:persistent="false"
+        app:iconSpaceReserved="false" />
     <Preference
         app:key="backupSettings"
         app:title="@string/backup_settings_title"
         app:summary="@string/backup_settings_desc"
-        app:persistent="false" />
+        app:persistent="false"
+        app:iconSpaceReserved="false" />
     <Preference
         app:key="restoreSettings"
         app:title="@string/restore_settings_title"
         app:summary="@string/restore_settings_desc"
-        app:persistent="false" />
+        app:persistent="false"
+        app:iconSpaceReserved="false" />
 </PreferenceScreen>

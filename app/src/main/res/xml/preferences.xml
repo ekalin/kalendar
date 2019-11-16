@@ -4,30 +4,37 @@
     <Preference
         app:title="@string/layout_prefs_title"
         app:summary="@string/layout_prefs_desc"
-        app:fragment="org.andstatus.todoagenda.prefs.LayoutPreferencesFragment" />
+        app:fragment="org.andstatus.todoagenda.prefs.LayoutPreferencesFragment"
+        app:iconSpaceReserved="false" />
     <Preference
         app:title="@string/appearance_group_color_title"
         app:summary="@string/colors_prefs_desc"
-        app:fragment="org.andstatus.todoagenda.prefs.ColorsPreferencesFragment" />
+        app:fragment="org.andstatus.todoagenda.prefs.ColorsPreferencesFragment"
+        app:iconSpaceReserved="false" />
     <Preference
         app:title="@string/event_details_prefs"
         app:summary="@string/event_details_prefs_desc"
-        app:fragment="org.andstatus.todoagenda.prefs.EventDetailsPreferencesFragment" />
+        app:fragment="org.andstatus.todoagenda.prefs.EventDetailsPreferencesFragment"
+        app:iconSpaceReserved="false" />
     <Preference
         app:title="@string/event_filters_prefs"
         app:summary="@string/event_filters_prefs_desc"
-        app:fragment="org.andstatus.todoagenda.prefs.EventFiltersPreferencesFragment" />
+        app:fragment="org.andstatus.todoagenda.prefs.EventFiltersPreferencesFragment"
+        app:iconSpaceReserved="false" />
     <Preference
         app:title="@string/calendars_prefs"
         app:summary="@string/calendars_prefs_desc"
-        app:fragment="org.andstatus.todoagenda.prefs.CalendarPreferencesFragment" />
+        app:fragment="org.andstatus.todoagenda.prefs.CalendarPreferencesFragment"
+        app:iconSpaceReserved="false" />
     <Preference
         app:title="@string/task_prefs"
         app:summary="@string/task_prefs_desc"
-        app:fragment="org.andstatus.todoagenda.prefs.TaskPreferencesFragment" />
+        app:fragment="org.andstatus.todoagenda.prefs.TaskPreferencesFragment"
+        app:iconSpaceReserved="false" />
     <Preference
         app:title="@string/feedback_backup_prefs"
         app:summary="@string/feedback_backup_prefs_desc"
-        app:fragment="org.andstatus.todoagenda.prefs.FeedbackPreferencesFragment" />
+        app:fragment="org.andstatus.todoagenda.prefs.FeedbackPreferencesFragment"
+        app:iconSpaceReserved="false" />
 
 </PreferenceScreen>
