@@ -81,14 +81,6 @@
     <string name="appearance_background_color_desc">Ajuster la transparence du fond</string>
     <string name="appearance_past_events_background_color_title">Couleur d\'arrière-plan des événements passés</string>
     <string name="appearance_past_events_background_color_desc">Ajuster la couleur de fond des événements passés</string>
-    <string name="appearance_header_theme_title">Ombre de l\'en-tête du gadget</string>
-    <string name="appearance_header_theme_desc">Afficher l\'en-tête du gadget avec une ombre claire ou foncée</string>
-    <string name="appearance_entries_theme_title">Ombrage des événements</string>
-    <string name="appearance_entries_theme_desc">Afficher un événement avec une ombre claire ou foncée</string>
-    <string name="appearance_theme_black">Noir</string>
-    <string name="appearance_theme_dark">Sombre</string>
-    <string name="appearance_theme_light">Clair</string>
-    <string name="appearance_theme_white">Blanc</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Détails de l\'événement</string>
     <string name="event_details_prefs_desc">Configurez quelles informations voir pour un événement</string>

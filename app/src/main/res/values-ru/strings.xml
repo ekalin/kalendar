@@ -81,14 +81,6 @@
     <string name="appearance_background_color_desc">Изменить цвет и прозрачность фона</string>
     <string name="appearance_past_events_background_color_title">Цвет фона для прошедших событий</string>
     <string name="appearance_past_events_background_color_desc">Настройка цвета фона для событий, произошедших в прошлом</string>
-    <string name="appearance_header_theme_title">Цвет текста заголовка виджета</string>
-    <string name="appearance_header_theme_desc">Светлый или тёмный цвет текста заголовка</string>
-    <string name="appearance_entries_theme_title">Цвет текста событий</string>
-    <string name="appearance_entries_theme_desc">Светлый или тёмный цвет текста событий</string>
-    <string name="appearance_theme_black">Чёрный</string>
-    <string name="appearance_theme_dark">Тёмный</string>
-    <string name="appearance_theme_light">Светлый</string>
-    <string name="appearance_theme_white">Белый</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Подробности о событии</string>
     <string name="event_details_prefs_desc">Укажите, какую информацию о событиях показывать</string>

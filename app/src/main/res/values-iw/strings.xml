@@ -55,14 +55,6 @@
     <string name="appearance_background_color_desc">התאם את צבע הרקע</string>
     <string name="appearance_past_events_background_color_title">צבע רקע של אירועי עבר</string>
     <string name="appearance_past_events_background_color_desc">התאם צבע רקע של אירועי עבר</string>
-    <string name="appearance_header_theme_title">גוון כותרת היישומון</string>
-    <string name="appearance_header_theme_desc">הצג את כותרת היישומון בגוון כהה או בהיר</string>
-    <string name="appearance_entries_theme_title">גוון האירוע</string>
-    <string name="appearance_entries_theme_desc">הצג טקסט של אירוע בגוון כהה או בהיר</string>
-    <string name="appearance_theme_black">שחור</string>
-    <string name="appearance_theme_dark">כהה</string>
-    <string name="appearance_theme_light">בהיר</string>
-    <string name="appearance_theme_white">לבן</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">פרטי אירוע</string>
     <string name="event_details_prefs_desc">הגדר אילו פריטים להציג לאירוע</string>

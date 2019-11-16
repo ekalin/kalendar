@@ -12,10 +12,10 @@ buildscript {
 
         annotationVersion = '1.0.1'
         appCompatVersion = '1.1.0'
+        colorPickerVersion = '1.1.0'
         grgitVersion = '2.1.0'
         jodaTimeVersion = '2.10.3'
         junitVersion = '4.12'
-        holoColorPickerVersion = '1.5'
         mockitoVersion = '3.0.0'
         preferenceVersion = '1.1.0'
         robolectricVersion = '4.3'

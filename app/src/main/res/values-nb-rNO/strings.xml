@@ -43,14 +43,6 @@
     <string name="appearance_background_color_desc">Juster bakgrunnsfargen</string>
     <string name="appearance_past_events_background_color_title">Bakgrunnsfarge for tidligere hendelser</string>
     <string name="appearance_past_events_background_color_desc">Tilpass bakgrunnsfargen for hendelser som har vært</string>
-    <string name="appearance_header_theme_title">Topplinjefarge</string>
-    <string name="appearance_header_theme_desc">Vis topplinjen i mørk eller lys skygge</string>
-    <string name="appearance_entries_theme_title">Hendelsesfarge</string>
-    <string name="appearance_entries_theme_desc">Vis hendelser i mørk eller lys skygge</string>
-    <string name="appearance_theme_black">Svart</string>
-    <string name="appearance_theme_dark">Mørk</string>
-    <string name="appearance_theme_light">Lys</string>
-    <string name="appearance_theme_white">Hvit</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Hendelsesdetaljer</string>
     <string name="event_details_prefs_desc">Konfigurer hvilke detaljer som skal vises for en hendelse</string>

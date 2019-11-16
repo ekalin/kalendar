@@ -54,14 +54,6 @@
     <string name="appearance_background_color_desc">Nastavit barvu pozadí</string>
     <string name="appearance_past_events_background_color_title">Barva pozadí minulých událostí</string>
     <string name="appearance_past_events_background_color_desc">Nastavit barvu pozadí minulých událostí</string>
-    <string name="appearance_header_theme_title">Odstín záhlaví widgetu</string>
-    <string name="appearance_header_theme_desc">Zobrazit záhlaví widgetu ve tmavém nebo světlém odstínu</string>
-    <string name="appearance_entries_theme_title">Odstín události</string>
-    <string name="appearance_entries_theme_desc">Zobrazit název události ve tmavém nebo světlém odstínu</string>
-    <string name="appearance_theme_black">Černý</string>
-    <string name="appearance_theme_dark">Tmavý</string>
-    <string name="appearance_theme_light">Světlý</string>
-    <string name="appearance_theme_white">Bílý</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Detaily události</string>
     <string name="event_details_prefs_desc">Nastavení detailů pro zobrazovanou událost</string>

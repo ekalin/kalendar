@@ -63,14 +63,6 @@
     <string name="appearance_background_color_desc">Seggem ini n ugilal</string>
     <string name="appearance_past_events_background_color_title">Ini n ugilal n tedyanin yezrin</string>
     <string name="appearance_past_events_background_color_desc">Seggem ini n ugilal n tedyanin yezrin</string>
-    <string name="appearance_header_theme_title">Tili n uqeṛṛu n usfaylurar</string>
-    <string name="appearance_header_theme_desc">Sken aqeṛṛu n usfaylurar s tili tubrikt neɣ n tafat</string>
-    <string name="appearance_entries_theme_title">Tili n tedyant</string>
-    <string name="appearance_entries_theme_desc">Sken aqeṛṛu n tedyant s tili tubrikt neɣ n tafat</string>
-    <string name="appearance_theme_black">Aberkan</string>
-    <string name="appearance_theme_dark">Tebrek</string>
-    <string name="appearance_theme_light">Tafat</string>
-    <string name="appearance_theme_white">Amellal</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Talqayt n tedyant</string>
     <string name="event_details_prefs_desc">Sbadu talqayt akken ad d-sekneḍ i tedyant</string>

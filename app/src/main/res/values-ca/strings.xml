@@ -82,14 +82,6 @@
     <string name="appearance_background_color_desc">Ajusteu el color del fons</string>
     <string name="appearance_past_events_background_color_title">Color de fons dels esdeveniments passats</string>
     <string name="appearance_past_events_background_color_desc">Ajustar color de fons dels esdeveniments passats</string>
-    <string name="appearance_header_theme_title">Ombrejat de la capçalera de widget</string>
-    <string name="appearance_header_theme_desc">Mostra la sombra de la capçalera en oscur o clar</string>
-    <string name="appearance_entries_theme_title">Ombrejat d\'esdeveniment</string>
-    <string name="appearance_entries_theme_desc">Mostra el text de l\'esdeveniment amb l\'ombra clara o fosca</string>
-    <string name="appearance_theme_black">Negre</string>
-    <string name="appearance_theme_dark">Fosc</string>
-    <string name="appearance_theme_light">Clar</string>
-    <string name="appearance_theme_white">Blanc</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Detalls de l\'esdeveniment</string>
     <string name="event_details_prefs_desc">Configurar el que detalla per mostrar per a un esdeveniment</string>

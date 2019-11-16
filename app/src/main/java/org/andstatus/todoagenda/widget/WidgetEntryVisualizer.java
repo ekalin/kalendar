@@ -27,6 +27,22 @@ public abstract class WidgetEntryVisualizer<T extends WidgetEntry> {
 
     public abstract RemoteViews getRemoteViews(WidgetEntry eventEntry, int position);
 
+    protected void setEventTitleColor(RemoteViews rv, int viewId, WidgetEntry entry) {
+        if (entry.isCurrent()) {
+            rv.setTextColor(viewId, getSettings().getCurrentEventColor());
+        } else {
+            rv.setTextColor(viewId, getSettings().getEventColor());
+        }
+    }
+
+    protected void setDayHeaderColor(RemoteViews rv, int viewId, WidgetEntry entry) {
+        if (entry.isCurrent()) {
+            rv.setTextColor(viewId, getSettings().getCurrentEventColor());
+        } else {
+            rv.setTextColor(viewId, getSettings().getDayHeaderColor());
+        }
+    }
+
     public abstract int getViewTypeCount();
 
     public abstract List<T> getEventEntries();

@@ -1,31 +1,57 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ListPreference
-        app:key="headerTheme"
-        app:title="@string/appearance_header_theme_title"
-        app:summary="@string/appearance_header_theme_desc"
-        app:defaultValue="LIGHT"
-        app:entries="@array/pref_theme_entries"
-        app:entryValues="@array/pref_theme_values" />
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        app:key="eventColor"
+        app:title="@string/appearance_event_color_title"
+        app:summary="@string/appearance_event_color_desc"
+        app:cpv_dialogTitle="@string/appearance_event_color_title"
+        app:defaultValue="0xffffffff"
+        app:cpv_showAlphaSlider="true"
+        app:cpv_colorShape="square" />
 
-    <Preference
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        app:key="currentEventColor"
+        app:title="@string/appearance_current_event_color_title"
+        app:summary="@string/appearance_current_event_color_desc"
+        app:cpv_dialogTitle="@string/appearance_current_event_color_title"
+        app:defaultValue="0xffffe900"
+        app:cpv_showAlphaSlider="true"
+        app:cpv_colorShape="square" />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        app:key="dayHeaderColor"
+        app:title="@string/appearance_day_header_color_title"
+        app:summary="@string/appearance_day_header_color_desc"
+        app:cpv_dialogTitle="@string/appearance_day_header_color_title"
+        app:defaultValue="0xffffffff"
+        app:cpv_showAlphaSlider="true"
+        app:cpv_colorShape="square" />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        app:key="widgetHeaderColor"
+        app:title="@string/appearance_widget_header_color_title"
+        app:summary="@string/appearance_widget_header_color_desc"
+        app:cpv_dialogTitle="@string/appearance_widget_header_color_title"
+        app:defaultValue="0x9affffff"
+        app:cpv_showAlphaSlider="true"
+        app:cpv_colorShape="square" />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         app:key="backgroundColor"
         app:title="@string/appearance_background_color_title"
         app:summary="@string/appearance_background_color_desc"
-        app:defaultValue="2147483648" />
+        app:cpv_dialogTitle="@string/appearance_background_color_title"
+        app:defaultValue="0x80000000"
+        app:cpv_showAlphaSlider="true"
+        app:cpv_colorShape="square" />
 
-    <Preference
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         app:key="pastEventsBackgroundColor"
         app:title="@string/appearance_past_events_background_color_title"
         app:summary="@string/appearance_past_events_background_color_desc"
-        app:defaultValue="2147548928" />
-
-    <ListPreference
-        app:key="entryTheme"
-        app:title="@string/appearance_entries_theme_title"
-        app:summary="@string/appearance_entries_theme_desc"
-        app:defaultValue="WHITE"
-        app:entries="@array/pref_theme_entries"
-        app:entryValues="@array/pref_theme_values" />
+        app:cpv_dialogTitle="@string/appearance_past_events_background_color_title"
+        app:defaultValue="0x4affff2b"
+        app:cpv_showAlphaSlider="true"
+        app:cpv_colorShape="square" />
 
 </PreferenceScreen>

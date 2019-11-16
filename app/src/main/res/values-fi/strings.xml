@@ -54,14 +54,6 @@
     <string name="appearance_background_color_desc">Muuta taustan väriä</string>
     <string name="appearance_past_events_background_color_title">Menneiden tapahtumien taustaväri</string>
     <string name="appearance_past_events_background_color_desc">Muuta menneiden tapahtumien taustaväriä</string>
-    <string name="appearance_header_theme_title">Widgetin otsikon väri</string>
-    <string name="appearance_header_theme_desc">Näytä widgetin otsikko tummana tai vaaleana</string>
-    <string name="appearance_entries_theme_title">Tapahtuman väri</string>
-    <string name="appearance_entries_theme_desc">Näytä tapahtuman teksti tummana tai vaaleana</string>
-    <string name="appearance_theme_black">Musta</string>
-    <string name="appearance_theme_dark">Tumma</string>
-    <string name="appearance_theme_light">Vaalea</string>
-    <string name="appearance_theme_white">Valkoinen</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Tapahtuman tiedot</string>
     <string name="event_details_prefs_desc">Määritä näytettävät tapahtuman tiedot</string>

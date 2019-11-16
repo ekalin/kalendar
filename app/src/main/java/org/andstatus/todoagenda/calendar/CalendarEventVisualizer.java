@@ -17,10 +17,8 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.andstatus.todoagenda.Theme.themeNameToResId;
-import static org.andstatus.todoagenda.util.RemoteViewsUtil.setAlpha;
 import static org.andstatus.todoagenda.util.RemoteViewsUtil.setBackgroundColor;
-import static org.andstatus.todoagenda.util.RemoteViewsUtil.setImageFromAttr;
+import static org.andstatus.todoagenda.util.RemoteViewsUtil.setDrawableColor;
 
 public class CalendarEventVisualizer extends WidgetEntryVisualizer<CalendarEntry> {
     private final CalendarEventProvider calendarContentProvider;
@@ -37,7 +35,7 @@ public class CalendarEventVisualizer extends WidgetEntryVisualizer<CalendarEntry
         RemoteViews rv = new RemoteViews(getContext().getPackageName(), eventEntryLayout.layoutId);
         rv.setOnClickFillInIntent(R.id.event_entry,
                 calendarContentProvider.createOpenCalendarEventIntent(entry.getEvent()));
-        eventEntryLayout.visualizeEvent(entry, rv);
+        eventEntryLayout.visualizeEvent(this, entry, rv);
         setAlarmActive(entry, rv);
         setRecurring(entry, rv);
         setColor(entry, rv);
@@ -49,7 +47,7 @@ public class CalendarEventVisualizer extends WidgetEntryVisualizer<CalendarEntry
         for (AlarmIndicatorScaled indicator : AlarmIndicatorScaled.values()) {
             setIndicator(rv,
                     showIndicator && indicator == getSettings().getTextSizeScale().alarmIndicator,
-                    indicator.indicatorResId, R.attr.eventEntryAlarm);
+                    indicator.indicatorResId, entry);
         }
     }
 
@@ -58,22 +56,24 @@ public class CalendarEventVisualizer extends WidgetEntryVisualizer<CalendarEntry
         for (RecurringIndicatorScaled indicator : RecurringIndicatorScaled.values()) {
             setIndicator(rv,
                     showIndicator && indicator == getSettings().getTextSizeScale().recurringIndicator,
-                    indicator.indicatorResId, R.attr.eventEntryRecurring);
+                    indicator.indicatorResId, entry);
         }
     }
 
-    private void setIndicator(RemoteViews rv, boolean showIndication, int viewId, int imageAttrId) {
+    private void setIndicator(RemoteViews rv, boolean showIndication, int viewId, CalendarEntry entry) {
         if (showIndication) {
             rv.setViewVisibility(viewId, View.VISIBLE);
-            setImageFromAttr(getSettings().getEntryThemeContext(), rv, viewId, imageAttrId);
-            int themeId = themeNameToResId(getSettings().getEntryTheme());
-            int alpha = 255;
-            if (themeId == R.style.Theme_Calendar_Dark || themeId == R.style.Theme_Calendar_Light) {
-                alpha = 128;
-            }
-            setAlpha(rv, viewId, alpha);
+            setDrawableColor(rv, viewId, getIndicatorColor(entry));
         } else {
             rv.setViewVisibility(viewId, View.GONE);
+        }
+    }
+
+    private int getIndicatorColor(CalendarEntry entry) {
+        if (entry.isCurrent()) {
+            return getSettings().getCurrentEventColor();
+        } else {
+            return getSettings().getEventColor();
         }
     }
 

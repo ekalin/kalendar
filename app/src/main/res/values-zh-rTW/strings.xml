@@ -37,14 +37,6 @@
     <string name="appearance_background_color_desc">調整背景的顏色</string>
     <string name="appearance_past_events_background_color_title">已過去活動的背景顏色</string>
     <string name="appearance_past_events_background_color_desc">調整已過去活動的背景顏色</string>
-    <string name="appearance_header_theme_title">小工具標題陰影</string>
-    <string name="appearance_header_theme_desc">在深色或淺色的陰影下顯示小工具的標題</string>
-    <string name="appearance_entries_theme_title">活動的陰影</string>
-    <string name="appearance_entries_theme_desc">以深色或淺色的陰影顯示活動的文字</string>
-    <string name="appearance_theme_black">黑色</string>
-    <string name="appearance_theme_dark">深色</string>
-    <string name="appearance_theme_light">淺色</string>
-    <string name="appearance_theme_white">白色</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">活動詳細資訊</string>
     <string name="event_details_prefs_desc">設置活動需要顯示的細節</string>

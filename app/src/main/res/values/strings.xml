@@ -75,6 +75,14 @@
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Colors</string>
     <string name="colors_prefs_desc">Colors and opacity of texts and backgrounds</string>
+    <string name="appearance_event_color_title">Event color</string>
+    <string name="appearance_event_color_desc">Adjust the text color of events</string>
+    <string name="appearance_current_event_color_title">Current event color</string>
+    <string name="appearance_current_event_color_desc">Adjust the text color of events currently happening</string>
+    <string name="appearance_day_header_color_title">Day header color</string>
+    <string name="appearance_day_header_color_desc">Adjust the text color of day headers</string>
+    <string name="appearance_widget_header_color_title">Widget header color</string>
+    <string name="appearance_widget_header_color_desc">Adjust the text color of widget header</string>
     <string name="appearance_background_color_title">Background color</string>
     <string name="appearance_background_color_desc">Adjust the color of the background</string>
     <string name="appearance_past_events_background_color_title">Past events background color</string>
@@ -84,14 +92,6 @@
     <string name="appearance_day_header_alignment_left">Left</string>
     <string name="appearance_day_header_alignment_center">Center</string>
     <string name="appearance_day_header_alignment_right">Right</string>
-    <string name="appearance_header_theme_title">Widget header text shading</string>
-    <string name="appearance_header_theme_desc">Show the header of the widget in dark or light shade</string>
-    <string name="appearance_entries_theme_title">Event shading</string>
-    <string name="appearance_entries_theme_desc">Show event text in dark or light shade</string>
-    <string name="appearance_theme_black">Black</string>
-    <string name="appearance_theme_dark">Dark</string>
-    <string name="appearance_theme_light">Light</string>
-    <string name="appearance_theme_white">White</string>
     <string name="appearance_abbreviate_dates_title">Abbreviate dates</string>
     <string name="appearance_abbreviate_dates_desc">Use three-letter format for dates in Widget and Day headers etc.</string>
 

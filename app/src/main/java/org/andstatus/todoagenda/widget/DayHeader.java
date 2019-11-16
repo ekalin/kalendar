@@ -13,6 +13,7 @@ public class DayHeader extends WidgetEntry {
         this.zone = zone;
     }
 
+    @Override
     public boolean isCurrent() {
         return getStartDate().equals(DateUtil.now(zone).withTimeAtStartOfDay());
     }

@@ -37,14 +37,6 @@
     <string name="appearance_background_color_desc">Настройка за цвета на фона</string>
     <string name="appearance_past_events_background_color_title">Цвята на фона за отминали събития</string>
     <string name="appearance_past_events_background_color_desc">Коригира цветasazа на фона за минали събитияddd</string>
-    <string name="appearance_header_theme_title">Нюанс на заглавието</string>
-    <string name="appearance_header_theme_desc">Показва в светъл или тъмен нюанс заглавната част</string>
-    <string name="appearance_entries_theme_title">Нюанс на събитието</string>
-    <string name="appearance_entries_theme_desc">Показва в светъл или тъмен нюанс събитието</string>
-    <string name="appearance_theme_black">Черен</string>
-    <string name="appearance_theme_dark">Тъмен</string>
-    <string name="appearance_theme_light">Светъл</string>
-    <string name="appearance_theme_white">Бял</string>
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Подробности за събитието</string>
     <string name="event_details_prefs_desc">Настройки за показване на събитията</string>

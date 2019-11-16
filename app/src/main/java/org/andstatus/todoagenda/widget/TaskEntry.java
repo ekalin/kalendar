@@ -25,6 +25,7 @@ public class TaskEntry extends WidgetEntry {
         return event;
     }
 
+    @Override
     public boolean isCurrent() {
         return getStartDate().withTimeAtStartOfDay().equals(DateUtil.now(event.getZone()).withTimeAtStartOfDay());
     }

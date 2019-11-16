@@ -70,7 +70,9 @@ We are also looking for new and improved translations over at http://crowdin.net
   of the widget changes, when you change "Text size" option.
 * [Backup and Restore widget settings](https://github.com/plusonelabs/calendar-widget/issues/330). 
   Convenient for cloning settings to another widget on the same device. 
-  Good for moving widget settings to another device, but may require calendars selection adjustment in this case.  
+  Good for moving widget settings to another device, but may require calendars selection adjustment in this case.
+* It's now possible to set the colors of the widget texts individually, instead of selecting a theme (which was
+  confusingly called a "shading").
 * Hopefully fixed intermittent "No events" display instead of actual list of events. 
   Separate "[ToDo Agenda Not Initialized yet...](https://github.com/plusonelabs/calendar-widget/issues/318)" layout added 
   to see the widget, when it is not initialized yet (e.g. after device reboot).
