@@ -8,6 +8,8 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class Optional<T> {
+    private static final Optional EMPTY = new Optional();
+
     private T value;
 
     private Optional() {
@@ -18,8 +20,9 @@ public class Optional<T> {
         this.value = Objects.requireNonNull(value);
     }
 
+    @SuppressWarnings("unchecked")
     public static <T> Optional<T> empty() {
-        return new Optional<>();
+        return EMPTY;
     }
 
     public static <T> Optional<T> of(T value) {
