@@ -26,11 +26,11 @@ public class LastEntryVisualizer extends WidgetEntryVisualizer<LastEntry> {
     @Override
     public RemoteViews getRemoteViews(WidgetEntry eventEntry, int position) {
         LastEntry entry = (LastEntry) eventEntry;
-        Log.d(this.getClass().getSimpleName(), "lastEntry: " + entry.type);
-        RemoteViews rv = new RemoteViews(getContext().getPackageName(), entry.type.layoutId);
+        Log.d(this.getClass().getSimpleName(), "lastEntry: " + entry.getType());
+        RemoteViews rv = new RemoteViews(getContext().getPackageName(), entry.getType().getLayoutId());
 
         int viewId = R.id.event_entry;
-        switch (entry.type) {
+        switch (entry.getType()) {
             case EMPTY:
             case NOT_LOADED:
                 boolean permissionsGranted = PermissionsUtil.arePermissionsGranted(getSettings().getContext());
@@ -45,7 +45,7 @@ public class LastEntryVisualizer extends WidgetEntryVisualizer<LastEntry> {
                 rv.setOnClickPendingIntent(viewId, getPermittedAddEventPendingIntent(getSettings()));
                 break;
         }
-        if (entry.type == LastEntry.LastEntryType.EMPTY && getSettings().noPastEvents()) {
+        if (entry.getType() == LastEntry.LastEntryType.EMPTY && getSettings().noPastEvents()) {
             rv.setTextViewText(viewId, getContext().getText(R.string.no_upcoming_events));
         }
         setTextSize(getSettings(), rv, viewId, R.dimen.event_entry_title);

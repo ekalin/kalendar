@@ -167,11 +167,7 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
         Collections.sort(eventEntries);
 
         List<WidgetEntry> widgetEntries = settings.getShowDayHeaders() ? addDayHeaders(eventEntries) : eventEntries;
-        LastEntry lastEntry = LastEntry.from(settings, widgetEntries);
-        if (lastEntry != null) {
-            widgetEntries.add(lastEntry);
-        }
-
+        LastEntry.from(settings, widgetEntries).ifPresent(widgetEntries::add);
         return widgetEntries;
     }
 

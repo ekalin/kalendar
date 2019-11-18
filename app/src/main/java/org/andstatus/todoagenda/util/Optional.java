@@ -1,6 +1,7 @@
 package org.andstatus.todoagenda.util;
 
 import androidx.arch.core.util.Function;
+import androidx.core.util.Consumer;
 import androidx.core.util.Supplier;
 
 import java.util.NoSuchElementException;
@@ -58,6 +59,12 @@ public class Optional<T> {
             return this.value;
         } else {
             throw exceptionSupplier.get();
+        }
+    }
+
+    public void ifPresent(Consumer<? super T> operation) {
+        if (isPresent()) {
+            operation.accept(this.value);
         }
     }
 
