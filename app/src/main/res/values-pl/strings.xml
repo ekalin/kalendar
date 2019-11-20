@@ -9,7 +9,6 @@
     <string name="tomorrow">Jutro</string>
     <string name="not_initialized_yet">Jeszcze nie za zainicjowano...</string>
     <string name="no_events_to_show">Brak wydarzeń do wyświetlenia</string>
-    <string name="no_upcoming_events">Brak nadchodzących wydarzeń</string>
     <string name="open_prefs_desc">Otwórz ustawienia widżetu kalendarza</string>
     <string name="add_event_desc">Dodaj nowe wydarzenie w kalendarzu</string>
     <string name="indicator_alarm">Wskaźnik pokazujący czy został ustawiony alarm</string>
@@ -22,7 +21,6 @@
     <string name="select_a_widget_to_configure">Wybierz widżet, aby skonfigurować</string>
     <string name="close">Zamknij</string>
     <string name="go_to_home_screen">Przejdź do ekranu głównego</string>
-    <string name="loading_with_dots">Ładowanie...</string>
     <!-- Descriptions for app markets -->
     <string name="app_description_80_chars_max">Widżety wyświetlają listę nadchodzących (oraz zakończonych...) wydarzeń z wybranych kalendarzy</string>
     <string name="app_description_4000_chars_max_part01">Lista nadchodzących wydarzeń to widżet dla urządzeń z androidem. Wyświetla listę nadchodzących wydarzeń z kalendarza, aby nie przegapić żadnego spotkania.</string>

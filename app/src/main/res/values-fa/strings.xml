@@ -7,7 +7,6 @@
     <string name="yesterday">دیروز</string>
     <string name="today">امروز</string>
     <string name="tomorrow">فردا</string>
-    <string name="no_upcoming_events">هیچ رویدادی در آینده نیست</string>
     <string name="open_prefs_desc">باز کردن تنظیمات ویجت تقویم</string>
     <string name="add_event_desc">اضافه کردن رویداد جدید</string>
     <string name="indicator_alarm">نشانگر تنظیم آلارم</string>

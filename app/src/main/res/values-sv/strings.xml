@@ -5,7 +5,6 @@
     <string name="yesterday">Igår</string>
     <string name="today">I dag</string>
     <string name="tomorrow">I morgon</string>
-    <string name="no_upcoming_events">Inga kommande händelser</string>
     <string name="open_prefs_desc">Öppna applikationens kalenderinställningar</string>
     <string name="add_event_desc">Lägg till kalenderhändelse</string>
     <string name="indicator_alarm">Indikerar att larm är inställt</string>

@@ -9,7 +9,6 @@
     <string name="tomorrow">Demà</string>
     <string name="not_initialized_yet">No inicialitzat encara...</string>
     <string name="no_events_to_show">No hi ha esdeveniments per mostrar</string>
-    <string name="no_upcoming_events">Sense esdeveniments pròxims</string>
     <string name="open_prefs_desc">Obrir la configuració del widget del calendari</string>
     <string name="add_event_desc">Afegir un nou esdeveniment</string>
     <string name="indicator_alarm">Indicador de si s\'ha creat una alarma</string>
@@ -22,7 +21,6 @@
     <string name="select_a_widget_to_configure">Seleccioneu un giny per configurar</string>
     <string name="close">Tanca</string>
     <string name="go_to_home_screen">Anar a la pantalla d\'inici</string>
-    <string name="loading_with_dots">Carregant...</string>
     <!-- Descriptions for app markets -->
     <string name="app_description_80_chars_max">Ginys que mostren llistes d\'esdeveniments pròxims (i passats&#8230;) dels calendaris seleccionats</string>
     <string name="app_description_4000_chars_max_part01">Todo Agenda és un giny per la pantalla principal del vostre dispositiu Android. I mostra una llista d\'esdeveniments  futurs del vostre calendari

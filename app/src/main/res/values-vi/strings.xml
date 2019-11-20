@@ -7,7 +7,6 @@
     <string name="yesterday">Ngày hôm qua</string>
     <string name="today">Hôm nay</string>
     <string name="tomorrow">Ngày mai</string>
-    <string name="no_upcoming_events">Không có sự kiện sắp tới</string>
     <string name="open_prefs_desc">Mở cài đặt widget lịch</string>
     <string name="add_event_desc">Thêm sự kiện lịch mới</string>
     <string name="indicator_alarm">Báo hiệu nếu một báo động đã được thiết lập</string>

@@ -9,7 +9,6 @@
     <string name="tomorrow">Domani</string>
     <string name="not_initialized_yet">Non ancora inizializzato...</string>
     <string name="no_events_to_show">Nessun evento da mostrare</string>
-    <string name="no_upcoming_events">Prossimi eventi</string>
     <string name="open_prefs_desc">Apri i settaggi di Calendar Widget</string>
     <string name="add_event_desc">Aggiungi evento al calendario</string>
     <string name="indicator_alarm">Mostra se l\'evento ha un allarme</string>
@@ -23,7 +22,6 @@ Per ottenere il massimo dal widget è necessario autorizzare l\'accesso ai calen
     <string name="select_a_widget_to_configure">Seleziona un widget da configurare</string>
     <string name="close">Chiudi</string>
     <string name="go_to_home_screen">Vai alla home</string>
-    <string name="loading_with_dots">Caricamento in corso...</string>
     <!-- Descriptions for app markets -->
     <!-- Preference header: Calendars and Task Lists -->
     <string name="calendars_prefs">Calendari</string>

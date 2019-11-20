@@ -5,7 +5,6 @@
     <string name="yesterday">Včera</string>
     <string name="today">Dnes</string>
     <string name="tomorrow">Zajtra</string>
-    <string name="no_upcoming_events">Žiadne udalosti</string>
     <string name="open_prefs_desc">Otvorí nastavenia</string>
     <string name="add_event_desc">Pridá novú udalosť</string>
     <string name="indicator_alarm">Ikonka pripomenutia</string>

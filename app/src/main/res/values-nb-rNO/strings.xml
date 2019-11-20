@@ -5,7 +5,6 @@
     <string name="yesterday">I går</string>
     <string name="today">I dag</string>
     <string name="tomorrow">I morgen</string>
-    <string name="no_upcoming_events">Ingen kommende hendelser</string>
     <string name="open_prefs_desc">Åpne innstillingene til Calendar Widget</string>
     <string name="add_event_desc">Legg til ny kalenderhendelse</string>
     <string name="indicator_alarm">Indikator dersom handelsen har en påminnelse</string>

@@ -5,7 +5,6 @@
     <string name="yesterday">אתמול</string>
     <string name="today">היום</string>
     <string name="tomorrow">מחר</string>
-    <string name="no_upcoming_events">אין ארועים קרבים</string>
     <string name="open_prefs_desc">פתח את ההגדרות של יישומון לוח שנה</string>
     <string name="add_event_desc">הוסף אירוע חדש</string>
     <string name="indicator_alarm">הצג חיווי להתראות</string>

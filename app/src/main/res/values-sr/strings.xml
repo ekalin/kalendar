@@ -5,7 +5,6 @@
     <string name="yesterday">Јуче</string>
     <string name="today">Данас</string>
     <string name="tomorrow">Сутра</string>
-    <string name="no_upcoming_events">Нема предстојећих догађаја</string>
     <string name="open_prefs_desc">Отворите поставке календар виџета</string>
     <string name="add_event_desc">Додај нови догађај у календар</string>
     <string name="indicator_alarm">Индикатор за постављен аларм</string>

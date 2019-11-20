@@ -5,7 +5,6 @@
     <string name="yesterday">Tegnap</string>
     <string name="today">Ma</string>
     <string name="tomorrow">Holnap</string>
-    <string name="no_upcoming_events">Nincs közelgő esemény</string>
     <string name="open_prefs_desc">A naptár modul beállításainak megnyitása</string>
     <string name="add_event_desc">Új esemény</string>
     <string name="indicator_alarm">Jelölő emlékeztető beállításánál</string>

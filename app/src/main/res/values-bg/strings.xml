@@ -3,7 +3,6 @@
 <resources>
     <string name="today">Днес</string>
     <string name="tomorrow">Утре</string>
-    <string name="no_upcoming_events">Няма предстоящи събития</string>
     <string name="open_prefs_desc">Настройки на уиджета</string>
     <string name="add_event_desc">Добави ново събитие в календара</string>
     <string name="indicator_alarm">Индикатор за зададена аларма</string>

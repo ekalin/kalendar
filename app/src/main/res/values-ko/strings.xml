@@ -7,7 +7,6 @@
     <string name="yesterday">어제</string>
     <string name="today">오늘</string>
     <string name="tomorrow">내일</string>
-    <string name="no_upcoming_events">예정된 이벤트 없음</string>
     <string name="open_prefs_desc">캘린더 위젯 설정 열기</string>
     <string name="add_event_desc">새 이벤트 추가</string>
     <string name="indicator_alarm">알람이 설정되어 있을때 알림</string>

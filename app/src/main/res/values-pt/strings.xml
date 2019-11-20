@@ -5,7 +5,6 @@
     <string name="yesterday">Ontem</string>
     <string name="today">Hoje</string>
     <string name="tomorrow">Amanhã</string>
-    <string name="no_upcoming_events">Sem eventos futuros</string>
     <string name="open_prefs_desc">Configurações do widget calendário</string>
     <string name="add_event_desc">Adicionar novo evento no calendário</string>
     <string name="indicator_alarm">Indicador se um lembrete foi definido</string>

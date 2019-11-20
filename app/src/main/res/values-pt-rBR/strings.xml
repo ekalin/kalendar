@@ -9,7 +9,6 @@
   <string name="tomorrow">Amanhã</string>
   <string name="not_initialized_yet">Iniciando…</string>
   <string name="no_events_to_show">Nenhum evento para exibir</string>
-  <string name="no_upcoming_events">Sem novos eventos</string>
   <string name="open_prefs_desc">Configurações do widget do calendário</string>
   <string name="add_event_desc">Adicionar novo evento</string>
   <string name="indicator_alarm">Indicador que um alarme foi definido</string>
@@ -22,7 +21,6 @@
   <string name="select_a_widget_to_configure">Selecione um widget para configurar</string>
   <string name="close">Fechar</string>
   <string name="go_to_home_screen">Ir para a tela inicial</string>
-  <string name="loading_with_dots">Carregando…</string>
 
   <!-- Descriptions for app markets -->
   <string name="app_description_80_chars_max">Widget com lista dos próximos compromissos de calendários selecionados</string>

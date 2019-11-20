@@ -7,7 +7,6 @@
     <string name="yesterday">Kemarin</string>
     <string name="today">Hari ini</string>
     <string name="tomorrow">Besok</string>
-    <string name="no_upcoming_events">Tidak ada acara mendatang</string>
     <string name="open_prefs_desc">Buka pengaturan widget kalender</string>
     <string name="add_event_desc">Tambah kalender acara baru</string>
     <string name="indicator_alarm">Indikator jika alarm telah diatur</string>

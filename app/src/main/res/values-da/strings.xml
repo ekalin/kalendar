@@ -3,7 +3,6 @@
 <resources>
     <string name="today">I dag</string>
     <string name="tomorrow">I morgen</string>
-    <string name="no_upcoming_events">Ingen kommende aftaler</string>
     <string name="open_prefs_desc">Åben indstillingerne for kalender widgeten</string>
     <string name="add_event_desc">Tilføj ny kalender-aftale</string>
     <string name="indicator_alarm">Indikator hvis en alarm er indstillet</string>

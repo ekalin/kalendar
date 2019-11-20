@@ -7,7 +7,6 @@
     <string name="yesterday">Вчора</string>
     <string name="today">Сьогодні</string>
     <string name="tomorrow">Завтра</string>
-    <string name="no_upcoming_events">Немає очікуваних подій</string>
     <string name="open_prefs_desc">Відкрити налаштування віджета календаря</string>
     <string name="add_event_desc">Додати нову подію до календаря</string>
     <string name="indicator_alarm">Індикатор встановленого сповіщення</string>
@@ -18,7 +17,6 @@
     <string name="select_a_widget_to_configure">Виберіть віджет для налаштування</string>
     <string name="close">Закрити</string>
     <string name="go_to_home_screen">Перейти до головного екрану</string>
-    <string name="loading_with_dots">Завантаження даних...</string>
     <!-- Descriptions for app markets -->
     <string name="app_description_4000_chars_max_part02">Можливості</string>
     <string name="app_description_4000_chars_max_part14">Підтримка версій Android від 4 до 9. Повна підтримка планшетів.</string>

@@ -6,7 +6,6 @@
     <string name="yesterday">Ayer</string>
     <string name="today">Hoy</string>
     <string name="tomorrow">Mañana</string>
-    <string name="no_upcoming_events">No hay próximos eventos</string>
     <string name="open_prefs_desc">Abrir ajustes del widget</string>
     <string name="add_event_desc">Añadir nuevo evento al calendario</string>
     <string name="indicator_alarm">Indicar si se ha ajustado una alarma</string>

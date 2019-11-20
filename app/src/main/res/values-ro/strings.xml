@@ -3,7 +3,6 @@
 <resources>
     <string name="today">Astazi</string>
     <string name="tomorrow">Maine</string>
-    <string name="no_upcoming_events">Nu sunt evenimente</string>
     <string name="open_prefs_desc">Deschideti setarile widget calendar</string>
     <string name="add_event_desc">Adauga eveniment nou calendar</string>
     <string name="indicator_alarm">Indicator in cazul in care a fost stabilita o alarma</string>

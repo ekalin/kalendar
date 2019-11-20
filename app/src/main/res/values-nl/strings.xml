@@ -5,7 +5,6 @@
     <string name="yesterday">Gisteren</string>
     <string name="today">Vandaag</string>
     <string name="tomorrow">Morgen</string>
-    <string name="no_upcoming_events">Geen aankomende evenementen</string>
     <string name="open_prefs_desc">Open de instellingen van de agenda widget</string>
     <string name="add_event_desc">Nieuwe gebeurtenis aan de agenda toevoegen</string>
     <string name="indicator_alarm">Indicator als een alarm is ingesteld</string>

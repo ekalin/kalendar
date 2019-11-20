@@ -5,7 +5,6 @@
     <string name="yesterday">Eilen</string>
     <string name="today">Tänään</string>
     <string name="tomorrow">Huomenna</string>
-    <string name="no_upcoming_events">Ei tulevia tapahtumia</string>
     <string name="open_prefs_desc">Avaa kalenteri-widgetin asetukset</string>
     <string name="add_event_desc">Lisää uusi tapahtuma</string>
     <string name="indicator_alarm">Asetetun hälytyksen ilmaisin</string>

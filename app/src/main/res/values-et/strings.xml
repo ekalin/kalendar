@@ -5,7 +5,6 @@
     <string name="yesterday">Eile</string>
     <string name="today">Täna</string>
     <string name="tomorrow">Homme</string>
-    <string name="no_upcoming_events">Ei ole tulevasi sündmusi</string>
     <string name="open_prefs_desc">Ava kalendrividina sätted</string>
     <string name="add_event_desc">Lisa uus sündmus kalendrisse</string>
     <string name="indicator_alarm">Seatud meeldetuletuse näit</string>

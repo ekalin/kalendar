@@ -7,7 +7,6 @@
     <string name="yesterday">Dün</string>
     <string name="today">Bugün</string>
     <string name="tomorrow">Yarın</string>
-    <string name="no_upcoming_events">Yaklaşan etkinlik yok</string>
     <string name="open_prefs_desc">Takvim widget\'inin ayarlarını aç</string>
     <string name="add_event_desc">Yeni takvim etkinliği ekle</string>
     <string name="indicator_alarm">Alarm ayarlandığında gösterge oluştur</string>
@@ -20,7 +19,6 @@
     <string name="select_a_widget_to_configure">Yapılandırmak için bir widget seç</string>
     <string name="close">Kapat</string>
     <string name="go_to_home_screen">Ana ekrana git</string>
-    <string name="loading_with_dots">Yükleniyor...</string>
     <!-- Descriptions for app markets -->
     <string name="app_description_80_chars_max">Seçili takvimlerden yaklaşan (ve geçmiş&#8230;) etkinlik listelerini gösteren tuşlar</string>
     <string name="app_description_4000_chars_max_part01">Todo Andaç\'ı Android cihazınız için bir ana ekran tuşudur.

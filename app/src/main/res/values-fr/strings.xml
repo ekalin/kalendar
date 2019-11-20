@@ -9,7 +9,6 @@
     <string name="tomorrow">Demain</string>
     <string name="not_initialized_yet">Pas encore initialisé...</string>
     <string name="no_events_to_show">Aucun événement à afficher</string>
-    <string name="no_upcoming_events">Aucun événement à venir</string>
     <string name="open_prefs_desc">Ouvrir les paramètres du widget calendrier</string>
     <string name="add_event_desc">Ajouter un nouvel événement</string>
     <string name="indicator_alarm">Indicator d\'alarme</string>
@@ -22,7 +21,6 @@
     <string name="select_a_widget_to_configure">Sélectionner un widget à configurer</string>
     <string name="close">Fermer</string>
     <string name="go_to_home_screen">Aller à l\'écran d\'accueil</string>
-    <string name="loading_with_dots">Chargement en cours...</string>
     <!-- Descriptions for app markets -->
     <string name="app_description_80_chars_max">Widgets affichant les listes des événements à venir (et anciens&#8230;) des calendriers sélectionnés</string>
     <string name="app_description_4000_chars_max_part01">Todo Agenda est un widget d\'écran d\'accueil pour votre appareil Android. Il affiche une liste des prochains événements du calendrier

@@ -5,7 +5,6 @@
     <string name="yesterday">बीता कल</string>
     <string name="today">आज</string>
     <string name="tomorrow">आनेवाला कल</string>
-    <string name="no_upcoming_events">कोई आगामी घटनाएं नहीं</string>
     <string name="open_prefs_desc">कैलेंडर विजेट की सेटिंग को खोलें</string>
     <string name="add_event_desc">नए कैलेंडर ईवेंट को जोड़ें</string>
     <string name="indicator_alarm">संकेतक यदि कोई अलार्म सेट किया गया है तो</string>

@@ -43,7 +43,7 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int widgetId : appWidgetIds) {
-            EventRemoteViewsFactory.updateWidget(context, widgetId);
+            EventRemoteViewsFactory.updateWidget(context, widgetId, null);
             notifyWidgetDataChanged(context, widgetId);
         }
     }

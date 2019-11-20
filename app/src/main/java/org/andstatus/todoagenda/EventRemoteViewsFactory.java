@@ -11,6 +11,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService.RemoteViewsFactory;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.andstatus.todoagenda.calendar.CalendarEventVisualizer;
 import org.andstatus.todoagenda.prefs.AllSettings;
@@ -21,8 +22,7 @@ import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.util.PermissionsUtil;
 import org.andstatus.todoagenda.widget.DayHeader;
 import org.andstatus.todoagenda.widget.DayHeaderVisualizer;
-import org.andstatus.todoagenda.widget.LastEntry;
-import org.andstatus.todoagenda.widget.LastEntryVisualizer;
+import org.andstatus.todoagenda.widget.EmptyListMessageVisualizer;
 import org.andstatus.todoagenda.widget.WidgetEntry;
 import org.andstatus.todoagenda.widget.WidgetEntryVisualizer;
 import org.joda.time.DateTime;
@@ -66,9 +66,6 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
         eventProviders.add(new DayHeaderVisualizer(context, widgetId));
         eventProviders.add(new CalendarEventVisualizer(context, widgetId));
         eventProviders.add(new TaskVisualizer(context, widgetId));
-        eventProviders.add(new LastEntryVisualizer(context, widgetId));
-
-        widgetEntries.add(new LastEntry(LastEntry.LastEntryType.NOT_LOADED, DateUtil.now(getSettings().getTimeZone())));
     }
 
     private void logEvent(String message) {
@@ -125,7 +122,7 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
             prevReloadFinishedAt = System.currentTimeMillis();
             scheduleNextUpdate();
         }
-        updateWidget(context, widgetId);
+        updateWidget(context, widgetId, this);
     }
 
     private void scheduleNextUpdate() {
@@ -140,7 +137,7 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
         EnvironmentChangedReceiver.scheduleNextUpdate(getSettings(), nextUpdate);
     }
 
-    static void updateWidget(Context context, int widgetId) {
+    static void updateWidget(Context context, int widgetId, @Nullable RemoteViewsFactory factory) {
         try {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             if (appWidgetManager == null) {
@@ -151,6 +148,9 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
             InstanceSettings settings = AllSettings.instanceFromId(context, widgetId);
             RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_initial);
             configureWidgetHeader(settings, rv);
+            if (factory != null && factory.getCount() == 0) {
+                configureEmptyWidgetMessage(settings, rv);
+            }
             configureWidgetEntriesList(settings, context, widgetId, rv);
 
             appWidgetManager.updateAppWidget(widgetId, rv);
@@ -166,9 +166,7 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
         }
         Collections.sort(eventEntries);
 
-        List<WidgetEntry> widgetEntries = settings.getShowDayHeaders() ? addDayHeaders(eventEntries) : eventEntries;
-        LastEntry.from(settings, widgetEntries).ifPresent(widgetEntries::add);
-        return widgetEntries;
+        return settings.getShowDayHeaders() ? addDayHeaders(eventEntries) : eventEntries;
     }
 
     private List<WidgetEntry> addDayHeaders(List<WidgetEntry> listIn) {
@@ -283,6 +281,17 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
         Intent intent = MainActivity.intentToConfigure(settings.getContext(), settings.getWidgetId());
         PendingIntent pendingIntent = PermissionsUtil.getPermittedPendingActivityIntent(settings, intent);
         rv.setOnClickPendingIntent(R.id.overflow_menu, pendingIntent);
+    }
+
+    private static void configureEmptyWidgetMessage(InstanceSettings settings, RemoteViews rv) {
+        EmptyListMessageVisualizer visualizer = new EmptyListMessageVisualizer(settings);
+        RemoteViews message;
+        if (PermissionsUtil.arePermissionsGranted(settings.getContext())) {
+            message = visualizer.getView(EmptyListMessageVisualizer.Type.EMPTY);
+        } else {
+            message = visualizer.getView(EmptyListMessageVisualizer.Type.NO_PERMISSIONS);
+        }
+        rv.addView(R.id.header_parent, message);
     }
 
     private static void configureWidgetEntriesList(InstanceSettings settings, Context context, int widgetId,

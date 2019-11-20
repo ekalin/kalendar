@@ -5,7 +5,6 @@
     <string name="yesterday">Včera</string>
     <string name="today">Dnes</string>
     <string name="tomorrow">Zítra</string>
-    <string name="no_upcoming_events">Žádné nadcházející události</string>
     <string name="open_prefs_desc">Otevřít nastavení widgetu</string>
     <string name="add_event_desc">Přidat novou událost</string>
     <string name="indicator_alarm">Zobrazení ikonky u událostí s upomínkou</string>

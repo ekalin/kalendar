@@ -9,7 +9,6 @@
     <string name="tomorrow">Tomorrow</string>
     <string name="not_initialized_yet">Not initialized yet…</string>
     <string name="no_events_to_show">No events to show</string>
-    <string name="no_upcoming_events">No upcoming events</string>
     <string name="open_prefs_desc">Open the settings of the calendar widget</string>
     <string name="add_event_desc">Add new calendar event</string>
     <string name="indicator_alarm">Indicator if an alarm has been set</string>
@@ -23,7 +22,6 @@
     <string name="close">Close</string>
     <string name="go_to_home_screen">Go to home screen</string>
     <string name="task_icon" translatable="false">✓</string>
-    <string name="loading_with_dots">Loading…</string>
 
     <!-- Descriptions for app markets -->
     <string name="app_description_80_chars_max">Widgets displaying lists of upcoming (and past…) events from selected calendars</string>

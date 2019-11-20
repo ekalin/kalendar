@@ -5,7 +5,6 @@
     <string name="yesterday">Χθές</string>
     <string name="today">Σήμερα</string>
     <string name="tomorrow">Αύριο</string>
-    <string name="no_upcoming_events">Κανένα προσεχές γεγονός</string>
     <string name="open_prefs_desc">Άνοιγμα ρυθμίσεων του γραφικού ημερολογίου</string>
     <string name="add_event_desc">Προσθήκη νέου γεγονότος</string>
     <string name="indicator_alarm">Ένδειξη για το αν έχει ορισθεί υπενθύμιση</string>

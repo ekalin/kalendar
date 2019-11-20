@@ -3,7 +3,6 @@
 <resources>
     <string name="today">今天</string>
     <string name="tomorrow">明天</string>
-    <string name="no_upcoming_events">近期未有活動</string>
     <string name="open_prefs_desc">打開行事曆小工具設定</string>
     <string name="add_event_desc">新增活動</string>
     <string name="indicator_alarm">響閙已被設置時之指示</string>

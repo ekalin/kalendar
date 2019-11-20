@@ -9,7 +9,6 @@
     <string name="tomorrow">Morgen</string>
     <string name="not_initialized_yet">Noch nicht initialisiert...</string>
     <string name="no_events_to_show">Keine Termine vorhanden</string>
-    <string name="no_upcoming_events">Keine anstehenden Termine</string>
     <string name="open_prefs_desc">Öffne die Einstellungen des Kalender-Widget</string>
     <string name="add_event_desc">Neuen Kalendereintrag erstellen</string>
     <string name="indicator_alarm">Hinweis ob an dem Ereignis ein Erinnerungen gesetzt wurde</string>
@@ -24,7 +23,6 @@
     <string name="select_a_widget_to_configure">Wähle ein Widget zur Konfiguration aus</string>
     <string name="close">Schließen</string>
     <string name="go_to_home_screen">Zum Startbildschirm</string>
-    <string name="loading_with_dots">Lädt...</string>
     <!-- Descriptions for app markets -->
     <string name="app_description_80_chars_max">Widgets zeigen kommende (und vergangene&#8230;) Ereignisse von ausgewählten Kalendern an</string>
     <string name="app_description_4000_chars_max_part01">Todo Agenda ist ein Home-Screen-Widget für Ihr Android-Gerät.

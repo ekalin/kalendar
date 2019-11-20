@@ -9,7 +9,6 @@
     <string name="tomorrow">الغد</string>
     <string name="not_initialized_yet">لم تتم التهيئة بعد...</string>
     <string name="no_events_to_show">لا يوجد أحداث لإظهارها</string>
-    <string name="no_upcoming_events">لا توجد احداث مستقبلية</string>
     <string name="open_prefs_desc">فتح اعدادات تطبيق التقويم</string>
     <string name="add_event_desc">اضافة حدث جديد للتقويم</string>
     <string name="indicator_alarm">مؤشر ضبط التنبيه</string>
@@ -20,7 +19,6 @@
     <string name="select_a_widget_to_configure">قم باختيار عنصر واجهة المستخدم لتهيئته</string>
     <string name="close">إغلاق</string>
     <string name="go_to_home_screen">العودة إلى الشاشة الرئيسية</string>
-    <string name="loading_with_dots">جاري التحميل...</string>
     <!-- Descriptions for app markets -->
     <!-- Preference header: Calendars and Task Lists -->
     <string name="calendars_prefs">التقويمات</string>
