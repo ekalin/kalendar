@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        EnvironmentChangedReceiver.registerReceivers(this);
+        EnvironmentChangedReceiver.registerReceivers(this, true);
         checkPermissions();
         updateScreen();
     }

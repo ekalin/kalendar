@@ -8,14 +8,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.provider.CalendarContract;
 import android.util.Log;
 
 import org.joda.time.DateTime;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
-import com.github.ekalin.kalendar.task.dmfs.DmfsOpenTasksContract;
+import com.github.ekalin.kalendar.task.TaskProvider;
 
 import static com.github.ekalin.kalendar.KalendarAppWidgetProvider.getWidgetIds;
 import static com.github.ekalin.kalendar.KalendarRemoteViewsFactory.ACTION_REFRESH;
@@ -24,35 +28,46 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
     private static final String TAG = EnvironmentChangedReceiver.class.getSimpleName();
     private static boolean receiverRegistered = false;
     private static final AtomicReference<EnvironmentChangedReceiver> registeredReceiver = new AtomicReference<>();
+    private static final AtomicReference<ContentObserver> registeredCalendarObserver = new AtomicReference<>();
+    private static final AtomicReference<List<ContentObserver>> registeredTaskObservers = new AtomicReference<>();
 
-    public static void registerReceivers(Context context) {
-        context = context.getApplicationContext();
+    public static void registerReceivers(Context context, boolean reregister) {
+        Context applContext = context.getApplicationContext();
         synchronized (registeredReceiver) {
-            if (receiverRegistered) {
+            if (!reregister && receiverRegistered) {
                 return;
             }
 
             EnvironmentChangedReceiver receiver = new EnvironmentChangedReceiver();
-
-            IntentFilter providerChanged = new IntentFilter();
-            providerChanged.addAction(Intent.ACTION_PROVIDER_CHANGED);
-            providerChanged.addDataScheme("content");
-            providerChanged.addDataAuthority("com.android.calendar", null);
-            providerChanged.addDataAuthority(DmfsOpenTasksContract.AUTHORITY, null);
-            context.registerReceiver(receiver, providerChanged);
-
             IntentFilter filter = new IntentFilter();
             filter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
             filter.addAction(Intent.ACTION_DREAMING_STOPPED);
-            context.registerReceiver(receiver, filter);
+            applContext.registerReceiver(receiver, filter);
 
             EnvironmentChangedReceiver oldReceiver = registeredReceiver.getAndSet(receiver);
             if (oldReceiver != null) {
-                oldReceiver.unRegister(context);
+                oldReceiver.unRegister(applContext);
+            }
+
+            EventsContentObserver calendarObserver = new EventsContentObserver(applContext);
+            applContext.getContentResolver().registerContentObserver(CalendarContract.CONTENT_URI, false,
+                    calendarObserver);
+            ContentObserver oldCalendarObserver = registeredCalendarObserver.getAndSet(calendarObserver);
+            if (oldCalendarObserver != null) {
+                applContext.getContentResolver().unregisterContentObserver(oldCalendarObserver);
+            }
+
+            List<ContentObserver> taskObservers = TaskProvider.registerObservers(applContext,
+                    () -> new EventsContentObserver(applContext));
+            List<ContentObserver> oldTaskObservers = registeredTaskObservers.getAndSet(taskObservers);
+            if (oldTaskObservers != null) {
+                for (ContentObserver oldTaskObserver : oldTaskObservers) {
+                    applContext.getContentResolver().unregisterContentObserver(oldTaskObserver);
+                }
             }
 
             receiverRegistered = true;
-            Log.i(TAG, "Registered receivers from " + context.getClass().getName());
+            Log.i(TAG, "Registered receivers from " + applContext.getClass().getName());
         }
     }
 
@@ -106,5 +121,25 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds);
         Log.d(TAG, "updateAllWidgets:" + widgetIds + ", context:" + context);
         context.sendBroadcast(intent);
+    }
+
+    private static final class EventsContentObserver extends ContentObserver {
+        private Context context;
+
+        public EventsContentObserver(Context context) {
+            super(null);
+            this.context = context;
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            this.onChange(selfChange, null);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            Log.i(TAG, "Content changed notification for " + uri);
+            updateAllWidgets(context);
+        }
     }
 }

@@ -2,8 +2,11 @@ package com.github.ekalin.kalendar.task;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.ContentObserver;
+import androidx.core.util.Supplier;
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,6 +15,7 @@ import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.provider.EventProvider;
 import com.github.ekalin.kalendar.task.dmfs.DmfsOpenTasksProvider;
 import com.github.ekalin.kalendar.task.samsung.SamsungTasksProvider;
+import com.github.ekalin.kalendar.util.Optional;
 
 public class TaskProvider extends EventProvider {
     public static final String PROVIDER_NONE = "NONE";
@@ -41,6 +45,14 @@ public class TaskProvider extends EventProvider {
     public void requestPermission(Fragment fragment, String taskSource) {
         AbstractTaskProvider provider = getProvider(taskSource);
         provider.requestPermission(fragment);
+    }
+
+    public static List<ContentObserver> registerObservers(Context context, Supplier<ContentObserver> observerCreator) {
+        List<ContentObserver> observers = new ArrayList<>();
+        Optional<ContentObserver> opObserver = DmfsOpenTasksProvider.registerContentObserver(context,
+                observerCreator);
+        opObserver.ifPresent(observers::add);
+        return observers;
     }
 
     public Intent createOpenCalendarEventIntent(TaskEvent event) {

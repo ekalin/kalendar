@@ -3,9 +3,11 @@ package com.github.ekalin.kalendar.task.dmfs;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.text.TextUtils;
+import androidx.core.util.Supplier;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import com.github.ekalin.kalendar.provider.QueryResultsStorage;
 import com.github.ekalin.kalendar.task.AbstractTaskProvider;
 import com.github.ekalin.kalendar.task.TaskEvent;
 import com.github.ekalin.kalendar.util.CalendarIntentUtil;
+import com.github.ekalin.kalendar.util.Optional;
 import com.github.ekalin.kalendar.util.PermissionsUtil;
 
 public class DmfsOpenTasksProvider extends AbstractTaskProvider {
@@ -176,11 +179,27 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
 
     @Override
     public boolean hasPermission() {
+        return hasPermission(context);
+    }
+
+    private static boolean hasPermission(Context context) {
         return PermissionsUtil.isPermissionGranted(context, DmfsOpenTasksContract.PERMISSION);
     }
 
     @Override
     public void requestPermission(Fragment fragment) {
         fragment.requestPermissions(new String[]{DmfsOpenTasksContract.PERMISSION}, 1);
+    }
+
+    public static Optional<ContentObserver> registerContentObserver(Context context,
+                                                                    Supplier<ContentObserver> observerCreator) {
+        if (hasPermission(context)) {
+            ContentObserver observer = observerCreator.get();
+            context.getContentResolver().registerContentObserver(DmfsOpenTasksContract.Tasks.PROVIDER_URI, false,
+                    observer);
+            return Optional.of(observer);
+        } else {
+            return Optional.empty();
+        }
     }
 }

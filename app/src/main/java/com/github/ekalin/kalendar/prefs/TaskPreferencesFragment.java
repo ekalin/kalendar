@@ -7,6 +7,7 @@ import androidx.preference.Preference;
 
 import java.util.Collections;
 
+import com.github.ekalin.kalendar.EnvironmentChangedReceiver;
 import com.github.ekalin.kalendar.R;
 import com.github.ekalin.kalendar.task.TaskProvider;
 
@@ -80,5 +81,6 @@ public class TaskPreferencesFragment extends KalendarPreferenceFragment implemen
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         setGrantPermissionVisibility();
+        EnvironmentChangedReceiver.registerReceivers(getActivity(), true);
     }
 }
