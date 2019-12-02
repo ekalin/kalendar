@@ -120,14 +120,16 @@
     <string name="ended_yesterday">Finalitzats ahir</string>
     <string name="pref_hide_based_on_keywords_title">Amagar en funció de les paraules clau al títol</string>
     <string name="show_only_closest_instance_of_recurring_event">Visualitzar només la instància més propera d\'un esdeveniment recurrent</string>
-    <!-- Preference header: Feedback -->
-    <string name="feedback_prefs">Suggeriments</string>
-    <string name="feedback_prefs_desc">Contacti amb nosaltres</string>
+    <!-- Preference header: Feedback and Backup -->
+    <string name="feedback_backup_prefs">Suport i còpia de seguretat</string>
+    <string name="feedback_backup_prefs_desc">Poseu-vos en contacte amb nosaltres, configuració de còpia de seguretat i restauració</string>
     <string name="feedback_github_desc">Proporcionar suggerències en la pàgina del projecte</string>
     <string name="feedback_github_title">Visita el widget en Github</string>
     <string name="feedback_play_store_desc">Vota i opina en el Google Play Store</string>
     <string name="feedback_play_store_title">Visita el widget en el Google Play Store</string>
     <string name="refresh_desc">Refrescar</string>
-    <string name="share_events_for_debugging_desc">Crea un informe per ajudar els desenvolupadors a solucionar errors</string>
-    <string name="share_events_for_debugging_title">Comparteix esdeveniments per la depuració</string>
+    <string name="share_events_settings_for_debugging_title">Compartiu esdeveniments i configuracions per a la depuració</string>
+    <string name="share_events_for_debugging_desc">Creeu un informe per ajudar els desenvolupadors a solucionar problemes.
+        Abans de compartir filtreu esdeveniments per protegir la vostra privadesa, però encara demostreu el problema</string>
+    <string name="restore_settings_title">Restaureu la configuració des d’una còpia de seguretat</string>
 </resources>

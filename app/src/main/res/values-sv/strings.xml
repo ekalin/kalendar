@@ -19,6 +19,7 @@
     <!-- Preference header: Calendars and Task Lists -->
     <string name="calendars_prefs">Kalendrar</string>
     <string name="calendars_prefs_desc">Välj kalendrar som skall visas</string>
+    <string name="task_source_samsung">Samsung Kalender</string>
     <!-- Preference header: Other -->
     <string name="appearance_text_size_title">Textstorlek</string>
     <string name="appearance_text_size_desc">Justera textstorleken</string>
@@ -33,6 +34,7 @@
     <string name="appearance_abbreviate_dates_title">Förkorta datum</string>
     <string name="appearance_abbreviate_dates_desc">Använd tre-bokstavs-format för datum i Widget och Dags-Ledare m.m.</string>
     <!-- Preference header: Layout -->
+    <string name="layout_prefs_title">Layout</string>
     <string name="pref_event_entry_layout_title">Upplägg av händelsen</string>
     <string name="default_multiline_layout">Tid under titel</string>
     <string name="single_line_layout">Alla i en rad</string>
