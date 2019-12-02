@@ -26,6 +26,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
 public class EventRemoteViewsFactory_IntegrationTest {
+    private static final String COLUMN_START_DATE = "EFFECTIVE_START_DATE";
+
     private final Context context = ApplicationProvider.getApplicationContext();
     private final int widgetId = 1;
     private final DateTimeZone zone = DateTimeZone.UTC;
@@ -143,8 +145,8 @@ public class EventRemoteViewsFactory_IntegrationTest {
         MatrixCursor cursor = new MatrixCursor(new String[]{
                 DmfsOpenTasksContract.Tasks.COLUMN_ID,
                 DmfsOpenTasksContract.Tasks.COLUMN_TITLE,
+                COLUMN_START_DATE,
                 DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE,
-                DmfsOpenTasksContract.Tasks.COLUMN_START_DATE,
                 DmfsOpenTasksContract.Tasks.COLUMN_COLOR,
         });
 
@@ -157,8 +159,8 @@ public class EventRemoteViewsFactory_IntegrationTest {
         cursor.newRow()
                 .add(DmfsOpenTasksContract.Tasks.COLUMN_ID, id)
                 .add(DmfsOpenTasksContract.Tasks.COLUMN_TITLE, title)
+                .add(COLUMN_START_DATE, dueDate.getMillis())
                 .add(DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE, dueDate.getMillis())
-                .add(DmfsOpenTasksContract.Tasks.COLUMN_START_DATE, null)
                 .add(DmfsOpenTasksContract.Tasks.COLUMN_COLOR, 0);
     }
 

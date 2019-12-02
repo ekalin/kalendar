@@ -23,6 +23,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
 public class DmfsOpenTasksProviderTest {
+    private static final String COLUMN_START_DATE = "EFFECTIVE_START_DATE";
+
     private ContentProviderForTests contentProvider;
     private DmfsOpenTasksProvider tasksProvider;
 
@@ -47,13 +49,14 @@ public class DmfsOpenTasksProviderTest {
         MatrixCursor matrixCursor = new MatrixCursor(new String[]{
                 DmfsOpenTasksContract.Tasks.COLUMN_ID,
                 DmfsOpenTasksContract.Tasks.COLUMN_TITLE,
+                COLUMN_START_DATE,
                 DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE,
-                DmfsOpenTasksContract.Tasks.COLUMN_START_DATE,
                 DmfsOpenTasksContract.Tasks.COLUMN_COLOR});
         for (TaskEvent task : createTaskEvents()) {
             matrixCursor.newRow()
                     .add(DmfsOpenTasksContract.Tasks.COLUMN_ID, task.getId())
                     .add(DmfsOpenTasksContract.Tasks.COLUMN_TITLE, task.getTitle())
+                    .add(COLUMN_START_DATE, task.getTaskDate().getMillis())
                     .add(DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE, task.getTaskDate().getMillis())
                     .add(DmfsOpenTasksContract.Tasks.COLUMN_COLOR, task.getColor());
         }
