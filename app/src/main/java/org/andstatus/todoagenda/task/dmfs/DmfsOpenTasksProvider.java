@@ -23,8 +23,6 @@ import java.util.List;
 import java.util.Set;
 
 public class DmfsOpenTasksProvider extends AbstractTaskProvider {
-    private static final String COLUMN_EFFECTIVE_START_DATE = "EFFECTIVE_START_DATE";
-
     public DmfsOpenTasksProvider(Context context, int widgetId, InstanceSettings settings) {
         super(context, widgetId, settings);
     }

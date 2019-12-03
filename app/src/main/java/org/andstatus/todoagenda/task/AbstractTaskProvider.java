@@ -14,6 +14,8 @@ import java.util.Collection;
 import java.util.List;
 
 public abstract class AbstractTaskProvider extends EventProvider {
+    protected static final String COLUMN_EFFECTIVE_START_DATE = "EFFECTIVE_START_DATE";
+
     protected DateTime now;
 
     public AbstractTaskProvider(Context context, int widgetId, InstanceSettings settings) {

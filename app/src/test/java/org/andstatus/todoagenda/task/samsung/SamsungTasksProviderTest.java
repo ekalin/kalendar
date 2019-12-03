@@ -23,6 +23,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
 public class SamsungTasksProviderTest {
+    private static final String COLUMN_START_DATE = "EFFECTIVE_START_DATE";
+
     private ContentProviderForTests contentProvider;
     private SamsungTasksProvider tasksProvider;
 
@@ -47,6 +49,7 @@ public class SamsungTasksProviderTest {
         MatrixCursor matrixCursor = new MatrixCursor(new String[]{
                 SamsungTasksContract.Tasks.COLUMN_ID,
                 SamsungTasksContract.Tasks.COLUMN_TITLE,
+                COLUMN_START_DATE,
                 SamsungTasksContract.Tasks.COLUMN_DUE_DATE,
                 SamsungTasksContract.Tasks.COLUMN_COLOR,
                 SamsungTasksContract.Tasks.COLUMN_LIST_ID});
@@ -54,6 +57,7 @@ public class SamsungTasksProviderTest {
             matrixCursor.newRow()
                     .add(SamsungTasksContract.Tasks.COLUMN_ID, task.getId())
                     .add(SamsungTasksContract.Tasks.COLUMN_TITLE, task.getTitle())
+                    .add(COLUMN_START_DATE, task.getTaskDate().getMillis())
                     .add(SamsungTasksContract.Tasks.COLUMN_DUE_DATE, task.getTaskDate().getMillis())
                     .add(SamsungTasksContract.Tasks.COLUMN_COLOR, task.getColor())
                     .add(SamsungTasksContract.Tasks.COLUMN_LIST_ID, 1);
