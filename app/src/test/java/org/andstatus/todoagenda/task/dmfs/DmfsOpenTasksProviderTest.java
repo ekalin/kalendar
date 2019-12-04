@@ -9,6 +9,7 @@ import org.andstatus.todoagenda.prefs.EventSource;
 import org.andstatus.todoagenda.task.TaskEvent;
 import org.andstatus.todoagenda.testutil.ContentProviderForTests;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,53 +39,51 @@ public class DmfsOpenTasksProviderTest {
 
     @Test
     public void getTasks_returnsTasks() {
-        setupTasks();
+        List<TaskEvent> createdTasks = setupTasks();
 
         List<TaskEvent> tasks = tasksProvider.getTasks();
 
-        assertThat(tasks).isEqualTo(expectedEvents());
+        assertThat(tasks).isEqualTo(createdTasks);
     }
 
-    private void setupTasks() {
+    private List<TaskEvent> setupTasks() {
         MatrixCursor matrixCursor = new MatrixCursor(new String[]{
                 DmfsOpenTasksContract.Tasks.COLUMN_ID,
                 DmfsOpenTasksContract.Tasks.COLUMN_TITLE,
                 COLUMN_START_DATE,
                 DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE,
                 DmfsOpenTasksContract.Tasks.COLUMN_COLOR});
-        for (TaskEvent task : createTaskEvents()) {
+
+        List<TaskEvent> taskEvents = createTaskEvents();
+        for (TaskEvent task : taskEvents) {
             matrixCursor.newRow()
                     .add(DmfsOpenTasksContract.Tasks.COLUMN_ID, task.getId())
                     .add(DmfsOpenTasksContract.Tasks.COLUMN_TITLE, task.getTitle())
-                    .add(COLUMN_START_DATE, task.getTaskDate().getMillis())
-                    .add(DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE, task.getTaskDate().getMillis())
+                    .add(COLUMN_START_DATE, task.getStartDate().getMillis())
+                    .add(DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE, task.getDueDate().getMillis())
                     .add(DmfsOpenTasksContract.Tasks.COLUMN_COLOR, task.getColor());
         }
         contentProvider.setQueryResult(matrixCursor);
+
+        return taskEvents;
     }
 
     private List<TaskEvent> createTaskEvents() {
         List<TaskEvent> tasks = new ArrayList<>();
-        tasks.add(createTaskEvent(6L, "Test task 2", DateTime.now().plusDays(2), 0xff000011));
-        tasks.add(createTaskEvent(3L, "Test task 1", DateTime.now().plusDays(3), 0xff000022));
-        tasks.add(createTaskEvent(15L, "Test task 3", DateTime.now().plusDays(1), 0xff000033));
+        tasks.add(createTaskEvent(6L, "Test task 2", DateTime.now().plusDays(1), DateTime.now().plusDays(2),
+                0xff000011));
+        tasks.add(createTaskEvent(3L, "Test task 1", DateTime.now(), DateTime.now().plusDays(3), 0xff000022));
+        tasks.add(createTaskEvent(15L, "Test task 3", DateTime.now().minusDays(1), DateTime.now().plusDays(1),
+                0xff000033));
         return tasks;
     }
 
-    // Time is not considered for tasks. There's a test just for how dates are set.
-    private List<TaskEvent> expectedEvents() {
-        List<TaskEvent> taskEvents = createTaskEvents();
-        for (TaskEvent taskEvent : taskEvents) {
-            taskEvent.setTaskDate(taskEvent.getTaskDate().withTimeAtStartOfDay());
-        }
-        return taskEvents;
-    }
-
-    private TaskEvent createTaskEvent(long id, String title, DateTime taskDate, int color) {
+    private TaskEvent createTaskEvent(long id, String title, DateTime startDate, DateTime endDate, int color) {
         TaskEvent event = new TaskEvent();
         event.setId(id);
         event.setTitle(title);
-        event.setTaskDate(taskDate);
+        event.setZone(DateTimeZone.getDefault());
+        event.setDates(startDate.getMillis(), endDate.getMillis());
         event.setColor(color);
         return event;
     }

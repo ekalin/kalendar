@@ -11,8 +11,8 @@ public class TaskEntryTest {
     @Test
     public void isCurrent_forTodayTask_returnsTrue() {
         TaskEvent task = new TaskEvent();
-        task.setTaskDate(DateTime.now().withTimeAtStartOfDay().plusHours(5));
         task.setZone(DateTimeZone.getDefault());
+        task.setDates(DateTime.now().withTimeAtStartOfDay().plusHours(5).getMillis(), null);
         TaskEntry taskEntry = TaskEntry.fromEvent(task);
 
         assertThat(taskEntry.isCurrent()).isTrue();
@@ -21,8 +21,8 @@ public class TaskEntryTest {
     @Test
     public void isCurrent_forFutureTask_returnsFalse() {
         TaskEvent task = new TaskEvent();
-        task.setTaskDate(DateTime.now().plusDays(2));
         task.setZone(DateTimeZone.getDefault());
+        task.setDates(DateTime.now().plusDays(2).getMillis(), null);
         TaskEntry taskEntry = TaskEntry.fromEvent(task);
 
         assertThat(taskEntry.isCurrent()).isFalse();

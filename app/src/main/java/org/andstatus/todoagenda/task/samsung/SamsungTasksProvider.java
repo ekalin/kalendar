@@ -112,6 +112,7 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
         TaskEvent task = new TaskEvent();
         task.setId(cursor.getLong(cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_ID)));
         task.setTitle(cursor.getString(cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_TITLE)));
+        task.setZone(zone);
 
         int startDateIdx = cursor.getColumnIndex(COLUMN_EFFECTIVE_START_DATE);
         Long startMillis = null;
@@ -123,8 +124,7 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
         if (!cursor.isNull(dueDateIdx)) {
             dueMillis = cursor.getLong(dueDateIdx);
         }
-        task.setTaskDate(getTaskDate(dueMillis, startMillis));
-        task.setZone(zone);
+        task.setDates(startMillis, dueMillis);
 
         task.setColor(getColor(cursor, cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_COLOR),
                 cursor.getInt(cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_LIST_ID))));

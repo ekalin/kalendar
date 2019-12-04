@@ -176,7 +176,8 @@ public class EventRemoteViewsFactoryTest {
 
     private TaskEntry createTaskEntry(DateTime taskDate, String title) {
         TaskEvent event = new TaskEvent();
-        event.setTaskDate(taskDate);
+        event.setZone(DateTimeZone.getDefault());
+        event.setDates(taskDate.getMillis(), null);
         event.setTitle(title);
 
         return TaskEntry.fromEvent(event);

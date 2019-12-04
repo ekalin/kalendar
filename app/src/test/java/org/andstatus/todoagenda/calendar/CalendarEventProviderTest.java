@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
+import static org.andstatus.todoagenda.testutil.DateAssert.assertDatesWithTolerance;
 
 @RunWith(RobolectricTestRunner.class)
 public class CalendarEventProviderTest {
@@ -119,14 +119,6 @@ public class CalendarEventProviderTest {
         assertDatesWithTolerance(calendarProvider.getEndOfTimeRange(), now.plusDays(14));
 
         DateUtil.setNow(null);
-    }
-
-    private void assertDatesWithTolerance(DateTime actual, DateTime expected) {
-        // Since a few ms have elapsed since setNow() and setting of startOfTimeRange/endOfTimeRange, we need a
-        // little fuzzyness
-        int toleranceMs = 500;
-        assertWithMessage("%s is not equal to %s (with tolerance %sms)", actual, expected, toleranceMs)
-                .that(actual.getMillis() - expected.getMillis()).isAtMost(toleranceMs);
     }
 
     @Test

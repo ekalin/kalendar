@@ -1,12 +1,14 @@
 package org.andstatus.todoagenda.task;
 
+import org.andstatus.todoagenda.util.DateUtil;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
 public class TaskEvent {
     private long id;
     private String title;
-    private DateTime taskDate;
+    private DateTime startDate;
+    private DateTime dueDate;
     private DateTimeZone zone;
     private int color;
 
@@ -26,12 +28,30 @@ public class TaskEvent {
         this.title = title;
     }
 
-    public DateTime getTaskDate() {
-        return taskDate;
+    public DateTime getStartDate() {
+        return startDate;
     }
 
-    public void setTaskDate(DateTime taskDate) {
-        this.taskDate = taskDate;
+    public DateTime getDueDate() {
+        return dueDate;
+    }
+
+    public void setDates(Long startDateMillis, Long dueDateMillis) {
+        if (startDateMillis != null) {
+            this.startDate = new DateTime(startDateMillis, zone);
+
+            if (dueDateMillis != null) {
+                this.dueDate = new DateTime(dueDateMillis, zone);
+            } else {
+                this.dueDate = this.startDate;
+            }
+        } else if (dueDateMillis != null) {
+            this.startDate = new DateTime(dueDateMillis, zone);
+            this.dueDate = this.startDate;
+        } else {
+            this.startDate = DateUtil.now(zone);
+            this.dueDate = this.startDate.plusYears(50);
+        }
     }
 
     public DateTimeZone getZone() {
@@ -58,14 +78,16 @@ public class TaskEvent {
         return id == taskEvent.id &&
                 color == taskEvent.color &&
                 title.equals(taskEvent.title) &&
-                taskDate.equals(taskEvent.taskDate);
+                startDate.equals(taskEvent.startDate) &&
+                dueDate.equals(taskEvent.dueDate);
     }
 
     @Override
     public int hashCode() {
         int result = Long.valueOf(id).hashCode();
         result += 31 * title.hashCode();
-        result += 31 * taskDate.hashCode();
+        result += 31 * startDate.hashCode();
+        result += 31 * dueDate.hashCode();
         result += 31 * color;
         return result;
     }
@@ -75,7 +97,8 @@ public class TaskEvent {
         return "TaskEvent{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", taskDate=" + taskDate +
+                ", startDate=" + startDate +
+                ", dueDate=" + dueDate +
                 ", color=" + color +
                 '}';
     }
