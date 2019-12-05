@@ -2,6 +2,7 @@ package org.andstatus.todoagenda.widget;
 
 import org.andstatus.todoagenda.task.TaskEvent;
 import org.andstatus.todoagenda.util.DateUtil;
+import org.joda.time.DateTime;
 
 public class TaskEntry extends WidgetEntry {
     private TaskEvent event;
@@ -13,7 +14,14 @@ public class TaskEntry extends WidgetEntry {
     public static TaskEntry fromEvent(TaskEvent event) {
         TaskEntry entry = new TaskEntry();
         entry.event = event;
-        entry.setStartDate(event.getStartDate());
+
+        DateTime now = DateUtil.now(event.getZone());
+        if (event.getStartDate().isBefore(now)) {
+            entry.setStartDate(now.withTimeAtStartOfDay());
+        } else {
+            entry.setStartDate(event.getStartDate());
+        }
+
         return entry;
     }
 

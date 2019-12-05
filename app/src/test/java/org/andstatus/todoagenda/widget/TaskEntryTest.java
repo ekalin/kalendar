@@ -9,6 +9,28 @@ import static com.google.common.truth.Truth.assertThat;
 
 public class TaskEntryTest {
     @Test
+    public void startDateOfEntryIsTodayIfStartDateOfTaskIsInThePast() {
+        TaskEvent task = new TaskEvent();
+        task.setZone(DateTimeZone.getDefault());
+        task.setDates(DateTime.now().minusDays(2).getMillis(), null);
+        TaskEntry taskEntry = TaskEntry.fromEvent(task);
+
+        assertThat(taskEntry.getStartDate()).isEqualTo(DateTime.now().withTimeAtStartOfDay());
+    }
+
+    @Test
+    public void startDateOfEntryIsStartDateOfTaskIfTaskIsNotInThePast() {
+        DateTime startDate = DateTime.now().plusHours(3);
+
+        TaskEvent task = new TaskEvent();
+        task.setZone(DateTimeZone.getDefault());
+        task.setDates(startDate.getMillis(), null);
+        TaskEntry taskEntry = TaskEntry.fromEvent(task);
+
+        assertThat(taskEntry.getStartDate()).isEqualTo(startDate);
+    }
+
+    @Test
     public void isCurrent_forTodayTask_returnsTrue() {
         TaskEvent task = new TaskEvent();
         task.setZone(DateTimeZone.getDefault());
