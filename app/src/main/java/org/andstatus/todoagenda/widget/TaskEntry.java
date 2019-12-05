@@ -37,4 +37,17 @@ public class TaskEntry extends WidgetEntry {
     public boolean isCurrent() {
         return getStartDate().withTimeAtStartOfDay().equals(DateUtil.now(event.getZone()).withTimeAtStartOfDay());
     }
+
+    @Override
+    protected DateTime getDateForSortingWithinDay() {
+        return event.getDueDate();
+    }
+
+    @Override
+    public String toString() {
+        return "TaskEntry ["
+                + "startDate=" + getStartDate()
+                + ", event=" + event
+                + "]";
+    }
 }
