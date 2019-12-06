@@ -3,13 +3,12 @@ package org.andstatus.todoagenda.task.samsung;
 import android.net.Uri;
 
 public class SamsungTasksContract {
-
     public static class Tasks {
-
         public static final Uri PROVIDER_URI = Uri.parse("content://com.android.calendar/syncTasks");
 
         public static final String COLUMN_ID = "_id";
         public static final String COLUMN_TITLE = "subject";
+        public static final String COLUMN_START_DATE = "utc_start_date";
         public static final String COLUMN_DUE_DATE = "utc_due_date";
         public static final String COLUMN_COLOR = "secAccountColor";
         public static final String COLUMN_COMPLETE = "complete";
@@ -18,7 +17,6 @@ public class SamsungTasksContract {
     }
 
     public static class TaskLists {
-
         public static final Uri PROVIDER_URI = Uri.parse("content://com.android.calendar/TasksAccounts");
 
         public static final String COLUMN_ID = "_sync_account_key";

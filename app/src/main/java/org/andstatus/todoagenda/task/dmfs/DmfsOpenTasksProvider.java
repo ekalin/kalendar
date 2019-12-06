@@ -43,8 +43,9 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
         String[] projection = {
                 DmfsOpenTasksContract.Tasks.COLUMN_ID,
                 DmfsOpenTasksContract.Tasks.COLUMN_TITLE,
+                "COALESCE(" + DmfsOpenTasksContract.Tasks.COLUMN_START_DATE + ',' + DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE
+                        + ") as " + COLUMN_EFFECTIVE_START_DATE,
                 DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE,
-                DmfsOpenTasksContract.Tasks.COLUMN_START_DATE,
                 DmfsOpenTasksContract.Tasks.COLUMN_COLOR,
         };
         String where = getWhereClause();
@@ -87,20 +88,11 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
 
         whereBuilder.append(DmfsOpenTasksContract.Tasks.COLUMN_STATUS).append(NOT_EQUALS).append(DmfsOpenTasksContract.Tasks.STATUS_COMPLETED);
 
-        // @formatter:off
         whereBuilder.append(AND_BRACKET)
-                .append(DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE).append(LTE).append(mEndOfTimeRange.getMillis())
+                .append(COLUMN_EFFECTIVE_START_DATE).append(LTE).append(mEndOfTimeRange.getMillis())
                 .append(OR)
-                    .append(OPEN_BRACKET)
-                        .append(DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE).append(IS_NULL)
-                        .append(AND_BRACKET)
-                            .append(DmfsOpenTasksContract.Tasks.COLUMN_START_DATE).append(LTE).append(mEndOfTimeRange.getMillis())
-                            .append(OR)
-                            .append(DmfsOpenTasksContract.Tasks.COLUMN_START_DATE).append(IS_NULL)
-                        .append(CLOSING_BRACKET)
-                    .append(CLOSING_BRACKET)
+                .append(COLUMN_EFFECTIVE_START_DATE).append(IS_NULL)
                 .append(CLOSING_BRACKET);
-        // @formatter:on
 
         Set<String> taskLists = getSettings().getActiveTaskLists();
         if (!taskLists.isEmpty()) {
@@ -118,19 +110,19 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
         TaskEvent task = new TaskEvent();
         task.setId(cursor.getLong(cursor.getColumnIndex(DmfsOpenTasksContract.Tasks.COLUMN_ID)));
         task.setTitle(cursor.getString(cursor.getColumnIndex(DmfsOpenTasksContract.Tasks.COLUMN_TITLE)));
+        task.setZone(zone);
 
+        int startDateIdx = cursor.getColumnIndex(COLUMN_EFFECTIVE_START_DATE);
+        Long startMillis = null;
+        if (!cursor.isNull(startDateIdx)) {
+            startMillis = cursor.getLong(startDateIdx);
+        }
         int dueDateIdx = cursor.getColumnIndex(DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE);
         Long dueMillis = null;
         if (!cursor.isNull(dueDateIdx)) {
             dueMillis = cursor.getLong(dueDateIdx);
         }
-        int startDateIdx = cursor.getColumnIndex(DmfsOpenTasksContract.Tasks.COLUMN_START_DATE);
-        Long startMillis = null;
-        if (!cursor.isNull(startDateIdx)) {
-            startMillis = cursor.getLong(startDateIdx);
-        }
-        task.setTaskDate(getTaskDate(dueMillis, startMillis));
-        task.setZone(zone);
+        task.setDates(startMillis, dueMillis);
 
         task.setColor(getAsOpaque(cursor.getInt(cursor.getColumnIndex(DmfsOpenTasksContract.Tasks.COLUMN_COLOR))));
 
@@ -149,7 +141,8 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
         };
         Cursor cursor;
         try {
-            cursor = context.getContentResolver().query(DmfsOpenTasksContract.TaskLists.PROVIDER_URI, projection, null, null, null);
+            cursor = context.getContentResolver().query(DmfsOpenTasksContract.TaskLists.PROVIDER_URI, projection,
+                    null, null, null);
         } catch (IllegalArgumentException e) {
             cursor = null;
         }

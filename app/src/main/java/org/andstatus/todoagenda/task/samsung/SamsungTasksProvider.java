@@ -41,6 +41,8 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
         String[] projection = {
                 SamsungTasksContract.Tasks.COLUMN_ID,
                 SamsungTasksContract.Tasks.COLUMN_TITLE,
+                "COALESCE(" + SamsungTasksContract.Tasks.COLUMN_START_DATE + ',' + SamsungTasksContract.Tasks.COLUMN_DUE_DATE
+                        + ") as " + COLUMN_EFFECTIVE_START_DATE,
                 SamsungTasksContract.Tasks.COLUMN_DUE_DATE,
                 SamsungTasksContract.Tasks.COLUMN_COLOR,
                 SamsungTasksContract.Tasks.COLUMN_LIST_ID,
@@ -89,9 +91,9 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
         whereBuilder.append(AND).append(SamsungTasksContract.Tasks.COLUMN_DELETED).append(EQUALS).append("0");
 
         whereBuilder.append(AND_BRACKET)
-                .append(SamsungTasksContract.Tasks.COLUMN_DUE_DATE).append(LTE).append(mEndOfTimeRange.getMillis())
+                .append(COLUMN_EFFECTIVE_START_DATE).append(LTE).append(mEndOfTimeRange.getMillis())
                 .append(OR)
-                .append(SamsungTasksContract.Tasks.COLUMN_DUE_DATE).append(IS_NULL)
+                .append(COLUMN_EFFECTIVE_START_DATE).append(IS_NULL)
                 .append(CLOSING_BRACKET);
 
         Set<String> taskLists = getSettings().getActiveTaskLists();
@@ -110,14 +112,19 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
         TaskEvent task = new TaskEvent();
         task.setId(cursor.getLong(cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_ID)));
         task.setTitle(cursor.getString(cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_TITLE)));
+        task.setZone(zone);
 
+        int startDateIdx = cursor.getColumnIndex(COLUMN_EFFECTIVE_START_DATE);
+        Long startMillis = null;
+        if (!cursor.isNull(startDateIdx)) {
+            startMillis = cursor.getLong(startDateIdx);
+        }
         int dueDateIdx = cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_DUE_DATE);
         Long dueMillis = null;
         if (!cursor.isNull(dueDateIdx)) {
             dueMillis = cursor.getLong(dueDateIdx);
         }
-        task.setTaskDate(getTaskDate(dueMillis, null));
-        task.setZone(zone);
+        task.setDates(startMillis, dueMillis);
 
         task.setColor(getColor(cursor, cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_COLOR),
                 cursor.getInt(cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_LIST_ID))));

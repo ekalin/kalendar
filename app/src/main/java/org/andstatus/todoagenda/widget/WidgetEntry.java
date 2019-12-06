@@ -39,12 +39,22 @@ public class WidgetEntry implements Comparable<WidgetEntry> {
 
     @Override
     public int compareTo(WidgetEntry otherEvent) {
-        if (getStartDate().isAfter(otherEvent.getStartDate())) {
-            return 1;
-        } else if (getStartDate().isBefore(otherEvent.getStartDate())) {
-            return -1;
+        int order = getStartDay().compareTo(otherEvent.getStartDay());
+        if (order != 0) {
+            return order;
         }
-        return Integer.signum(priority - otherEvent.priority);
+
+        order = Integer.signum(priority - otherEvent.priority);
+        if (order != 0) {
+            return order;
+        }
+
+        order = getDateForSortingWithinDay().compareTo(otherEvent.getDateForSortingWithinDay());
+        return order;
+    }
+
+    protected DateTime getDateForSortingWithinDay() {
+        return getStartDate();
     }
 
     @Override

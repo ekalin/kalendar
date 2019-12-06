@@ -26,6 +26,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
 public class EventRemoteViewsFactory_IntegrationTest {
+    private static final String COLUMN_START_DATE = "EFFECTIVE_START_DATE";
+
     private final Context context = ApplicationProvider.getApplicationContext();
     private final int widgetId = 1;
     private final DateTimeZone zone = DateTimeZone.UTC;
@@ -46,6 +48,7 @@ public class EventRemoteViewsFactory_IntegrationTest {
      * <p>
      * -- D0
      * * Write integration test [Task, due on D-1]
+     * * Review other tests [Task, starts on D-3, due on D0]
      * * Kalendar birthday [All day event]
      * <p>
      * -- D2
@@ -53,7 +56,7 @@ public class EventRemoteViewsFactory_IntegrationTest {
      * * Medical appointment [Regular event]
      * <p>
      * -- D3
-     * * Prepare release [Task]
+     * * Prepare release [Task, starts on D3]
      * * Time off [End of all day event]
      * <p>
      * -- D5
@@ -143,53 +146,55 @@ public class EventRemoteViewsFactory_IntegrationTest {
         MatrixCursor cursor = new MatrixCursor(new String[]{
                 DmfsOpenTasksContract.Tasks.COLUMN_ID,
                 DmfsOpenTasksContract.Tasks.COLUMN_TITLE,
+                COLUMN_START_DATE,
                 DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE,
-                DmfsOpenTasksContract.Tasks.COLUMN_START_DATE,
                 DmfsOpenTasksContract.Tasks.COLUMN_COLOR,
         });
 
-        addTaskRow(cursor, 2L, "Prepare release", d0.plusDays(3));
-        addTaskRow(cursor, 3L, "Write integration test", d0.minusDays(1));
+        addTaskRow(cursor, 2L, "Prepare release", d0.plusDays(3), null);
+        addTaskRow(cursor, 4L, "Review other tests", d0.minusDays(3), d0);
+        addTaskRow(cursor, 3L, "Write integration test", null, d0.minusDays(1));
         taskProvider.setQueryResult(cursor);
     }
 
-    private void addTaskRow(MatrixCursor cursor, long id, String title, DateTime dueDate) {
+    private void addTaskRow(MatrixCursor cursor, long id, String title, DateTime startDate, DateTime dueDate) {
         cursor.newRow()
                 .add(DmfsOpenTasksContract.Tasks.COLUMN_ID, id)
                 .add(DmfsOpenTasksContract.Tasks.COLUMN_TITLE, title)
-                .add(DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE, dueDate.getMillis())
-                .add(DmfsOpenTasksContract.Tasks.COLUMN_START_DATE, null)
+                .add(COLUMN_START_DATE, startDate != null ? startDate.getMillis() : null)
+                .add(DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE, dueDate != null ? dueDate.getMillis() : null)
                 .add(DmfsOpenTasksContract.Tasks.COLUMN_COLOR, 0);
     }
 
     private void checkEntries(List<WidgetEntry> entries) {
-        System.out.println(entries);
-        checkDayHeader(entries.get(0), d0.minusDays(1));
-        checkCalendar(entries.get(1), "Finished event", "4:00 PM - 6:00 PM", "");
+        int event = 0;
+        checkDayHeader(entries.get(event++), d0.minusDays(1));
+        checkCalendar(entries.get(event++), "Finished event", "4:00 PM - 6:00 PM", "");
 
-        checkDayHeader(entries.get(2), d0);
-        checkTask(entries.get(3), "Write integration test");
-        checkCalendar(entries.get(4), "Kalendar birthday", "", "Android Studio");
+        checkDayHeader(entries.get(event++), d0);
+        checkTask(entries.get(event++), "Write integration test");
+        checkTask(entries.get(event++), "Review other tests");
+        checkCalendar(entries.get(event++), "Kalendar birthday", "", "Android Studio");
 
-        checkDayHeader(entries.get(5), d0.plusDays(2));
-        checkCalendar(entries.get(6), "Time off", "", "");
-        checkCalendar(entries.get(7), "Medical appointment", "9:00 AM - 10:15 AM", "Hospital");
+        checkDayHeader(entries.get(event++), d0.plusDays(2));
+        checkCalendar(entries.get(event++), "Time off", "", "");
+        checkCalendar(entries.get(event++), "Medical appointment", "9:00 AM - 10:15 AM", "Hospital");
 
-        checkDayHeader(entries.get(8), d0.plusDays(3));
-        checkTask(entries.get(9), "Prepare release");
-        checkCalendar(entries.get(10), "Time off", "", "");
+        checkDayHeader(entries.get(event++), d0.plusDays(3));
+        checkTask(entries.get(event++), "Prepare release");
+        checkCalendar(entries.get(event++), "Time off", "", "");
 
-        checkDayHeader(entries.get(11), d0.plusDays(5));
-        checkCalendar(entries.get(12), "Rental car", "1:00 PM →", "");
-        checkCalendar(entries.get(13), "Dentist", "2:30 PM - 3:00 PM", "");
+        checkDayHeader(entries.get(event++), d0.plusDays(5));
+        checkCalendar(entries.get(event++), "Rental car", "1:00 PM →", "");
+        checkCalendar(entries.get(event++), "Dentist", "2:30 PM - 3:00 PM", "");
 
-        checkDayHeader(entries.get(14), d0.plusDays(6));
-        checkCalendar(entries.get(15), "Rental car", "→  →", "");
+        checkDayHeader(entries.get(event++), d0.plusDays(6));
+        checkCalendar(entries.get(event++), "Rental car", "→  →", "");
 
-        checkDayHeader(entries.get(16), d0.plusDays(7));
-        checkCalendar(entries.get(17), "Rental car", "→ 4:30 PM", "");
+        checkDayHeader(entries.get(event++), d0.plusDays(7));
+        checkCalendar(entries.get(event++), "Rental car", "→ 4:30 PM", "");
 
-        assertThat(entries).hasSize(18);
+        assertThat(entries).hasSize(event);
     }
 
     private void checkDayHeader(WidgetEntry entry, DateTime day) {

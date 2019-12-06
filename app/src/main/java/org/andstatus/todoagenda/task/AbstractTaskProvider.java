@@ -14,6 +14,8 @@ import java.util.Collection;
 import java.util.List;
 
 public abstract class AbstractTaskProvider extends EventProvider {
+    protected static final String COLUMN_EFFECTIVE_START_DATE = "EFFECTIVE_START_DATE";
+
     protected DateTime now;
 
     public AbstractTaskProvider(Context context, int widgetId, InstanceSettings settings) {
@@ -38,23 +40,4 @@ public abstract class AbstractTaskProvider extends EventProvider {
     public abstract boolean hasPermission();
 
     public abstract void requestPermission(Fragment fragment);
-
-    protected DateTime getTaskDate(Long dueMillis, Long startMillis) {
-        DateTime dueDate;
-        if (dueMillis != null) {
-            dueDate = new DateTime(dueMillis, zone);
-        } else {
-            if (startMillis != null) {
-                dueDate = new DateTime(startMillis, zone);
-            } else {
-                dueDate = now;
-            }
-        }
-
-        if (dueDate.isBefore(now)) {
-            dueDate = now;
-        }
-
-        return dueDate.withTimeAtStartOfDay();
-    }
 }

@@ -9,6 +9,7 @@ import org.andstatus.todoagenda.prefs.EventSource;
 import org.andstatus.todoagenda.task.TaskEvent;
 import org.andstatus.todoagenda.testutil.ContentProviderForTests;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
 public class SamsungTasksProviderTest {
+    private static final String COLUMN_START_DATE = "EFFECTIVE_START_DATE";
+
     private ContentProviderForTests contentProvider;
     private SamsungTasksProvider tasksProvider;
 
@@ -36,53 +39,53 @@ public class SamsungTasksProviderTest {
 
     @Test
     public void getTasks_returnsTasks() {
-        setupTasks();
+        List<TaskEvent> createdTasks = setupTasks();
 
         List<TaskEvent> tasks = tasksProvider.getTasks();
 
-        assertThat(tasks).isEqualTo(expectedEvents());
+        assertThat(tasks).isEqualTo(createdTasks);
     }
 
-    private void setupTasks() {
+    private List<TaskEvent> setupTasks() {
         MatrixCursor matrixCursor = new MatrixCursor(new String[]{
                 SamsungTasksContract.Tasks.COLUMN_ID,
                 SamsungTasksContract.Tasks.COLUMN_TITLE,
+                COLUMN_START_DATE,
                 SamsungTasksContract.Tasks.COLUMN_DUE_DATE,
                 SamsungTasksContract.Tasks.COLUMN_COLOR,
                 SamsungTasksContract.Tasks.COLUMN_LIST_ID});
-        for (TaskEvent task : createTaskEvents()) {
+
+        List<TaskEvent> taskEvents = createTaskEvents();
+        for (TaskEvent task : taskEvents) {
             matrixCursor.newRow()
                     .add(SamsungTasksContract.Tasks.COLUMN_ID, task.getId())
                     .add(SamsungTasksContract.Tasks.COLUMN_TITLE, task.getTitle())
-                    .add(SamsungTasksContract.Tasks.COLUMN_DUE_DATE, task.getTaskDate().getMillis())
+                    .add(COLUMN_START_DATE, task.getStartDate().getMillis())
+                    .add(SamsungTasksContract.Tasks.COLUMN_DUE_DATE, task.getDueDate().getMillis())
                     .add(SamsungTasksContract.Tasks.COLUMN_COLOR, task.getColor())
                     .add(SamsungTasksContract.Tasks.COLUMN_LIST_ID, 1);
         }
         contentProvider.setQueryResult(matrixCursor);
+
+        return taskEvents;
     }
 
     private List<TaskEvent> createTaskEvents() {
         List<TaskEvent> tasks = new ArrayList<>();
-        tasks.add(createTaskEvent(6L, "Test task 2", DateTime.now().plusDays(2), 0xff000011));
-        tasks.add(createTaskEvent(3L, "Test task 1", DateTime.now().plusDays(3), 0xff000022));
-        tasks.add(createTaskEvent(15L, "Test task 3", DateTime.now().plusDays(1), 0xff000033));
+        tasks.add(createTaskEvent(6L, "Test task 2", DateTime.now().plusDays(1), DateTime.now().plusDays(2),
+                0xff000011));
+        tasks.add(createTaskEvent(3L, "Test task 1", DateTime.now().minusDays(10), DateTime.now().plusDays(3),
+                0xff000022));
+        tasks.add(createTaskEvent(15L, "Test task 3", DateTime.now(), DateTime.now().plusDays(1), 0xff000033));
         return tasks;
     }
 
-    // Time is not considered for tasks. There's a test just for how dates are set.
-    private List<TaskEvent> expectedEvents() {
-        List<TaskEvent> taskEvents = createTaskEvents();
-        for (TaskEvent taskEvent : taskEvents) {
-            taskEvent.setTaskDate(taskEvent.getTaskDate().withTimeAtStartOfDay());
-        }
-        return taskEvents;
-    }
-
-    private TaskEvent createTaskEvent(long id, String title, DateTime taskDate, int color) {
+    private TaskEvent createTaskEvent(long id, String title, DateTime startDate, DateTime dueDate, int color) {
         TaskEvent event = new TaskEvent();
         event.setId(id);
         event.setTitle(title);
-        event.setTaskDate(taskDate);
+        event.setZone(DateTimeZone.getDefault());
+        event.setDates(startDate.getMillis(), dueDate.getMillis());
         event.setColor(color);
         return event;
     }

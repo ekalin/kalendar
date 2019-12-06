@@ -3,10 +3,13 @@ package org.andstatus.todoagenda;
 import android.content.Context;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.google.common.truth.Correspondence;
+
 import org.andstatus.todoagenda.calendar.CalendarEvent;
 import org.andstatus.todoagenda.prefs.AllSettings;
 import org.andstatus.todoagenda.prefs.InstanceSettingsTestHelper;
 import org.andstatus.todoagenda.task.TaskEvent;
+import org.andstatus.todoagenda.util.DateUtil;
 import org.andstatus.todoagenda.widget.CalendarEntry;
 import org.andstatus.todoagenda.widget.DayHeader;
 import org.andstatus.todoagenda.widget.TaskEntry;
@@ -34,27 +37,35 @@ import static org.mockito.Mockito.doReturn;
 
 @RunWith(RobolectricTestRunner.class)
 public class EventRemoteViewsFactoryTest {
+    private static final Correspondence<WidgetEntry, String> EVENT_TITLE
+            = Correspondence.transforming(EventRemoteViewsFactoryTest::getEventTitle, "has title of");
+
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule().strictness(Strictness.STRICT_STUBS);
 
     @Mock
-    private WidgetEntryVisualizer eventProvider;
+    private WidgetEntryVisualizer<WidgetEntry> eventProvider;
 
     private Context context = ApplicationProvider.getApplicationContext();
     private DateTime today = DateTime.now();
 
     @After
     public void reset() {
+        DateUtil.setNow(null);
+
         AllSettings.delete(context, 1);
 
         // We need to clear this because otherwise it remains from one test method to the other
-        AtomicReference<EnvironmentChangedReceiver> registeredReceiver = ReflectionHelpers.getStaticField(EnvironmentChangedReceiver.class,
-                "registeredReceiver");
+        AtomicReference<EnvironmentChangedReceiver> registeredReceiver =
+                ReflectionHelpers.getStaticField(EnvironmentChangedReceiver.class,
+                        "registeredReceiver");
         registeredReceiver.set(null);
     }
 
     @Test
     public void getEventEntries_returnsEventsSorted() {
+        DateUtil.setNow(new DateTime(2019, 8, 7, 0, 0, DateTimeZone.getDefault()));
+
         new InstanceSettingsTestHelper(context, 1).setShowDayHeaders(false);
 
         doReturn(createEventListForSortTest()).when(eventProvider).getEventEntries();
@@ -63,41 +74,20 @@ public class EventRemoteViewsFactoryTest {
         factory.onDataSetChanged();
 
         List<WidgetEntry> widgetEntries = factory.getWidgetEntries();
-        assertEventOrder(widgetEntries);
+        assertThat(widgetEntries).comparingElementsUsing(EVENT_TITLE).containsExactly(
+                "Day Header for 2019-08-08", "task1", "task2", "calendar1", "calendar2", "calendar3").inOrder();
     }
 
     private List<WidgetEntry> createEventListForSortTest() {
         DayHeader dayHeader = new DayHeader(new DateTime(2019, 8, 8, 0, 0), DateTimeZone.getDefault());
-        TaskEntry task1 = createTaskEntry(new DateTime(2019, 8, 8, 0, 0), "task1");
+        TaskEntry task1 = createTaskEntry(new DateTime(2019, 8, 8, 12, 0),
+                new DateTime(2019, 8, 9, 15, 0, 0), "task1");
+        TaskEntry task2 = createTaskEntry(new DateTime(2019, 8, 8, 10, 0),
+                new DateTime(2019, 8, 9, 16, 0, 0), "task2");
         CalendarEntry calendar1 = createCalendarEntry(new DateTime(2019, 8, 8, 0, 0), "calendar1");
         CalendarEntry calendar2 = createCalendarEntry(new DateTime(2019, 8, 8, 15, 30), "calendar2");
         CalendarEntry calendar3 = createCalendarEntry(new DateTime(2019, 8, 9, 10, 0), "calendar3");
-        return Arrays.asList(calendar3, calendar2, dayHeader, calendar1, task1);
-    }
-
-    private void assertEventOrder(List<WidgetEntry> widgetEntries) {
-        assertThat(widgetEntries).hasSize(5);
-
-        WidgetEntry entry = widgetEntries.get(0);
-        assertThat(entry).isInstanceOf(DayHeader.class);
-
-        entry = widgetEntries.get(1);
-        assertThat(entry).isInstanceOf(TaskEntry.class);
-
-        entry = widgetEntries.get(2);
-        assertThat(entry).isInstanceOf(CalendarEntry.class);
-        CalendarEntry calendarEntry = (CalendarEntry) entry;
-        assertThat(calendarEntry.getTitle()).isEqualTo("calendar1");
-
-        entry = widgetEntries.get(3);
-        assertThat(entry).isInstanceOf(CalendarEntry.class);
-        calendarEntry = (CalendarEntry) entry;
-        assertThat(calendarEntry.getTitle()).isEqualTo("calendar2");
-
-        entry = widgetEntries.get(4);
-        assertThat(entry).isInstanceOf(CalendarEntry.class);
-        calendarEntry = (CalendarEntry) entry;
-        assertThat(calendarEntry.getTitle()).isEqualTo("calendar3");
+        return Arrays.asList(task2, calendar3, calendar2, dayHeader, calendar1, task1);
     }
 
     @Test
@@ -174,9 +164,10 @@ public class EventRemoteViewsFactoryTest {
         return factory;
     }
 
-    private TaskEntry createTaskEntry(DateTime taskDate, String title) {
+    private TaskEntry createTaskEntry(DateTime startDate, DateTime dueDate, String title) {
         TaskEvent event = new TaskEvent();
-        event.setTaskDate(taskDate);
+        event.setZone(DateTimeZone.getDefault());
+        event.setDates(startDate.getMillis(), dueDate.getMillis());
         event.setTitle(title);
 
         return TaskEntry.fromEvent(event);
@@ -188,5 +179,16 @@ public class EventRemoteViewsFactoryTest {
         event.setStartMillis(startDate.getMillis());
         event.setTitle(title);
         return CalendarEntry.fromEvent(event, startDate);
+    }
+
+    private static String getEventTitle(WidgetEntry widgetEntry) {
+        if (widgetEntry instanceof DayHeader) {
+            return "Day Header for " + widgetEntry.getStartDay().toString("yyyy-MM-dd");
+        } else if (widgetEntry instanceof CalendarEntry) {
+            return ((CalendarEntry) widgetEntry).getTitle();
+        } else if (widgetEntry instanceof TaskEntry) {
+            return ((TaskEntry) widgetEntry).getTitle();
+        }
+        return "Unknown entry type";
     }
 }
