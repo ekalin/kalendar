@@ -44,7 +44,7 @@ public class FeedbackPreferencesFragment extends KalendarPreferenceFragment {
     }
 
     private void backupSettings(int widgetId) {
-        String fileName = "Todo_Agenda-" + widgetId + ".json";
+        String fileName = "Kalendar-" + widgetId + ".json";
         Intent intent = new Intent(ACTION_CREATE_DOCUMENT);
         intent.setType("application/json");
         intent.putExtra(Intent.EXTRA_TITLE, fileName);

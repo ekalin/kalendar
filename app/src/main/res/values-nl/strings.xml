@@ -12,8 +12,8 @@
     <string name="no_title">(Geen titel)</string>
     <string name="grant_permissions">Geef toestemming</string>
     <string name="grant_permissions_verbose">De widget heeft toestemming nodig om kalenders te mogen uitlezen.\nDruk hier om toestemming te verlenen.</string>
-    <string name="permissions_justification">Welkom bij de Todo Agenda, de makkelijkste manier om toegang te krijgen tot uw agenda.\n\nOm de widget te kunnen gebruiken moet u hem toegang verlenen tot uw agenda.</string>
-    <string name="no_widgets_found">Voeg eerst een \"Todo Agenda\" widget toe aan het startscherm van uw apparaat.</string>
+    <string name="permissions_justification">Welkom bij de Kalendar, de makkelijkste manier om toegang te krijgen tot uw agenda.\n\nOm de widget te kunnen gebruiken moet u hem toegang verlenen tot uw agenda.</string>
+    <string name="no_widgets_found">Voeg eerst een \"Kalendar\" widget toe aan het startscherm van uw apparaat.</string>
     <string name="select_a_widget_to_configure">Selecteer de in te stellen widget</string>
     <string name="close">Sluiten</string>
     <string name="go_to_home_screen">Ga naar startscherm</string>

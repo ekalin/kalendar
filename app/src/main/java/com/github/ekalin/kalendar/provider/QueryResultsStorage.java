@@ -54,7 +54,7 @@ public class QueryResultsStorage {
             if (TextUtils.isEmpty(results)) {
                 Log.i(TAG, method + "; Nothing to share");
             } else {
-                String fileName = "Todo_Agenda-" + widgetId + ".json";
+                String fileName = "Kalendar-" + widgetId + ".json";
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("application/json");
                 intent.putExtra(Intent.EXTRA_SUBJECT, fileName);
