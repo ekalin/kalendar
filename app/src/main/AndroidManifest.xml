@@ -35,7 +35,7 @@
         </activity>
 
         <receiver
-            android:name="com.github.ekalin.kalendar.EventAppWidgetProvider"
+            android:name="com.github.ekalin.kalendar.KalendarAppWidgetProvider"
             android:label="@string/widget_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
@@ -65,7 +65,7 @@
         </receiver>
 
         <service
-            android:name="com.github.ekalin.kalendar.EventWidgetService"
+            android:name="com.github.ekalin.kalendar.KalendarRemoteViewsService"
             android:exported="false"
             android:permission="android.permission.BIND_REMOTEVIEWS">
         </service>

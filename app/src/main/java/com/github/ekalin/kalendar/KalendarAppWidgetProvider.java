@@ -10,8 +10,8 @@ import android.util.Log;
 
 import com.github.ekalin.kalendar.prefs.AllSettings;
 
-public class EventAppWidgetProvider extends AppWidgetProvider {
-    private static final String TAG = EventAppWidgetProvider.class.getSimpleName();
+public class KalendarAppWidgetProvider extends AppWidgetProvider {
+    private static final String TAG = KalendarAppWidgetProvider.class.getSimpleName();
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -43,7 +43,7 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int widgetId : appWidgetIds) {
-            EventRemoteViewsFactory.updateWidget(context, widgetId, null);
+            KalendarRemoteViewsFactory.updateWidget(context, widgetId, null);
             notifyWidgetDataChanged(context, widgetId);
         }
     }
@@ -52,7 +52,7 @@ public class EventAppWidgetProvider extends AppWidgetProvider {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         return appWidgetManager == null
                 ? new int[]{}
-                : appWidgetManager.getAppWidgetIds(new ComponentName(context, EventAppWidgetProvider.class));
+                : appWidgetManager.getAppWidgetIds(new ComponentName(context, KalendarAppWidgetProvider.class));
     }
 
     private static void notifyWidgetDataChanged(Context context, int widgetId) {

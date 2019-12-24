@@ -5,7 +5,7 @@ import android.widget.RemoteViews;
 import androidx.annotation.StringRes;
 import androidx.arch.core.util.Function;
 
-import com.github.ekalin.kalendar.EventRemoteViewsFactory;
+import com.github.ekalin.kalendar.KalendarRemoteViewsFactory;
 import com.github.ekalin.kalendar.R;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.util.PermissionsUtil;
@@ -35,7 +35,7 @@ public class EmptyListMessageVisualizer {
     }
 
     public enum Type {
-        EMPTY(R.string.no_events_to_show, EventRemoteViewsFactory::getPermittedAddEventPendingIntent),
+        EMPTY(R.string.no_events_to_show, KalendarRemoteViewsFactory::getPermittedAddEventPendingIntent),
         NO_PERMISSIONS(R.string.grant_permissions_verbose, PermissionsUtil::getNoPermissionsPendingIntent);
 
         @StringRes private int message;

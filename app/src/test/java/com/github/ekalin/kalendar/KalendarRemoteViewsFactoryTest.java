@@ -36,9 +36,9 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(RobolectricTestRunner.class)
-public class EventRemoteViewsFactoryTest {
+public class KalendarRemoteViewsFactoryTest {
     private static final Correspondence<WidgetEntry, String> EVENT_TITLE
-            = Correspondence.transforming(EventRemoteViewsFactoryTest::getEventTitle, "has title of");
+            = Correspondence.transforming(KalendarRemoteViewsFactoryTest::getEventTitle, "has title of");
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule().strictness(Strictness.STRICT_STUBS);
@@ -70,7 +70,7 @@ public class EventRemoteViewsFactoryTest {
 
         doReturn(createEventListForSortTest()).when(eventProvider).getEventEntries();
 
-        EventRemoteViewsFactory factory = createFactory(eventProvider);
+        KalendarRemoteViewsFactory factory = createFactory(eventProvider);
         factory.onDataSetChanged();
 
         List<WidgetEntry> widgetEntries = factory.getWidgetEntries();
@@ -98,7 +98,7 @@ public class EventRemoteViewsFactoryTest {
 
         doReturn(createEventListForDayHeaderTest()).when(eventProvider).getEventEntries();
 
-        EventRemoteViewsFactory factory = createFactory(eventProvider);
+        KalendarRemoteViewsFactory factory = createFactory(eventProvider);
         factory.onDataSetChanged();
 
         List<WidgetEntry> widgetEntries = factory.getWidgetEntries();
@@ -125,7 +125,7 @@ public class EventRemoteViewsFactoryTest {
 
         doReturn(createEventListForDayHeaderTest()).when(eventProvider).getEventEntries();
 
-        EventRemoteViewsFactory factory = createFactory(eventProvider);
+        KalendarRemoteViewsFactory factory = createFactory(eventProvider);
         factory.onDataSetChanged();
 
         List<WidgetEntry> widgetEntries = factory.getWidgetEntries();
@@ -154,8 +154,8 @@ public class EventRemoteViewsFactoryTest {
         return Arrays.asList(calendar1, calendar2);
     }
 
-    private EventRemoteViewsFactory createFactory(WidgetEntryVisualizer<?> eventProvider) {
-        EventRemoteViewsFactory factory = new EventRemoteViewsFactory(context, 1);
+    private KalendarRemoteViewsFactory createFactory(WidgetEntryVisualizer<?> eventProvider) {
+        KalendarRemoteViewsFactory factory = new KalendarRemoteViewsFactory(context, 1);
         // Make it a unit test
         List<WidgetEntryVisualizer<?>> eventProviders = ReflectionHelpers.getField(factory, "eventProviders");
         eventProviders.clear();

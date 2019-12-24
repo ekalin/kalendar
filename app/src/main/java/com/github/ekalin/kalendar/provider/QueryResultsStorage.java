@@ -12,7 +12,7 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.github.ekalin.kalendar.EventRemoteViewsFactory;
+import com.github.ekalin.kalendar.KalendarRemoteViewsFactory;
 import com.github.ekalin.kalendar.R;
 
 /**
@@ -48,7 +48,7 @@ public class QueryResultsStorage {
         try {
             Log.i(TAG, method + " started");
             setNeedToStoreResults(true);
-            EventRemoteViewsFactory factory = new EventRemoteViewsFactory(context, widgetId);
+            KalendarRemoteViewsFactory factory = new KalendarRemoteViewsFactory(context, widgetId);
             factory.onDataSetChanged();
             String results = theStorage.toJsonString(context, widgetId);
             if (TextUtils.isEmpty(results)) {

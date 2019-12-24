@@ -12,7 +12,7 @@ import com.github.ekalin.kalendar.R;
 import com.github.ekalin.kalendar.provider.WidgetData;
 import com.github.ekalin.kalendar.util.Optional;
 
-import static com.github.ekalin.kalendar.EventAppWidgetProvider.getWidgetIds;
+import static com.github.ekalin.kalendar.KalendarAppWidgetProvider.getWidgetIds;
 
 /**
  * Singleton holder of settings for all widgets

@@ -26,7 +26,7 @@ import com.github.ekalin.kalendar.widget.WidgetEntry;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
-public class EventRemoteViewsFactory_IntegrationTest {
+public class KalendarRemoteViewsFactory_IntegrationTest {
     private static final String COLUMN_START_DATE = "EFFECTIVE_START_DATE";
 
     private final Context context = ApplicationProvider.getApplicationContext();
@@ -75,7 +75,7 @@ public class EventRemoteViewsFactory_IntegrationTest {
         setupWidget();
         createEntries();
 
-        EventRemoteViewsFactory factory = new EventRemoteViewsFactory(context, widgetId);
+        KalendarRemoteViewsFactory factory = new KalendarRemoteViewsFactory(context, widgetId);
         factory.onDataSetChanged();
         List<WidgetEntry> entries = factory.getWidgetEntries();
 

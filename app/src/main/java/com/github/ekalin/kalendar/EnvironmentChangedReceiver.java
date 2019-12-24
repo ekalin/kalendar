@@ -17,8 +17,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.task.dmfs.DmfsOpenTasksContract;
 
-import static com.github.ekalin.kalendar.EventAppWidgetProvider.getWidgetIds;
-import static com.github.ekalin.kalendar.EventRemoteViewsFactory.ACTION_REFRESH;
+import static com.github.ekalin.kalendar.KalendarAppWidgetProvider.getWidgetIds;
+import static com.github.ekalin.kalendar.KalendarRemoteViewsFactory.ACTION_REFRESH;
 
 public class EnvironmentChangedReceiver extends BroadcastReceiver {
     private static final String TAG = EnvironmentChangedReceiver.class.getSimpleName();
@@ -67,7 +67,7 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
         intent.setAction(ACTION_REFRESH);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, settings.getWidgetId());
         PendingIntent pendingIntent = PendingIntent.getBroadcast(settings.getContext(),
-                EventRemoteViewsFactory.REQUEST_CODE_MIDNIGHT_ALARM + settings.getWidgetId(),
+                KalendarRemoteViewsFactory.REQUEST_CODE_MIDNIGHT_ALARM + settings.getWidgetId(),
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -92,7 +92,7 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
     }
 
     public static void updateWidget(Context context, int widgetId) {
-        Intent intent = new Intent(context, EventAppWidgetProvider.class);
+        Intent intent = new Intent(context, KalendarAppWidgetProvider.class);
         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[]{widgetId});
         Log.d(TAG, "updateWidget:" + widgetId + ", context:" + context);
@@ -100,7 +100,7 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
     }
 
     public static void updateAllWidgets(Context context) {
-        Intent intent = new Intent(context, EventAppWidgetProvider.class);
+        Intent intent = new Intent(context, KalendarAppWidgetProvider.class);
         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         int[] widgetIds = getWidgetIds(context);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds);

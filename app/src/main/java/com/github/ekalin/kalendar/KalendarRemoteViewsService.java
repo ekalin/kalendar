@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.RemoteViewsService;
 
-public class EventWidgetService extends RemoteViewsService {
+public class KalendarRemoteViewsService extends RemoteViewsService {
     @Override
     public void onCreate() {
         super.onCreate();
@@ -16,6 +16,6 @@ public class EventWidgetService extends RemoteViewsService {
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
         int widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, 0);
-        return new EventRemoteViewsFactory(getApplicationContext(), widgetId);
+        return new KalendarRemoteViewsFactory(getApplicationContext(), widgetId);
     }
 }

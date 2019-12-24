@@ -40,8 +40,8 @@ import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setBackgroundColor
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setDrawableColor;
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setTextSize;
 
-public class EventRemoteViewsFactory implements RemoteViewsFactory {
-    private static final String TAG = EventRemoteViewsFactory.class.getSimpleName();
+public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
+    private static final String TAG = KalendarRemoteViewsFactory.class.getSimpleName();
 
     private static final int MIN_MILLIS_BETWEEN_RELOADS = 500;
     private static final String PACKAGE = "com.github.ekalin.kalendar";
@@ -58,7 +58,7 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
     private volatile List<WidgetEntryVisualizer<?>> eventProviders;
     private volatile long prevReloadFinishedAt = 0;
 
-    public EventRemoteViewsFactory(Context context, int widgetId) {
+    public KalendarRemoteViewsFactory(Context context, int widgetId) {
         this.context = context;
         this.widgetId = widgetId;
         this.settings = AllSettings.instanceFromId(context, widgetId);
@@ -297,7 +297,7 @@ public class EventRemoteViewsFactory implements RemoteViewsFactory {
 
     private static void configureWidgetEntriesList(InstanceSettings settings, Context context, int widgetId,
                                                    RemoteViews rv) {
-        Intent intent = new Intent(context, EventWidgetService.class);
+        Intent intent = new Intent(context, KalendarRemoteViewsService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
         setBackgroundColor(rv, R.id.event_list, settings.getBackgroundColor());
