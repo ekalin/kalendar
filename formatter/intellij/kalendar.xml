@@ -1,4 +1,4 @@
-<code_scheme name="todoagenda" version="173">
+<code_scheme name="kalendar_widget" version="173">
   <option name="LINE_SEPARATOR" value="&#xA;" />
   <option name="FORMATTER_TAGS_ENABLED" value="true" />
   <AndroidXmlCodeStyleSettings>
@@ -13,14 +13,15 @@
     <option name="IMPORT_LAYOUT_TABLE">
       <value>
         <package name="android" withSubpackages="true" static="false" />
+        <package name="androidx" withSubpackages="true" static="false" />
         <emptyLine />
-        <package name="com" withSubpackages="true" static="false" />
+        <package name="com" withSubpackages="false" static="false" />
+        <package name="net" withSubpackages="true" static="false" />
+        <package name="org" withSubpackages="true" static="false" />
+        <emptyLine />
+        <package name="import com.github.ekalin.kalendar" withSubpackages="true" static="false" />
         <emptyLine />
         <package name="junit" withSubpackages="true" static="false" />
-        <emptyLine />
-        <package name="net" withSubpackages="true" static="false" />
-        <emptyLine />
-        <package name="org" withSubpackages="true" static="false" />
         <emptyLine />
         <package name="java" withSubpackages="true" static="false" />
         <emptyLine />
