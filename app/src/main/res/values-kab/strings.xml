@@ -18,11 +18,7 @@
     <string name="close">Mdel</string>
     <string name="go_to_home_screen">Ddu ar ugdil agejdan</string>
     <!-- Descriptions for app markets -->
-    <string name="app_description_80_chars_max">Asfaylurar yeskan-d ineḍruyen ara d-yilin (d wid yezrin...) n teswasin yettwafernen</string>
-    <string name="app_description_4000_chars_max_part01">Todo Agenda d asfaylurar n ugdil n umager i yibenk-ik android.
-        Yeskan-d ineḍruyen ara d-yilin n teswast akken ad tesɛuḍ tamuɣli ɣef ttiɛadat-ik.</string>
     <string name="app_description_4000_chars_max_part02">Tulmisin</string>
-    <string name="app_description_4000_chars_max_part03">Sken-d akk ineḍruyen n teswasin-ik. Sken-d s wudem anufran wid yezrin.</string>
     <!-- Preference header: Calendars and Task Lists -->
     <string name="calendars_prefs">Iwitayen</string>
     <string name="calendars_prefs_desc">Fren iwitayen ara d-sekneḍ</string>

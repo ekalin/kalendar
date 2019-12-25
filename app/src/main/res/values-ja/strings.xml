@@ -20,21 +20,10 @@
     <string name="close">閉じる</string>
     <string name="go_to_home_screen">ホーム画面に移動</string>
     <!-- Descriptions for app markets -->
-    <string name="app_description_80_chars_max">選択したカレンダーから、今後 (および過去の&#8230;) のイベントを表示するウィジェット</string>
-    <string name="app_description_4000_chars_max_part01">Todo Agenda は、お使いの Android デバイス用のホーム画面ウィジェットです。今後のカレンダーイベントを一覧表示するので、予定を一目で簡単に把握することができます。</string>
     <string name="app_description_4000_chars_max_part02">機能</string>
-    <string name="app_description_4000_chars_max_part03">カレンダーのすべてのイベントが表示されます。必要に応じて過去のイベントを表示します。</string>
-    <string name="app_description_4000_chars_max_part04">イベントを追加/削除/変更した時に自動的に更新します。また、即座にリストを更新することもできます。</string>
-    <string name="app_description_4000_chars_max_part05">ウィジェットに表示したいカレンダーのみを選択します。</string>
-    <string name="app_description_4000_chars_max_part06">必要に応じて、いくつかのウィジェットを作成します。各ウィジェットは、フィルター、選択したカレンダーなどの独自の設定があります。</string>
-    <string name="app_description_4000_chars_max_part07">ウィジェットの背景とテキストの色をカスタマイズします。</string>
-    <string name="app_description_4000_chars_max_part08">今後のイベントの一覧をスクロールします。</string>
-    <string name="app_description_4000_chars_max_part09">ウィジェットの文字サイズをカスタマイズします。</string>
-    <string name="app_description_4000_chars_max_part10">2 種類のレイアウトで、ウィジェットは完全にサイズ変更可能です。</string>
-    <string name="app_description_4000_chars_max_part11">アラートおよび定期的なイベントのインジケーター。</string>
-    <string name="app_description_4000_chars_max_part12">異なるタイムゾーンに旅行するときは、タイムゾーンをロックします。</string>
-    <string name="app_description_4000_chars_max_part13">日ヘッダーをオフにして、「今日からの日数」列の日付を参照します。</string>
-    <string name="app_description_4000_chars_max_part14">Android 4 から 7 をサポートしています。Android タブレットをサポートしています。</string>
+    <string name="app_description_4000_chars_max_part07">イベントを追加/削除/変更した時に自動的に更新します。また、即座にリストを更新することもできます。</string>
+    <string name="app_description_4000_chars_max_part10">異なるタイムゾーンに旅行するときは、タイムゾーンをロックします。</string>
+    <string name="app_description_4000_chars_max_part12">Android 4.4+ をサポートしています。Android タブレットをサポートしています。</string>
     <!-- Preference header: Calendars and Task Lists -->
     <string name="calendars_prefs">カレンダー</string>
     <string name="calendars_prefs_desc">表示するカレンダーを選択します</string>

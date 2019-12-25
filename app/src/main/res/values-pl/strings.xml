@@ -19,21 +19,10 @@
     <string name="close">Zamknij</string>
     <string name="go_to_home_screen">Przejdź do ekranu głównego</string>
     <!-- Descriptions for app markets -->
-    <string name="app_description_80_chars_max">Widżety wyświetlają listę nadchodzących (oraz zakończonych...) wydarzeń z wybranych kalendarzy</string>
-    <string name="app_description_4000_chars_max_part01">Lista nadchodzących wydarzeń to widżet dla urządzeń z androidem. Wyświetla listę nadchodzących wydarzeń z kalendarza, aby nie przegapić żadnego spotkania.</string>
     <string name="app_description_4000_chars_max_part02">Funkcje</string>
-    <string name="app_description_4000_chars_max_part03">Wyświetla wszystkie wydarzenia z twoich kalendarzy. Opcjonalnie pokazuje zakończone wydarzenia.</string>
-    <string name="app_description_4000_chars_max_part04">Aktualizuj automatycznie, gdy dodasz/usuniesz/zmodyfikujesz wydarzenie. Albo zaktualizuj listę już teraz.</string>
-    <string name="app_description_4000_chars_max_part05">Wybierz kalendarze, które chcesz wyświetlić w widżecie.</string>
-    <string name="app_description_4000_chars_max_part06">Jeżeli potrzebujesz, utwórz kilka widżetów. Każdy widżet będzie miał swoje ustawienia, razem z filtrami oraz wybranymi kalendarzami.</string>
-    <string name="app_description_4000_chars_max_part07">Dostosuj kolory tła i tekstu widżetu.</string>
-    <string name="app_description_4000_chars_max_part08">Przewijaj przez listę nadchodzących wydarzeń.</string>
-    <string name="app_description_4000_chars_max_part09">Dostosuj rozmiar tekstu widżetu.</string>
-    <string name="app_description_4000_chars_max_part10">W pełni skalowalny widżet z dwoma alternatywnymi układami.</string>
-    <string name="app_description_4000_chars_max_part11">Ikony dla powiadomień oraz powtarzających się wydarzeń.</string>
-    <string name="app_description_4000_chars_max_part12">Zablokuj swoją strefę czasową, gdy podróżujesz do innych stref czasowych.</string>
-    <string name="app_description_4000_chars_max_part13">Wyłącz nagłówki Dni i wyświetl daty w kolumnie \"Dni od dziś\".</string>
-    <string name="app_description_4000_chars_max_part14">Wsparcie dla Androida od 4 do 7. A także tabletów.</string>
+    <string name="app_description_4000_chars_max_part07">Aktualizuj automatycznie, gdy dodasz/usuniesz/zmodyfikujesz wydarzenie. Albo zaktualizuj listę już teraz.</string>
+    <string name="app_description_4000_chars_max_part10">Zablokuj swoją strefę czasową, gdy podróżujesz do innych stref czasowych.</string>
+    <string name="app_description_4000_chars_max_part12">Wsparcie dla Androida od 4.4. A także tabletów.</string>
     <!-- Preference header: Calendars and Task Lists -->
     <string name="calendars_prefs">Kalendarze</string>
     <string name="calendars_prefs_desc">Wybierz kalendarze do wyświetlenia</string>

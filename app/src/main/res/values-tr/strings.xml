@@ -17,23 +17,10 @@
     <string name="close">Kapat</string>
     <string name="go_to_home_screen">Ana ekrana git</string>
     <!-- Descriptions for app markets -->
-    <string name="app_description_80_chars_max">Seçili takvimlerden yaklaşan (ve geçmiş&#8230;) etkinlik listelerini gösteren tuşlar</string>
-    <string name="app_description_4000_chars_max_part01">Todo Andaç\'ı Android cihazınız için bir ana ekran tuşudur.
-
-Randevularınıza kolayca göz atmanız için yaklaşan takvim etkinliklerinin bir listesini görüntüler.</string>
     <string name="app_description_4000_chars_max_part02">Özellikler</string>
-    <string name="app_description_4000_chars_max_part03">Takvimlerinizdeki tüm etkinlikleri görüntüler. İsteğe bağlı olarak geçmiş olayları gösterir.</string>
-    <string name="app_description_4000_chars_max_part04">Bir etkinlik eklediğinizde /sildiğinizde/değiştirdiğinizde kendiliğinden güncellenir. Ya da listeyi anında güncelleyebilirsiniz.</string>
-    <string name="app_description_4000_chars_max_part05">Yalnızca tuş\'ta görmek istediğiniz takvimleri seçin.</string>
-    <string name="app_description_4000_chars_max_part06">Gerekirse birkaç tuş oluşturun. Her tuş\'un, filtreler ve seçili takvimleri içermek üzere kendi ayarları olacaktır.</string>
-    <string name="app_description_4000_chars_max_part07">Tuş arka plan ve metin renklerini özelleştirin.</string>
-    <string name="app_description_4000_chars_max_part08">Yaklaşan etkinlikler listesinde ilerleyin.</string>
-    <string name="app_description_4000_chars_max_part09">Widget\'ın metin boyutunu özelleştirin.</string>
-    <string name="app_description_4000_chars_max_part10">İki alternatif düzen ile tamamen yeniden boyutlandırılabilir tuş.</string>
-    <string name="app_description_4000_chars_max_part11">Uyarılar ve yineleyen etkinlikler için göstergeler.</string>
-    <string name="app_description_4000_chars_max_part12">Değişik zaman dilimlerine giderken saat dilimini kilitleyin.</string>
-    <string name="app_description_4000_chars_max_part13">Gün başlıklarını kapatın ve tarihleri \"Bugünden itibaren Günler\" sütununda görün.</string>
-    <string name="app_description_4000_chars_max_part14">Android 4 ila 7 desteklenir. Android tabletleri destekler.</string>
+    <string name="app_description_4000_chars_max_part07">Bir etkinlik eklediğinizde /sildiğinizde/değiştirdiğinizde kendiliğinden güncellenir. Ya da listeyi anında güncelleyebilirsiniz.</string>
+    <string name="app_description_4000_chars_max_part10">Değişik zaman dilimlerine giderken saat dilimini kilitleyin.</string>
+    <string name="app_description_4000_chars_max_part12">Android 4.4+ desteklenir. Android tabletleri destekler.</string>
     <!-- Preference header: Calendars and Task Lists -->
     <string name="calendars_prefs">Takvimler</string>
     <string name="calendars_prefs_desc">Görüntülenecek takvimleri seç</string>

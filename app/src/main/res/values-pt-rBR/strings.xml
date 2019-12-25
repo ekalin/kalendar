@@ -21,21 +21,19 @@
   <string name="go_to_home_screen">Ir para a tela inicial</string>
 
   <!-- Descriptions for app markets -->
-  <string name="app_description_80_chars_max">Widget com lista dos próximos compromissos de calendários selecionados</string>
-  <string name="app_description_4000_chars_max_part01">Todo Agenda é um widget para a tela inicial do seu dispositivo Android. Ele exibe a lista dos próximos eventos para que você tenha uma visão rápida da sua agenda.</string>
+  <string name="app_description_80_chars_max">Widget que exibe uma lista dos próximos compromissos e tarefas</string>
+  <string name="app_description_4000_chars_max_part01">Kalendar é um widget para a tela inicial que exibe uma lista dos próximos eventos e tarefas, mostrando uma visão geral dos seus próximos compromissos.</string>
   <string name="app_description_4000_chars_max_part02">Recursos</string>
-  <string name="app_description_4000_chars_max_part03">Exibe todos os eventos dos seus calendários. Opcionalmente exibe eventos passados.</string>
-  <string name="app_description_4000_chars_max_part04">A lista é atualizada automaticamente quando um evento é adicionado/removido/modificado. Ou ela pode ser atualizada manualmente.</string>
-  <string name="app_description_4000_chars_max_part05">Selecione apenas os calendários que você deseja ver no widget.</string>
-  <string name="app_description_4000_chars_max_part06">Crie vários widgets, se desejar. Cada widget tem suas próprias configurações, incluindo filtros e calendários selecionados.</string>
-  <string name="app_description_4000_chars_max_part07">Ajuste as cores do fundo do widget e do texto.</string>
-  <string name="app_description_4000_chars_max_part08">Role pela lista dos próximos eventos.</string>
-  <string name="app_description_4000_chars_max_part09">Ajuste o tamanho do texto do widget.</string>
-  <string name="app_description_4000_chars_max_part10">Widget redimensionável com dois layouts alternativos.</string>
-  <string name="app_description_4000_chars_max_part11">Indicadores para alertas e eventos recorrentes.</string>
-  <string name="app_description_4000_chars_max_part12">Bloqueie o fuso horário quando viajar para outros fusos horários.</string>
-  <string name="app_description_4000_chars_max_part13">Esconda os cabeçalhos dos dias e veja datas na coluna \"Dias a partir de hoje\".</string>
-  <string name="app_description_4000_chars_max_part14">Android 4 a 7 suportados. Tablets Android suportados.</string>
+  <string name="app_description_4000_chars_max_part03">Sem anúncios. Grátis e de código aberto.</string>
+  <string name="app_description_4000_chars_max_part04">Exibe compromissos dos calendários e listas de tarefas selecionadas.</string>
+  <string name="app_description_4000_chars_max_part05">Suporta exibir tarefas do Open Tasks (por dmfs GmbH) e do calendário Samsung.</string>
+  <string name="app_description_4000_chars_max_part06">Selecione quais compromissos futuros exibir (uma semana, um mês, etc.). Pode exibir compromissos passados.</string>
+  <string name="app_description_4000_chars_max_part07">A lista é atualizada automaticamente quando um evento é adicionado/removido/modificado. Ou ela pode ser atualizada manualmente.</string>
+  <string name="app_description_4000_chars_max_part08">Selecione as cores e tamanho do texto do widget.</string>
+  <string name="app_description_4000_chars_max_part09">O widget é redimensionável e tem dois layouts alternativos, além de permitir ajustes no layouts.</string>
+  <string name="app_description_4000_chars_max_part10">Bloqueie o fuso horário quando viajar para outros fusos horários.</string>
+  <string name="app_description_4000_chars_max_part11">Faça backup e restaure as configurações, fazendo uma cópia do wiget no mesmo aparelho ou em aparelhos diferentes.</string>
+  <string name="app_description_4000_chars_max_part12">Android 4.4+ suportado. Tablets Android suportados.</string>
 
   <!-- Preference header: Calendars -->
   <string name="calendars_prefs">Calendários</string>

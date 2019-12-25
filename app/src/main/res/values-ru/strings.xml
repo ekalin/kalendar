@@ -19,21 +19,10 @@
     <string name="close">Закрыть</string>
     <string name="go_to_home_screen">Перейти на главный экран</string>
     <!-- Descriptions for app markets -->
-    <string name="app_description_80_chars_max">Виджеты, отображающие списки предстоящих (и прошедших...) событий из выбранных календарей</string>
-    <string name="app_description_4000_chars_max_part01">Todo Agenda - это виджет домашнего экрана для Вашего Android устройства. Он отображает список предстоящих событий календаря, так что Вы можете легко видеть Ваши дела и встречи.</string>
     <string name="app_description_4000_chars_max_part02">Возможности</string>
-    <string name="app_description_4000_chars_max_part03">Отображает все события из Ваших календарей. При необходимости, показывает прошедшие события.</string>
-    <string name="app_description_4000_chars_max_part04">Обновляется автоматически, когда Вы добавляете/удаляете/изменяете событие. Или Вы можете обновить список немедленно.</string>
-    <string name="app_description_4000_chars_max_part05">Выберите только те календари, которые Вы хотите видеть в виджете.</string>
-    <string name="app_description_4000_chars_max_part06">Если необходимо, создайте несколько виджетов. Каждый виджет будет иметь свои собственные настройки, включая фильтры и выбранные календари.</string>
-    <string name="app_description_4000_chars_max_part07">Настройка цвета фона виджета и текста.</string>
-    <string name="app_description_4000_chars_max_part08">Прокрутка списка событий.</string>
-    <string name="app_description_4000_chars_max_part09">Настройка размера текста виджета.</string>
-    <string name="app_description_4000_chars_max_part10">Виджет изменяемого размера на основе альтернативных макетов.</string>
-    <string name="app_description_4000_chars_max_part11">Индикаторы для оповещений и повторяющихся событий.</string>
-    <string name="app_description_4000_chars_max_part12">Блокировка часового пояса при путешествии в разных часовых поясах.</string>
-    <string name="app_description_4000_chars_max_part13">Отключение заголовков дней и просмотр даты в столбце \"Дней с сегодняшнего дня\".</string>
-    <string name="app_description_4000_chars_max_part14">Поддержка Android версий 4 - 7. Поддержка планшетов.</string>
+    <string name="app_description_4000_chars_max_part07">Обновляется автоматически, когда Вы добавляете/удаляете/изменяете событие. Или Вы можете обновить список немедленно.</string>
+    <string name="app_description_4000_chars_max_part10">Блокировка часового пояса при путешествии в разных часовых поясах.</string>
+    <string name="app_description_4000_chars_max_part12">Поддержка Android версий 4.4+. Поддержка планшетов.</string>
     <!-- Preference header: Calendars and Task Lists -->
     <string name="calendars_prefs">Календари</string>
     <string name="calendars_prefs_desc">Выбрать календари для отображения</string>

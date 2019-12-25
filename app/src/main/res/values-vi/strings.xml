@@ -18,22 +18,10 @@
     <string name="close">Đóng lại</string>
     <string name="go_to_home_screen">Quay lại màn hình chủ</string>
     <!-- Descriptions for app markets -->
-    <string name="app_description_80_chars_max">Widget hiển thị danh sách các sự kiện sắp tới (và quá sứ) từ lịch đã chọn</string>
-    <string name="app_description_4000_chars_max_part01">Todo Agenda là widget cho màn hình chủ cho máy Android. Widget hiển thị danh sách các sự kiện sắp tới 
-để dễ nìn bảo quản các đợt hẹn.</string>
     <string name="app_description_4000_chars_max_part02">Tính năng</string>
-    <string name="app_description_4000_chars_max_part03">Hiển tất cả các sự kiện từ các lịch. Có thể hiện sự kiện quá sứ.</string>
-    <string name="app_description_4000_chars_max_part04">Tự động cập nhật khi bạn thêm / xóa / sửa đổi một sự kiện. Hoặc bạn có thể cập nhật danh sách ngay lập tức.</string>
-    <string name="app_description_4000_chars_max_part05">Chọn caí lịch bạn muốn xem trong widget.</string>
-    <string name="app_description_4000_chars_max_part06">Tạo nhiều widget, nếu cần. Mỗi widget sẽ có cài đặt riêng, với bộ lọc và lịch được chọn.</string>
-    <string name="app_description_4000_chars_max_part07">Điều chỉnh màu nền và chữ của widget.</string>
-    <string name="app_description_4000_chars_max_part08">Cuộn qua danh sách các sự kiện sắp tới.</string>
-    <string name="app_description_4000_chars_max_part09">Điều chỉnh cỡ chữ của widget.</string>
-    <string name="app_description_4000_chars_max_part10">Widget thay đổi kích thước với hai bố trí chọn được.</string>
-    <string name="app_description_4000_chars_max_part11">Báo hiệu cho các cảnh báo và các sự kiện định kỳ.</string>
-    <string name="app_description_4000_chars_max_part12">Khóa múi giờ khi đi du lịch đến các múi giờ khác.</string>
-    <string name="app_description_4000_chars_max_part13">Tắt Ngày tiêu đề và xem ngày trong cột \"Ngày từ hôm nay\".</string>
-    <string name="app_description_4000_chars_max_part14">Hỗ trợ Android 4 đến 7. Hỗ trợ máy tính bảng Android.</string>
+    <string name="app_description_4000_chars_max_part07">Tự động cập nhật khi bạn thêm / xóa / sửa đổi một sự kiện. Hoặc bạn có thể cập nhật danh sách ngay lập tức.</string>
+    <string name="app_description_4000_chars_max_part10">Khóa múi giờ khi đi du lịch đến các múi giờ khác.</string>
+    <string name="app_description_4000_chars_max_part12">Hỗ trợ Android 4.4+. Hỗ trợ máy tính bảng Android.</string>
     <!-- Preference header: Calendars and Task Lists -->
     <string name="calendars_prefs">Lịch</string>
     <string name="calendars_prefs_desc">Chọn lịch để hiển thị</string>

@@ -14,16 +14,11 @@ Kalendar is a home screen widget for your Android device. Each widget has its ow
 ## Features
 
 * No advertising. Free and Open Source.
-* Displays events from your calendars and task lists for the selected period. Optionally shows past events.
+* Displays events from selected calendars and task lists.
+* Select how far ahead to display events (one week, one month, etc.). Optionally shows past events.
 * Automatically updates when you add/delete/modify an event. Or you may update the list instantly.
-* Select only the calendars and task lists that you want to see in the widget.
-* Create several widgets, if you need. Each widget has its own settings, including layouts, filters, and selected calendars and task lists.
-* Customize colors of the widget background and texts.
-* Scroll through the list of upcoming events.
-* Customize the text size of the widget.
-* Fully resizable widget with two alternative layouts.
-* Layout customizations.
-* Indicators for alerts and recurring events.
+* Customize colors and text size of the widget.
+* Fully resizable widget with two alternative layouts and layout customizations.
 * Lock time zone when travelling to different time zones.
 * Backup and restore settings, cloning widgets on the same or different devices.
 * Android 4.4+ supported. Supports Android tablets.
