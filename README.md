@@ -7,9 +7,10 @@ Kalendar is a home screen widget for your Android device. Each widget has its ow
     src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png" 
     width="150px"/>
 </a>
+<br/><br/>
 
-
-![Kalendar Widget Screenshots](assets/screenshots/widget-device.png)
+![Kalendar Widget screenshot](assets/screenshots/widget.png)
+![Preferences screenshot](assets/screenshots/prefs.png)
 
 ## Features
 
