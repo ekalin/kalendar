@@ -12,27 +12,16 @@
     <string name="no_title">(Geen titel)</string>
     <string name="grant_permissions">Geef toestemming</string>
     <string name="grant_permissions_verbose">De widget heeft toestemming nodig om kalenders te mogen uitlezen.\nDruk hier om toestemming te verlenen.</string>
-    <string name="permissions_justification">Welkom bij de Todo Agenda, de makkelijkste manier om toegang te krijgen tot uw agenda.\n\nOm de widget te kunnen gebruiken moet u hem toegang verlenen tot uw agenda.</string>
-    <string name="no_widgets_found">Voeg eerst een \"Todo Agenda\" widget toe aan het startscherm van uw apparaat.</string>
+    <string name="permissions_justification">Welkom bij de Kalendar, de makkelijkste manier om toegang te krijgen tot uw agenda.\n\nOm de widget te kunnen gebruiken moet u hem toegang verlenen tot uw agenda.</string>
+    <string name="no_widgets_found">Voeg eerst een \"Kalendar\" widget toe aan het startscherm van uw apparaat.</string>
     <string name="select_a_widget_to_configure">Selecteer de in te stellen widget</string>
     <string name="close">Sluiten</string>
     <string name="go_to_home_screen">Ga naar startscherm</string>
     <!-- Descriptions for app markets -->
-    <string name="app_description_80_chars_max">Widgets voor een overzicht van afspraken in de toekomst (en verleden&#8230;) van gekozen agenda\'s</string>
-    <string name="app_description_4000_chars_max_part01">Todo Agenda is een startscherm widget voor uw Android-apparaat. Het toont een lijst van de aankomende afspraken zodat u een snelle blik kunt werpen op uw afspraken.</string>
     <string name="app_description_4000_chars_max_part02">Functies</string>
-    <string name="app_description_4000_chars_max_part03">Toont alle afspraken van uw agenda\'s. Optionele mogelijkheid om agendapunten uit het verleden te tonen.</string>
-    <string name="app_description_4000_chars_max_part04">Updatet automatisch wanneer u een afspraak toevoegt/verwijdert/wijzigt. U kunt ook op verzoek bijwerken.</string>
-    <string name="app_description_4000_chars_max_part05">Selecteer alleen de agenda\'s die u wilt weergeven in de widget.</string>
-    <string name="app_description_4000_chars_max_part06">U kunt desgewenst meerdere widgets plaatsen. Elke widget kan individueel worden geconfigureerd, inclusief filters en weer te geven agenda\'s.</string>
-    <string name="app_description_4000_chars_max_part07">Verander de kleuren van de achtergrond en tekst in de widget.</string>
-    <string name="app_description_4000_chars_max_part08">Scroll door de lijst van afspraken.</string>
-    <string name="app_description_4000_chars_max_part09">Verander de tekstgrootte van de widget.</string>
-    <string name="app_description_4000_chars_max_part10">Volledig aanpasbaar formaat met twee verschillende indelingen.</string>
-    <string name="app_description_4000_chars_max_part11">Indicatoren voor herinneringen en herhaalde afspraken.</string>
-    <string name="app_description_4000_chars_max_part12">Vergrendel de tijdzone als u naar verschillende tijdzones reist.</string>
-    <string name="app_description_4000_chars_max_part13">Verberg de dagkop en toon \"aantal dagen vanaf vandaag\".</string>
-    <string name="app_description_4000_chars_max_part14">Android 4 - 7 wordt ondersteund. Ondersteunt Android tablets.</string>
+    <string name="app_description_4000_chars_max_part07">Updatet automatisch wanneer u een afspraak toevoegt/verwijdert/wijzigt. U kunt ook op verzoek bijwerken.</string>
+    <string name="app_description_4000_chars_max_part10">Vergrendel de tijdzone als u naar verschillende tijdzones reist.</string>
+    <string name="app_description_4000_chars_max_part12">Android 4.4+ wordt ondersteund. Ondersteunt Android tablets.</string>
     <!-- Preference header: Calendars and Task Lists -->
     <string name="calendars_prefs">Agenda\'s</string>
     <string name="calendars_prefs_desc">Selecteer de weer te geven agenda\'s</string>

@@ -34,7 +34,7 @@
             app:summary="@string/this_option_is_turned_off"
             app:iconSpaceReserved="false" />
 
-        <org.andstatus.todoagenda.prefs.MultilineCheckBoxPreference
+        <com.github.ekalin.kalendar.prefs.MultilineCheckBoxPreference
             app:key="showOnlyClosestInstanceOfRecurringEvent"
             app:title="@string/show_only_closest_instance_of_recurring_event"
             app:defaultValue="false"

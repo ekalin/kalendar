@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="org.andstatus.todoagenda.MainActivity">
+    tools:context="com.github.ekalin.kalendar.MainActivity">
 
     <TextView
         android:id="@+id/message"

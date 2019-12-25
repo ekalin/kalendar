@@ -20,6 +20,6 @@
         app:title="@string/task_lists_pref_title"
         app:summary="@string/task_lists_pref_summary"
         app:persistent="false"
-        app:fragment="org.andstatus.todoagenda.prefs.TaskListsPreferencesFragment"
+        app:fragment="com.github.ekalin.kalendar.prefs.TaskListsPreferencesFragment"
         app:iconSpaceReserved="false" />
 </PreferenceScreen>

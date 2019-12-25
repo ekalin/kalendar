@@ -1,95 +1,62 @@
-# Todo Agenda - Calendar and Task widgets for Android
+# Kalendar Widget - Upcoming events and tasks widget for Android
 
-[![Build Status](https://travis-ci.org/andstatus/todoagenda.svg?branch=master)](https://travis-ci.org/andstatus/todoagenda)
+Kalendar is a home screen widget for your Android device. Each widget has its own settings and displays configured list of calendar events and tasks so that you can easily have a glimpse at your appointments.
 
-Todo Agenda is a home screen widget for your Android device. 
-Each widget has its own settings and displays configured list of calendar events and tasks
-so that you can easily have a glimpse at your appointments.
-
-<table style="border-collapse:collapse; margin:0; padding:0">
-<tr>
-<td>
-<a href="https://play.google.com/store/apps/details?id=org.andstatus.todoagenda">
+<a href="https://play.google.com/store/apps/details?id=com.github.ekalin.kalendar">
 <img alt="Get it on Google Play" 
     src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png" 
     width="150px"/>
 </a>
-</td>
-<td>
-<a href="https://f-droid.org/en/packages/com.plusonelabs.calendar">
-<img alt="Get it on F-Droid" src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" width="175px"/>
-</a>
-</td>
-</tr>
-</table>
+<br/><br/>
 
-Want to contribute to the project? Start by translating the widget to another language or update existing translation
-at [Translation project at Crowdin](http://crowdin.net/project/plusonelabs-calendar-widget) 
-and be a part of the next release. :)
-
-![Calendar Widget Screenshots](assets/screenshots/widget-device.png)
+![Kalendar Widget screenshot](assets/screenshots/widget.png)
+![Preferences screenshot](assets/screenshots/prefs.png)
 
 ## Features
 
 * No advertising. Free and Open Source.
-* Displays events from your calendars and task lists for the selected period. Optionally shows past events.
+* Displays events from selected calendars and task lists.
+* Select how far ahead to display events (one week, one month, etc.). Optionally shows past events.
 * Automatically updates when you add/delete/modify an event. Or you may update the list instantly.
-* Select only the calendars and task lists that you want to see in the widget.
-* Create several widgets, if you need. Each widget has its own settings, including layouts, filters 
-and selected calendars and task lists.
-* Customize colors of the widget background and texts.
-* Scroll through the list of upcoming events.
-* Customize the text size of the widget.
-* Fully resizable widget with two alternative layouts.
-* Indicators for alerts and recurring events.
+* Customize colors and text size of the widget.
+* Fully resizable widget with two alternative layouts and layout customizations.
 * Lock time zone when travelling to different time zones.
-* Turn off Day headers and see dates in the "Days from today" column.
 * Backup and restore settings, cloning widgets on the same or different devices.
 * Android 4.4+ supported. Supports Android tablets.
 
-Note on Tasks support: As there is no unified way to access tasks created in different applications, 
-each application needs its own implementation. Currently supported:
+Note on Tasks support: As there is no unified way to access tasks created in different applications, each application needs its own implementation. Currently supported:
 * [OpenTasks (by dmfs GmbH)](https://github.com/dmfs/opentasks).
 * Tasks of Samsung Calendar. 
 
 ## Collaborate
 
-We are developing this application in public to bring you a tool that _you_ want to use. Please feel free to open 
-[issues](https://github.com/plusonelabs/calendar-widget/issues) and provide 
-[pull requests](https://github.com/andstatus/todoagenda/pulls). 
-To get timely feedback we are also making use of the open beta feature in the Google Play Store. 
-Please [opt-in here](https://play.google.com/apps/testing/org.andstatus.todoagenda).
+We are developing this application in public to bring you a tool that _you_ want to use. Please feel free to open [issues](https://github.com/ekalin/kalendar/issues) and provide [pull requests](https://github.com/ekalin/kalendar/pulls). 
 
-We are also looking for new and improved translations over at http://crowdin.net/project/plusonelabs-calendar-widget.
 
 ## Changelog
 
-### [v2.4.0]
-* Ongoing events are highlighted in a different color.
-* [Text size scaling improved](https://github.com/plusonelabs/calendar-widget/issues/301) - Now size of text in all parts
-  of the widget changes, when you change "Text size" option.
-* [Backup and Restore widget settings](https://github.com/plusonelabs/calendar-widget/issues/330). 
-  Convenient for cloning settings to another widget on the same device. 
-  Good for moving widget settings to another device, but may require calendars selection adjustment in this case.
-* It's now possible to set the colors of the widget texts individually, instead of selecting a theme (which was
-  confusingly called a "shading").
-* Hopefully fixed intermittent "No events" display instead of actual list of events. 
-  Separate "[ToDo Agenda Not Initialized yet...](https://github.com/plusonelabs/calendar-widget/issues/318)" layout added 
-  to see the widget, when it is not initialized yet (e.g. after device reboot).
+### v2.4.0
 
-### [v2.3.0]
+* Ongoing events are highlighted in a different color.
+* [Text size scaling improved](https://github.com/plusonelabs/calendar-widget/issues/301) - Now size of text in all parts of the widget changes, when you change "Text size" option.
+* [Backup and Restore widget settings](https://github.com/plusonelabs/calendar-widget/issues/330). Convenient for cloning settings to another widget on the same device. Good for moving widget settings to another device, but may require calendars selection adjustment in this case.
+* It's now possible to set the colors of the widget texts individually, instead of selecting a theme (which was confusingly called a "shading").
+* Hopefully fixed intermittent "No events" display instead of actual list of events. Separate "[ToDo Agenda Not Initialized yet...](https://github.com/plusonelabs/calendar-widget/issues/318)" layout added to see the widget, when it is not initialized yet (e.g. after device reboot).
+
+### v2.3.0
+
 * [Don't show time for All day events](https://github.com/plusonelabs/calendar-widget/issues/236).
 * Show end date for multi-day all day events when "Fill all day events" is disabled.
 * Show end time for events spanning more than one day (but not all day events) when "Fill all day events" is disabled.
-* [Display location independently of time](https://github.com/plusonelabs/calendar-widget/issues/221), 
-  including showing location for All day events.
+* [Display location independently of time](https://github.com/plusonelabs/calendar-widget/issues/221), including showing location for All day events.
 
-### [v2.2.0]
+### v2.2.0
+
 * Fixes all-day events disappearing before the end of the day.
 
 ### [v2.1](https://github.com/plusonelabs/calendar-widget/issues/308) Tasks support
-* Tasks support added. Two Task apps are supported: [OpenTasks (by dmfs GmbH)](https://github.com/dmfs/opentasks)
-  and Tasks of Samsung Calendar. 
+
+* Tasks support added. Two Task apps are supported: [OpenTasks (by dmfs GmbH)](https://github.com/dmfs/opentasks) and Tasks of Samsung Calendar. 
 
 ### [v2.0.0](https://github.com/plusonelabs/calendar-widget/issues/291) Renamed and republished
 
@@ -296,3 +263,10 @@ double quotes in order to have space or comma in a filter.
 ### v1.0
 
 * Initial Release
+
+
+## Licence and authors
+
+Kalendar Widget is released under the [Apache 2.0 Licence](LICENSE).
+
+Kalendar Widget is currently maintained by Eduardo M KALINOWSKI. It is based on [ToDo Agenda](https://github.com/plusonelabs/calendar-widget), written by Yuri Volkov and Moritz Post, with help from other contributors and translators.
