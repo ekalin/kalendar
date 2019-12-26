@@ -1,12 +1,17 @@
 apply plugin: 'com.android.application'
 
+ext.versionMajor = 2
+ext.versionMinor = 4
+ext.versionPatch = 0
+ext.versionBuild = 1
+
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
-        versionCode getCommitCount()
-        versionName '2.3.0' + "-" + versionCode
+        versionCode generateVersionCode()
+        versionName generateVersionName()
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
 
@@ -17,7 +22,7 @@ android {
         release {
             minifyEnabled false
             lintOptions {
-                warning 'MissingTranslation','InvalidPackage'
+                warning 'MissingTranslation', 'InvalidPackage'
             }
         }
     }
@@ -68,13 +73,13 @@ dependencies {
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
 }
 
-static getCommitCount() {
-    try {
-        def git = org.ajoberstar.grgit.Grgit.open()
-        def versionCode = git.log().size()
-        git.close()
-        return versionCode
-    } catch (ignored) {
-        return 1
-    }
+private Integer generateVersionCode() {
+    return ext.versionMajor * 1000000 \
+             + ext.versionMinor * 10000 \
+             + ext.versionPatch * 100 \
+             + ext.versionBuild
+}
+
+private String generateVersionName() {
+    return "${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
 }
