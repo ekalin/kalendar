@@ -89,7 +89,7 @@ public class CalendarEventVisualizer extends WidgetEntryVisualizer<CalendarEntry
 
     @Override
     public int getViewTypeCount() {
-        return 1;
+        return 2;
     }
 
     @Override
