@@ -20,6 +20,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.task.TaskProvider;
+import com.github.ekalin.kalendar.util.PermissionsUtil;
 
 import static com.github.ekalin.kalendar.KalendarAppWidgetProvider.getWidgetIds;
 import static com.github.ekalin.kalendar.KalendarRemoteViewsFactory.ACTION_REFRESH;
@@ -49,12 +50,14 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
                 oldReceiver.unRegister(applContext);
             }
 
-            EventsContentObserver calendarObserver = new EventsContentObserver(applContext);
-            applContext.getContentResolver().registerContentObserver(CalendarContract.CONTENT_URI, false,
-                    calendarObserver);
-            ContentObserver oldCalendarObserver = registeredCalendarObserver.getAndSet(calendarObserver);
-            if (oldCalendarObserver != null) {
-                applContext.getContentResolver().unregisterContentObserver(oldCalendarObserver);
+            if (PermissionsUtil.arePermissionsGranted(applContext)) {
+                EventsContentObserver calendarObserver = new EventsContentObserver(applContext);
+                applContext.getContentResolver().registerContentObserver(CalendarContract.CONTENT_URI, false,
+                        calendarObserver);
+                ContentObserver oldCalendarObserver = registeredCalendarObserver.getAndSet(calendarObserver);
+                if (oldCalendarObserver != null) {
+                    applContext.getContentResolver().unregisterContentObserver(oldCalendarObserver);
+                }
             }
 
             List<ContentObserver> taskObservers = TaskProvider.registerObservers(applContext,
