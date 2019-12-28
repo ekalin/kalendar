@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name" translatable="false">Kalendar</string>
     <string name="widget_name" translatable="false">Kalendar</string>
-    <string name="widget_instance_name">Widget name</string>
     <string name="yesterday">Yesterday</string>
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
     <string name="not_initialized_yet">Not initialized yet…</string>
     <string name="no_events_to_show">No events to show</string>
-    <string name="open_prefs_desc">Open the settings of the calendar widget</string>
     <string name="add_event_desc">Add new calendar event</string>
+    <string name="refresh_desc">Refresh</string>
+    <string name="open_prefs_desc">Open the settings of the calendar widget</string>
     <string name="indicator_alarm">Indicator if an alarm has been set</string>
     <string name="indicator_recurring">Indicator if the event is recurring</string>
     <string name="no_title">(No title)</string>
@@ -21,7 +20,6 @@
     <string name="select_a_widget_to_configure">Select a widget to configure</string>
     <string name="close">Close</string>
     <string name="go_to_home_screen">Go to home screen</string>
-    <string name="task_icon" translatable="false">✓</string>
 
     <!-- Descriptions for app markets -->
     <string name="app_description_80_chars_max">Widget that displays a list of upcoming events and tasks</string>
@@ -45,6 +43,7 @@
     <!-- Preference header: Layout -->
     <string name="layout_prefs_title">Layout</string>
     <string name="layout_prefs_desc">Place, show and hide widget elements</string>
+    <string name="widget_instance_name">Widget name</string>
     <string name="appearance_text_size_title">Text size</string>
     <string name="appearance_text_size_desc">Adjust the text size</string>
     <string name="appearance_text_size_very_small">Very small</string>
@@ -57,15 +56,22 @@
     <string name="single_line_layout">All in one row</string>
     <string name="appearance_multiline_title_title">Multiline title</string>
     <string name="appearance_multiline_title_desc">Spread event title over multiple lines</string>
-    <string name="appearance_show_days_without_events_title">Show days without events</string>
-    <string name="appearance_show_days_without_events_desc">Show day headers for days without events</string>
+    <string name="appearance_abbreviate_dates_title">Abbreviate dates</string>
+    <string name="appearance_abbreviate_dates_desc">Use three-letter format for dates in Widget and Day headers etc.</string>
     <string name="appearance_show_day_headers_title">Show day headers</string>
     <string name="appearance_show_day_headers_desc">Show day headers at all</string>
+    <string name="appearance_day_header_alignment_title">Day header alignment</string>
+    <string name="appearance_day_header_alignment_desc">Set the alignment of the day header</string>
+    <string name="appearance_day_header_alignment_left">Left</string>
+    <string name="appearance_day_header_alignment_center">Center</string>
+    <string name="appearance_day_header_alignment_right">Right</string>
+    <string name="appearance_show_days_without_events_title">Show days without events</string>
+    <string name="appearance_show_days_without_events_desc">Show day headers for days without events</string>
     <string name="appearance_display_header_title">Show widget header</string>
     <string name="appearance_display_header_desc">Show the date and settings header</string>
+    <string name="lock_time_zone_title">Lock time zone</string>
     <string name="lock_time_zone_off_desc">Unlocked, current zone: %s</string>
     <string name="lock_time_zone_on_desc">Locked at %s</string>
-    <string name="lock_time_zone_title">Lock time zone</string>
 
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Colors</string>
@@ -82,13 +88,6 @@
     <string name="appearance_background_color_desc">Adjust the color of the background</string>
     <string name="appearance_past_events_background_color_title">Past events background color</string>
     <string name="appearance_past_events_background_color_desc">Adjust background color of past events</string>
-    <string name="appearance_day_header_alignment_desc">Set the alignment of the day header</string>
-    <string name="appearance_day_header_alignment_title">Day header alignment</string>
-    <string name="appearance_day_header_alignment_left">Left</string>
-    <string name="appearance_day_header_alignment_center">Center</string>
-    <string name="appearance_day_header_alignment_right">Right</string>
-    <string name="appearance_abbreviate_dates_title">Abbreviate dates</string>
-    <string name="appearance_abbreviate_dates_desc">Use three-letter format for dates in Widget and Day headers etc.</string>
 
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Event details</string>
@@ -108,11 +107,16 @@
     <!-- Preference header: Event filters -->
     <string name="event_filters_prefs">Event filters</string>
     <string name="event_filters_prefs_desc">Which current, future and past events to show</string>
-    <string name="all_events">All events</string>
-    <string name="current_and_future_events">Current and future events</string>
     <string name="past_events">Past events</string>
+    <string name="pref_events_ended_title">Show past events</string>
+    <string name="this_option_is_turned_off">(disabled)</string>
+    <string name="ended_one_hour_ago">Ended one hour ago</string>
+    <string name="ended_two_hours_ago">Ended two hours ago</string>
+    <string name="ended_four_hours_ago">Ended four hours ago</string>
+    <string name="ended_today">Ended today</string>
+    <string name="ended_yesterday">Ended yesterday</string>
+    <string name="current_and_future_events">Current and future events</string>
     <string name="event_details_event_range_title">Date range</string>
-    <string name="event_details_event_range_desc">Configure the number of events to display</string>
     <string name="event_range_today">Today</string>
     <string name="event_range_one_day">One day</string>
     <string name="event_range_one_week">One week</string>
@@ -122,17 +126,12 @@
     <string name="event_range_three_months">Three months</string>
     <string name="event_range_six_months">Six months</string>
     <string name="event_range_one_year">One year</string>
-    <string name="this_option_is_turned_off">(disabled)</string>
-    <string name="pref_events_ended_title">Show past events</string>
-    <string name="ended_one_hour_ago">Ended one hour ago</string>
-    <string name="ended_two_hours_ago">Ended two hours ago</string>
-    <string name="ended_four_hours_ago">Ended four hours ago</string>
-    <string name="ended_today">Ended today</string>
-    <string name="ended_yesterday">Ended yesterday</string>
+    <string name="all_events">All events</string>
     <string name="pref_hide_based_on_keywords_title">Hide based on keywords in a title</string>
     <string name="show_only_closest_instance_of_recurring_event">Show only the closest instance of a recurring event</string>
 
     <!-- Preference header: Tasks -->
+    <string name="task_icon" translatable="false">✓</string>
     <string name="task_prefs">Tasks</string>
     <string name="task_prefs_desc">Configure display of tasks/TODOs</string>
     <string name="task_source_pref_title">Task events source</string>
@@ -147,11 +146,10 @@
     <!-- Preference header: Feedback -->
     <string name="feedback_backup_prefs">Feedback and Backup</string>
     <string name="feedback_backup_prefs_desc">Get in touch with us, backup and restore settings</string>
-    <string name="feedback_github_desc">Provide feedback on the project page</string>
     <string name="feedback_github_title">Visit widget on Github</string>
-    <string name="feedback_play_store_desc">Rate and comment on Google Play Store</string>
+    <string name="feedback_github_desc">Provide feedback on the project page</string>
     <string name="feedback_play_store_title">Visit widget on Google Play Store</string>
-    <string name="refresh_desc">Refresh</string>
+    <string name="feedback_play_store_desc">Rate and comment on Google Play Store</string>
     <string name="share_events_for_debugging_desc">Create a report to help developers troubleshoot problems.
         Before sharing please filter events to protect your privacy but still demonstrate a problem</string>
     <string name="share_events_settings_for_debugging_title">Share events and settings for debugging</string>
@@ -164,5 +162,4 @@
     <string name="restore_settings_successful">Settings restored</string>
     <string name="restore_settings_unsuccessful">Could not restore settings</string>
     <string name="restore_settings_error">Error while reading settings from %1$s\n%2$s</string>
-
 </resources>
