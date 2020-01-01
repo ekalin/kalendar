@@ -5,29 +5,28 @@ buildscript {
     }
 
     ext {
-        compileSdkVersion = 28 as int
-        buildToolsVersion = '28.0.3'
+        compileSdkVersion = 29 as int
+        buildToolsVersion = '29.0.2'
         minSdkVersion = 19 as int
-        targetSdkVersion = 28 as int
+        targetSdkVersion = 29 as int
 
         annotationVersion = '1.0.1'
         appCompatVersion = '1.1.0'
         colorPickerVersion = '1.1.0'
-        grgitVersion = '2.1.0'
         jodaTimeVersion = '2.10.3'
         junitVersion = '4.12'
         mockitoVersion = '3.0.0'
         preferenceVersion = '1.1.0'
-        robolectricVersion = '4.3'
+        robolectricVersion = '4.3.1'
         testCoreVersion = '1.2.0'
         truthVersion = '1.0'
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.2'
-        classpath "org.ajoberstar:grgit:$grgitVersion"
+        classpath 'com.android.tools.build:gradle:3.5.3'
     }
 }
+
 allprojects {
     repositories {
         google()
