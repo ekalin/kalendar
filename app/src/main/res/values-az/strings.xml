@@ -3,6 +3,8 @@
     <string name="yesterday">Dünən</string>
     <string name="today">Bugün</string>
     <string name="tomorrow">Sabah</string>
+    <string name="not_initialized_yet">Hələ başladılmayıb…</string>
+    <string name="no_events_to_show">Göstəriləcək heç bir tədbir yoxdur</string>
     <string name="add_event_desc">Yeni təqvim tədbiri əlavə et</string>
     <string name="refresh_desc">Təzələ</string>
     <string name="open_prefs_desc">Təqvim vidget tənzimləmələrini aç</string>

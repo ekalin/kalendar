@@ -3,6 +3,8 @@
     <string name="yesterday">I går</string>
     <string name="today">I dag</string>
     <string name="tomorrow">I morgen</string>
+    <string name="not_initialized_yet">Har ikke startet opp enda …</string>
+    <string name="no_events_to_show">Ingen hendelser å vise</string>
     <string name="add_event_desc">Legg til ny kalenderhendelse</string>
     <string name="refresh_desc">Oppdater</string>
     <string name="open_prefs_desc">Åpne innstillingene til Calendar Widget</string>
@@ -10,15 +12,24 @@
     <string name="indicator_recurring">Indikator dersom hendelsen er gjentakende</string>
     <string name="no_title">(Ingen tittel)</string>
     <string name="grant_permissions">Gi tillatelse</string>
+    <string name="grant_permissions_verbose">Modulen trenger tillatelse til å lese kalendere og oppgaver..\n
+        Trykk her for å gi tillatelser.</string>
+    <string name="permissions_justification">Velkommen til Todo Agenda, den enkle tilgangen til dine kalendere og oppgaver.\n\n
+        For å få mest ut av modulen, må du gi den tilgang til dine kalendere og oppgaver.</string>
+    <string name="no_widgets_found">Vennligst legg til en \"Todo Agenda\"-modul på din mobils hjemmeskjerm først.</string>
+    <string name="select_a_widget_to_configure">Velg en modul å sette opp</string>
     <string name="close">Lukk</string>
-    <string name="go_to_home_screen">Gå til hjemskjerm</string>
+    <string name="go_to_home_screen">Gå til hjemmeskjermen</string>
 
     <!-- Descriptions for app markets -->
+
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Kalendere</string>
     <string name="calendars_prefs_desc">Velg kalenderne som skal vises</string>
 
     <!-- Preference header: Layout -->
+    <string name="layout_prefs_title">Oppsett</string>
+    <string name="layout_prefs_desc">Plassér, vis og skjul modulelementer</string>
     <string name="widget_instance_name">Widget-navn</string>
     <string name="appearance_text_size_title">Tekststørrelse</string>
     <string name="appearance_text_size_desc">Juster tekststørrelsen</string>
@@ -27,9 +38,15 @@
     <string name="appearance_text_size_medium">Middels</string>
     <string name="appearance_text_size_large">Stor</string>
     <string name="appearance_text_size_very_large">Ekstra stor</string>
+    <string name="pref_event_entry_layout_title">Hendelsesoppføringsoppsett</string>
+    <string name="default_multiline_layout">Tid under tittelen</string>
     <string name="single_line_layout">Alt på én rad</string>
     <string name="appearance_multiline_title_title">Flerlinjetitler</string>
     <string name="appearance_multiline_title_desc">Sprer hendelsens tittel over flere linjer</string>
+    <string name="appearance_abbreviate_dates_title">Forkort datoer</string>
+    <string name="appearance_abbreviate_dates_desc">Bruk 3-bokstaversformat for datoer i modulen, dagsoverskriftene, osv.</string>
+    <string name="appearance_show_day_headers_title">Vis dagslinjer</string>
+    <string name="appearance_show_day_headers_desc">Vis dagslinjer i det hele tatt</string>
     <string name="appearance_day_header_alignment_title">Justering av dag-linje</string>
     <string name="appearance_day_header_alignment_desc">Velg posisjonen til dag-linjen</string>
     <string name="appearance_day_header_alignment_left">Venstre</string>
@@ -37,8 +54,13 @@
     <string name="appearance_day_header_alignment_right">Høyre</string>
     <string name="appearance_show_days_without_events_title">Vis dager uten hendelser</string>
     <string name="appearance_show_days_without_events_desc">Vis overskrifter for dager uten hendelser</string>
+    <string name="lock_time_zone_off_desc">Ulåst, nåværende tidssone: %s</string>
+    <string name="lock_time_zone_on_desc">Låst fast til %s</string>
+    <string name="lock_time_zone_title">Lås fast tidssonen</string>
+
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Farger</string>
+    <string name="colors_prefs_desc">Fargene og gjennomsiktigheten til tekst og bakgrunner</string>
     <string name="appearance_background_color_title">Bakgrunnsfarge</string>
     <string name="appearance_background_color_desc">Juster bakgrunnsfargen</string>
     <string name="appearance_past_events_background_color_title">Bakgrunnsfarge for tidligere hendelser</string>
@@ -83,10 +105,18 @@
     <string name="event_range_one_year">Et år</string>
     <string name="all_events">Alle hendelser</string>
     <string name="pref_hide_based_on_keywords_title">Skjul basert på nøkkelord i en tittel</string>
+    <string name="show_only_closest_instance_of_recurring_event">Vis kun det nærmeste tilfellet av en gjentakende hendelse</string>
+
     <!-- Preference header: Tasks -->
+    <string name="task_source_opentasks">OpenTasks (av dmfs GmbH)</string>
+    <string name="task_source_samsung">Samsung-kalender</string>
+
     <!-- Preference header: Feedback -->
     <string name="feedback_github_title">Besøk Calendar Widget på Github</string>
     <string name="feedback_github_desc">Kom med tilbakemeldinger på prosjektsiden</string>
     <string name="feedback_play_store_title">Besøk Calendar Widget på Google Play</string>
     <string name="feedback_play_store_desc">Ranger og kommenter på Google Play</string>
-    </resources>
+    <string name="share_events_for_debugging_desc">Opprett en saksrapport for å hjelpe utviklere med å feilsøke problemer. Før du deler det med oss, vennligst filtrer hendelser for å beskytte privatlivet ditt og likevel kunne demonstrere at det er et problem</string>
+    <string name="backup_settings_title">Sikkerhetskopier innstillinger</string>
+    <string name="restore_settings_title">Tilbakestill innstillinger fra en sikkerhetskopi</string>
+</resources>

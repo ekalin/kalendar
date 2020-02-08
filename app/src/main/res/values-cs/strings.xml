@@ -3,6 +3,8 @@
     <string name="yesterday">Včera</string>
     <string name="today">Dnes</string>
     <string name="tomorrow">Zítra</string>
+    <string name="not_initialized_yet">Zatím neinicializováno…</string>
+    <string name="no_events_to_show">Žádné události k zobrazení</string>
     <string name="add_event_desc">Přidat novou událost</string>
     <string name="refresh_desc">Obnovit</string>
     <string name="open_prefs_desc">Otevřít nastavení widgetu</string>
@@ -11,16 +13,21 @@
     <string name="no_title">(Bez názvu)</string>
     <string name="grant_permissions">Udělit oprávnění</string>
     <string name="grant_permissions_verbose">Widget vyžaduje oprávnění ke čtení kalendářů.\nStiskněte zde pro udělení oprávnění.</string>
+    <string name="permissions_justification">Vítejte v Todo Agenda, snadnému přístupu k Vašim kalendářům a úkolům.\n\n
+        Pro správnou funkčnost widgetu mu povolte přístup ke kalendářům a úkolům.</string>
+    <string name="no_widgets_found">Nejdříve přidejte widget \"Todo Agenda\" na hlavní obrazovku.</string>
     <string name="select_a_widget_to_configure">Vyberte widget ke konfiguraci</string>
     <string name="close">Zavřít</string>
     <string name="go_to_home_screen">Přejít na domovskou stránku</string>
 
     <!-- Descriptions for app markets -->
+
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Kalendáře</string>
     <string name="calendars_prefs_desc">Vyberte kalendaře k zobrazení</string>
 
     <!-- Preference header: Layout -->
+    <string name="layout_prefs_title">Uspořádání</string>
     <string name="widget_instance_name">Název instance widgetu</string>
     <string name="appearance_text_size_title">Velikost textu</string>
     <string name="appearance_text_size_desc">Nastavit velikost textu</string>

@@ -3,18 +3,18 @@
     <string name="yesterday">Ahir</string>
     <string name="today">Avui</string>
     <string name="tomorrow">Demà</string>
-    <string name="not_initialized_yet">No inicialitzat encara...</string>
-    <string name="no_events_to_show">No hi ha esdeveniments per mostrar</string>
+    <string name="not_initialized_yet">No inicialitzat encara…</string>
+    <string name="no_events_to_show">Cap esdeveniment per mostrar</string>
     <string name="add_event_desc">Afegir un nou esdeveniment</string>
-    <string name="refresh_desc">Refrescar</string>
+    <string name="refresh_desc">Refresca</string>
     <string name="open_prefs_desc">Obrir la configuració del widget del calendari</string>
     <string name="indicator_alarm">Indicador de si s\'ha creat una alarma</string>
     <string name="indicator_recurring">Indicador de si l\'esdeveniment és recurrent</string>
     <string name="no_title">(Sense títol)</string>
     <string name="grant_permissions">Concedeix permisos</string>
     <string name="grant_permissions_verbose">El giny requereix permís per llegir calendaris.\nPremeu aquí per concedir-li.</string>
-    <string name="permissions_justification">Et donem la benvinguda a Kalendar, l\'accés fàcil al teu calendari.\n\nPerquè el giny pugui executar totes les funcions necessites donar-li accés al teu calendari.</string>
-    <string name="no_widgets_found">Per favor afegeix el giny \"Kalendar\" a la pantalla principal del teu dispositiu.</string>
+    <string name="permissions_justification">Et donem la benvinguda a Todo Agenda, l\'accés fàcil al teu calendari i tasques.\n\nPerquè el giny pugui executar totes les funcions cal donar-li accés al teu calendari.</string>
+    <string name="no_widgets_found">Per favor, primer afegeix el giny \"Todo Agenda\" a la pantalla principal del teu dispositiu.</string>
     <string name="select_a_widget_to_configure">Seleccioneu un giny per configurar</string>
     <string name="close">Tanca</string>
     <string name="go_to_home_screen">Anar a la pantalla d\'inici</string>
@@ -54,7 +54,7 @@
     <string name="appearance_day_header_alignment_left">A l\'esquerra</string>
     <string name="appearance_day_header_alignment_center">Al centre</string>
     <string name="appearance_day_header_alignment_right">A la dreta</string>
-    <string name="appearance_show_days_without_events_title">Visualitzar dies sense esdeveniments</string>
+    <string name="appearance_show_days_without_events_title">Mostra dies sense esdeveniments</string>
     <string name="appearance_show_days_without_events_desc">Mostra capçaleres pels dies sense esdeveniments</string>
     <string name="lock_time_zone_title">Bloqueja la zona horària</string>
     <string name="lock_time_zone_off_desc">Desbloquejat, zona actual: %s</string>
@@ -66,7 +66,7 @@
     <string name="appearance_background_color_title">Color de fons</string>
     <string name="appearance_background_color_desc">Ajusteu el color del fons</string>
     <string name="appearance_past_events_background_color_title">Color de fons dels esdeveniments passats</string>
-    <string name="appearance_past_events_background_color_desc">Ajustar color de fons dels esdeveniments passats</string>
+    <string name="appearance_past_events_background_color_desc">Ajusta el color de fons dels esdeveniments passats</string>
 
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Detalls de l\'esdeveniment</string>
@@ -87,13 +87,13 @@
     <string name="event_filters_prefs">Filtres d\'esdeveniments</string>
     <string name="event_filters_prefs_desc">Quins esdeveniments presents, futurs i passats visualitzar</string>
     <string name="past_events">Esdeveniments passats</string>
-    <string name="pref_events_ended_title">Mostra els esdeveniments que han finalitzat recentment</string>
+    <string name="pref_events_ended_title">Mostra els esdeveniments finalitzats</string>
     <string name="this_option_is_turned_off">(desactivat)</string>
-    <string name="ended_one_hour_ago">Finalitzats fa una hora</string>
-    <string name="ended_two_hours_ago">Finalitzats fa dues hores</string>
-    <string name="ended_four_hours_ago">Finalitzats fa quatre hores</string>
-    <string name="ended_today">Finalitzats avui</string>
-    <string name="ended_yesterday">Finalitzats ahir</string>
+    <string name="ended_one_hour_ago">Finalitzat fa una hora</string>
+    <string name="ended_two_hours_ago">Finalitzat fa dues hores</string>
+    <string name="ended_four_hours_ago">Finalitzat fa quatre hores</string>
+    <string name="ended_today">Finalitzat avui</string>
+    <string name="ended_yesterday">Finalitzat ahir</string>
     <string name="current_and_future_events">Esdeveniments presents i futurs</string>
     <string name="event_details_event_range_title">Interval de dates</string>
     <string name="event_range_today">Avui</string>
@@ -107,11 +107,12 @@
     <string name="event_range_one_year">Un any</string>
     <string name="all_events">Tots els esdeveniments</string>
     <string name="pref_hide_based_on_keywords_title">Amagar en funció de les paraules clau al títol</string>
-    <string name="show_only_closest_instance_of_recurring_event">Visualitzar només la instància més propera d\'un esdeveniment recurrent</string>
+    <string name="show_only_closest_instance_of_recurring_event">Mostrar només el cas més proper d\'un esdeveniment periòdic</string>
 
     <!-- Preference header: Tasks -->
-    <string name="task_source_opentasks">OpenTasks (by dmfs GmbH)</string>
+    <string name="task_source_opentasks">OpenTasks (per dmfs GmbH)</string>
     <string name="task_source_samsung">Samsung Calendar</string>
+
     <!-- Preference header: Feedback -->
     <string name="feedback_backup_prefs">Suport i còpia de seguretat</string>
     <string name="feedback_backup_prefs_desc">Poseu-vos en contacte amb nosaltres, configuració de còpia de seguretat i restauració</string>
@@ -123,4 +124,4 @@
         Abans de compartir filtreu esdeveniments per protegir la vostra privadesa, però encara demostreu el problema</string>
     <string name="share_events_settings_for_debugging_title">Compartiu esdeveniments i configuracions per a la depuració</string>
     <string name="restore_settings_title">Restaureu la configuració des d’una còpia de seguretat</string>
-    </resources>
+</resources>
