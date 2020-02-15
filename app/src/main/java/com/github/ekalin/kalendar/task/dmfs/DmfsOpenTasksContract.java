@@ -17,6 +17,7 @@ public class DmfsOpenTasksContract {
         public static final String COLUMN_LIST_ID = "list_id";
 
         public static final int STATUS_COMPLETED = 2;
+        public static final int STATUS_CANCELED = 3;
     }
 
     public static class TaskLists {

@@ -32,8 +32,9 @@ import com.github.ekalin.kalendar.util.PermissionsUtil;
 
 public class CalendarEventProvider extends EventProvider {
     public static final String EVENT_SORT_ORDER = "startDay ASC, allDay DESC, begin ASC ";
-    private static final String EVENT_SELECTION = Instances.SELF_ATTENDEE_STATUS + "!="
+    private static final String EXCLUDE_DECLINED = Instances.SELF_ATTENDEE_STATUS + NOT_EQUALS
             + Attendees.ATTENDEE_STATUS_DECLINED;
+    private static final String EXCLUDE_CANCELED = Instances.STATUS + NOT_EQUALS + Instances.STATUS_CANCELED;
     private static final String[] CALENDARS_PROJECTION = new String[]{Calendars._ID,
             Calendars.CALENDAR_DISPLAY_NAME, Calendars.CALENDAR_COLOR,
             Calendars.ACCOUNT_NAME};
@@ -112,7 +113,8 @@ public class CalendarEventProvider extends EventProvider {
 
     private String getCalendarSelection() {
         Set<String> activeCalendars = getSettings().getActiveCalendars();
-        StringBuilder stringBuilder = new StringBuilder(EVENT_SELECTION);
+        StringBuilder stringBuilder = new StringBuilder(EXCLUDE_DECLINED).append(AND).append(EXCLUDE_CANCELED);
+
         if (!activeCalendars.isEmpty()) {
             stringBuilder.append(AND_BRACKET);
             Iterator<String> iterator = activeCalendars.iterator();
@@ -127,6 +129,7 @@ public class CalendarEventProvider extends EventProvider {
             }
             stringBuilder.append(CLOSING_BRACKET);
         }
+
         return stringBuilder.toString();
     }
 

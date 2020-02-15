@@ -35,6 +35,10 @@ We are developing this application in public to bring you a tool that _you_ want
 
 ## Changelog
 
+### In development
+
+* Canceled events and tasks are not shown anymore.
+
 ### v2.4.0
 
 * Ongoing events are highlighted in a different color.

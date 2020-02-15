@@ -89,7 +89,8 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
     private String getWhereClause() {
         StringBuilder whereBuilder = new StringBuilder();
 
-        whereBuilder.append(DmfsOpenTasksContract.Tasks.COLUMN_STATUS).append(NOT_EQUALS).append(DmfsOpenTasksContract.Tasks.STATUS_COMPLETED);
+        whereBuilder.append(DmfsOpenTasksContract.Tasks.COLUMN_STATUS).append(NOT_EQUALS).append(DmfsOpenTasksContract.Tasks.STATUS_COMPLETED)
+                .append(AND).append(DmfsOpenTasksContract.Tasks.COLUMN_STATUS).append(NOT_EQUALS).append(DmfsOpenTasksContract.Tasks.STATUS_CANCELED);
 
         whereBuilder.append(AND_BRACKET)
                 .append(COLUMN_EFFECTIVE_START_DATE).append(LTE).append(mEndOfTimeRange.getMillis())
