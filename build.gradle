@@ -13,13 +13,13 @@ buildscript {
         annotationVersion = '1.0.1'
         appCompatVersion = '1.1.0'
         colorPickerVersion = '1.1.0'
-        jodaTimeVersion = '2.10.3'
+        jodaTimeVersion = '2.10.6'
         junitVersion = '4.12'
-        mockitoVersion = '3.0.0'
-        preferenceVersion = '1.1.0'
+        mockitoVersion = '3.3.3'
+        preferenceVersion = '1.1.1'
         robolectricVersion = '4.3.1'
         testCoreVersion = '1.2.0'
-        truthVersion = '1.0'
+        truthVersion = '1.0.1'
     }
 
     dependencies {
