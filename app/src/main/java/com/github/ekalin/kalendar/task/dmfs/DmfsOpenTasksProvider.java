@@ -185,6 +185,11 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
     }
 
     @Override
+    public String getAppPackage() {
+        return DmfsOpenTasksContract.APP_PACKAGE;
+    }
+
+    @Override
     public boolean hasPermission() {
         return hasPermission(context);
     }

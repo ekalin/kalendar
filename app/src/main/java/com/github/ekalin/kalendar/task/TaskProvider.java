@@ -42,6 +42,16 @@ public class TaskProvider extends EventProvider {
         return provider.isInstalled();
     }
 
+    public Optional<String> getNonInstallableReason(Context context, String taskSource) {
+        AbstractTaskProvider provider = getProvider(taskSource);
+        return provider.getNonInstallableReason(context);
+    }
+
+    public String getAppPackage(String taskSource) {
+        AbstractTaskProvider provider = getProvider(taskSource);
+        return provider.getAppPackage();
+    }
+
     public boolean hasPermissionForSource(String taskSource) {
         AbstractTaskProvider provider = getProvider(taskSource);
         return provider.hasPermission();

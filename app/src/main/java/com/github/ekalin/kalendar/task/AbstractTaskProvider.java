@@ -13,6 +13,7 @@ import com.github.ekalin.kalendar.prefs.EventSource;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.provider.EventProvider;
 import com.github.ekalin.kalendar.util.DateUtil;
+import com.github.ekalin.kalendar.util.Optional;
 
 public abstract class AbstractTaskProvider extends EventProvider {
     protected static final String COLUMN_EFFECTIVE_START_DATE = "EFFECTIVE_START_DATE";
@@ -39,6 +40,12 @@ public abstract class AbstractTaskProvider extends EventProvider {
     public abstract Intent createViewIntent(TaskEvent event);
 
     public abstract boolean isInstalled();
+
+    public Optional<String> getNonInstallableReason(Context context) {
+        return Optional.empty();
+    }
+
+    public abstract String getAppPackage();
 
     public abstract boolean hasPermission();
 

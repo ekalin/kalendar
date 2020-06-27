@@ -42,6 +42,11 @@ public class EmptyTaskProvider extends AbstractTaskProvider {
     }
 
     @Override
+    public String getAppPackage() {
+        return null;
+    }
+
+    @Override
     public void requestPermission(Fragment fragment) {
         // No action necessary
     }

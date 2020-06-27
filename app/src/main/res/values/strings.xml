@@ -138,7 +138,9 @@
     <string name="task_source_none">Don\'t display tasks</string>
     <string name="task_source_opentasks">OpenTasks (by dmfs GmbH)</string>
     <string name="task_source_samsung">Samsung Calendar</string>
+    <string name="task_source_samsung_not_installable">Samsung Calendar is only available on Samsung devices</string>
     <string name="task_app_not_installed">Selected task app is not installed</string>
+    <string name="task_app_install">Tap to install</string>
     <string name="grant_task_permission_title">Grant permission to fetch tasks</string>
     <string name="grant_task_permission_desc">You need to grant permission for tasks to be displayed</string>
     <string name="task_lists_pref_title">Task lists</string>

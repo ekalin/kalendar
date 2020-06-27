@@ -10,6 +10,8 @@ import java.util.Collections;
 import com.github.ekalin.kalendar.EnvironmentChangedReceiver;
 import com.github.ekalin.kalendar.R;
 import com.github.ekalin.kalendar.task.TaskProvider;
+import com.github.ekalin.kalendar.util.Optional;
+import com.github.ekalin.kalendar.util.PackageManagerUtil;
 
 public class TaskPreferencesFragment extends KalendarPreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String PREF_ACTIVE_TASK_LISTS_BUTTON = "activeTaskListsButton";
@@ -26,6 +28,7 @@ public class TaskPreferencesFragment extends KalendarPreferenceFragment implemen
     @Override
     public void onResume() {
         super.onResume();
+        updateState();
         getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
     }
 
@@ -46,26 +49,45 @@ public class TaskPreferencesFragment extends KalendarPreferenceFragment implemen
     }
 
     private void updateState() {
-        setGrantPermissionVisibility();
         setInstalledVisibility();
+        setGrantPermissionVisibility();
         setTaskListState();
-    }
-
-    private void setGrantPermissionVisibility() {
-        TaskProvider taskProvider = new TaskProvider(getActivity(), instanceSettings.getWidgetId(), instanceSettings);
-        Preference preference = findPreference(KEY_PREF_GRANT_TASK_PERMISSION);
-        preference.setVisible(!taskProvider.hasPermissionForSource(instanceSettings.getTaskSource()));
     }
 
     private void setInstalledVisibility() {
         TaskProvider taskProvider = new TaskProvider(getActivity(), instanceSettings.getWidgetId(), instanceSettings);
         Preference preference = findPreference(KEY_APP_NOT_INSTALLED);
-        preference.setVisible(!taskProvider.isInstalled(instanceSettings.getTaskSource()));
+        if (taskProvider.isInstalled(instanceSettings.getTaskSource())) {
+            preference.setVisible(false);
+        } else {
+            preference.setVisible(true);
+            Optional<String> nonInstallableReason =
+                    taskProvider.getNonInstallableReason(getActivity(), instanceSettings.getTaskSource());
+            nonInstallableReason.ifPresentOrElse(reason -> {
+                        preference.setEnabled(false);
+                        preference.setSummary(reason);
+                    },
+                    () -> preference.setSummary(R.string.task_app_install));
+        }
+    }
+
+    private void setGrantPermissionVisibility() {
+        Preference preference = findPreference(KEY_PREF_GRANT_TASK_PERMISSION);
+        String selectedTaskSource = instanceSettings.getTaskSource();
+
+        TaskProvider taskProvider = new TaskProvider(getActivity(), instanceSettings.getWidgetId(), instanceSettings);
+        preference.setVisible(taskProvider.isInstalled(selectedTaskSource) && !taskProvider.hasPermissionForSource(selectedTaskSource));
     }
 
     private void setTaskListState() {
+        String selectedTaskSource = instanceSettings.getTaskSource();
         Preference taskListButton = findPreference(PREF_ACTIVE_TASK_LISTS_BUTTON);
-        taskListButton.setEnabled(!instanceSettings.getTaskSource().equals(TaskProvider.PROVIDER_NONE));
+
+        TaskProvider taskProvider = new TaskProvider(getActivity(), instanceSettings.getWidgetId(), instanceSettings);
+        taskListButton.setVisible(!selectedTaskSource.equals(TaskProvider.PROVIDER_NONE)
+                && taskProvider.isInstalled(selectedTaskSource)
+                && taskProvider.hasPermissionForSource(selectedTaskSource));
+        taskListButton.setEnabled(!selectedTaskSource.equals(TaskProvider.PROVIDER_NONE));
     }
 
     private void clearTasksLists() {
@@ -77,6 +99,9 @@ public class TaskPreferencesFragment extends KalendarPreferenceFragment implemen
         switch (preference.getKey()) {
             case KEY_PREF_GRANT_TASK_PERMISSION:
                 requestTaskPermission();
+                return true;
+            case KEY_APP_NOT_INSTALLED:
+                installTaskApp();
                 return true;
         }
 
@@ -92,6 +117,12 @@ public class TaskPreferencesFragment extends KalendarPreferenceFragment implemen
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         setGrantPermissionVisibility();
+        setTaskListState();
         EnvironmentChangedReceiver.registerReceivers(getActivity(), true);
+    }
+
+    private void installTaskApp() {
+        TaskProvider taskProvider = new TaskProvider(getActivity(), instanceSettings.getWidgetId(), instanceSettings);
+        PackageManagerUtil.goToAppOnMarket(getActivity(), taskProvider.getAppPackage(instanceSettings.getTaskSource()));
     }
 }

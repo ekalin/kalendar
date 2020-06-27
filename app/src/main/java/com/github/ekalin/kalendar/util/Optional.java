@@ -71,6 +71,14 @@ public class Optional<T> {
         }
     }
 
+    public void ifPresentOrElse(Consumer<? super T> operation, Runnable emptyAction) {
+        if (isPresent()) {
+            operation.accept(this.value);
+        } else {
+            emptyAction.run();
+        }
+    }
+
     public <U> Optional<U> map(Function<? super T, ? extends U> mapper) {
         if (!isPresent()) {
             return Optional.empty();
