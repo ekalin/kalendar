@@ -37,6 +37,11 @@ public class TaskProvider extends EventProvider {
         return provider.getTaskLists();
     }
 
+    public boolean isInstalled(String taskSource) {
+        AbstractTaskProvider provider = getProvider(taskSource);
+        return provider.isInstalled();
+    }
+
     public boolean hasPermissionForSource(String taskSource) {
         AbstractTaskProvider provider = getProvider(taskSource);
         return provider.hasPermission();

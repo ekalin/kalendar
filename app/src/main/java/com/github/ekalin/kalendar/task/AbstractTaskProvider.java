@@ -38,6 +38,8 @@ public abstract class AbstractTaskProvider extends EventProvider {
 
     public abstract Intent createViewIntent(TaskEvent event);
 
+    public abstract boolean isInstalled();
+
     public abstract boolean hasPermission();
 
     public abstract void requestPermission(Fragment fragment);

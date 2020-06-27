@@ -3,8 +3,11 @@ package com.github.ekalin.kalendar.task.samsung;
 import android.net.Uri;
 
 public class SamsungTasksContract {
+    public static final String APP_PACKAGE = "com.samsung.android.calendar";
+    public static final String AUTHORITY = "com.android.calendar";
+
     public static class Tasks {
-        public static final Uri PROVIDER_URI = Uri.parse("content://com.android.calendar/syncTasks");
+        public static final Uri PROVIDER_URI = Uri.parse("content://" + AUTHORITY + "/syncTasks");
 
         public static final String COLUMN_ID = "_id";
         public static final String COLUMN_TITLE = "subject";
@@ -17,7 +20,7 @@ public class SamsungTasksContract {
     }
 
     public static class TaskLists {
-        public static final Uri PROVIDER_URI = Uri.parse("content://com.android.calendar/TasksAccounts");
+        public static final Uri PROVIDER_URI = Uri.parse("content://" + AUTHORITY + "/TasksAccounts");
 
         public static final String COLUMN_ID = "_sync_account_key";
         public static final String COLUMN_NAME = "displayName";

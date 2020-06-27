@@ -23,6 +23,7 @@ import com.github.ekalin.kalendar.task.AbstractTaskProvider;
 import com.github.ekalin.kalendar.task.TaskEvent;
 import com.github.ekalin.kalendar.util.CalendarIntentUtil;
 import com.github.ekalin.kalendar.util.Optional;
+import com.github.ekalin.kalendar.util.PackageManagerUtil;
 import com.github.ekalin.kalendar.util.PermissionsUtil;
 
 public class DmfsOpenTasksProvider extends AbstractTaskProvider {
@@ -176,6 +177,11 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
         Intent intent = CalendarIntentUtil.createCalendarIntent();
         intent.setData(ContentUris.withAppendedId(DmfsOpenTasksContract.Tasks.PROVIDER_URI, event.getId()));
         return intent;
+    }
+
+    @Override
+    public boolean isInstalled() {
+        return PackageManagerUtil.isPackageInstalled(context, DmfsOpenTasksContract.APP_PACKAGE);
     }
 
     @Override

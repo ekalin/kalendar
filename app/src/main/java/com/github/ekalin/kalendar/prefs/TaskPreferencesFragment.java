@@ -14,13 +14,13 @@ import com.github.ekalin.kalendar.task.TaskProvider;
 public class TaskPreferencesFragment extends KalendarPreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String PREF_ACTIVE_TASK_LISTS_BUTTON = "activeTaskListsButton";
     private static final String KEY_PREF_GRANT_TASK_PERMISSION = "grantTaskPermission";
+    private static final String KEY_APP_NOT_INSTALLED = "taskAppNotInstalled";
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
         setPreferencesFromResource(R.xml.preferences_task, rootKey);
-        setGrantPermissionVisibility();
-        setTaskListState();
+        updateState();
     }
 
     @Override
@@ -39,17 +39,28 @@ public class TaskPreferencesFragment extends KalendarPreferenceFragment implemen
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         switch (key) {
             case InstanceSettings.PREF_TASK_SOURCE:
-                setGrantPermissionVisibility();
-                setTaskListState();
+                updateState();
                 clearTasksLists();
                 break;
         }
+    }
+
+    private void updateState() {
+        setGrantPermissionVisibility();
+        setInstalledVisibility();
+        setTaskListState();
     }
 
     private void setGrantPermissionVisibility() {
         TaskProvider taskProvider = new TaskProvider(getActivity(), instanceSettings.getWidgetId(), instanceSettings);
         Preference preference = findPreference(KEY_PREF_GRANT_TASK_PERMISSION);
         preference.setVisible(!taskProvider.hasPermissionForSource(instanceSettings.getTaskSource()));
+    }
+
+    private void setInstalledVisibility() {
+        TaskProvider taskProvider = new TaskProvider(getActivity(), instanceSettings.getWidgetId(), instanceSettings);
+        Preference preference = findPreference(KEY_APP_NOT_INSTALLED);
+        preference.setVisible(!taskProvider.isInstalled(instanceSettings.getTaskSource()));
     }
 
     private void setTaskListState() {

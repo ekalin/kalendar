@@ -37,6 +37,11 @@ public class EmptyTaskProvider extends AbstractTaskProvider {
     }
 
     @Override
+    public boolean isInstalled() {
+        return true;
+    }
+
+    @Override
     public void requestPermission(Fragment fragment) {
         // No action necessary
     }

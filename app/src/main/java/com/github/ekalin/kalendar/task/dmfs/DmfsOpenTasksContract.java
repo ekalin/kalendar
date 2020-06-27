@@ -3,7 +3,8 @@ package com.github.ekalin.kalendar.task.dmfs;
 import android.net.Uri;
 
 public class DmfsOpenTasksContract {
-    public static final String AUTHORITY = "org.dmfs.tasks";
+    public static final String APP_PACKAGE = "org.dmfs.tasks";
+    public static final String AUTHORITY = APP_PACKAGE;
 
     public static class Tasks {
         public static final Uri PROVIDER_URI = Uri.parse("content://" + AUTHORITY + "/tasks");

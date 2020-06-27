@@ -24,6 +24,7 @@ import com.github.ekalin.kalendar.provider.QueryResultsStorage;
 import com.github.ekalin.kalendar.task.AbstractTaskProvider;
 import com.github.ekalin.kalendar.task.TaskEvent;
 import com.github.ekalin.kalendar.util.CalendarIntentUtil;
+import com.github.ekalin.kalendar.util.PackageManagerUtil;
 
 public class SamsungTasksProvider extends AbstractTaskProvider {
     public SamsungTasksProvider(Context context, int widgetId, InstanceSettings settings) {
@@ -189,6 +190,11 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
         intent.putExtra(SamsungTasksContract.INTENT_EXTRA_DETAIL_MODE, true);
         intent.putExtra(SamsungTasksContract.INTENT_EXTRA_LAUNCH_FROM_WIDGET, true);
         return intent;
+    }
+
+    @Override
+    public boolean isInstalled() {
+        return PackageManagerUtil.isPackageInstalled(context, SamsungTasksContract.APP_PACKAGE);
     }
 
     @Override

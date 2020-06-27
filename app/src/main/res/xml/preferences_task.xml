@@ -9,6 +9,12 @@
         app:iconSpaceReserved="false" />
 
     <Preference
+        app:key="taskAppNotInstalled"
+        app:title="@string/task_app_not_installed"
+        app:persistent="false"
+        app:iconSpaceReserved="false" />
+
+    <Preference
         app:key="grantTaskPermission"
         app:title="@string/grant_task_permission_title"
         app:summary="@string/grant_task_permission_desc"
