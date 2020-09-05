@@ -38,7 +38,6 @@
                     android:padding="@dimen/calendar_padding"
                     android:text="@string/widget_name"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_marginLeft="@dimen/calendar_padding"
                     android:layout_marginStart="@dimen/calendar_padding" />
             </LinearLayout>
 

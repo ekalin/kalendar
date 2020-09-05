@@ -25,10 +25,10 @@
             style="@style/EventEntryTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignWithParentIfMissing="true"
-            android:layout_toLeftOf="@+id/event_entry_indicator_layout_ref"
+            android:layout_toStartOf="@+id/event_entry_indicator_layout_ref"
             android:gravity="center_vertical"
             tools:text="Event Entry Title. It may be long and not fit in one line"
             tools:ignore="SelectableText"/>
@@ -39,9 +39,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_below="@id/event_entry_title"
-            android:layout_toLeftOf="@+id/event_entry_indicator_layout_ref"
+            android:layout_toStartOf="@+id/event_entry_indicator_layout_ref"
             tools:text="Event Entry Details, which could be quite long and span more than one line"
             tools:ignore="SelectableText"/>
 
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/event_entry_title"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignTop="@id/event_entry_title"/>
     </RelativeLayout>
 
