@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Preferences -->
-    <color name="colorPrimary">#455a63</color>
-    <color name="colorPrimaryDark">#37474f</color>
-    <color name="colorAccent">#009688</color>
-
     <!-- Task list colors for providers that don't supply this information -->
     <color name="task_list_0">#2196f3</color>
     <color name="task_list_1">#009688</color>

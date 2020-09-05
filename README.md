@@ -39,6 +39,7 @@ We are developing this application in public to bring you a tool that _you_ want
 
 * Canceled events and tasks are not shown anymore.
 * If the task app is not installed, a button is displayed to install it.
+* Dark mode support.
 
 ### v2.4.0
 

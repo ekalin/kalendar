@@ -43,8 +43,7 @@
             android:layout_marginStart="@dimen/activity_vertical_margin"
             android:layout_marginTop="24dp"
             android:onClick="grantPermissions"
-            android:text="@string/grant_permissions"
-            android:textColor="@color/colorAccent" />
+            android:text="@string/grant_permissions" />
 
         <Button
             android:id="@+id/go_to_home_screen_button"
@@ -56,8 +55,7 @@
             android:layout_marginStart="@dimen/activity_vertical_margin"
             android:layout_marginTop="24dp"
             android:onClick="onHomeButtonClick"
-            android:text="@string/go_to_home_screen"
-            android:textColor="@color/colorAccent" />
+            android:text="@string/go_to_home_screen" />
     </LinearLayout>
 
 </LinearLayout>
