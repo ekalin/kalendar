@@ -7,10 +7,10 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import com.github.ekalin.kalendar.R;
 import com.github.ekalin.kalendar.provider.WidgetData;
-import com.github.ekalin.kalendar.util.Optional;
 
 import static com.github.ekalin.kalendar.KalendarAppWidgetProvider.getWidgetIds;
 

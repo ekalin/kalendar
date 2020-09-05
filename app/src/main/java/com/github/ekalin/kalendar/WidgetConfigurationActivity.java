@@ -24,13 +24,13 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 
 import com.github.ekalin.kalendar.prefs.AllSettings;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.prefs.KalendarPreferenceFragment;
 import com.github.ekalin.kalendar.prefs.PreferencesFragment;
 import com.github.ekalin.kalendar.provider.WidgetData;
-import com.github.ekalin.kalendar.util.Optional;
 import com.github.ekalin.kalendar.util.PermissionsUtil;
 
 public class WidgetConfigurationActivity extends AppCompatActivity

@@ -9,13 +9,13 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import com.github.ekalin.kalendar.prefs.EventSource;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.provider.EventProvider;
 import com.github.ekalin.kalendar.task.dmfs.DmfsOpenTasksProvider;
 import com.github.ekalin.kalendar.task.samsung.SamsungTasksProvider;
-import com.github.ekalin.kalendar.util.Optional;
 
 public class TaskProvider extends EventProvider {
     public static final String PROVIDER_NONE = "NONE";

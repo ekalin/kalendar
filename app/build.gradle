@@ -14,6 +14,8 @@ android {
         versionName generateVersionName()
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
+        // Required when setting minSdkVersion to 20 or lower
+        multiDexEnabled true
 
         project.ext.archivesBaseName = "Kalendar-$versionName".toString()
     }
@@ -30,6 +32,7 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
     }
 
     testOptions {
@@ -66,11 +69,14 @@ dependencies {
     implementation "joda-time:joda-time:$jodaTimeVersion"
     implementation "com.jaredrummler:colorpicker:$colorPickerVersion"
 
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:$desugarVersion"
+
     testImplementation "junit:junit:$junitVersion"
     testImplementation "com.google.truth:truth:$truthVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "androidx.test:core:$testCoreVersion"
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation "androidx.multidex:multidex:$multidexVersion"
 }
 
 private Integer generateVersionCode() {

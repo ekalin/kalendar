@@ -8,12 +8,12 @@ import org.joda.time.DateTime;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import com.github.ekalin.kalendar.prefs.EventSource;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.provider.EventProvider;
 import com.github.ekalin.kalendar.util.DateUtil;
-import com.github.ekalin.kalendar.util.Optional;
 
 public abstract class AbstractTaskProvider extends EventProvider {
     protected static final String COLUMN_EFFECTIVE_START_DATE = "EFFECTIVE_START_DATE";

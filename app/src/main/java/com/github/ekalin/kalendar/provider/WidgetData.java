@@ -9,9 +9,10 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Optional;
+
 import com.github.ekalin.kalendar.prefs.AllSettings;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
-import com.github.ekalin.kalendar.util.Optional;
 
 public class WidgetData {
     private static final String TAG = WidgetData.class.getSimpleName();

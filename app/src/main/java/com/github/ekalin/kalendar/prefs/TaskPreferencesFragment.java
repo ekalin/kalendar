@@ -6,11 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 
 import java.util.Collections;
+import java.util.Optional;
 
 import com.github.ekalin.kalendar.EnvironmentChangedReceiver;
 import com.github.ekalin.kalendar.R;
 import com.github.ekalin.kalendar.task.TaskProvider;
-import com.github.ekalin.kalendar.util.Optional;
 import com.github.ekalin.kalendar.util.PackageManagerUtil;
 
 public class TaskPreferencesFragment extends KalendarPreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -63,11 +63,13 @@ public class TaskPreferencesFragment extends KalendarPreferenceFragment implemen
             preference.setVisible(true);
             Optional<String> nonInstallableReason =
                     taskProvider.getNonInstallableReason(getActivity(), instanceSettings.getTaskSource());
-            nonInstallableReason.ifPresentOrElse(reason -> {
-                        preference.setEnabled(false);
-                        preference.setSummary(reason);
-                    },
-                    () -> preference.setSummary(R.string.task_app_install));
+            nonInstallableReason.ifPresent(reason -> {
+                preference.setEnabled(false);
+                preference.setSummary(reason);
+            });
+            if (!nonInstallableReason.isPresent()) {
+                preference.setSummary(R.string.task_app_install);
+            }
         }
     }
 

@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import com.github.ekalin.kalendar.prefs.EventSource;
@@ -22,7 +23,6 @@ import com.github.ekalin.kalendar.provider.QueryResultsStorage;
 import com.github.ekalin.kalendar.task.AbstractTaskProvider;
 import com.github.ekalin.kalendar.task.TaskEvent;
 import com.github.ekalin.kalendar.util.CalendarIntentUtil;
-import com.github.ekalin.kalendar.util.Optional;
 import com.github.ekalin.kalendar.util.PackageManagerUtil;
 import com.github.ekalin.kalendar.util.PermissionsUtil;
 
