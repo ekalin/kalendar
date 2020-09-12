@@ -49,7 +49,7 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
         };
         String where = getWhereClause();
 
-        QueryResult result = new QueryResult(getSettings(), uri, projection, where, null, null);
+        QueryResult result = new QueryResult(getSettings(), uri, projection, where);
 
         List<TaskEvent> taskEvents = queryProviderAndStoreResults(uri, projection, where, result, this::createTask);
         QueryResultsStorage.storeTask(result);

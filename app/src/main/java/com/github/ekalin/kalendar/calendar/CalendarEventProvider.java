@@ -129,8 +129,7 @@ public class CalendarEventProvider extends EventProvider {
     }
 
     private List<CalendarEvent> queryList(Uri uri, String selection) {
-        QueryResult result = new QueryResult(getSettings(), uri, getProjection(),
-                selection, null, null);
+        QueryResult result = new QueryResult(getSettings(), uri, getProjection(), selection);
 
         List<CalendarEvent> eventList = queryProviderAndStoreResults(uri, getProjection(), selection, result, this::createCalendarEvent);
         QueryResultsStorage.storeCalendar(result);

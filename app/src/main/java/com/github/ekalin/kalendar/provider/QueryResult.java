@@ -31,27 +31,20 @@ public class QueryResult {
     private static final String KEY_URI = "uri";
     private static final String KEY_PROJECTION = "projection";
     private static final String KEY_SELECTION = "selection";
-    private static final String KEY_SELECTION_ARGS = "selectionArgs";
-    private static final String KEY_SORT_ORDER = "sortOrder";
 
     private final DateTime executedAt;
     private final int widgetId;
-    private Uri uri = Uri.EMPTY;
-    private String[] projection = {};
-    private String selection = "";
-    private String[] selectionArgs = {};
-    private String sortOrder = "";
+    private Uri uri;
+    private String[] projection;
+    private String selection;
     private final List<QueryRow> rows = new ArrayList<>();
 
-    public QueryResult(InstanceSettings settings, Uri uri, String[] projection, String selection,
-                       String[] selectionArgs, String sortOrder) {
+    public QueryResult(InstanceSettings settings, Uri uri, String[] projection, String selection) {
         this.widgetId = settings.getWidgetId();
         this.executedAt = DateUtil.now(settings.getTimeZone());
         this.uri = uri;
         this.projection = projection;
         this.selection = selection;
-        this.selectionArgs = selectionArgs;
-        this.sortOrder = sortOrder;
     }
 
     public int getWidgetId() {
@@ -80,8 +73,6 @@ public class QueryResult {
         if (!uri.equals(that.uri)) return false;
         if (!Arrays.equals(projection, that.projection)) return false;
         if (!selection.equals(that.selection)) return false;
-        if (!Arrays.equals(selectionArgs, that.selectionArgs)) return false;
-        if (!sortOrder.equals(that.sortOrder)) return false;
         if (rows.size() != that.rows.size()) return false;
         for (int ind = 0; ind < rows.size(); ind++) {
             if (!rows.get(ind).equals(that.rows.get(ind))) {
@@ -96,8 +87,6 @@ public class QueryResult {
         int result = uri.hashCode();
         result = 31 * result + Arrays.hashCode(projection);
         result = 31 * result + selection.hashCode();
-        result = 31 * result + (selectionArgs != null ? Arrays.hashCode(selectionArgs) : 0);
-        result = 31 * result + sortOrder.hashCode();
         for (int ind = 0; ind < rows.size(); ind++) {
             result = 31 * result + rows.get(ind).hashCode();
         }
@@ -124,8 +113,6 @@ public class QueryResult {
         json.put(KEY_URI, uri != null ? uri.toString() : "");
         json.put(KEY_PROJECTION, arrayOfStingsToJson(projection));
         json.put(KEY_SELECTION, selection != null ? selection : "");
-        json.put(KEY_SELECTION_ARGS, arrayOfStingsToJson(selectionArgs));
-        json.put(KEY_SORT_ORDER, sortOrder != null ? sortOrder : "");
         JSONArray jsonArray = new JSONArray();
         for (QueryRow row : rows) {
             jsonArray.put(row.toJson());
