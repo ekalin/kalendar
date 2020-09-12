@@ -4,18 +4,16 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.provider.CalendarContract;
 import android.text.TextUtils;
-import android.util.Log;
 import androidx.fragment.app.Fragment;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.github.ekalin.kalendar.R;
 import com.github.ekalin.kalendar.prefs.EventSource;
@@ -53,38 +51,10 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
 
         QueryResult result = new QueryResult(getSettings(), uri, projection, where, null, null);
 
-        Cursor cursor;
-        try {
-            cursor = context.getContentResolver().query(uri, projection, where, null, null);
-        } catch (SQLiteException e) {
-            Log.i(SamsungTasksProvider.class.getSimpleName(), "fetchAvailableSources: " + e.getMessage());
-            cursor = null;
-        } catch (IllegalArgumentException e) {
-            cursor = null;
-        }
-        if (cursor == null) {
-            return new ArrayList<>();
-        }
-
-        List<TaskEvent> tasks = new ArrayList<>();
-        try {
-            while (cursor.moveToNext()) {
-                if (QueryResultsStorage.getNeedToStoreResults()) {
-                    result.addRow(cursor);
-                }
-
-                TaskEvent task = createTask(cursor);
-                if (!mKeywordsFilter.matched(task.getTitle())) {
-                    tasks.add(task);
-                }
-            }
-        } finally {
-            cursor.close();
-        }
-
+        List<TaskEvent> taskEvents = queryProviderAndStoreResults(uri, projection, where, result, this::createTask);
         QueryResultsStorage.storeTask(result);
 
-        return tasks;
+        return taskEvents.stream().filter(task -> !mKeywordsFilter.matched(task.getTitle())).collect(Collectors.toList());
     }
 
     private String getWhereClause() {
@@ -136,39 +106,21 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
 
     @Override
     public Collection<EventSource> getTaskLists() {
-        ArrayList<EventSource> eventSources = new ArrayList<>();
+        String taskListName = context.getResources().getString(R.string.task_prefs);
 
         String[] projection = {
                 SamsungTasksContract.TaskLists.COLUMN_ID,
                 SamsungTasksContract.TaskLists.COLUMN_NAME,
                 SamsungTasksContract.TaskLists.COLUMN_COLOR,
         };
-        Cursor cursor;
-        try {
-            cursor = context.getContentResolver().query(SamsungTasksContract.TaskLists.PROVIDER_URI, projection, null, null, null);
-        } catch (IllegalArgumentException e) {
-            cursor = null;
-        }
-        if (cursor == null) {
-            return eventSources;
-        }
+        return queryProvider(SamsungTasksContract.TaskLists.PROVIDER_URI, projection, null, cursor -> {
+            int idIdx = cursor.getColumnIndex(SamsungTasksContract.TaskLists.COLUMN_ID);
+            int nameIdx = cursor.getColumnIndex(SamsungTasksContract.TaskLists.COLUMN_NAME);
+            int colorIdx = cursor.getColumnIndex(SamsungTasksContract.TaskLists.COLUMN_COLOR);
 
-        String taskListName = context.getResources().getString(R.string.task_prefs);
-        int idIdx = cursor.getColumnIndex(SamsungTasksContract.TaskLists.COLUMN_ID);
-        int nameIdx = cursor.getColumnIndex(SamsungTasksContract.TaskLists.COLUMN_NAME);
-        int colorIdx = cursor.getColumnIndex(SamsungTasksContract.TaskLists.COLUMN_COLOR);
-        try {
-            while (cursor.moveToNext()) {
-                int id = cursor.getInt(idIdx);
-                EventSource eventSource = new EventSource(id, taskListName,
-                        cursor.getString(nameIdx), getColor(cursor, colorIdx, id));
-                eventSources.add(eventSource);
-            }
-        } finally {
-            cursor.close();
-        }
-
-        return eventSources;
+            int id = cursor.getInt(idIdx);
+            return new EventSource(id, taskListName, cursor.getString(nameIdx), getColor(cursor, colorIdx, id));
+        });
     }
 
     private int getColor(Cursor cursor, int colorIdx, int accountId) {

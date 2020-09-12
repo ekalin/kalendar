@@ -1,10 +1,18 @@
 package com.github.ekalin.kalendar.provider;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteException;
+import android.net.Uri;
+import android.util.Log;
 import androidx.annotation.NonNull;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
 
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.util.DateUtil;
@@ -62,5 +70,45 @@ public abstract class EventProvider {
 
     protected int getAsOpaque(int color) {
         return argb(255, red(color), green(color), blue(color));
+    }
+
+    protected <T> List<T> queryProviderAndStoreResults(Uri uri, String[] projection, String where,
+                                                       QueryResult result,
+                                                       Function<Cursor, T> converter) {
+        return queryProvider(uri, projection, where, cursor -> {
+            if (QueryResultsStorage.getNeedToStoreResults()) {
+                result.addRow(cursor);
+            }
+
+            return converter.apply(cursor);
+        });
+    }
+
+    protected <T> List<T> queryProvider(Uri uri, String[] projection, String where, Function<Cursor, T> converter) {
+        List<T> results = new ArrayList<>();
+
+        Cursor cursor;
+        try {
+            cursor = context.getContentResolver().query(uri, projection, where, null, null);
+        } catch (SQLiteException | IllegalArgumentException e) {
+            Log.i(getClass().getSimpleName(), e.getMessage());
+            cursor = null;
+        }
+        if (cursor == null) {
+            return results;
+        }
+
+        try {
+            while (cursor.moveToNext()) {
+                T created = converter.apply(cursor);
+                if (!results.contains(created)) {
+                    results.add(created);
+                }
+            }
+        } finally {
+            cursor.close();
+        }
+
+        return results;
     }
 }

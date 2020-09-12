@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.github.ekalin.kalendar.prefs.EventSource;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
@@ -56,35 +57,10 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
 
         QueryResult result = new QueryResult(getSettings(), uri, projection, where, null, null);
 
-        Cursor cursor;
-        try {
-            cursor = context.getContentResolver().query(uri, projection, where, null, null);
-        } catch (IllegalArgumentException e) {
-            cursor = null;
-        }
-        if (cursor == null) {
-            return new ArrayList<>();
-        }
-
-        List<TaskEvent> tasks = new ArrayList<>();
-        try {
-            while (cursor.moveToNext()) {
-                if (QueryResultsStorage.getNeedToStoreResults()) {
-                    result.addRow(cursor);
-                }
-
-                TaskEvent task = createTask(cursor);
-                if (!mKeywordsFilter.matched(task.getTitle())) {
-                    tasks.add(task);
-                }
-            }
-        } finally {
-            cursor.close();
-        }
-
+        List<TaskEvent> taskEvents = queryProviderAndStoreResults(uri, projection, where, result, this::createTask);
         QueryResultsStorage.storeTask(result);
 
-        return tasks;
+        return taskEvents.stream().filter(task -> !mKeywordsFilter.matched(task.getTitle())).collect(Collectors.toList());
     }
 
     private String getWhereClause() {
@@ -136,40 +112,21 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
 
     @Override
     public Collection<EventSource> getTaskLists() {
-        ArrayList<EventSource> eventSources = new ArrayList<>();
-
         String[] projection = {
                 DmfsOpenTasksContract.TaskLists.COLUMN_ID,
                 DmfsOpenTasksContract.TaskLists.COLUMN_NAME,
-                DmfsOpenTasksContract.TaskLists.COLUMN_COLOR,
                 DmfsOpenTasksContract.TaskLists.COLUMN_ACCOUNT_NAME,
+                DmfsOpenTasksContract.TaskLists.COLUMN_COLOR,
         };
-        Cursor cursor;
-        try {
-            cursor = context.getContentResolver().query(DmfsOpenTasksContract.TaskLists.PROVIDER_URI, projection,
-                    null, null, null);
-        } catch (IllegalArgumentException e) {
-            cursor = null;
-        }
-        if (cursor == null) {
-            return eventSources;
-        }
 
-        int idIdx = cursor.getColumnIndex(DmfsOpenTasksContract.TaskLists.COLUMN_ID);
-        int nameIdx = cursor.getColumnIndex(DmfsOpenTasksContract.TaskLists.COLUMN_NAME);
-        int colorIdx = cursor.getColumnIndex(DmfsOpenTasksContract.TaskLists.COLUMN_COLOR);
-        int accountIdx = cursor.getColumnIndex(DmfsOpenTasksContract.TaskLists.COLUMN_ACCOUNT_NAME);
-        try {
-            while (cursor.moveToNext()) {
-                EventSource eventSource = new EventSource(cursor.getInt(idIdx), cursor.getString(nameIdx),
-                        cursor.getString(accountIdx), cursor.getInt(colorIdx));
-                eventSources.add(eventSource);
-            }
-        } finally {
-            cursor.close();
-        }
-
-        return eventSources;
+        return queryProvider(DmfsOpenTasksContract.TaskLists.PROVIDER_URI, projection, null, cursor -> {
+            int idIdx = cursor.getColumnIndex(DmfsOpenTasksContract.TaskLists.COLUMN_ID);
+            int nameIdx = cursor.getColumnIndex(DmfsOpenTasksContract.TaskLists.COLUMN_NAME);
+            int accountIdx = cursor.getColumnIndex(DmfsOpenTasksContract.TaskLists.COLUMN_ACCOUNT_NAME);
+            int colorIdx = cursor.getColumnIndex(DmfsOpenTasksContract.TaskLists.COLUMN_COLOR);
+            return new EventSource(cursor.getInt(idIdx), cursor.getString(nameIdx),
+                    cursor.getString(accountIdx), cursor.getInt(colorIdx));
+        });
     }
 
     @Override
