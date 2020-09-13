@@ -134,6 +134,7 @@
     <string name="task_source_pref_title">Origem das tarefas</string>
     <string name="task_source_none">Não exibir tarefas</string>
     <string name="task_source_opentasks">OpenTasks (por dmfs GmbH)</string>
+    <string name="task_source_astrid_clone">Tasks.org (por Alex Baker)</string>
     <string name="task_source_samsung">Calendário Samsung</string>
     <string name="task_source_samsung_not_installable">O Calendário Samsung só é disponível em dispositivos Samsung</string>
     <string name="task_app_not_installed">O app de tarefas selecionado não está instalado</string>
