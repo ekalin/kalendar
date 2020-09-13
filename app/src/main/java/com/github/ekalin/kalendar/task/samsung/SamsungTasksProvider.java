@@ -23,7 +23,6 @@ import com.github.ekalin.kalendar.provider.QueryResultsStorage;
 import com.github.ekalin.kalendar.task.AbstractTaskProvider;
 import com.github.ekalin.kalendar.task.TaskEvent;
 import com.github.ekalin.kalendar.util.CalendarIntentUtil;
-import com.github.ekalin.kalendar.util.PackageManagerUtil;
 
 public class SamsungTasksProvider extends AbstractTaskProvider {
     public SamsungTasksProvider(Context context, int widgetId, InstanceSettings settings) {
@@ -146,18 +145,13 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
     }
 
     @Override
-    public boolean isInstalled() {
-        return PackageManagerUtil.isPackageInstalled(context, SamsungTasksContract.APP_PACKAGE);
-    }
-
-    @Override
     public Optional<String> getNonInstallableReason(Context context) {
         return Optional.of(context.getString(R.string.task_source_samsung_not_installable));
     }
 
     @Override
     public String getAppPackage() {
-        return null;
+        return SamsungTasksContract.APP_PACKAGE;
     }
 
     @Override
