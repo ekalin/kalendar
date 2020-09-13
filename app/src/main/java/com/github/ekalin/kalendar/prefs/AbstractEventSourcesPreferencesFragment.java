@@ -37,10 +37,10 @@ abstract class AbstractEventSourcesPreferencesFragment extends KalendarPreferenc
             checkboxPref.setTitle(source.getTitle());
             checkboxPref.setSummary(source.getSummary());
             checkboxPref.setIcon(createDrawable(source.getColor()));
-            int sourceId = source.getId();
-            checkboxPref.getExtras().putInt(SOURCE_ID, sourceId);
+            String sourceId = source.getId();
+            checkboxPref.getExtras().putString(SOURCE_ID, sourceId);
             checkboxPref.setChecked(activeCalendars.isEmpty()
-                    || activeCalendars.contains(String.valueOf(sourceId)));
+                    || activeCalendars.contains(sourceId));
             preferenceScreen.addPreference(checkboxPref);
         }
 
@@ -69,7 +69,7 @@ abstract class AbstractEventSourcesPreferencesFragment extends KalendarPreferenc
             if (pref instanceof CheckBoxPreference) {
                 CheckBoxPreference checkPref = (CheckBoxPreference) pref;
                 if (checkPref.isChecked()) {
-                    prefValues.add(String.valueOf(checkPref.getExtras().getInt(SOURCE_ID)));
+                    prefValues.add(checkPref.getExtras().getString(SOURCE_ID));
                 }
             }
         }

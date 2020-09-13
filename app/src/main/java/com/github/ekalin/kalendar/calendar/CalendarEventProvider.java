@@ -182,7 +182,7 @@ public class CalendarEventProvider extends EventProvider {
             int nameIdx = cursor.getColumnIndex(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME);
             int accountIdx = cursor.getColumnIndex(CalendarContract.Calendars.ACCOUNT_NAME);
             int colorIdx = cursor.getColumnIndex(CalendarContract.Calendars.CALENDAR_COLOR);
-            return new EventSource(cursor.getInt(idIdx), cursor.getString(nameIdx),
+            return new EventSource(String.valueOf(cursor.getInt(idIdx)), cursor.getString(nameIdx),
                     cursor.getString(accountIdx), cursor.getInt(colorIdx));
         });
     }

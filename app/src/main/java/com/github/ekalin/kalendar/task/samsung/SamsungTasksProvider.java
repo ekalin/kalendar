@@ -119,7 +119,7 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
             int colorIdx = cursor.getColumnIndex(SamsungTasksContract.TaskLists.COLUMN_COLOR);
 
             int id = cursor.getInt(idIdx);
-            return new EventSource(id, taskListName, cursor.getString(nameIdx), getColor(cursor, colorIdx, id));
+            return new EventSource(String.valueOf(id), taskListName, cursor.getString(nameIdx), getColor(cursor, colorIdx, id));
         });
     }
 

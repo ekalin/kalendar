@@ -124,7 +124,7 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
             int nameIdx = cursor.getColumnIndex(DmfsOpenTasksContract.TaskLists.COLUMN_NAME);
             int accountIdx = cursor.getColumnIndex(DmfsOpenTasksContract.TaskLists.COLUMN_ACCOUNT_NAME);
             int colorIdx = cursor.getColumnIndex(DmfsOpenTasksContract.TaskLists.COLUMN_COLOR);
-            return new EventSource(cursor.getInt(idIdx), cursor.getString(nameIdx),
+            return new EventSource(String.valueOf(cursor.getInt(idIdx)), cursor.getString(nameIdx),
                     cursor.getString(accountIdx), cursor.getInt(colorIdx));
         });
     }

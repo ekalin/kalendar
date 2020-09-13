@@ -116,8 +116,8 @@ public class SamsungTasksProviderTest {
 
     private Collection<EventSource> createTaskListsSources() {
         List<EventSource> sources = new ArrayList<>();
-        sources.add(new EventSource(2, "Tasks", "Local account", 0xff000011));
-        sources.add(new EventSource(4, "Tasks", "remote@account.org", 0xff000022));
+        sources.add(new EventSource("2", "Tasks", "Local account", 0xff000011));
+        sources.add(new EventSource("4", "Tasks", "remote@account.org", 0xff000022));
         return sources;
     }
 }
