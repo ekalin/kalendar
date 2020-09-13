@@ -226,7 +226,7 @@ public class CalendarEventProviderTest {
                     .add(CalendarContract.Calendars.CALENDAR_COLOR, source.getColor())
                     .add(CalendarContract.Calendars.ACCOUNT_NAME, source.getSummary());
         }
-        contentProvider.setQueryResult(matrixCursor);
+        contentProvider.setQueryResult(CalendarContract.Calendars.CONTENT_URI, matrixCursor);
     }
 
     private Collection<EventSource> createEventSources() {

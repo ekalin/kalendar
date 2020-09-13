@@ -64,7 +64,7 @@ public class DmfsOpenTasksProviderTest {
                     .add(DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE, task.getDueDate().getMillis())
                     .add(DmfsOpenTasksContract.Tasks.COLUMN_COLOR, task.getColor());
         }
-        contentProvider.setQueryResult(matrixCursor);
+        contentProvider.setQueryResult(DmfsOpenTasksContract.Tasks.PROVIDER_URI, matrixCursor);
 
         return taskEvents;
     }
@@ -111,7 +111,7 @@ public class DmfsOpenTasksProviderTest {
                     .add(DmfsOpenTasksContract.TaskLists.COLUMN_ACCOUNT_NAME, taskList.getSummary())
                     .add(DmfsOpenTasksContract.TaskLists.COLUMN_COLOR, taskList.getColor());
         }
-        contentProvider.setQueryResult(matrixCursor);
+        contentProvider.setQueryResult(DmfsOpenTasksContract.TaskLists.PROVIDER_URI, matrixCursor);
     }
 
     private Collection<EventSource> createTaskListsSources() {

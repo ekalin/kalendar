@@ -1,5 +1,7 @@
 package com.github.ekalin.kalendar.task.astridclone;
 
+import android.net.Uri;
+
 public class AstridCloneTasksContract {
     public static final String APP_PACKAGE = "org.tasks";
     public static final String AUTHORITY = APP_PACKAGE;
@@ -9,7 +11,21 @@ public class AstridCloneTasksContract {
     }
 
     public static class TaskLists {
+        public static final Uri PROVIDER_URI = Uri.parse("content://" + AUTHORITY + "/lists");
 
+        public static final String COLUMN_ID = "cdl_id";
+        public static final String COLUMN_NAME = "cdl_name";
+        public static final String COLUMN_COLOR = "cdl_color";
+        public static final String COLUMN_ACCOUNT_NAME = "cdl_account";
+    }
+
+    public static class GoogleTaskLists {
+        public static final Uri PROVIDER_URI = Uri.parse("content://" + AUTHORITY + "/google_lists");
+
+        public static final String COLUMN_ID = "gtl_id";
+        public static final String COLUMN_NAME = "gtl_title";
+        public static final String COLUMN_COLOR = "gtl_color";
+        public static final String COLUMN_ACCOUNT_NAME = "gtl_account";
     }
 
     public static final String PERMISSION = "org.tasks.permission.READ_TASKS";

@@ -66,7 +66,7 @@ public class SamsungTasksProviderTest {
                     .add(SamsungTasksContract.Tasks.COLUMN_COLOR, task.getColor())
                     .add(SamsungTasksContract.Tasks.COLUMN_LIST_ID, 1);
         }
-        contentProvider.setQueryResult(matrixCursor);
+        contentProvider.setQueryResult(SamsungTasksContract.Tasks.PROVIDER_URI, matrixCursor);
 
         return taskEvents;
     }
@@ -111,7 +111,7 @@ public class SamsungTasksProviderTest {
                     .add(SamsungTasksContract.TaskLists.COLUMN_NAME, taskList.getSummary())
                     .add(SamsungTasksContract.TaskLists.COLUMN_COLOR, taskList.getColor());
         }
-        contentProvider.setQueryResult(matrixCursor);
+        contentProvider.setQueryResult(SamsungTasksContract.TaskLists.PROVIDER_URI, matrixCursor);
     }
 
     private Collection<EventSource> createTaskListsSources() {

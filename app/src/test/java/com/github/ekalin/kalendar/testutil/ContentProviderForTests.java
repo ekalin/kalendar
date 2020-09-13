@@ -5,8 +5,12 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ContentProviderForTests extends ContentProvider {
-    private Cursor cursor;
+    private Map<Uri, Cursor> results = new HashMap<>();
+    private Cursor defaultResults;
     private Uri lastQueryUri;
 
     @Override
@@ -17,11 +21,15 @@ public class ContentProviderForTests extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         lastQueryUri = uri;
-        return cursor;
+        return results.getOrDefault(uri, defaultResults);
     }
 
     public void setQueryResult(Cursor cursor) {
-        this.cursor = cursor;
+        defaultResults = cursor;
+    }
+
+    public void setQueryResult(Uri uri, Cursor cursor) {
+        results.put(uri, cursor);
     }
 
     public Uri getLastQueryUri() {
@@ -32,7 +40,6 @@ public class ContentProviderForTests extends ContentProvider {
     public String getType(Uri uri) {
         return null;
     }
-
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
