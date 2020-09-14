@@ -7,7 +7,18 @@ public class AstridCloneTasksContract {
     public static final String AUTHORITY = APP_PACKAGE;
 
     public static class Tasks {
+        public static final Uri PROVIDER_URI = Uri.parse("content://" + AUTHORITY + "/todoagenda");
+        public static final Uri VIEW_URI = Uri.parse("content://" + AUTHORITY + "/tasks");
 
+        public static final String COLUMN_ID = "_id";
+        public static final String COLUMN_TITLE = "title";
+        public static final String COLUMN_DUE_DATE = "dueDate";
+        public static final String COLUMN_START_DATE = "hideUntil";
+        public static final String COLUMN_COLOR_LOCAL = "cdl_color";
+        public static final String COLUMN_COLOR_GOOGLE = "gtl_color";
+        public static final String COLUMN_COMPLETED = "completed";
+        public static final String COLUMN_LIST_ID_LOCAL = "cdl_id";
+        public static final String COLUMN_LIST_ID_GOOGLE = "gtl_id";
     }
 
     public static class TaskLists {

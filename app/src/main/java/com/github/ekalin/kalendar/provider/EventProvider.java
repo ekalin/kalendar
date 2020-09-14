@@ -32,6 +32,7 @@ public abstract class EventProvider {
     protected static final String NOT_EQUALS = " != ";
     protected static final String LTE = " <= ";
     protected static final String IS_NULL = " IS NULL";
+    protected static final String IN = " IN ( ";
 
     protected final Context context;
     protected final int widgetId;

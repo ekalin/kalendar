@@ -12,6 +12,7 @@ public class ContentProviderForTests extends ContentProvider {
     private Map<Uri, Cursor> results = new HashMap<>();
     private Cursor defaultResults;
     private Uri lastQueryUri;
+    private String lastQuerySelection;
 
     @Override
     public boolean onCreate() {
@@ -21,6 +22,7 @@ public class ContentProviderForTests extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         lastQueryUri = uri;
+        lastQuerySelection = selection;
         return results.getOrDefault(uri, defaultResults);
     }
 
@@ -34,6 +36,10 @@ public class ContentProviderForTests extends ContentProvider {
 
     public Uri getLastQueryUri() {
         return lastQueryUri;
+    }
+
+    public String getLastQuerySelection() {
+        return lastQuerySelection;
     }
 
     @Override
@@ -52,8 +58,7 @@ public class ContentProviderForTests extends ContentProvider {
     }
 
     @Override
-    public int update(Uri uri, ContentValues values, String selection,
-                      String[] selectionArgs) {
+    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         return 0;
     }
 }

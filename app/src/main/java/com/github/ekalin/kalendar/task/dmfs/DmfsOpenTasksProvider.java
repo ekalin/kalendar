@@ -78,7 +78,7 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
         if (!taskLists.isEmpty()) {
             whereBuilder.append(AND);
             whereBuilder.append(DmfsOpenTasksContract.Tasks.COLUMN_LIST_ID);
-            whereBuilder.append(" IN ( ");
+            whereBuilder.append(IN);
             whereBuilder.append(TextUtils.join(",", taskLists));
             whereBuilder.append(CLOSING_BRACKET);
         }
