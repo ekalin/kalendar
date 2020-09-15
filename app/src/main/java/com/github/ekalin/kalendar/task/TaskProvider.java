@@ -66,9 +66,10 @@ public class TaskProvider extends EventProvider {
 
     public static List<ContentObserver> registerObservers(Context context, Supplier<ContentObserver> observerCreator) {
         List<ContentObserver> observers = new ArrayList<>();
-        Optional<ContentObserver> opObserver = DmfsOpenTasksProvider.registerContentObserver(context,
-                observerCreator);
-        opObserver.ifPresent(observers::add);
+        DmfsOpenTasksProvider.registerContentObserver(context, observerCreator)
+                .ifPresent(observers::add);
+        AstridCloneTasksProvider.registerContentObserver(context, observerCreator)
+                .ifPresent(observers::add);
         return observers;
     }
 

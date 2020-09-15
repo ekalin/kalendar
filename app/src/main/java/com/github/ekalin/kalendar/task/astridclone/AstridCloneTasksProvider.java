@@ -3,14 +3,16 @@ package com.github.ekalin.kalendar.task.astridclone;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
+import androidx.core.util.Supplier;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -237,5 +239,17 @@ public class AstridCloneTasksProvider extends AbstractTaskProvider {
     @Override
     public void requestPermission(Fragment fragment) {
         fragment.requestPermissions(new String[]{AstridCloneTasksContract.PERMISSION}, 1);
+    }
+
+    public static Optional<ContentObserver> registerContentObserver(Context context,
+                                                                    Supplier<ContentObserver> observerCreator) {
+        if (hasPermission(context)) {
+            ContentObserver observer = observerCreator.get();
+            context.getContentResolver().registerContentObserver(AstridCloneTasksContract.Tasks.PROVIDER_URI, false,
+                    observer);
+            return Optional.of(observer);
+        } else {
+            return Optional.empty();
+        }
     }
 }
