@@ -3,6 +3,8 @@ package com.github.ekalin.kalendar.prefs;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.Set;
+
 import com.github.ekalin.kalendar.EndedSomeTimeAgo;
 
 public class InstanceSettingsTestHelper {
@@ -38,6 +40,10 @@ public class InstanceSettingsTestHelper {
 
     public void setTaskSource(String source) {
         sharedPreferences.edit().putString(InstanceSettings.PREF_TASK_SOURCE, source).apply();
+    }
+
+    public void setActiveTaskLists(Set<String> taskLists) {
+        sharedPreferences.edit().putStringSet(InstanceSettings.PREF_ACTIVE_TASK_LISTS, taskLists).apply();
     }
 
     public void setLockedTimeZoneId(String zoneId) {

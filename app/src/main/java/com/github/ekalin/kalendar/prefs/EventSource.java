@@ -1,19 +1,19 @@
 package com.github.ekalin.kalendar.prefs;
 
 public class EventSource {
-    private int id;
-    private String title;
-    private String summary;
-    private int color;
+    private final String id;
+    private final String title;
+    private final String summary;
+    private final int color;
 
-    public EventSource(int id, String title, String summary, int color) {
+    public EventSource(String id, String title, String summary, int color) {
         this.id = id;
         this.title = title;
         this.summary = summary;
         this.color = color;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -34,7 +34,7 @@ public class EventSource {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EventSource that = (EventSource) o;
-        return id == that.id &&
+        return id.equals(that.id) &&
                 color == that.color &&
                 title.equals(that.title) &&
                 summary.equals(that.summary);
@@ -42,7 +42,7 @@ public class EventSource {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = id.hashCode();
         result += 31 * title.hashCode();
         result += 31 * summary.hashCode();
         result += 31 * color;

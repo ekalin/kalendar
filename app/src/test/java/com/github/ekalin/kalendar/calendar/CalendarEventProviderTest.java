@@ -226,13 +226,13 @@ public class CalendarEventProviderTest {
                     .add(CalendarContract.Calendars.CALENDAR_COLOR, source.getColor())
                     .add(CalendarContract.Calendars.ACCOUNT_NAME, source.getSummary());
         }
-        contentProvider.setQueryResult(matrixCursor);
+        contentProvider.setQueryResult(CalendarContract.Calendars.CONTENT_URI, matrixCursor);
     }
 
     private Collection<EventSource> createEventSources() {
         List<EventSource> sources = new ArrayList<>();
-        sources.add(new EventSource(2, "My Calendar", "Local account", 0xff000011));
-        sources.add(new EventSource(4, "Work Items", "remote@account.org", 0xff000022));
+        sources.add(new EventSource("2", "My Calendar", "Local account", 0xff000011));
+        sources.add(new EventSource("4", "Work Items", "remote@account.org", 0xff000022));
         return sources;
     }
 }
