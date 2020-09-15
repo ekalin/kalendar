@@ -38,6 +38,10 @@ public class InstanceSettingsTestHelper {
         sharedPreferences.edit().putString(InstanceSettings.PREF_EVENT_RANGE, String.valueOf(range)).apply();
     }
 
+    public void setActiveCalendars(Set<String> activeCalendars) {
+        sharedPreferences.edit().putStringSet(InstanceSettings.PREF_ACTIVE_CALENDARS, activeCalendars).apply();
+    }
+
     public void setTaskSource(String source) {
         sharedPreferences.edit().putString(InstanceSettings.PREF_TASK_SOURCE, source).apply();
     }

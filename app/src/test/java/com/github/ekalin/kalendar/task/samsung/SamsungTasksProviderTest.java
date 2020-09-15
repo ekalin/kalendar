@@ -14,10 +14,14 @@ import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.github.ekalin.kalendar.prefs.AllSettings;
 import com.github.ekalin.kalendar.prefs.EventSource;
+import com.github.ekalin.kalendar.prefs.InstanceSettingsTestHelper;
 import com.github.ekalin.kalendar.task.TaskEvent;
 import com.github.ekalin.kalendar.testutil.ContentProviderForTests;
 
@@ -27,12 +31,13 @@ import static com.google.common.truth.Truth.assertThat;
 public class SamsungTasksProviderTest {
     private static final String COLUMN_START_DATE = "EFFECTIVE_START_DATE";
 
+    private Context context;
     private ContentProviderForTests contentProvider;
     private SamsungTasksProvider tasksProvider;
 
     @Before
     public void setup() {
-        Context context = ApplicationProvider.getApplicationContext();
+        context = ApplicationProvider.getApplicationContext();
         contentProvider = Robolectric.setupContentProvider(ContentProviderForTests.class,
                 SamsungTasksContract.TaskLists.PROVIDER_URI.getAuthority());
         tasksProvider = new SamsungTasksProvider(context, 1, AllSettings.instanceFromId(context, 1));
@@ -89,6 +94,31 @@ public class SamsungTasksProviderTest {
         event.setDates(startDate.getMillis(), dueDate.getMillis());
         event.setColor(color);
         return event;
+    }
+
+    @Test
+    public void getTasks_filtersByStateAndDate() {
+        new InstanceSettingsTestHelper(context, 1).setActiveTaskLists(Collections.emptySet());
+
+        tasksProvider.getTasks();
+
+        String expectedQuery = String.format("%s = 0 AND %s = 0 AND \\(%s <= \\d+ OR %s IS NULL \\)",
+                SamsungTasksContract.Tasks.COLUMN_COMPLETE, SamsungTasksContract.Tasks.COLUMN_DELETED,
+                COLUMN_START_DATE, COLUMN_START_DATE);
+        assertThat(contentProvider.getLastQuerySelection()).matches(expectedQuery);
+    }
+
+    @Test
+    public void getTasks_filtersByTaskList() {
+        Set<String> taskLists = new HashSet<>();
+        taskLists.add("12");
+        taskLists.add("179");
+        new InstanceSettingsTestHelper(context, 1).setActiveTaskLists(taskLists);
+
+        tasksProvider.getTasks();
+
+        String expectedQuery = String.format("AND %s IN ( 12,179 )", SamsungTasksContract.Tasks.COLUMN_LIST_ID);
+        assertThat(contentProvider.getLastQuerySelection()).endsWith(expectedQuery);
     }
 
     @Test

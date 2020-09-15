@@ -18,7 +18,10 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import com.github.ekalin.kalendar.EndedSomeTimeAgo;
@@ -203,6 +206,32 @@ public class CalendarEventProviderTest {
                 .add(CalendarContract.Instances.DISPLAY_COLOR, 0);
     }
 
+    @Test
+    public void getEvents_filtersByState() {
+        new InstanceSettingsTestHelper(context, 1).setActiveCalendars(Collections.emptySet());
+
+        calendarProvider.getEvents();
+
+        String expectedQuery = String.format("%s != %d AND %s != %d",
+                CalendarContract.Instances.SELF_ATTENDEE_STATUS, CalendarContract.Attendees.ATTENDEE_STATUS_DECLINED,
+                CalendarContract.Instances.STATUS, CalendarContract.Instances.STATUS_CANCELED);
+        assertThat(contentProvider.getLastQuerySelection()).matches(expectedQuery);
+    }
+
+    @Test
+    public void getEvents_filtersBySelectedCalendars() {
+        Set<String> calendars = new HashSet<>();
+        calendars.add("5");
+        calendars.add("29");
+        new InstanceSettingsTestHelper(context, 1).setActiveCalendars(calendars);
+
+        calendarProvider.getEvents();
+
+        String expectedQuery = String.format("AND (%s = %s OR %s = %s )",
+                CalendarContract.Instances.CALENDAR_ID, "5",
+                CalendarContract.Instances.CALENDAR_ID, "29");
+        assertThat(contentProvider.getLastQuerySelection()).endsWith(expectedQuery);
+    }
 
     @Test
     public void getCalendars_returnsEventSources() {

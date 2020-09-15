@@ -14,10 +14,14 @@ import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.github.ekalin.kalendar.prefs.AllSettings;
 import com.github.ekalin.kalendar.prefs.EventSource;
+import com.github.ekalin.kalendar.prefs.InstanceSettingsTestHelper;
 import com.github.ekalin.kalendar.task.TaskEvent;
 import com.github.ekalin.kalendar.testutil.ContentProviderForTests;
 
@@ -27,12 +31,13 @@ import static com.google.common.truth.Truth.assertThat;
 public class DmfsOpenTasksProviderTest {
     private static final String COLUMN_START_DATE = "EFFECTIVE_START_DATE";
 
+    private Context context;
     private ContentProviderForTests contentProvider;
     private DmfsOpenTasksProvider tasksProvider;
 
     @Before
     public void setup() {
-        Context context = ApplicationProvider.getApplicationContext();
+        context = ApplicationProvider.getApplicationContext();
         contentProvider = Robolectric.setupContentProvider(ContentProviderForTests.class,
                 DmfsOpenTasksContract.TaskLists.PROVIDER_URI.getAuthority());
         tasksProvider = new DmfsOpenTasksProvider(context, 1, AllSettings.instanceFromId(context, 1));
@@ -87,6 +92,32 @@ public class DmfsOpenTasksProviderTest {
         event.setDates(startDate.getMillis(), endDate.getMillis());
         event.setColor(color);
         return event;
+    }
+
+    @Test
+    public void getTasks_filtersByStateAndDate() {
+        new InstanceSettingsTestHelper(context, 1).setActiveTaskLists(Collections.emptySet());
+
+        tasksProvider.getTasks();
+
+        String expectedQuery = String.format("%s != %d AND %s != %d AND \\(%s <= \\d+ OR %s IS NULL \\)",
+                DmfsOpenTasksContract.Tasks.COLUMN_STATUS, DmfsOpenTasksContract.Tasks.STATUS_COMPLETED,
+                DmfsOpenTasksContract.Tasks.COLUMN_STATUS, DmfsOpenTasksContract.Tasks.STATUS_CANCELED,
+                COLUMN_START_DATE, COLUMN_START_DATE);
+        assertThat(contentProvider.getLastQuerySelection()).matches(expectedQuery);
+    }
+
+    @Test
+    public void getTasks_filtersByTaskList() {
+        Set<String> taskLists = new HashSet<>();
+        taskLists.add("2");
+        taskLists.add("17");
+        new InstanceSettingsTestHelper(context, 1).setActiveTaskLists(taskLists);
+
+        tasksProvider.getTasks();
+
+        String expectedQuery = String.format("AND %s IN ( 2,17 )", DmfsOpenTasksContract.Tasks.COLUMN_LIST_ID);
+        assertThat(contentProvider.getLastQuerySelection()).endsWith(expectedQuery);
     }
 
     @Test
