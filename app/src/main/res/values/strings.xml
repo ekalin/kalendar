@@ -99,10 +99,10 @@
     <string name="event_details_fill_all_day_events_title">Fill all day events</string>
     <string name="event_details_fill_all_day_events_desc">Show an entry for each day of an all day event</string>
     <string name="event_details_indicators">Indicators</string>
-    <string name="event_details_indicate_alert_desc">Show indicator for alerts</string>
     <string name="event_details_indicate_alert_title">Alerts</string>
-    <string name="event_details_indicate_recurring_desc">Show indicator for recurring events</string>
+    <string name="event_details_indicate_alert_desc">Show indicator for alerts</string>
     <string name="event_details_indicate_recurring_title">Recurring events</string>
+    <string name="event_details_indicate_recurring_desc">Show indicator for recurring events</string>
 
     <!-- Preference header: Event filters -->
     <string name="event_filters_prefs">Event filters</string>
@@ -154,9 +154,9 @@
     <string name="feedback_github_desc">Provide feedback on the project page</string>
     <string name="feedback_play_store_title">Visit widget on Google Play Store</string>
     <string name="feedback_play_store_desc">Rate and comment on Google Play Store</string>
+    <string name="share_events_settings_for_debugging_title">Share events and settings for debugging</string>
     <string name="share_events_for_debugging_desc">Create a report to help developers troubleshoot problems.
         Before sharing please filter events to protect your privacy but still demonstrate a problem</string>
-    <string name="share_events_settings_for_debugging_title">Share events and settings for debugging</string>
     <string name="backup_settings_title">Backup settings</string>
     <string name="backup_settings_desc">Export this widget\'s settings to a file</string>
     <string name="restore_settings_title">Restore settings from a backup</string>

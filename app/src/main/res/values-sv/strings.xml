@@ -3,6 +3,8 @@
     <string name="yesterday">Igår</string>
     <string name="today">I dag</string>
     <string name="tomorrow">I morgon</string>
+    <string name="not_initialized_yet">Inte initierad än…</string>
+    <string name="no_events_to_show">Inga händelser att visa</string>
     <string name="add_event_desc">Lägg till kalenderhändelse</string>
     <string name="refresh_desc">Uppdatera</string>
     <string name="open_prefs_desc">Öppna applikationens kalenderinställningar</string>
@@ -11,11 +13,13 @@
     <string name="no_title">(ingen rubrik)</string>
     <string name="grant_permissions">Bevilja behörighet</string>
     <string name="grant_permissions_verbose">Widget kräver behörighet för att läsa kalendrar.\nTryck här för att bevilja behörighet.</string>
+    <string name="no_widgets_found">Var vänlig lägg till en \"Kalendar\" widget från hemskärmen på din enhet först.</string>
     <string name="select_a_widget_to_configure">Välj en widget att konfigurera</string>
     <string name="close">Stäng</string>
     <string name="go_to_home_screen">Gå till hemskärmen</string>
 
     <!-- Descriptions for app markets -->
+
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Kalendrar</string>
     <string name="calendars_prefs_desc">Välj kalendrar som skall visas</string>
@@ -67,10 +71,10 @@
     <string name="event_details_fill_all_day_events_title">Fyll heldagsaktiviteter</string>
     <string name="event_details_fill_all_day_events_desc">Visa en post för varje dag av en heldagshändelse</string>
     <string name="event_details_indicators">Tecken</string>
-    <string name="event_details_indicate_alert_desc">Visa tecken för larm</string>
     <string name="event_details_indicate_alert_title">Larm</string>
-    <string name="event_details_indicate_recurring_desc">Visa tecken för återkommande händelser</string>
+    <string name="event_details_indicate_alert_desc">Visa tecken för larm</string>
     <string name="event_details_indicate_recurring_title">Återkommande händelser</string>
+    <string name="event_details_indicate_recurring_desc">Visa tecken för återkommande händelser</string>
 
     <!-- Preference header: Event filters -->
     <string name="event_filters_prefs">Filter för händelser</string>
@@ -99,11 +103,17 @@
     <string name="show_only_closest_instance_of_recurring_event">Visa endast det närmaste datum av ett återkommande händelse</string>
 
     <!-- Preference header: Tasks -->
+    <string name="task_source_opentasks">OpenTasks (av dmfs GmbH)</string>
     <string name="task_source_samsung">Samsung Kalender</string>
+
     <!-- Preference header: Feedback -->
+    <string name="feedback_backup_prefs">Feedback och säkerhetskopiering</string>
+    <string name="feedback_backup_prefs_desc">Kontakta oss, säkerhetskopiera och återställ inställningar</string>
     <string name="feedback_github_title">Gå till applikationen på Github</string>
     <string name="feedback_github_desc">Lämna feedback på projektets hemsida</string>
     <string name="feedback_play_store_title">Gå till applikationen på Google Play Store</string>
     <string name="feedback_play_store_desc">Recensera på Google Play Store</string>
     <string name="share_events_for_debugging_desc">Skapa data, vilket gör att du kan kommunicera dina önskemål eller problem till utvecklarna enkelt</string>
-    </resources>
+    <string name="backup_settings_title">Säkerhetskopieringsinställningar</string>
+    <string name="restore_settings_title">Återställ inställningar från en säkerhetskopia</string>
+</resources>

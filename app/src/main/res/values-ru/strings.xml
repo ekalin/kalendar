@@ -3,8 +3,8 @@
     <string name="yesterday">Вчера</string>
     <string name="today">Сегодня</string>
     <string name="tomorrow">Завтра</string>
-    <string name="not_initialized_yet">Пока не инициализировано...</string>
-    <string name="no_events_to_show">Нет события для просмотра</string>
+    <string name="not_initialized_yet">Пока не инициализировано…</string>
+    <string name="no_events_to_show">Нет событий для просмотра</string>
     <string name="add_event_desc">Добавить событие</string>
     <string name="refresh_desc">Обновить</string>
     <string name="open_prefs_desc">Открыть настройки виджета календаря</string>
@@ -111,6 +111,7 @@
     <!-- Preference header: Tasks -->
     <string name="task_source_opentasks">OpenTasks (от dmfs GmbH)</string>
     <string name="task_source_samsung">Календарь Samsung</string>
+
     <!-- Preference header: Feedback -->
     <string name="feedback_backup_prefs">Обратная связь и Резервное копирование</string>
     <string name="feedback_backup_prefs_desc">Свяжитесь с нами, Резервное копирование и восстановление настроек</string>

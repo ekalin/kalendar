@@ -3,7 +3,7 @@
     <string name="yesterday">Ieri</string>
     <string name="today">Oggi</string>
     <string name="tomorrow">Domani</string>
-    <string name="not_initialized_yet">Non ancora inizializzato...</string>
+    <string name="not_initialized_yet">Non ancora inizializzato…</string>
     <string name="no_events_to_show">Nessun evento da mostrare</string>
     <string name="add_event_desc">Aggiungi evento al calendario</string>
     <string name="refresh_desc">Aggiorna</string>
@@ -11,16 +11,17 @@
     <string name="indicator_alarm">Mostra se l\'evento ha un allarme</string>
     <string name="indicator_recurring">Mostra se l\'evento è ricorrente</string>
     <string name="no_title">(Nessun titolo)</string>
-    <string name="grant_permissions">Dai permessi</string>
-    <string name="grant_permissions_verbose">Il widget chiede il permesso di leggere i calendari.\nTocca per concederlo.</string>
+    <string name="grant_permissions">Dai i permessi</string>
+    <string name="grant_permissions_verbose">Il widget chiede il permesso di leggere i calendari e i compiti.\nTocca qui per autorizzarlo</string>
     <string name="permissions_justification">Benvenuto in Kalendar, facile accesso a calendario e attività.
 Per ottenere il massimo dal widget è necessario autorizzare l\'accesso ai calendari ed alle attività.</string>
     <string name="no_widgets_found">Per prima cosa aggiungere il widget \"Kalendar\" alla pagina Home del tuo dispositivo.</string>
     <string name="select_a_widget_to_configure">Seleziona un widget da configurare</string>
     <string name="close">Chiudi</string>
-    <string name="go_to_home_screen">Vai alla home</string>
+    <string name="go_to_home_screen">Vai alla schermata home</string>
 
     <!-- Descriptions for app markets -->
+
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Calendari</string>
     <string name="calendars_prefs_desc">Selezionare i calendari da mostrare</string>
@@ -28,7 +29,7 @@ Per ottenere il massimo dal widget è necessario autorizzare l\'accesso ai calen
     <!-- Preference header: Layout -->
     <string name="layout_prefs_title">Aspetto</string>
     <string name="layout_prefs_desc">Imposta, mostra o nascondi elementi</string>
-    <string name="widget_instance_name">Nome Widget</string>
+    <string name="widget_instance_name">Nome del Widget</string>
     <string name="appearance_text_size_title">Dimensione testo</string>
     <string name="appearance_text_size_desc">Imposta dimensione del testo</string>
     <string name="appearance_text_size_very_small">Molto piccolo</string>
@@ -61,7 +62,7 @@ Per ottenere il massimo dal widget è necessario autorizzare l\'accesso ai calen
     <string name="colors_prefs_desc">Colore e trasparenza dei testi e dello sfondo</string>
     <string name="appearance_background_color_title">Sfondo trasparente</string>
     <string name="appearance_background_color_desc">Imposta la trasparenza dello sfondo</string>
-    <string name="appearance_past_events_background_color_title">Colore di sfondo di eventi passati</string>
+    <string name="appearance_past_events_background_color_title">Colore di sfondo degli eventi passati</string>
     <string name="appearance_past_events_background_color_desc">Regola il colore di sfondo degli eventi passati</string>
 
     <!-- Preference header: Event details -->
@@ -81,9 +82,9 @@ Per ottenere il massimo dal widget è necessario autorizzare l\'accesso ai calen
 
     <!-- Preference header: Event filters -->
     <string name="event_filters_prefs">Filtri per gli eventi</string>
-    <string name="event_filters_prefs_desc">Eventi attuali, futuri e passati da mostrare</string>
+    <string name="event_filters_prefs_desc">Quali eventi attuali, futuri e passati mostrare</string>
     <string name="past_events">Eventi passati</string>
-    <string name="pref_events_ended_title">Visualizza gli eventi conclusi di recente</string>
+    <string name="pref_events_ended_title">Visualizza gli eventi passati</string>
     <string name="this_option_is_turned_off">(disabilitato)</string>
     <string name="ended_one_hour_ago">Concluso un ora fa</string>
     <string name="ended_two_hours_ago">Concluso due ore fa</string>
@@ -108,6 +109,7 @@ Per ottenere il massimo dal widget è necessario autorizzare l\'accesso ai calen
     <!-- Preference header: Tasks -->
     <string name="task_source_opentasks">OpenTasks (di dmfs GmbH)</string>
     <string name="task_source_samsung">Calendario Samsung</string>
+
     <!-- Preference header: Feedback -->
     <string name="feedback_backup_prefs">Feedback e salvataggio</string>
     <string name="feedback_backup_prefs_desc">Entra in contatto con noi, impostazioni di salvataggio e ripristino</string>
@@ -119,4 +121,4 @@ Per ottenere il massimo dal widget è necessario autorizzare l\'accesso ai calen
     <string name="share_events_settings_for_debugging_title">Condividi eventi ed impostazioni per il debug</string>
     <string name="backup_settings_title">Impostazioni di salvataggio</string>
     <string name="restore_settings_title">Ripristino impostazioni da un salvataggio</string>
-    </resources>
+</resources>

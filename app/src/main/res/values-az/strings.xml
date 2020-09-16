@@ -23,6 +23,8 @@
     <string name="calendars_prefs_desc">Göstəriləcək təqvimləri seçin</string>
 
     <!-- Preference header: Layout -->
+    <string name="layout_prefs_title">Düzüm</string>
+    <string name="layout_prefs_desc">Vidget elementlərini yerləşdirin, göstərin və gizlədin</string>
     <string name="widget_instance_name">Vidget adı</string>
     <string name="appearance_text_size_title">Mətn ölçüsü</string>
     <string name="appearance_text_size_desc">Mətn ölçüsünü nizamla</string>
@@ -31,7 +33,7 @@
     <string name="appearance_text_size_medium">Orta</string>
     <string name="appearance_text_size_large">Böyük</string>
     <string name="appearance_text_size_very_large">Çox böyük</string>
-    <string name="pref_event_entry_layout_title">Tədbir giriş tərtibatı</string>
+    <string name="pref_event_entry_layout_title">Tədbir giriş düzümü</string>
     <string name="default_multiline_layout">Vaxt alt başlığı</string>
     <string name="single_line_layout">Hamısı bir sətirdə</string>
     <string name="appearance_multiline_title_title">Çox sətirli başlıq</string>
@@ -39,7 +41,7 @@
     <string name="appearance_abbreviate_dates_title">Tarixləri qısalt</string>
     <string name="appearance_abbreviate_dates_desc">Vidget və Gün başlıqları üçün üç-hərf formatından istifadə et.</string>
     <string name="appearance_show_day_headers_title">Gün başlıqlarını göstər</string>
-    <string name="appearance_show_day_headers_desc">Gün başlıqlarını heçbir halda göstərmə</string>
+    <string name="appearance_show_day_headers_desc">Gün başlıqlarını heç bir halda göstərmə</string>
     <string name="appearance_day_header_alignment_title">Gün başlığı qruplaşması</string>
     <string name="appearance_day_header_alignment_desc">Gün başlığı qruplaşmasını tənzimlə</string>
     <string name="appearance_day_header_alignment_left">Sol</string>
@@ -55,8 +57,8 @@
     <string name="appearance_group_color_title">Rənglər</string>
     <string name="appearance_background_color_title">Arxafon rəngi</string>
     <string name="appearance_background_color_desc">Arxafon rəngini nizamla</string>
-    <string name="appearance_past_events_background_color_title">Keçmiş tədbirlərin arxafon rəngi</string>
-    <string name="appearance_past_events_background_color_desc">Keçmiş tədbirlərin arxafon rəngini nizamla</string>
+    <string name="appearance_past_events_background_color_title">Keçmiş tədbirlərin arxaplan rəngi</string>
+    <string name="appearance_past_events_background_color_desc">Keçmiş tədbirlərin arxaplan rəngini nizamla.</string>
 
     <!-- Preference header: Event details -->
     <string name="event_details_prefs">Tədbir təfsilatı</string>
@@ -68,10 +70,10 @@
     <string name="event_details_fill_all_day_events_title">Bütün gün tədbirlərini doldur</string>
     <string name="event_details_fill_all_day_events_desc">Bütün gün tədbirinin hər günü üçün giriş göstər</string>
     <string name="event_details_indicators">Göstəricilər</string>
-    <string name="event_details_indicate_alert_desc">Xəbərdarlıqlar üçün göstərici göstər</string>
     <string name="event_details_indicate_alert_title">Xəbərdarlıqlar</string>
-    <string name="event_details_indicate_recurring_desc">Təkrarlanan təbirlər üçün göstərici göstər</string>
+    <string name="event_details_indicate_alert_desc">Xəbərdarlıqlar üçün göstərici göstər</string>
     <string name="event_details_indicate_recurring_title">Təkrarlanan tədbirlər</string>
+    <string name="event_details_indicate_recurring_desc">Təkrarlanan təbirlər üçün göstərici göstər</string>
 
     <!-- Preference header: Event filters -->
     <string name="event_filters_prefs">Tədbir filtrləri</string>
@@ -100,10 +102,20 @@
     <string name="show_only_closest_instance_of_recurring_event">Təkrarlanan bir tədbirin yalnız ən yaxın nümunəsini göstər</string>
 
     <!-- Preference header: Tasks -->
+    <string name="task_source_opentasks">OpenTasks (dmfs GmbH tərəfindən)</string>
+    <string name="task_source_samsung">Samsung Təqvim</string>
+
     <!-- Preference header: Feedback -->
+    <string name="feedback_backup_prefs">Əks əlaqə və Nüsxələmə</string>
+    <string name="feedback_backup_prefs_desc">Bizimlə əlaqədə qalın, tənzimləmələri nüsxələyin və geri yükləyin</string>
     <string name="feedback_github_title">Github-da vidgeti ziyarət edin</string>
     <string name="feedback_github_desc">Layihə səhifəsinə əks əlaqə verin</string>
     <string name="feedback_play_store_title">Google Play Store-da vidgeti ziyarət edin</string>
     <string name="feedback_play_store_desc">Google Play Store-da rəy bildirin və bizə qiymət verin</string>
-    <string name="share_events_for_debugging_desc">Tərtibatçılara kömək etmək üçün problemlərin hesabatını hazırlayın</string>
-    </resources>
+    <string name="share_events_settings_for_debugging_title">Sazlamaq üçün tədbirləri və tənzimləmələri paylaş</string>
+    <string name="share_events_for_debugging_desc">Nasazlıqların aşkarlanması problemlərində tərtibatçılara kömək etmək üçün bir hesabat yaradın.
+        Paylaşmazdan əvvəl gizliliyinizi qorumaq üçün tədbirləri filtrləyin, ancaq problemi göstərin</string>
+    <string name="backup_settings_title">Nüsxələmə tənzimləmələri</string>
+    <string name="restore_settings_title">Tənzimləmələri geri yüklə</string>
+    <string name="restore_settings_desc">Hər bir ToDo Gündəm vidgetinin tənzimləmələri ayrıca geri yüklənməlidir</string>
+</resources>

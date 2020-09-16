@@ -21,11 +21,14 @@
     <string name="go_to_home_screen">Ir a la pantalla de inicio</string>
 
     <!-- Descriptions for app markets -->
+
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Calendarios</string>
     <string name="calendars_prefs_desc">Seleccionar calendarios a mostrar</string>
 
     <!-- Preference header: Layout -->
+    <string name="layout_prefs_title">Disposición</string>
+    <string name="layout_prefs_desc">Colocar, mostrar y ocultar elementos de widget</string>
     <string name="widget_instance_name">Nombre del widget</string>
     <string name="appearance_text_size_title">Tamaño del texto</string>
     <string name="appearance_text_size_desc">Ajustar el tamaño del texto</string>
@@ -39,8 +42,8 @@
     <string name="single_line_layout">Todo en una sola línea</string>
     <string name="appearance_multiline_title_title">Título multilinea</string>
     <string name="appearance_multiline_title_desc">Extender título de eventos en varias líneas</string>
-    <string name="appearance_abbreviate_dates_title">Acortar fechas</string>
-    <string name="appearance_abbreviate_dates_desc">Usar formato de tres letras para fechas en encabezados de Widget y día, etc.</string>
+    <string name="appearance_abbreviate_dates_title">Abreviar fechas con Día de la semana</string>
+    <string name="appearance_abbreviate_dates_desc">Use el formato de tres letras para las fechas</string>
     <string name="appearance_show_day_headers_title">Mostrar encabezados de día</string>
     <string name="appearance_show_day_headers_desc">Mostrar encabezados de día en todos los días</string>
     <string name="appearance_day_header_alignment_title">Alineación del encabezado del día</string>
@@ -56,6 +59,7 @@
 
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Colores</string>
+    <string name="colors_prefs_desc">Colores y opacidad de textos y fondos.</string>
     <string name="appearance_background_color_title">Color del fondo</string>
     <string name="appearance_background_color_desc">Ajustar el color de fondo</string>
     <string name="appearance_past_events_background_color_title">Color de fondo de eventos pasados</string>
@@ -103,10 +107,19 @@
     <string name="show_only_closest_instance_of_recurring_event">Mostrar sólo la fecha más cercana de un evento recurrente</string>
 
     <!-- Preference header: Tasks -->
+    <string name="task_source_opentasks">OpenTasks (por dmfs GmbH)</string>
+    <string name="task_source_samsung">Calendario Samsung</string>
+
     <!-- Preference header: Feedback -->
+    <string name="feedback_backup_prefs">Opiniones y Copia de seguridad</string>
+    <string name="feedback_backup_prefs_desc">Ponte en contacto con nosotros, haz copias de seguridad y restaura ajustes</string>
     <string name="feedback_github_title">Visitar widget en Github</string>
     <string name="feedback_github_desc">Proporcionar la información en la página del proyecto</string>
     <string name="feedback_play_store_title">Visitar widget en Google Play Store</string>
     <string name="feedback_play_store_desc">Valorar y comentar en Google Play Store</string>
-    <string name="share_events_for_debugging_desc">Generar un informe para ayudar los desarrolladores a solucionar el problema</string>
-    </resources>
+    <string name="share_events_settings_for_debugging_title">Comparta eventos y ajustes para la depuración</string>
+    <string name="share_events_for_debugging_desc">Crea un informe para ayudar a los desarrolladores a solucionar problemas.
+        Antes de compartir, filtra los eventos para proteger tu privacidad pero que aún demuestre un problema</string>
+    <string name="restore_settings_title">Restaurar ajustes desde una copia de seguridad</string>
+    <string name="restore_settings_desc">La configuración de cada widget de ToDo Agenda debe restaurarse por separado</string>
+</resources>

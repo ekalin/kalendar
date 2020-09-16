@@ -1,19 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="yesterday">Вчера</string>
     <string name="today">Днес</string>
     <string name="tomorrow">Утре</string>
+    <string name="not_initialized_yet">Все още не е инизциализирано</string>
+    <string name="no_events_to_show">Няма събития</string>
     <string name="add_event_desc">Добави ново събитие в календара</string>
     <string name="refresh_desc">Обновяване</string>
     <string name="open_prefs_desc">Настройки на уиджета</string>
     <string name="indicator_alarm">Индикатор за зададена аларма</string>
     <string name="indicator_recurring">Индикатор за повтарящо се събитие</string>
     <string name="no_title">(Без заглавие)</string>
+    <string name="grant_permissions">Даване на разрешения</string>
+    <string name="grant_permissions_verbose">Необходими за разрешения за четене на календар и задачи.\n
+Докоснете тук за да позволите.</string>
+    <string name="permissions_justification">Добре дошли в Todo Agenda, лесният достъп до вашите календари и задачи.\n\n
+За да се възползвате функционалността на програмата, трябва да предоставите достъп до вашите календари и задачи.</string>
+    <string name="no_widgets_found">Моля добавете \"Todo Agenda\" уиджет на екрана на вашето устройство.</string>
+    <string name="select_a_widget_to_configure">Изберете уиджет</string>
+    <string name="close">Затвори</string>
+    <string name="go_to_home_screen">Към началният екран</string>
+
     <!-- Descriptions for app markets -->
+
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Календари</string>
     <string name="calendars_prefs_desc">Изберете календари за показване</string>
 
     <!-- Preference header: Layout -->
+    <string name="widget_instance_name">Име на widget</string>
     <string name="appearance_text_size_title">Размер на текста</string>
     <string name="appearance_text_size_desc">Настройка за размера на текста</string>
     <string name="appearance_text_size_very_small">Много малък</string>
@@ -23,6 +38,8 @@
     <string name="appearance_text_size_very_large">Много голям</string>
     <string name="appearance_multiline_title_title">Многоредово събитие</string>
     <string name="appearance_multiline_title_desc">Показва събитието на няколко реда</string>
+    <string name="appearance_abbreviate_dates_title">Abbreviate dates</string>
+    <string name="appearance_abbreviate_dates_desc">Use three-letter format for dates in Widget and Day headers etc.</string>
     <string name="appearance_day_header_alignment_title">Подравняване на заглавието</string>
     <string name="appearance_day_header_alignment_desc">Настройка за подравняване на заглавната част</string>
     <string name="appearance_day_header_alignment_left">Ляво</string>
@@ -30,6 +47,7 @@
     <string name="appearance_day_header_alignment_right">Дясно</string>
     <string name="appearance_show_days_without_events_title">Показва дни без събития</string>
     <string name="appearance_show_days_without_events_desc">Показва заглавиcdxaxdccе за дни без събития</string>
+
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Цветове</string>
     <string name="appearance_background_color_title">Цвят на фона</string>

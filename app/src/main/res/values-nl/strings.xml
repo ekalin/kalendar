@@ -3,6 +3,8 @@
     <string name="yesterday">Gisteren</string>
     <string name="today">Vandaag</string>
     <string name="tomorrow">Morgen</string>
+    <string name="not_initialized_yet">Nog niet geïnitialiseerd…</string>
+    <string name="no_events_to_show">Geen evenement om te laten zien</string>
     <string name="add_event_desc">Nieuwe gebeurtenis aan de agenda toevoegen</string>
     <string name="refresh_desc">Vernieuwen</string>
     <string name="open_prefs_desc">Open de instellingen van de agenda widget</string>
@@ -28,6 +30,8 @@
     <string name="calendars_prefs_desc">Selecteer de weer te geven agenda\'s</string>
 
     <!-- Preference header: Layout -->
+    <string name="layout_prefs_title">Indeling</string>
+    <string name="layout_prefs_desc">Plaats, toon en verberg widget-elementen</string>
     <string name="widget_instance_name">Naam van deze widget instantie</string>
     <string name="appearance_text_size_title">Tekstgrootte</string>
     <string name="appearance_text_size_desc">De tekstgrootte wijzigen</string>
@@ -57,6 +61,7 @@
     <string name="lock_time_zone_on_desc">Vergrendeld op %s</string>
 
     <!-- Preference header: Colors -->
+    <string name="colors_prefs_desc">Kleur en ondoorzichtigheid van teksten en achtergronden</string>
     <string name="appearance_group_color_title">Kleuren</string>
     <string name="appearance_background_color_title">Achtergrondkleur</string>
     <string name="appearance_background_color_desc">De kleur van de achtergrond aanpassen</string>

@@ -62,7 +62,8 @@
 
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Couleurs</string>
-    <string name="appearance_background_color_title">Transparence du fond</string>
+    <string name="colors_prefs_desc">Couleur et opacité du texte et de l\'arrière plan</string>
+    <string name="appearance_background_color_title">Couleur d\'arrière plan</string>
     <string name="appearance_background_color_desc">Ajuster la transparence du fond</string>
     <string name="appearance_past_events_background_color_title">Couleur d\'arrière-plan des événements passés</string>
     <string name="appearance_past_events_background_color_desc">Ajuster la couleur de fond des événements passés</string>
@@ -74,7 +75,7 @@
     <string name="event_details_show_end_time_desc">Afficher l\'heure de fin de l\'événement</string>
     <string name="event_details_show_location_title">Montrer le lieu</string>
     <string name="event_details_show_location_desc">Cacher ou montrer le lieu de l\'événement</string>
-    <string name="event_details_fill_all_day_events_title">Remplir tous les jours d\'événements</string>
+    <string name="event_details_fill_all_day_events_title">Gestion des événements Journée Entière</string>
     <string name="event_details_fill_all_day_events_desc">Afficher une entrée pour chaque jour d\'un événement Journée entière</string>
     <string name="event_details_indicators">Indicateurs</string>
     <string name="event_details_indicate_alert_desc">Montrer l\'indicateur pour les alertes</string>
@@ -111,10 +112,18 @@
     <!-- Preference header: Tasks -->
     <string name="task_source_opentasks">OpenTasks (par dmfs GmbH)</string>
     <string name="task_source_samsung">Calendrier Samsung</string>
+
     <!-- Preference header: Feedback -->
+    <string name="feedback_backup_prefs">Commentaires et sauvegarde</string>
+    <string name="feedback_backup_prefs_desc">Nous contacter, sauvegarder et restaurer les paramètre</string>
     <string name="feedback_github_title">Visiter le widget sur Github</string>
     <string name="feedback_github_desc">Faire un retour sur la page du projet</string>
     <string name="feedback_play_store_title">Visiter le widget sur le Google Play Store</string>
     <string name="feedback_play_store_desc">Noter et commenter sur le Google Play Store</string>
-    <string name="share_events_for_debugging_desc">Créer un rapport pour aider les développeurs à résoudre les problèmes</string>
-    </resources>
+    <string name="share_events_settings_for_debugging_title">Partager les événements et les paramètres pour aider au débogage</string>
+    <string name="share_events_for_debugging_desc">Créer un rapport pour aider les développeurs à analyser les problèmes.
+        Attention, avant de partager veillez à filtrer les événements pour protéger votre vie privée, tout en conservant les éléments qui mettent le problème en évidence</string>
+    <string name="backup_settings_title">Savegarder les paramètres</string>
+    <string name="restore_settings_title">Restaurer les paramètres à partir d\'une sauvegarde</string>
+    <string name="restore_settings_desc">Les paramètres de chaque widget ToDo Agenda doivent être restaurés séparément</string>
+</resources>
