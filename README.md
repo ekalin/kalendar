@@ -38,7 +38,7 @@ We are developing this application in public to bring you a tool that _you_ want
 
 ## Changelog
 
-### In development
+### v3
 
 * Added support for [Tasks.org (by Alex Baker)](https://play.google.com/store/apps/details?id=org.tasks). This application also supports Google Tasks, so you can now see your Google Tasks in Kalendar.
 * Canceled events and tasks are not shown anymore.
