@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import com.github.ekalin.kalendar.birthday.BirthdayVisualizer;
 import com.github.ekalin.kalendar.calendar.CalendarEventVisualizer;
 import com.github.ekalin.kalendar.prefs.AllSettings;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
@@ -67,6 +68,7 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
         eventProviders.add(new DayHeaderVisualizer(context, widgetId));
         eventProviders.add(new CalendarEventVisualizer(context, widgetId));
         eventProviders.add(new TaskVisualizer(context, widgetId));
+        eventProviders.add(new BirthdayVisualizer(context, widgetId));
     }
 
     private void logEvent(String message) {

@@ -21,7 +21,7 @@ public class CalendarEntry extends WidgetEntry {
     private CalendarEvent event;
 
     private CalendarEntry() {
-        super(30);
+        super(40);
     }
 
     public static CalendarEntry fromEvent(CalendarEvent event, DateTime entryDate) {
