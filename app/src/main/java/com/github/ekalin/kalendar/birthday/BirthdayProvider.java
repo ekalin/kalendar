@@ -2,10 +2,12 @@ package com.github.ekalin.kalendar.birthday;
 
 import android.Manifest;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import androidx.core.util.Supplier;
 import androidx.fragment.app.Fragment;
 
 import org.joda.time.LocalDate;
@@ -21,6 +23,7 @@ import com.github.ekalin.kalendar.util.PermissionsUtil;
 
 public class BirthdayProvider extends EventProvider {
     private static final String PERMISSION = Manifest.permission.READ_CONTACTS;
+    private static final Uri CONTACTS_URI = ContactsContract.Data.CONTENT_URI;
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -36,7 +39,6 @@ public class BirthdayProvider extends EventProvider {
 
         initialiseParameters();
 
-        Uri contentUri = ContactsContract.Data.CONTENT_URI;
         String[] projection = {
                 ContactsContract.CommonDataKinds.Event.CONTACT_ID,
                 ContactsContract.CommonDataKinds.Event.DISPLAY_NAME,
@@ -44,7 +46,7 @@ public class BirthdayProvider extends EventProvider {
         };
         String selection = getWhereClause();
 
-        List<BirthdayEvent> birthdayEvents = queryProvider(contentUri, projection, selection, this::createBirthday);
+        List<BirthdayEvent> birthdayEvents = queryProvider(CONTACTS_URI, projection, selection, this::createBirthday);
 
         return birthdayEvents.stream().filter(this::inDisplayRange).collect(Collectors.toList());
     }
@@ -87,5 +89,15 @@ public class BirthdayProvider extends EventProvider {
 
     public static void requestPermission(Fragment fragment) {
         fragment.requestPermissions(new String[]{PERMISSION}, 1);
+    }
+
+    public static List<ContentObserver> registerObservers(Context context, Supplier<ContentObserver> observerCreator) {
+        if (hasPermission(context)) {
+            ContentObserver observer = observerCreator.get();
+            context.getContentResolver().registerContentObserver(CONTACTS_URI, false, observer);
+            return Collections.singletonList(observer);
+        } else {
+            return Collections.emptyList();
+        }
     }
 }

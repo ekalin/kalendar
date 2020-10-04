@@ -3,6 +3,7 @@ package com.github.ekalin.kalendar.calendar;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
@@ -11,10 +12,12 @@ import android.provider.CalendarContract.Calendars;
 import android.provider.CalendarContract.Instances;
 import android.util.SparseArray;
 import androidx.annotation.NonNull;
+import androidx.core.util.Supplier;
 
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -193,5 +196,16 @@ public class CalendarEventProvider extends EventProvider {
         intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, event.getStartMillis());
         intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, event.getEndMillis());
         return intent;
+    }
+
+    public static List<ContentObserver> registerObservers(Context context, Supplier<ContentObserver> observerCreator) {
+        if (PermissionsUtil.arePermissionsGranted(context)) {
+            ContentObserver observer = observerCreator.get();
+            context.getContentResolver().registerContentObserver(CalendarContract.CONTENT_URI, false,
+                    observer);
+            return Collections.singletonList(observer);
+        } else {
+            return Collections.emptyList();
+        }
     }
 }
