@@ -1,0 +1,15 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <CheckBoxPreference
+        app:key="showBirthdays"
+        app:title="@string/show_birthdays_title"
+        app:summary="@string/show_birthdays_desc"
+        app:defaultValue="false"
+        app:iconSpaceReserved="false" />
+
+    <Preference
+        app:key="grantBirthdayPermission"
+        app:title="@string/grant_birthday_permission_title"
+        app:summary="@string/grant_birthday_permission_desc"
+        app:persistent="false"
+        app:iconSpaceReserved="false" />
+</PreferenceScreen>

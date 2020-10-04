@@ -147,6 +147,14 @@
     <string name="task_lists_pref_title">Task lists</string>
     <string name="task_lists_pref_summary">Select the task lists to display</string>
 
+    <!-- Preference header: Birthdays -->
+    <string name="birthday_prefs">Birthdays</string>
+    <string name="birthday_prefs_desc">Configure display of birthdays</string>
+    <string name="show_birthdays_title">Show birthdays</string>
+    <string name="show_birthdays_desc">Show birthdays from your contacts</string>
+    <string name="grant_birthday_permission_title">Grant permission to fetch contacts</string>
+    <string name="grant_birthday_permission_desc">You need to grant permission to access your contacts in order for their birthdays to be displayed</string>
+
     <!-- Preference header: Feedback -->
     <string name="feedback_backup_prefs">Feedback and Backup</string>
     <string name="feedback_backup_prefs_desc">Get in touch with us, backup and restore settings</string>

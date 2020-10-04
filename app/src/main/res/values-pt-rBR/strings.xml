@@ -144,6 +144,14 @@
     <string name="task_lists_pref_title">Listas de tarefas</string>
     <string name="task_lists_pref_summary">Selecione as listas de tarefas a exibir</string>
 
+    <!-- Preference header: Birthdays -->
+    <string name="birthday_prefs">Aniversários</string>
+    <string name="birthday_prefs_desc">Configurar a exibição de aniversários</string>
+    <string name="show_birthdays_title">Exibir aniversários</string>
+    <string name="show_birthdays_desc">Exibir aniversários de seus contatos</string>
+    <string name="grant_birthday_permission_title">Conceder permissão para ler contacts</string>
+    <string name="grant_birthday_permission_desc">É necessário conceder permissão de acesso aos contatos para exibir os aniverários</string>
+
     <!-- Preference header: Feedback -->
     <string name="feedback_backup_prefs">Feedback e backup</string>
     <string name="feedback_backup_prefs_desc">Entre em contato conosco, fazer backup e restaurar configurações</string>

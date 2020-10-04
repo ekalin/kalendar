@@ -96,6 +96,9 @@ public class InstanceSettings {
     static final String PREF_TASK_SOURCE_DEFAULT = TaskProvider.PROVIDER_NONE;
     static final String PREF_ACTIVE_TASK_LISTS = "activeTaskLists";
 
+    // Birthdays
+    static final String PREF_SHOW_BIRTHDAYS = "showBirthdays";
+
     private final Context context;
     private final int widgetId;
     private final SharedPreferences sharedPreferences;
@@ -144,6 +147,8 @@ public class InstanceSettings {
 
             setStringFromJson(editor, json, PREF_TASK_SOURCE);
             setStringSetFromJson(editor, json, PREF_ACTIVE_TASK_LISTS);
+
+            setBooleanFromJson(editor, json, PREF_SHOW_BIRTHDAYS);
 
             editor.apply();
         } catch (JSONException e) {
@@ -245,6 +250,8 @@ public class InstanceSettings {
             if (complete) {
                 json.put(PREF_ACTIVE_TASK_LISTS, new JSONArray(getActiveTaskLists()));
             }
+
+            json.put(PREF_SHOW_BIRTHDAYS, getShowBirthdays());
         } catch (JSONException e) {
             throw new RuntimeException("Saving settings to JSON", e);
         }
@@ -413,6 +420,10 @@ public class InstanceSettings {
 
     private boolean noTaskSources() {
         return getTaskSource().equals(TaskProvider.PROVIDER_NONE);
+    }
+
+    public boolean getShowBirthdays() {
+        return sharedPreferences.getBoolean(PREF_SHOW_BIRTHDAYS, false);
     }
 
     void delete() {
