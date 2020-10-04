@@ -1,0 +1,5 @@
+This app does not collect or store any personal data.
+
+It accesses your calendars, tasks and contacts (in order to display their birthdays), but this data is only used to display the widget's event list. It is never stored nor sent anywhere.
+
+If the "Share events and settings for debugging" feature is used, a copy of your events (as displayed in the widget) is generated, and you are asked to share it with the developers for debugging. Using this feature is entirely optional, and you have a chance to remove sensitive data before sharing.
