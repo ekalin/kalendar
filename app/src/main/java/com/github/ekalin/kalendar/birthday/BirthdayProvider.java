@@ -2,12 +2,17 @@ package com.github.ekalin.kalendar.birthday;
 
 import android.Manifest;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Color;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import androidx.fragment.app.Fragment;
 
-import java.util.ArrayList;
+import org.joda.time.LocalDate;
+
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.provider.EventProvider;
@@ -16,6 +21,9 @@ import com.github.ekalin.kalendar.util.PermissionsUtil;
 
 public class BirthdayProvider extends EventProvider {
     private static final String PERMISSION = Manifest.permission.READ_CONTACTS;
+
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     public BirthdayProvider(Context context, int widgetId, InstanceSettings settings) {
         super(context, widgetId, settings);
@@ -28,24 +36,49 @@ public class BirthdayProvider extends EventProvider {
 
         initialiseParameters();
 
-        BirthdayEvent ev1 = new BirthdayEvent();
-        ev1.setId(1L);
-        ev1.setTitle("Birthday today");
-        ev1.setStartDate(DateUtil.now(zone));
-        ev1.setColor(Color.GREEN);
-        ev1.setZone(zone);
+        Uri contentUri = ContactsContract.Data.CONTENT_URI;
+        String[] projection = {
+                ContactsContract.CommonDataKinds.Event.CONTACT_ID,
+                ContactsContract.CommonDataKinds.Event.DISPLAY_NAME,
+                ContactsContract.CommonDataKinds.Event.START_DATE,
+        };
+        String selection = getWhereClause();
 
-        BirthdayEvent ev2 = new BirthdayEvent();
-        ev2.setId(2L);
-        ev2.setTitle("Birthday tomorrow");
-        ev2.setStartDate(DateUtil.now(zone).plusDays(1));
-        ev2.setColor(Color.GREEN);
-        ev2.setZone(zone);
+        List<BirthdayEvent> birthdayEvents = queryProvider(contentUri, projection, selection, this::createBirthday);
 
-        List<BirthdayEvent> events = new ArrayList<>();
-        events.add(ev1);
-        events.add(ev2);
-        return events;
+        return birthdayEvents.stream().filter(this::inDisplayRange).collect(Collectors.toList());
+    }
+
+    @Override
+    protected void initialiseParameters() {
+        super.initialiseParameters();
+        startDate = mStartOfTimeRange.toLocalDate();
+        endDate = mEndOfTimeRange.toLocalDate();
+    }
+
+    private String getWhereClause() {
+        return ContactsContract.CommonDataKinds.Event.MIMETYPE + EQUALS + "'" + ContactsContract.CommonDataKinds.Event.CONTENT_ITEM_TYPE + "'"
+                + AND + ContactsContract.CommonDataKinds.Event.TYPE + EQUALS + ContactsContract.CommonDataKinds.Event.TYPE_BIRTHDAY;
+    }
+
+    private BirthdayEvent createBirthday(Cursor cursor) {
+        BirthdayEvent event = new BirthdayEvent();
+        event.setId(cursor.getLong(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Event.CONTACT_ID)));
+        event.setTitle(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Event.DISPLAY_NAME)));
+        event.setZone(zone);
+        event.setColor(Color.GREEN);
+
+        LocalDate birthDate = DateUtil.parseContactDate(
+                cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Event.START_DATE)));
+        LocalDate eventDate = DateUtil.birthDateToDisplayedBirthday(birthDate, settings);
+        event.setDate(eventDate);
+
+        return event;
+    }
+
+    private boolean inDisplayRange(BirthdayEvent event) {
+        return !event.getDate().isBefore(startDate)
+                && !event.getDate().isAfter(endDate);
     }
 
     public static boolean hasPermission(Context context) {

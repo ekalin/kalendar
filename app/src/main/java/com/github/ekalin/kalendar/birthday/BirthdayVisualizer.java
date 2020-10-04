@@ -72,7 +72,7 @@ public class BirthdayVisualizer extends WidgetEntryVisualizer<BirthdayEntry> {
 
     private void setTitle(BirthdayEntry entry, RemoteViews rv) {
         int viewId = R.id.birthday_entry_title;
-        rv.setTextViewText(viewId, entry.getTitle());
+        rv.setTextViewText(viewId, entry.getTitle(getContext().getResources().getString(R.string.birthday_event_text)));
         setTextSize(getSettings(), rv, viewId, R.dimen.event_entry_title);
         setEventTitleColor(rv, viewId, entry);
         setMultiline(rv, viewId, getSettings().getTitleMultiline());

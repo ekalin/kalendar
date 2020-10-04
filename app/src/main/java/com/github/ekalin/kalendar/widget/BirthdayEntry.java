@@ -14,13 +14,13 @@ public class BirthdayEntry extends WidgetEntry {
         BirthdayEntry entry = new BirthdayEntry();
         entry.event = event;
 
-        entry.setStartDate(event.getStartDate());
+        entry.setStartDate(event.getDate().toDateTimeAtStartOfDay(event.getZone()));
 
         return entry;
     }
 
-    public String getTitle() {
-        return event.getTitle();
+    public String getTitle(String template) {
+        return String.format(template, event.getTitle());
     }
 
     public BirthdayEvent getEvent() {

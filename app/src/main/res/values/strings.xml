@@ -154,6 +154,7 @@
     <string name="show_birthdays_desc">Show birthdays from your contacts</string>
     <string name="grant_birthday_permission_title">Grant permission to fetch contacts</string>
     <string name="grant_birthday_permission_desc">You need to grant permission to access your contacts in order for their birthdays to be displayed</string>
+    <string name="birthday_event_text">%s\'s birthday</string>
 
     <!-- Preference header: Feedback -->
     <string name="feedback_backup_prefs">Feedback and Backup</string>

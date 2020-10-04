@@ -1,12 +1,12 @@
 package com.github.ekalin.kalendar.birthday;
 
-import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
 
 public class BirthdayEvent {
     private long id;
     private String title;
-    private DateTime startDate;
+    private LocalDate date;
     private int color;
     private DateTimeZone zone;
 
@@ -26,12 +26,12 @@ public class BirthdayEvent {
         this.title = title;
     }
 
-    public DateTime getStartDate() {
-        return startDate;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setStartDate(DateTime startDate) {
-        this.startDate = startDate.withTimeAtStartOfDay();
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public int getColor() {
@@ -54,7 +54,7 @@ public class BirthdayEvent {
     public int hashCode() {
         int result = Long.valueOf(id).hashCode();
         result += 31 * title.hashCode();
-        result += 31 * startDate.hashCode();
+        result += 31 * date.hashCode();
         return result;
     }
 
@@ -63,7 +63,7 @@ public class BirthdayEvent {
         return "BirthdayEvent{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", startDate=" + startDate +
+                ", startDate=" + date +
                 ", color=" + color +
                 '}';
     }

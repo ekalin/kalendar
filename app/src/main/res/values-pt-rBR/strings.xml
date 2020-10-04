@@ -151,6 +151,7 @@
     <string name="show_birthdays_desc">Exibir aniversários de seus contatos</string>
     <string name="grant_birthday_permission_title">Conceder permissão para ler contacts</string>
     <string name="grant_birthday_permission_desc">É necessário conceder permissão de acesso aos contatos para exibir os aniverários</string>
+    <string name="birthday_event_text">Aniversário de %s</string>
 
     <!-- Preference header: Feedback -->
     <string name="feedback_backup_prefs">Feedback e backup</string>
