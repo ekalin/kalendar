@@ -132,10 +132,10 @@ public class CalendarEventProvider extends EventProvider {
     }
 
     private List<CalendarEvent> queryList(Uri uri, String selection) {
-        QueryResult result = new QueryResult(getSettings(), uri, getProjection(), selection);
+        QueryResult result = new QueryResult(getSettings(), QueryResult.QueryResultType.CALENDAR, uri, getProjection(), selection);
 
         List<CalendarEvent> eventList = queryProviderAndStoreResults(uri, getProjection(), selection, result, this::createCalendarEvent);
-        QueryResultsStorage.storeCalendar(result);
+        QueryResultsStorage.storeResult(result);
 
         return eventList.stream().filter(event -> !mKeywordsFilter.matched(event.getTitle())).collect(Collectors.toList());
     }

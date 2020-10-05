@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
 
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.provider.EventProvider;
+import com.github.ekalin.kalendar.provider.QueryResult;
+import com.github.ekalin.kalendar.provider.QueryResultsStorage;
 import com.github.ekalin.kalendar.util.CalendarIntentUtil;
 import com.github.ekalin.kalendar.util.DateUtil;
 import com.github.ekalin.kalendar.util.PermissionsUtil;
@@ -49,7 +51,10 @@ public class BirthdayProvider extends EventProvider {
         };
         String selection = getWhereClause();
 
-        List<BirthdayEvent> birthdayEvents = queryProvider(CONTACTS_URI, projection, selection, this::createBirthday);
+        QueryResult result = new QueryResult(getSettings(), QueryResult.QueryResultType.BIRTHDAY, CONTACTS_URI, projection, selection);
+
+        List<BirthdayEvent> birthdayEvents = queryProviderAndStoreResults(CONTACTS_URI, projection, selection, result, this::createBirthday);
+        QueryResultsStorage.storeResult(result);
 
         return birthdayEvents.stream().filter(this::inDisplayRange).collect(Collectors.toList());
     }
