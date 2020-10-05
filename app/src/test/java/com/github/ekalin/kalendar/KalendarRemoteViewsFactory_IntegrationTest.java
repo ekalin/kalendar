@@ -180,7 +180,8 @@ public class KalendarRemoteViewsFactory_IntegrationTest {
 
     public void createBirthdays() {
         MatrixCursor matrixCursor = new MatrixCursor(new String[]{
-                ContactsContract.CommonDataKinds.Event.CONTACT_ID,
+                ContactsContract.CommonDataKinds.Event._ID,
+                ContactsContract.CommonDataKinds.Event.LOOKUP_KEY,
                 ContactsContract.CommonDataKinds.Event.DISPLAY_NAME,
                 ContactsContract.CommonDataKinds.Event.START_DATE,
         });
@@ -195,7 +196,8 @@ public class KalendarRemoteViewsFactory_IntegrationTest {
         String dateStr = DateTimeFormat.forPattern("yyyy-MM-dd").print(date);
 
         cursor.newRow()
-                .add(ContactsContract.CommonDataKinds.Event.CONTACT_ID, id)
+                .add(ContactsContract.CommonDataKinds.Event._ID, id)
+                .add(ContactsContract.CommonDataKinds.Event.LOOKUP_KEY, String.valueOf(id))
                 .add(ContactsContract.CommonDataKinds.Event.DISPLAY_NAME, name)
                 .add(ContactsContract.CommonDataKinds.Event.START_DATE, dateStr);
     }

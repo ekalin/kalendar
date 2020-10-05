@@ -2,6 +2,7 @@ package com.github.ekalin.kalendar.birthday;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.provider.EventProvider;
+import com.github.ekalin.kalendar.util.CalendarIntentUtil;
 import com.github.ekalin.kalendar.util.DateUtil;
 import com.github.ekalin.kalendar.util.PermissionsUtil;
 
@@ -40,7 +42,8 @@ public class BirthdayProvider extends EventProvider {
         initialiseParameters();
 
         String[] projection = {
-                ContactsContract.CommonDataKinds.Event.CONTACT_ID,
+                ContactsContract.CommonDataKinds.Event._ID,
+                ContactsContract.CommonDataKinds.Event.LOOKUP_KEY,
                 ContactsContract.CommonDataKinds.Event.DISPLAY_NAME,
                 ContactsContract.CommonDataKinds.Event.START_DATE,
         };
@@ -65,7 +68,8 @@ public class BirthdayProvider extends EventProvider {
 
     private BirthdayEvent createBirthday(Cursor cursor) {
         BirthdayEvent event = new BirthdayEvent();
-        event.setId(cursor.getLong(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Event.CONTACT_ID)));
+        event.setId(cursor.getLong(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Event._ID)));
+        event.setLookupKey(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Event.LOOKUP_KEY)));
         event.setTitle(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Event.DISPLAY_NAME)));
         event.setZone(zone);
         event.setColor(Color.GREEN);
@@ -81,6 +85,12 @@ public class BirthdayProvider extends EventProvider {
     private boolean inDisplayRange(BirthdayEvent event) {
         return !event.getDate().isBefore(startDate)
                 && !event.getDate().isAfter(endDate);
+    }
+
+    public Intent createViewIntent(BirthdayEvent event) {
+        Intent intent = CalendarIntentUtil.createViewIntent();
+        intent.setData(ContactsContract.Contacts.getLookupUri(event.getId(), event.getLookupKey()));
+        return intent;
     }
 
     public static boolean hasPermission(Context context) {

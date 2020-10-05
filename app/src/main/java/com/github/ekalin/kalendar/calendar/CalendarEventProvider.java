@@ -191,7 +191,7 @@ public class CalendarEventProvider extends EventProvider {
     }
 
     public Intent createOpenCalendarEventIntent(CalendarEvent event) {
-        Intent intent = CalendarIntentUtil.createCalendarIntent();
+        Intent intent = CalendarIntentUtil.createViewIntent();
         intent.setData(ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, event.getEventId()));
         intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, event.getStartMillis());
         intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, event.getEndMillis());

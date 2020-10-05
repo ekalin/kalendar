@@ -69,7 +69,8 @@ public class BirthdayProviderTest {
 
     private void setupContacts() {
         MatrixCursor matrixCursor = new MatrixCursor(new String[]{
-                ContactsContract.CommonDataKinds.Event.CONTACT_ID,
+                ContactsContract.CommonDataKinds.Event._ID,
+                ContactsContract.CommonDataKinds.Event.LOOKUP_KEY,
                 ContactsContract.CommonDataKinds.Event.DISPLAY_NAME,
                 ContactsContract.CommonDataKinds.Event.START_DATE,
         });
@@ -77,7 +78,8 @@ public class BirthdayProviderTest {
         List<MockContact> contacts = createContacts();
         for (MockContact contact : contacts) {
             matrixCursor.newRow()
-                    .add(ContactsContract.CommonDataKinds.Event.CONTACT_ID, contact.id)
+                    .add(ContactsContract.CommonDataKinds.Event._ID, contact.id)
+                    .add(ContactsContract.CommonDataKinds.Event.LOOKUP_KEY, String.valueOf(contact.id))
                     .add(ContactsContract.CommonDataKinds.Event.DISPLAY_NAME, contact.name)
                     .add(ContactsContract.CommonDataKinds.Event.START_DATE, contact.birthday);
         }

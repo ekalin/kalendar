@@ -130,7 +130,7 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
 
     @Override
     public Intent createViewIntent(TaskEvent event) {
-        Intent intent = CalendarIntentUtil.createCalendarIntent();
+        Intent intent = CalendarIntentUtil.createViewIntent();
         intent.setData(ContentUris.withAppendedId(DmfsOpenTasksContract.Tasks.PROVIDER_URI, event.getId()));
         return intent;
     }

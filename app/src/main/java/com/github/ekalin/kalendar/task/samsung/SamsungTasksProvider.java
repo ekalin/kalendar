@@ -134,7 +134,7 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
 
     @Override
     public Intent createViewIntent(TaskEvent event) {
-        Intent intent = CalendarIntentUtil.createCalendarIntent();
+        Intent intent = CalendarIntentUtil.createViewIntent();
         intent.setData(ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, event.getId()));
         intent.putExtra(SamsungTasksContract.INTENT_EXTRA_TASK, true);
         intent.putExtra(SamsungTasksContract.INTENT_EXTRA_SELECTED, event.getId());

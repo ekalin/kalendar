@@ -34,6 +34,7 @@ public class BirthdayVisualizer extends WidgetEntryVisualizer<BirthdayEntry> {
         setColor(entry, rv);
         setDaysToEvent(entry, rv);
         setTitle(entry, rv);
+        rv.setOnClickFillInIntent(R.id.birthday_entry, birthdayProvider.createViewIntent(entry.getEvent()));
         return rv;
     }
 

@@ -5,6 +5,7 @@ import org.joda.time.LocalDate;
 
 public class BirthdayEvent {
     private long id;
+    private String lookupKey;
     private String title;
     private LocalDate date;
     private int color;
@@ -16,6 +17,14 @@ public class BirthdayEvent {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getLookupKey() {
+        return lookupKey;
+    }
+
+    public void setLookupKey(String lookupKey) {
+        this.lookupKey = lookupKey;
     }
 
     public String getTitle() {
@@ -53,6 +62,7 @@ public class BirthdayEvent {
     @Override
     public int hashCode() {
         int result = Long.valueOf(id).hashCode();
+        result += 31 * lookupKey.hashCode();
         result += 31 * title.hashCode();
         result += 31 * date.hashCode();
         return result;

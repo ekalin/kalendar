@@ -35,8 +35,8 @@ import com.github.ekalin.kalendar.widget.EmptyListMessageVisualizer;
 import com.github.ekalin.kalendar.widget.WidgetEntry;
 import com.github.ekalin.kalendar.widget.WidgetEntryVisualizer;
 
-import static com.github.ekalin.kalendar.util.CalendarIntentUtil.createOpenCalendarEventPendingIntent;
 import static com.github.ekalin.kalendar.util.CalendarIntentUtil.createOpenCalendarPendingIntent;
+import static com.github.ekalin.kalendar.util.CalendarIntentUtil.createViewPendingIntent;
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setBackgroundColor;
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setDrawableColor;
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setTextSize;
@@ -306,7 +306,7 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
         rv.setRemoteAdapter(R.id.event_list, intent);
         boolean permissionsGranted = PermissionsUtil.arePermissionsGranted(context);
         if (permissionsGranted) {
-            rv.setPendingIntentTemplate(R.id.event_list, createOpenCalendarEventPendingIntent(settings));
+            rv.setPendingIntentTemplate(R.id.event_list, createViewPendingIntent(settings));
         }
     }
 

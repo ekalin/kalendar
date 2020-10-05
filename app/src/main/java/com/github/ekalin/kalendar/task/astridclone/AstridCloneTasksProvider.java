@@ -217,7 +217,7 @@ public class AstridCloneTasksProvider extends AbstractTaskProvider {
 
     @Override
     public Intent createViewIntent(TaskEvent event) {
-        Intent intent = CalendarIntentUtil.createCalendarIntent();
+        Intent intent = CalendarIntentUtil.createViewIntent();
         intent.setData(ContentUris.withAppendedId(AstridCloneTasksContract.Tasks.VIEW_URI, event.getId()));
         return intent;
     }
