@@ -149,6 +149,8 @@
     <string name="birthday_prefs_desc">Configurar a exibição de aniversários</string>
     <string name="show_birthdays_title">Exibir aniversários</string>
     <string name="show_birthdays_desc">Exibir aniversários de seus contatos</string>
+    <string name="birthday_color_title">Cor dos aniversários</string>
+    <string name="birthday_color_desc">Selecionar a cor usada para aniversários</string>
     <string name="grant_birthday_permission_title">Conceder permissão para ler contacts</string>
     <string name="grant_birthday_permission_desc">É necessário conceder permissão de acesso aos contatos para exibir os aniverários</string>
     <string name="birthday_event_text">Aniversário de %s</string>

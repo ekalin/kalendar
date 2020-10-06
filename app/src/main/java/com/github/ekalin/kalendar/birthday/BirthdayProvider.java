@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import androidx.core.util.Supplier;
@@ -77,7 +76,7 @@ public class BirthdayProvider extends EventProvider {
         event.setLookupKey(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Event.LOOKUP_KEY)));
         event.setTitle(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Event.DISPLAY_NAME)));
         event.setZone(zone);
-        event.setColor(Color.GREEN);
+        event.setColor(settings.getBirthdayColor());
 
         LocalDate birthDate = DateUtil.parseContactDate(
                 cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Event.START_DATE)));
