@@ -20,9 +20,9 @@
 
     <!-- Descriptions for app markets -->
     <string name="app_description_4000_chars_max_part02">Возможности</string>
-    <string name="app_description_4000_chars_max_part07">Обновляется автоматически, когда Вы добавляете/удаляете/изменяете событие. Или Вы можете обновить список немедленно.</string>
-    <string name="app_description_4000_chars_max_part10">Блокировка часового пояса при путешествии в разных часовых поясах.</string>
-    <string name="app_description_4000_chars_max_part12">Поддержка Android версий 4.4+. Поддержка планшетов.</string>
+    <string name="app_description_4000_chars_max_part08">Обновляется автоматически, когда Вы добавляете/удаляете/изменяете событие. Или Вы можете обновить список немедленно.</string>
+    <string name="app_description_4000_chars_max_part11">Блокировка часового пояса при путешествии в разных часовых поясах.</string>
+    <string name="app_description_4000_chars_max_part13">Поддержка Android версий 4.4+. Поддержка планшетов.</string>
 
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Календари</string>

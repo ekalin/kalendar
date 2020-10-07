@@ -25,14 +25,15 @@
     <string name="app_description_4000_chars_max_part02">Recursos</string>
     <string name="app_description_4000_chars_max_part03">Sem anúncios. Grátis e de código aberto.</string>
     <string name="app_description_4000_chars_max_part04">Exibe compromissos dos calendários e listas de tarefas selecionadas.</string>
-    <string name="app_description_4000_chars_max_part05">Suporta exibir tarefas do Open Tasks (por dmfs GmbH) e do calendário Samsung.</string>
-    <string name="app_description_4000_chars_max_part06">Selecione quais compromissos futuros exibir (uma semana, um mês, etc.). Pode exibir compromissos passados.</string>
-    <string name="app_description_4000_chars_max_part07">A lista é atualizada automaticamente quando um evento é adicionado/removido/modificado. Ou ela pode ser atualizada manualmente.</string>
-    <string name="app_description_4000_chars_max_part08">Selecione as cores e tamanho do texto do widget.</string>
-    <string name="app_description_4000_chars_max_part09">O widget é redimensionável e tem dois layouts alternativos, além de permitir ajustes no layouts.</string>
-    <string name="app_description_4000_chars_max_part10">Bloqueie o fuso horário quando viajar para outros fusos horários.</string>
-    <string name="app_description_4000_chars_max_part11">Faça backup e restaure as configurações, fazendo uma cópia do wiget no mesmo aparelho ou em aparelhos diferentes.</string>
-    <string name="app_description_4000_chars_max_part12">Android 4.4+ suportado. Tablets Android suportados.</string>
+    <string name="app_description_4000_chars_max_part05">Exibe aniversários de seus contatos.</string>
+    <string name="app_description_4000_chars_max_part06">Suporta exibir tarefas do Open Tasks (por dmfs GmbH) e do calendário Samsung.</string>
+    <string name="app_description_4000_chars_max_part07">Selecione quais compromissos futuros exibir (uma semana, um mês, etc.). Pode exibir compromissos passados.</string>
+    <string name="app_description_4000_chars_max_part08">A lista é atualizada automaticamente quando um evento é adicionado/removido/modificado. Ou ela pode ser atualizada manualmente.</string>
+    <string name="app_description_4000_chars_max_part09">Selecione as cores e tamanho do texto do widget.</string>
+    <string name="app_description_4000_chars_max_part10">O widget é redimensionável e tem dois layouts alternativos, além de permitir ajustes no layouts.</string>
+    <string name="app_description_4000_chars_max_part11">Bloqueie o fuso horário quando viajar para outros fusos horários.</string>
+    <string name="app_description_4000_chars_max_part12">Faça backup e restaure as configurações, fazendo uma cópia do wiget no mesmo aparelho ou em aparelhos diferentes.</string>
+    <string name="app_description_4000_chars_max_part13">Android 4.4+ suportado. Tablets Android suportados.</string>
 
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Calendários</string>

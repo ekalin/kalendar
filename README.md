@@ -16,6 +16,7 @@ Kalendar is a home screen widget for your Android device. Each widget has its ow
 
 * No advertising. Free and Open Source.
 * Displays events from selected calendars and task lists.
+* Displays birthdays from you contacts.
 * Select how far ahead to display events (one week, one month, etc.). Optionally shows past events.
 * Automatically updates when you add/delete/modify an event. Or you may update the list instantly.
 * Customize colors and text size of the widget.
@@ -37,6 +38,10 @@ We are developing this application in public to bring you a tool that _you_ want
 
 
 ## Changelog
+
+### In development
+
+* It is now possible to display birthdays from your contacts, if your calendar does not create events for birthdays.
 
 ### v3
 

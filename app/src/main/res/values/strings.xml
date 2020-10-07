@@ -27,14 +27,15 @@
     <string name="app_description_4000_chars_max_part02">Features</string>
     <string name="app_description_4000_chars_max_part03">No advertising. Free and Open Source.</string>
     <string name="app_description_4000_chars_max_part04">Displays events from selected calendars and task lists.</string>
-    <string name="app_description_4000_chars_max_part05">Supports displaying tasks from Open Tasks (by dmfs GmbH) and Samsung Calendar.</string>
-    <string name="app_description_4000_chars_max_part06">Select how far ahead to display events (one week, one month, etc.). Optionally shows past events.</string>
-    <string name="app_description_4000_chars_max_part07">Automatically updates when you add/delete/modify an event. Or you may update the list instantly.</string>
-    <string name="app_description_4000_chars_max_part08">Customize colors and text size of the widget.</string>
-    <string name="app_description_4000_chars_max_part09">Fully resizable widget with two alternative layouts and layout customizations.</string>
-    <string name="app_description_4000_chars_max_part10">Lock time zone when travelling to different time zones.</string>
-    <string name="app_description_4000_chars_max_part11">Backup and restore settings, cloning widgets on the same or different devices.</string>
-    <string name="app_description_4000_chars_max_part12">Android 4.4+ supported. Supports Android tablets.</string>
+    <string name="app_description_4000_chars_max_part05">Displays birthdays from you contacts.</string>
+    <string name="app_description_4000_chars_max_part06">Supports displaying tasks from Open Tasks (by dmfs GmbH) and Samsung Calendar.</string>
+    <string name="app_description_4000_chars_max_part07">Select how far ahead to display events (one week, one month, etc.). Optionally shows past events.</string>
+    <string name="app_description_4000_chars_max_part08">Automatically updates when you add/delete/modify an event. Or you may update the list instantly.</string>
+    <string name="app_description_4000_chars_max_part09">Customize colors and text size of the widget.</string>
+    <string name="app_description_4000_chars_max_part10">Fully resizable widget with two alternative layouts and layout customizations.</string>
+    <string name="app_description_4000_chars_max_part11">Lock time zone when travelling to different time zones.</string>
+    <string name="app_description_4000_chars_max_part12">Backup and restore settings, cloning widgets on the same or different devices.</string>
+    <string name="app_description_4000_chars_max_part13">Android 4.4+ supported. Supports Android tablets.</string>
 
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Calendars</string>
