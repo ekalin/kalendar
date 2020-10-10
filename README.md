@@ -39,7 +39,7 @@ We are developing this application in public to bring you a tool that _you_ want
 
 ## Changelog
 
-### In development
+### v4
 
 * It is now possible to display birthdays from your contacts, if your calendar does not create events for birthdays.
 
