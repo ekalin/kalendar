@@ -53,4 +53,8 @@ public class InstanceSettingsTestHelper {
     public void setLockedTimeZoneId(String zoneId) {
         instanceSettings.setLockedTimeZoneId(zoneId);
     }
+
+    public void setShowBirthdays(boolean showBirthdays) {
+        sharedPreferences.edit().putBoolean(InstanceSettings.PREF_SHOW_BIRTHDAYS, showBirthdays).apply();
+    }
 }

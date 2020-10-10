@@ -3,6 +3,7 @@ package com.github.ekalin.kalendar.calendar;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
@@ -11,10 +12,12 @@ import android.provider.CalendarContract.Calendars;
 import android.provider.CalendarContract.Instances;
 import android.util.SparseArray;
 import androidx.annotation.NonNull;
+import androidx.core.util.Supplier;
 
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -129,10 +132,10 @@ public class CalendarEventProvider extends EventProvider {
     }
 
     private List<CalendarEvent> queryList(Uri uri, String selection) {
-        QueryResult result = new QueryResult(getSettings(), uri, getProjection(), selection);
+        QueryResult result = new QueryResult(getSettings(), QueryResult.QueryResultType.CALENDAR, uri, getProjection(), selection);
 
         List<CalendarEvent> eventList = queryProviderAndStoreResults(uri, getProjection(), selection, result, this::createCalendarEvent);
-        QueryResultsStorage.storeCalendar(result);
+        QueryResultsStorage.storeResult(result);
 
         return eventList.stream().filter(event -> !mKeywordsFilter.matched(event.getTitle())).collect(Collectors.toList());
     }
@@ -188,10 +191,21 @@ public class CalendarEventProvider extends EventProvider {
     }
 
     public Intent createOpenCalendarEventIntent(CalendarEvent event) {
-        Intent intent = CalendarIntentUtil.createCalendarIntent();
+        Intent intent = CalendarIntentUtil.createViewIntent();
         intent.setData(ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, event.getEventId()));
         intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, event.getStartMillis());
         intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, event.getEndMillis());
         return intent;
+    }
+
+    public static List<ContentObserver> registerObservers(Context context, Supplier<ContentObserver> observerCreator) {
+        if (PermissionsUtil.arePermissionsGranted(context)) {
+            ContentObserver observer = observerCreator.get();
+            context.getContentResolver().registerContentObserver(CalendarContract.CONTENT_URI, false,
+                    observer);
+            return Collections.singletonList(observer);
+        } else {
+            return Collections.emptyList();
+        }
     }
 }

@@ -3,7 +3,7 @@
     <string name="yesterday">Hier</string>
     <string name="today">Aujourd’hui</string>
     <string name="tomorrow">Demain</string>
-    <string name="not_initialized_yet">Pas encore initialisé...</string>
+    <string name="not_initialized_yet">Pas encore initialisé…</string>
     <string name="no_events_to_show">Aucun événement à afficher</string>
     <string name="add_event_desc">Ajouter un nouvel événement</string>
     <string name="refresh_desc">Rafraîchir</string>
@@ -20,10 +20,10 @@
     <string name="go_to_home_screen">Aller à l\'écran d\'accueil</string>
 
     <!-- Descriptions for app markets -->
-    <string name="app_description_4000_chars_max_part02">Fonctionnalités </string>
-    <string name="app_description_4000_chars_max_part07">Mise à jour automatique lorsque vous ajoutez/supprimez/modifiez un événement. Ou vous pouvez mettre à jour la liste instantanément.</string>
-    <string name="app_description_4000_chars_max_part10">Verrouillage fuseau horaire lorsque vous voyagez dans différents fuseaux horaires.</string>
-    <string name="app_description_4000_chars_max_part12">Android 4.4+ supporté. Supporte les tablettes Android.</string>
+    <string name="app_description_4000_chars_max_part02">Fonctionnalités</string>
+    <string name="app_description_4000_chars_max_part08">Mise à jour automatique lorsque vous ajoutez/supprimez/modifiez un événement. Ou vous pouvez mettre à jour la liste instantanément.</string>
+    <string name="app_description_4000_chars_max_part11">Verrouillage fuseau horaire lorsque vous voyagez dans différents fuseaux horaires.</string>
+    <string name="app_description_4000_chars_max_part13">Android 4.4+ supporté. Supporte les tablettes Android.</string>
 
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Calendriers</string>

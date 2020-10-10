@@ -22,24 +22,16 @@ public class QueryResultsStorage {
     private static final String TAG = QueryResultsStorage.class.getSimpleName();
 
     private static final String KEY_RESULTS_VERSION = "resultsVersion";
-    private static final int RESULTS_VERSION = 2;
-    private static final String KEY_CALENDAR_RESULTS = "results";
-    private static final String KEY_TASK_RESULTS = "taskResults";
+    private static final int RESULTS_VERSION = 3;
+    private static final String KEY_RESULTS = "results";
 
     private static volatile QueryResultsStorage theStorage = null;
 
-    private final List<QueryResult> calendarResults = new CopyOnWriteArrayList<>();
-    private final List<QueryResult> taskResults = new CopyOnWriteArrayList<>();
+    private final List<QueryResult> results = new CopyOnWriteArrayList<>();
 
-    public static void storeCalendar(QueryResult result) {
+    public static void storeResult(QueryResult result) {
         if (theStorage != null) {
-            theStorage.calendarResults.add(result);
-        }
-    }
-
-    public static void storeTask(QueryResult result) {
-        if (theStorage != null) {
-            theStorage.taskResults.add(result);
+            theStorage.results.add(result);
         }
     }
 
@@ -91,8 +83,7 @@ public class QueryResultsStorage {
     private JSONObject toJson(Context context, int widgetId) throws JSONException {
         JSONObject json = WidgetData.fromWidgetId(context, widgetId).map(WidgetData::toJson).orElse(new JSONObject());
         json.put(KEY_RESULTS_VERSION, RESULTS_VERSION);
-        json.put(KEY_CALENDAR_RESULTS, getResultsArray(widgetId, this.calendarResults));
-        json.put(KEY_TASK_RESULTS, getResultsArray(widgetId, this.taskResults));
+        json.put(KEY_RESULTS, getResultsArray(widgetId, this.results));
         return json;
     }
 
@@ -111,10 +102,9 @@ public class QueryResultsStorage {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        QueryResultsStorage results = (QueryResultsStorage) o;
+        QueryResultsStorage that = (QueryResultsStorage) o;
 
-        if (!compareResults(this.calendarResults, results.calendarResults)) return false;
-        if (!compareResults(this.taskResults, results.taskResults)) return false;
+        if (!compareResults(this.results, that.results)) return false;
 
         return true;
     }
@@ -134,11 +124,8 @@ public class QueryResultsStorage {
     @Override
     public int hashCode() {
         int result = 0;
-        for (int ind = 0; ind < calendarResults.size(); ind++) {
-            result = 31 * result + calendarResults.get(ind).hashCode();
-        }
-        for (int ind = 0; ind < taskResults.size(); ind++) {
-            result = 31 * result + taskResults.get(ind).hashCode();
+        for (QueryResult queryResult : results) {
+            result = 31 * result + queryResult.hashCode();
         }
         return result;
     }
@@ -146,8 +133,7 @@ public class QueryResultsStorage {
     @Override
     public String toString() {
         return "CalendarQueryResultsStorage{" +
-                "results=" + calendarResults +
-                ",taksResults=" + taskResults +
+                "results=" + results +
                 '}';
     }
 }

@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import com.github.ekalin.kalendar.birthday.BirthdayVisualizer;
 import com.github.ekalin.kalendar.calendar.CalendarEventVisualizer;
 import com.github.ekalin.kalendar.prefs.AllSettings;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
@@ -34,8 +35,8 @@ import com.github.ekalin.kalendar.widget.EmptyListMessageVisualizer;
 import com.github.ekalin.kalendar.widget.WidgetEntry;
 import com.github.ekalin.kalendar.widget.WidgetEntryVisualizer;
 
-import static com.github.ekalin.kalendar.util.CalendarIntentUtil.createOpenCalendarEventPendingIntent;
 import static com.github.ekalin.kalendar.util.CalendarIntentUtil.createOpenCalendarPendingIntent;
+import static com.github.ekalin.kalendar.util.CalendarIntentUtil.createViewPendingIntent;
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setBackgroundColor;
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setDrawableColor;
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setTextSize;
@@ -67,6 +68,7 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
         eventProviders.add(new DayHeaderVisualizer(context, widgetId));
         eventProviders.add(new CalendarEventVisualizer(context, widgetId));
         eventProviders.add(new TaskVisualizer(context, widgetId));
+        eventProviders.add(new BirthdayVisualizer(context, widgetId));
     }
 
     private void logEvent(String message) {
@@ -304,7 +306,7 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
         rv.setRemoteAdapter(R.id.event_list, intent);
         boolean permissionsGranted = PermissionsUtil.arePermissionsGranted(context);
         if (permissionsGranted) {
-            rv.setPendingIntentTemplate(R.id.event_list, createOpenCalendarEventPendingIntent(settings));
+            rv.setPendingIntentTemplate(R.id.event_list, createViewPendingIntent(settings));
         }
     }
 

@@ -17,7 +17,7 @@
 
     <!-- Descriptions for app markets -->
     <string name="app_description_4000_chars_max_part02">Можливості</string>
-    <string name="app_description_4000_chars_max_part12">Підтримка версій Android від 4.4. Повна підтримка планшетів.</string>
+    <string name="app_description_4000_chars_max_part13">Підтримка версій Android від 4.4. Повна підтримка планшетів.</string>
 
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Календарі</string>

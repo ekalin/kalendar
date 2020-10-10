@@ -1,0 +1,25 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <CheckBoxPreference
+        app:key="showBirthdays"
+        app:title="@string/show_birthdays_title"
+        app:summary="@string/show_birthdays_desc"
+        app:defaultValue="false"
+        app:iconSpaceReserved="false" />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        app:key="birthdayColor"
+        app:title="@string/birthday_color_title"
+        app:summary="@string/birthday_color_desc"
+        app:cpv_dialogTitle="@string/birthday_color_title"
+        app:defaultValue="0xff00ff00"
+        app:cpv_showAlphaSlider="false"
+        app:cpv_colorShape="square"
+        app:iconSpaceReserved="false" />
+
+    <Preference
+        app:key="grantBirthdayPermission"
+        app:title="@string/grant_birthday_permission_title"
+        app:summary="@string/grant_birthday_permission_desc"
+        app:persistent="false"
+        app:iconSpaceReserved="false" />
+</PreferenceScreen>

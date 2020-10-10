@@ -54,10 +54,10 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
         };
         String where = getWhereClause();
 
-        QueryResult result = new QueryResult(getSettings(), uri, projection, where);
+        QueryResult result = new QueryResult(getSettings(), QueryResult.QueryResultType.TASK, uri, projection, where);
 
         List<TaskEvent> taskEvents = queryProviderAndStoreResults(uri, projection, where, result, this::createTask);
-        QueryResultsStorage.storeTask(result);
+        QueryResultsStorage.storeResult(result);
 
         return taskEvents.stream().filter(task -> !mKeywordsFilter.matched(task.getTitle())).collect(Collectors.toList());
     }
@@ -130,7 +130,7 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
 
     @Override
     public Intent createViewIntent(TaskEvent event) {
-        Intent intent = CalendarIntentUtil.createCalendarIntent();
+        Intent intent = CalendarIntentUtil.createViewIntent();
         intent.setData(ContentUris.withAppendedId(DmfsOpenTasksContract.Tasks.PROVIDER_URI, event.getId()));
         return intent;
     }

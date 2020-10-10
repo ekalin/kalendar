@@ -3,7 +3,7 @@
     <string name="yesterday">Gestern</string>
     <string name="today">Heute</string>
     <string name="tomorrow">Morgen</string>
-    <string name="not_initialized_yet">Noch nicht initialisiert...</string>
+    <string name="not_initialized_yet">Noch nicht initialisiert…</string>
     <string name="no_events_to_show">Keine Termine vorhanden</string>
     <string name="add_event_desc">Neuen Kalendereintrag erstellen</string>
     <string name="refresh_desc">Aktualisieren</string>
@@ -23,9 +23,9 @@
 
     <!-- Descriptions for app markets -->
     <string name="app_description_4000_chars_max_part02">Funktionen</string>
-    <string name="app_description_4000_chars_max_part07">Automatische Aktualisierung wenn du Events veränderst, hinzufügst oder entfernst.</string>
-    <string name="app_description_4000_chars_max_part10">Fixieren sie die Zeitzone wenn sie in andere reisen.</string>
-    <string name="app_description_4000_chars_max_part12">Android 4.4+ unterstützt. Unterstützt Android Tablets.</string>
+    <string name="app_description_4000_chars_max_part08">Automatische Aktualisierung wenn du Events veränderst, hinzufügst oder entfernst.</string>
+    <string name="app_description_4000_chars_max_part11">Fixieren sie die Zeitzone wenn sie in andere reisen.</string>
+    <string name="app_description_4000_chars_max_part13">Android 4.4+ unterstützt. Unterstützt Android Tablets.</string>
 
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Kalender</string>

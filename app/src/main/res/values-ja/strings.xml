@@ -21,9 +21,9 @@
 
     <!-- Descriptions for app markets -->
     <string name="app_description_4000_chars_max_part02">機能</string>
-    <string name="app_description_4000_chars_max_part07">イベントを追加/削除/変更した時に自動的に更新します。また、即座にリストを更新することもできます。</string>
-    <string name="app_description_4000_chars_max_part10">異なるタイムゾーンに旅行するときは、タイムゾーンをロックします。</string>
-    <string name="app_description_4000_chars_max_part12">Android 4.4+ をサポートしています。Android タブレットをサポートしています。</string>
+    <string name="app_description_4000_chars_max_part08">イベントを追加/削除/変更した時に自動的に更新します。また、即座にリストを更新することもできます。</string>
+    <string name="app_description_4000_chars_max_part11">異なるタイムゾーンに旅行するときは、タイムゾーンをロックします。</string>
+    <string name="app_description_4000_chars_max_part13">Android 4.4+ をサポートしています。Android タブレットをサポートしています。</string>
 
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">カレンダー</string>

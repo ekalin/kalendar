@@ -32,6 +32,11 @@
         app:fragment="com.github.ekalin.kalendar.prefs.TaskPreferencesFragment"
         app:iconSpaceReserved="false" />
     <Preference
+        app:title="@string/birthday_prefs"
+        app:summary="@string/birthday_prefs_desc"
+        app:fragment="com.github.ekalin.kalendar.prefs.BirthdayPreferencesFragment"
+        app:iconSpaceReserved="false" />
+    <Preference
         app:title="@string/feedback_backup_prefs"
         app:summary="@string/feedback_backup_prefs_desc"
         app:fragment="com.github.ekalin.kalendar.prefs.FeedbackPreferencesFragment"

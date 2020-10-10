@@ -8,15 +8,23 @@ import androidx.annotation.NonNull;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.Formatter;
 import java.util.Locale;
 
+import com.github.ekalin.kalendar.EndedSomeTimeAgo;
 import com.github.ekalin.kalendar.R;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 
 public class DateUtil {
     private static final String COMMA_SPACE = ", ";
+    private static final DateTimeFormatter CONTACT_DATE_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter CONTACT_MONTH_DAY_FORMAT = DateTimeFormat.forPattern("--MM-dd");
+    private static final int CONTACT_DATE_SIZE = 10;
+
     private static volatile DateTime mNow = null;
     private static volatile DateTime mNowSetAt = DateTime.now();
 
@@ -83,6 +91,29 @@ public class DateUtil {
 
     public static DateTime startOfNextDay(DateTime date) {
         return date.plusDays(1).withTimeAtStartOfDay();
+    }
+
+    public static LocalDate parseContactDate(String dateStr) {
+        if (dateStr.length() < CONTACT_DATE_SIZE) {
+            return CONTACT_MONTH_DAY_FORMAT.parseLocalDate(dateStr);
+        }
+
+        String onlyDateStr = dateStr.substring(0, CONTACT_DATE_SIZE);
+        return CONTACT_DATE_FORMAT.parseLocalDate(onlyDateStr);
+    }
+
+    public static LocalDate birthDateToDisplayedBirthday(LocalDate birthDate, InstanceSettings settings) {
+        DateTime now = now(settings.getTimeZone());
+
+        LocalDate adjustedDate = birthDate.withYear(now.getYear());
+        if (adjustedDate.isBefore(now.toLocalDate())) {
+            EndedSomeTimeAgo pastEventsRange = settings.getEventsEnded();
+            if (adjustedDate.isBefore(pastEventsRange.endedAt(now).toLocalDate())) {
+                adjustedDate = adjustedDate.plusYears(1);
+            }
+        }
+
+        return adjustedDate;
     }
 
     public static void setNow(DateTime now) {

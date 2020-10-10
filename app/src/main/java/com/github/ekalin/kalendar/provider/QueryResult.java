@@ -28,20 +28,23 @@ public class QueryResult {
     private static final String KEY_TIME_ZONE_ID = "timeZoneId";
     private static final String KEY_MILLIS_OFFSET_FROM_UTC_TO_LOCAL = "millisOffsetUtcToLocal";
     private static final String KEY_STANDARD_MILLIS_OFFSET_FROM_UTC_TO_LOCAL = "standardMillisOffsetUtcToLocal";
+    private static final String KEY_TYPE = "type";
     private static final String KEY_URI = "uri";
     private static final String KEY_PROJECTION = "projection";
     private static final String KEY_SELECTION = "selection";
 
     private final DateTime executedAt;
     private final int widgetId;
+    private QueryResultType type;
     private Uri uri;
     private String[] projection;
     private String selection;
     private final List<QueryRow> rows = new ArrayList<>();
 
-    public QueryResult(InstanceSettings settings, Uri uri, String[] projection, String selection) {
+    public QueryResult(InstanceSettings settings, QueryResultType type, Uri uri, String[] projection, String selection) {
         this.widgetId = settings.getWidgetId();
         this.executedAt = DateUtil.now(settings.getTimeZone());
+        this.type = type;
         this.uri = uri;
         this.projection = projection;
         this.selection = selection;
@@ -70,6 +73,7 @@ public class QueryResult {
 
         QueryResult that = (QueryResult) o;
 
+        if (type != that.type) return false;
         if (!uri.equals(that.uri)) return false;
         if (!Arrays.equals(projection, that.projection)) return false;
         if (!selection.equals(that.selection)) return false;
@@ -84,7 +88,8 @@ public class QueryResult {
 
     @Override
     public int hashCode() {
-        int result = uri.hashCode();
+        int result = type.hashCode();
+        result += uri.hashCode();
         result = 31 * result + Arrays.hashCode(projection);
         result = 31 * result + selection.hashCode();
         for (int ind = 0; ind < rows.size(); ind++) {
@@ -110,6 +115,7 @@ public class QueryResult {
         json.put(KEY_TIME_ZONE_ID, zone.getID());
         json.put(KEY_MILLIS_OFFSET_FROM_UTC_TO_LOCAL, zone.getOffset(executedAt));
         json.put(KEY_STANDARD_MILLIS_OFFSET_FROM_UTC_TO_LOCAL, zone.getStandardOffset(executedAt.getMillis()));
+        json.put(KEY_TYPE, type);
         json.put(KEY_URI, uri != null ? uri.toString() : "");
         json.put(KEY_PROJECTION, arrayOfStingsToJson(projection));
         json.put(KEY_SELECTION, selection != null ? selection : "");
@@ -129,5 +135,11 @@ public class QueryResult {
             }
         }
         return jsonArray;
+    }
+
+    public enum QueryResultType {
+        CALENDAR,
+        TASK,
+        BIRTHDAY;
     }
 }

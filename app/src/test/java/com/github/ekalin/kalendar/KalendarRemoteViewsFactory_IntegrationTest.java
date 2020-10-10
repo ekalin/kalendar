@@ -3,10 +3,12 @@ package com.github.ekalin.kalendar;
 import android.content.Context;
 import android.database.MatrixCursor;
 import android.provider.CalendarContract;
+import android.provider.ContactsContract;
 import androidx.test.core.app.ApplicationProvider;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -18,6 +20,7 @@ import com.github.ekalin.kalendar.prefs.InstanceSettingsTestHelper;
 import com.github.ekalin.kalendar.task.dmfs.DmfsOpenTasksContract;
 import com.github.ekalin.kalendar.testutil.ContentProviderForTests;
 import com.github.ekalin.kalendar.util.DateUtil;
+import com.github.ekalin.kalendar.widget.BirthdayEntry;
 import com.github.ekalin.kalendar.widget.CalendarEntry;
 import com.github.ekalin.kalendar.widget.DayHeader;
 import com.github.ekalin.kalendar.widget.TaskEntry;
@@ -36,6 +39,7 @@ public class KalendarRemoteViewsFactory_IntegrationTest {
 
     private ContentProviderForTests calendarProvider;
     private ContentProviderForTests taskProvider;
+    private ContentProviderForTests birthdaysProvider;
 
     /**
      * An integration test that tries to exercise as many components as possible.
@@ -45,12 +49,14 @@ public class KalendarRemoteViewsFactory_IntegrationTest {
      * The following entries are created:
      * <p>
      * -- D-1
+     * * Mary's birthday [Birthday]
      * * Finished event [Regular event]
      * <p>
      * -- D0
      * * Write integration test [Task, due on D-1]
      * * Review other tests [Task, starts on D-3, due on D0]
-     * * Kalendar birthday [All day event]
+     * * Kalendar's birthday [Birthday]
+     * * Kalendar launch day [All day event]
      * <p>
      * -- D2
      * * Time off [Start of all day event]
@@ -58,6 +64,7 @@ public class KalendarRemoteViewsFactory_IntegrationTest {
      * <p>
      * -- D3
      * * Prepare release [Task, starts on D3]
+     * * John's Birthday [Birthday]
      * * Time off [End of all day event]
      * <p>
      * -- D5
@@ -71,7 +78,7 @@ public class KalendarRemoteViewsFactory_IntegrationTest {
      * * Rental car [End of multi-day event at 16h30]
      */
     @Test
-    public void eventsAndTasksTest() {
+    public void multipleEventsTests() {
         setupWidget();
         createEntries();
 
@@ -91,16 +98,20 @@ public class KalendarRemoteViewsFactory_IntegrationTest {
                 CalendarContract.Instances.CONTENT_URI.getAuthority());
         taskProvider = Robolectric.setupContentProvider(ContentProviderForTests.class,
                 DmfsOpenTasksContract.Tasks.PROVIDER_URI.getAuthority());
+        birthdaysProvider = Robolectric.setupContentProvider(ContentProviderForTests.class,
+                ContactsContract.AUTHORITY);
 
         InstanceSettingsTestHelper settingsHelper = new InstanceSettingsTestHelper(context, widgetId);
         settingsHelper.setLockedTimeZoneId(zone.getID());
         settingsHelper.setTaskSource("DMFS_OPEN_TASKS");
         settingsHelper.setEventsEnded(EndedSomeTimeAgo.YESTERDAY);
+        settingsHelper.setShowBirthdays(true);
     }
 
     private void createEntries() {
         createCalendarEntries();
         createTaskEntries();
+        createBirthdays();
     }
 
     private void createCalendarEntries() {
@@ -116,7 +127,7 @@ public class KalendarRemoteViewsFactory_IntegrationTest {
                 CalendarContract.Instances.DISPLAY_COLOR,
         });
 
-        addCalendarRow(cursor, 13L, "Kalendar birthday", d0, d0.plusDays(1), true, "Android Studio");
+        addCalendarRow(cursor, 13L, "Kalendar launch day", d0, d0.plusDays(1), true, "Android Studio");
         addCalendarRow(cursor, 15L, "Finished event", d0.minusDays(1).plusHours(16), d0.minusDays(1).plusHours(18),
                 false, null);
         addCalendarRow(cursor, 28L, "Rental car", d0.plusDays(5).plusHours(13),
@@ -167,15 +178,41 @@ public class KalendarRemoteViewsFactory_IntegrationTest {
                 .add(DmfsOpenTasksContract.Tasks.COLUMN_COLOR, 0);
     }
 
+    public void createBirthdays() {
+        MatrixCursor matrixCursor = new MatrixCursor(new String[]{
+                ContactsContract.CommonDataKinds.Event._ID,
+                ContactsContract.CommonDataKinds.Event.LOOKUP_KEY,
+                ContactsContract.CommonDataKinds.Event.DISPLAY_NAME,
+                ContactsContract.CommonDataKinds.Event.START_DATE,
+        });
+
+        addBirthdayRow(matrixCursor, 98L, "Kalendar", d0);
+        addBirthdayRow(matrixCursor, 32L, "John", d0.plusDays(3).withYear(1975));
+        addBirthdayRow(matrixCursor, 76L, "Mary", d0.minusDays(1).withYear(1980));
+        birthdaysProvider.setQueryResult(matrixCursor);
+    }
+
+    private void addBirthdayRow(MatrixCursor cursor, long id, String name, DateTime date) {
+        String dateStr = DateTimeFormat.forPattern("yyyy-MM-dd").print(date);
+
+        cursor.newRow()
+                .add(ContactsContract.CommonDataKinds.Event._ID, id)
+                .add(ContactsContract.CommonDataKinds.Event.LOOKUP_KEY, String.valueOf(id))
+                .add(ContactsContract.CommonDataKinds.Event.DISPLAY_NAME, name)
+                .add(ContactsContract.CommonDataKinds.Event.START_DATE, dateStr);
+    }
+
     private void checkEntries(List<WidgetEntry> entries) {
         int event = 0;
         checkDayHeader(entries.get(event++), d0.minusDays(1));
+        checkBirthday(entries.get(event++), "Mary's birthday");
         checkCalendar(entries.get(event++), "Finished event", "4:00 PM - 6:00 PM", "");
 
         checkDayHeader(entries.get(event++), d0);
         checkTask(entries.get(event++), "Write integration test");
         checkTask(entries.get(event++), "Review other tests");
-        checkCalendar(entries.get(event++), "Kalendar birthday", "", "Android Studio");
+        checkBirthday(entries.get(event++), "Kalendar's birthday");
+        checkCalendar(entries.get(event++), "Kalendar launch day", "", "Android Studio");
 
         checkDayHeader(entries.get(event++), d0.plusDays(2));
         checkCalendar(entries.get(event++), "Time off", "", "");
@@ -183,6 +220,7 @@ public class KalendarRemoteViewsFactory_IntegrationTest {
 
         checkDayHeader(entries.get(event++), d0.plusDays(3));
         checkTask(entries.get(event++), "Prepare release");
+        checkBirthday(entries.get(event++), "John's birthday");
         checkCalendar(entries.get(event++), "Time off", "", "");
 
         checkDayHeader(entries.get(event++), d0.plusDays(5));
@@ -214,6 +252,11 @@ public class KalendarRemoteViewsFactory_IntegrationTest {
     private void checkTask(WidgetEntry entry, String title) {
         assertThat(entry).isInstanceOf(TaskEntry.class);
         assertThat(((TaskEntry) entry).getTitle()).isEqualTo(title);
+    }
+
+    private void checkBirthday(WidgetEntry entry, String title) {
+        assertThat(entry).isInstanceOf(BirthdayEntry.class);
+        assertThat(((BirthdayEntry) entry).getTitle("%s's birthday")).isEqualTo(title);
     }
 
     private void tearDown() {

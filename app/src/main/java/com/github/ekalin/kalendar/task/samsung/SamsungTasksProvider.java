@@ -48,10 +48,10 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
         };
         String where = getWhereClause();
 
-        QueryResult result = new QueryResult(getSettings(), uri, projection, where);
+        QueryResult result = new QueryResult(getSettings(), QueryResult.QueryResultType.TASK, uri, projection, where);
 
         List<TaskEvent> taskEvents = queryProviderAndStoreResults(uri, projection, where, result, this::createTask);
-        QueryResultsStorage.storeTask(result);
+        QueryResultsStorage.storeResult(result);
 
         return taskEvents.stream().filter(task -> !mKeywordsFilter.matched(task.getTitle())).collect(Collectors.toList());
     }
@@ -134,7 +134,7 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
 
     @Override
     public Intent createViewIntent(TaskEvent event) {
-        Intent intent = CalendarIntentUtil.createCalendarIntent();
+        Intent intent = CalendarIntentUtil.createViewIntent();
         intent.setData(ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, event.getId()));
         intent.putExtra(SamsungTasksContract.INTENT_EXTRA_TASK, true);
         intent.putExtra(SamsungTasksContract.INTENT_EXTRA_SELECTED, event.getId());

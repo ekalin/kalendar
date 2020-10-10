@@ -19,9 +19,9 @@
 
     <!-- Descriptions for app markets -->
     <string name="app_description_4000_chars_max_part02">Tính năng</string>
-    <string name="app_description_4000_chars_max_part07">Tự động cập nhật khi bạn thêm / xóa / sửa đổi một sự kiện. Hoặc bạn có thể cập nhật danh sách ngay lập tức.</string>
-    <string name="app_description_4000_chars_max_part10">Khóa múi giờ khi đi du lịch đến các múi giờ khác.</string>
-    <string name="app_description_4000_chars_max_part12">Hỗ trợ Android 4.4+. Hỗ trợ máy tính bảng Android.</string>
+    <string name="app_description_4000_chars_max_part08">Tự động cập nhật khi bạn thêm / xóa / sửa đổi một sự kiện. Hoặc bạn có thể cập nhật danh sách ngay lập tức.</string>
+    <string name="app_description_4000_chars_max_part11">Khóa múi giờ khi đi du lịch đến các múi giờ khác.</string>
+    <string name="app_description_4000_chars_max_part13">Hỗ trợ Android 4.4+. Hỗ trợ máy tính bảng Android.</string>
 
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Lịch</string>
