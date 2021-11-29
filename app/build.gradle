@@ -7,7 +7,6 @@ ext.versionBuild = 1
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
         versionCode generateVersionCode()

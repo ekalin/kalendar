@@ -28,12 +28,12 @@ public class CalendarIntentUtil {
         return intent;
     }
 
-    public static PendingIntent createViewPendingIntent(InstanceSettings settings) {
-        return PermissionsUtil.getPermittedPendingActivityIntent(settings, createViewIntent());
+    public static PendingIntent createEventClickPendingIntentTemplate(InstanceSettings settings) {
+        return PermissionsUtil.getPermittedPendingActivityIntentMutable(settings, createViewIntent());
     }
 
     public static PendingIntent createOpenCalendarPendingIntent(InstanceSettings settings) {
-        return PermissionsUtil.getPermittedPendingActivityIntent(settings,
+        return PermissionsUtil.getPermittedPendingActivityIntentMutable(settings,
                 createOpenCalendarAtDayIntent(new DateTime(settings.getTimeZone())));
     }
 

@@ -38,16 +38,20 @@
 
         <receiver
             android:name="com.github.ekalin.kalendar.KalendarAppWidgetProvider"
+            android:exported="false"
             android:label="@string/widget_name">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/calendar_appwidget_info"/>
+                android:resource="@xml/calendar_appwidget_info" />
         </receiver>
-        <receiver android:name="com.github.ekalin.kalendar.EnvironmentChangedReceiver">
+
+        <receiver
+            android:name="com.github.ekalin.kalendar.EnvironmentChangedReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_ALARM_CHANGED" />
                 <action android:name="android.intent.action.DATE_CHANGED" />
@@ -66,5 +70,21 @@
             android:permission="android.permission.BIND_REMOTEVIEWS">
         </service>
     </application>
+
+    <queries>
+        <!-- Necessary for "Add new event button" -->
+        <intent>
+            <action android:name="android.intent.action.INSERT" />
+            <data
+                android:scheme="content"
+                android:host="com.android.calendar"
+                android:mimeType="*/*" />
+        </intent>
+
+        <!-- Necessary to find out if the taks applications are installed -->
+        <package android:name="org.dmfs.tasks" />
+        <package android:name="org.tasks" />
+        <package android:name="com.samsung.android.calendar" />
+    </queries>
 
 </manifest>
