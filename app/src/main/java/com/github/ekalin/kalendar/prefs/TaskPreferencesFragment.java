@@ -2,21 +2,34 @@ package com.github.ekalin.kalendar.prefs;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.preference.Preference;
-
-import java.util.Collections;
-import java.util.Optional;
 
 import com.github.ekalin.kalendar.EnvironmentChangedReceiver;
 import com.github.ekalin.kalendar.R;
 import com.github.ekalin.kalendar.task.TaskProvider;
 import com.github.ekalin.kalendar.util.PackageManagerUtil;
 
-public class TaskPreferencesFragment extends KalendarPreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+import java.util.Collections;
+import java.util.Optional;
+
+public class TaskPreferencesFragment extends KalendarPreferenceFragment
+        implements SharedPreferences.OnSharedPreferenceChangeListener, PermissionRequester {
     private static final String PREF_ACTIVE_TASK_LISTS_BUTTON = "activeTaskListsButton";
     private static final String KEY_PREF_GRANT_TASK_PERMISSION = "grantTaskPermission";
     private static final String KEY_APP_NOT_INSTALLED = "taskAppNotInstalled";
+
+    private final ActivityResultLauncher<String> requestPermissionLauncher;
+
+    public TaskPreferencesFragment() {
+        requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(),
+                isGranted -> {
+                    if (isGranted) {
+                        onPermissionGranted();
+                    }
+                });
+    }
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -116,8 +129,11 @@ public class TaskPreferencesFragment extends KalendarPreferenceFragment implemen
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void requestPermission(String permission) {
+        requestPermissionLauncher.launch(permission);
+    }
+
+    private void onPermissionGranted() {
         setGrantPermissionVisibility();
         setTaskListState();
         EnvironmentChangedReceiver.registerReceivers(getActivity(), true);

@@ -2,14 +2,14 @@ package com.github.ekalin.kalendar.task;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.fragment.app.Fragment;
+
+import com.github.ekalin.kalendar.prefs.EventSource;
+import com.github.ekalin.kalendar.prefs.InstanceSettings;
+import com.github.ekalin.kalendar.prefs.PermissionRequester;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import com.github.ekalin.kalendar.prefs.EventSource;
-import com.github.ekalin.kalendar.prefs.InstanceSettings;
 
 public class EmptyTaskProvider extends AbstractTaskProvider {
     public EmptyTaskProvider(Context context, int widgetId, InstanceSettings settings) {
@@ -47,7 +47,7 @@ public class EmptyTaskProvider extends AbstractTaskProvider {
     }
 
     @Override
-    public void requestPermission(Fragment fragment) {
+    public void requestPermission(PermissionRequester permissionRequester) {
         // No action necessary
     }
 }

@@ -8,7 +8,16 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.text.TextUtils;
 import androidx.core.util.Supplier;
-import androidx.fragment.app.Fragment;
+
+import com.github.ekalin.kalendar.prefs.EventSource;
+import com.github.ekalin.kalendar.prefs.InstanceSettings;
+import com.github.ekalin.kalendar.prefs.PermissionRequester;
+import com.github.ekalin.kalendar.provider.QueryResult;
+import com.github.ekalin.kalendar.provider.QueryResultsStorage;
+import com.github.ekalin.kalendar.task.AbstractTaskProvider;
+import com.github.ekalin.kalendar.task.TaskEvent;
+import com.github.ekalin.kalendar.util.CalendarIntentUtil;
+import com.github.ekalin.kalendar.util.PermissionsUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,15 +25,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import com.github.ekalin.kalendar.prefs.EventSource;
-import com.github.ekalin.kalendar.prefs.InstanceSettings;
-import com.github.ekalin.kalendar.provider.QueryResult;
-import com.github.ekalin.kalendar.provider.QueryResultsStorage;
-import com.github.ekalin.kalendar.task.AbstractTaskProvider;
-import com.github.ekalin.kalendar.task.TaskEvent;
-import com.github.ekalin.kalendar.util.CalendarIntentUtil;
-import com.github.ekalin.kalendar.util.PermissionsUtil;
 
 public class DmfsOpenTasksProvider extends AbstractTaskProvider {
     public DmfsOpenTasksProvider(Context context, int widgetId, InstanceSettings settings) {
@@ -150,8 +150,8 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
     }
 
     @Override
-    public void requestPermission(Fragment fragment) {
-        fragment.requestPermissions(new String[]{DmfsOpenTasksContract.PERMISSION}, 1);
+    public void requestPermission(PermissionRequester requester) {
+        requester.requestPermission(DmfsOpenTasksContract.PERMISSION);
     }
 
     public static Optional<ContentObserver> registerContentObserver(Context context,

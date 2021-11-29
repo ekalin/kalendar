@@ -8,21 +8,21 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import androidx.core.util.Supplier;
-import androidx.fragment.app.Fragment;
 
 import org.joda.time.LocalDate;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
+import com.github.ekalin.kalendar.prefs.PermissionRequester;
 import com.github.ekalin.kalendar.provider.EventProvider;
 import com.github.ekalin.kalendar.provider.QueryResult;
 import com.github.ekalin.kalendar.provider.QueryResultsStorage;
 import com.github.ekalin.kalendar.util.CalendarIntentUtil;
 import com.github.ekalin.kalendar.util.DateUtil;
 import com.github.ekalin.kalendar.util.PermissionsUtil;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BirthdayProvider extends EventProvider {
     private static final String PERMISSION = Manifest.permission.READ_CONTACTS;
@@ -101,8 +101,8 @@ public class BirthdayProvider extends EventProvider {
         return PermissionsUtil.isPermissionGranted(context, PERMISSION);
     }
 
-    public static void requestPermission(Fragment fragment) {
-        fragment.requestPermissions(new String[]{PERMISSION}, 1);
+    public static void requestPermission(PermissionRequester requester) {
+        requester.requestPermission(PERMISSION);
     }
 
     public static List<ContentObserver> registerObservers(Context context, Supplier<ContentObserver> observerCreator) {

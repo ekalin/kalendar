@@ -7,22 +7,22 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
 import android.text.TextUtils;
-import androidx.fragment.app.Fragment;
+
+import com.github.ekalin.kalendar.R;
+import com.github.ekalin.kalendar.prefs.EventSource;
+import com.github.ekalin.kalendar.prefs.InstanceSettings;
+import com.github.ekalin.kalendar.prefs.PermissionRequester;
+import com.github.ekalin.kalendar.provider.QueryResult;
+import com.github.ekalin.kalendar.provider.QueryResultsStorage;
+import com.github.ekalin.kalendar.task.AbstractTaskProvider;
+import com.github.ekalin.kalendar.task.TaskEvent;
+import com.github.ekalin.kalendar.util.CalendarIntentUtil;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import com.github.ekalin.kalendar.R;
-import com.github.ekalin.kalendar.prefs.EventSource;
-import com.github.ekalin.kalendar.prefs.InstanceSettings;
-import com.github.ekalin.kalendar.provider.QueryResult;
-import com.github.ekalin.kalendar.provider.QueryResultsStorage;
-import com.github.ekalin.kalendar.task.AbstractTaskProvider;
-import com.github.ekalin.kalendar.task.TaskEvent;
-import com.github.ekalin.kalendar.util.CalendarIntentUtil;
 
 public class SamsungTasksProvider extends AbstractTaskProvider {
     public SamsungTasksProvider(Context context, int widgetId, InstanceSettings settings) {
@@ -160,7 +160,7 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
     }
 
     @Override
-    public void requestPermission(Fragment fragment) {
+    public void requestPermission(PermissionRequester requester) {
         // Requires just android.permission.READ_CALENDAR, which is expected to be granted already
     }
 }

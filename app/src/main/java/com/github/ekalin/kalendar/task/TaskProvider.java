@@ -4,19 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import androidx.core.util.Supplier;
-import androidx.fragment.app.Fragment;
+
+import com.github.ekalin.kalendar.prefs.EventSource;
+import com.github.ekalin.kalendar.prefs.InstanceSettings;
+import com.github.ekalin.kalendar.prefs.PermissionRequester;
+import com.github.ekalin.kalendar.provider.EventProvider;
+import com.github.ekalin.kalendar.task.astridclone.AstridCloneTasksProvider;
+import com.github.ekalin.kalendar.task.dmfs.DmfsOpenTasksProvider;
+import com.github.ekalin.kalendar.task.samsung.SamsungTasksProvider;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-
-import com.github.ekalin.kalendar.prefs.EventSource;
-import com.github.ekalin.kalendar.prefs.InstanceSettings;
-import com.github.ekalin.kalendar.provider.EventProvider;
-import com.github.ekalin.kalendar.task.astridclone.AstridCloneTasksProvider;
-import com.github.ekalin.kalendar.task.dmfs.DmfsOpenTasksProvider;
-import com.github.ekalin.kalendar.task.samsung.SamsungTasksProvider;
 
 public class TaskProvider extends EventProvider {
     public static final String PROVIDER_NONE = "NONE";
@@ -59,9 +59,9 @@ public class TaskProvider extends EventProvider {
         return provider.hasPermission();
     }
 
-    public void requestPermission(Fragment fragment, String taskSource) {
+    public void requestPermission(PermissionRequester requester, String taskSource) {
         AbstractTaskProvider provider = getProvider(taskSource);
-        provider.requestPermission(fragment);
+        provider.requestPermission(requester);
     }
 
     public static List<ContentObserver> registerObservers(Context context, Supplier<ContentObserver> observerCreator) {

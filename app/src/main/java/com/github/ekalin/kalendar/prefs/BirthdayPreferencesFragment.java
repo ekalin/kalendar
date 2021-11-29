@@ -1,16 +1,28 @@
 package com.github.ekalin.kalendar.prefs;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.preference.Preference;
 
 import com.github.ekalin.kalendar.EnvironmentChangedReceiver;
 import com.github.ekalin.kalendar.R;
 import com.github.ekalin.kalendar.birthday.BirthdayProvider;
 
-public class BirthdayPreferencesFragment extends KalendarPreferenceFragment {
+public class BirthdayPreferencesFragment extends KalendarPreferenceFragment implements PermissionRequester {
     private static final String KEY_PREF_GRANT_BIRTHDAY_PERMISSION = "grantBirthdayPermission";
     private static final String KEY_PREF_SHOW_BIRTHDAYS = "showBirthdays";
+
+    private final ActivityResultLauncher<String> requestPermissionLauncher;
+
+    public BirthdayPreferencesFragment() {
+        requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(),
+                isGranted -> {
+                    if (isGranted) {
+                        onPermissionGranted();
+                    }
+                });
+    }
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -54,8 +66,11 @@ public class BirthdayPreferencesFragment extends KalendarPreferenceFragment {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void requestPermission(String permission) {
+        requestPermissionLauncher.launch(permission);
+    }
+
+    public void onPermissionGranted() {
         setGrantPermissionVisibility();
         EnvironmentChangedReceiver.registerReceivers(getActivity(), true);
     }

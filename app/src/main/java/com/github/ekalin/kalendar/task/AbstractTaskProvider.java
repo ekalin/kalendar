@@ -2,19 +2,19 @@ package com.github.ekalin.kalendar.task;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.fragment.app.Fragment;
 
 import org.joda.time.DateTime;
+
+import com.github.ekalin.kalendar.prefs.EventSource;
+import com.github.ekalin.kalendar.prefs.InstanceSettings;
+import com.github.ekalin.kalendar.prefs.PermissionRequester;
+import com.github.ekalin.kalendar.provider.EventProvider;
+import com.github.ekalin.kalendar.util.DateUtil;
+import com.github.ekalin.kalendar.util.PackageManagerUtil;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-
-import com.github.ekalin.kalendar.prefs.EventSource;
-import com.github.ekalin.kalendar.prefs.InstanceSettings;
-import com.github.ekalin.kalendar.provider.EventProvider;
-import com.github.ekalin.kalendar.util.DateUtil;
-import com.github.ekalin.kalendar.util.PackageManagerUtil;
 
 public abstract class AbstractTaskProvider extends EventProvider {
     protected static final String COLUMN_EFFECTIVE_START_DATE = "EFFECTIVE_START_DATE";
@@ -52,5 +52,5 @@ public abstract class AbstractTaskProvider extends EventProvider {
 
     public abstract boolean hasPermission();
 
-    public abstract void requestPermission(Fragment fragment);
+    public abstract void requestPermission(PermissionRequester requester);
 }
