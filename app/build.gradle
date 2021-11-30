@@ -42,6 +42,7 @@ android {
 
     lintOptions {
         abortOnError false
+        disable 'MissingTranslation'
     }
 
     if (project.hasProperty('kalendarStoreFile')) {
