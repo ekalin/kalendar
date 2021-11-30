@@ -14,7 +14,6 @@
     <string name="grant_permissions">الصلاحيات الممنوحة</string>
     <string name="no_widgets_found">الرجاء إضافة عنصر واجهة المستخدم \"Kalendar\" من الشاشة الرئيسية لجهازك أولاً.</string>
     <string name="select_a_widget_to_configure">قم باختيار عنصر واجهة المستخدم لتهيئته</string>
-    <string name="close">إغلاق</string>
     <string name="go_to_home_screen">العودة إلى الشاشة الرئيسية</string>
 
     <!-- Descriptions for app markets -->

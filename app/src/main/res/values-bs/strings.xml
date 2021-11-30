@@ -12,7 +12,6 @@
     <string name="grant_permissions">Dozvoli</string>
     <string name="grant_permissions_verbose">Widget traži dozvolu za čitanje kalendara.\nPritisni ovdje da daš dozvolu.</string>
     <string name="select_a_widget_to_configure">Odaberi widget za konfigurisanje</string>
-    <string name="close">Zatvori</string>
     <string name="go_to_home_screen">Idi na početni zaslon</string>
 
     <!-- Descriptions for app markets -->

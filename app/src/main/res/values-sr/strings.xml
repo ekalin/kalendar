@@ -11,7 +11,6 @@
     <string name="no_title">(Без наслова)</string>
     <string name="grant_permissions">Одобри дозволе</string>
     <string name="grant_permissions_verbose">Виџет захтева дозволу за читање календара.\nКликни овде да одобрите дозволу.</string>
-    <string name="close">Затвори</string>
     <string name="go_to_home_screen">Назад на почетни екран</string>
 
     <!-- Descriptions for app markets -->

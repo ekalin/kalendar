@@ -16,7 +16,6 @@
     <string name="permissions_justification">Witaj w Todo Agenda, łatwym dostępie do swojego kalendarza.\n\nAby jak najlepiej wykorzystać możliwości widżetu, należy przyznać mu dostęp do kalendarza.</string>
     <string name="no_widgets_found">Proszę najpierw dodać widżet \"Todo Agenda\" z ekranu głównego urządzenia.</string>
     <string name="select_a_widget_to_configure">Wybierz widżet, aby skonfigurować</string>
-    <string name="close">Zamknij</string>
     <string name="go_to_home_screen">Przejdź do ekranu głównego</string>
 
     <!-- Descriptions for app markets -->

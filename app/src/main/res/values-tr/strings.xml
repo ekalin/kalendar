@@ -13,7 +13,6 @@
     <string name="grant_permissions_verbose">Widget, takvimleri okumak için izin gerektirir.\nİzin vermek için buraya dokunun.</string>
     <string name="no_widgets_found">Lütfen önce cihazınızın ana ekranından bir \"Kalendar\" tuşu ekleyin.</string>
     <string name="select_a_widget_to_configure">Yapılandırmak için bir widget seç</string>
-    <string name="close">Kapat</string>
     <string name="go_to_home_screen">Ana ekrana git</string>
 
     <!-- Descriptions for app markets -->

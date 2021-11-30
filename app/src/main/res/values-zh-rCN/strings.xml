@@ -14,7 +14,6 @@
     <string name="grant_permissions">授权</string>
     <string name="grant_permissions_verbose">小部件需要访问日历的许可，\n点此授权。</string>
     <string name="select_a_widget_to_configure">选择要配置的组件</string>
-    <string name="close">关闭</string>
     <string name="go_to_home_screen">返回主界面</string>
 
     <!-- Descriptions for app markets -->

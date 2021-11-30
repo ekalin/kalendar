@@ -15,7 +15,6 @@
     <string name="grant_permissions_verbose">Widget kräver behörighet för att läsa kalendrar.\nTryck här för att bevilja behörighet.</string>
     <string name="no_widgets_found">Var vänlig lägg till en \"Kalendar\" widget från hemskärmen på din enhet först.</string>
     <string name="select_a_widget_to_configure">Välj en widget att konfigurera</string>
-    <string name="close">Stäng</string>
     <string name="go_to_home_screen">Gå till hemskärmen</string>
 
     <!-- Descriptions for app markets -->

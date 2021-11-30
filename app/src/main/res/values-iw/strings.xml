@@ -13,7 +13,6 @@
     <string name="grant_permissions_verbose">היישומון צריך הרשאות לקרוא לוחות שנה.\n
 לאישור לחץ כאן.</string>
     <string name="select_a_widget_to_configure">בחר יישומון לקביעת תצורה</string>
-    <string name="close">סגור</string>
     <string name="go_to_home_screen">עבור למסך הבית</string>
 
     <!-- Descriptions for app markets -->

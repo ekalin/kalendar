@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">Kalendar</string>
     <string name="widget_name" translatable="false">Kalendar</string>
     <string name="yesterday">Yesterday</string>
@@ -18,24 +18,23 @@
     <string name="permissions_justification">Welcome to Kalendar, the easy access to your calendar.\n\nTo make the most of the widget you need to grant it access to your calendar.</string>
     <string name="no_widgets_found">Please add a \"Kalendar\" widget from the home screen of your device first.</string>
     <string name="select_a_widget_to_configure">Select a widget to configure</string>
-    <string name="close">Close</string>
     <string name="go_to_home_screen">Go to home screen</string>
 
     <!-- Descriptions for app markets -->
-    <string name="app_description_80_chars_max">Widget that displays a list of upcoming events and tasks</string>
-    <string name="app_description_4000_chars_max_part01">Kalendar is a home screen widget that displays a list of upcoming calendar events and taks providing a glimpse at your appointments.</string>
-    <string name="app_description_4000_chars_max_part02">Features</string>
-    <string name="app_description_4000_chars_max_part03">No advertising. Free and Open Source.</string>
-    <string name="app_description_4000_chars_max_part04">Displays events from selected calendars and task lists.</string>
-    <string name="app_description_4000_chars_max_part05">Displays birthdays from you contacts.</string>
-    <string name="app_description_4000_chars_max_part06">Supports displaying tasks from Open Tasks (by dmfs GmbH), Tasks.org (by Alex Baker), and Samsung Calendar.</string>
-    <string name="app_description_4000_chars_max_part07">Select how far ahead to display events (one week, one month, etc.). Optionally shows past events.</string>
-    <string name="app_description_4000_chars_max_part08">Automatically updates when you add/delete/modify an event. Or you may update the list instantly.</string>
-    <string name="app_description_4000_chars_max_part09">Customize colors and text size of the widget.</string>
-    <string name="app_description_4000_chars_max_part10">Fully resizable widget with two alternative layouts and layout customizations.</string>
-    <string name="app_description_4000_chars_max_part11">Lock time zone when travelling to different time zones.</string>
-    <string name="app_description_4000_chars_max_part12">Backup and restore settings, cloning widgets on the same or different devices.</string>
-    <string name="app_description_4000_chars_max_part13">Android 4.4+ supported. Supports Android tablets.</string>
+    <string name="app_description_80_chars_max" tools:ignore="UnusedResources">Widget that displays a list of upcoming events and tasks</string>
+    <string name="app_description_4000_chars_max_part01" tools:ignore="UnusedResources">Kalendar is a home screen widget that displays a list of upcoming calendar events and taks providing a glimpse at your appointments.</string>
+    <string name="app_description_4000_chars_max_part02" tools:ignore="UnusedResources">Features</string>
+    <string name="app_description_4000_chars_max_part03" tools:ignore="UnusedResources">No advertising. Free and Open Source.</string>
+    <string name="app_description_4000_chars_max_part04" tools:ignore="UnusedResources">Displays events from selected calendars and task lists.</string>
+    <string name="app_description_4000_chars_max_part05" tools:ignore="UnusedResources">Displays birthdays from you contacts.</string>
+    <string name="app_description_4000_chars_max_part06" tools:ignore="UnusedResources">Supports displaying tasks from Open Tasks (by dmfs GmbH), Tasks.org (by Alex Baker), and Samsung Calendar.</string>
+    <string name="app_description_4000_chars_max_part07" tools:ignore="UnusedResources">Select how far ahead to display events (one week, one month, etc.). Optionally shows past events.</string>
+    <string name="app_description_4000_chars_max_part08" tools:ignore="UnusedResources">Automatically updates when you add/delete/modify an event. Or you may update the list instantly.</string>
+    <string name="app_description_4000_chars_max_part09" tools:ignore="UnusedResources">Customize colors and text size of the widget.</string>
+    <string name="app_description_4000_chars_max_part10" tools:ignore="UnusedResources">Fully resizable widget with two alternative layouts and layout customizations.</string>
+    <string name="app_description_4000_chars_max_part11" tools:ignore="UnusedResources">Lock time zone when travelling to different time zones.</string>
+    <string name="app_description_4000_chars_max_part12" tools:ignore="UnusedResources">Backup and restore settings, cloning widgets on the same or different devices.</string>
+    <string name="app_description_4000_chars_max_part13" tools:ignore="UnusedResources">Android 4.4+ supported. Supports Android tablets.</string>
 
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Calendars</string>

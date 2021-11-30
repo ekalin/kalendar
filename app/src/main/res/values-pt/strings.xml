@@ -16,7 +16,6 @@
     <string name="permissions_justification">Bem-vindo ao Kalendar, a forma mais simples de aceder ao seu calendário.\n\nDe modo a aproveitar ao máximo o widget, necessitamos que autorize o acesso ao seu calendário.</string>
     <string name="no_widgets_found">Por favor, adicione primeiramente um widget \"Kalendar\" no ecrã inicial do seu aparelho.</string>
     <string name="select_a_widget_to_configure">Selecione um widget para configurar</string>
-    <string name="close">Fechar</string>
     <string name="go_to_home_screen">Voltar ao ecrã inicial</string>
 
     <!-- Descriptions for app markets -->

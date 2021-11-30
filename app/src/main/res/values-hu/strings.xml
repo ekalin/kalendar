@@ -12,7 +12,6 @@
     <string name="grant_permissions">Engedélyek megadása</string>
     <string name="grant_permissions_verbose">A widgetnek szüksége van engedélyre a naptár olvasásához.\nPöccints ide az engedélyezéshez.</string>
     <string name="select_a_widget_to_configure">Widget kiválasztása szerkesztéshez</string>
-    <string name="close">Bezár</string>
     <string name="go_to_home_screen">Ugrás a kezdőképernyőre</string>
 
     <!-- Descriptions for app markets -->

@@ -14,7 +14,6 @@
     <string name="permissions_justification">Xin chào mừng đến Kalendar, dễ dàng truy cập lịch. \n\n Để dùng tối đa widget này, cần ccấp quyền đọc lịch.</string>
     <string name="no_widgets_found">Đàu tiên, xin thêm một widget \"Kalendar\" từ màn hình chủ của máy.</string>
     <string name="select_a_widget_to_configure">Chọn một Widget để cấu hình nó</string>
-    <string name="close">Đóng lại</string>
     <string name="go_to_home_screen">Quay lại màn hình chủ</string>
 
     <!-- Descriptions for app markets -->

@@ -12,7 +12,6 @@
     <string name="grant_permissions">اجازه دادن مجوز</string>
     <string name="grant_permissions_verbose">این ویجت نیاز به مجوز دسترسی برای خواندن تقویم را دارد.\n ضربه بزنید برای اجازه دادن مجوز دسترسی.</string>
     <string name="select_a_widget_to_configure">یک ویجت برای پیکربندی انتخاب کنید</string>
-    <string name="close">بستن</string>
     <string name="go_to_home_screen">انتقال به صفحه اصلی</string>
 
     <!-- Descriptions for app markets -->

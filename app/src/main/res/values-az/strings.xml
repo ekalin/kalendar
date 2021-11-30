@@ -14,7 +14,6 @@
     <string name="grant_permissions">Verilən icazələr</string>
     <string name="grant_permissions_verbose">Vidgetə təqvimləri oxumaq üçün icazə vermək lazımdır.\nİcazə vermək üçün toxunun.</string>
     <string name="select_a_widget_to_configure">Konfiqurasiya etmək üçün bir vidget seçin</string>
-    <string name="close">Bağla</string>
     <string name="go_to_home_screen">Əsas ekrana get</string>
 
     <!-- Descriptions for app markets -->

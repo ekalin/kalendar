@@ -12,7 +12,6 @@
     <string name="grant_permissions">Anna käyttöoikeudet</string>
     <string name="grant_permissions_verbose">Widget tarvitsee käyttöoikeuden kalenteriin.\nAnna lupa tästä.</string>
     <string name="select_a_widget_to_configure">Valitse muokattava widget</string>
-    <string name="close">Sulje</string>
     <string name="go_to_home_screen">Siirry aloitusnäyttöön</string>
 
     <!-- Descriptions for app markets -->

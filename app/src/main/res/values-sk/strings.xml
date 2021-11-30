@@ -12,7 +12,6 @@
     <string name="grant_permissions">Udeliť oprávnenia</string>
     <string name="grant_permissions_verbose">Widget vyžaduje povolenie na čítanie kalendárov. \nUdeliť povolenie.</string>
     <string name="select_a_widget_to_configure">Zvoľte widget na konfigurovanie</string>
-    <string name="close">Zatvoriť</string>
     <string name="go_to_home_screen">Domovská obrazovka</string>
 
     <!-- Descriptions for app markets -->

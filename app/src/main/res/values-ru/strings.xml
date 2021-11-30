@@ -15,7 +15,6 @@
     <string name="grant_permissions_verbose">Для Виджета требуется разрешение на чтение календарей и задач. \nНажмите здесь, чтобы предоставить это разрешение.</string>
     <string name="no_widgets_found">Сначала, пожалуйста, добавьте виджет \"Kalendar\" на домашний экран Вашего устройства.</string>
     <string name="select_a_widget_to_configure">Выберите Виджет, который Вы хотите настроить</string>
-    <string name="close">Закрыть</string>
     <string name="go_to_home_screen">Перейти на главный экран</string>
 
     <!-- Descriptions for app markets -->

@@ -12,7 +12,6 @@
     <string name="grant_permissions">अनुमति दें</string>
     <string name="grant_permissions_verbose">विजेट कैलेंडर पढ़ने के लिए अनुमति की आवश्यकता है. \n अनुमति देने के लिए यहां यहां टैप करें।</string>
     <string name="select_a_widget_to_configure">कॉंफ़िगर करने के लिए एक विजेट का चयन करें</string>
-    <string name="close">बंद करें</string>
     <string name="go_to_home_screen">होम स्क्रीन पर जाएं</string>
 
     <!-- Descriptions for app markets -->

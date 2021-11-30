@@ -14,7 +14,6 @@
     <string name="permissions_justification">Selamat datang di Kalendar, akses mudah ke kalender anda.\n\nAgar widget bekerja dengan baik, anda perlu memberikan izin akses ke kalender anda.</string>
     <string name="no_widgets_found">Silakan tambahkan widget \"Kalendar\" dari layar beranda perangkat anda terlebih dahulu.</string>
     <string name="select_a_widget_to_configure">Pilih widget untuk konfigurasi</string>
-    <string name="close">Tutup</string>
     <string name="go_to_home_screen">Buka layar beranda</string>
 
     <!-- Descriptions for app markets -->

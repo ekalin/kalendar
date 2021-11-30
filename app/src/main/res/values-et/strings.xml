@@ -12,7 +12,6 @@
     <string name="grant_permissions">Anna õigused</string>
     <string name="grant_permissions_verbose">Vidin vajab kalendri kasutuse luba.\nAnna luba siin.</string>
     <string name="select_a_widget_to_configure">Vali vidin sätete muutmiseks</string>
-    <string name="close">Sulge</string>
     <string name="go_to_home_screen">Mine avakuvale</string>
 
     <!-- Descriptions for app markets -->

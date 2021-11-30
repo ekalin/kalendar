@@ -16,7 +16,6 @@
     <string name="permissions_justification">Et donem la benvinguda a Todo Agenda, l\'accés fàcil al teu calendari i tasques.\n\nPerquè el giny pugui executar totes les funcions cal donar-li accés al teu calendari.</string>
     <string name="no_widgets_found">Per favor, primer afegeix el giny \"Todo Agenda\" a la pantalla principal del teu dispositiu.</string>
     <string name="select_a_widget_to_configure">Seleccioneu un giny per configurar</string>
-    <string name="close">Tanca</string>
     <string name="go_to_home_screen">Anar a la pantalla d\'inici</string>
 
     <!-- Descriptions for app markets -->
