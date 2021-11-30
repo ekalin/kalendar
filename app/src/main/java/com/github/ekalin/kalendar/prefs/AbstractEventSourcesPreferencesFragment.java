@@ -7,11 +7,11 @@ import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.github.ekalin.kalendar.R;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.github.ekalin.kalendar.R;
 
 abstract class AbstractEventSourcesPreferencesFragment extends KalendarPreferenceFragment {
     private static final String SOURCE_ID = "sourceId";
@@ -77,6 +77,7 @@ abstract class AbstractEventSourcesPreferencesFragment extends KalendarPreferenc
     }
 
     private Drawable createDrawable(int color) {
+        // Fixing this deprecation would require API 21
         Drawable drawable = getResources().getDrawable(R.drawable.prefs_calendar_entry);
         drawable.setColorFilter(new LightingColorFilter(0x0, color));
         return drawable;

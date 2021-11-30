@@ -9,10 +9,10 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Optional;
-
 import com.github.ekalin.kalendar.prefs.AllSettings;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
+
+import java.util.Optional;
 
 public class WidgetData {
     private static final String TAG = WidgetData.class.getSimpleName();
@@ -87,6 +87,7 @@ public class WidgetData {
                 PackageManager pm = context.getPackageManager();
                 PackageInfo pi = pm.getPackageInfo(context.getApplicationContext().getPackageName(), 0);
                 json.put(KEY_APP_VERSION_NAME, pi.versionName);
+                // Fixing this deprecation would require API 28
                 json.put(KEY_APP_VERSION_CODE, pi.versionCode);
             } catch (PackageManager.NameNotFoundException e) {
                 json.put(KEY_APP_VERSION_NAME, "Unable to obtain package information " + e);
