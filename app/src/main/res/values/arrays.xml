@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <string-array name="pref_text_size_entries">
         <item>@string/appearance_text_size_very_small</item>
@@ -8,7 +8,7 @@
         <item>@string/appearance_text_size_large</item>
         <item>@string/appearance_text_size_very_large</item>
     </string-array>
-    <string-array name="pref_text_size_values" tools:ignore="MissingTranslation">
+    <string-array name="pref_text_size_values" translatable="false">
         <item>0.6</item>
         <item>0.8</item>
         <item>1.0</item>
@@ -20,7 +20,7 @@
         <item>@string/appearance_day_header_alignment_center</item>
         <item>@string/appearance_day_header_alignment_right</item>
     </string-array>
-    <string-array name="pref_day_header_alignment_values" tools:ignore="MissingTranslation">
+    <string-array name="pref_day_header_alignment_values" translatable="false">
         <item>LEFT</item>
         <item>CENTER</item>
         <item>RIGHT</item>
@@ -36,7 +36,7 @@
         <item>@string/event_range_six_months</item>
         <item>@string/event_range_one_year</item>
     </string-array>
-    <string-array name="pref_event_range_values" tools:ignore="MissingTranslation">
+    <string-array name="pref_event_range_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>7</item>
@@ -55,7 +55,7 @@
         <item>@string/ended_today</item>
         <item>@string/ended_yesterday</item>
     </string-array>
-    <string-array name="pref_events_ended_values" tools:ignore="MissingTranslation">
+    <string-array name="pref_events_ended_values" translatable="false">
         <item>NONE</item>
         <item>ONE_HOUR</item>
         <item>TWO_HOURS</item>
@@ -67,7 +67,7 @@
         <item>@string/default_multiline_layout</item>
         <item>@string/single_line_layout</item>
     </string-array>
-    <string-array name="pref_event_entry_layout_values" tools:ignore="MissingTranslation">
+    <string-array name="pref_event_entry_layout_values" translatable="false">
         <item>DEFAULT</item>
         <item>ONE_LINE</item>
     </string-array>
@@ -77,7 +77,7 @@
         <item>@string/task_source_astrid_clone</item>
         <item>@string/task_source_samsung</item>
     </string-array>
-    <string-array name="pref_task_source_values" tools:ignore="MissingTranslation">
+    <string-array name="pref_task_source_values" translatable="false">
         <item>NONE</item>
         <item>DMFS_OPEN_TASKS</item>
         <item>ASTRID_CLONE</item>
