@@ -3,7 +3,7 @@
     <string name="yesterday">昨日</string>
     <string name="today">今日</string>
     <string name="tomorrow">明日</string>
-    <string name="not_initialized_yet">まだ初期化されていません...</string>
+    <string name="not_initialized_yet">まだ初期化されていません…</string>
     <string name="no_events_to_show">表示するイベントはありません</string>
     <string name="add_event_desc">新しいカレンダーイベントを追加します</string>
     <string name="refresh_desc">更新</string>

@@ -3,7 +3,7 @@
     <string name="yesterday">أمس</string>
     <string name="today">اليوم</string>
     <string name="tomorrow">الغد</string>
-    <string name="not_initialized_yet">لم تتم التهيئة بعد...</string>
+    <string name="not_initialized_yet">لم تتم التهيئة بعد…</string>
     <string name="no_events_to_show">لا يوجد أحداث لإظهارها</string>
     <string name="add_event_desc">اضافة حدث جديد للتقويم</string>
     <string name="refresh_desc">تحديث(إنعاش)</string>

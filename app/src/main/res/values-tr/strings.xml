@@ -3,6 +3,8 @@
     <string name="yesterday">Dün</string>
     <string name="today">Bugün</string>
     <string name="tomorrow">Yarın</string>
+    <string name="not_initialized_yet">Henüz başlatılmadı…</string>
+    <string name="no_events_to_show">Gösterilecek etkinlik yok</string>
     <string name="add_event_desc">Yeni takvim etkinliği ekle</string>
     <string name="refresh_desc">Yenile</string>
     <string name="open_prefs_desc">Takvim widget\'inin ayarlarını aç</string>
@@ -70,7 +72,7 @@
     <string name="event_details_show_end_time_title">Bitiş zamanı</string>
     <string name="event_details_show_end_time_desc">Etkinlik bitiş zamanını göster</string>
     <string name="event_details_show_location_title">Konumu göster</string>
-    <string name="event_details_show_location_desc">Etkinlik konumunu göster yada gizle</string>
+    <string name="event_details_show_location_desc">Etkinlik konumunu göster ya da gizle</string>
     <string name="event_details_fill_all_day_events_title">Bütün gün etkinliklerini doldur</string>
     <string name="event_details_fill_all_day_events_desc">Bir tüm gün etkinliğinin her günü için bir girdi göster</string>
     <string name="event_details_indicators">Göstergeler</string>
@@ -108,10 +110,11 @@
     <!-- Preference header: Tasks -->
     <string name="task_source_opentasks">OpenTasks (dmfs GmbH tarafından)</string>
     <string name="task_source_samsung">Samsung Takvim</string>
+
     <!-- Preference header: Feedback -->
     <string name="feedback_github_title">Github\'da widget\'i ziyaret edin</string>
     <string name="feedback_github_desc">Proje sayfasında geri bildirim sağlayın</string>
     <string name="feedback_play_store_title">Google Play Store\'da widget\'i ziyaret edin</string>
     <string name="feedback_play_store_desc">Google Play Store\'da yorum yapın ve oylayın</string>
     <string name="share_events_for_debugging_desc">Sorunların gideriminde geliştiricilere yardım etmek için bir rapor oluştur</string>
-    </resources>
+</resources>

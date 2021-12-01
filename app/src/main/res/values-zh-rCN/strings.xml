@@ -3,7 +3,7 @@
     <string name="yesterday">昨天</string>
     <string name="today">今日</string>
     <string name="tomorrow">明日</string>
-    <string name="not_initialized_yet">尚未初始化...</string>
+    <string name="not_initialized_yet">尚未初始化…</string>
     <string name="no_events_to_show">没有要展示的项目</string>
     <string name="add_event_desc">添加日程</string>
     <string name="refresh_desc">刷新</string>

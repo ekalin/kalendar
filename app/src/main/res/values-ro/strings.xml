@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="yesterday">Ieri</string>
     <string name="today">Astazi</string>
     <string name="tomorrow">Maine</string>
+    <string name="not_initialized_yet">Nu a fost inițializat încă…</string>
+    <string name="no_events_to_show">Niciun eveniment de afișat</string>
     <string name="add_event_desc">Adauga eveniment nou calendar</string>
     <string name="refresh_desc">Reîncarcă</string>
     <string name="open_prefs_desc">Deschideti setarile widget calendar</string>
     <string name="indicator_alarm">Indicator in cazul in care a fost stabilita o alarma</string>
     <string name="indicator_recurring">Indicator dacă evenimentul este recurent</string>
     <string name="no_title">(Nici un titlu)</string>
+    <string name="grant_permissions">Acordă permisiuni</string>
+    <string name="grant_permissions_verbose">Widgetul necesită permisiunea de a accesa calendare și sarcini.\n
+        Apasă aici pentru a acorda permisiuni.</string>
+
     <!-- Descriptions for app markets -->
+
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Calendare</string>
     <string name="calendars_prefs_desc">Selectati calendarele pentru a afisare</string>
 
     <!-- Preference header: Layout -->
+    <string name="widget_instance_name">Nume widget</string>
     <string name="appearance_text_size_title">Dimensiune text</string>
     <string name="appearance_text_size_desc">Ajustare dimensiune text</string>
     <string name="appearance_text_size_very_small">Foarte mic</string>
@@ -30,11 +39,13 @@
     <string name="appearance_day_header_alignment_right">Dreapta</string>
     <string name="appearance_show_days_without_events_title">Arată zile fără evenimente</string>
     <string name="appearance_show_days_without_events_desc">Arată anteturile zilelor, fără evenimente</string>
+
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Culori</string>
     <string name="appearance_background_color_title">Culoare fundal</string>
     <string name="appearance_background_color_desc">Ajustare culori fundal</string>
     <string name="appearance_past_events_background_color_title">Culoarea de fundal a evenimentelor trecute</string>
+
     <!-- Preference header: Event details -->
     <string name="event_details_prefs_desc">Configurarea detalii pentru un eveniment</string>
     <string name="event_details_show_end_time_title">Sfarsit timp</string>
@@ -63,10 +74,12 @@
     <string name="event_range_three_months">Trei luni</string>
     <string name="event_range_six_months">Sase luni</string>
     <string name="event_range_one_year">Un an</string>
+
     <!-- Preference header: Tasks -->
+
     <!-- Preference header: Feedback -->
     <string name="feedback_github_title">Vizitați widget pe Github</string>
     <string name="feedback_github_desc">Furnizarea de feedback-ul pe pagina proiectului</string>
     <string name="feedback_play_store_title">Vizitati widget pe Google Play Store</string>
     <string name="feedback_play_store_desc">Evaluare si comentariu pe Google Play Store</string>
-    </resources>
+</resources>
