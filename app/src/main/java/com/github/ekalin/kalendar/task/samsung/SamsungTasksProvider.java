@@ -81,24 +81,24 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
 
     private TaskEvent createTask(Cursor cursor) {
         TaskEvent task = new TaskEvent();
-        task.setId(cursor.getLong(cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_ID)));
-        task.setTitle(cursor.getString(cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_TITLE)));
+        task.setId(cursor.getLong(cursor.getColumnIndexOrThrow(SamsungTasksContract.Tasks.COLUMN_ID)));
+        task.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(SamsungTasksContract.Tasks.COLUMN_TITLE)));
         task.setZone(zone);
 
-        int startDateIdx = cursor.getColumnIndex(COLUMN_EFFECTIVE_START_DATE);
+        int startDateIdx = cursor.getColumnIndexOrThrow(COLUMN_EFFECTIVE_START_DATE);
         Long startMillis = null;
         if (!cursor.isNull(startDateIdx)) {
             startMillis = cursor.getLong(startDateIdx);
         }
-        int dueDateIdx = cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_DUE_DATE);
+        int dueDateIdx = cursor.getColumnIndexOrThrow(SamsungTasksContract.Tasks.COLUMN_DUE_DATE);
         Long dueMillis = null;
         if (!cursor.isNull(dueDateIdx)) {
             dueMillis = cursor.getLong(dueDateIdx);
         }
         task.setDates(startMillis, dueMillis);
 
-        task.setColor(getColor(cursor, cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_COLOR),
-                cursor.getInt(cursor.getColumnIndex(SamsungTasksContract.Tasks.COLUMN_LIST_ID))));
+        task.setColor(getColor(cursor, cursor.getColumnIndexOrThrow(SamsungTasksContract.Tasks.COLUMN_COLOR),
+                cursor.getInt(cursor.getColumnIndexOrThrow(SamsungTasksContract.Tasks.COLUMN_LIST_ID))));
 
         return task;
     }
@@ -113,9 +113,9 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
                 SamsungTasksContract.TaskLists.COLUMN_COLOR,
         };
         return queryProvider(SamsungTasksContract.TaskLists.PROVIDER_URI, projection, null, cursor -> {
-            int idIdx = cursor.getColumnIndex(SamsungTasksContract.TaskLists.COLUMN_ID);
-            int nameIdx = cursor.getColumnIndex(SamsungTasksContract.TaskLists.COLUMN_NAME);
-            int colorIdx = cursor.getColumnIndex(SamsungTasksContract.TaskLists.COLUMN_COLOR);
+            int idIdx = cursor.getColumnIndexOrThrow(SamsungTasksContract.TaskLists.COLUMN_ID);
+            int nameIdx = cursor.getColumnIndexOrThrow(SamsungTasksContract.TaskLists.COLUMN_NAME);
+            int colorIdx = cursor.getColumnIndexOrThrow(SamsungTasksContract.TaskLists.COLUMN_COLOR);
 
             int id = cursor.getInt(idIdx);
             return new EventSource(String.valueOf(id), taskListName, cursor.getString(nameIdx), getColor(cursor, colorIdx, id));

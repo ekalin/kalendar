@@ -88,23 +88,23 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
 
     private TaskEvent createTask(Cursor cursor) {
         TaskEvent task = new TaskEvent();
-        task.setId(cursor.getLong(cursor.getColumnIndex(DmfsOpenTasksContract.Tasks.COLUMN_ID)));
-        task.setTitle(cursor.getString(cursor.getColumnIndex(DmfsOpenTasksContract.Tasks.COLUMN_TITLE)));
+        task.setId(cursor.getLong(cursor.getColumnIndexOrThrow(DmfsOpenTasksContract.Tasks.COLUMN_ID)));
+        task.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(DmfsOpenTasksContract.Tasks.COLUMN_TITLE)));
         task.setZone(zone);
 
-        int startDateIdx = cursor.getColumnIndex(COLUMN_EFFECTIVE_START_DATE);
+        int startDateIdx = cursor.getColumnIndexOrThrow(COLUMN_EFFECTIVE_START_DATE);
         Long startMillis = null;
         if (!cursor.isNull(startDateIdx)) {
             startMillis = cursor.getLong(startDateIdx);
         }
-        int dueDateIdx = cursor.getColumnIndex(DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE);
+        int dueDateIdx = cursor.getColumnIndexOrThrow(DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE);
         Long dueMillis = null;
         if (!cursor.isNull(dueDateIdx)) {
             dueMillis = cursor.getLong(dueDateIdx);
         }
         task.setDates(startMillis, dueMillis);
 
-        task.setColor(getAsOpaque(cursor.getInt(cursor.getColumnIndex(DmfsOpenTasksContract.Tasks.COLUMN_COLOR))));
+        task.setColor(getAsOpaque(cursor.getInt(cursor.getColumnIndexOrThrow(DmfsOpenTasksContract.Tasks.COLUMN_COLOR))));
 
         return task;
     }
@@ -119,10 +119,10 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
         };
 
         return queryProvider(DmfsOpenTasksContract.TaskLists.PROVIDER_URI, projection, null, cursor -> {
-            int idIdx = cursor.getColumnIndex(DmfsOpenTasksContract.TaskLists.COLUMN_ID);
-            int nameIdx = cursor.getColumnIndex(DmfsOpenTasksContract.TaskLists.COLUMN_NAME);
-            int accountIdx = cursor.getColumnIndex(DmfsOpenTasksContract.TaskLists.COLUMN_ACCOUNT_NAME);
-            int colorIdx = cursor.getColumnIndex(DmfsOpenTasksContract.TaskLists.COLUMN_COLOR);
+            int idIdx = cursor.getColumnIndexOrThrow(DmfsOpenTasksContract.TaskLists.COLUMN_ID);
+            int nameIdx = cursor.getColumnIndexOrThrow(DmfsOpenTasksContract.TaskLists.COLUMN_NAME);
+            int accountIdx = cursor.getColumnIndexOrThrow(DmfsOpenTasksContract.TaskLists.COLUMN_ACCOUNT_NAME);
+            int colorIdx = cursor.getColumnIndexOrThrow(DmfsOpenTasksContract.TaskLists.COLUMN_COLOR);
             return new EventSource(String.valueOf(cursor.getInt(idIdx)), cursor.getString(nameIdx),
                     cursor.getString(accountIdx), cursor.getInt(colorIdx));
         });

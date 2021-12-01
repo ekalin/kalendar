@@ -72,14 +72,14 @@ public class BirthdayProvider extends EventProvider {
 
     private BirthdayEvent createBirthday(Cursor cursor) {
         BirthdayEvent event = new BirthdayEvent();
-        event.setId(cursor.getLong(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Event._ID)));
-        event.setLookupKey(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Event.LOOKUP_KEY)));
-        event.setTitle(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Event.DISPLAY_NAME)));
+        event.setId(cursor.getLong(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Event._ID)));
+        event.setLookupKey(cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Event.LOOKUP_KEY)));
+        event.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Event.DISPLAY_NAME)));
         event.setZone(zone);
         event.setColor(settings.getBirthdayColor());
 
         LocalDate birthDate = DateUtil.parseContactDate(
-                cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Event.START_DATE)));
+                cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Event.START_DATE)));
         LocalDate eventDate = DateUtil.birthDateToDisplayedBirthday(birthDate, settings);
         event.setDate(eventDate);
 

@@ -134,13 +134,13 @@ public class AstridCloneTasksProvider extends AbstractTaskProvider {
 
     private TaskEvent createTask(Cursor cursor) {
         TaskEvent task = new TaskEvent();
-        task.setId(cursor.getLong(cursor.getColumnIndex(AstridCloneTasksContract.Tasks.COLUMN_ID)));
-        task.setTitle(cursor.getString(cursor.getColumnIndex(AstridCloneTasksContract.Tasks.COLUMN_TITLE)));
+        task.setId(cursor.getLong(cursor.getColumnIndexOrThrow(AstridCloneTasksContract.Tasks.COLUMN_ID)));
+        task.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(AstridCloneTasksContract.Tasks.COLUMN_TITLE)));
         task.setZone(zone);
 
-        int startDateIdx = cursor.getColumnIndex(AstridCloneTasksContract.Tasks.COLUMN_START_DATE);
+        int startDateIdx = cursor.getColumnIndexOrThrow(AstridCloneTasksContract.Tasks.COLUMN_START_DATE);
         Long startMillis = getNonZero(cursor, startDateIdx);
-        int dueDateIdx = cursor.getColumnIndex(AstridCloneTasksContract.Tasks.COLUMN_DUE_DATE);
+        int dueDateIdx = cursor.getColumnIndexOrThrow(AstridCloneTasksContract.Tasks.COLUMN_DUE_DATE);
         Long dueMillis = getNonZero(cursor, dueDateIdx);
         task.setDates(startMillis, dueMillis);
 
@@ -158,12 +158,12 @@ public class AstridCloneTasksProvider extends AbstractTaskProvider {
     }
 
     private int getColor(Cursor cursor) {
-        int localColor = cursor.getColumnIndex(AstridCloneTasksContract.Tasks.COLUMN_COLOR_LOCAL);
+        int localColor = cursor.getColumnIndexOrThrow(AstridCloneTasksContract.Tasks.COLUMN_COLOR_LOCAL);
         if (!cursor.isNull(localColor)) {
             return cursor.getInt(localColor);
         }
 
-        int googleColor = cursor.getColumnIndex(AstridCloneTasksContract.Tasks.COLUMN_COLOR_GOOGLE);
+        int googleColor = cursor.getColumnIndexOrThrow(AstridCloneTasksContract.Tasks.COLUMN_COLOR_GOOGLE);
         return cursor.getInt(googleColor);
     }
 
@@ -204,10 +204,10 @@ public class AstridCloneTasksProvider extends AbstractTaskProvider {
         };
 
         return queryProvider(uri, projection, null, cursor -> {
-            int idIdx = cursor.getColumnIndex(columnId);
-            int nameIdx = cursor.getColumnIndex(columnName);
-            int accountIdx = cursor.getColumnIndex(columnAccountName);
-            int colorIdx = cursor.getColumnIndex(columnColor);
+            int idIdx = cursor.getColumnIndexOrThrow(columnId);
+            int nameIdx = cursor.getColumnIndexOrThrow(columnName);
+            int accountIdx = cursor.getColumnIndexOrThrow(columnAccountName);
+            int colorIdx = cursor.getColumnIndexOrThrow(columnColor);
 
             String id = idPrefix + cursor.getInt(idIdx);
             return new EventSource(id, cursor.getString(nameIdx),

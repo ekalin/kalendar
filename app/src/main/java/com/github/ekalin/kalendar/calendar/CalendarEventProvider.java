@@ -16,13 +16,6 @@ import androidx.core.util.Supplier;
 
 import org.joda.time.DateTime;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.github.ekalin.kalendar.prefs.EventSource;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.provider.EventProvider;
@@ -31,6 +24,13 @@ import com.github.ekalin.kalendar.provider.QueryResultsStorage;
 import com.github.ekalin.kalendar.util.CalendarIntentUtil;
 import com.github.ekalin.kalendar.util.DateUtil;
 import com.github.ekalin.kalendar.util.PermissionsUtil;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CalendarEventProvider extends EventProvider {
     private static final String EXCLUDE_DECLINED = Instances.SELF_ATTENDEE_STATUS + NOT_EQUALS
@@ -155,21 +155,21 @@ public class CalendarEventProvider extends EventProvider {
     }
 
     private CalendarEvent createCalendarEvent(Cursor cursor) {
-        boolean allDay = cursor.getInt(cursor.getColumnIndex(Instances.ALL_DAY)) > 0;
+        boolean allDay = cursor.getInt(cursor.getColumnIndexOrThrow(Instances.ALL_DAY)) > 0;
         CalendarEvent event = new CalendarEvent(settings, zone, allDay);
-        event.setEventId(cursor.getInt(cursor.getColumnIndex(Instances.EVENT_ID)));
-        event.setTitle(cursor.getString(cursor.getColumnIndex(Instances.TITLE)));
-        event.setStartMillis(cursor.getLong(cursor.getColumnIndex(Instances.BEGIN)));
-        event.setEndMillis(cursor.getLong(cursor.getColumnIndex(Instances.END)));
-        event.setLocation(cursor.getString(cursor.getColumnIndex(Instances.EVENT_LOCATION)));
-        event.setAlarmActive(cursor.getInt(cursor.getColumnIndex(Instances.HAS_ALARM)) > 0);
-        event.setRecurring(cursor.getString(cursor.getColumnIndex(Instances.RRULE)) != null);
+        event.setEventId(cursor.getInt(cursor.getColumnIndexOrThrow(Instances.EVENT_ID)));
+        event.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(Instances.TITLE)));
+        event.setStartMillis(cursor.getLong(cursor.getColumnIndexOrThrow(Instances.BEGIN)));
+        event.setEndMillis(cursor.getLong(cursor.getColumnIndexOrThrow(Instances.END)));
+        event.setLocation(cursor.getString(cursor.getColumnIndexOrThrow(Instances.EVENT_LOCATION)));
+        event.setAlarmActive(cursor.getInt(cursor.getColumnIndexOrThrow(Instances.HAS_ALARM)) > 0);
+        event.setRecurring(cursor.getString(cursor.getColumnIndexOrThrow(Instances.RRULE)) != null);
         event.setColor(getAsOpaque(getEventColor(cursor)));
         return event;
     }
 
     private int getEventColor(Cursor cursor) {
-        return cursor.getInt(cursor.getColumnIndex(Instances.DISPLAY_COLOR));
+        return cursor.getInt(cursor.getColumnIndexOrThrow(Instances.DISPLAY_COLOR));
     }
 
     public List<EventSource> getCalendars() {
@@ -181,10 +181,10 @@ public class CalendarEventProvider extends EventProvider {
         };
 
         return queryProvider(Calendars.CONTENT_URI, projection, null, cursor -> {
-            int idIdx = cursor.getColumnIndex(CalendarContract.Calendars._ID);
-            int nameIdx = cursor.getColumnIndex(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME);
-            int accountIdx = cursor.getColumnIndex(CalendarContract.Calendars.ACCOUNT_NAME);
-            int colorIdx = cursor.getColumnIndex(CalendarContract.Calendars.CALENDAR_COLOR);
+            int idIdx = cursor.getColumnIndexOrThrow(CalendarContract.Calendars._ID);
+            int nameIdx = cursor.getColumnIndexOrThrow(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME);
+            int accountIdx = cursor.getColumnIndexOrThrow(CalendarContract.Calendars.ACCOUNT_NAME);
+            int colorIdx = cursor.getColumnIndexOrThrow(CalendarContract.Calendars.CALENDAR_COLOR);
             return new EventSource(String.valueOf(cursor.getInt(idIdx)), cursor.getString(nameIdx),
                     cursor.getString(accountIdx), cursor.getInt(colorIdx));
         });
