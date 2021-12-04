@@ -28,16 +28,22 @@ Kalendar is a home screen widget for your Android device. Each widget has its ow
 Note on Tasks support: As there is no unified way to access tasks created in different applications, each application needs its own implementation. Currently supported:
 * [OpenTasks (by dmfs GmbH)](https://github.com/dmfs/opentasks).
 * [Tasks.org (by Alex Baker)](https://play.google.com/store/apps/details?id=org.tasks).
-* Tasks of Samsung Calendar. 
+* Tasks of Samsung Calendar.
 
-Tasks from Google Tasks are supported with the use of [Tasks.org (by Alex Baker)](https://play.google.com/store/apps/details?id=org.tasks).
+Tasks from Google Tasks are supported with the use
+of [Tasks.org (by Alex Baker)](https://play.google.com/store/apps/details?id=org.tasks).
 
 ## Collaborate
 
-We are developing this application in public to bring you a tool that _you_ want to use. Please feel free to open [issues](https://github.com/ekalin/kalendar/issues) and provide [pull requests](https://github.com/ekalin/kalendar/pulls). 
-
+We are developing this application in public to bring you a tool that _you_ want to use. Please feel free to
+open [issues](https://github.com/ekalin/kalendar/issues) and
+provide [pull requests](https://github.com/ekalin/kalendar/pulls).
 
 ## Changelog
+
+### v5
+
+* Support for Android 12.
 
 ### v4
 
@@ -45,7 +51,8 @@ We are developing this application in public to bring you a tool that _you_ want
 
 ### v3
 
-* Added support for [Tasks.org (by Alex Baker)](https://play.google.com/store/apps/details?id=org.tasks). This application also supports Google Tasks, so you can now see your Google Tasks in Kalendar.
+* Added support for [Tasks.org (by Alex Baker)](https://play.google.com/store/apps/details?id=org.tasks). This
+  application also supports Google Tasks, so you can now see your Google Tasks in Kalendar.
 * Canceled events and tasks are not shown anymore.
 * If the task app is not installed, a button is displayed to install it.
 * Dark mode support.
