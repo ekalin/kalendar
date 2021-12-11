@@ -1,7 +1,5 @@
 package com.github.ekalin.kalendar.calendar;
 
-import android.util.Log;
-
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;
@@ -62,13 +60,11 @@ public class CalendarEvent {
                     .withMillisOfDay(0);
             int hour = 0;
             while (zone.isLocalDateTimeGap(ldt)) {
-                Log.v("fixTimeOfAllDayEvent", "Local Date Time Gap: " + ldt + "; " + msgLog);
                 ldt = ldt.withHourOfDay(++hour);
             }
             fixed = ldt.toDateTime(zone);
             msgLog += " -> " + fixed;
             if (BuildConfig.DEBUG) {
-                Log.v("fixTimeOfAllDayEvent", msgLog);
             }
         } catch (org.joda.time.IllegalInstantException e) {
             throw new org.joda.time.IllegalInstantException(msgLog + " caused by: " + e);

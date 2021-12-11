@@ -222,7 +222,6 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
         for (WidgetEntryVisualizer<?> eventProvider : eventProviders) {
             result += eventProvider.getViewTypeCount();
         }
-        logEvent("getViewTypeCount:" + result);
         return result;
     }
 

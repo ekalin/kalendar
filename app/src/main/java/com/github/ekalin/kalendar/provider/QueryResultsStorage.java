@@ -3,17 +3,16 @@ package com.github.ekalin.kalendar.provider;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import com.github.ekalin.kalendar.KalendarRemoteViewsFactory;
 import com.github.ekalin.kalendar.R;
+
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author yvolk@yurivolkov.com
@@ -38,14 +37,11 @@ public class QueryResultsStorage {
     public static void shareEventsForDebugging(Context context, int widgetId) {
         final String method = "shareEventsForDebugging";
         try {
-            Log.i(TAG, method + " started");
             setNeedToStoreResults(true);
             KalendarRemoteViewsFactory factory = new KalendarRemoteViewsFactory(context, widgetId);
             factory.onDataSetChanged();
             String results = theStorage.toJsonString(context, widgetId);
-            if (TextUtils.isEmpty(results)) {
-                Log.i(TAG, method + "; Nothing to share");
-            } else {
+            if (!TextUtils.isEmpty(results)) {
                 String fileName = "Kalendar-" + widgetId + ".json";
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("application/json");
@@ -53,7 +49,6 @@ public class QueryResultsStorage {
                 intent.putExtra(Intent.EXTRA_TEXT, results);
                 context.startActivity(
                         Intent.createChooser(intent, context.getText(R.string.share_events_settings_for_debugging_title)));
-                Log.i(TAG, method + "; Shared " + results);
             }
         } finally {
             setNeedToStoreResults(false);

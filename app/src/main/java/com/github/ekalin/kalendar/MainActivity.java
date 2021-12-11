@@ -4,7 +4,6 @@ import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -16,13 +15,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.github.ekalin.kalendar.prefs.AllSettings;
+import com.github.ekalin.kalendar.util.PermissionsUtil;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.github.ekalin.kalendar.prefs.AllSettings;
-import com.github.ekalin.kalendar.util.PermissionsUtil;
 
 /**
  * @author yvolk@yurivolkov.com
@@ -61,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     private void checkPermissionsAndRequestThem() {
         checkPermissions();
         if (!permissionsGranted) {
-            Log.d(this.getLocalClassName(), "Requesting permission: " + PermissionsUtil.PERMISSION);
             ActivityCompat.requestPermissions(this, new String[]{PermissionsUtil.PERMISSION}, 1);
         }
     }
