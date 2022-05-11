@@ -46,6 +46,7 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
     private static final String TAG = KalendarRemoteViewsFactory.class.getSimpleName();
 
     private static final int MIN_MILLIS_BETWEEN_RELOADS = 500;
+    private static final int MINIMUM_UPDATE_MINUTES = 60;
     private static final String PACKAGE = "com.github.ekalin.kalendar";
     public static final String ACTION_REFRESH = PACKAGE + ".action.REFRESH";
     private static final int MAX_NUMBER_OF_WIDGETS = 100;
@@ -130,12 +131,20 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
     }
 
     private void scheduleNextUpdate() {
-        DateTime nextUpdate = DateUtil.startOfNextDay(DateUtil.now(getSettings().getTimeZone()));
+        DateTime now = DateUtil.now(getSettings().getTimeZone());
+
+        DateTime nextUpdate = DateUtil.startOfNextDay(now);
+
         for (WidgetEntry entry : widgetEntries) {
             DateTime eventUpdateTime = entry.getNextUpdateTime();
             if (eventUpdateTime != null && eventUpdateTime.isBefore(nextUpdate)) {
                 nextUpdate = eventUpdateTime;
             }
+        }
+
+        DateTime minimumUpdateInterval = now.plusMinutes(MINIMUM_UPDATE_MINUTES);
+        if (minimumUpdateInterval.isBefore(nextUpdate)) {
+            nextUpdate = minimumUpdateInterval;
         }
 
         EnvironmentChangedReceiver.scheduleNextUpdate(getSettings(), nextUpdate);

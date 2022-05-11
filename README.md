@@ -41,6 +41,10 @@ provide [pull requests](https://github.com/ekalin/kalendar/pulls).
 
 ## Changelog
 
+### v6
+
+* Adds a periodic refresh every hour, because sometimes notifications of changes in the events are missed.
+
 ### v5
 
 * Support for Android 12.
