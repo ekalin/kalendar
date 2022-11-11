@@ -8,6 +8,8 @@ ext.versionBuild = 1
 android {
     compileSdkVersion rootProject.compileSdkVersion
 
+    namespace 'com.github.ekalin.kalendar'
+
     defaultConfig {
         versionCode generateVersionCode()
         versionName generateVersionName()
@@ -40,7 +42,7 @@ android {
         }
     }
 
-    lintOptions {
+    lint {
         abortOnError false
         disable 'MissingTranslation'
     }
