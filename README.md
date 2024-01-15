@@ -41,6 +41,11 @@ provide [pull requests](https://github.com/ekalin/kalendar/pulls).
 
 ## Changelog
 
+### (Unreleased)
+
+* It is now possible to use a different language than the rest of the system (when running on Android 13 or
+  later). [Change app language](https://support.google.com/android/answer/12395118?hl=en).
+
 ### v7
 
 * Support for Android 13.

@@ -21,6 +21,10 @@ android {
         project.ext.archivesBaseName = "Kalendar-$versionName".toString()
     }
 
+    androidResources {
+        generateLocaleConfig = true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
