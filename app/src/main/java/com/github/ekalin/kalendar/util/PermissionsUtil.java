@@ -32,37 +32,21 @@ public class PermissionsUtil {
     }
 
     private static PendingIntent getWithPermissionsPendingBroadcastIntent(InstanceSettings settings, Intent intent, int requestCode) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return PendingIntent.getBroadcast(settings.getContext(), requestCode, intent,
-                    PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
-        } else {
-            return PendingIntent.getBroadcast(settings.getContext(), requestCode, intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-        }
+        return PendingIntent.getBroadcast(settings.getContext(), requestCode, intent,
+                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     public static PendingIntent getNoPermissionsPendingIntent(InstanceSettings settings) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return PendingIntent.getActivity(settings.getContext(), settings.getWidgetId(),
-                    MainActivity.intentToStartMe(settings.getContext()),
-                    PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
-        } else {
-            return PendingIntent.getActivity(settings.getContext(), settings.getWidgetId(),
-                    MainActivity.intentToStartMe(settings.getContext()),
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-        }
+        return PendingIntent.getActivity(settings.getContext(), settings.getWidgetId(),
+                MainActivity.intentToStartMe(settings.getContext()),
+                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     @NonNull
     public static PendingIntent getPermittedPendingActivityIntent(InstanceSettings settings, Intent intent) {
         Intent intentPermitted = getPermittedActivityIntent(settings.getContext(), intent);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return PendingIntent.getActivity(settings.getContext(), settings.getWidgetId(), intentPermitted,
-                    PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
-        } else {
-            return PendingIntent.getActivity(settings.getContext(), settings.getWidgetId(), intentPermitted,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-        }
+        return PendingIntent.getActivity(settings.getContext(), settings.getWidgetId(), intentPermitted,
+                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     @NonNull

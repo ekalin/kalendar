@@ -23,7 +23,7 @@ Kalendar is a home screen widget for your Android device. Each widget has its ow
 * Fully resizable widget with two alternative layouts and layout customizations.
 * Lock time zone when travelling to different time zones.
 * Backup and restore settings, cloning widgets on the same or different devices.
-* Android 4.4+ supported. Supports Android tablets.
+* Android 6+ supported. Supports Android tablets.
 
 Note on Tasks support: As there is no unified way to access tasks created in different applications, each application needs its own implementation. Currently supported:
 * [OpenTasks (by dmfs GmbH)](https://github.com/dmfs/opentasks).
@@ -45,6 +45,7 @@ provide [pull requests](https://github.com/ekalin/kalendar/pulls).
 
 * It is now possible to use a different language than the rest of the system (when running on Android 13 or
   later). [Change app language](https://support.google.com/android/answer/12395118?hl=en).
+* Android 6+ is now required.
 
 ### v7
 

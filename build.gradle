@@ -6,7 +6,7 @@ buildscript {
 
     ext {
         compileSdkVersion = 33 as int
-        minSdkVersion = 19 as int
+        minSdkVersion = 23 as int
         targetSdkVersion = 33 as int
 
         appCompatVersion = '1.6.1'

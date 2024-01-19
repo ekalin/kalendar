@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService.RemoteViewsFactory;
@@ -335,22 +334,12 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
     }
 
     private static PendingIntent getAddEventPendingIntent(Context context, Intent intent) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return PendingIntent.getActivity(context, REQUEST_CODE_ADD_EVENT, intent,
-                    PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
-        } else {
-            return PendingIntent.getActivity(context, REQUEST_CODE_ADD_EVENT, intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-        }
+        return PendingIntent.getActivity(context, REQUEST_CODE_ADD_EVENT, intent,
+                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     private static PendingIntent getEmptyPendingIntent(Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return PendingIntent.getActivity(context.getApplicationContext(), REQUEST_CODE_EMPTY, new Intent(),
-                    PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
-        } else {
-            return PendingIntent.getActivity(context.getApplicationContext(), REQUEST_CODE_EMPTY, new Intent(),
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-        }
+        return PendingIntent.getActivity(context.getApplicationContext(), REQUEST_CODE_EMPTY, new Intent(),
+                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
     }
 }
