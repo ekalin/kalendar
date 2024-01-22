@@ -312,7 +312,7 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
         setBackgroundColor(rv, R.id.event_list, settings.getBackgroundColor());
         rv.setRemoteAdapter(R.id.event_list, intent);
         rv.setPendingIntentTemplate(R.id.event_list,
-                KalendarClickReceiver.createPendingIntentForAction(KalendarClickReceiver.KalendarAction.VIEW_ENTRY, settings));
+                KalendarClickReceiver.createMutablePendingIntentForAction(KalendarClickReceiver.KalendarAction.VIEW_ENTRY, settings));
     }
 
     public static PendingIntent getPermittedAddEventPendingIntent(InstanceSettings settings) {

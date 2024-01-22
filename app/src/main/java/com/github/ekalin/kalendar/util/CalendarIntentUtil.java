@@ -58,4 +58,10 @@ public class CalendarIntentUtil {
                 .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getMillis())
                 .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getMillis());
     }
+
+    public static Intent createNewEventIntent() {
+        return new Intent(Intent.ACTION_INSERT, Events.CONTENT_URI)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
+                        | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    }
 }

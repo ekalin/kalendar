@@ -41,6 +41,12 @@ public class KalendarClickReceiver extends BroadcastReceiver {
             case VIEW_ENTRY:
                 viewEntry(context, intent);
                 break;
+            case ADD_CALENDAR_EVENT:
+                addCalendarEvent(context);
+                break;
+            case CONFIGURE:
+                configure(context, widgetId);
+                break;
         }
     }
 
@@ -58,20 +64,45 @@ public class KalendarClickReceiver extends BroadcastReceiver {
         context.startActivity(viewIntent);
     }
 
-    public static PendingIntent createPendingIntentForAction(KalendarAction action, InstanceSettings settings) {
+    private void addCalendarEvent(Context context) {
+        Intent intent = CalendarIntentUtil.createNewEventIntent();
+        context.startActivity(intent);
+    }
+
+    private void configure(Context context, int widgetId) {
+        Intent intent = MainActivity.intentToConfigure(context, widgetId);
+        context.startActivity(intent);
+    }
+
+    public static PendingIntent createImmutablePendingIntentForAction(KalendarAction action, InstanceSettings settings) {
+        return createPendingIntentForAction(action, settings, false);
+    }
+
+    public static PendingIntent createMutablePendingIntentForAction(KalendarAction action, InstanceSettings settings) {
+        return createPendingIntentForAction(action, settings, true);
+    }
+
+    private static PendingIntent createPendingIntentForAction(KalendarAction action, InstanceSettings settings,
+                                                              boolean mutable) {
         int requestCode = settings.getWidgetId();
         Intent intent = new Intent(settings.getContext().getApplicationContext(), KalendarClickReceiver.class)
                 .setAction(action.getName())
                 .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, settings.getWidgetId());
         int flags = PendingIntent.FLAG_UPDATE_CURRENT;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            flags |= PendingIntent.FLAG_MUTABLE;
+        if (mutable) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                flags |= PendingIntent.FLAG_MUTABLE;
+            }
+        } else {
+            flags |= PendingIntent.FLAG_IMMUTABLE;
         }
         return PendingIntent.getBroadcast(settings.getContext(), requestCode, intent, flags);
     }
 
     public enum KalendarAction {
-        VIEW_ENTRY;
+        VIEW_ENTRY,
+        ADD_CALENDAR_EVENT,
+        CONFIGURE;
 
         public String getName() {
             return ACTION_PREFIX + name();
