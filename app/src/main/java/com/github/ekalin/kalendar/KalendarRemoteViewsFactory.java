@@ -35,7 +35,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-import static com.github.ekalin.kalendar.util.CalendarIntentUtil.createEventClickPendingIntentTemplate;
 import static com.github.ekalin.kalendar.util.CalendarIntentUtil.createOpenCalendarPendingIntent;
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setBackgroundColor;
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setDrawableColor;
@@ -312,10 +311,8 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
         setBackgroundColor(rv, R.id.event_list, settings.getBackgroundColor());
         rv.setRemoteAdapter(R.id.event_list, intent);
-        boolean permissionsGranted = PermissionsUtil.arePermissionsGranted(context);
-        if (permissionsGranted) {
-            rv.setPendingIntentTemplate(R.id.event_list, createEventClickPendingIntentTemplate(settings));
-        }
+        rv.setPendingIntentTemplate(R.id.event_list,
+                KalendarClickReceiver.createPendingIntentForAction(KalendarClickReceiver.KalendarAction.VIEW_ENTRY, settings));
     }
 
     public static PendingIntent getPermittedAddEventPendingIntent(InstanceSettings settings) {

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Attendees;
 import android.provider.CalendarContract.Calendars;
@@ -16,12 +17,12 @@ import androidx.core.util.Supplier;
 
 import org.joda.time.DateTime;
 
+import com.github.ekalin.kalendar.KalendarClickReceiver;
 import com.github.ekalin.kalendar.prefs.EventSource;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.provider.EventProvider;
 import com.github.ekalin.kalendar.provider.QueryResult;
 import com.github.ekalin.kalendar.provider.QueryResultsStorage;
-import com.github.ekalin.kalendar.util.CalendarIntentUtil;
 import com.github.ekalin.kalendar.util.DateUtil;
 import com.github.ekalin.kalendar.util.PermissionsUtil;
 
@@ -191,10 +192,13 @@ public class CalendarEventProvider extends EventProvider {
     }
 
     public Intent createOpenCalendarEventIntent(CalendarEvent event) {
-        Intent intent = CalendarIntentUtil.createViewIntent();
-        intent.setData(ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, event.getEventId()));
-        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, event.getStartMillis());
-        intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, event.getEndMillis());
+        Intent intent = new Intent();
+        intent.putExtra(KalendarClickReceiver.VIEW_ENTRY_DATA,
+                ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, event.getEventId()).toString());
+        Bundle extras = new Bundle();
+        extras.putLong(CalendarContract.EXTRA_EVENT_BEGIN_TIME, event.getStartMillis());
+        extras.putLong(CalendarContract.EXTRA_EVENT_END_TIME, event.getEndMillis());
+        intent.putExtra(KalendarClickReceiver.VIEW_ENTRY_EXTRAS, extras);
         return intent;
     }
 

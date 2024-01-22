@@ -10,6 +10,7 @@ import android.provider.CalendarContract.Events;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
+import com.github.ekalin.kalendar.KalendarClickReceiver;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 
 public class CalendarIntentUtil {
@@ -28,8 +29,13 @@ public class CalendarIntentUtil {
         return intent;
     }
 
-    public static PendingIntent createEventClickPendingIntentTemplate(InstanceSettings settings) {
-        return PermissionsUtil.getPermittedPendingActivityIntentMutable(settings, createViewIntent());
+    public static Intent createOpenCalendarAtDayFillInIntent(DateTime goToTime) {
+        Intent intent = new Intent();
+        Uri.Builder uriBuilder = CalendarContract.CONTENT_URI.buildUpon();
+        uriBuilder.appendPath(TIME);
+        ContentUris.appendId(uriBuilder, goToTime.getMillis());
+        intent.putExtra(KalendarClickReceiver.VIEW_ENTRY_DATA, uriBuilder.toString());
+        return intent;
     }
 
     public static PendingIntent createOpenCalendarPendingIntent(InstanceSettings settings) {

@@ -67,6 +67,10 @@
             </intent-filter>
         </receiver>
 
+        <receiver
+            android:name="com.github.ekalin.kalendar.KalendarClickReceiver"
+            android:exported="false" />
+
         <service
             android:name="com.github.ekalin.kalendar.KalendarRemoteViewsService"
             android:exported="false"

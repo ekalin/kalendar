@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 import androidx.core.util.Supplier;
 
+import com.github.ekalin.kalendar.KalendarClickReceiver;
 import com.github.ekalin.kalendar.prefs.EventSource;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.prefs.PermissionRequester;
@@ -16,7 +17,6 @@ import com.github.ekalin.kalendar.provider.QueryResult;
 import com.github.ekalin.kalendar.provider.QueryResultsStorage;
 import com.github.ekalin.kalendar.task.AbstractTaskProvider;
 import com.github.ekalin.kalendar.task.TaskEvent;
-import com.github.ekalin.kalendar.util.CalendarIntentUtil;
 import com.github.ekalin.kalendar.util.PermissionsUtil;
 
 import java.util.ArrayList;
@@ -217,8 +217,9 @@ public class AstridCloneTasksProvider extends AbstractTaskProvider {
 
     @Override
     public Intent createViewIntent(TaskEvent event) {
-        Intent intent = CalendarIntentUtil.createViewIntent();
-        intent.setData(ContentUris.withAppendedId(AstridCloneTasksContract.Tasks.VIEW_URI, event.getId()));
+        Intent intent = new Intent();
+        intent.putExtra(KalendarClickReceiver.VIEW_ENTRY_DATA,
+                ContentUris.withAppendedId(AstridCloneTasksContract.Tasks.VIEW_URI, event.getId()).toString());
         return intent;
     }
 
