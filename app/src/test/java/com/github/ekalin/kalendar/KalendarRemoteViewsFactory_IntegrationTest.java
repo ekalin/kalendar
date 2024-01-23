@@ -14,8 +14,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
-import java.util.List;
-
 import com.github.ekalin.kalendar.prefs.InstanceSettingsTestHelper;
 import com.github.ekalin.kalendar.task.dmfs.DmfsOpenTasksContract;
 import com.github.ekalin.kalendar.testutil.ContentProviderForTests;
@@ -25,6 +23,8 @@ import com.github.ekalin.kalendar.widget.CalendarEntry;
 import com.github.ekalin.kalendar.widget.DayHeader;
 import com.github.ekalin.kalendar.widget.TaskEntry;
 import com.github.ekalin.kalendar.widget.WidgetEntry;
+
+import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -206,7 +206,7 @@ public class KalendarRemoteViewsFactory_IntegrationTest {
         int event = 0;
         checkDayHeader(entries.get(event++), d0.minusDays(1));
         checkBirthday(entries.get(event++), "Mary's birthday");
-        checkCalendar(entries.get(event++), "Finished event", "4:00 PM - 6:00 PM", "");
+        checkCalendar(entries.get(event++), "Finished event", "4:00 PM - 6:00 PM", "");
 
         checkDayHeader(entries.get(event++), d0);
         checkTask(entries.get(event++), "Write integration test");
@@ -216,7 +216,7 @@ public class KalendarRemoteViewsFactory_IntegrationTest {
 
         checkDayHeader(entries.get(event++), d0.plusDays(2));
         checkCalendar(entries.get(event++), "Time off", "", "");
-        checkCalendar(entries.get(event++), "Medical appointment", "9:00 AM - 10:15 AM", "Hospital");
+        checkCalendar(entries.get(event++), "Medical appointment", "9:00 AM - 10:15 AM", "Hospital");
 
         checkDayHeader(entries.get(event++), d0.plusDays(3));
         checkTask(entries.get(event++), "Prepare release");
@@ -224,14 +224,14 @@ public class KalendarRemoteViewsFactory_IntegrationTest {
         checkCalendar(entries.get(event++), "Time off", "", "");
 
         checkDayHeader(entries.get(event++), d0.plusDays(5));
-        checkCalendar(entries.get(event++), "Rental car", "1:00 PM →", "");
-        checkCalendar(entries.get(event++), "Dentist", "2:30 PM - 3:00 PM", "");
+        checkCalendar(entries.get(event++), "Rental car", "1:00 PM →", "");
+        checkCalendar(entries.get(event++), "Dentist", "2:30 PM - 3:00 PM", "");
 
         checkDayHeader(entries.get(event++), d0.plusDays(6));
         checkCalendar(entries.get(event++), "Rental car", "→  →", "");
 
         checkDayHeader(entries.get(event++), d0.plusDays(7));
-        checkCalendar(entries.get(event++), "Rental car", "→ 4:30 PM", "");
+        checkCalendar(entries.get(event++), "Rental car", "→ 4:30 PM", "");
 
         assertThat(entries).hasSize(event);
     }
