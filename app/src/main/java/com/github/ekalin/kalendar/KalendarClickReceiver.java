@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 
+import org.joda.time.DateTime;
+
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.util.CalendarIntentUtil;
 
@@ -41,8 +43,14 @@ public class KalendarClickReceiver extends BroadcastReceiver {
             case VIEW_ENTRY:
                 viewEntry(context, intent);
                 break;
+            case VIEW_CALENDAR_TODAY:
+                viewCalendarToday(context);
+                break;
             case ADD_CALENDAR_EVENT:
                 addCalendarEvent(context);
+                break;
+            case REFRESH:
+                refresh(context, widgetId);
                 break;
             case CONFIGURE:
                 configure(context, widgetId);
@@ -64,9 +72,17 @@ public class KalendarClickReceiver extends BroadcastReceiver {
         context.startActivity(viewIntent);
     }
 
+    private void viewCalendarToday(Context context) {
+        viewEntry(context, CalendarIntentUtil.createOpenCalendarAtDayFillInIntent(new DateTime()));
+    }
+
     private void addCalendarEvent(Context context) {
         Intent intent = CalendarIntentUtil.createNewEventIntent();
         context.startActivity(intent);
+    }
+
+    private void refresh(Context context, int widgetId) {
+        EnvironmentChangedReceiver.updateWidget(context, widgetId);
     }
 
     private void configure(Context context, int widgetId) {
@@ -101,7 +117,9 @@ public class KalendarClickReceiver extends BroadcastReceiver {
 
     public enum KalendarAction {
         VIEW_ENTRY,
+        VIEW_CALENDAR_TODAY,
         ADD_CALENDAR_EVENT,
+        REFRESH,
         CONFIGURE;
 
         public String getName() {
