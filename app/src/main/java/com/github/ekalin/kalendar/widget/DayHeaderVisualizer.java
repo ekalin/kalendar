@@ -5,15 +5,15 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.widget.RemoteViews;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
-
 import com.github.ekalin.kalendar.Alignment;
 import com.github.ekalin.kalendar.R;
 import com.github.ekalin.kalendar.util.DateUtil;
 
-import static com.github.ekalin.kalendar.util.CalendarIntentUtil.createOpenCalendarAtDayIntent;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+
+import static com.github.ekalin.kalendar.util.CalendarIntentUtil.createOpenCalendarAtDayFillInIntent;
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setBackgroundColor;
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setPadding;
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setTextSize;
@@ -36,7 +36,7 @@ public class DayHeaderVisualizer extends WidgetEntryVisualizer<DayHeader> {
                         getSettings().getPastEventsBackgroundColor() : Color.TRANSPARENT);
         setDayHeaderTitle(dayHeader, position, rv);
 
-        Intent intent = createOpenCalendarAtDayIntent(dayHeader.getStartDate());
+        Intent intent = createOpenCalendarAtDayFillInIntent(dayHeader.getStartDate());
         rv.setOnClickFillInIntent(R.id.day_header, intent);
         return rv;
     }

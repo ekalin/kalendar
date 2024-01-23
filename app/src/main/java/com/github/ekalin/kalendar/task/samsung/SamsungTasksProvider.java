@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.text.TextUtils;
 
+import com.github.ekalin.kalendar.KalendarClickReceiver;
 import com.github.ekalin.kalendar.R;
 import com.github.ekalin.kalendar.prefs.EventSource;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
@@ -16,7 +18,6 @@ import com.github.ekalin.kalendar.provider.QueryResult;
 import com.github.ekalin.kalendar.provider.QueryResultsStorage;
 import com.github.ekalin.kalendar.task.AbstractTaskProvider;
 import com.github.ekalin.kalendar.task.TaskEvent;
-import com.github.ekalin.kalendar.util.CalendarIntentUtil;
 
 import java.util.Collection;
 import java.util.List;
@@ -134,13 +135,16 @@ public class SamsungTasksProvider extends AbstractTaskProvider {
 
     @Override
     public Intent createViewIntent(TaskEvent event) {
-        Intent intent = CalendarIntentUtil.createViewIntent();
-        intent.setData(ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, event.getId()));
-        intent.putExtra(SamsungTasksContract.INTENT_EXTRA_TASK, true);
-        intent.putExtra(SamsungTasksContract.INTENT_EXTRA_SELECTED, event.getId());
-        intent.putExtra(SamsungTasksContract.INTENT_EXTRA_ACTION_VIEW_FOCUS, 0);
-        intent.putExtra(SamsungTasksContract.INTENT_EXTRA_DETAIL_MODE, true);
-        intent.putExtra(SamsungTasksContract.INTENT_EXTRA_LAUNCH_FROM_WIDGET, true);
+        Intent intent = new Intent();
+        intent.putExtra(KalendarClickReceiver.VIEW_ENTRY_DATA,
+                ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, event.getId()).toString());
+        Bundle extras = new Bundle();
+        extras.putBoolean(SamsungTasksContract.INTENT_EXTRA_TASK, true);
+        extras.putLong(SamsungTasksContract.INTENT_EXTRA_SELECTED, event.getId());
+        extras.putInt(SamsungTasksContract.INTENT_EXTRA_ACTION_VIEW_FOCUS, 0);
+        extras.putBoolean(SamsungTasksContract.INTENT_EXTRA_DETAIL_MODE, true);
+        extras.putBoolean(SamsungTasksContract.INTENT_EXTRA_LAUNCH_FROM_WIDGET, true);
+        intent.putExtra(KalendarClickReceiver.VIEW_ENTRY_EXTRAS, extras);
         return intent;
     }
 

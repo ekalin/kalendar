@@ -11,12 +11,12 @@ import androidx.core.util.Supplier;
 
 import org.joda.time.LocalDate;
 
+import com.github.ekalin.kalendar.KalendarClickReceiver;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.prefs.PermissionRequester;
 import com.github.ekalin.kalendar.provider.EventProvider;
 import com.github.ekalin.kalendar.provider.QueryResult;
 import com.github.ekalin.kalendar.provider.QueryResultsStorage;
-import com.github.ekalin.kalendar.util.CalendarIntentUtil;
 import com.github.ekalin.kalendar.util.DateUtil;
 import com.github.ekalin.kalendar.util.PermissionsUtil;
 
@@ -92,8 +92,9 @@ public class BirthdayProvider extends EventProvider {
     }
 
     public Intent createViewIntent(BirthdayEvent event) {
-        Intent intent = CalendarIntentUtil.createViewIntent();
-        intent.setData(ContactsContract.Contacts.getLookupUri(event.getId(), event.getLookupKey()));
+        Intent intent = new Intent();
+        intent.putExtra(KalendarClickReceiver.VIEW_ENTRY_DATA,
+                ContactsContract.Contacts.getLookupUri(event.getId(), event.getLookupKey()).toString());
         return intent;
     }
 

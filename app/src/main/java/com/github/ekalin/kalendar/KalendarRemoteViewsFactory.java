@@ -4,8 +4,6 @@ import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.RemoteViews;
@@ -21,7 +19,6 @@ import com.github.ekalin.kalendar.calendar.CalendarEventVisualizer;
 import com.github.ekalin.kalendar.prefs.AllSettings;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.task.TaskVisualizer;
-import com.github.ekalin.kalendar.util.CalendarIntentUtil;
 import com.github.ekalin.kalendar.util.DateUtil;
 import com.github.ekalin.kalendar.util.PermissionsUtil;
 import com.github.ekalin.kalendar.widget.DayHeader;
@@ -35,8 +32,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-import static com.github.ekalin.kalendar.util.CalendarIntentUtil.createEventClickPendingIntentTemplate;
-import static com.github.ekalin.kalendar.util.CalendarIntentUtil.createOpenCalendarPendingIntent;
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setBackgroundColor;
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setDrawableColor;
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setTextSize;
@@ -49,9 +44,7 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
     private static final String PACKAGE = "com.github.ekalin.kalendar";
     public static final String ACTION_REFRESH = PACKAGE + ".action.REFRESH";
     private static final int MAX_NUMBER_OF_WIDGETS = 100;
-    private static final int REQUEST_CODE_EMPTY = 1;
-    private static final int REQUEST_CODE_ADD_EVENT = 2;
-    public static final int REQUEST_CODE_MIDNIGHT_ALARM = REQUEST_CODE_ADD_EVENT + MAX_NUMBER_OF_WIDGETS;
+    public static final int REQUEST_CODE_MIDNIGHT_ALARM = MAX_NUMBER_OF_WIDGETS + 1;
 
     private final Context context;
     private final int widgetId;
@@ -262,7 +255,9 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
 
     private static void configureCurrentDate(InstanceSettings settings, RemoteViews rv) {
         int viewId = R.id.calendar_current_date;
-        rv.setOnClickPendingIntent(viewId, createOpenCalendarPendingIntent(settings));
+        PendingIntent pendingIntent = KalendarClickReceiver.createImmutablePendingIntentForAction(
+                KalendarClickReceiver.KalendarAction.VIEW_CALENDAR_TODAY, settings);
+        rv.setOnClickPendingIntent(viewId, pendingIntent);
         String formattedDate = DateUtil.createDateString(settings,
                 DateUtil.now(settings.getTimeZone())).toUpperCase(Locale.getDefault());
         rv.setTextViewText(viewId, formattedDate);
@@ -277,20 +272,20 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
     }
 
     private static void configureAddEvent(InstanceSettings settings, RemoteViews rv) {
-        rv.setOnClickPendingIntent(R.id.add_event, getPermittedAddEventPendingIntent(settings));
+        PendingIntent pendingIntent = KalendarClickReceiver.createImmutablePendingIntentForAction(
+                KalendarClickReceiver.KalendarAction.ADD_CALENDAR_EVENT, settings);
+        rv.setOnClickPendingIntent(R.id.add_event, pendingIntent);
     }
 
     private static void configureRefresh(InstanceSettings settings, RemoteViews rv) {
-        Intent intent = new Intent(settings.getContext(), EnvironmentChangedReceiver.class);
-        intent.setAction(ACTION_REFRESH);
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, settings.getWidgetId());
-        PendingIntent pendingIntent = PermissionsUtil.getPermittedPendingBroadcastIntent(settings, intent);
+        PendingIntent pendingIntent = KalendarClickReceiver.createImmutablePendingIntentForAction(
+                KalendarClickReceiver.KalendarAction.REFRESH, settings);
         rv.setOnClickPendingIntent(R.id.refresh, pendingIntent);
     }
 
     private static void configureOverflowMenu(InstanceSettings settings, RemoteViews rv) {
-        Intent intent = MainActivity.intentToConfigure(settings.getContext(), settings.getWidgetId());
-        PendingIntent pendingIntent = PermissionsUtil.getPermittedPendingActivityIntent(settings, intent);
+        PendingIntent pendingIntent = KalendarClickReceiver.createImmutablePendingIntentForAction(
+                KalendarClickReceiver.KalendarAction.CONFIGURE, settings);
         rv.setOnClickPendingIntent(R.id.overflow_menu, pendingIntent);
     }
 
@@ -312,34 +307,7 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
         setBackgroundColor(rv, R.id.event_list, settings.getBackgroundColor());
         rv.setRemoteAdapter(R.id.event_list, intent);
-        boolean permissionsGranted = PermissionsUtil.arePermissionsGranted(context);
-        if (permissionsGranted) {
-            rv.setPendingIntentTemplate(R.id.event_list, createEventClickPendingIntentTemplate(settings));
-        }
-    }
-
-    public static PendingIntent getPermittedAddEventPendingIntent(InstanceSettings settings) {
-        Context context = settings.getContext();
-        Intent intent = PermissionsUtil.getPermittedActivityIntent(context,
-                CalendarIntentUtil.createNewEventIntent(settings.getTimeZone()));
-        return isIntentAvailable(context, intent) ?
-                getAddEventPendingIntent(context, intent) :
-                getEmptyPendingIntent(context);
-    }
-
-    private static boolean isIntentAvailable(Context context, Intent intent) {
-        PackageManager packageManager = context.getPackageManager();
-        List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-        return list.size() > 0;
-    }
-
-    private static PendingIntent getAddEventPendingIntent(Context context, Intent intent) {
-        return PendingIntent.getActivity(context, REQUEST_CODE_ADD_EVENT, intent,
-                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
-    }
-
-    private static PendingIntent getEmptyPendingIntent(Context context) {
-        return PendingIntent.getActivity(context.getApplicationContext(), REQUEST_CODE_EMPTY, new Intent(),
-                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+        rv.setPendingIntentTemplate(R.id.event_list,
+                KalendarClickReceiver.createMutablePendingIntentForAction(KalendarClickReceiver.KalendarAction.VIEW_ENTRY, settings));
     }
 }

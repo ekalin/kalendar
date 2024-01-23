@@ -1,20 +1,17 @@
 package com.github.ekalin.kalendar.widget;
 
-import android.app.PendingIntent;
 import android.widget.RemoteViews;
 import androidx.annotation.StringRes;
-import androidx.arch.core.util.Function;
 
-import com.github.ekalin.kalendar.KalendarRemoteViewsFactory;
+import com.github.ekalin.kalendar.KalendarClickReceiver;
 import com.github.ekalin.kalendar.R;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
-import com.github.ekalin.kalendar.util.PermissionsUtil;
 
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setBackgroundColor;
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setTextSize;
 
 public class EmptyListMessageVisualizer {
-    private InstanceSettings settings;
+    private final InstanceSettings settings;
 
     public EmptyListMessageVisualizer(InstanceSettings settings) {
         this.settings = settings;
@@ -29,25 +26,23 @@ public class EmptyListMessageVisualizer {
         rv.setTextColor(R.id.event_entry, settings.getEventColor());
         setBackgroundColor(rv, R.id.event_entry, settings.getBackgroundColor());
 
-        rv.setOnClickPendingIntent(R.id.event_entry, type.getIntent(settings));
+        rv.setOnClickPendingIntent(R.id.event_entry,
+                KalendarClickReceiver.createImmutablePendingIntentForAction(type.action, settings));
 
         return rv;
     }
 
     public enum Type {
-        EMPTY(R.string.no_events_to_show, KalendarRemoteViewsFactory::getPermittedAddEventPendingIntent),
-        NO_PERMISSIONS(R.string.grant_permissions_verbose, PermissionsUtil::getNoPermissionsPendingIntent);
+        EMPTY(R.string.no_events_to_show, KalendarClickReceiver.KalendarAction.ADD_CALENDAR_EVENT),
+        NO_PERMISSIONS(R.string.grant_permissions_verbose, KalendarClickReceiver.KalendarAction.CONFIGURE);
 
-        @StringRes private int message;
-        private Function<InstanceSettings, PendingIntent> intentSupplier;
+        @StringRes
+        private final int message;
+        private final KalendarClickReceiver.KalendarAction action;
 
-        Type(@StringRes int message, Function<InstanceSettings, PendingIntent> intentSupplier) {
+        Type(@StringRes int message, KalendarClickReceiver.KalendarAction action) {
             this.message = message;
-            this.intentSupplier = intentSupplier;
-        }
-
-        private PendingIntent getIntent(InstanceSettings settings) {
-            return intentSupplier.apply(settings);
+            this.action = action;
         }
     }
 }
