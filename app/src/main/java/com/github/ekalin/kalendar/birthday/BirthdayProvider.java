@@ -36,7 +36,7 @@ public class BirthdayProvider extends EventProvider {
     }
 
     public List<BirthdayEvent> getEvents() {
-        if (!settings.getShowBirthdays()) {
+        if (!settings.getShowBirthdays() || !hasPermission(context)) {
             return Collections.emptyList();
         }
 
