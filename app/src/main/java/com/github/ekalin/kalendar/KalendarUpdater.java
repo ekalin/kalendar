@@ -21,18 +21,19 @@ import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.task.TaskProvider;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.github.ekalin.kalendar.KalendarAppWidgetProvider.getWidgetIds;
 
-public class EnvironmentChangedReceiver extends BroadcastReceiver {
-    private static final String TAG = EnvironmentChangedReceiver.class.getSimpleName();
+public class KalendarUpdater extends BroadcastReceiver {
+    private static final String TAG = KalendarUpdater.class.getSimpleName();
 
     private static final String ACTION_REFRESH = "com.github.ekalin.kalendar.action.REFRESH";
 
     private static boolean receiverRegistered = false;
-    private static final AtomicReference<EnvironmentChangedReceiver> registeredReceiver = new AtomicReference<>();
+    private static final AtomicReference<KalendarUpdater> registeredReceiver = new AtomicReference<>();
     private static final AtomicReference<List<ContentObserver>> registeredObservers = new AtomicReference<>();
 
     public static void registerReceivers(Context context, boolean reregister) {
@@ -42,21 +43,21 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
                 return;
             }
 
-            registerEnvironentChangedReceiver(applContext);
+            registerBroadcastReceiver(applContext);
             registerContentObservers(applContext);
             receiverRegistered = true;
             Log.i(TAG, "Registered receivers from " + applContext.getClass().getName());
         }
     }
 
-    private static void registerEnvironentChangedReceiver(Context applContext) {
-        EnvironmentChangedReceiver receiver = new EnvironmentChangedReceiver();
+    private static void registerBroadcastReceiver(Context applContext) {
+        KalendarUpdater receiver = new KalendarUpdater();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
         filter.addAction(Intent.ACTION_DREAMING_STOPPED);
         applContext.registerReceiver(receiver, filter);
 
-        EnvironmentChangedReceiver oldReceiver = registeredReceiver.getAndSet(receiver);
+        KalendarUpdater oldReceiver = registeredReceiver.getAndSet(receiver);
         if (oldReceiver != null) {
             oldReceiver.unRegister(applContext);
         }
@@ -85,7 +86,7 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
     public static void scheduleNextUpdate(InstanceSettings settings, DateTime nextUpdate) {
         Log.i(TAG, "Setting next update for id " + settings.getWidgetId() + " for " + nextUpdate);
 
-        Intent intent = new Intent(settings.getContext(), EnvironmentChangedReceiver.class);
+        Intent intent = new Intent(settings.getContext(), KalendarUpdater.class);
         intent.setAction(ACTION_REFRESH);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, settings.getWidgetId());
         PendingIntent pendingIntent;
@@ -125,12 +126,12 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         int[] widgetIds = getWidgetIds(context);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds);
-        Log.d(TAG, "updateAllWidgets:" + widgetIds + ", context:" + context);
+        Log.d(TAG, "updateAllWidgets:" + Arrays.toString(widgetIds) + ", context:" + context);
         context.sendBroadcast(intent);
     }
 
     private static final class EventsContentObserver extends ContentObserver {
-        private Context context;
+        private final Context context;
 
         public EventsContentObserver(Context context) {
             super(null);

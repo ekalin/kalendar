@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         if (grantPermissionsButton != null) {
             grantPermissionsButton.setVisibility(permissionsGranted ? View.GONE : View.VISIBLE);
         }
-        EnvironmentChangedReceiver.updateAllWidgets(this);
+        KalendarUpdater.updateAllWidgets(this);
     }
 
     private void fillWidgetList() {
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        EnvironmentChangedReceiver.registerReceivers(this, true);
+        KalendarUpdater.registerReceivers(this, true);
         checkPermissions();
         updateScreen();
     }

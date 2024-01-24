@@ -8,7 +8,7 @@ public class KalendarRemoteViewsService extends RemoteViewsService {
     @Override
     public void onCreate() {
         super.onCreate();
-        EnvironmentChangedReceiver.registerReceivers(this, false);
+        KalendarUpdater.registerReceivers(this, false);
     }
 
     @Override

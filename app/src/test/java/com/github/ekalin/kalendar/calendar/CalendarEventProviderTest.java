@@ -16,6 +16,14 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
+import com.github.ekalin.kalendar.EndedSomeTimeAgo;
+import com.github.ekalin.kalendar.KalendarUpdater;
+import com.github.ekalin.kalendar.prefs.AllSettings;
+import com.github.ekalin.kalendar.prefs.EventSource;
+import com.github.ekalin.kalendar.prefs.InstanceSettingsTestHelper;
+import com.github.ekalin.kalendar.testutil.ContentProviderForTests;
+import com.github.ekalin.kalendar.util.DateUtil;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,13 +32,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
-import com.github.ekalin.kalendar.EndedSomeTimeAgo;
-import com.github.ekalin.kalendar.EnvironmentChangedReceiver;
-import com.github.ekalin.kalendar.prefs.AllSettings;
-import com.github.ekalin.kalendar.prefs.EventSource;
-import com.github.ekalin.kalendar.prefs.InstanceSettingsTestHelper;
-import com.github.ekalin.kalendar.testutil.ContentProviderForTests;
-import com.github.ekalin.kalendar.util.DateUtil;
 import com.google.common.truth.Correspondence;
 
 import static com.github.ekalin.kalendar.testutil.DateAssert.assertDatesWithTolerance;
@@ -60,7 +61,7 @@ public class CalendarEventProviderTest {
         AllSettings.delete(context, 1);
 
         // We need to clear this because otherwise it remains from one test method to the other
-        AtomicReference<EnvironmentChangedReceiver> registeredReceiver = ReflectionHelpers.getStaticField(EnvironmentChangedReceiver.class,
+        AtomicReference<KalendarUpdater> registeredReceiver = ReflectionHelpers.getStaticField(KalendarUpdater.class,
                 "registeredReceiver");
         registeredReceiver.set(null);
     }

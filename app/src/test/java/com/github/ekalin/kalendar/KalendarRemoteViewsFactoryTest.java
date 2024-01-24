@@ -16,10 +16,6 @@ import org.mockito.quality.Strictness;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
-
 import com.github.ekalin.kalendar.calendar.CalendarEvent;
 import com.github.ekalin.kalendar.prefs.AllSettings;
 import com.github.ekalin.kalendar.prefs.InstanceSettingsTestHelper;
@@ -30,6 +26,11 @@ import com.github.ekalin.kalendar.widget.DayHeader;
 import com.github.ekalin.kalendar.widget.TaskEntry;
 import com.github.ekalin.kalendar.widget.WidgetEntry;
 import com.github.ekalin.kalendar.widget.WidgetEntryVisualizer;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+
 import com.google.common.truth.Correspondence;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -56,8 +57,8 @@ public class KalendarRemoteViewsFactoryTest {
         AllSettings.delete(context, 1);
 
         // We need to clear this because otherwise it remains from one test method to the other
-        AtomicReference<EnvironmentChangedReceiver> registeredReceiver =
-                ReflectionHelpers.getStaticField(EnvironmentChangedReceiver.class,
+        AtomicReference<KalendarUpdater> registeredReceiver =
+                ReflectionHelpers.getStaticField(KalendarUpdater.class,
                         "registeredReceiver");
         registeredReceiver.set(null);
     }

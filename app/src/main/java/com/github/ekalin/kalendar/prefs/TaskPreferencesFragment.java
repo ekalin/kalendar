@@ -6,7 +6,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.preference.Preference;
 
-import com.github.ekalin.kalendar.EnvironmentChangedReceiver;
+import com.github.ekalin.kalendar.KalendarUpdater;
 import com.github.ekalin.kalendar.R;
 import com.github.ekalin.kalendar.task.TaskProvider;
 import com.github.ekalin.kalendar.util.PackageManagerUtil;
@@ -136,7 +136,7 @@ public class TaskPreferencesFragment extends KalendarPreferenceFragment
     private void onPermissionGranted() {
         setGrantPermissionVisibility();
         setTaskListState();
-        EnvironmentChangedReceiver.registerReceivers(getActivity(), true);
+        KalendarUpdater.registerReceivers(getActivity(), true);
     }
 
     private void installTaskApp() {

@@ -112,7 +112,7 @@ public class WidgetConfigurationActivity extends AppCompatActivity
     @Override
     protected void onPause() {
         super.onPause();
-        EnvironmentChangedReceiver.updateWidget(this, widgetId);
+        KalendarUpdater.updateWidget(this, widgetId);
     }
 
     @Override

@@ -82,7 +82,7 @@ public class KalendarClickReceiver extends BroadcastReceiver {
     }
 
     private void refresh(Context context, int widgetId) {
-        EnvironmentChangedReceiver.updateWidget(context, widgetId);
+        KalendarUpdater.updateWidget(context, widgetId);
     }
 
     private void configure(Context context, int widgetId) {

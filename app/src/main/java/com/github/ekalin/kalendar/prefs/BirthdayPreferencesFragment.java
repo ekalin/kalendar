@@ -5,7 +5,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.preference.Preference;
 
-import com.github.ekalin.kalendar.EnvironmentChangedReceiver;
+import com.github.ekalin.kalendar.KalendarUpdater;
 import com.github.ekalin.kalendar.R;
 import com.github.ekalin.kalendar.birthday.BirthdayProvider;
 
@@ -72,6 +72,6 @@ public class BirthdayPreferencesFragment extends KalendarPreferenceFragment impl
 
     public void onPermissionGranted() {
         setGrantPermissionVisibility();
-        EnvironmentChangedReceiver.registerReceivers(getActivity(), true);
+        KalendarUpdater.registerReceivers(getActivity(), true);
     }
 }

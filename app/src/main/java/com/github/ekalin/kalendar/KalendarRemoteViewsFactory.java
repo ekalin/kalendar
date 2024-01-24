@@ -135,7 +135,7 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
             nextUpdate = minimumUpdateInterval;
         }
 
-        EnvironmentChangedReceiver.scheduleNextUpdate(getSettings(), nextUpdate);
+        KalendarUpdater.scheduleNextUpdate(getSettings(), nextUpdate);
     }
 
     static void updateWidget(Context context, int widgetId, @Nullable RemoteViewsFactory factory) {
