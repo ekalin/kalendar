@@ -25,10 +25,12 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.github.ekalin.kalendar.KalendarAppWidgetProvider.getWidgetIds;
-import static com.github.ekalin.kalendar.KalendarRemoteViewsFactory.ACTION_REFRESH;
 
 public class EnvironmentChangedReceiver extends BroadcastReceiver {
     private static final String TAG = EnvironmentChangedReceiver.class.getSimpleName();
+
+    private static final String ACTION_REFRESH = "com.github.ekalin.kalendar.action.REFRESH";
+
     private static boolean receiverRegistered = false;
     private static final AtomicReference<EnvironmentChangedReceiver> registeredReceiver = new AtomicReference<>();
     private static final AtomicReference<List<ContentObserver>> registeredObservers = new AtomicReference<>();
@@ -88,7 +90,7 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, settings.getWidgetId());
         PendingIntent pendingIntent;
         pendingIntent = PendingIntent.getBroadcast(settings.getContext(),
-                KalendarRemoteViewsFactory.REQUEST_CODE_MIDNIGHT_ALARM + settings.getWidgetId(),
+                settings.getWidgetId(),
                 intent,
                 PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -102,9 +104,7 @@ public class EnvironmentChangedReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.i(this.getClass().getSimpleName(), "Received intent: " + intent);
 
-        int widgetId = intent == null
-                ? 0
-                : intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, 0);
+        int widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, 0);
         if (widgetId == 0) {
             updateAllWidgets(context);
         } else {

@@ -41,10 +41,6 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
 
     private static final int MIN_MILLIS_BETWEEN_RELOADS = 500;
     private static final int MINIMUM_UPDATE_MINUTES = 60;
-    private static final String PACKAGE = "com.github.ekalin.kalendar";
-    public static final String ACTION_REFRESH = PACKAGE + ".action.REFRESH";
-    private static final int MAX_NUMBER_OF_WIDGETS = 100;
-    public static final int REQUEST_CODE_MIDNIGHT_ALARM = MAX_NUMBER_OF_WIDGETS + 1;
 
     private final Context context;
     private final int widgetId;
