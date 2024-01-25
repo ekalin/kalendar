@@ -80,7 +80,7 @@
     <string name="appearance_current_event_color_desc">Selecionar a cor do texto dos eventos acontecendo no momento</string>
     <string name="appearance_day_header_color_title">Cor dos cabeçalhos dos dias</string>
     <string name="appearance_day_header_color_desc">Selecionar a cor do texto dos cabeçalhos dos dias</string>
-    <string name="appearance_widget_header_color_title">Cor do cabeçalhos do widget</string>
+    <string name="appearance_widget_header_color_title">Cor do cabeçalho do widget</string>
     <string name="appearance_widget_header_color_desc">Selecionar a cor do texto do cabeçalho do widget</string>
     <string name="appearance_background_color_title">Cor de fundo</string>
     <string name="appearance_background_color_desc">Selecionar a cor de fundo</string>
