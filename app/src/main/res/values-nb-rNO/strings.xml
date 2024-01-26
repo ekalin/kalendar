@@ -14,9 +14,9 @@
     <string name="grant_permissions">Gi tillatelse</string>
     <string name="grant_permissions_verbose">Modulen trenger tillatelse til å lese kalendere og oppgaver..\n
         Trykk her for å gi tillatelser.</string>
-    <string name="permissions_justification">Velkommen til Todo Agenda, den enkle tilgangen til dine kalendere og oppgaver.\n\n
+    <string name="permissions_justification">Velkommen til Kalendar, den enkle tilgangen til dine kalendere og oppgaver.\n\n
         For å få mest ut av modulen, må du gi den tilgang til dine kalendere og oppgaver.</string>
-    <string name="no_widgets_found">Vennligst legg til en \"Todo Agenda\"-modul på din mobils hjemmeskjerm først.</string>
+    <string name="no_widgets_found">Vennligst legg til en \"Kalendar\"-modul på din mobils hjemmeskjerm først.</string>
     <string name="select_a_widget_to_configure">Velg en modul å sette opp</string>
     <string name="go_to_home_screen">Gå til hjemmeskjermen</string>
 

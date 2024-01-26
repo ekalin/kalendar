@@ -14,9 +14,9 @@
     <string name="grant_permissions">Даване на разрешения</string>
     <string name="grant_permissions_verbose">Необходими за разрешения за четене на календар и задачи.\n
 Докоснете тук за да позволите.</string>
-    <string name="permissions_justification">Добре дошли в Todo Agenda, лесният достъп до вашите календари и задачи.\n\n
+    <string name="permissions_justification">Добре дошли в Kalendar, лесният достъп до вашите календари и задачи.\n\n
 За да се възползвате функционалността на програмата, трябва да предоставите достъп до вашите календари и задачи.</string>
-    <string name="no_widgets_found">Моля добавете \"Todo Agenda\" уиджет на екрана на вашето устройство.</string>
+    <string name="no_widgets_found">Моля добавете \"Kalendar\" уиджет на екрана на вашето устройство.</string>
     <string name="select_a_widget_to_configure">Изберете уиджет</string>
     <string name="go_to_home_screen">Към началният екран</string>
 

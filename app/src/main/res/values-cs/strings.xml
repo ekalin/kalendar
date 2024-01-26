@@ -13,9 +13,9 @@
     <string name="no_title">(Bez názvu)</string>
     <string name="grant_permissions">Udělit oprávnění</string>
     <string name="grant_permissions_verbose">Widget vyžaduje oprávnění ke čtení kalendářů.\nStiskněte zde pro udělení oprávnění.</string>
-    <string name="permissions_justification">Vítejte v Todo Agenda, snadnému přístupu k Vašim kalendářům a úkolům.\n\n
+    <string name="permissions_justification">Vítejte v Kalendar, snadnému přístupu k Vašim kalendářům a úkolům.\n\n
         Pro správnou funkčnost widgetu mu povolte přístup ke kalendářům a úkolům.</string>
-    <string name="no_widgets_found">Nejdříve přidejte widget \"Todo Agenda\" na hlavní obrazovku.</string>
+    <string name="no_widgets_found">Nejdříve přidejte widget \"Kalendar\" na hlavní obrazovku.</string>
     <string name="select_a_widget_to_configure">Vyberte widget ke konfiguraci</string>
     <string name="go_to_home_screen">Přejít na domovskou stránku</string>
 

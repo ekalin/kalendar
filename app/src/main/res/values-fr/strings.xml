@@ -124,5 +124,5 @@
         Attention, avant de partager veillez à filtrer les événements pour protéger votre vie privée, tout en conservant les éléments qui mettent le problème en évidence</string>
     <string name="backup_settings_title">Savegarder les paramètres</string>
     <string name="restore_settings_title">Restaurer les paramètres à partir d\'une sauvegarde</string>
-    <string name="restore_settings_desc">Les paramètres de chaque widget ToDo Agenda doivent être restaurés séparément</string>
+    <string name="restore_settings_desc">Les paramètres de chaque widget doivent être restaurés séparément</string>
 </resources>

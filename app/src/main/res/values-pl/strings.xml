@@ -13,8 +13,8 @@
     <string name="no_title">(brak tytułu)</string>
     <string name="grant_permissions">Przyznaj uprawnienia</string>
     <string name="grant_permissions_verbose">Widżet wymaga uprawnień do odczytu kalendarzy.\nDotknij tutaj, aby przyznać uprawnienia.</string>
-    <string name="permissions_justification">Witaj w Todo Agenda, łatwym dostępie do swojego kalendarza.\n\nAby jak najlepiej wykorzystać możliwości widżetu, należy przyznać mu dostęp do kalendarza.</string>
-    <string name="no_widgets_found">Proszę najpierw dodać widżet \"Todo Agenda\" z ekranu głównego urządzenia.</string>
+    <string name="permissions_justification">Witaj w Kalendar, łatwym dostępie do swojego kalendarza.\n\nAby jak najlepiej wykorzystać możliwości widżetu, należy przyznać mu dostęp do kalendarza.</string>
+    <string name="no_widgets_found">Proszę najpierw dodać widżet \"Kalendar\" z ekranu głównego urządzenia.</string>
     <string name="select_a_widget_to_configure">Wybierz widżet, aby skonfigurować</string>
     <string name="go_to_home_screen">Przejdź do ekranu głównego</string>
 
