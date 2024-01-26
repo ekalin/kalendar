@@ -69,6 +69,8 @@
     <string name="appearance_show_days_without_events_desc">Show day headers for days without events</string>
     <string name="appearance_display_header_title">Show widget header</string>
     <string name="appearance_display_header_desc">Show the date and settings header</string>
+    <string name="appearance_header_separator_title">Show separator below header</string>
+    <string name="appearance_header_separator_desc">Show a line below the widget header to separate it from the main content</string>
     <string name="lock_time_zone_title">Lock time zone</string>
     <string name="lock_time_zone_off_desc">Unlocked, current zone: %s</string>
     <string name="lock_time_zone_on_desc">Locked at %s</string>
@@ -84,6 +86,8 @@
     <string name="appearance_day_header_color_desc">Adjust the text color of day headers</string>
     <string name="appearance_widget_header_color_title">Widget header color</string>
     <string name="appearance_widget_header_color_desc">Adjust the text color of widget header</string>
+    <string name="appearance_widget_header_background_color_title">Widget header background color</string>
+    <string name="appearance_widget_header_background_color_desc">Adjust the text color of widget header background</string>
     <string name="appearance_background_color_title">Background color</string>
     <string name="appearance_background_color_desc">Adjust the color of the background</string>
     <string name="appearance_past_events_background_color_title">Past events background color</string>

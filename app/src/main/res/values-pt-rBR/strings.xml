@@ -67,6 +67,8 @@
     <string name="appearance_show_days_without_events_desc">Exibir cabeçalho para dias sem eventos</string>
     <string name="appearance_display_header_title">Mostrar cabeçalho do widget</string>
     <string name="appearance_display_header_desc">Mostrar data e configurações no cabeçalho</string>
+    <string name="appearance_header_separator_title">Exibir separador abaixo do cabeçalho</string>
+    <string name="appearance_header_separator_desc">Exibir uma linha abaixo do cabeçalho para separá-lo do conteúdo principal</string>
     <string name="lock_time_zone_title">Bloquear fuso horário</string>
     <string name="lock_time_zone_off_desc">Desbloqueado, fuso atual: %s</string>
     <string name="lock_time_zone_on_desc">Bloqueado em %s</string>
@@ -82,6 +84,8 @@
     <string name="appearance_day_header_color_desc">Selecionar a cor do texto dos cabeçalhos dos dias</string>
     <string name="appearance_widget_header_color_title">Cor do cabeçalho do widget</string>
     <string name="appearance_widget_header_color_desc">Selecionar a cor do texto do cabeçalho do widget</string>
+    <string name="appearance_widget_header_background_color_title">Cor de fundo do cabeçalho do widget</string>
+    <string name="appearance_widget_header_background_color_desc">Selecionar a cor de fundo do cabeçalho do widget</string>
     <string name="appearance_background_color_title">Cor de fundo</string>
     <string name="appearance_background_color_desc">Selecionar a cor de fundo</string>
     <string name="appearance_past_events_background_color_title">Cor de fundo de eventos passados</string>

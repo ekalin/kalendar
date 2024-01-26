@@ -43,6 +43,8 @@ provide [pull requests](https://github.com/ekalin/kalendar/pulls).
 
 ### (Unreleased)
 
+* It is now possible to configure the background color of the header, and to add a separator betweeen the header and the
+  contents.
 * It is now possible to use a different language than the rest of the system (when running on Android 13 or
   later). [Change app language](https://support.google.com/android/answer/12395118?hl=en).
 * Fixed crash if contacts permission (necessary in order to show birthdays) is removed.

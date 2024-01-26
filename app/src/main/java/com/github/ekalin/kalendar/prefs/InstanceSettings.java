@@ -12,18 +12,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TimeZone;
-
 import com.github.ekalin.kalendar.Alignment;
 import com.github.ekalin.kalendar.EndedSomeTimeAgo;
 import com.github.ekalin.kalendar.TextSizeScale;
 import com.github.ekalin.kalendar.task.TaskProvider;
 import com.github.ekalin.kalendar.util.DateUtil;
 import com.github.ekalin.kalendar.widget.EventEntryLayout;
+
+import java.io.File;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TimeZone;
 
 /**
  * Loaded settings of one Widget
@@ -51,6 +51,8 @@ public class InstanceSettings {
     static final boolean PREF_SHOW_DAYS_WITHOUT_EVENTS_DEFAULT = false;
     static final String PREF_SHOW_WIDGET_HEADER = "showHeader";
     static final boolean PREF_SHOW_WIDGET_HEADER_DEFAULT = true;
+    static final String PREF_SHOW_WIDGET_HEADER_SEPARATOR = "showHeaderSeparator";
+    static final boolean PREF_SHOW_WIDGET_HEADER_SEPARATOR_DEFAULT = false;
     static final String PREF_LOCKED_TIME_ZONE_ID = "lockedTimeZoneId";
 
     // Colors
@@ -62,6 +64,9 @@ public class InstanceSettings {
     @ColorInt static final int PREF_DAY_HEADER_COLOR_DEFAULT = 0xffffffff;
     static final String PREF_WIDGET_HEADER_COLOR = "widgetHeaderColor";
     @ColorInt static final int PREF_WIDGET_HEADER_COLOR_DEFAULT = 0x9affffff;
+    static final String PREF_WIDGET_HEADER_BACKGROUND_COLOR = "widgetHeaderBackgroundColor";
+    @ColorInt
+    static final int PREF_WIDGET_HEADER_BACKGROUND_COLOR_DEFAULT = 0x00000000;
     static final String PREF_BACKGROUND_COLOR = "backgroundColor";
     @ColorInt static final int PREF_BACKGROUND_COLOR_DEFAULT = 0x80000000;
     static final String PREF_PAST_EVENTS_BACKGROUND_COLOR = "pastEventsBackgroundColor";
@@ -124,12 +129,14 @@ public class InstanceSettings {
             setStringFromJson(editor, json, PREF_DAY_HEADER_ALIGNMENT);
             setBooleanFromJson(editor, json, PREF_SHOW_DAYS_WITHOUT_EVENTS);
             setBooleanFromJson(editor, json, PREF_SHOW_WIDGET_HEADER);
+            setBooleanFromJson(editor, json, PREF_SHOW_WIDGET_HEADER_SEPARATOR);
             setStringFromJson(editor, json, PREF_LOCKED_TIME_ZONE_ID);
 
             setIntFromJson(editor, json, PREF_EVENT_COLOR);
             setIntFromJson(editor, json, PREF_CURRENT_EVENT_COLOR);
             setIntFromJson(editor, json, PREF_DAY_HEADER_COLOR);
             setIntFromJson(editor, json, PREF_WIDGET_HEADER_COLOR);
+            setIntFromJson(editor, json, PREF_WIDGET_HEADER_BACKGROUND_COLOR);
             setIntFromJson(editor, json, PREF_BACKGROUND_COLOR);
             setIntFromJson(editor, json, PREF_PAST_EVENTS_BACKGROUND_COLOR);
 
@@ -226,12 +233,14 @@ public class InstanceSettings {
             json.put(PREF_DAY_HEADER_ALIGNMENT, getDayHeaderAlignment());
             json.put(PREF_SHOW_DAYS_WITHOUT_EVENTS, getShowDaysWithoutEvents());
             json.put(PREF_SHOW_WIDGET_HEADER, getShowWidgetHeader());
+            json.put(PREF_SHOW_WIDGET_HEADER_SEPARATOR, getShowWidgetHeaderSeparator());
             json.put(PREF_LOCKED_TIME_ZONE_ID, getLockedTimeZoneId());
 
             json.put(PREF_EVENT_COLOR, getEventColor());
             json.put(PREF_CURRENT_EVENT_COLOR, getCurrentEventColor());
             json.put(PREF_DAY_HEADER_COLOR, getDayHeaderColor());
             json.put(PREF_WIDGET_HEADER_COLOR, getWidgetHeaderColor());
+            json.put(PREF_WIDGET_HEADER_BACKGROUND_COLOR, getWidgetHeaderBackgroundColor());
             json.put(PREF_BACKGROUND_COLOR, getBackgroundColor());
             json.put(PREF_PAST_EVENTS_BACKGROUND_COLOR, getPastEventsBackgroundColor());
 
@@ -315,6 +324,10 @@ public class InstanceSettings {
         return sharedPreferences.getBoolean(PREF_SHOW_WIDGET_HEADER, PREF_SHOW_WIDGET_HEADER_DEFAULT);
     }
 
+    public boolean getShowWidgetHeaderSeparator() {
+        return sharedPreferences.getBoolean(PREF_SHOW_WIDGET_HEADER_SEPARATOR, PREF_SHOW_WIDGET_HEADER_SEPARATOR_DEFAULT);
+    }
+
     public String getLockedTimeZoneId() {
         return sharedPreferences.getString(PREF_LOCKED_TIME_ZONE_ID, "");
     }
@@ -346,6 +359,10 @@ public class InstanceSettings {
 
     public int getWidgetHeaderColor() {
         return sharedPreferences.getInt(PREF_WIDGET_HEADER_COLOR, PREF_WIDGET_HEADER_COLOR_DEFAULT);
+    }
+
+    public int getWidgetHeaderBackgroundColor() {
+        return sharedPreferences.getInt(PREF_WIDGET_HEADER_BACKGROUND_COLOR, PREF_WIDGET_HEADER_BACKGROUND_COLOR_DEFAULT);
     }
 
     public int getBackgroundColor() {

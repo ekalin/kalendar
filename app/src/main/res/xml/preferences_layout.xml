@@ -71,6 +71,13 @@
         app:iconSpaceReserved="false" />
 
     <CheckBoxPreference
+        app:key="showHeaderSeparator"
+        app:title="@string/appearance_header_separator_title"
+        app:summary="@string/appearance_header_separator_desc"
+        app:defaultValue="false"
+        app:iconSpaceReserved="false" />
+
+    <CheckBoxPreference
         app:key="lockTimeZone"
         app:title="@string/lock_time_zone_title"
         app:summary="@string/lock_time_zone_off_desc"

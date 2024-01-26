@@ -1,40 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/action_bar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/action_bar"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="bottom"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/calendar_current_date"
+            style="@style/HeaderCurrentDate"
+            android:layout_width="0dp"
+            android:paddingTop="4dp"
+            android:text="@string/today"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/add_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:contentDescription="@string/add_event_desc"
+            android:src="@drawable/ic_action_add_event" />
+
+        <ImageView
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:contentDescription="@string/refresh_desc"
+            android:src="@drawable/ic_action_refresh" />
+
+        <ImageView
+            android:id="@+id/overflow_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:contentDescription="@string/open_prefs_desc"
+            android:src="@drawable/ic_action_overflow" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/calendar_current_date"
-        style="@style/HeaderCurrentDate"
-        android:layout_width="0dp"
-        android:paddingTop="4dp"
-        android:text="@string/today"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-
-    <ImageView
-        android:id="@+id/add_event"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:contentDescription="@string/add_event_desc"
-        android:src="@drawable/ic_action_add_event" />
-
-    <ImageView
-        android:id="@+id/refresh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:contentDescription="@string/refresh_desc"
-        android:src="@drawable/ic_action_refresh" />
-
-    <ImageView
-        android:id="@+id/overflow_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:contentDescription="@string/open_prefs_desc"
-        android:src="@drawable/ic_action_overflow" />
+        android:id="@+id/widget_header_separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        tools:ignore="SelectableText" />
 </LinearLayout>

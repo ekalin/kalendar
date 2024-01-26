@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
+import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService.RemoteViewsFactory;
 import androidx.annotation.NonNull;
@@ -241,6 +242,10 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
         RemoteViews headerView = new RemoteViews(settings.getContext().getPackageName(),
                 R.layout.widget_header_one_line);
         rv.addView(R.id.header_parent, headerView);
+        setBackgroundColor(rv, R.id.header_parent, settings.getWidgetHeaderBackgroundColor());
+        setBackgroundColor(rv, R.id.widget_header_separator, settings.getWidgetHeaderColor());
+        rv.setViewVisibility(R.id.widget_header_separator,
+                settings.getShowWidgetHeaderSeparator() ? View.VISIBLE : View.INVISIBLE);
 
         configureCurrentDate(settings, rv);
         setActionIcons(settings, rv);

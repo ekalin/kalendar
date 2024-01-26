@@ -41,6 +41,16 @@
         app:iconSpaceReserved="false" />
 
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        app:key="widgetHeaderBackgroundColor"
+        app:title="@string/appearance_widget_header_background_color_title"
+        app:summary="@string/appearance_widget_header_background_color_desc"
+        app:cpv_dialogTitle="@string/appearance_widget_header_background_color_title"
+        app:defaultValue="0x0000000000"
+        app:cpv_showAlphaSlider="true"
+        app:cpv_colorShape="square"
+        app:iconSpaceReserved="false" />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
         app:key="backgroundColor"
         app:title="@string/appearance_background_color_title"
         app:summary="@string/appearance_background_color_desc"
