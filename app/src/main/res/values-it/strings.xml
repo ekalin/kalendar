@@ -52,6 +52,8 @@ Per ottenere il massimo dal widget è necessario autorizzare l\'accesso ai calen
     <string name="appearance_day_header_alignment_right">Destra</string>
     <string name="appearance_show_days_without_events_title">Visualizza i giorni senza eventi</string>
     <string name="appearance_show_days_without_events_desc">Visualizza le intestazioni del giorno per giorni senza eventi</string>
+    <string name="appearance_display_header_title">Visualizza l\'intestazione del widget</string>
+    <string name="appearance_display_header_desc">Visualizza l\'intestazione con la data i gli impostazioni</string>
     <string name="lock_time_zone_title">Blocca fuso orario</string>
     <string name="lock_time_zone_off_desc">Sbloccato, fuso corrente: %s</string>
     <string name="lock_time_zone_on_desc">Bloccato a %s</string>
@@ -59,8 +61,16 @@ Per ottenere il massimo dal widget è necessario autorizzare l\'accesso ai calen
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Colori</string>
     <string name="colors_prefs_desc">Colore e trasparenza dei testi e dello sfondo</string>
-    <string name="appearance_background_color_title">Sfondo trasparente</string>
-    <string name="appearance_background_color_desc">Imposta la trasparenza dello sfondo</string>
+    <string name="appearance_event_color_title">Colore degli eventi</string>
+    <string name="appearance_event_color_desc">Imposta la colore degli eventi</string>
+    <string name="appearance_day_header_color_title">Colore degli instestazioni del giorno</string>
+    <string name="appearance_day_header_color_desc">Imposta la olore degli instestazioni del giorno</string>
+    <string name="appearance_widget_header_color_title">Colore dell\'impostazione del widget</string>
+    <string name="appearance_widget_header_color_desc">Imposta la colore dell\'impostazione del widget</string>
+    <string name="appearance_widget_header_background_color_title">Colore di sfondo dell\'impostazione del widget</string>
+    <string name="appearance_widget_header_background_color_desc">Imposta la colore dello sfondo dell\'impostazione del widget</string>
+    <string name="appearance_background_color_title">Colori di sfondo</string>
+    <string name="appearance_background_color_desc">Imposta la colore dello sfondo</string>
     <string name="appearance_past_events_background_color_title">Colore di sfondo degli eventi passati</string>
     <string name="appearance_past_events_background_color_desc">Regola il colore di sfondo degli eventi passati</string>
 
@@ -106,8 +116,25 @@ Per ottenere il massimo dal widget è necessario autorizzare l\'accesso ai calen
     <string name="show_only_closest_instance_of_recurring_event">Visualizza solo l\'istanza piú vicina di un evento ricorrente</string>
 
     <!-- Preference header: Tasks -->
+    <string name="task_prefs">Compiti</string>
+    <string name="task_prefs_desc">Configurare la visualizzazione dei compiti</string>
+    <string name="task_source_pref_title">Origine dei compiti</string>
+    <string name="task_source_none">Non mostrare compiti</string>
     <string name="task_source_opentasks">OpenTasks (di dmfs GmbH)</string>
+    <string name="task_source_astrid_clone">Tasks.org (di Alex Baker)</string>
     <string name="task_source_samsung">Calendario Samsung</string>
+
+    <!-- Preference header: Birthdays -->
+    <string name="task_app_install">Tocca per installare</string>
+    <string name="grant_task_permission_title">Tocca per autorizare la busca dei compiti</string>
+    <string name="grant_task_permission_desc">È necessario autorizzare per che i compiti siano mostrati</string>
+    <string name="task_lists_pref_title">Lista di compiti</string>
+    <string name="task_lists_pref_summary">Seleziona le liste di compiti per mostrare</string>
+    <string name="birthday_prefs">Compleanni</string>
+    <string name="birthday_prefs_desc">Configurare la visualizzazione dei compleanni</string>
+    <string name="show_birthdays_title">Mostra compleanni</string>
+    <string name="birthday_color_title">Colore dei compleanni</string>
+    <string name="birthday_color_desc">Imposta la colore per dei compleanni</string>
 
     <!-- Preference header: Feedback -->
     <string name="feedback_backup_prefs">Feedback e salvataggio</string>

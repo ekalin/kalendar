@@ -9,7 +9,7 @@
     <string name="no_events_to_show">No events to show</string>
     <string name="add_event_desc">Add new calendar event</string>
     <string name="refresh_desc">Refresh</string>
-    <string name="open_prefs_desc">Open the settings of the calendar widget</string>
+    <string name="open_prefs_desc">Open widget settings</string>
     <string name="indicator_alarm">Indicator if an alarm has been set</string>
     <string name="indicator_recurring">Indicator if the event is recurring</string>
     <string name="no_title">(No title)</string>
@@ -34,7 +34,7 @@
     <string name="app_description_4000_chars_max_part10" tools:ignore="UnusedResources">Fully resizable widget with two alternative layouts and layout customizations.</string>
     <string name="app_description_4000_chars_max_part11" tools:ignore="UnusedResources">Lock time zone when travelling to different time zones.</string>
     <string name="app_description_4000_chars_max_part12" tools:ignore="UnusedResources">Backup and restore settings, cloning widgets on the same or different devices.</string>
-    <string name="app_description_4000_chars_max_part13" tools:ignore="UnusedResources">Android 4.4+ supported. Supports Android tablets.</string>
+    <string name="app_description_4000_chars_max_part13" tools:ignore="UnusedResources">Android 6+ supported. Supports Android tablets.</string>
 
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Calendars</string>
@@ -57,9 +57,9 @@
     <string name="appearance_multiline_title_title">Multiline title</string>
     <string name="appearance_multiline_title_desc">Spread event title over multiple lines</string>
     <string name="appearance_abbreviate_dates_title">Abbreviate dates</string>
-    <string name="appearance_abbreviate_dates_desc">Use three-letter format for dates in Widget and Day headers etc.</string>
+    <string name="appearance_abbreviate_dates_desc">Use three-letter format for dates in widget and day headers</string>
     <string name="appearance_show_day_headers_title">Show day headers</string>
-    <string name="appearance_show_day_headers_desc">Show day headers at all</string>
+    <string name="appearance_show_day_headers_desc">Show a header before each day\'s events</string>
     <string name="appearance_day_header_alignment_title">Day header alignment</string>
     <string name="appearance_day_header_alignment_desc">Set the alignment of the day header</string>
     <string name="appearance_day_header_alignment_left">Left</string>

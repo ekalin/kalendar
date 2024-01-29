@@ -22,7 +22,7 @@
     <string name="app_description_4000_chars_max_part02">Fonctionnalités</string>
     <string name="app_description_4000_chars_max_part08">Mise à jour automatique lorsque vous ajoutez/supprimez/modifiez un événement. Ou vous pouvez mettre à jour la liste instantanément.</string>
     <string name="app_description_4000_chars_max_part11">Verrouillage fuseau horaire lorsque vous voyagez dans différents fuseaux horaires.</string>
-    <string name="app_description_4000_chars_max_part13">Android 4.4+ supporté. Supporte les tablettes Android.</string>
+    <string name="app_description_4000_chars_max_part13">Android 6+ supporté. Supporte les tablettes Android.</string>
 
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Calendriers</string>
@@ -30,7 +30,7 @@
 
     <!-- Preference header: Layout -->
     <string name="layout_prefs_title">Disposition</string>
-    <string name="layout_prefs_desc">Positionnez,, affichez et masquez les éléments du widget</string>
+    <string name="layout_prefs_desc">Positionnez, affichez et masquez les éléments du widget</string>
     <string name="widget_instance_name">Nom du widget</string>
     <string name="appearance_text_size_title">Taille de police</string>
     <string name="appearance_text_size_desc">Ajuster la taille de police</string>
@@ -46,15 +46,17 @@
     <string name="appearance_multiline_title_desc">Etendre le titre de l\'événement sur plusieurs lignes</string>
     <string name="appearance_abbreviate_dates_title">Dates abrégées</string>
     <string name="appearance_abbreviate_dates_desc">Utiliser un format de 3 lettres pour les dates du Widget, les en-têtes des Jours, etc.</string>
-    <string name="appearance_show_day_headers_title">Afficher les jours</string>
-    <string name="appearance_show_day_headers_desc">Afficher l\'en-tête dédiée aux jours</string>
-    <string name="appearance_day_header_alignment_title">Alignement de la date de l\'en-tête</string>
+    <string name="appearance_show_day_headers_title">Montrer les jours</string>
+    <string name="appearance_show_day_headers_desc">Montrer l\'en-tête dédiée aux jours</string>
+    <string name="appearance_day_header_alignment_title">Alignement de l\'en-tête dédiée aux jours</string>
     <string name="appearance_day_header_alignment_desc">Choisir l\'alignement de la date dans l\'en-tête</string>
     <string name="appearance_day_header_alignment_left">Gauche</string>
     <string name="appearance_day_header_alignment_center">Centre</string>
     <string name="appearance_day_header_alignment_right">Droite</string>
-    <string name="appearance_show_days_without_events_title">Afficher les jours sans événements</string>
+    <string name="appearance_show_days_without_events_title">Montrer les jours sans événements</string>
     <string name="appearance_show_days_without_events_desc">Montrer les en-têtes pour les jours sans évènement</string>
+    <string name="appearance_display_header_title">Montrer l\'en-tête du widget</string>
+    <string name="appearance_display_header_desc">Montrer l\'en-tête avec la date e les paramètres</string>
     <string name="lock_time_zone_title">Verrouiller le fuseau horaire</string>
     <string name="lock_time_zone_off_desc">Déverrouillé, fuseau actuel : %s</string>
     <string name="lock_time_zone_on_desc">Verrouillé sur %s</string>
@@ -62,8 +64,16 @@
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Couleurs</string>
     <string name="colors_prefs_desc">Couleur et opacité du texte et de l\'arrière plan</string>
+    <string name="appearance_event_color_title">Couleur des événements</string>
+    <string name="appearance_event_color_desc">Ajuster la couleur des événements</string>
+    <string name="appearance_day_header_color_title">Coleur de l\'en-tête dédiée aux jours</string>
+    <string name="appearance_day_header_color_desc">Ajuster la coleur de l\'en-tête dédiée aux jours</string>
+    <string name="appearance_widget_header_color_title">Coleur de l\'en-tête du wiget</string>
+    <string name="appearance_widget_header_color_desc">Ajuster la coleur de l\'en-tête du wiget</string>
+    <string name="appearance_widget_header_background_color_title">Coleur d\'arrière plan de l\'en-tête du wiget</string>
+    <string name="appearance_widget_header_background_color_desc">Ajuster la coleur d\'arrière plan de l\'en-tête du wiget</string>
     <string name="appearance_background_color_title">Couleur d\'arrière plan</string>
-    <string name="appearance_background_color_desc">Ajuster la transparence du fond</string>
+    <string name="appearance_background_color_desc">Ajuster la couleur d\'arrière plan</string>
     <string name="appearance_past_events_background_color_title">Couleur d\'arrière-plan des événements passés</string>
     <string name="appearance_past_events_background_color_desc">Ajuster la couleur de fond des événements passés</string>
 
@@ -109,10 +119,23 @@
     <string name="show_only_closest_instance_of_recurring_event">N\'afficher que l\'instance la plus proche d\'un événement récurrent</string>
 
     <!-- Preference header: Tasks -->
+    <string name="task_prefs">Tâches</string>
+    <string name="task_source_pref_title">Origin de les tâches</string>
+    <string name="task_source_none">Non montrer pas les tâches</string>
     <string name="task_source_opentasks">OpenTasks (par dmfs GmbH)</string>
+    <string name="task_source_astrid_clone">Tasks.org (par Alex Baker)</string>
     <string name="task_source_samsung">Calendrier Samsung</string>
 
     <!-- Preference header: Feedback -->
+    <string name="task_app_install">Appuyer pour installer</string>
+    <string name="grant_task_permission_title">Accorder l\'autorisation pour obtenir les tâchs</string>
+    <string name="grant_task_permission_desc">Il fault accorder l\'autorization pour que tâches soient montrées</string>
+    <string name="task_lists_pref_title">Listes de tâches</string>
+    <string name="task_lists_pref_summary">Sélectionner les listes de tâches pour montrer</string>
+    <string name="birthday_prefs">Anniversaires</string>
+    <string name="show_birthdays_title">Montrer anniversaires</string>
+    <string name="birthday_color_title">Couleur des anniversaires</string>
+    <string name="birthday_color_desc">Ajuster la couleur des anniversaires</string>
     <string name="feedback_backup_prefs">Commentaires et sauvegarde</string>
     <string name="feedback_backup_prefs_desc">Nous contacter, sauvegarder et restaurer les paramètre</string>
     <string name="feedback_github_title">Visiter le widget sur Github</string>

@@ -24,7 +24,7 @@
     <string name="app_description_4000_chars_max_part02">Functies</string>
     <string name="app_description_4000_chars_max_part08">Updatet automatisch wanneer u een afspraak toevoegt/verwijdert/wijzigt. U kunt ook op verzoek bijwerken.</string>
     <string name="app_description_4000_chars_max_part11">Vergrendel de tijdzone als u naar verschillende tijdzones reist.</string>
-    <string name="app_description_4000_chars_max_part13">Android 4.4+ wordt ondersteund. Ondersteunt Android tablets.</string>
+    <string name="app_description_4000_chars_max_part13">Android 6+ wordt ondersteund. Ondersteunt Android tablets.</string>
 
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Agenda\'s en Takenlijsten</string>

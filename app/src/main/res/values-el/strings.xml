@@ -44,12 +44,19 @@
     <string name="appearance_day_header_alignment_right">Δεξιά</string>
     <string name="appearance_show_days_without_events_title">Εμφάνιση ημέρες χωρίς συμβάντα</string>
     <string name="appearance_show_days_without_events_desc">Εμφάνιση ημέρα κεφαλίδες για μέρες χωρίς εκδηλώσεις</string>
+    <string name="appearance_display_header_title">Εμφάνιση κεφαλίδα του πρό</string>
     <string name="lock_time_zone_title">Κλείδωμα ζώνης ώρας</string>
     <string name="lock_time_zone_off_desc">Ξεκλειδωμένο, τρέχουσα ζώνη: %s</string>
     <string name="lock_time_zone_on_desc">Κλειδωμένο στο %s</string>
 
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Χρώματα</string>
+    <string name="appearance_day_header_color_title">Χρώμα της κεφαλίδας της ημέρας</string>
+    <string name="appearance_day_header_color_desc">Ρύθμιση χρώματος της κεφαλίδας της ημέρας</string>
+    <string name="appearance_widget_header_color_title">Χρώμα της κεφαλίδας του πρόσθετου</string>
+    <string name="appearance_widget_header_color_desc">Ρύθμιση χρώματος της κεφαλίδας του πρόσθετου</string>
+    <string name="appearance_widget_header_background_color_title">Χρώμα φόντου της κεφαλίδας του πρόσθετου</string>
+    <string name="appearance_widget_header_background_color_desc">Ρύθμιση χρώματος της κεφαλίδας του πρόσθετου</string>
     <string name="appearance_background_color_title">Χρώμα φόντου</string>
     <string name="appearance_background_color_desc">Προσαρμόστε το χρώμα του φόντου</string>
     <string name="appearance_past_events_background_color_title">Χρώμα φόντου για παλαιότερες εκδηλώσεις</string>
@@ -98,9 +105,12 @@
 
     <!-- Preference header: Tasks -->
     <!-- Preference header: Feedback -->
+    <string name="birthday_prefs">Γενέθλια</string>
+    <string name="birthday_color_title">"Χρώμα γενεθλί "</string>
+    <string name="birthday_color_desc">"Ρύθμιση χρώματος των "</string>
     <string name="feedback_github_title">Δείτε το πρόσθετο στο Github</string>
     <string name="feedback_github_desc">Σχολιάστε στη σελίδα της εφαρμογής</string>
     <string name="feedback_play_store_title">Δείτε το γραφικό στοιχείο, στο Google Play Store</string>
     <string name="feedback_play_store_desc">Αξιολογείστε και σχολιάστε στο Google Play Store</string>
     <string name="share_events_for_debugging_desc">Αποστολή ανώνυμων δεδομένων, για να βοηθήσετε τους προγραμματιστές στην επίλυση τυχών προβλημάτων</string>
-    </resources>
+</resources>

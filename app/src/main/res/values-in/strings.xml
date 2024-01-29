@@ -20,7 +20,7 @@
     <string name="app_description_4000_chars_max_part02">Fitur</string>
     <string name="app_description_4000_chars_max_part08">Otomatis memperbarui ketika anda menambah/menghapus/mengubah sebuah acara. Atau juga bisa memperbarui daftarnya secara langsung.</string>
     <string name="app_description_4000_chars_max_part11">Kunci zona waktu ketika bepergian ke zona waktu yang berbeda.</string>
-    <string name="app_description_4000_chars_max_part13">Android 4.4+ didukung. Mendukung tablet Android.</string>
+    <string name="app_description_4000_chars_max_part13">Android 6+ didukung. Mendukung tablet Android.</string>
 
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Kalender</string>

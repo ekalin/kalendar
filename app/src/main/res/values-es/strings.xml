@@ -52,6 +52,7 @@
     <string name="appearance_day_header_alignment_right">Derecha</string>
     <string name="appearance_show_days_without_events_title">Mostrar días sin eventos</string>
     <string name="appearance_show_days_without_events_desc">Mostrar encabezados de día para días sin eventos</string>
+    <string name="appearance_display_header_title">Mostrar encabezado del widget</string>
     <string name="lock_time_zone_title">Bloquear zona horaria</string>
     <string name="lock_time_zone_off_desc">Desbloqueado, zona actual: %s</string>
     <string name="lock_time_zone_on_desc">Bloqueado en %s</string>
@@ -59,7 +60,16 @@
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Colores</string>
     <string name="colors_prefs_desc">Colores y opacidad de textos y fondos.</string>
-    <string name="appearance_background_color_title">Color del fondo</string>
+    <string name="appearance_event_color_title">Color de los eventos</string>
+    <string name="appearance_event_color_desc">Ajustar el color de los eventos</string>
+    <string name="appearance_current_event_color_title">Color de los eventos actuales</string>
+    <string name="appearance_day_header_color_title">Color de los encabezados de días</string>
+    <string name="appearance_day_header_color_desc">Ajustar el color de los encabezados de diás</string>
+    <string name="appearance_widget_header_color_title">Color del encabezado del widget</string>
+    <string name="appearance_widget_header_color_desc">Ajustar el color del encabezado del widget</string>
+    <string name="appearance_widget_header_background_color_title">Color de fundo del encabezado del widget</string>
+    <string name="appearance_widget_header_background_color_desc">Ajustar el color de fundo del encabezado del widget</string>
+    <string name="appearance_background_color_title">Color de fondo</string>
     <string name="appearance_background_color_desc">Ajustar el color de fondo</string>
     <string name="appearance_past_events_background_color_title">Color de fondo de eventos pasados</string>
     <string name="appearance_past_events_background_color_desc">Ajustar color de fondo de eventos pasados</string>
@@ -106,8 +116,17 @@
     <string name="show_only_closest_instance_of_recurring_event">Mostrar sólo la fecha más cercana de un evento recurrente</string>
 
     <!-- Preference header: Tasks -->
+    <string name="task_prefs">Tareas</string>
+    <string name="task_source_none">No mostrar tareas</string>
     <string name="task_source_opentasks">OpenTasks (por dmfs GmbH)</string>
     <string name="task_source_samsung">Calendario Samsung</string>
+    <string name="grant_task_permission_title">Conceder permissos para leer tareas</string>
+
+    <!-- Preference header: Birthdays -->
+    <string name="birthday_prefs">Cumpleaños</string>
+    <string name="show_birthdays_title">Mostrar cumpleaños</string>
+    <string name="birthday_color_title">Color de los cumpleaños</string>
+    <string name="birthday_color_desc">Ajustar el color de los eventos de cumpleaños</string>
 
     <!-- Preference header: Feedback -->
     <string name="feedback_backup_prefs">Opiniones y Copia de seguridad</string>
@@ -120,5 +139,5 @@
     <string name="share_events_for_debugging_desc">Crea un informe para ayudar a los desarrolladores a solucionar problemas.
         Antes de compartir, filtra los eventos para proteger tu privacidad pero que aún demuestre un problema</string>
     <string name="restore_settings_title">Restaurar ajustes desde una copia de seguridad</string>
-    <string name="restore_settings_desc">La configuración de cada widget de ToDo Agenda debe restaurarse por separado</string>
+    <string name="restore_settings_desc">La configuración de cada widget debe restaurarse por separado</string>
 </resources>

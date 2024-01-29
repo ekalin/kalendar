@@ -24,7 +24,7 @@
     <string name="app_description_4000_chars_max_part02">Funktionen</string>
     <string name="app_description_4000_chars_max_part08">Automatische Aktualisierung wenn du Events veränderst, hinzufügst oder entfernst.</string>
     <string name="app_description_4000_chars_max_part11">Fixieren sie die Zeitzone wenn sie in andere reisen.</string>
-    <string name="app_description_4000_chars_max_part13">Android 4.4+ unterstützt. Unterstützt Android Tablets.</string>
+    <string name="app_description_4000_chars_max_part13">Android 6+ unterstützt. Unterstützt Android Tablets.</string>
 
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Kalender</string>
@@ -57,6 +57,7 @@
     <string name="appearance_day_header_alignment_right">Rechts</string>
     <string name="appearance_show_days_without_events_title">Zeige Tage ohne Einträge</string>
     <string name="appearance_show_days_without_events_desc">Zeige Tageskopfzeile für Tage ohne Einträge</string>
+    <string name="appearance_display_header_title">Zeige Widgetkopfzeile</string>
     <string name="lock_time_zone_title">Zeitzone fixieren</string>
     <string name="lock_time_zone_off_desc">Nicht fixiert, aktuelle Zeitzone: %s</string>
     <string name="lock_time_zone_on_desc">Fixiert auf %s</string>
@@ -64,6 +65,12 @@
     <!-- Preference header: Colors -->
     <string name="appearance_group_color_title">Farben</string>
     <string name="colors_prefs_desc">Farbe und Deckkraft von Texten und Hintergründen</string>
+    <string name="appearance_day_header_color_title">Farbe der Tageskopfzeile</string>
+    <string name="appearance_day_header_color_desc">Pass die Farbe der Tageskopfzeile an</string>
+    <string name="appearance_widget_header_color_title">Farbe der Widgetkopfzeile</string>
+    <string name="appearance_widget_header_color_desc">Pass die Farbe der Widgetkopfzeile an</string>
+    <string name="appearance_widget_header_background_color_title">Hintergrundfarbe der Widgetkopfzeile</string>
+    <string name="appearance_widget_header_background_color_desc">Pass die Hintergrundfarbe der Widgetkopfzeile an</string>
     <string name="appearance_background_color_title">Hintergrundfarbe</string>
     <string name="appearance_background_color_desc">Passe die Farbe des Hintergrundes an</string>
     <string name="appearance_past_events_background_color_title">Hintergrundfarbe für vergangene Ereignisse</string>
@@ -111,8 +118,23 @@
     <string name="show_only_closest_instance_of_recurring_event">Zeigen nur den nächsten Eintrag eines wiederholenden Ereignisses</string>
 
     <!-- Preference header: Tasks -->
+    <string name="task_prefs">Aufgaben</string>
+    <string name="task_prefs_desc">Konfiguriere Anzeige der Aufgaben</string>
+    <string name="task_source_pref_title">Aufgabequelle</string>
+    <string name="task_source_none">Aufgaben nicht anzeigen</string>
     <string name="task_source_opentasks">OpenTasks (von dmfs GmbH)</string>
+    <string name="task_source_astrid_clone">Tasks.org (von Alex Baker)</string>
     <string name="task_source_samsung">Samsung Calendar</string>
+    <string name="task_app_install">Klicke um installieren</string>
+    <string name="task_lists_pref_title">Aufgabenlisten</string>
+
+    <!-- Preference header: Birthdays -->
+    <string name="birthday_prefs">Geburtstage</string>
+    <string name="birthday_prefs_desc">Konfiguriere Anzeige der Geburtstage</string>
+    <string name="show_birthdays_title">Zeige Geburtstage</string>
+    <string name="birthday_color_title">Farbe der Geburtstage</string>
+    <string name="birthday_color_desc">Pass die Farbe der Geburtstage an</string>
+
     <!-- Preference header: Feedback -->
     <string name="feedback_backup_prefs">Feedback und Sicherung</string>
     <string name="feedback_backup_prefs_desc">Mit uns in Kontakt treten, Einstellungen sichern und wiederherstellen</string>

@@ -7,14 +7,14 @@
     <string name="no_events_to_show">Nenhum evento para exibir</string>
     <string name="add_event_desc">Adicionar novo evento</string>
     <string name="refresh_desc">Atualizar</string>
-    <string name="open_prefs_desc">Configurações do widget do calendário</string>
-    <string name="indicator_alarm">Indicador que um alarme foi definido</string>
+    <string name="open_prefs_desc">Configurações do widget</string>
+    <string name="indicator_alarm">Indicador que um lembrete foi definido</string>
     <string name="indicator_recurring">Indicador que o evento é recorrente</string>
     <string name="no_title">(Sem título)</string>
     <string name="grant_permissions">Conceder permissões</string>
-    <string name="grant_permissions_verbose">O widget requer permissão para ler calendários.\nToque aqui para conceder permissão.</string>
+    <string name="grant_permissions_verbose">O widget necessita de permissão para ler calendários.\nToque aqui para conceder permissão.</string>
     <string name="permissions_justification">Bem-vindo ao Kalendar, o acesso fácil ao seu calendário.\n\nPara aproveitar ao máximo o widget você precisa conceder acesso ao seu calendário.</string>
-    <string name="no_widgets_found">Por favor, adicione um \"Kalendar\" na tela inicial do seu dispositivo primeiro.</string>
+    <string name="no_widgets_found">Por favor, adicione primeiramente um widget \"Kalendar\" na tela inicial do seu aparelho.</string>
     <string name="select_a_widget_to_configure">Selecione um widget para configurar</string>
     <string name="go_to_home_screen">Ir para a tela inicial</string>
 
@@ -31,8 +31,8 @@
     <string name="app_description_4000_chars_max_part09">Selecione as cores e tamanho do texto do widget.</string>
     <string name="app_description_4000_chars_max_part10">O widget é redimensionável e tem dois layouts alternativos, além de permitir ajustes no layouts.</string>
     <string name="app_description_4000_chars_max_part11">Bloqueie o fuso horário quando viajar para outros fusos horários.</string>
-    <string name="app_description_4000_chars_max_part12">Faça backup e restaure as configurações, fazendo uma cópia do wiget no mesmo aparelho ou em aparelhos diferentes.</string>
-    <string name="app_description_4000_chars_max_part13">Android 4.4+ suportado. Tablets Android suportados.</string>
+    <string name="app_description_4000_chars_max_part12">Faça backup e restaure as configurações, fazendo uma cópia do widget no mesmo aparelho ou em aparelhos diferentes.</string>
+    <string name="app_description_4000_chars_max_part13">Android 6+ suportado. Tablets Android suportados.</string>
 
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Calendários</string>
@@ -51,13 +51,13 @@
     <string name="appearance_text_size_very_large">Muito grande</string>
     <string name="pref_event_entry_layout_title">Layout dos eventos</string>
     <string name="default_multiline_layout">Horário abaixo do título</string>
-    <string name="single_line_layout">Tudo em uma linha</string>
+    <string name="single_line_layout">Tudo em uma única linha</string>
     <string name="appearance_multiline_title_title">Título em múltiplas linhas</string>
-    <string name="appearance_multiline_title_desc">Distribuir título por múltiplas linhas</string>
+    <string name="appearance_multiline_title_desc">Mostrar o título do evento em múltiplas linhas</string>
     <string name="appearance_abbreviate_dates_title">Abreviar datas</string>
     <string name="appearance_abbreviate_dates_desc">Usar abreviaturas para datas (seg, ter, etc) no widget</string>
     <string name="appearance_show_day_headers_title">Mostrar dias</string>
-    <string name="appearance_show_day_headers_desc">Mostrar cabeçalhos dos dias</string>
+    <string name="appearance_show_day_headers_desc">Mostrar um cabeçalhos antos dos eventos de cada dia</string>
     <string name="appearance_day_header_alignment_title">Posição do dia</string>
     <string name="appearance_day_header_alignment_desc">Selecionar posição do cabeçalho do dia</string>
     <string name="appearance_day_header_alignment_left">À esquerda</string>
@@ -101,13 +101,13 @@
     <string name="event_details_fill_all_day_events_title">Estender eventos de dia inteiro</string>
     <string name="event_details_fill_all_day_events_desc">Mostrar uma entrada para cada dia de um evento de múltiplos dias inteiros</string>
     <string name="event_details_indicators">Indicadores</string>
-    <string name="event_details_indicate_alert_desc">Mostrar indicador de alertas</string>
-    <string name="event_details_indicate_alert_title">Alertas</string>
+    <string name="event_details_indicate_alert_desc">Mostrar indicador de lembretes</string>
+    <string name="event_details_indicate_alert_title">Lembretes</string>
     <string name="event_details_indicate_recurring_desc">Mostrar indicador de eventos recorrentes</string>
     <string name="event_details_indicate_recurring_title">Eventos recorrentes</string>
 
     <!-- Preference header: Event filters -->
-    <string name="event_filters_prefs">Filtros de evento</string>
+    <string name="event_filters_prefs">Filtros de eventos</string>
     <string name="event_filters_prefs_desc">Quais eventos (atuais, futuros e passados) a exibir</string>
     <string name="past_events">Eventos passados</string>
     <string name="pref_events_ended_title">Mostrar eventos passados</string>
@@ -129,7 +129,7 @@
     <string name="event_range_six_months">Seis meses</string>
     <string name="event_range_one_year">Um ano</string>
     <string name="all_events">Todos os eventos</string>
-    <string name="pref_hide_based_on_keywords_title">Ocultar baseado em palavras-chave no título</string>
+    <string name="pref_hide_based_on_keywords_title">Ocultar tendo por base palavras-chave no título</string>
     <string name="show_only_closest_instance_of_recurring_event">Mostrar apenas a instância mais próxima de um evento recorrente</string>
 
     <!-- Preference header: Tasks -->
@@ -140,7 +140,7 @@
     <string name="task_source_opentasks">OpenTasks (por dmfs GmbH)</string>
     <string name="task_source_astrid_clone">Tasks.org (por Alex Baker)</string>
     <string name="task_source_samsung">Calendário Samsung</string>
-    <string name="task_source_samsung_not_installable">O Calendário Samsung só é disponível em dispositivos Samsung</string>
+    <string name="task_source_samsung_not_installable">O Calendário Samsung só está disponível em dispositivos Samsung</string>
     <string name="task_app_not_installed">O app de tarefas selecionado não está instalado</string>
     <string name="task_app_install">Toque para instalar</string>
     <string name="grant_task_permission_title">Conceder permissão para ler tarefas</string>

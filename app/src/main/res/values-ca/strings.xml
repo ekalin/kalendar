@@ -22,7 +22,7 @@
     <string name="app_description_4000_chars_max_part02">Característiques</string>
     <string name="app_description_4000_chars_max_part08">Actualitza automàticament quan afegeixis/eliminis/modifiquis un esdeveniment. O pots actualitzar la llista instantàniament.</string>
     <string name="app_description_4000_chars_max_part11">Bloqueja la zona horària quan viatgis a diferents zones horàries.</string>
-    <string name="app_description_4000_chars_max_part13">Android 4.4+ suportats. És compatible amb tauletes Android.</string>
+    <string name="app_description_4000_chars_max_part13">Android 6+ suportats. És compatible amb tauletes Android.</string>
 
     <!-- Preference header: Calendars -->
     <string name="calendars_prefs">Calendaris</string>
