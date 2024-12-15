@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 
-ext.versionMajor = 8
+ext.versionMajor = 9
 ext.versionMinor = 0
 ext.versionPatch = 0
 ext.versionBuild = 1
