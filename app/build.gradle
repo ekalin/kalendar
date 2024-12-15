@@ -73,6 +73,8 @@ android {
 }
 
 dependencies {
+    implementation platform("org.jetbrains.kotlin:kotlin-bom:$kotlinVersion")
+
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.preference:preference:$preferenceVersion"
     implementation "joda-time:joda-time:$jodaTimeVersion"
