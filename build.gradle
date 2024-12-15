@@ -5,9 +5,9 @@ buildscript {
     }
 
     ext {
-        compileSdkVersion = 34 as int
+        compileSdkVersion = 35 as int
         minSdkVersion = 23 as int
-        targetSdkVersion = 34 as int
+        targetSdkVersion = 35 as int
 
         appCompatVersion = '1.7.0'
         colorPickerVersion = '1.1.0'

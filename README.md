@@ -41,6 +41,10 @@ provide [pull requests](https://github.com/ekalin/kalendar/pulls).
 
 ## Changelog
 
+### (To be released)
+
+* Support for Android 15.
+
 ### v8
 
 * It is now possible to configure the background color of the header, and to add a separator betweeen the header and the
