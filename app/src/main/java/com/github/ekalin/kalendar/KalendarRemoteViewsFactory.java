@@ -148,7 +148,7 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
             }
 
             InstanceSettings settings = AllSettings.instanceFromId(context, widgetId);
-            RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_initial);
+            RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_main);
             configureWidgetHeader(settings, rv);
             if (factory != null && factory.getCount() == 0) {
                 configureEmptyWidgetMessage(settings, rv);
