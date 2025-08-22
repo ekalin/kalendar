@@ -4,28 +4,17 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
-import android.util.Log;
 
 import com.github.ekalin.kalendar.prefs.AllSettings;
 
 public class KalendarAppWidgetProvider extends AppWidgetProvider {
-    private static final String TAG = KalendarAppWidgetProvider.class.getSimpleName();
-
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int widgetId : appWidgetIds) {
-            KalendarRemoteViewsFactory.updateWidget(context, widgetId, null);
-            notifyWidgetDataChanged(context, widgetId);
+            // TODO: Cache the factory for each widget
+            new KalendarRemoteViewsFactory(context, widgetId).updateWidget(context, widgetId);
         }
-    }
-
-    private static void notifyWidgetDataChanged(Context context, int widgetId) {
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        if (appWidgetManager != null) {
-            appWidgetManager.notifyAppWidgetViewDataChanged(new int[]{widgetId}, R.id.event_list);
-        } else {
-            Log.d(TAG, widgetId + " notifyWidgetDataChanged, appWidgetManager is null, context:" + context);
-        }
+        KalendarUpdater.registerReceivers(context, false);
     }
 
     @Override

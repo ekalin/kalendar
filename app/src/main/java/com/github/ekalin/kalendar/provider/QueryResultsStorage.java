@@ -8,7 +8,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.github.ekalin.kalendar.KalendarRemoteViewsFactory;
 import com.github.ekalin.kalendar.R;
 
 import java.util.List;
@@ -38,8 +37,9 @@ public class QueryResultsStorage {
         final String method = "shareEventsForDebugging";
         try {
             setNeedToStoreResults(true);
-            KalendarRemoteViewsFactory factory = new KalendarRemoteViewsFactory(context, widgetId);
-            factory.onDataSetChanged();
+            // TODO: Make it work again
+//            KalendarRemoteViewsFactory factory = new KalendarRemoteViewsFactory(context, widgetId);
+//            factory.onDataSetChanged();
             String results = theStorage.toJsonString(context, widgetId);
             if (!TextUtils.isEmpty(results)) {
                 String fileName = "Kalendar-" + widgetId + ".json";

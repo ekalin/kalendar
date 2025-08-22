@@ -3,14 +3,10 @@ package com.github.ekalin.kalendar;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
-import android.widget.RemoteViewsService.RemoteViewsFactory;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -37,22 +33,15 @@ import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setBackgroundColor
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setDrawableColor;
 import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setTextSize;
 
-public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
+public class KalendarRemoteViewsFactory {
     private static final String TAG = KalendarRemoteViewsFactory.class.getSimpleName();
 
-    private static final int MIN_MILLIS_BETWEEN_RELOADS = 500;
     private static final int MINIMUM_UPDATE_MINUTES = 60;
 
-    private final Context context;
-    private final int widgetId;
     private final InstanceSettings settings;
-    private volatile List<WidgetEntry> widgetEntries = new ArrayList<>();
     private volatile List<WidgetEntryVisualizer<?>> eventProviders;
-    private volatile long prevReloadFinishedAt = 0;
 
     public KalendarRemoteViewsFactory(Context context, int widgetId) {
-        this.context = context;
-        this.widgetId = widgetId;
         this.settings = AllSettings.instanceFromId(context, widgetId);
 
         eventProviders = new ArrayList<>();
@@ -62,84 +51,8 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
         eventProviders.add(new BirthdayVisualizer(context, widgetId));
     }
 
-    private void logEvent(String message) {
-        Log.d(this.getClass().getSimpleName(), widgetId + " " + message);
-    }
-
-    @Override
-    public void onCreate() {
-        reload();
-    }
-
-    @Override
-    public void onDestroy() {
-        // Empty
-    }
-
-    @Override
-    public int getCount() {
-        return widgetEntries.size();
-    }
-
-    @Override
-    public RemoteViews getViewAt(int position) {
-        List<WidgetEntry> widgetEntries = this.widgetEntries;
-        if (position < widgetEntries.size()) {
-            WidgetEntry entry = widgetEntries.get(position);
-            for (WidgetEntryVisualizer<?> eventProvider : eventProviders) {
-                if (entry.getClass().isAssignableFrom(eventProvider.getSupportedEventEntryType())) {
-                    return eventProvider.getRemoteViews(entry, position);
-                }
-            }
-        }
-        return null;
-    }
-
-    @NonNull
-    private InstanceSettings getSettings() {
-        return settings;
-    }
-
-    @Override
-    public void onDataSetChanged() {
-        logEvent("onDataSetChanged");
-        reload();
-    }
-
-    private void reload() {
-        long prevReloadMillis = Math.abs(System.currentTimeMillis() - prevReloadFinishedAt);
-        if (prevReloadMillis < MIN_MILLIS_BETWEEN_RELOADS) {
-            logEvent("reload, skip as done " + prevReloadMillis + " ms ago");
-        } else {
-            this.widgetEntries = getWidgetEntries(getSettings());
-            logEvent("reload, visualizers:" + eventProviders.size() + ", entries:" + this.widgetEntries.size());
-            prevReloadFinishedAt = System.currentTimeMillis();
-            scheduleNextUpdate();
-        }
-        updateWidget(context, widgetId, this);
-    }
-
-    private void scheduleNextUpdate() {
-        DateTime now = DateUtil.now(getSettings().getTimeZone());
-
-        DateTime nextUpdate = DateUtil.startOfNextDay(now);
-
-        for (WidgetEntry entry : widgetEntries) {
-            DateTime eventUpdateTime = entry.getNextUpdateTime();
-            if (eventUpdateTime != null && eventUpdateTime.isBefore(nextUpdate)) {
-                nextUpdate = eventUpdateTime;
-            }
-        }
-
-        DateTime minimumUpdateInterval = now.plusMinutes(MINIMUM_UPDATE_MINUTES);
-        if (minimumUpdateInterval.isBefore(nextUpdate)) {
-            nextUpdate = minimumUpdateInterval;
-        }
-
-        KalendarUpdater.scheduleNextUpdate(getSettings(), nextUpdate);
-    }
-
-    static void updateWidget(Context context, int widgetId, @Nullable RemoteViewsFactory factory) {
+    void updateWidget(Context context, int widgetId) {
+        Log.d(TAG, "Starting update for " + widgetId);
         try {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             if (appWidgetManager == null) {
@@ -150,15 +63,113 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
             InstanceSettings settings = AllSettings.instanceFromId(context, widgetId);
             RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_main);
             configureWidgetHeader(settings, rv);
-            if (factory != null && factory.getCount() == 0) {
-                configureEmptyWidgetMessage(settings, rv);
-            }
-            configureWidgetEntriesList(settings, context, widgetId, rv);
+            configureWidgetEntriesList(settings, rv);
 
+            Log.d(TAG, "Calling appWidgetManager.updateAppWidget");
             appWidgetManager.updateAppWidget(widgetId, rv);
+            Log.d(TAG, "Finished update for " + widgetId);
         } catch (Exception e) {
             Log.w(TAG, widgetId + " Exception in updateWidget, context:" + context, e);
         }
+    }
+
+    private void configureWidgetHeader(InstanceSettings settings, RemoteViews rv) {
+        rv.removeAllViews(R.id.header_parent);
+        if (!settings.getShowWidgetHeader()) {
+            return;
+        }
+
+        RemoteViews headerView = new RemoteViews(settings.getContext().getPackageName(),
+                R.layout.widget_header_one_line);
+        rv.addView(R.id.header_parent, headerView);
+        setBackgroundColor(rv, R.id.header_parent, settings.getWidgetHeaderBackgroundColor());
+        setBackgroundColor(rv, R.id.widget_header_separator, settings.getWidgetHeaderColor());
+        rv.setViewVisibility(R.id.widget_header_separator,
+                settings.getShowWidgetHeaderSeparator() ? View.VISIBLE : View.INVISIBLE);
+
+        configureCurrentDate(settings, rv);
+        setActionIcons(settings, rv);
+        configureAddEvent(settings, rv);
+        configureRefresh(settings, rv);
+        configureOverflowMenu(settings, rv);
+    }
+
+    private void configureCurrentDate(InstanceSettings settings, RemoteViews rv) {
+        int viewId = R.id.calendar_current_date;
+        PendingIntent pendingIntent = KalendarClickReceiver.createImmutablePendingIntentForAction(
+                KalendarClickReceiver.KalendarAction.VIEW_CALENDAR_TODAY, settings);
+        rv.setOnClickPendingIntent(viewId, pendingIntent);
+        String formattedDate = DateUtil.createDateString(settings,
+                DateUtil.now(settings.getTimeZone())).toUpperCase(Locale.getDefault());
+        rv.setTextViewText(viewId, formattedDate);
+        setTextSize(settings, rv, viewId, R.dimen.widget_header_title);
+        rv.setTextColor(viewId, settings.getWidgetHeaderColor());
+    }
+
+    private void setActionIcons(InstanceSettings settings, RemoteViews rv) {
+        setDrawableColor(rv, R.id.add_event, settings.getWidgetHeaderColor());
+        setDrawableColor(rv, R.id.refresh, settings.getWidgetHeaderColor());
+        setDrawableColor(rv, R.id.overflow_menu, settings.getWidgetHeaderColor());
+    }
+
+    private void configureAddEvent(InstanceSettings settings, RemoteViews rv) {
+        PendingIntent pendingIntent = KalendarClickReceiver.createImmutablePendingIntentForAction(
+                KalendarClickReceiver.KalendarAction.ADD_CALENDAR_EVENT, settings);
+        rv.setOnClickPendingIntent(R.id.add_event, pendingIntent);
+    }
+
+    private void configureRefresh(InstanceSettings settings, RemoteViews rv) {
+        PendingIntent pendingIntent = KalendarClickReceiver.createImmutablePendingIntentForAction(
+                KalendarClickReceiver.KalendarAction.REFRESH, settings);
+        rv.setOnClickPendingIntent(R.id.refresh, pendingIntent);
+    }
+
+    private void configureOverflowMenu(InstanceSettings settings, RemoteViews rv) {
+        PendingIntent pendingIntent = KalendarClickReceiver.createImmutablePendingIntentForAction(
+                KalendarClickReceiver.KalendarAction.CONFIGURE, settings);
+        rv.setOnClickPendingIntent(R.id.overflow_menu, pendingIntent);
+    }
+
+    private void configureEmptyWidgetMessage(InstanceSettings settings, RemoteViews rv) {
+        EmptyListMessageVisualizer visualizer = new EmptyListMessageVisualizer(settings);
+        RemoteViews message;
+        if (PermissionsUtil.arePermissionsGranted(settings.getContext())) {
+            message = visualizer.getView(EmptyListMessageVisualizer.Type.EMPTY);
+        } else {
+            message = visualizer.getView(EmptyListMessageVisualizer.Type.NO_PERMISSIONS);
+        }
+        rv.addView(R.id.header_parent, message);
+    }
+
+    private void configureWidgetEntriesList(InstanceSettings settings, RemoteViews rv) {
+        setBackgroundColor(rv, R.id.event_list, settings.getBackgroundColor());
+
+        List<WidgetEntry> entries = getWidgetEntries(settings);
+        if (entries.isEmpty()) {
+            configureEmptyWidgetMessage(settings, rv);
+        }
+
+        rv.setRemoteAdapter(R.id.event_list, getEntryViews(entries));
+        rv.setPendingIntentTemplate(R.id.event_list,
+                KalendarClickReceiver.createMutablePendingIntentForAction(KalendarClickReceiver.KalendarAction.VIEW_ENTRY, settings));
+
+        scheduleNextUpdate(entries);
+    }
+
+    private RemoteViews.RemoteCollectionItems getEntryViews(List<WidgetEntry> entries) {
+        Log.d(TAG, "Creating entries list");
+        RemoteViews.RemoteCollectionItems.Builder builder = new RemoteViews.RemoteCollectionItems.Builder()
+                .setHasStableIds(false)
+                .setViewTypeCount(getViewTypeCount());
+
+        for (int i = 0; i < entries.size(); i++) {
+            WidgetEntry entry = entries.get(i);
+            RemoteViews view = getEntryView(entry, i);
+            builder.addItem(i, view);
+        }
+
+        Log.d(TAG, "Finished creating entries list with " + entries.size() + " items");
+        return builder.build();
     }
 
     private List<WidgetEntry> getWidgetEntries(InstanceSettings settings) {
@@ -192,10 +203,6 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
         return listOut;
     }
 
-    List<WidgetEntry> getWidgetEntries() {
-        return widgetEntries;
-    }
-
     private void addEmptyDayHeadersBetweenTwoDays(List<WidgetEntry> entries, DateTime fromDayExclusive,
                                                   DateTime toDayExclusive, DateTimeZone zone) {
         DateTime emptyDay = fromDayExclusive.plusDays(1);
@@ -209,12 +216,16 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
         }
     }
 
-    @Override
-    public RemoteViews getLoadingView() {
+    public RemoteViews getEntryView(WidgetEntry entry, int position) {
+        for (WidgetEntryVisualizer<?> eventProvider : eventProviders) {
+            if (entry.getClass().isAssignableFrom(eventProvider.getSupportedEventEntryType())) {
+                return eventProvider.getRemoteViews(entry, position);
+            }
+        }
+
         return null;
     }
 
-    @Override
     public int getViewTypeCount() {
         int result = 0;
         for (WidgetEntryVisualizer<?> eventProvider : eventProviders) {
@@ -223,92 +234,30 @@ public class KalendarRemoteViewsFactory implements RemoteViewsFactory {
         return result;
     }
 
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
+    // TODO: This logic would fit better in KalendarUpdater
+    // Maybe here only the next event date is returned, and the rest of the logic is in KalendarUpdater
+    private void scheduleNextUpdate(List<WidgetEntry> entries) {
+        DateTime now = DateUtil.now(getSettings().getTimeZone());
 
-    @Override
-    public boolean hasStableIds() {
-        return true;
-    }
+        DateTime nextUpdate = DateUtil.startOfNextDay(now);
 
-    private static void configureWidgetHeader(InstanceSettings settings, RemoteViews rv) {
-        rv.removeAllViews(R.id.header_parent);
-        if (!settings.getShowWidgetHeader()) {
-            return;
+        for (WidgetEntry entry : entries) {
+            DateTime eventUpdateTime = entry.getNextUpdateTime();
+            if (eventUpdateTime != null && eventUpdateTime.isBefore(nextUpdate)) {
+                nextUpdate = eventUpdateTime;
+            }
         }
 
-        RemoteViews headerView = new RemoteViews(settings.getContext().getPackageName(),
-                R.layout.widget_header_one_line);
-        rv.addView(R.id.header_parent, headerView);
-        setBackgroundColor(rv, R.id.header_parent, settings.getWidgetHeaderBackgroundColor());
-        setBackgroundColor(rv, R.id.widget_header_separator, settings.getWidgetHeaderColor());
-        rv.setViewVisibility(R.id.widget_header_separator,
-                settings.getShowWidgetHeaderSeparator() ? View.VISIBLE : View.INVISIBLE);
-
-        configureCurrentDate(settings, rv);
-        setActionIcons(settings, rv);
-        configureAddEvent(settings, rv);
-        configureRefresh(settings, rv);
-        configureOverflowMenu(settings, rv);
-    }
-
-    private static void configureCurrentDate(InstanceSettings settings, RemoteViews rv) {
-        int viewId = R.id.calendar_current_date;
-        PendingIntent pendingIntent = KalendarClickReceiver.createImmutablePendingIntentForAction(
-                KalendarClickReceiver.KalendarAction.VIEW_CALENDAR_TODAY, settings);
-        rv.setOnClickPendingIntent(viewId, pendingIntent);
-        String formattedDate = DateUtil.createDateString(settings,
-                DateUtil.now(settings.getTimeZone())).toUpperCase(Locale.getDefault());
-        rv.setTextViewText(viewId, formattedDate);
-        setTextSize(settings, rv, viewId, R.dimen.widget_header_title);
-        rv.setTextColor(viewId, settings.getWidgetHeaderColor());
-    }
-
-    private static void setActionIcons(InstanceSettings settings, RemoteViews rv) {
-        setDrawableColor(rv, R.id.add_event, settings.getWidgetHeaderColor());
-        setDrawableColor(rv, R.id.refresh, settings.getWidgetHeaderColor());
-        setDrawableColor(rv, R.id.overflow_menu, settings.getWidgetHeaderColor());
-    }
-
-    private static void configureAddEvent(InstanceSettings settings, RemoteViews rv) {
-        PendingIntent pendingIntent = KalendarClickReceiver.createImmutablePendingIntentForAction(
-                KalendarClickReceiver.KalendarAction.ADD_CALENDAR_EVENT, settings);
-        rv.setOnClickPendingIntent(R.id.add_event, pendingIntent);
-    }
-
-    private static void configureRefresh(InstanceSettings settings, RemoteViews rv) {
-        PendingIntent pendingIntent = KalendarClickReceiver.createImmutablePendingIntentForAction(
-                KalendarClickReceiver.KalendarAction.REFRESH, settings);
-        rv.setOnClickPendingIntent(R.id.refresh, pendingIntent);
-    }
-
-    private static void configureOverflowMenu(InstanceSettings settings, RemoteViews rv) {
-        PendingIntent pendingIntent = KalendarClickReceiver.createImmutablePendingIntentForAction(
-                KalendarClickReceiver.KalendarAction.CONFIGURE, settings);
-        rv.setOnClickPendingIntent(R.id.overflow_menu, pendingIntent);
-    }
-
-    private static void configureEmptyWidgetMessage(InstanceSettings settings, RemoteViews rv) {
-        EmptyListMessageVisualizer visualizer = new EmptyListMessageVisualizer(settings);
-        RemoteViews message;
-        if (PermissionsUtil.arePermissionsGranted(settings.getContext())) {
-            message = visualizer.getView(EmptyListMessageVisualizer.Type.EMPTY);
-        } else {
-            message = visualizer.getView(EmptyListMessageVisualizer.Type.NO_PERMISSIONS);
+        DateTime minimumUpdateInterval = now.plusMinutes(MINIMUM_UPDATE_MINUTES);
+        if (minimumUpdateInterval.isBefore(nextUpdate)) {
+            nextUpdate = minimumUpdateInterval;
         }
-        rv.addView(R.id.header_parent, message);
+
+        KalendarUpdater.scheduleNextUpdate(getSettings(), nextUpdate);
     }
 
-    private static void configureWidgetEntriesList(InstanceSettings settings, Context context, int widgetId,
-                                                   RemoteViews rv) {
-        Intent intent = new Intent(context, KalendarRemoteViewsService.class);
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
-        intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-        setBackgroundColor(rv, R.id.event_list, settings.getBackgroundColor());
-        rv.setRemoteAdapter(R.id.event_list, intent);
-        rv.setPendingIntentTemplate(R.id.event_list,
-                KalendarClickReceiver.createMutablePendingIntentForAction(KalendarClickReceiver.KalendarAction.VIEW_ENTRY, settings));
+    @NonNull
+    private InstanceSettings getSettings() {
+        return settings;
     }
 }

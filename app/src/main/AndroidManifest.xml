@@ -70,12 +70,6 @@
         <receiver
             android:name="com.github.ekalin.kalendar.KalendarClickReceiver"
             android:exported="false" />
-
-        <service
-            android:name="com.github.ekalin.kalendar.KalendarRemoteViewsService"
-            android:exported="false"
-            android:permission="android.permission.BIND_REMOTEVIEWS">
-        </service>
     </application>
 
     <queries>

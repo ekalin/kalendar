@@ -11,6 +11,7 @@ import android.provider.CalendarContract;
 import android.provider.CalendarContract.Attendees;
 import android.provider.CalendarContract.Calendars;
 import android.provider.CalendarContract.Instances;
+import android.util.Log;
 import android.util.SparseArray;
 import androidx.annotation.NonNull;
 import androidx.core.util.Supplier;
@@ -34,6 +35,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CalendarEventProvider extends EventProvider {
+    private static final String TAG = CalendarEventProvider.class.getSimpleName();
     private static final String EXCLUDE_DECLINED = Instances.SELF_ATTENDEE_STATUS + NOT_EQUALS
             + Attendees.ATTENDEE_STATUS_DECLINED;
     private static final String EXCLUDE_CANCELED = Instances.STATUS + NOT_EQUALS + Instances.STATUS_CANCELED;
@@ -207,6 +209,7 @@ public class CalendarEventProvider extends EventProvider {
             ContentObserver observer = observerCreator.get();
             context.getContentResolver().registerContentObserver(CalendarContract.CONTENT_URI, false,
                     observer);
+            Log.d(TAG, "Registered contentObserver");
             return Collections.singletonList(observer);
         } else {
             return Collections.emptyList();

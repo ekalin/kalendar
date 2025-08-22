@@ -7,6 +7,7 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 import androidx.core.util.Supplier;
 
 import com.github.ekalin.kalendar.KalendarClickReceiver;
@@ -27,6 +28,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DmfsOpenTasksProvider extends AbstractTaskProvider {
+    private static final String TAG = DmfsOpenTasksProvider.class.getSimpleName();
+
     public DmfsOpenTasksProvider(Context context, int widgetId, InstanceSettings settings) {
         super(context, widgetId, settings);
     }
@@ -161,6 +164,7 @@ public class DmfsOpenTasksProvider extends AbstractTaskProvider {
             ContentObserver observer = observerCreator.get();
             context.getContentResolver().registerContentObserver(DmfsOpenTasksContract.Tasks.PROVIDER_URI, false,
                     observer);
+            Log.d(TAG, "Registered contentObserver");
             return Optional.of(observer);
         } else {
             return Optional.empty();
