@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 import androidx.annotation.NonNull;
+import androidx.core.widget.RemoteViewsCompat;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -63,7 +64,7 @@ public class KalendarRemoteViewsFactory {
             InstanceSettings settings = AllSettings.instanceFromId(context, widgetId);
             RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_main);
             configureWidgetHeader(settings, rv);
-            configureWidgetEntriesList(settings, rv);
+            configureWidgetEntriesList(context, settings, rv);
 
             Log.d(TAG, "Calling appWidgetManager.updateAppWidget");
             appWidgetManager.updateAppWidget(widgetId, rv);
@@ -141,7 +142,7 @@ public class KalendarRemoteViewsFactory {
         rv.addView(R.id.header_parent, message);
     }
 
-    private void configureWidgetEntriesList(InstanceSettings settings, RemoteViews rv) {
+    private void configureWidgetEntriesList(Context context, InstanceSettings settings, RemoteViews rv) {
         setBackgroundColor(rv, R.id.event_list, settings.getBackgroundColor());
 
         List<WidgetEntry> entries = getWidgetEntries(settings);
@@ -149,16 +150,16 @@ public class KalendarRemoteViewsFactory {
             configureEmptyWidgetMessage(settings, rv);
         }
 
-        rv.setRemoteAdapter(R.id.event_list, getEntryViews(entries));
+        RemoteViewsCompat.setRemoteAdapter(context, rv, settings.getWidgetId(), R.id.event_list, getEntryViews(entries));
         rv.setPendingIntentTemplate(R.id.event_list,
                 KalendarClickReceiver.createMutablePendingIntentForAction(KalendarClickReceiver.KalendarAction.VIEW_ENTRY, settings));
 
         scheduleNextUpdate(entries);
     }
 
-    private RemoteViews.RemoteCollectionItems getEntryViews(List<WidgetEntry> entries) {
+    private RemoteViewsCompat.RemoteCollectionItems getEntryViews(List<WidgetEntry> entries) {
         Log.d(TAG, "Creating entries list");
-        RemoteViews.RemoteCollectionItems.Builder builder = new RemoteViews.RemoteCollectionItems.Builder()
+        RemoteViewsCompat.RemoteCollectionItems.Builder builder = new RemoteViewsCompat.RemoteCollectionItems.Builder()
                 .setHasStableIds(false)
                 .setViewTypeCount(getViewTypeCount());
 

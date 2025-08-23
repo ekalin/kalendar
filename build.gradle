@@ -6,11 +6,12 @@ buildscript {
 
     ext {
         compileSdkVersion = 35 as int
-        minSdkVersion = 31 as int
+        minSdkVersion = 23 as int
         targetSdkVersion = 35 as int
 
         appCompatVersion = '1.7.1'
         colorPickerVersion = '1.1.0'
+        coreRemoteViewsVersion = '1.1.0'
         desugarVersion = '2.1.5'
         jodaTimeVersion = '2.14.0'
         junitVersion = '4.13.2'
