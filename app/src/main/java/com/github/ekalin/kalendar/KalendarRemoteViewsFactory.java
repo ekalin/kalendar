@@ -6,27 +6,17 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
-import androidx.annotation.NonNull;
 import androidx.core.widget.RemoteViewsCompat;
 
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 
-import com.github.ekalin.kalendar.birthday.BirthdayVisualizer;
-import com.github.ekalin.kalendar.calendar.CalendarEventVisualizer;
 import com.github.ekalin.kalendar.prefs.AllSettings;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
-import com.github.ekalin.kalendar.task.TaskVisualizer;
 import com.github.ekalin.kalendar.util.DateUtil;
 import com.github.ekalin.kalendar.util.PermissionsUtil;
-import com.github.ekalin.kalendar.widget.DayHeader;
-import com.github.ekalin.kalendar.widget.DayHeaderVisualizer;
 import com.github.ekalin.kalendar.widget.EmptyListMessageVisualizer;
 import com.github.ekalin.kalendar.widget.WidgetEntry;
-import com.github.ekalin.kalendar.widget.WidgetEntryVisualizer;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -40,19 +30,14 @@ public class KalendarRemoteViewsFactory {
     private static final int MINIMUM_UPDATE_MINUTES = 60;
 
     private final InstanceSettings settings;
-    private volatile List<WidgetEntryVisualizer<?>> eventProviders;
+    private volatile WidgetEntryFactory widgetEntryFactory;
 
     public KalendarRemoteViewsFactory(Context context, int widgetId) {
         this.settings = AllSettings.instanceFromId(context, widgetId);
-
-        eventProviders = new ArrayList<>();
-        eventProviders.add(new DayHeaderVisualizer(context, widgetId));
-        eventProviders.add(new CalendarEventVisualizer(context, widgetId));
-        eventProviders.add(new TaskVisualizer(context, widgetId));
-        eventProviders.add(new BirthdayVisualizer(context, widgetId));
+        this.widgetEntryFactory = new WidgetEntryFactory(context, widgetId, settings);
     }
 
-    void updateWidget(Context context, int widgetId) {
+    public void updateWidget(Context context, int widgetId) {
         Log.d(TAG, "Starting update for " + widgetId);
         try {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -145,100 +130,23 @@ public class KalendarRemoteViewsFactory {
     private void configureWidgetEntriesList(Context context, InstanceSettings settings, RemoteViews rv) {
         setBackgroundColor(rv, R.id.event_list, settings.getBackgroundColor());
 
-        List<WidgetEntry> entries = getWidgetEntries(settings);
+        List<WidgetEntry> entries = widgetEntryFactory.getWidgetEntries();
         if (entries.isEmpty()) {
             configureEmptyWidgetMessage(settings, rv);
         }
 
-        RemoteViewsCompat.setRemoteAdapter(context, rv, settings.getWidgetId(), R.id.event_list, getEntryViews(entries));
+        RemoteViewsCompat.RemoteCollectionItems entryViews = widgetEntryFactory.getEntryViews(entries);
+        RemoteViewsCompat.setRemoteAdapter(context, rv, settings.getWidgetId(), R.id.event_list, entryViews);
         rv.setPendingIntentTemplate(R.id.event_list,
                 KalendarClickReceiver.createMutablePendingIntentForAction(KalendarClickReceiver.KalendarAction.VIEW_ENTRY, settings));
 
         scheduleNextUpdate(entries);
     }
 
-    private RemoteViewsCompat.RemoteCollectionItems getEntryViews(List<WidgetEntry> entries) {
-        Log.d(TAG, "Creating entries list");
-        RemoteViewsCompat.RemoteCollectionItems.Builder builder = new RemoteViewsCompat.RemoteCollectionItems.Builder()
-                .setHasStableIds(false)
-                .setViewTypeCount(getViewTypeCount());
-
-        for (int i = 0; i < entries.size(); i++) {
-            WidgetEntry entry = entries.get(i);
-            RemoteViews view = getEntryView(entry, i);
-            builder.addItem(i, view);
-        }
-
-        Log.d(TAG, "Finished creating entries list with " + entries.size() + " items");
-        return builder.build();
-    }
-
-    private List<WidgetEntry> getWidgetEntries(InstanceSettings settings) {
-        List<WidgetEntry> eventEntries = new ArrayList<>();
-        for (WidgetEntryVisualizer<?> eventProvider : eventProviders) {
-            eventEntries.addAll(eventProvider.getEventEntries());
-        }
-        Collections.sort(eventEntries);
-
-        return settings.getShowDayHeaders() ? addDayHeaders(eventEntries) : eventEntries;
-    }
-
-    private List<WidgetEntry> addDayHeaders(List<WidgetEntry> listIn) {
-        List<WidgetEntry> listOut = new ArrayList<>();
-        if (!listIn.isEmpty()) {
-            DateTimeZone zone = getSettings().getTimeZone();
-            boolean showDaysWithoutEvents = getSettings().getShowDaysWithoutEvents();
-            DayHeader curDayBucket = new DayHeader(new DateTime(0, zone), zone);
-            for (WidgetEntry entry : listIn) {
-                DateTime nextStartOfDay = entry.getStartDay();
-                if (!nextStartOfDay.isEqual(curDayBucket.getStartDay())) {
-                    if (showDaysWithoutEvents) {
-                        addEmptyDayHeadersBetweenTwoDays(listOut, curDayBucket.getStartDay(), nextStartOfDay, zone);
-                    }
-                    curDayBucket = new DayHeader(nextStartOfDay, zone);
-                    listOut.add(curDayBucket);
-                }
-                listOut.add(entry);
-            }
-        }
-        return listOut;
-    }
-
-    private void addEmptyDayHeadersBetweenTwoDays(List<WidgetEntry> entries, DateTime fromDayExclusive,
-                                                  DateTime toDayExclusive, DateTimeZone zone) {
-        DateTime emptyDay = fromDayExclusive.plusDays(1);
-        DateTime today = DateUtil.now(getSettings().getTimeZone()).withTimeAtStartOfDay();
-        if (emptyDay.isBefore(today)) {
-            emptyDay = today;
-        }
-        while (emptyDay.isBefore(toDayExclusive)) {
-            entries.add(new DayHeader(emptyDay, zone));
-            emptyDay = emptyDay.plusDays(1);
-        }
-    }
-
-    public RemoteViews getEntryView(WidgetEntry entry, int position) {
-        for (WidgetEntryVisualizer<?> eventProvider : eventProviders) {
-            if (entry.getClass().isAssignableFrom(eventProvider.getSupportedEventEntryType())) {
-                return eventProvider.getRemoteViews(entry, position);
-            }
-        }
-
-        return null;
-    }
-
-    public int getViewTypeCount() {
-        int result = 0;
-        for (WidgetEntryVisualizer<?> eventProvider : eventProviders) {
-            result += eventProvider.getViewTypeCount();
-        }
-        return result;
-    }
-
     // TODO: This logic would fit better in KalendarUpdater
     // Maybe here only the next event date is returned, and the rest of the logic is in KalendarUpdater
     private void scheduleNextUpdate(List<WidgetEntry> entries) {
-        DateTime now = DateUtil.now(getSettings().getTimeZone());
+        DateTime now = DateUtil.now(settings.getTimeZone());
 
         DateTime nextUpdate = DateUtil.startOfNextDay(now);
 
@@ -254,11 +162,6 @@ public class KalendarRemoteViewsFactory {
             nextUpdate = minimumUpdateInterval;
         }
 
-        KalendarUpdater.scheduleNextUpdate(getSettings(), nextUpdate);
-    }
-
-    @NonNull
-    private InstanceSettings getSettings() {
-        return settings;
+        KalendarUpdater.scheduleNextUpdate(settings, nextUpdate);
     }
 }

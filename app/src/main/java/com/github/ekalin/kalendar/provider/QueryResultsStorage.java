@@ -9,6 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.github.ekalin.kalendar.R;
+import com.github.ekalin.kalendar.WidgetEntryFactory;
+import com.github.ekalin.kalendar.prefs.AllSettings;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -34,12 +36,10 @@ public class QueryResultsStorage {
     }
 
     public static void shareEventsForDebugging(Context context, int widgetId) {
-        final String method = "shareEventsForDebugging";
         try {
             setNeedToStoreResults(true);
-            // TODO: Make it work again
-//            KalendarRemoteViewsFactory factory = new KalendarRemoteViewsFactory(context, widgetId);
-//            factory.onDataSetChanged();
+            WidgetEntryFactory factory = new WidgetEntryFactory(context, widgetId, AllSettings.instanceFromId(context, widgetId));
+            factory.getWidgetEntries();
             String results = theStorage.toJsonString(context, widgetId);
             if (!TextUtils.isEmpty(results)) {
                 String fileName = "Kalendar-" + widgetId + ".json";
