@@ -17,6 +17,7 @@ import com.github.ekalin.kalendar.util.PermissionsUtil;
 import com.github.ekalin.kalendar.widget.EmptyListMessageVisualizer;
 import com.github.ekalin.kalendar.widget.WidgetEntry;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -27,8 +28,6 @@ import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setTextSize;
 public class KalendarRemoteViewsFactory {
     private static final String TAG = KalendarRemoteViewsFactory.class.getSimpleName();
 
-    private static final int MINIMUM_UPDATE_MINUTES = 60;
-
     private final InstanceSettings settings;
     private volatile WidgetEntryFactory widgetEntryFactory;
 
@@ -37,25 +36,29 @@ public class KalendarRemoteViewsFactory {
         this.widgetEntryFactory = new WidgetEntryFactory(context, widgetId, settings);
     }
 
-    public void updateWidget(Context context, int widgetId) {
+    public DateTime updateWidget(Context context, int widgetId) {
         Log.d(TAG, "Starting update for " + widgetId);
         try {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             if (appWidgetManager == null) {
                 Log.d(TAG, widgetId + " updateWidget, appWidgetManager is null, context:" + context);
-                return;
+                return null;
             }
 
             InstanceSettings settings = AllSettings.instanceFromId(context, widgetId);
             RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_main);
             configureWidgetHeader(settings, rv);
-            configureWidgetEntriesList(context, settings, rv);
+            List<WidgetEntry> entries = widgetEntryFactory.getWidgetEntries();
+            configureWidgetEntriesList(context, settings, rv, entries);
 
             Log.d(TAG, "Calling appWidgetManager.updateAppWidget");
             appWidgetManager.updateAppWidget(widgetId, rv);
             Log.d(TAG, "Finished update for " + widgetId);
+
+            return nextUpdateTime(entries);
         } catch (Exception e) {
             Log.w(TAG, widgetId + " Exception in updateWidget, context:" + context, e);
+            return nextUpdateTime(Collections.emptyList());
         }
     }
 
@@ -127,10 +130,9 @@ public class KalendarRemoteViewsFactory {
         rv.addView(R.id.header_parent, message);
     }
 
-    private void configureWidgetEntriesList(Context context, InstanceSettings settings, RemoteViews rv) {
+    private void configureWidgetEntriesList(Context context, InstanceSettings settings, RemoteViews rv, List<WidgetEntry> entries) {
         setBackgroundColor(rv, R.id.event_list, settings.getBackgroundColor());
 
-        List<WidgetEntry> entries = widgetEntryFactory.getWidgetEntries();
         if (entries.isEmpty()) {
             configureEmptyWidgetMessage(settings, rv);
         }
@@ -139,15 +141,10 @@ public class KalendarRemoteViewsFactory {
         RemoteViewsCompat.setRemoteAdapter(context, rv, settings.getWidgetId(), R.id.event_list, entryViews);
         rv.setPendingIntentTemplate(R.id.event_list,
                 KalendarClickReceiver.createMutablePendingIntentForAction(KalendarClickReceiver.KalendarAction.VIEW_ENTRY, settings));
-
-        scheduleNextUpdate(entries);
     }
 
-    // TODO: This logic would fit better in KalendarUpdater
-    // Maybe here only the next event date is returned, and the rest of the logic is in KalendarUpdater
-    private void scheduleNextUpdate(List<WidgetEntry> entries) {
+    private DateTime nextUpdateTime(List<WidgetEntry> entries) {
         DateTime now = DateUtil.now(settings.getTimeZone());
-
         DateTime nextUpdate = DateUtil.startOfNextDay(now);
 
         for (WidgetEntry entry : entries) {
@@ -157,11 +154,6 @@ public class KalendarRemoteViewsFactory {
             }
         }
 
-        DateTime minimumUpdateInterval = now.plusMinutes(MINIMUM_UPDATE_MINUTES);
-        if (minimumUpdateInterval.isBefore(nextUpdate)) {
-            nextUpdate = minimumUpdateInterval;
-        }
-
-        KalendarUpdater.scheduleNextUpdate(settings, nextUpdate);
+        return nextUpdate;
     }
 }

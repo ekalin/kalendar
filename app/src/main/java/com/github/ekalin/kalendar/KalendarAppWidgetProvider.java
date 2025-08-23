@@ -5,16 +5,36 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 
+import org.joda.time.DateTime;
+
 import com.github.ekalin.kalendar.prefs.AllSettings;
+import com.github.ekalin.kalendar.prefs.InstanceSettings;
+import com.github.ekalin.kalendar.util.DateUtil;
 
 public class KalendarAppWidgetProvider extends AppWidgetProvider {
+    private static final int MINIMUM_UPDATE_MINUTES = 60;
+
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int widgetId : appWidgetIds) {
             // TODO: Cache the factory for each widget
-            new KalendarRemoteViewsFactory(context, widgetId).updateWidget(context, widgetId);
+            DateTime nextUpdate = new KalendarRemoteViewsFactory(context, widgetId).updateWidget(context, widgetId);
+            scheduleNextUpdate(context, widgetId, nextUpdate);
         }
         KalendarUpdater.registerReceivers(context, false);
+    }
+
+    private void scheduleNextUpdate(Context context, int widgetId, DateTime nextUpdate) {
+        InstanceSettings settings = AllSettings.instanceFromId(context, widgetId);
+
+        DateTime now = DateUtil.now(settings.getTimeZone());
+
+        DateTime minimumUpdateInterval = now.plusMinutes(MINIMUM_UPDATE_MINUTES);
+        if (minimumUpdateInterval.isBefore(nextUpdate)) {
+            nextUpdate = minimumUpdateInterval;
+        }
+
+        KalendarUpdater.scheduleNextUpdate(settings, nextUpdate);
     }
 
     @Override
