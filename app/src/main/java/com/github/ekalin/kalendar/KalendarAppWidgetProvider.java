@@ -4,6 +4,7 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
+import android.util.Log;
 
 import org.joda.time.DateTime;
 
@@ -15,17 +16,34 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class KalendarAppWidgetProvider extends AppWidgetProvider {
+    private static final String TAG = KalendarAppWidgetProvider.class.getSimpleName();
+
     private static final int MINIMUM_UPDATE_MINUTES = 60;
+    private static final int MIN_MILLIS_BETWEEN_RELOADS = 500;
 
     private static final Map<Integer, KalendarRemoteViewsFactory> factories = new HashMap<>();
+    private static final Map<Integer, Long> lastUpdated = new HashMap<>();
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int widgetId : appWidgetIds) {
-            DateTime nextUpdate = getFactory(context, widgetId).updateWidget();
-            scheduleNextUpdate(context, widgetId, nextUpdate);
+            updateWidget(context, widgetId);
         }
         KalendarUpdater.registerReceivers(context, false);
+    }
+
+    private void updateWidget(Context context, int widgetId) {
+        //noinspection DataFlowIssue
+        long lastUpdatedMillis = lastUpdated.getOrDefault(widgetId, 0L);
+        long millisSinceLastUpdate = Math.abs(System.currentTimeMillis() - lastUpdatedMillis);
+        if (millisSinceLastUpdate < MIN_MILLIS_BETWEEN_RELOADS) {
+            Log.d(TAG, "onUpdate skipped, last update was " + millisSinceLastUpdate + "ms ago");
+            return;
+        }
+
+        DateTime nextUpdate = getFactory(context, widgetId).updateWidget();
+        lastUpdated.put(widgetId, System.currentTimeMillis());
+        scheduleNextUpdate(context, widgetId, nextUpdate);
     }
 
     private KalendarRemoteViewsFactory getFactory(Context context, int widgetId) {
