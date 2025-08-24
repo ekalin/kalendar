@@ -11,17 +11,25 @@ import com.github.ekalin.kalendar.prefs.AllSettings;
 import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.util.DateUtil;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class KalendarAppWidgetProvider extends AppWidgetProvider {
     private static final int MINIMUM_UPDATE_MINUTES = 60;
+
+    private static final Map<Integer, KalendarRemoteViewsFactory> factories = new HashMap<>();
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int widgetId : appWidgetIds) {
-            // TODO: Cache the factory for each widget
-            DateTime nextUpdate = new KalendarRemoteViewsFactory(context, widgetId).updateWidget(context, widgetId);
+            DateTime nextUpdate = getFactory(context, widgetId).updateWidget();
             scheduleNextUpdate(context, widgetId, nextUpdate);
         }
         KalendarUpdater.registerReceivers(context, false);
+    }
+
+    private KalendarRemoteViewsFactory getFactory(Context context, int widgetId) {
+        return factories.computeIfAbsent(widgetId, (id) -> new KalendarRemoteViewsFactory(context, id));
     }
 
     private void scheduleNextUpdate(Context context, int widgetId, DateTime nextUpdate) {

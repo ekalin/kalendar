@@ -28,15 +28,19 @@ import static com.github.ekalin.kalendar.util.RemoteViewsUtil.setTextSize;
 public class KalendarRemoteViewsFactory {
     private static final String TAG = KalendarRemoteViewsFactory.class.getSimpleName();
 
+    private final Context context;
+    private final int widgetId;
     private final InstanceSettings settings;
-    private volatile WidgetEntryFactory widgetEntryFactory;
+    private final WidgetEntryFactory widgetEntryFactory;
 
     public KalendarRemoteViewsFactory(Context context, int widgetId) {
+        this.context = context;
+        this.widgetId = widgetId;
         this.settings = AllSettings.instanceFromId(context, widgetId);
         this.widgetEntryFactory = new WidgetEntryFactory(context, widgetId, settings);
     }
 
-    public DateTime updateWidget(Context context, int widgetId) {
+    public DateTime updateWidget() {
         Log.d(TAG, "Starting update for " + widgetId);
         try {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
