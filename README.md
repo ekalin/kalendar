@@ -26,12 +26,10 @@ Kalendar is a home screen widget for your Android device. Each widget has its ow
 * Android 6+ supported. Supports Android tablets.
 
 Note on Tasks support: As there is no unified way to access tasks created in different applications, each application needs its own implementation. Currently supported:
-* [OpenTasks (by dmfs GmbH)](https://github.com/dmfs/opentasks).
-* [Tasks.org (by Alex Baker)](https://play.google.com/store/apps/details?id=org.tasks).
-* Tasks of Samsung Calendar.
 
-Tasks from Google Tasks are supported with the use
-of [Tasks.org (by Alex Baker)](https://play.google.com/store/apps/details?id=org.tasks).
+* [Tasks.org (by Alex Baker)](https://play.google.com/store/apps/details?id=org.tasks). This app allows syncing tasks
+  from Google Tasks, Microsoft To Do and CalDAV sources.
+* Tasks of Samsung Calendar.
 
 ## Collaborate
 
@@ -44,6 +42,8 @@ provide [pull requests](https://github.com/ekalin/kalendar/pulls).
 ### v10
 
 * Support for Android 16.
+* Note: A future version will drop support for OpenTasks, as the app has not been updated and is not available anymore
+  for new installs.
 
 ### v9
 
