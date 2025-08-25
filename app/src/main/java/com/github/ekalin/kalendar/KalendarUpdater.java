@@ -37,16 +37,18 @@ public class KalendarUpdater extends BroadcastReceiver {
     private static final AtomicReference<List<ContentObserver>> registeredObservers = new AtomicReference<>();
 
     public static void registerReceivers(Context context, boolean reregister) {
+        Log.d(TAG, "registerReceivers starting");
         Context applContext = context.getApplicationContext();
         synchronized (registeredReceiver) {
             if (!reregister && receiverRegistered) {
+                Log.d(TAG, "registerReceivers: already registered");
                 return;
             }
 
             registerBroadcastReceiver(applContext);
             registerContentObservers(applContext);
             receiverRegistered = true;
-            Log.i(TAG, "Registered receivers from " + applContext.getClass().getName());
+            Log.i(TAG, "registerReceivers: Registered receivers from " + applContext.getClass().getName());
         }
     }
 
@@ -61,6 +63,7 @@ public class KalendarUpdater extends BroadcastReceiver {
         if (oldReceiver != null) {
             oldReceiver.unRegister(applContext);
         }
+        Log.d(TAG, "registerReceivers: Registered broadcast receiver");
     }
 
     private static void registerContentObservers(Context applContext) {

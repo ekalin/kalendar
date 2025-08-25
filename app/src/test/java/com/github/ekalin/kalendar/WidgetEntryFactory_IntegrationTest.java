@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
+import com.github.ekalin.kalendar.prefs.AllSettings;
 import com.github.ekalin.kalendar.prefs.InstanceSettingsTestHelper;
 import com.github.ekalin.kalendar.task.dmfs.DmfsOpenTasksContract;
 import com.github.ekalin.kalendar.testutil.ContentProviderForTests;
@@ -29,7 +30,7 @@ import java.util.List;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
-public class KalendarRemoteViewsFactory_IntegrationTest {
+public class WidgetEntryFactory_IntegrationTest {
     private static final String COLUMN_START_DATE = "EFFECTIVE_START_DATE";
 
     private final Context context = ApplicationProvider.getApplicationContext();
@@ -82,8 +83,7 @@ public class KalendarRemoteViewsFactory_IntegrationTest {
         setupWidget();
         createEntries();
 
-        KalendarRemoteViewsFactory factory = new KalendarRemoteViewsFactory(context, widgetId);
-        factory.onDataSetChanged();
+        WidgetEntryFactory factory = new WidgetEntryFactory(context, widgetId, AllSettings.instanceFromId(context, widgetId));
         List<WidgetEntry> entries = factory.getWidgetEntries();
 
         checkEntries(entries);

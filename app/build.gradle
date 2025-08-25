@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 ext.versionMajor = 9
-ext.versionMinor = 0
-ext.versionPatch = 0
+ext.versionMinor = 9
+ext.versionPatch = 1
 ext.versionBuild = 1
 
 android {
@@ -76,6 +76,7 @@ dependencies {
     implementation platform("org.jetbrains.kotlin:kotlin-bom:$kotlinVersion")
 
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "androidx.core:core-remoteviews:$coreRemoteViewsVersion"
     implementation "androidx.preference:preference:$preferenceVersion"
     implementation "joda-time:joda-time:$jodaTimeVersion"
     implementation "com.jaredrummler:colorpicker:$colorPickerVersion"

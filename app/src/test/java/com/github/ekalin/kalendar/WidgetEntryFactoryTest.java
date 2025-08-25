@@ -37,9 +37,9 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(RobolectricTestRunner.class)
-public class KalendarRemoteViewsFactoryTest {
+public class WidgetEntryFactoryTest {
     private static final Correspondence<WidgetEntry, String> EVENT_TITLE
-            = Correspondence.transforming(KalendarRemoteViewsFactoryTest::getEventTitle, "has title of");
+            = Correspondence.transforming(WidgetEntryFactoryTest::getEventTitle, "has title of");
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule().strictness(Strictness.STRICT_STUBS);
@@ -47,8 +47,8 @@ public class KalendarRemoteViewsFactoryTest {
     @Mock
     private WidgetEntryVisualizer<WidgetEntry> eventProvider;
 
-    private Context context = ApplicationProvider.getApplicationContext();
-    private DateTime today = DateTime.now();
+    private final Context context = ApplicationProvider.getApplicationContext();
+    private final DateTime today = DateTime.now();
 
     @After
     public void reset() {
@@ -71,8 +71,7 @@ public class KalendarRemoteViewsFactoryTest {
 
         doReturn(createEventListForSortTest()).when(eventProvider).getEventEntries();
 
-        KalendarRemoteViewsFactory factory = createFactory(eventProvider);
-        factory.onDataSetChanged();
+        WidgetEntryFactory factory = createFactory(eventProvider);
 
         List<WidgetEntry> widgetEntries = factory.getWidgetEntries();
         assertThat(widgetEntries).comparingElementsUsing(EVENT_TITLE).containsExactly(
@@ -99,8 +98,7 @@ public class KalendarRemoteViewsFactoryTest {
 
         doReturn(createEventListForDayHeaderTest()).when(eventProvider).getEventEntries();
 
-        KalendarRemoteViewsFactory factory = createFactory(eventProvider);
-        factory.onDataSetChanged();
+        WidgetEntryFactory factory = createFactory(eventProvider);
 
         List<WidgetEntry> widgetEntries = factory.getWidgetEntries();
         assertDayHeaders(widgetEntries);
@@ -126,8 +124,7 @@ public class KalendarRemoteViewsFactoryTest {
 
         doReturn(createEventListForDayHeaderTest()).when(eventProvider).getEventEntries();
 
-        KalendarRemoteViewsFactory factory = createFactory(eventProvider);
-        factory.onDataSetChanged();
+        WidgetEntryFactory factory = createFactory(eventProvider);
 
         List<WidgetEntry> widgetEntries = factory.getWidgetEntries();
         assertDayHeadersForDaysWithoutEvents(widgetEntries);
@@ -155,12 +152,12 @@ public class KalendarRemoteViewsFactoryTest {
         return Arrays.asList(calendar1, calendar2);
     }
 
-    private KalendarRemoteViewsFactory createFactory(WidgetEntryVisualizer<?> eventProvider) {
-        KalendarRemoteViewsFactory factory = new KalendarRemoteViewsFactory(context, 1);
+    private WidgetEntryFactory createFactory(WidgetEntryVisualizer<?> entryVisualizer) {
+        WidgetEntryFactory factory = new WidgetEntryFactory(context, 1, AllSettings.instanceFromId(context, 1));
         // Make it a unit test
-        List<WidgetEntryVisualizer<?>> eventProviders = ReflectionHelpers.getField(factory, "eventProviders");
-        eventProviders.clear();
-        eventProviders.add(eventProvider);
+        List<WidgetEntryVisualizer<?>> eventVisualizers = ReflectionHelpers.getField(factory, "eventVisualizers");
+        eventVisualizers.clear();
+        eventVisualizers.add(eventProvider);
 
         return factory;
     }

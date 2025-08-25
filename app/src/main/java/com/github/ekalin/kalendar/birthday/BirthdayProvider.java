@@ -7,6 +7,7 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.util.Log;
 import androidx.core.util.Supplier;
 
 import org.joda.time.LocalDate;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class BirthdayProvider extends EventProvider {
+    private static final String TAG = BirthdayProvider.class.getSimpleName();
     private static final String PERMISSION = Manifest.permission.READ_CONTACTS;
     private static final Uri CONTACTS_URI = ContactsContract.Data.CONTENT_URI;
 
@@ -110,6 +112,7 @@ public class BirthdayProvider extends EventProvider {
         if (hasPermission(context)) {
             ContentObserver observer = observerCreator.get();
             context.getContentResolver().registerContentObserver(CONTACTS_URI, false, observer);
+            Log.d(TAG, "Registered contentObserver");
             return Collections.singletonList(observer);
         } else {
             return Collections.emptyList();
