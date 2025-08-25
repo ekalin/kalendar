@@ -41,6 +41,10 @@ provide [pull requests](https://github.com/ekalin/kalendar/pulls).
 
 ## Changelog
 
+### v10
+
+* Support for Android 16.
+
 ### v9
 
 * Support for Android 15.
