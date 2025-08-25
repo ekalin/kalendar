@@ -109,7 +109,6 @@
     <string name="show_only_closest_instance_of_recurring_event">繰り返しイベントの最も近いインスタンスのみを表示</string>
 
     <!-- Preference header: Tasks -->
-    <string name="task_source_opentasks">OpenTasks (by dmfs GmbH)</string>
     <string name="task_source_samsung">Samsung カレンダー</string>
     <!-- Preference header: Feedback -->
     <string name="feedback_backup_prefs">フィードバックとバックアップ</string>

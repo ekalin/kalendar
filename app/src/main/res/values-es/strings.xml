@@ -118,7 +118,6 @@
     <!-- Preference header: Tasks -->
     <string name="task_prefs">Tareas</string>
     <string name="task_source_none">No mostrar tareas</string>
-    <string name="task_source_opentasks">OpenTasks (por dmfs GmbH)</string>
     <string name="task_source_samsung">Calendario Samsung</string>
     <string name="grant_task_permission_title">Conceder permissos para leer tareas</string>
 

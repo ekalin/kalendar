@@ -108,7 +108,6 @@
     <string name="show_only_closest_instance_of_recurring_event">Показать только ближайший экземпляр повторяющегося события</string>
 
     <!-- Preference header: Tasks -->
-    <string name="task_source_opentasks">OpenTasks (от dmfs GmbH)</string>
     <string name="task_source_samsung">Календарь Samsung</string>
 
     <!-- Preference header: Feedback -->

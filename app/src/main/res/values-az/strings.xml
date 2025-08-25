@@ -101,7 +101,6 @@
     <string name="show_only_closest_instance_of_recurring_event">Təkrarlanan bir tədbirin yalnız ən yaxın nümunəsini göstər</string>
 
     <!-- Preference header: Tasks -->
-    <string name="task_source_opentasks">OpenTasks (dmfs GmbH tərəfindən)</string>
     <string name="task_source_samsung">Samsung Təqvim</string>
 
     <!-- Preference header: Feedback -->

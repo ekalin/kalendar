@@ -102,7 +102,6 @@
     <string name="show_only_closest_instance_of_recurring_event">Visa endast det närmaste datum av ett återkommande händelse</string>
 
     <!-- Preference header: Tasks -->
-    <string name="task_source_opentasks">OpenTasks (av dmfs GmbH)</string>
     <string name="task_source_samsung">Samsung Kalender</string>
 
     <!-- Preference header: Feedback -->

@@ -106,7 +106,6 @@
     <string name="show_only_closest_instance_of_recurring_event">Zobrazit pouze nejbližší výskyt opakované události</string>
 
     <!-- Preference header: Tasks -->
-    <string name="task_source_opentasks">OpenTasks (od dmfs GmbH)</string>
     <string name="task_source_samsung">Samsung kalendář</string>
 
     <!-- Preference header: Feedback -->

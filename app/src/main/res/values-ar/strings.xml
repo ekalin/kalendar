@@ -92,7 +92,6 @@
     <string name="all_events">جميع الاحداث</string>
     <string name="pref_hide_based_on_keywords_title">إخفاء استناداً إلى الكلمات الأساسية في العنوان</string>
     <!-- Preference header: Tasks -->
-    <string name="task_source_opentasks">OpenTasks (by dmfs GmbH)</string>
     <string name="task_source_samsung">تقويم سامسونج</string>
     <!-- Preference header: Feedback -->
     <string name="feedback_backup_prefs">الملاحظات والنسخة الإحتياطية</string>

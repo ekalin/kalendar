@@ -109,7 +109,6 @@
     <string name="show_only_closest_instance_of_recurring_event">Mostrar només el cas més proper d\'un esdeveniment periòdic</string>
 
     <!-- Preference header: Tasks -->
-    <string name="task_source_opentasks">OpenTasks (per dmfs GmbH)</string>
     <string name="task_source_samsung">Samsung Calendar</string>
 
     <!-- Preference header: Feedback -->

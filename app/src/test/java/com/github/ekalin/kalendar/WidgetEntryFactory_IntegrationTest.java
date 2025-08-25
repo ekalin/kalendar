@@ -16,7 +16,7 @@ import org.robolectric.RobolectricTestRunner;
 
 import com.github.ekalin.kalendar.prefs.AllSettings;
 import com.github.ekalin.kalendar.prefs.InstanceSettingsTestHelper;
-import com.github.ekalin.kalendar.task.dmfs.DmfsOpenTasksContract;
+import com.github.ekalin.kalendar.task.astridclone.AstridCloneTasksContract;
 import com.github.ekalin.kalendar.testutil.ContentProviderForTests;
 import com.github.ekalin.kalendar.util.DateUtil;
 import com.github.ekalin.kalendar.widget.BirthdayEntry;
@@ -97,13 +97,13 @@ public class WidgetEntryFactory_IntegrationTest {
         calendarProvider = Robolectric.setupContentProvider(ContentProviderForTests.class,
                 CalendarContract.Instances.CONTENT_URI.getAuthority());
         taskProvider = Robolectric.setupContentProvider(ContentProviderForTests.class,
-                DmfsOpenTasksContract.Tasks.PROVIDER_URI.getAuthority());
+                AstridCloneTasksContract.Tasks.PROVIDER_URI.getAuthority());
         birthdaysProvider = Robolectric.setupContentProvider(ContentProviderForTests.class,
                 ContactsContract.AUTHORITY);
 
         InstanceSettingsTestHelper settingsHelper = new InstanceSettingsTestHelper(context, widgetId);
         settingsHelper.setLockedTimeZoneId(zone.getID());
-        settingsHelper.setTaskSource("DMFS_OPEN_TASKS");
+        settingsHelper.setTaskSource("ASTRID_CLONE");
         settingsHelper.setEventsEnded(EndedSomeTimeAgo.YESTERDAY);
         settingsHelper.setShowBirthdays(true);
     }
@@ -156,11 +156,11 @@ public class WidgetEntryFactory_IntegrationTest {
 
     private void createTaskEntries() {
         MatrixCursor cursor = new MatrixCursor(new String[]{
-                DmfsOpenTasksContract.Tasks.COLUMN_ID,
-                DmfsOpenTasksContract.Tasks.COLUMN_TITLE,
-                COLUMN_START_DATE,
-                DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE,
-                DmfsOpenTasksContract.Tasks.COLUMN_COLOR,
+                AstridCloneTasksContract.Tasks.COLUMN_ID,
+                AstridCloneTasksContract.Tasks.COLUMN_TITLE,
+                AstridCloneTasksContract.Tasks.COLUMN_START_DATE,
+                AstridCloneTasksContract.Tasks.COLUMN_DUE_DATE,
+                AstridCloneTasksContract.Tasks.COLUMN_COLOR_LOCAL,
         });
 
         addTaskRow(cursor, 2L, "Prepare release", d0.plusDays(3), null);
@@ -171,11 +171,11 @@ public class WidgetEntryFactory_IntegrationTest {
 
     private void addTaskRow(MatrixCursor cursor, long id, String title, DateTime startDate, DateTime dueDate) {
         cursor.newRow()
-                .add(DmfsOpenTasksContract.Tasks.COLUMN_ID, id)
-                .add(DmfsOpenTasksContract.Tasks.COLUMN_TITLE, title)
-                .add(COLUMN_START_DATE, startDate != null ? startDate.getMillis() : null)
-                .add(DmfsOpenTasksContract.Tasks.COLUMN_DUE_DATE, dueDate != null ? dueDate.getMillis() : null)
-                .add(DmfsOpenTasksContract.Tasks.COLUMN_COLOR, 0);
+                .add(AstridCloneTasksContract.Tasks.COLUMN_ID, id)
+                .add(AstridCloneTasksContract.Tasks.COLUMN_TITLE, title)
+                .add(AstridCloneTasksContract.Tasks.COLUMN_START_DATE, startDate != null ? startDate.getMillis() : null)
+                .add(AstridCloneTasksContract.Tasks.COLUMN_DUE_DATE, dueDate != null ? dueDate.getMillis() : null)
+                .add(AstridCloneTasksContract.Tasks.COLUMN_COLOR_LOCAL, 0);
     }
 
     public void createBirthdays() {

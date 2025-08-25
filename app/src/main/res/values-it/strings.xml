@@ -120,7 +120,6 @@ Per ottenere il massimo dal widget è necessario autorizzare l\'accesso ai calen
     <string name="task_prefs_desc">Configurare la visualizzazione dei compiti</string>
     <string name="task_source_pref_title">Origine dei compiti</string>
     <string name="task_source_none">Non mostrare compiti</string>
-    <string name="task_source_opentasks">OpenTasks (di dmfs GmbH)</string>
     <string name="task_source_astrid_clone">Tasks.org (di Alex Baker)</string>
     <string name="task_source_samsung">Calendario Samsung</string>
 

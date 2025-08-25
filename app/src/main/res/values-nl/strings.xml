@@ -111,7 +111,6 @@
     <string name="show_only_closest_instance_of_recurring_event">Alleen de eerstvolgende van een terugkerende afspraak weergeven</string>
 
     <!-- Preference header: Tasks -->
-    <string name="task_source_opentasks">OpenTasks (door dmfs GmbH)</string>
     <string name="task_source_samsung">Samsung Kalender</string>
 
     <!-- Preference header: Feedback -->

@@ -73,13 +73,11 @@
     </string-array>
     <string-array name="pref_task_source_entries">
         <item>@string/task_source_none</item>
-        <item>@string/task_source_opentasks</item>
         <item>@string/task_source_astrid_clone</item>
         <item>@string/task_source_samsung</item>
     </string-array>
     <string-array name="pref_task_source_values" translatable="false">
         <item>NONE</item>
-        <item>DMFS_OPEN_TASKS</item>
         <item>ASTRID_CLONE</item>
         <item>SAMSUNG</item>
     </string-array>

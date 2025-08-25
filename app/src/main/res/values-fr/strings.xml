@@ -122,7 +122,6 @@
     <string name="task_prefs">Tâches</string>
     <string name="task_source_pref_title">Origin de les tâches</string>
     <string name="task_source_none">Non montrer pas les tâches</string>
-    <string name="task_source_opentasks">OpenTasks (par dmfs GmbH)</string>
     <string name="task_source_astrid_clone">Tasks.org (par Alex Baker)</string>
     <string name="task_source_samsung">Calendrier Samsung</string>
 

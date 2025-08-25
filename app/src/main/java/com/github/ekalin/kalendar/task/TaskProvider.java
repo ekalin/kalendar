@@ -10,7 +10,6 @@ import com.github.ekalin.kalendar.prefs.InstanceSettings;
 import com.github.ekalin.kalendar.prefs.PermissionRequester;
 import com.github.ekalin.kalendar.provider.EventProvider;
 import com.github.ekalin.kalendar.task.astridclone.AstridCloneTasksProvider;
-import com.github.ekalin.kalendar.task.dmfs.DmfsOpenTasksProvider;
 import com.github.ekalin.kalendar.task.samsung.SamsungTasksProvider;
 
 import java.util.ArrayList;
@@ -21,7 +20,6 @@ import java.util.Optional;
 public class TaskProvider extends EventProvider {
     public static final String PROVIDER_NONE = "NONE";
 
-    private static final String PROVIDER_DMFS = "DMFS_OPEN_TASKS";
     private static final String PROVIDER_ASTRID = "ASTRID_CLONE";
     private static final String PROVIDER_SAMSUNG = "SAMSUNG";
 
@@ -66,8 +64,6 @@ public class TaskProvider extends EventProvider {
 
     public static List<ContentObserver> registerObservers(Context context, Supplier<ContentObserver> observerCreator) {
         List<ContentObserver> observers = new ArrayList<>();
-        DmfsOpenTasksProvider.registerContentObserver(context, observerCreator)
-                .ifPresent(observers::add);
         AstridCloneTasksProvider.registerContentObserver(context, observerCreator)
                 .ifPresent(observers::add);
         return observers;
@@ -86,9 +82,6 @@ public class TaskProvider extends EventProvider {
     // This is called from the settings activity, when the task source that the user
     // selected has not been saved to settings yet
     private AbstractTaskProvider getProvider(String taskSource) {
-        if (PROVIDER_DMFS.equals(taskSource)) {
-            return new DmfsOpenTasksProvider(context, widgetId, settings);
-        }
         if (PROVIDER_ASTRID.equals(taskSource)) {
             return new AstridCloneTasksProvider(context, widgetId, settings);
         }

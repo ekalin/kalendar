@@ -122,7 +122,6 @@
     <string name="task_prefs_desc">Konfiguriere Anzeige der Aufgaben</string>
     <string name="task_source_pref_title">Aufgabequelle</string>
     <string name="task_source_none">Aufgaben nicht anzeigen</string>
-    <string name="task_source_opentasks">OpenTasks (von dmfs GmbH)</string>
     <string name="task_source_astrid_clone">Tasks.org (von Alex Baker)</string>
     <string name="task_source_samsung">Samsung Calendar</string>
     <string name="task_app_install">Klicke um installieren</string>

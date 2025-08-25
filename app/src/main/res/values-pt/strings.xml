@@ -25,7 +25,7 @@
     <string name="app_description_4000_chars_max_part03">Sem anúncios. Grátis e de código aberto.</string>
     <string name="app_description_4000_chars_max_part04">Exibe compromissos dos calendários e listas de tarefas selecionadas.</string>
     <string name="app_description_4000_chars_max_part05">Exibe aniversários de seus contatos.</string>
-    <string name="app_description_4000_chars_max_part06">Suporta exibir tarefas do Open Tasks (por dmfs GmbH), Tasks.org (por Alex Baker), e do calendário Samsung.</string>
+    <string name="app_description_4000_chars_max_part06">Suporta exibir tarefas do Tasks.org (por Alex Baker) e do calendário Samsung.</string>
     <string name="app_description_4000_chars_max_part07">Selecione quais compromissos futuros exibir (uma semana, um mês, etc.). Pode exibir compromissos passados.</string>
     <string name="app_description_4000_chars_max_part08">A lista é atualizada automaticamente quando um evento é adicionado/removido/modificado. Ou ela pode ser atualizada manualmente.</string>
     <string name="app_description_4000_chars_max_part09">Selecione as cores e tamanho do texto do widget.</string>
@@ -137,7 +137,6 @@
     <string name="task_prefs_desc">Configurar a exibição de tarefas</string>
     <string name="task_source_pref_title">Origem das tarefas</string>
     <string name="task_source_none">Não exibir tarefas</string>
-    <string name="task_source_opentasks">OpenTasks (por dmfs GmbH)</string>
     <string name="task_source_astrid_clone">Tasks.org (por Alex Baker)</string>
     <string name="task_source_samsung">Calendário Samsung</string>
     <string name="task_source_samsung_not_installable">O Calendário Samsung só está disponível em dispositivos Samsung</string>
